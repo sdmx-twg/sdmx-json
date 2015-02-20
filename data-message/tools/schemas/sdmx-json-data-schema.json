@@ -1,0 +1,366 @@
+{
+    "id": "http://sdmx.org/data-message/v0.9.0/schema#",
+    "$schema" : "http://json-schema.org/draft-04/schema#",
+    "description": "Schema for SDMX-JSON data message",
+    "type": "object",
+    "required": [ "header" ],
+    "properties": {
+        "header": {
+            "$ref": "#/definitions/header"
+        },
+        "structure": {
+            "$ref": "#/definitions/structure"
+        },
+        "dataSets": {
+            "type": [ "null", "array" ],
+            "items": {
+                "$ref": "#/definitions/dataSet"
+            }
+        },
+        "errors": {
+            "type": [ "null", "array" ],
+            "items": {
+                "$ref": "#/definitions/error"
+            }
+        }
+    },
+    "definitions": {
+        "header": {
+            "type": "object",
+            "required": [ "id", "prepared", "sender" ],
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "prepared": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "test": {
+                    "type": [ "null", "boolean" ]
+                },
+                "sender": {
+                    "$ref": "#/definitions/party"
+                },
+                "receiver": {
+                    "$ref": "#/definitions/party"
+                },
+                "request": {
+                    "type": [ "null", "object" ],
+                    "properties": {
+                        "uri": {
+                            "type": "string",
+                            "format": "uri"
+                        }
+                    }
+                }
+            }
+        },
+        "party": {
+            "type": "object",
+            "required": [ "id" ],
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "contact": {
+                    "type": [ "null", "array" ],
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": [ "null", "string" ]
+                            },
+                            "department": {
+                                "type": [ "null", "string" ]
+                            },
+                            "role": {
+                                "type": [ "null", "string" ]
+                            },
+                            "telephone": {
+                                "type": [ "null", "array" ],
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "fax": {
+                                "type": [ "null", "array" ],
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "uri": {
+                                "type": [ "null", "array" ],
+                                "items": {
+                                    "type": "string",
+                                    "format": "uri"
+                                }
+                            },
+                            "email": {
+                                "type": [ "null", "array" ],
+                                "items": {
+                                    "type": "string",
+                                    "format": "email"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "error": {
+            "type": "object",
+            "required": [ "code", "message" ],
+            "properties": {
+                "code": {
+                    "type": "number"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "structure": {
+            "type": [ "null", "object" ],
+            "required": [ "dimensions" ],
+            "properties": {
+                "uri": {
+                    "type": [ "null", "string" ],
+                    "format": "uri"
+                },
+                "name": {
+                    "type": [ "null", "string" ]
+                },
+                "description": {
+                    "type": [ "null", "string" ]
+                },
+                "dimensions": {
+                    "type": "object",
+                    "properties": {
+                        "dataSet": {
+                            "type": [ "null", "array" ],
+                            "items": {
+                                "$ref": "#/definitions/component"
+                            },
+                            "uniqueItems": true
+                        },
+                        "series": {
+                            "type": [ "null", "array" ],
+                            "items": {
+                                "$ref": "#/definitions/component"
+                            },
+                            "uniqueItems": true
+                        },
+                        "observation": {
+                            "type": [ "null", "array" ],
+                            "items": {
+                                "$ref": "#/definitions/component"
+                            },
+                            "uniqueItems": true
+                        }
+                    }
+                },
+                "attributes": {
+                    "type": "object",
+                    "properties": {
+                        "dataSet": {
+                            "type": [ "null", "array" ],
+                            "items": {
+                                "$ref": "#/definitions/component"
+                            },
+                            "uniqueItems": true
+                        },
+                        "series": {
+                            "type": [ "null", "array" ],
+                            "items": {
+                                "$ref": "#/definitions/component"
+                            },
+                            "uniqueItems": true
+                        },
+                        "observation": {
+                            "type": [ "null", "array" ],
+                            "items": {
+                                "$ref": "#/definitions/component"
+                            },
+                            "uniqueItems": true
+                        }
+                    }
+                },
+                "annotations": {
+                    "type": [ "null", "array" ],
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "title": {
+                                "type": [ "null", "string" ]
+                            },
+                            "type": {
+                                "type": [ "null", "string" ]
+                            },
+                            "uri": {
+                                "type": [ "null", "string" ],
+                                "format": "uri"
+                            },
+                            "text": {
+                                "type": [ "null", "string" ]
+                            },
+                            "id": {
+                                "type": [ "null", "string" ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "component": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": [ "null", "string" ]
+                },
+                "role": {
+                    "type": [ "null", "string" ],
+                    "enum": [ null, "time", "measure" ]
+                },
+                "keyPosition": {
+                    "type": [ "null", "integer" ],
+                    "minimum": 0
+                },
+                "default": {
+                    "type": [ "null", "string" ]
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": [ "null", "string" ]
+                            },
+                            "start": {
+                                "type": [ "null", "string" ],
+                                "format": "date-time"
+                            },
+                            "end": {
+                                "type": [ "null", "string" ],
+                                "format": "date-time"
+                            }
+                        },
+                        "required": [ "name" ]
+                    },
+                    "minItems": 0,
+                    "uniqueItems": true
+                }
+            },
+            "required": [ "name", "values" ]
+        },
+        "dataSet": {
+            "type": "object",
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "enum": [ "Information", "Append", "Replace", "Delete" ]
+                },
+                "reportingBegin": {
+                    "type": [ "null", "string" ]
+                },
+                "reportingEnd": {
+                    "type": [ "null", "string" ]
+                },
+                "validFrom": {
+                    "type": [ "null", "string" ],
+                    "format": "date-time"
+                },
+                "validTo": {
+                    "type": [ "null", "string" ],
+                    "format": "date-time"
+                },
+                "publicationYear": {
+                    "type": [ "null", "string" ]
+                },
+                "publicationPeriod": {
+                    "type": [ "null", "string" ]
+                },
+                "annotations": {
+                    "type": [ "null", "array" ],
+                    "items": {
+                        "type": [ "integer" ],
+                        "minimum": 0
+                    }
+                },
+                "attributes": {
+                    "type": [ "null", "array" ],
+                    "items": {
+                        "type": [ "null", "integer" ],
+                        "minimum": 0
+                    }
+                },
+                "observations": {
+                    "type": [ "null", "object" ],
+                    "patternProperties": {
+                        "^[0-9]+(:[0-9]+)*$": {
+                            "type": "array",
+                            "items": {
+                                "type": [ "null", "number" ]
+                            }
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "series": {
+                    "type": [ "null", "object" ],
+                    "patternProperties": {
+                        "^[0-9]+(:[0-9]+)*$": {
+                            "type": "object",
+                            "properties": {
+                                "annotations": {
+                                    "type": [ "null", "array" ],
+                                    "items": {
+                                        "type": [ "integer" ],
+                                        "minimum": 0
+                                    }
+                                },
+                                "attributes": {
+                                    "type": [ "null", "array" ],
+                                    "items": {
+                                        "type": [ "null", "integer" ],
+                                        "minimum": 0
+                                    }
+                                },
+                                "observations": {
+                                    "type": "object",
+                                    "patternProperties": {
+                                        "^[0-9]+(:[0-9]+)*$": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": [ "null", "number" ]
+                                            }
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            }
+        }
+    }
+}
