@@ -272,8 +272,6 @@ Example:
         }
     }
 
-    ,
-
 ### links
 
 *Array* *nullable*. A collection of links to structural metadata or to additional information regarding the structure.
@@ -547,7 +545,10 @@ An array of data set objects. Example:
         "action": "Information",
         "series": {
           # series object #
-        }
+        },
+        "links": [
+          # links array #
+        ]
       }
     ]
 
@@ -699,6 +700,34 @@ The first value in the observation array is the observation value. The data type
 for observation value is *Number*. Data type for a reported missing observation value is a *null*.
 
 Elements after the observation value are values for the observation level attributes.
+
+### links
+
+*Array* *nullable*. A collection of links to additional information about the data set.
+
+Example:
+
+    "links": [
+      {
+        "href": "https://data.sdmx.org/release-calendar",
+        "rel": "calendar"
+      }
+    ]
+
+#### link
+
+*Object* *nullable*. A link to an external resource. Example:
+
+    {
+      "href": "https://data.sdmx.org/release-calendar",
+      "rel": "calendar",
+      "title": "Release calendar",
+      "type": "text/html"
+    }
+
+The `href` and `rel` attributes are mandatory, while the `title` and `type` are optional.
+
+See the section about the [linking mechanism](#linking-mechanism) for additional information.
 
 # Linking mechanism
 

@@ -377,6 +377,12 @@
                         }
                     },
                     "additionalProperties": false
+                },
+                "links": {
+                    "type": [ "null", "array" ],
+                    "items": {
+                        "$ref": "#/definitions/link"
+                    }
                 }
             }
         }
