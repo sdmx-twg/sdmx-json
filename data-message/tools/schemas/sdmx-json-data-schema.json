@@ -45,13 +45,10 @@
                 "receiver": {
                     "$ref": "#/definitions/party"
                 },
-                "request": {
-                    "type": [ "null", "object" ],
-                    "properties": {
-                        "uri": {
-                            "type": "string",
-                            "format": "uri"
-                        }
+                "links": {
+                    "type": [ "null", "array" ],
+                    "items": {
+                        "$ref": "#/definitions/link"
                     }
                 }
             }
@@ -123,13 +120,34 @@
                 }
             }
         },
+        "link": {
+            "type": "object",
+            "required": [ "href", "rel" ],
+            "properties": {
+                "href": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "rel": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": [ "null", "string" ]
+                },
+                "type": {
+                    "type": [ "null", "string" ]
+                }
+            }
+        },
         "structure": {
             "type": [ "null", "object" ],
             "required": [ "dimensions" ],
             "properties": {
-                "uri": {
-                    "type": [ "null", "string" ],
-                    "format": "uri"
+                "links": {
+                    "type": [ "null", "array" ],
+                    "items": {
+                        "$ref": "#/definitions/link"
+                    }
                 },
                 "name": {
                     "type": [ "null", "string" ]
