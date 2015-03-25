@@ -730,8 +730,8 @@ Let's say that the following message needs to be processed:
         "id": "ECB_EXR_WEB",
         "links": [
           {
-            "href" = "http://sdw-ws.ecb.europa.eu/dataflow/ECB/EXR/1.0",
-            "rel" = "dataflow"
+            "href": "http://sdw-ws.ecb.europa.eu/dataflow/ECB/EXR/1.0",
+            "rel": "dataflow"
           }
         ],
         "dimensions": {
