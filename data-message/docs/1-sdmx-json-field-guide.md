@@ -77,7 +77,11 @@ the message, such as when it was prepared and how has sent it. Example:
 interpret the data available in the message, such as the list of concepts used. Example:
 
     "structure": {
-        "uri": "http://sdw-ws.ecb.europa.eu/dataflow/ECB/EXR/1.0",
+        "links": [
+          {
+            # link object #
+          }
+        ],
         "dimensions": {
             # dimensions object #
         },
@@ -217,23 +221,33 @@ Example:
       "id": "SDMX"
     }
 
-### request
+### links
 
-*Object* *nullable*. Information about the client request.
+*Array* *nullable*. A collection of links to additional resources for the headers.
 
 Example:
 
-    "request": {
-      "uri": "https://registry.sdmx.org/ws/rest/data/EXR/D.USD.EUR.SP00.A"
+    "links": [
+      {
+        "href": "https://data.sdmx.org/ws/rest/data/EXR/D.USD.EUR.SP00.A",
+        "rel": "request"
+      }
+    ]
+
+#### link
+
+*Object* *nullable*. A link to an external resource. Example:
+
+    {
+      "href": "https://registry.sdmx.org/help.html",
+      "rel": "help",
+      "title": "Documentation about the SDMX Global Registry",
+      "type": "text/html"
     }
 
-#### uri
+The `href` and `rel` attributes are mandatory, while the `title` and `type` are optional.
 
-*String* *nullable*. SDMX RESTful API URL requested by the client. Example:
-
-    "uri": "https://registry.sdmx.org/ws/rest/data/EXR/D.USD.EUR.SP00.A"
-
-
+See the section about the [linking mechanism](#linking-mechanism) for additional information.
 
 ## structure
 
@@ -244,7 +258,9 @@ level in the hierarchy (data set, series, observations) these components are att
 Example:
 
     "structure": {
-        "uri": "http://sdw-ws.ecb.europa.eu/dataflow/ECB/EXR/1.0",
+        "links": [
+          # links array #
+        ],
         "dimensions": {
             # dimensions object #
         },
@@ -256,12 +272,37 @@ Example:
         }
     }
 
-### uri
+### links
 
-*String* *nullable*. A link to an SDMX 2.1 web service resource where additional information regarding the structure is
-available (e.g. link to the dataflow). Example:
+*Array* *nullable*. A collection of links to structural metadata or to additional information regarding the structure.
 
-    "uri": "http://sdw-ws.ecb.europa.eu/dataflow/ECB/EXR/1.0"
+Example:
+
+    "links": [
+      {
+        "href": "https://registry.sdmx.org/ws/rest/dataflow/ECB/EXR",
+        "rel": "dataflow"
+      },
+      {
+        "href": "https://registry.sdmx.org/ws/rest/datastructure/ECB/ECB_EXR1",
+        "rel": "datastructure"
+      }
+    ]
+
+#### link
+
+*Object* *nullable*. A link to an external resource. Example:
+
+    {
+      "href": "https://registry.sdmx.org/help.html",
+      "rel": "help",
+      "title": "Documentation about the SDMX Global Registry",
+      "type": "text/html"
+    }
+
+The `href` and `rel` attributes are mandatory, while the `title` and `type` are optional.
+
+See the section about the [linking mechanism](#linking-mechanism) for additional information.
 
 ### name
 
@@ -445,7 +486,6 @@ Statistical data, can be collected, for example, at the beginning, the middle or
 represent the average of observations through the period. Based on this information and using the start and end
 fields, it is easy to get or calculate the desired point in time to be used for the time axis.
 
-
 ### Annotations
 
 *Array* *nullable*. Provides a list of annotation objects. Annotations can be attached
@@ -496,8 +536,6 @@ It can be used to disambiguate annotations. Example:
 
     "id": "74747"
 
-
-
 ## dataSets
 
 An array of data set objects. Example:
@@ -507,7 +545,10 @@ An array of data set objects. Example:
         "action": "Information",
         "series": {
           # series object #
-        }
+        },
+        "links": [
+          # links array #
+        ]
       }
     ]
 
@@ -660,7 +701,45 @@ for observation value is *Number*. Data type for a reported missing observation 
 
 Elements after the observation value are values for the observation level attributes.
 
+### links
 
+*Array* *nullable*. A collection of links to additional information about the data set.
+
+Example:
+
+    "links": [
+      {
+        "href": "https://data.sdmx.org/release-calendar",
+        "rel": "calendar"
+      }
+    ]
+
+#### link
+
+*Object* *nullable*. A link to an external resource. Example:
+
+    {
+      "href": "https://data.sdmx.org/release-calendar",
+      "rel": "calendar",
+      "title": "Release calendar",
+      "type": "text/html"
+    }
+
+The `href` and `rel` attributes are mandatory, while the `title` and `type` are optional.
+
+See the section about the [linking mechanism](#linking-mechanism) for additional information.
+
+# Linking mechanism
+
+Collections of links can be attached to various elements in SDMX-JSON.
+
+Similarily with standards such as HTML5 and Atom, link elements in SDMX-JSON *must* define a *URL* (the `href` attribute) and a *semantic* (the `rel` attribute). This allows clients to follow the links they care about and ignore the ones whose semantic they are not interested in. In addition, links in SDMX-JSON *may* define a `title` (a human-friendly description of the target link) and a `type` (a hint about the type of representation returned by the link).
+
+SDMX-JSON offers a list of predefined semantics, but implementers are free to extend it. The list of predefined semantics comes from the list of SDMX artefacts that can be returned by SDMX RESTful web services, semantics defined in [RFC5988](https://tools.ietf.org/rfc/rfc5988.txt) and additional items deemed to be useful in the context of statistical data dissemination. These semantics are:
+
+  - SDMX artefacts: datastructure, metadatastructure, categoryscheme, conceptscheme, codelist, hierarchicalcodelist, organisationscheme, agencyscheme, dataproviderscheme, dataconsumerscheme, organisationunitscheme, dataflow, metadataflow, reportingtaxonomy, provisionagreement, structureset, process, categorisation, contentconstraint, attachmentconstraint, category, concept, code, organisation, agency, dataprovider, dataconsumer, organisationunit, reportingcategory, data
+  - RFC5988: alternate, copyright, glossary, help, index.
+  - Miscellaneous: calendar (link to a release calendar), source (information about the source of data), request (the SDMX RESTful query that triggered the SDMX-JSON response).
 
 # Handling component values
 
@@ -678,7 +757,12 @@ Let's say that the following message needs to be processed:
     },
     "structure": {
         "id": "ECB_EXR_WEB",
-        "uri": "http://sdw-ws.ecb.europa.eu/dataflow/ECB/EXR/1.0",
+        "links": [
+          {
+            "href": "http://sdw-ws.ecb.europa.eu/dataflow/ECB/EXR/1.0",
+            "rel": "dataflow"
+          }
+        ],
         "dimensions": {
             "dataSet": [
                 {

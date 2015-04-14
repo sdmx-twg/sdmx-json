@@ -8,7 +8,12 @@
         }
     },
     "structure": {
-        "uri": "http://sdw-ws.ecb.europa.eu/dataflow/ECB/EXR/1.0",
+        "links": [
+          {
+            "href": "http://sdw-ws.ecb.europa.eu/dataflow/ECB/EXR/1.0",
+            "rel": "dataflow"
+          }
+        ],
         "dimensions": {
             "dataSet": [
                 {
