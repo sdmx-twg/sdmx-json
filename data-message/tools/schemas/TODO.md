@@ -1,6 +1,5 @@
 # TODO
 
-- implement links arrays
 - implememt dataprovider
 - move error to definition
 
@@ -10,3 +9,4 @@
 - add id to the schema root
 - additionalProperties allowed everywhere except observations and series
 - Update description
+- implement links arrays
