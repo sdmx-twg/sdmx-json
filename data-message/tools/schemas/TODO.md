@@ -1,7 +1,6 @@
 # TODO
 
 - implememt dataprovider
-- move error to definition
 
 # DONE
 
@@ -10,3 +9,4 @@
 - additionalProperties allowed everywhere except observations and series
 - Update description
 - implement links arrays
+- move error to definition
