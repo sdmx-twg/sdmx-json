@@ -46,11 +46,15 @@
       ]
     },
 
-    "request": {
-      # include complete URL as used by the client
-      "uri": "http://www.myorg.org/ws/data/ECB_ICP1/M.PT+FI.N.000000+071100.4.INX?
-      startPeriod=2009-01&dimensionAtObservation=AllDimensions"
-    }
+    "links": [
+      {
+        # include complete URL as used by the client
+        "href": "http://www.myorg.org/ws/data/ECB_ICP1/M.PT.N.071100.4.INX",
+        "rel": "request",
+        "title": "Link to the url that returns this response",
+        "type": "application/json"
+      }
+    ]
   },
   "errors": [
     {
@@ -59,8 +63,14 @@
     }
   ],
   "structure": {
-    # resolvable uri to dataflow
-    "uri": "http://sdw-ws.ecb.europa.eu/dataflow/ECB/EXR/1.0",
+
+    "links": [
+      {
+        "href": "http://sdw-ws.ecb.europa.eu/datastructure/ECB/ECB_EXR1/1.0",
+        "rel": "datastructure",
+        "title": "resolvable uri to dataflow"
+      }
+    ],
 
     "name": "dataflow name",
     "description": "dataflow description",
@@ -85,7 +95,7 @@
               "id": "D",
               "name": "Daily"
             }
-          ],
+          ]
         }, {
           "id": "CURRENCY_DENOM",
           "name": "Currency denominator",
@@ -136,7 +146,7 @@
               "name": "New Zealand dollar"
             }, {
               "id": "RUB",
-              "name": "Russian rouble",
+              "name": "Russian rouble"
             }
           ]
         }
@@ -223,18 +233,22 @@
     "annotations": [
       {
         "title": "AnnotationTitle provides a title for the annotation.",
-        "type": "AnnotationType is used to distinguish between annotations
-        designed to support various uses.",
+        "type": "AnnotationType is used to distinguish between annotations.",
         "uri": "http://www.myorg.org/ws/uri/for/this/annotation",
-        "text": "AnnotationText holds a language-specific string containing
-        the text of the annotation.",
-        "id": "The id attribute provides a non-standard identification of an
-        annotation. It can be used to disambiguate annotations."
+        "text": "AnnotationText contains the text of the annotation.",
+        "id": "Non-standard identification of an annotation."
       }
     ]
   },
   "dataSets": [
     {
+      "links": [
+        {
+          "href": "http://sdw-ws.ecb.europa.eu/datastructure/ECB/EXR/1.0",
+          "rel": "dataflow"
+        }
+      ],
+
       "action": "Information",
 
       # optional first time period in returned message
@@ -351,7 +365,7 @@
           "0:1": [],
           "1:0": [],
           "1:1": []
-      ]
+      }
     },
     {
       "action": "Information",
@@ -363,7 +377,7 @@
           "0:1": [1.5925],
           "1:0": [40.3426],
           "1:1": [40.3000]
-      ]
+      }
     },
     {
       "action": "Information",
@@ -376,8 +390,9 @@
           "0:1": [0],
           "1:0": [0],
           "1:1": [0]
-      ]
+      }
     }
   ]
 }
 ```
+
