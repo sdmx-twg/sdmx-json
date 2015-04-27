@@ -246,8 +246,7 @@
                     "type": [ "null", "string" ]
                 },
                 "role": {
-                    "type": [ "null", "string" ],
-                    "enum": [ null, "time", "measure" ]
+                    "type": [ "null", "string" ]
                 },
                 "keyPosition": {
                     "type": [ "null", "integer" ],
