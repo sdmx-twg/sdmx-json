@@ -64,7 +64,7 @@ Example:
 ### header
 
 *Object* *nullable*. *[Header](#Header)* contains basic technical information about
-the message, such as when it was prepared and how has sent it. Example:
+the message, such as when it was prepared and who has sent it. Example:
 
     "header": {
       "id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
