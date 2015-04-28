@@ -741,6 +741,8 @@ SDMX-JSON offers a list of predefined semantics, but implementers are free to ex
   - RFC5988: alternate, copyright, glossary, help, index.
   - Miscellaneous: calendar (link to a release calendar), source (information about the source of data), request (the SDMX RESTful query that triggered the SDMX-JSON response).
 
+The *URL* captured in the `href` attribute can be *absolute* or *relative*. If you intend to archive the SDMX-JSON message, it is recommended to use absolute URLs.
+
 # Handling component values
 
 Let's say that the following message needs to be processed:
