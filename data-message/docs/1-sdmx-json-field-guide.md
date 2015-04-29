@@ -64,7 +64,7 @@ Example:
 ### header
 
 *Object* *nullable*. *[Header](#Header)* contains basic technical information about
-the message, such as when it was prepared and how has sent it. Example:
+the message, such as when it was prepared and who has sent it. Example:
 
     "header": {
       "id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
@@ -740,6 +740,8 @@ SDMX-JSON offers a list of predefined semantics, but implementers are free to ex
   - SDMX artefacts: datastructure, metadatastructure, categoryscheme, conceptscheme, codelist, hierarchicalcodelist, organisationscheme, agencyscheme, dataproviderscheme, dataconsumerscheme, organisationunitscheme, dataflow, metadataflow, reportingtaxonomy, provisionagreement, structureset, process, categorisation, contentconstraint, attachmentconstraint, category, concept, code, organisation, agency, dataprovider, dataconsumer, organisationunit, reportingcategory, data
   - RFC5988: alternate, copyright, glossary, help, index.
   - Miscellaneous: calendar (link to a release calendar), source (information about the source of data), request (the SDMX RESTful query that triggered the SDMX-JSON response).
+
+The *URL* captured in the `href` attribute can be *absolute* or *relative*. If you intend to archive the SDMX-JSON message, it is recommended to use absolute URLs.
 
 # Handling component values
 
