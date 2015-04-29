@@ -66,7 +66,7 @@
 
     "links": [
       {
-        "href": "http://sdw-ws.ecb.europa.eu/datastructure/ECB/ECB_EXR1/1.0",
+        "href": "https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_EXR1/1.0",
         "rel": "datastructure",
         "title": "resolvable uri to datastructure"
       }
@@ -244,7 +244,7 @@
     {
       "links": [
         {
-          "href": "http://sdw-ws.ecb.europa.eu/datastructure/ECB/EXR/1.0",
+          "href": "https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/EXR/1.0",
           "rel": "datastructure"
         }
       ],
