@@ -182,7 +182,7 @@ Example:
 
     "sender": {
       "id": "ECB",
-      "name": "European Central Bank"
+      "name": "European Central Bank",
       "contact": [
         # contact details #
       ]
