@@ -133,7 +133,7 @@ in the SDMX 2.1 Web Services Guidelines. Example:
 
 #### message
 
-*string*. Provides the error message. Example:
+*string*. Provides the error message. Error messages are fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error. Example:
 
     "message": "Invalid number of dimensions in the key parameter"
 
@@ -371,6 +371,7 @@ A component represents a dimension or an attribute used in the message. It conta
       "id": "FREQ",
       "name": "Frequency",
       "keyPosition": 0,
+      "role": "FREQ",
       "values": [
         {
           # value object #
@@ -409,7 +410,7 @@ This field should not be supplied for attributes and it may also be omitted for 
 
 ##### role
 
-*String* *nullable*. Defines the component role(s), if any. Roles are represented by the id of a concept defined as [SDMX cross-domain concept](http://sdmx.org/?page_id=11). Several of the concepts defined as SDMX cross-domain concepts are useful for data visualisation, such as for example, the series title, the unit of measure, the number of decimals to be displayed, the reference area (e.g. when using maps), the period of time to which the measured observation refers, etc. It is recommended to identify any component that can be useful for data visualisation purposes by using the appropriate SDMX cross-domain concept as role. Example:
+*String* *nullable*. Defines the component role(s), if any. Roles are represented by the id of a concept defined as [SDMX cross-domain concept](http://sdmx.org/?page_id=11). Several of the concepts defined as SDMX cross-domain concepts are useful for data visualisation, such as for example, the series title ("TITLE"), the unit of measure ("UNIT_MEASURE"), the number of decimals to be displayed ("DECIMALS"), the  country or geographic reference area ("REF_AREA", e.g. when using maps), the period of time to which the measured observation refers ("REF_PERIOD"), the time interval at which observations occur over a given time period ("FREQ"), etc. It is strongly recommended to identify any component that can be useful for data visualisation purposes by using the appropriate SDMX cross-domain concept as role. Example:
 
     "role": "TITLE"
 
