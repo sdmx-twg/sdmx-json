@@ -27,7 +27,7 @@ however the above should be sufficient to understand the sdmx-json format. For
 additional information, please refer to the [SDMX documentation](http://sdmx.org/?page_id=10).
 
 Samples, tools and other SDMX-JSON resources are available in the public Github
-repository <https://github.com/sdmx-twg/sdmx-prototype-json/tree/master/draft-sdmx-json>.
+repository <https://github.com/sdmx-twg/sdmx-json>.
 
 Before we start, let's clarify a few more things about this guide:
 
