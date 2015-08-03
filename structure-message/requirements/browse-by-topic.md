@@ -72,13 +72,13 @@ The screenshot below shows an example of the type of user interface (a list box 
 
 The client typically needs to display the names of the dataflows. In addition, some clients might also want to display the descriptions of the dataflows and the name of the selected category.
 
-Multiple data providers may provide data for the same data flow. If this distinction is important then the client must query for Data Provisions Agreements that link to the data flow: 
+Multiple data providers may provide data for the same dataflow. If this distinction is important then the client must query for Data Provisions Agreements that link to the dataflow: 
 
 ```
 https://ws-entry-point/dataflow/agency-id/dataflow-id/dataflow-version?references=all
 ```
 
-The response will contain the Data Provision Aggreements that reference the data flow.
+The response will contain the Data Provision Agreements that reference the dataflow.
 
 In addition, in order to perform the next query (cf. step 3 below), clients will need the full references to the dataflows (id, agency id and version).
 
