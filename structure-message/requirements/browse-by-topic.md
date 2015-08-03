@@ -7,6 +7,9 @@ Browsing a list of *topics* (i.e. statistical domains) is a common way for users
 ## Artefacts involved
 
 The following SDMX artefacts are needed to support this use case:
+
+- Maintenance Agency
+- Data Provider
 - Category Scheme
 - Categorisation
 - Dataflow
@@ -23,13 +26,15 @@ For additional information about the query syntax used in the examples below, pl
 
 ### Step 1: Get the list of statistical domains
 
+Required artefacts: Category Scheme, Maintenance Agency
+
 The starting point is to retrieve the list of *topics* for which data are available. These are known as `category schemes` in SDMX. They can be retrieved using a categoryscheme query:
 
 ```
 https://ws-entry-point/categoryscheme
 ```
 
-Alternatively, if only the topics of a particular category scheme are needed, it is possible to only retrieve that particular category scheme:
+Alternatively, if only the topics of a particular category scheme are needed, it is possible to only retrieve that particular category scheme (assuming we also know the maintenance agency for the category scheme):
 
 ```
 https://ws-entry-point/categoryscheme/agency-id/category-scheme-id
@@ -45,11 +50,13 @@ The screenshot below displays the category scheme as a list box, similar to the 
 
 ![Idle points on the map](img/cs-list.png)
 
-The client typically needs to display the names of the categories. In addition, some clients might also want to display the descriptions of the categories and the name of the category schemes.
+The client typically needs to display the names of the categories. In addition, some clients might also want to display the descriptions of the categories and the name of the category schemes and possibly the name of its maintenance agency.
 
 In addition, on order to perform the next query (cf. step 2 below), clients will need the full references for the categories (id) and category schemes (id, agency id and version).
 
 ### Step 2: Get the list of dataflows attached to the selected domains
+
+Required artefacts: Categorisation, Dataflow, Data Provision Aggreement, Data Provider
 
 Once a user has selected a category, the web service client will need to retrieve the *baskets of data* attached to the category. These are known as `dataflows` in SDMX. It is possibe to retrieve these, using a category query and resolving its references.
 
@@ -65,9 +72,19 @@ The screenshot below shows an example of the type of user interface (a list box 
 
 The client typically needs to display the names of the dataflows. In addition, some clients might also want to display the descriptions of the dataflows and the name of the selected category.
 
+Multiple data providers may provide data for the same data flow. If this distinction is important then the client must query for Data Provisions Agreements that link to the data flow: 
+
+```
+https://ws-entry-point/dataflow/agency-id/dataflow-id/dataflow-version?references=all
+```
+
+The response will contain the Data Provision Aggreements that reference the data flow.
+
 In addition, in order to perform the next query (cf. step 3 below), clients will need the full references to the dataflows (id, agency id and version).
 
 ### Step 3: Find data in the selected dataflow, using concept filters
+
+Required artefacts: Data Structure Definition, Codelist, Concept, Content Constraint 
 
 Once a user has selected a dataflow, the web service client will need to retrieve the `concepts` that are used to structure that dataflow. In addition, the list of allowed values for each of these concepts will be needed. The list of values for which data exist can be found in the `content constraints`, while the names of the values can be retrieved from the `codes` in the `codelists` referenced by the `data structure definition`. All these artefacts can be retrieved in just one dataflow query, again using the references' resolution mechanism offered by the SDMX RESTful API.
 
