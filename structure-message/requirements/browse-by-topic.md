@@ -52,7 +52,7 @@ The screenshot below displays the category scheme as a list box, similar to the 
 
 The client typically needs to display the names of the categories. In addition, some clients might also want to display the descriptions of the categories and the name of the category schemes and possibly the name of its maintenance agency.
 
-In addition, on order to perform the next query (cf. step 2 below), clients will need the full references for the categories (id) and category schemes (id, agency id and version).
+In addition, in order to perform the next query (cf. step 2 below), clients will need the full references for the categories (id) and category schemes (id, agency id and version).
 
 ### Step 2: Get the list of dataflows attached to the selected domains
 
