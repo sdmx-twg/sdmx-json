@@ -9,52 +9,52 @@
     "structure": {
         "links": [
             {
-                "href": "http://a-sdw-wsrest.ecb.europa.eu/service/categoryscheme/ECB.DISS/MOBILE_NAVI_PUB/1.0",
+                "href": "https://ws-entry-point/categoryscheme/ECB/NAVI_PUB/1.0",
                 "rel": "self",
                 "title": "Economic concepts"
             },
             {
-                "href": "http://a-sdw-wsrest.ecb.europa.eu/service/categoryscheme/ECB.DISS/MOBILE_NAVI_PUB/1.0/01",
+                "href": "https://ws-entry-point/categoryscheme/ECB/NAVI_PUB/1.0/01?references=categorisation",
                 "rel": "category",
                 "title": "Monetary operations"
             },
             {
-                "href": "http://a-sdw-wsrest.ecb.europa.eu/service/categoryscheme/ECB.DISS/MOBILE_NAVI_PUB/1.0/02",
+                "href": "https://ws-entry-point/categoryscheme/ECB/NAVI_PUB/1.0/02?references=categorisation",
                 "rel": "category",
                 "title": "Prices, output, demand and labour market"
             },
             {
-                "href": "http://a-sdw-wsrest.ecb.europa.eu/service/categoryscheme/ECB.DISS/MOBILE_NAVI_PUB/1.0/03",
+                "href": "https://ws-entry-point/categoryscheme/ECB/NAVI_PUB/1.0/03?references=categorisation",
                 "rel": "category",
                 "title": "Monetary and financial statistics"
             },
             {
-                "href": "http://a-sdw-wsrest.ecb.europa.eu/service/categoryscheme/ECB.DISS/MOBILE_NAVI_PUB/1.0/04",
+                "href": "https://ws-entry-point/categoryscheme/ECB/NAVI_PUB/1.0/04?references=categorisation",
                 "rel": "category",
                 "title": "Euro area accounts"
             },
             {
-                "href": "http://a-sdw-wsrest.ecb.europa.eu/service/categoryscheme/ECB.DISS/MOBILE_NAVI_PUB/1.0/05",
+                "href": "https://ws-entry-point/categoryscheme/ECB/NAVI_PUB/1.0/05?references=categorisation",
                 "rel": "category",
                 "title": "Government finance"
             },
             {
-                "href": "http://a-sdw-wsrest.ecb.europa.eu/service/categoryscheme/ECB.DISS/MOBILE_NAVI_PUB/1.0/06",
+                "href": "https://ws-entry-point/categoryscheme/ECB/NAVI_PUB/1.0/06?references=categorisation",
                 "rel": "category",
                 "title": "External transactions and positions"
             },
             {
-                "href": "http://a-sdw-wsrest.ecb.europa.eu/service/categoryscheme/ECB.DISS/MOBILE_NAVI_PUB/1.0/07",
+                "href": "https://ws-entry-point/categoryscheme/ECB/NAVI_PUB/1.0/07?references=categorisation",
                 "rel": "category",
                 "title": "Exchange rates"
             },
             {
-                "href": "http://a-sdw-wsrest.ecb.europa.eu/service/categoryscheme/ECB.DISS/MOBILE_NAVI_PUB/1.0/08",
+                "href": "https://ws-entry-point/categoryscheme/ECB/NAVI_PUB/1.0/08?references=categorisation",
                 "rel": "category",
                 "title": "Payments and securities trading, clearing, settlement"
             },
             {
-                "href": "http://a-sdw-wsrest.ecb.europa.eu/service/categoryscheme/ECB.DISS/MOBILE_NAVI_PUB/1.0/09",
+                "href": "https://ws-entry-point/categoryscheme/ECB/NAVI_PUB/1.0/09?references=categorisation",
                 "rel": "category",
                 "title": "Banknotes and Coins"
             }
