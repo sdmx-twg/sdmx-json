@@ -48,7 +48,7 @@ The screenshot below shows an example of the type of user interface (a treeview 
 
 The screenshot below displays the category scheme as a list box, similar to the typical control displayed by mobile apps. The example is taken from the ECB statistical tablet app.
 
-![Idle points on the map](img/cs-list.png)
+![List of statistical domains](img/cs-list.png)
 
 The client typically needs to display the names of the categories. In addition, some clients might also want to display the descriptions of the categories and the name of the category schemes and possibly the name of its maintenance agency.
 
@@ -68,7 +68,7 @@ The response will contain the selected `category`, the `categorisations` that li
 
 The screenshot below shows an example of the type of user interface (a list box in this case) that can be built from the response. The example is taken from the ECB statistical tablet app.
 
-![Idle points on the map](img/df-list.png)
+![List of dataflows](img/df-list.png)
 
 The client typically needs to display the names of the dataflows. In addition, some clients might also want to display the descriptions of the dataflows and the name of the selected category.
 
@@ -96,7 +96,7 @@ The response will contain the selected `dataflow`, the `data structure definitio
 
 The screenshot below shows an example of the type of user interface (a list box for the list of concepts, and a collection of check boxes for the list of allowed values for each of the concepts in this example) that can be built from the response. The example is taken from the ECB statistical tablet app.
 
-![Idle points on the map](img/df-filters.png)
+![Dimension filters](img/df-filters.png)
 
 The client typically needs to display the name of the concepts (Frequency, Reference area, etc.) and of the allowed values for each concept (e.g.: Annual, Monthly, etc.). In addition, some clients will also need the descriptions of the concepts and codes, as well as the code ids.
 
