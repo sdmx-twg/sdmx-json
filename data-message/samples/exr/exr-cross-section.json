@@ -101,6 +101,16 @@
             "series": [],
             "observation": [
                 {
+                    "id": "OBS_STATUS",
+                    "name": "Observation status",
+                    "values": [
+                        {
+                            "id": "A",
+                            "name": "Normal value"
+                        }
+                    ]
+                },
+                {
                     "id": "TITLE",
                     "name": "Series title",
                     "role": "TITLE",
@@ -109,15 +119,6 @@
                             "name": "New Zealand dollar (NZD)"
                         }, {
                             "name": "Russian rouble (RUB)"
-                        }
-                    ]
-                }, {
-                    "id": "OBS_STATUS",
-                    "name": "Observation status",
-                    "values": [
-                        {
-                            "id": "A",
-                            "name": "Normal value"
                         }
                     ]
                 }
