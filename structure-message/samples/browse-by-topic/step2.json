@@ -1,0 +1,66 @@
+{
+  "header": {
+    "id": "IDREF148838",
+    "prepared": "2015-08-17T14:07:23.452Z",
+    "sender": {
+      "id": "ECB"
+    },
+    "links": [{
+      "href": "https://sdw-wsrest.ecb.europa.eu/service/categoryscheme/ECB.DISS/MOBILE_NAVI_PUB/1.0/01?references=parentsandsiblings",
+      "rel": "request"
+    }]
+  },
+  "resources": [{
+    "id": "MOBILE_NAVI_PUB",
+    "agencyID": "ECB.DISS",
+    "version": "1.0",
+    "name": "Economic concepts",
+    "isPartial": true,
+    "items": [
+      {
+        "id": "01",
+        "name": "Monetary operations",
+        "references": [
+          "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB.DISS:ILM_PUB(1.0)",
+          "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB.DISS:FM_PUB(1.0)",
+          "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB.DISS:BSI_PUB(1.0)"
+        ]
+      }
+    ]
+  }],
+  "references": {
+    "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB.DISS:ILM_PUB(1.0)": {
+      "id": "ILM_PUB",
+      "agencyID": "ECB.DISS",
+      "version": "1.0",
+      "name": "Internal Liquidity Management - Published series",
+      "structure": {
+        "id": "ECB_ILM1",
+        "agencyID": "ECB",
+        "version": "1.0"
+      }
+    },
+    "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB.DISS:FM_PUB(1.0)": {
+      "id": "FM_PUB",
+      "agencyID": "ECB.DISS",
+      "version": "1.0",
+      "name": "Financial market data - Published series",
+      "structure": {
+        "id": "ECB_FMD2",
+        "agencyID": "ECB",
+        "version": "1.0"
+      }
+    },
+    "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB.DISS:BSI_PUB(1.0)": {
+      "id": "BSI_PUB",
+      "agencyID": "ECB.DISS",
+      "version": "1.0",
+      "name": "Balance Sheet Items - Published series",
+      "structure": {
+        "id": "ECB_BSI1",
+        "agencyID": "ECB",
+        "version": "1.0"
+      }
+    }
+  }
+}
