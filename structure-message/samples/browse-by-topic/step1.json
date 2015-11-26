@@ -1,0 +1,57 @@
+{
+  "header": {
+    "id": "STEP1",
+    "prepared": "2015-08-17T14:07:23.452Z",
+    "sender": {
+      "id": "ECB"
+    },
+    "links": [{
+      "href": "https://sdw-wsrest.ecb.europa.eu/service/categoryscheme/ECB.DISS/MOBILE_NAVI_PUB/1.0",
+      "rel": "request"
+    }]
+  },
+  "resources": [{
+    "id": "MOBILE_NAVI_PUB",
+    "agencyID": "ECB.DISS",
+    "version": "1.0",
+    "name": "Economic concepts",
+    "items": [
+      {
+        "id": "01",
+        "name": "Monetary operations"
+      },
+      {
+        "id": "02",
+        "name": "Prices, output, demand and labour market"
+      },
+      {
+        "id": "03",
+        "name": "Monetary and financial statistics"
+      },
+      {
+        "id": "04",
+        "name": "Euro area accounts"
+      },
+      {
+        "id": "05",
+        "name": "Government finance"
+      },
+      {
+        "id": "06",
+        "name": "External transactions and positions"
+      },
+      {
+        "id": "07",
+        "name": "Exchange rates"
+      },
+      {
+        "id": "08",
+        "name": "Payments and securities trading, clearing, settlement"
+      },
+      {
+        "id": "09",
+        "name": "Banknotes and Coins"
+      }
+    ]
+  }]
+}
