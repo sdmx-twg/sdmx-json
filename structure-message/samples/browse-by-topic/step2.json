@@ -21,9 +21,21 @@
         "id": "01",
         "name": "Monetary operations",
         "references": [
-          "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB.DISS:ILM_PUB(1.0)",
-          "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB.DISS:FM_PUB(1.0)",
-          "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB.DISS:BSI_PUB(1.0)"
+          {
+            "href": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB.DISS:ILM_PUB(1.0)",
+            "rel": "request",
+            "type": "dataflow"
+          },
+          {
+            "href": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB.DISS:FM_PUB(1.0)",
+            "rel": "request",
+            "type": "dataflow"
+          },
+          {
+            "href": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB.DISS:BSI_PUB(1.0)",
+            "rel": "request",
+            "type": "dataflow"
+          }
         ]
       }
     ]
