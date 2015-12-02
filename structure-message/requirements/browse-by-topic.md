@@ -6,13 +6,13 @@ Browsing a list of *topics* (i.e. statistical domains) is a common way for users
 
 ## Artefacts involved
 
-At least the following SDMX artefacts are needed to support this use case:
+The following SDMX artefacts are needed to support this use case:
 
 - Category Scheme
 - Dataflow
 - ContentConstraint
 
-One of the guiding principles of SDMX-JSON is to make the artefacts useful on their own (i.e. standalone). This means that the `ContentConstraint` will embed the codes and concepts used by the constraints, thereby alleviating the need to also retrieve the `DataStructureDefinition`, along with its `ConceptSchemes` and `Codelists`. This not only simplifies the work to be done on the client but also aims to minimise the amount of resources needed (for example, by limiting the size of the message to a minimum).
+One of the guiding principles of SDMX-JSON is to make the artefacts useful on their own (i.e. standalone). This means that the `ContentConstraint` will embed the codes and concepts used by the constraints, thereby alleviating the need to also retrieve the `DataStructureDefinition`, along with its `ConceptSchemes` and `Codelists`. This not only simplifies the work to be done on the client but also aims to minimise the amount of resources needed (for example, by limiting the size of the message to a minimum). The same principle explains why the SDMX `Categorisations` are not used in this use case. 
 
 For additional information about these artefacts, please refer to the [SDMX information model](http://sdmx.org/wp-content/uploads/2011/08/SDMX_2-1-1_SECTION_2_InformationModel_201108.pdf).
 
