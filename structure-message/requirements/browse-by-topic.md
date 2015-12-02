@@ -22,11 +22,11 @@ For additional information about the query syntax used in the examples below, pl
 
 It is possible to support the requirement with 2 queries, one to get the list of statistical domains and the dataflows attached to them and one to build the dimension filters for the selected dataflow.
 
-### Step 1: Get the list of statistical domains and the dataflows attached to them
+### Query 1: Get the list of statistical domains and the dataflows attached to them
 
 Required artefacts: Category Scheme, Dataflow
 
-The starting point is to retrieve the list of *topics* for which data are available. These are known as `category schemes` in SDMX. The `dataflows` attached to each category give information about the data that can be retrieved for each of the *topics*. Both can be retrieved using a categoryscheme query, along with the `references` parameter:
+The starting point is to retrieve the list of *topics* for which data are available. These are known as `category schemes` in SDMX. The `dataflows` attached to each category give information about the data that can be retrieved for each of the *topics*. Both the category schemes and the dataflows can be retrieved using a categoryscheme query, along with the `references` parameter:
 
 ```
 https://ws-entry-point/categoryscheme?references=parentsandsiblings
@@ -56,9 +56,9 @@ Once a user has selected a category, the client could display the list of datafl
 
 The client typically needs to display the names of the dataflows. In addition, some clients might also want to display the descriptions of the dataflows and the name of the selected category.
 
-In order to perform the next query (cf. step 2 below), clients will need the full references to the dataflows (id, agency id and version).
+In order to perform the next query, clients will need the full references to the dataflows (id, agency id and version).
 
-### Step 2: Find data in the selected dataflow, using concept filters
+### Query 2: Find data in the selected dataflow, using concept filters
 
 Required artefacts: Content Constraint
 
