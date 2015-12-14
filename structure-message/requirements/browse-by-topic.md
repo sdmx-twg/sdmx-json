@@ -10,7 +10,7 @@ The following SDMX artefacts are needed to support this use case:
 
 - Category Scheme
 - Dataflow
-- ContentConstraint
+- Content Constraint
 
 One of the guiding principles of SDMX-JSON is to make the artefacts useful on their own (i.e. standalone). This means that the `ContentConstraint` will embed the codes and concepts used by the constraints, thereby alleviating the need to also retrieve the `DataStructureDefinition`, along with its `ConceptSchemes` and `Codelists`. This not only simplifies the work to be done on the client but also aims to minimise the amount of resources needed (for example, by limiting the size of the message to a minimum). The same principle explains why the SDMX `Categorisations` are not used in this use case. 
 
@@ -62,13 +62,13 @@ In order to perform the next query, clients will need the full references to the
 
 Required artefacts: Content Constraint
 
-Once a user has selected a dataflow, the web service client will need to retrieve the `concepts` that are used to structure that dataflow. In addition, the list of allowed values for each of these concepts will be needed. The list of values for which data exist can be found in the `content constraints`, while the names of the values can be retrieved from the `codes` in the `codelists` referenced by the `data structure definition`. All these artefacts can be retrieved in just one dataflow query, again using the references' resolution mechanism offered by the SDMX RESTful API.
+Once a user has selected a dataflow, the web service client will need to give users the possibility to retrieve data using *filters*. The list of values for which data exist can be found in the `content constraints`. In SDMX-JSON, the codes and concepts used by the constraints are resolved in the constraints, thereby alleviating the need to also retrieve the `DataStructureDefinition`, along with its `ConceptSchemes` and `Codelists`. The needed artefacts can be retrieved in just one dataflow query, again using the references' resolution mechanism offered by the SDMX RESTful API.
 
 ```
-https://ws-entry-point/dataflow/agency-id/dataflow-id/dataflow-version?references=all
+https://ws-entry-point/dataflow/agency-id/dataflow-id/dataflow-version?references=contentconstraint
 ```
 
-The response will contain the selected `dataflow`, the `data structure definition` that structure the data for the dataflow, as well as the `concepts` and `codelists` referenced by the data structure definition. In addition, it will contain the `content constraints` attached to the dataflow.
+The response will contain the selected `dataflow` and the `content constraints` attached to the dataflow.
 
 The screenshot below shows an example of the type of user interface (a list box for the list of concepts, and a collection of check boxes for the list of allowed values for each of the concepts in this example) that can be built from the response. The example is taken from the ECB statistical tablet app.
 
