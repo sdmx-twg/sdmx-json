@@ -53,5 +53,29 @@
         "name": "Banknotes and Coins"
       }
     ]
-  }]
+  }],
+  "references": {
+    "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:FM(1.0)": {
+      "id": "FM",
+      "agencyID": "ECB",
+      "version": "1.0",
+      "name": "Financial market data",
+      "references": [{
+        "href": "https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_FMD2/1.0",
+        "rel": "structure",
+        "type": "datastructure"
+      }]
+    },
+    "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:BSI(1.0)": {
+      "id": "BSI",
+      "agencyID": "ECB",
+      "version": "1.0",
+      "name": "Balance Sheet Items",
+      "references": [{
+        "href": "https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_BSI1/1.0",
+        "rel": "structure",
+        "type": "datastructure"
+      }]
+    }
+  }
 }
