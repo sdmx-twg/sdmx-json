@@ -18,7 +18,14 @@
     "items": [
       {
         "id": "01",
-        "name": "Monetary operations"
+        "name": "Monetary operations",
+        "links": [{
+          "href": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:FM(1.0)",
+          "rel": "dataflow"
+         }, {
+          "href": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:BSI(1.0)",
+          "rel": "dataflow"
+         }]
       },
       {
         "id": "02",
