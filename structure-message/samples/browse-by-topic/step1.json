@@ -9,10 +9,6 @@
             {
                 "href": "https://sdw-wsrest.ecb.europa.eu/service/categoryscheme/ECB.DISS/MOBILE_NAVI_PUB/1.0",
                 "rel": "request"
-            },
-            {
-                "href": "https://registry.sdmxcloud.org/ws/rest/categoryscheme/SDMX/SDMXStatSubMatDomainsWD1/latest/?detail=full&references=none&version=2.1",
-                "rel": "request"
             }
         ]
     },
