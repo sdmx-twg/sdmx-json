@@ -58,10 +58,10 @@ Example:
 	  "test": false,
       "sender": {
         # sender object #
-      }
+      },
       "receiver": {
         # receiver object #
-      }
+      },
 	  "links": [
 		{
 			# link object #
@@ -230,7 +230,7 @@ Example:
 		"id": "01",
 		"name": "Population and migration",
 		"description": "Description for Population and migration",
-		"urn": "urn:sdmx:org.sdmx.infomodel.categoryscheme.Category=SDMX:SDMXStatSubMatDomainsWD1(1.0).1.1"
+		"urn": "urn:sdmx:org.sdmx.infomodel.categoryscheme.Category=SDMX:SDMXStatSubMatDomainsWD1(1.0).1.1",
 		"links": [
 		  {
             # link object #
@@ -266,7 +266,7 @@ Example:
           {
             # item object #
           }
-        ]
+        ],
 		"links": [
           {
             # link object #
