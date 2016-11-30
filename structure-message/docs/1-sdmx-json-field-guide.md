@@ -23,20 +23,20 @@ Message is the top level object and it contains the requested resources and as w
 
 Example:
 
-    {
-      "header": {
-          # header fields #
-      },
-      "resources": [
-          # resource objects #
-      ],
-      "references": {
-          # referenced resource objects #
-      },
-      "errors": [
-          # error messages #
-      ]
-    }
+	{
+	  "header": {
+		# header fields #
+	  },
+	  "resources": [
+		# resource objects #
+	  ],
+	  "references": {
+		# referenced resource objects #
+	  },
+	  "errors": [
+		# error messages #
+	  ]
+	}
 
 ## header
 
@@ -52,22 +52,22 @@ useful if the WS requires authentication.
 
 Example:
 
-    "header": {
-      "id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
-      "prepared": "2016-01-03T12:54:12",
+	"header": {
+	  "id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
+	  "prepared": "2016-01-03T12:54:12",
 	  "test": false,
-      "sender": {
-        # sender object #
-      },
-      "receiver": {
-        # receiver object #
-      },
+	  "sender": {
+		# sender object #
+	  },
+	  "receiver": {
+		# receiver object #
+	  },
 	  "links": [
 		{
-			# link object #
+		  # link object #
 		}
-      ]
-    }
+	  ]
+	}
 
 ### sender
 
@@ -79,39 +79,46 @@ Example:
 
 Example:
 
-    "sender": {
-      "id": "ECB",
-      "name": "European Central Bank",
-      "contact": [
-        # contact details #
-      ]
-    }
+	"sender": {
+	  "id": "ECB",
+	  "name": "European Central Bank",
+	  "contact": [
+		# contact details #
+	  ]
+	}
 
 #### contact
 
 *Array* *nullable*. A collection of contact details. Each object in the collection may contain the following field:
 
 * name - *String*. The contact's name.
-* department - *String* *nullable*. The organisational structure for the contact.
+* department - *String* *nullable*. The organisational unit for the contact.
 * role - *String* *nullable*. The responsibility of the contact.
 * telephone - *Array* *nullable*. An array of telephone numbers for the contact.
 * fax - *Array* *nullable*. An array of fax numbers for the contact person.
 * uri - *Array* *nullable*. An array of uris. Each uri holds an information URL for the contact.
+* X400 - *Array* *nullable*. An array of X400. Each X400 holds an X400 address of the contact.
 * email - *Array* *nullable*. An array of email addresses for the contact person.
 
 Example:
 
-    "contact": [
-        {
-            "name": "Statistics hotline",
-            "email": [ "statistics@xyz.org" ]
-        }
-    ]
+	"contact": [
+	  {
+		"name": "Statistics hotline",
+		"department": "Statistics hotline",
+		"role": "Statistics hotline",
+		"telephone": [ "+00 0 00 00 00 00" ],
+		"fax": [ "+00 0 00 00 00 01" ],
+		"uri": [ "www.xyz.org" ],
+		"X400": [ "X400" ],
+		"email": [ "statistics@xyz.org" ]
+	  }
+	]
 
 ### receiver
 
 *Object* *nullable*. Information about the party that is receiving the message. This can be useful if the WS requires authentication. Receiver contains the same fields as [sender](#sender).
-	
+
 ### link
 
 *Object* *nullable*. A link to an external resource.
@@ -125,12 +132,12 @@ See the section about the [linking mechanism](#linking-mechanism) for additional
 
 Example:
 
-    {
-      "href": "https://registry.sdmx.org/help.html",
-      "rel": "help",
-      "title": "Documentation about the SDMX Global Registry",
-      "type": "text/html"
-    }
+	{
+	  "href": "https://registry.sdmx.org/help.html",
+	  "rel": "help",
+	  "title": "Documentation about the SDMX Global Registry",
+	  "type": "text/html"
+	}
 
 ## resource
 
@@ -153,45 +160,59 @@ Example:
 - StructureSet
 - Process
 - Categorisation
-- Constraint	
+- Constraint
+-
 
 * id - *String*. Identifier for the resource.
+* uri - *String* *nullable*. The URL address of the resource.
 * urn - *String* *nullable*. URN - typically a URL - which points to an external resource which may contain or supplement the annotation. If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly.
 * name - *String* *nullable*. Resource name.
 * description - *String* *nullable*. Description of the resource.
 * agencyID - *String* *nullable*. ID of the agency maintaining this resource.
 * version - *String* *nullable*. Version of this resource. It is "1.0" by default.
-* isFinal - *Boolean* *nullable*. True if this is the final version of the resource, otherwise False.
+* validFrom - *String* *nullable*. A timestamp from which the version is valid. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
+* validTo - *String* *nullable*.  A timestamp from which the version is superceded. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
+* isFinal - *Boolean* *nullable*. True if this is the final version of the resource, otherwise False (draft version).
+* isExternalReference - *Boolean* *nullable*. If set to “true” it indicates that the content of the resource is held externally.
+* isPartial - *Boolean* *nullable*. If set to true, it indicates that the resource contains only a sub-set of items. Only for resources that inherit from the ItemScheme (CategoryScheme, Codelist, ConceptScheme, ReportingTaxonomy, and OrganisationScheme).
 * links - *Array* *nullable*. A collection of links to additional resources for the resource. See the section [link](#link).
 * annotations - *Array* *nullable*. Provides a list of annotation objects.
 * items - *Array* *nullable*. Provides a list of items if the resource inherits from the ItemScheme (CategoryScheme, Codelist, ConceptScheme, ReportingTaxonomy, and OrganisationScheme). 
-	
+
 Example:
 
 	{
-		"id": "MOBILE_NAVI_PUB",
-		"urn": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB.DISS:BSI_PUB(1.0)",
-		"name": "Economic concepts",
-		"description": "This is the description of Economic concepts",
-		"agencyID": "ECB.DISS",
-		"version": "1.0",
-		"isFinal": true,
-		"links": [
-          {
-            # link object #
-          }
-		],
-		"annotations": [
-		  {
-			# annotation object #
-		  }
-		],
-		"items": [	
-          {
-            # item object #
-          }
-        ]
-    }
+	  "id": "MOBILE_NAVI_PUB",
+	  "uri": "HTTP://www.xyz.org/resource/0123456789",
+	  "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB.DISS:BSI_PUB(1.0)",
+	  "name": "Economic concepts",
+	  "description": "This is the description of Economic concepts",
+	  "agencyID": "ECB.DISS",
+	  "version": "1.0",
+	  "validFrom": "2012-05-04",
+	  "validTo": "2015-05-04",
+	  "isFinal": true,
+	  "isExternalReference": false,
+	  "isPartial": false,
+	  "links": [
+		{
+		  # link object#
+		}
+	  ],
+	  "annotations":[
+		{
+		  # annotation object#
+		}
+	  ],
+	  "items": [
+		{
+		  # item object #
+		}
+	  ],
+	  "contact": [
+		# contact details #
+	  ]
+	}
 
 ### annotation
 
@@ -200,24 +221,26 @@ Example:
 * id - *String* *nullable*. ID provides a non-standard identification of an annotation. It can be used to disambiguate annotations.
 * title - *String* *nullable*. Provides a title for the annotation.
 * type - *String* *nullable*. Type is used to distinguish between annotations designed to support various uses. The types are not enumerated, and these can be freely specified by the creator of the annotations. The definitions and use of annotation types should be documented by their creator.
-* uri - *String* *nullable*. URI - typically a URL - which points to an external resource which may contain or supplement the annotation. If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly.
+* url - *String* *nullable*. URI - typically a URL - which points to an external resource which may contain or supplement the annotation. If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly.
 * text - *String* *nullable*. Contains the text of the annotation.
 
 Example:
 
-    {
-        "id": "74747",
-		"title": "Sample annotation",
-		"type": "reference",
-        "uri": "http://sample.org/annotations/74747",
-		"text": "Sample annotation text"
-    }
+	{
+	  "id": "74747",
+	  "title": "Sample annotation",
+	  "type": "reference",
+	  "url": "http://sample.org/annotations/74747",
+	  "text": "Sample annotation text"
+	}
 
 ### item
 
 *Object* *nullable*. Item within the ItemScheme (if the resource is a CategoryScheme, Codelist, ConceptScheme, ReportingTaxonomy, or OrganisationScheme. 
 
 * id - *String*. Identifier for the item.
+* uri - *String* *nullable*. The URL address of the item.
+* urn - *String* *nullable*. URN - typically a URL - which points to an external resource which may contain or supplement the annotation. If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly.
 * name - *String* *nullable*. Item name.
 * description - *String* *nullable*. Description of the item. 
 * links - *Array* *nullable*. A collection of links to additional resources for the item. See the section [link](#link).
@@ -226,26 +249,27 @@ Example:
 
 Example:
 
-    {
-		"id": "01",
-		"name": "Population and migration",
-		"description": "Description for Population and migration",
-		"urn": "urn:sdmx:org.sdmx.infomodel.categoryscheme.Category=SDMX:SDMXStatSubMatDomainsWD1(1.0).1.1",
-		"links": [
-		  {
-            # link object #
-		  }
-		],
-		"annotations": [
-		  {
-			# annotation object #
-		  }
-		],
-		"items": [	
-          {
-            # item object #
-          }
-        ]
+	{
+	  "id": "01",
+	  "uri": "http://www.xyz.org/resource/0123456789",
+	  "urn": "urn:sdmx:org.sdmx.infomodel.categoryscheme.Category=SDMX:SDMXStatSubMatDomainsWD1(1.0).1.1",
+	  "name": "Population and migration",
+	  "description": "Description for Population and migration",
+	  "links":[
+		{
+		  # link object#
+		}
+	  ],
+	  "annotations": [
+		{
+		  # annotation object #
+		}
+	  ],
+	  "items": [	
+		{
+		  # item object #
+		}
+	  ]
 	}
 
 ## reference
@@ -254,43 +278,48 @@ Example:
 
 Example:
 
-    {
-		"id": "FM",
-		"urn": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:FM(1.0)",
-		"name": "Financial market data",
-		"description": "This is the description of Financial market data",
-		"agencyID": "ECB",
-		"version": "1.0",
-		"isFinal": true,
-		"items": [	
-          {
-            # item object #
-          }
-        ],
-		"links": [
-          {
-            # link object #
-          }
-		],
-		"annotations": [
-		  {
-			# annotation object #
-		  }
-		]
-    }
+	{
+	  "id": "FM",
+	  "uri": "http://www.xyz.org/resource/0123456789",
+	  "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:FM(1.0)",
+	  "name": "Financial market data",
+	  "description": "This is the description of Financial market data",
+	  "agencyID": "ECB",
+	  "version": "1.0",
+	  "validFrom": "2012-05-04",
+	  "validTo": "2015-05-04",
+	  "isFinal": true,
+	  "isExternalReference": false,
+	  "isPartial": false,
+	  "items": [	
+		{
+		  # item object #
+		}
+	  ],
+	  "links": [
+		{
+		  # link object #
+		}
+	  ],
+	  "annotations": [
+		{
+		  # annotation object #
+		}
+	  ]
+	}
 
 References within the "references" object are accessible through the "urn" properties.
 
 Example:
 
-      "references": {
-          "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:FM(1.0)":
-		  {
-		    # referenced resource object #
-		  }
-      }
+	"references": {
+	  "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:FM(1.0)":
+	  {
+		# referenced resource object #
+	  }
+	}
 
-		
+
 ## error
 
 *Object* *nullable*. Provides information about an error message.
@@ -300,12 +329,12 @@ Example:
 
 Example:
 
-    "errors": [
-      {
-        "code": 150,
-        "message": "Invalid number of dimensions in the key parameter"
-      }
-    ]
+	"errors": [
+	  {
+		"code": 150,
+		"message": "Invalid number of dimensions in the key parameter"
+	  }
+	]
 
 # Linking mechanism
 
@@ -335,12 +364,12 @@ The objects defined in SDMX-JSON are "open", i.e. they can be extended with prop
 
 The snippet below shows an example of an `error` object, extended with a `wsCustomErrorCode`:
 
-    ```
-    "errors": [
-      {
-        "code": 150,
-        "message": "Invalid number of dimensions in the key parameter",
-        "wsCustomErrorCode": 39272
-      }
-    ]
-    ```
+	```
+	"errors": [
+	  {
+		"code": 150,
+		"message": "Invalid number of dimensions in the key parameter",
+		"wsCustomErrorCode": 39272
+	  }
+	]
+	```
