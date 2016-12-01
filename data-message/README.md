@@ -21,6 +21,6 @@ to ease the development of client applications with a simple, but generic
 message structure that supports different types of data structures.
 
 See:
-- doc: for the normative documentation
+- docs: for the normative documentation
 - samples: for message samples
 - tools: for the JSON schema usable for validation purposes
