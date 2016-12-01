@@ -20,7 +20,7 @@
       {
         "id": "01",
         "name": "Monetary operations",
-        "references": [
+        "links": [
           {
             "href": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB.DISS:ILM_PUB(1.0)",
             "rel": "request",
@@ -46,7 +46,7 @@
       "agencyID": "ECB.DISS",
       "version": "1.0",
       "name": "Internal Liquidity Management - Published series",
-      "references": [{
+      "links": [{
         "href": "https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_ILM1/1.0",
         "rel": "structure",
         "type": "datastructure"
@@ -57,7 +57,7 @@
       "agencyID": "ECB.DISS",
       "version": "1.0",
       "name": "Financial market data - Published series",
-      "references": [{
+      "links": [{
         "href": "https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_FMD2/1.0",
         "rel": "structure",
         "type": "datastructure"
@@ -68,7 +68,7 @@
       "agencyID": "ECB.DISS",
       "version": "1.0",
       "name": "Balance Sheet Items - Published series",
-      "references": [{
+      "links": [{
         "href": "https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_BSI1/1.0",
         "rel": "structure",
         "type": "datastructure"
