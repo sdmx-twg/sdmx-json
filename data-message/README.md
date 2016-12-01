@@ -20,3 +20,7 @@ roundtrips, small message sizes and fast parsing. In addition, the format aims
 to ease the development of client applications with a simple, but generic
 message structure that supports different types of data structures.
 
+See:
+- doc: for the normative documentation
+- samples: for message samples
+- tools: for the JSON schema usable for validation purposes
