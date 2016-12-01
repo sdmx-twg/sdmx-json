@@ -307,7 +307,7 @@
             "agencyID": "ECB",
             "version": "1.0",
             "name": "Financial market data",
-            "references": [
+            "links": [
                 {
                     "href": "https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_FMD2/1.0",
                     "rel": "structure",
@@ -320,7 +320,7 @@
             "agencyID": "ECB",
             "version": "1.0",
             "name": "Balance Sheet Items",
-            "references": [
+            "links": [
                 {
                     "href": "https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_BSI1/1.0",
                     "rel": "structure",
