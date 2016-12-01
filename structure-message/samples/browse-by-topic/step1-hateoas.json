@@ -6,7 +6,7 @@
             "id": "ECB"
         }
     },
-    "structure": {
+    "resources": {
         "links": [
             {
                 "href": "https://ws-entry-point/categoryscheme/ECB/NAVI_PUB/1.0",
