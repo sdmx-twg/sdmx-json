@@ -22,9 +22,12 @@
       ],
       "name": "Balance Sheet Items - Published series",
       "description": "Series of the 'Balance Sheet Items' dataflow that are used in ECB publications",
-      "structure": {
-        "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_BSI1(1.0)"
-      }
+      "links": [
+	      {
+          "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_BSI1(1.0)",
+          "type": "datastructure"
+        }
+	    ]
     }
   ],
   "references": {
