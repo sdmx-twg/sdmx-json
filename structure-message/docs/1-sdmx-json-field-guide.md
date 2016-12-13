@@ -141,27 +141,7 @@ Example:
 
 ## resource
 
-*Object* *nullable*. Provides the information about a requested resource. A resource can be any SDMX artifact that can be requested through a structure request:
-- DataStructureDefinition
-- MetadataStructureDefinition
-- CategoryScheme
-- ConceptScheme
-- Codelist
-- HierarchicalCodelist
-- OrganisationsScheme
-- AgencyScheme
-- DataProviderScheme
-- DataConsumerScheme
-- OrganisationUnitScheme
-- Dataflow
-- Metadataflow
-- ReportingTaxonomy
-- ProvisionAgreement
-- StructureSet
-- Process
-- Categorisation
-- Constraint
--
+*Object* *nullable*. Provides the information about a requested resource. A resource can be any SDMX artifact that can be requested through a structure request: DataStructureDefinition, MetadataStructureDefinition, CategoryScheme, ConceptScheme, Codelist, HierarchicalCodelist, OrganisationsScheme, AgencyScheme, DataProviderScheme, DataConsumerScheme, OrganisationUnitScheme, Dataflow, Metadataflow, ReportingTaxonomy, ProvisionAgreement, StructureSet, Process, Categorisation, Constraint
 
 * id - *String*. Identifier for the resource.
 * uri - *String* *nullable*. The URL address of the resource.
@@ -173,7 +153,7 @@ Example:
 * validFrom - *String* *nullable*. A timestamp from which the version is valid. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
 * validTo - *String* *nullable*.  A timestamp from which the version is superceded. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
 * isFinal - *Boolean* *nullable*. True if this is the final version of the resource, otherwise False (draft version).
-* isExternalReference - *Boolean* *nullable*. If set to ìtrueî it indicates that the content of the resource is held externally.
+* isExternalReference - *Boolean* *nullable*. If set to ‚Äútrue‚Äù it indicates that the content of the resource is held externally.
 * isPartial - *Boolean* *nullable*. If set to true, it indicates that the resource contains only a sub-set of items. Only for resources that inherit from the ItemScheme (CategoryScheme, Codelist, ConceptScheme, ReportingTaxonomy, and OrganisationScheme).
 * links - *Array* *nullable*. A collection of links to additional resources for the resource. See the section [link](#link).
 * annotations - *Array* *nullable*. Provides a list of annotation objects.
