@@ -48,7 +48,7 @@ as the metadata needed to interpret those data.
 
 * header - *Object* *nullable*. *[Header](#header)* contains basic technical information about the message, such as when it was prepared and who has sent it.
 * structure - *Object* *nullable*. *[Structure](#structure)* contains the information needed to interpret the data available in the message, such as the list of concepts used.
-* dataSets - *Array* *nullable*. *DataSets* field is an array of *[dataSet](#dataSet)* objects. That's where the data (i.e.: the observations) will be.
+* dataSets - *Array* *nullable*. *DataSets* field is an array of *[dataSet](#dataset)* objects. That's where the data (i.e.: the observations) will be.
 * errors - *Array* *nullable*. *Errors* field is an array of *[error](#error)* objects. When appropriate provides a list of error messages in addition to RESTful web services HTTP error status codes.
 
 Example:
@@ -166,9 +166,9 @@ contained in the message. It tells you which are the components (`dimensions` an
 used in the message and also describes to which level in the hierarchy (`dataSet`, `series`, 
 `observations`) these components are attached.
 
-* links - *Array* *nullable*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to structural metadata or to additional information regarding the structure.
-* dimensions - *Object*. Describes the *[dimensions](#dimensions_attributes)* used in the message as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) to which these `dimensions` are attached.
-* attributes - *Object*. Describes the *[attributes](#dimensions_attributes)* used in the message as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) to which these `attributes` are attached.
+* links - *Array* *nullable*. *Links* field is an array of *[link](#link)* objects. A collection of links to structural metadata or to additional information regarding the structure. Providing links allowing accessing the underlying SDMX Data Structure Definition, Dataflow and/or Provision Agreements is recommended.
+* dimensions - *Object*. Describes the *[dimensions](#dimensions-attributes)* used in the message as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) to which these `dimensions` are attached.
+* attributes - *Object*. Describes the *[attributes](#dimensions-attributes)* used in the message as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) to which these `attributes` are attached.
 * annotations - *Array* *nullable*. *Annotations* field is an array of *[annotation](#annotation)* objects. If appropriate, provides a list of `annotations`. `Annotations` can be attached to `dataSets`, `series` and `observations`.
 
 Example:
@@ -195,6 +195,8 @@ Example:
 ### link
 
 See the section on [linking mechanism](#linking-mechanism) for all information on links.
+Providing links allowing accessing the underlying SDMX Data Structure Definition, Dataflow
+and/or Provision Agreements is recommended.
 
 ### dimensions, attributes
 
@@ -257,7 +259,7 @@ Each of the components may contain the following fields:
 * role - *String* *nullable*. Defines the component role(s), if any. Roles are represented by the id of a concept defined as [SDMX cross-domain concept](https://sdmx.org/wp-content/uploads/01_sdmx_cog_annex_1_cdc_2009.pdf). Several of the concepts defined as SDMX cross-domain concepts are useful for data visualisation, such as for example, the series title ("TITLE"), the unit of measure ("UNIT_MEASURE"), the number of decimals to be displayed ("DECIMALS"), the  country or geographic reference area ("REF_AREA", e.g. when using maps), the period of time to which the measured observation refers ("REF_PERIOD"), the time interval at which observations occur over a given time period ("FREQ"), etc. It is strongly recommended to identify any component that can be useful for data visualisation purposes by using the appropriate SDMX cross-domain concept as role.
 * default - *String* or *Number* *nullable*. Defines a default `value` for the component (valid for `attributes` only!). If no value is provided in the data part of the message then this value applies.
 * links - *Array* *nullable*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the component.
-* values - *Array*. *Values* field is an array of *[component value](#component_value)* objects. Note that `dimensions` and `attributes` presented at `dataSet` level can only have one single component value.
+* values - *Array*. *Values* field is an array of *[component value](#component-value)* objects. Note that `dimensions` and `attributes` presented at `dataSet` level can only have one single component value.
 
 Example:
 
@@ -351,6 +353,8 @@ In case the `dataSet` is a flat list of `observations`, `observations` will be f
 directly under a `dataSet` object. In case the `dataSet` represents time series 
 or cross sections, the `observations` will be found under the `series` elements.
 
+The `dataSet` properties are:
+
 * action - *String* *nullable*. Action provides a list of actions, describing the intention of the data transmission from the sender's side.
 - Append - this is an incremental update for an existing `dataSet` or the provision of new data or documentation (attribute values) formerly absent. If any of the supplied data or metadata is already present, it will not replace these data.
 - Replace - data are to be replaced, and may also include additional data to be appended.
@@ -366,10 +370,10 @@ or cross sections, the `observations` will be found under the `series` elements.
 * annotations - *Array* *nullable*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the dataSet. Indices refer back to the array of *annotations* in the structure field.
 * attributes - *Array* *nullable*. Collection of indices of the corresponding *values* of all attributes presented at the dataSet level. Each value is an index in the `values` array of the respective *component* object within the `structure.attributes.dataSet` array. This is typically the case for `attributes` that always have the same value for all the `observations` available in the `dataSet`. In order to avoid repetition, that value can simply be presented at the `dataSet` level.
 * series - *Object* *nullable*. A collection of *[series](#series)* objects, to be used when the `observations` contained in the `dataSet` are presented in logical groups (time series or cross-sections), e.g. when using the SDMX API with the parameter "dimensionAtObservation=TIME_PERIOD" (default option) or with the "dimensionAtObservation" parameter with an ID of any other specific `dimension`. This element must **not** be used in case the `dataSet` presents a flat view of `observations`.
-* observations - *Object* *nullable*. Collection of *[observations](#observations)* used in case when a `dataSet` is presented as a flat view of `observations`, e.g. when using the SDMX API with the parameter "dimensionAtObservation=AllDimensions". All `dimensions`, except those with only one `value` possibly presented at the `dataSet` level, would be presented at `observation` level. Alternatively, in case the `observations` are to be presented in logical groups (time series or cross-sections), use the *[series element](#series)* instead.
+* observations - *Object* *nullable*. Collection of *[observations](#observations)* used in case when a `dataSet` is presented as a flat view of `observations`, e.g. when using the SDMX API with the parameter "dimensionAtObservation=AllDimensions". All `dimensions`, except those with only one `value` possibly presented at the `dataSet` level, would be presented at `observation` level. Alternatively, in case the `observations` are to be presented in logical groups (time series or cross-sections), use the *[series](#series)* element instead.
 
 For information on how to handle the indices for `annotations`, `attributes` or 
-`observations` see the section dedicated to [handling component values](#Handling_component_values).
+`observations` see the section dedicated to [handling component values](#handling-component-values).
 
 Examples:
 
@@ -418,11 +422,13 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 *Object* *nullable*. Collection of series, when the `observations` contained in the `dataSet`
 are used into logical groups (time series or cross-sections). Each underlying series 
 is represented as a name/value pair in the `series` object.
-A series is uniquely identified through the content of the name in the name/value pair, 
+
+A series is uniquely identified through the content of the *name* in the name/value pair, 
 which is the indices of the corresponding `values` of all `dimensions` presented at `series` 
 level (indices in the `values` array of the respective *component* object within the 
 *structure.dimensions.series* array) separated by a colon (":"). 
-The value in the name/value pair is an object containing:
+
+The *value* in the name/value pair is an object containing:
 
 * annotations - *Array* *nullable*. Collection of indices of the corresponding *annotations* for the series. Indices refer back to the array of `annotations` in the structure field.
 * attributes - *Array* *nullable*. Collection of indices of the corresponding `values` of all `attributes` presented at the `series` level. Each value is an index in the `values` array of the respective `component` object within the `structure.attributes.series` array. This is typically the case for `attributes` that always have the same value for all the `observations` available in the series. In order to avoid repetition, that value can simply be presented at the `series` level. 
@@ -576,19 +582,21 @@ Example:
     }
 
 For information on how to handle the indices for `annotations`, `attributes` or 
-`observations` see the section dedicated to [handling component values](#Handling_component_values).
+`observations` see the section dedicated to [handling component values](#handling-component-values).
 
 ### observations
 
 *Object* *nullable*. Collection of observations. Each observation is represented as a 
 name/value pair in the `observations` object.
-An observation is uniquely identified through the content of the name in the name/value pair, 
+
+An observation is uniquely identified through the content of the *name* in the name/value pair, 
 which is the indices of the corresponding values of all dimensions presented at observation 
 level (indices in the `values` array of the respective `component` object within the 
 `structure.dimensions.observation` array) separated by a colon (":"). 
 It's one single index for time series and cross-sections representations, but there will be 
 more than one when the data are represented as a flat view of observations.
-The value in the name/value pair is an array containing the observation value (first position)
+
+The *value* in the name/value pair is an array containing the observation value (first position)
 and the indices of the corresponding values of all `attributes` presented at `observation` level
 (any following position). Therefore, elements after the observation value are for the 
 `observation` level `attributes`. Beginning from the end of the array, `observation` level 
@@ -691,7 +699,7 @@ Example:
     }
 
 For information on how to handle the indices for `observations` 
-see the section dedicated to [handling component values](#Handling_component_values).
+see the section dedicated to [handling component values](#handling-component-values).
 
 ## error
 
@@ -721,6 +729,7 @@ Example:
 * rel - *String*. Relationship of the object to the external resource.
 * title - *String* *nullable*. A human-friendly description of the target link.
 * type - *String* *nullable*. A hint about the type of representation returned by the link.
+* hreflang - *String* *nullable*. The natural language of the external link, the same as used in the HTTP Accept-Language request header.
 
 Examples:
 
@@ -738,7 +747,8 @@ Examples:
       "href": "https://registry.sdmx.org/help.html",
       "rel": "help",
       "title": "Documentation about the SDMX Global Registry",
-      "type": "text/html"
+      "type": "text/html",
+      "hreflang": "en"
     }
 
 Collections of links can be attached to various elements in SDMX-JSON.
