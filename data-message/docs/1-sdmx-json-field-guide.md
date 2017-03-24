@@ -712,12 +712,10 @@ The following pieces of information are to be provided:
 
 Example:
 
-    "errors": [
-      {
-        "code": 150,
-        "message": "Invalid number of dimensions in the key parameter"
-      }
-    ]
+    {
+      "code": 150,
+      "message": "Invalid number of dimensions in the key parameter"
+    }
 
 # Linking mechanism
 
