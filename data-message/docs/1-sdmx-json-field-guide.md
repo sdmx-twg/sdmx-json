@@ -296,6 +296,7 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 * name - *String*. Name provides a human-readable name for the component value.
 * description - *String* *nullable*. Description provides a human-readable description of the value. The description is typically longer than the text provided for the name field.
 * start, end - *String* *nullable*. Start and end are instances of time that define the actual Gregorian calendar period covered by the values for the time dimension. The algorithm for computing start and end fields for any supported reporting period is defined in the SDMX Technical Notes. These fields should be used only when the component value represents one of the values for the time dimension. Values are considered as inclusive both for the start field and the end field. Values must follow the ISO 8601 syntax for combined dates and times, including time zone. These fields are useful for visualisation tools, when selecting the appropriate point in time for the time axis. Statistical data, can be collected, for example, at the beginning, the middle or the end of the period, or can represent the average of observations through the period. Based on this information and using the start and end fields, it is easy to get or calculate the desired point in time to be used for the time axis.
+* links - *Array* *nullable*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the component value.
 * annotations - *Array* *nullable*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the component value. Indices refer back to the array of *annotations* in the structure field.
 
 Example:
@@ -306,29 +307,46 @@ Example:
         "description": "Description for 2010.",
         "start": "2010-01-01T00:00Z",
         "end": "2010-12-31T23:59:59Z",
+        "links": [
+          {
+            # link object #
+          }
+        ],
         "annotations": [ 5, 49 ]
     }
 
+###### link
+
+See the section on [linking mechanism](#linking-mechanism) for all information on links.
+
 ### annotation
 
-*Object* *nullable*. An annotation object can be attached to `dataSets`, 
+*Object* *nullable*. An annotation object can be attached to `structure`, `component`, `component value`, `dataSets`, 
 `series` and `observations`. It contains the following optional information:
 
 * title - *String* *nullable*. Provides a title for the annotation.
 * type - *String* *nullable*. Type is used to distinguish between annotations designed to support various uses. The types are not enumerated, and these can be freely specified by the creator of the annotations. The definitions and use of annotation types should be documented by their creator.
-* uri - *String* *nullable*. URI - typically a URL - which points to an external resource which may contain or supplement the annotation. If a specific behaviour is desired, an annotation type should be defined which specifies the use of this field more exactly.
 * text - *String* *nullable*. Contains the text of the annotation.
 * id - *String* *nullable*. ID provides a non-standard identification of an annotation. It can be used to disambiguate annotations.
+* links - *Array* *nullable*. *Links* field is an array of *[link](#link)* objects. If appropriate, a link to an additional external resource which may contain or supplement the annotation.
 
 Example:
 
     {
       "title": "Sample annotation",
       "type": "reference",
-      "uri": "http://sample.org/annotations/74747",
       "text": "Sample annotation text",
-      "id": "74747"
+      "id": "74747",
+      "links": [
+        {
+          # link object #
+        }
+      ]
     }
+
+#### link
+
+See the section on [linking mechanism](#linking-mechanism) for all information on links.
 
 ## dataSet
 
