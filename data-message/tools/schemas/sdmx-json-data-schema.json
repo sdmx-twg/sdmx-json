@@ -255,6 +255,11 @@
                 "default": {
                     "type": [ "null", "string" ]
                 },
+                "links": {
+                    "type": [ "null", "array" ],
+                    "items": {
+                        "$ref": "#/definitions/link"
+                },                
                 "values": {
                     "type": "array",
                     "items": {
