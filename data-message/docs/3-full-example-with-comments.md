@@ -69,6 +69,16 @@
         "href": "https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_EXR1/1.0",
         "rel": "datastructure",
         "title": "resolvable uri to datastructure"
+      },
+      {
+       "href": "https://sdw-wsrest.ecb.europa.eu/service/dataflow/ECB/EXR",
+        "rel": "dataflow",
+        "title": "resolvable uri to dataflow"
+      },
+      {
+        "href": "https://sdw-wsrest.ecb.europa.eu/service/provisionagreement/ECB/PA_EXR",
+        "rel": "provisionagreement",
+        "title": "resolvable uri to provision agreement"
       }
     ],
 
