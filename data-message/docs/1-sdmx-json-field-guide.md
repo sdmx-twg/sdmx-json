@@ -624,10 +624,10 @@ the indices of the corresponding values of `attributes` presented at `observatio
 the indices of the corresponding values of `annotations` of that observation (any following 
 position). Therefore, elements after the observation value are for the `observation` level 
 `attributes` and for `annotations` of that observation. Elements for `annotations` are only 
-included if there are `annotations` for that observation. If `annotations` are present, then
-all `attributes` defined at `observation` level must be included. Otherwise, if the observation
-has no `annotations`, then beginning from the end of the array, `observation` level `attributes` 
-can be omitted if: 
+included if there are `annotations` for that observation. **If `annotations` are present for an 
+observation, then all `attributes` defined at `observation` level must be included.** Otherwise, 
+if the observation has no `annotations`, then beginning from the end of the array, `observation` 
+level `attributes` can be omitted if: 
 - the `attribute` is not set for this observation (possible for optional attributes) or
 - the `attribute` value for this observation corresponds to the default value.
 
