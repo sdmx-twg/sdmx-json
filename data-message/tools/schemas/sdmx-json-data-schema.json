@@ -218,15 +218,17 @@
                             "type": {
                                 "type": [ "null", "string" ]
                             },
-                            "uri": {
-                                "type": [ "null", "string" ],
-                                "format": "uri"
-                            },
                             "text": {
                                 "type": [ "null", "string" ]
                             },
                             "id": {
                                 "type": [ "null", "string" ]
+                            },
+                            "links": {
+                                "type": [ "null", "array" ],
+                                "items": {
+                                    "$ref": "#/definitions/link"
+                                }
                             }
                         }
                     }
@@ -281,6 +283,12 @@
                             "end": {
                                 "type": [ "null", "string" ],
                                 "format": "date-time"
+                            },
+                            "links": {
+                                "type": [ "null", "array" ],
+                                "items": {
+                                    "$ref": "#/definitions/link"
+                                }
                             }
                         },
                         "required": [ "name" ]
