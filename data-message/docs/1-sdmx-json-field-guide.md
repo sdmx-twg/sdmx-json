@@ -166,7 +166,7 @@ contained in the message. It tells you which are the components (`dimensions` an
 used in the message and also describes to which level in the hierarchy (`dataSet`, `series`, 
 `observations`) these components are attached.
 
-* links - *Array* *nullable*. *Links* field is an array of *[link](#link)* objects. A collection of links to structural metadata or to additional information regarding the structure. Providing links allowing accessing the underlying SDMX Data Structure Definition, Dataflow and/or Provision Agreements is recommended.
+* links - *Array* *nullable*. *Links* field is an array of *[link](#link)* objects. A collection of links to structural metadata or to additional information regarding the structure. **Providing links allowing accessing the underlying SDMX Data Structure Definition, Dataflow and/or Provision Agreements is recommended.**
 * dimensions - *Object*. Describes the *[dimensions](#dimensions-attributes)* used in the message as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) to which these `dimensions` are attached.
 * attributes - *Object*. Describes the *[attributes](#dimensions-attributes)* used in the message as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) to which these `attributes` are attached.
 * annotations - *Array* *nullable*. *Annotations* field is an array of *[annotation](#annotation)* objects. If appropriate, provides a list of `annotations`. `Annotations` can be attached to `dataSets`, `series` and `observations`.
