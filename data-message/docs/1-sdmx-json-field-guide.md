@@ -770,6 +770,11 @@ Examples:
       "href": "https://registry.sdmx.org/ws/rest/datastructure/ECB/ECB_EXR1",
       "rel": "datastructure"
     }
+    
+    {
+       "href": "https://registry.sdmx.org/FusionRegistry/ws/rest/provisionagreement/ESTAT/PA_NAMAIN_IDC_N",
+       "rel": "provisionagreement"
+    }
 
     {
       "href": "https://registry.sdmx.org/help.html",
