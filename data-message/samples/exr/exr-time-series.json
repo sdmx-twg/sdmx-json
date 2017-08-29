@@ -38,7 +38,8 @@
                             "name": "Daily"
                         }
                     ]
-                }, {
+                },
+                {
                     "id": "CURRENCY_DENOM",
                     "name": "Currency denominator",
                     "keyPosition": 2,
@@ -48,7 +49,8 @@
                             "name": "Euro"
                         }
                     ]
-                }, {
+                },
+                {
                     "id": "EXR_TYPE",
                     "name": "Exchange rate type",
                     "keyPosition": 3,
@@ -58,7 +60,8 @@
                             "name": "Spot rate"
                         }
                     ]
-                }, {
+                },
+                {
                     "id": "EXR_SUFFIX",
                     "name": "Series variation - EXR context",
                     "keyPosition": 4,
@@ -79,7 +82,8 @@
                         {
                             "id": "NZD",
                             "name": "New Zealand dollar"
-                        }, {
+                        },
+                        {
                             "id": "RUB",
                             "name": "Russian rouble"
                         }
@@ -97,7 +101,8 @@
                             "name": "2013-01-18",
                             "start": "2013-01-18T00:00:00.000Z",
                             "end": "2013-01-18T23:59:59.999Z"
-                        }, {
+                        },
+                        {
                             "id": "2013-01-21",
                             "name": "2013-01-21",
                             "start": "2013-01-21T00:00:00.000Z",
@@ -117,7 +122,8 @@
                     "values": [
                         {
                             "name": "New Zealand dollar (NZD)"
-                        }, {
+                        },
+                        {
                             "name": "Russian rouble (RUB)"
                         }
                     ]
@@ -136,13 +142,28 @@
                     ]
                 }
             ]
-        }
+        },
+        "annotations": [
+            {
+              "title": "Sample series annotation title",
+              "type": "example",
+              "text": "Sample series annotation text",
+              "id": "ABC123456"
+            },
+            {
+              "title": "Sample observation annotation title",
+              "type": "example",
+              "text": "Sample observation annotation text",
+              "id": "XYZ98765"
+            }
+        ]
     },
     "dataSets": [
         {
             "action": "Information",
             "series": {
                 "0": {
+                    "annotations": [0],
                     "attributes": [0],
                     "observations": {
                         "0": [1.5931, 0],
@@ -153,7 +174,7 @@
                     "attributes": [1],
                     "observations": {
                         "0": [40.3426, 0],
-                        "1": [40.3000, 0]
+                        "1": [40.3000, 0, 1]
                     }
                 }
             }
