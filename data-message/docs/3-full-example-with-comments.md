@@ -106,7 +106,8 @@
               "name": "Daily"
             }
           ]
-        }, {
+        },
+        {
           "id": "CURRENCY_DENOM",
           "name": "Currency denominator",
           "description": "Description for the dimension",
@@ -117,7 +118,8 @@
               "name": "Euro"
             }
           ]
-        }, {
+        },
+        {
           "id": "EXR_TYPE",
           "name": "Exchange rate type",
           "description": "Description for the dimension",
@@ -128,7 +130,8 @@
               "name": "Spot rate"
             }
           ]
-        }, {
+        },
+        {
           "id": "EXR_SUFFIX",
           "name": "Series variation - EXR context",
           "description": "Description for the dimension",
@@ -154,7 +157,8 @@
             {
               "id": "NZD",
               "name": "New Zealand dollar"
-            }, {
+            },
+            {
               "id": "RUB",
               "name": "Russian rouble"
             }
@@ -244,9 +248,14 @@
       {
         "title": "AnnotationTitle provides a title for the annotation.",
         "type": "AnnotationType is used to distinguish between annotations.",
-        "uri": "http://www.myorg.org/ws/uri/for/this/annotation",
         "text": "AnnotationText contains the text of the annotation.",
-        "id": "Non-standard identification of an annotation."
+        "id": "Non-standard identification of an annotation.",
+        "links": [
+          {
+            "href": "http://www.myorg.org/ws/uri/for/this/annotation",
+            "rel": "description"
+          }
+        ]
       }
     ]
   },
@@ -298,7 +307,7 @@
           }
         },
         "1": {
-          "annotations": [ 34 ],
+          "annotations": [0],
           "attributes": [1],
           "observations": {
             "0": [40.3426, 0],
@@ -316,8 +325,8 @@
       "observations": {
           "0:0": [1.5931, 0],
           "0:1": [1.5925, 0],
-          "1:0": [40.3426, 0],
-          "1:1": [40.3000, 0]
+          "1:0": [40.3426, 0, 0],
+          "1:1": [40.3000, 0, 0]
       }
     },
 
@@ -331,14 +340,16 @@
       # (dimensionAtObservation <> allDimensions))
 
       "series": {
-         "0:0:0:0;0": {
+         "0:0:0:0:0": {
+            "annotations": [],
             "attributes": [0],
             "observations": {
                 "0": [1.5931, 0],
                 "1": [1.5925, 0]
             }
          },
-         "0:0:0:0;1": {
+         "0:0:0:0:1": {
+            "annotations": [0],
             "attributes": [1],
             "observations": {
                 "0": [40.3426, 0],
@@ -356,8 +367,8 @@
       "observations": {
           "0:0:0:0:0:0": [1.5931, 0],
           "0:0:0:0:0:1": [1.5925, 0],
-          "0:0:0:0:1:0": [40.3426, 0],
-          "0:0:0:0:1:1": [40.3000, 0]
+          "0:0:0:0:1:0": [40.3426, 0, 0],
+          "0:0:0:0:1:1": [40.3000, 0, 0]
       }
     },
 
@@ -398,8 +409,8 @@
       "observations": {
           "0:0": [0],
           "0:1": [0],
-          "1:0": [0],
-          "1:1": [0]
+          "1:0": [0, 0],
+          "1:1": [0, 0]
       }
     }
   ]
