@@ -261,7 +261,14 @@
                     "type": [ "null", "array" ],
                     "items": {
                         "$ref": "#/definitions/link"
-                },                
+                },
+                "annotations": {
+                    "type": [ "null", "array" ],
+                    "items": {
+                        "type": [ "integer" ],
+                        "minimum": 0
+                    }
+                },
                 "values": {
                     "type": "array",
                     "items": {
@@ -288,6 +295,13 @@
                                 "type": [ "null", "array" ],
                                 "items": {
                                     "$ref": "#/definitions/link"
+                                }
+                            },
+                            "annotations": {
+                                "type": [ "null", "array" ],
+                                "items": {
+                                    "type": [ "integer" ],
+                                    "minimum": 0
                                 }
                             }
                         },
