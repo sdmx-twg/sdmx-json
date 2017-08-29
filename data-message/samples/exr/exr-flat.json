@@ -38,7 +38,8 @@
                             "name": "Daily"
                         }
                     ]
-                }, {
+                },
+                {
                     "id": "CURRENCY_DENOM",
                     "name": "Currency denominator",
                     "keyPosition": 2,
@@ -48,7 +49,8 @@
                             "name": "Euro"
                         }
                     ]
-                }, {
+                },
+                {
                     "id": "EXR_TYPE",
                     "name": "Exchange rate type",
                     "keyPosition": 3,
@@ -58,7 +60,8 @@
                             "name": "Spot rate"
                         }
                     ]
-                }, {
+                },
+                {
                     "id": "EXR_SUFFIX",
                     "name": "Series variation - EXR context",
                     "keyPosition": 4,
@@ -80,12 +83,14 @@
                         {
                             "id": "NZD",
                             "name": "New Zealand dollar"
-                        }, {
+                        },
+                        {
                             "id": "RUB",
                             "name": "Russian rouble"
                         }
                     ]
-                }, {
+                },
+                {
                     "id": "TIME_PERIOD",
                     "name": "Time period or range",
                     "role": "TIME_PERIOD",
@@ -95,7 +100,8 @@
                             "name": "2013-01-18",
                             "start": "2013-01-18T00:00:00.000Z",
                             "end": "2013-01-18T23:59:59.999Z"
-                        }, {
+                        },
+                        {
                             "id": "2013-01-21",
                             "name": "2013-01-21",
                             "start": "2013-01-21T00:00:00.000Z",
@@ -116,11 +122,13 @@
                     "values": [
                         {
                             "name": "New Zealand dollar (NZD)"
-                        }, {
+                        },
+                        {
                             "name": "Russian rouble (RUB)"
                         }
                     ]
-                }, {
+                },
+                {
                     "id": "OBS_STATUS",
                     "name": "Observation status",
                     "values": [
@@ -131,14 +139,22 @@
                     ]
                 }
             ]
-        }
+        },
+        "annotations": [
+            {
+              "title": "Sample observation annotation title",
+              "type": "example",
+              "text": "Sample observation annotation text",
+              "id": "XYZ98765"
+            }
+        ]
     },
     "dataSets": [
         {
             "action": "Information",
             "observations": {
                 "0:0": [1.5931, 0, 0],
-                "0:1": [1.5925, 0, 0],
+                "0:1": [1.5925, 0, 0, 0],
                 "1:0": [40.3426, 1, 0],
                 "1:1": [40.3000, 1, 0]
             }
