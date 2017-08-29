@@ -110,7 +110,7 @@ Sender contains the following fields:
 
 * id - *String*. A unique identifier of the party.
 * name - *String* *nullable*. A human-readable name of the sender.
-* contacts - *Array* *nullable*. A collection of contacts.
+* contacts - *Array* *nullable*. A collection of *[contacts](#contact)*.
 
 Example:
 
@@ -169,7 +169,7 @@ used in the message and also describes to which level in the hierarchy (`dataSet
 * links - *Array* *nullable*. *Links* field is an array of *[link](#link)* objects. A collection of links to structural metadata or to additional information regarding the structure. **Providing links allowing accessing the underlying SDMX Data Structure Definition, Dataflow and/or Provision Agreements is recommended.**
 * dimensions - *Object*. Describes the *[dimensions](#dimensions-attributes)* used in the message as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) to which these `dimensions` are attached.
 * attributes - *Object*. Describes the *[attributes](#dimensions-attributes)* used in the message as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) to which these `attributes` are attached.
-* annotations - *Array* *nullable*. *Annotations* field is an array of *[annotation](#annotation)* objects. If appropriate, provides a list of `annotations`. `Annotations` can be attached to `dataSets`, `series` and `observations`.
+* annotations - *Array* *nullable*. *Annotations* field is an array of *[annotation](#annotation)* objects. If appropriate, provides a list of `annotations` that can be referenced by `structure`, `component`, `component value`, `dataSets`, `series` and `observations`.
 
 Example:
 
@@ -204,9 +204,9 @@ and/or Provision Agreements is recommended.
 as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) 
 to which these dimensions/attributes are attached. 
 
-* dataSet - *Array* *nullable*. *dataSet* field is an array of *[component](#component)* objects. Optional array to be provided if components (dimensions or attributes) are presented at the `dataSet` level. It is highly recommended to present all dimensions and attributes at the `dataSet` level for which the message contains only 1 single value.
-* series - *Array* *nullable*. *series* field is an array of *[component](#component)* objects. Optional array to be provided if components (dimensions or attributes) are presented at the `series` level.
-* observation - *Array* *nullable*. *observation* field is an array of *[component](#component)* objects. Optional array to be provided if components (dimensions or attributes) are presented at the `observation` level. When using the SDMX API, then the dimension(s) specified in the parameter "dimensionAtObservation" would be presented at `observation` level. If "dimensionAtObservation=AllDimensions" then all dimensions, except those with only one value possibly presented at the `dataSet` level, would be presented at `observation` level.
+* dataSet - *Array* *nullable*. *DataSet* field is an array of *[component](#component)* objects. Optional array to be provided if components (dimensions or attributes) are presented at the `dataSet` level. It is highly recommended to present all dimensions and attributes at the `dataSet` level for which the message contains only 1 single value.
+* series - *Array* *nullable*. *Series* field is an array of *[component](#component)* objects. Optional array to be provided if components (dimensions or attributes) are presented at the `series` level.
+* observation - *Array* *nullable*. *Observation* field is an array of *[component](#component)* objects. Optional array to be provided if components (dimensions or attributes) are presented at the `observation` level. When using the SDMX API, then the dimension(s) specified in the parameter "dimensionAtObservation" would be presented at `observation` level. If "dimensionAtObservation=AllDimensions" then all dimensions, except those with only one value possibly presented at the `dataSet` level, would be presented at `observation` level.
 
 Example:
 
@@ -321,8 +321,7 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 ### annotation
 
-*Object* *nullable*. An annotation object can be attached to `structure`, `component`, `component value`, `dataSets`, 
-`series` and `observations`. It contains the following optional information:
+*Object* *nullable*. An `annotation` object can be referenced through its `annotations` array index by `structure`, `component`, `component value`, `dataSets`, `series` and `observations`. It contains the following optional information:
 
 * title - *String* *nullable*. Provides a title for the annotation.
 * type - *String* *nullable*. Type is used to distinguish between annotations designed to support various uses. The types are not enumerated, and these can be freely specified by the creator of the annotations. The definitions and use of annotation types should be documented by their creator.
@@ -378,10 +377,10 @@ or cross sections, the `observations` will be found under the `series` elements.
 The `dataSet` properties are:
 
 * action - *String* *nullable*. Action provides a list of actions, describing the intention of the data transmission from the sender's side.
-- Append - this is an incremental update for an existing `dataSet` or the provision of new data or documentation (attribute values) formerly absent. If any of the supplied data or metadata is already present, it will not replace these data.
-- Replace - data are to be replaced, and may also include additional data to be appended.
-- Delete - data are to be deleted.
-- Information (default) - data are being exchanged for informational purposes only, and not meant to update a system.
+- `Append` - this is an incremental update for an existing `dataSet` or the provision of new data or documentation (attribute values) formerly absent. If any of the supplied data or metadata is already present, it will not replace these data.
+- `Replace` - data are to be replaced, and may also include additional data to be appended.
+- `Delete` - data are to be deleted.
+- `Information` (default) - data are being exchanged for informational purposes only, and not meant to update a system.
 * reportingBegin - *String* *nullable*. The start of the time period covered by the message.
 * reportingEnd - *String* *nullable*. The end of the time period covered by the message.
 * validFrom - *String* *nullable*. The validFrom indicates the inclusive start time indicating the validity of the information in the data.
@@ -462,9 +461,9 @@ Example:
     For this example, to ease understanding, let's consider a CSV format with 
     horizontal time series (with header row):
  
-    DIM1,DIM2,Value for 2016,Value for 2017,ATTR1,ATTR2,ATTR3 for 2016,ATTR3 for 2017
-    DIM1_VALUE_1,DIM2_VALUE_1,1.5931,1.5925,ATTR1_VALUE_2,ATTR2_VALUE_1,ATTR3_VALUE_1,
-    DIM1_VALUE_1,DIM2_VALUE_2,40.3426,40.3000,ATTR1_VALUE_1,,ATTR3_VALUE_1,ATTR3_VALUE_1
+    DIM1,DIM2,Value for 2016,Value for 2017,ATTR1,ATTR2,ANNOT,ATTR3 for 2016,ATTR3 for 2017
+    DIM1_VALUE_1,DIM2_VALUE_1,1.5931,1.5925,ATTR1_VALUE_2,ATTR2_VALUE_1,,ATTR3_VALUE_1,
+    DIM1_VALUE_1,DIM2_VALUE_2,40.3426,40.3000,ATTR1_VALUE_1,,ANNOT_VALUE1,ATTR3_VALUE_1,ATTR3_VALUE_1
     
     In SDMX-JSON, using "dimensionAtObservation=TIME_PERIOD" (default) the observations 
     are presented in a similar way, grouped by time series (with the TIME_PERIOD dimension 
@@ -480,6 +479,7 @@ Example:
         }
       },
       "0:1": {
+        "annotations": [0],
         "observations": {
           "0": [40.3426, 0],
           "1": [40.3000, 0]
@@ -499,8 +499,8 @@ Example:
                              The attribute for this observation is: "ATTR3":"ATTR3_VALUE_2" 
                              (because this is the default value)
     Series 2: "0:1" corresponds to the 2 indices for "DIM1":"DIM1_VALUE_1", "DIM2":"DIM2_VALUE_2"
-              The attributes for this series are: "ATTR1":"ATTR1_VALUE_1" 
-              (because this is the default value)
+              The annotation for this series is: "ANNOT":"ANNOT_VALUE1"
+              The attributes for this series are: "ATTR1":"ATTR1_VALUE_1" (because this is the default value)
               This series has 2 observations:
               Observation 1: "0" corresponds to the index for "TIME_PERIOD":"2016"
                              The value for this observation is: 40.3426
@@ -554,7 +554,7 @@ Example:
           ]
         }
       ]
-    }
+    },
     "attributes": {
       "dataSet": [],
       "series": [
@@ -601,7 +601,16 @@ Example:
           ]
         }
       ]
-    }
+    },
+    "annotations": [
+        {
+          "title": "Annotation 1 - with index 0",
+          "type": "example",
+          "text": "Sample annotation text",
+          "id": "ANNOT_VALUE1"
+        }
+    ]
+
 
 For information on how to handle the indices for `annotations`, `attributes` or 
 `observations` see the section dedicated to [handling component values](#handling-component-values).
@@ -640,30 +649,34 @@ The index for an `annotation` is the index in the array of `annotations` in the 
 Example:
 
     /*
-    For this example, to ease understanding, let's consider data without annotations in a 
+    For this example, to ease understanding, let's consider data in a 
     flat CSV format (with header row):
  
-    DIM1,DIM2,Observation Value,ATTR1,ATTR2
-    DIM1_VALUE_1,DIM2_VALUE_1,105.6,ATTR1_VALUE_2,ATTR2_VALUE_1
-    DIM1_VALUE_1,DIM2_VALUE_2,105.9,ATTR1_VALUE_1,
+    DIM1,DIM2,Observation Value,ATTR1,ATTR2,ANNOT
+    DIM1_VALUE_1,DIM2_VALUE_1,105.6,ATTR1_VALUE_1,,ANNOT_VALUE1
+    DIM1_VALUE_1,DIM2_VALUE_2,105.9,ATTR1_VALUE_2,,
     
     In SDMX-JSON, the observations are presented in a similar flattened way, 
     but dimension and attribute values are replaced by their indices:
     */
     
     "observations": {
-      "0:0": [105.6, 1, 0],
-      "0:1": [105.9]
+      "0:0": [105.6, 0, null, 0],
+      "0:1": [105.9, 1]
     }
     
     /*
     Observation 1: "0:0" corresponds to the 2 indices for "DIM1":"DIM1_VALUE_1", "DIM2":"DIM2_VALUE_1"
                    The value for this observation is: 105.6
-                   The attributes for this observation are: "ATTR1":"ATTR1_VALUE_2", "ATTR2":"ATTR2_VALUE_1"
+                   The attributes for this observation are: 
+                     "ATTR1":"ATTR1_VALUE_1"
+                     "ATTR2":"ATTR2_VALUE_1" (because this is the default value)
+                   The annotation for this observation is: "ANNOT":"ANNOT_VALUE1"
     Observation 2: "0:1" corresponds to the 2 indices for "DIM1":"DIM1_VALUE_1", "DIM2":"DIM2_VALUE_2"
                    The value for this observation is: 105.9
-                   The attributes for this observation are: "ATTR1":"ATTR1_VALUE_1" 
-                   (because there is a default value)
+                   The attributes for this observation are: 
+                     "ATTR1":"ATTR1_VALUE_1"
+                     "ATTR2":"ATTR2_VALUE_1" (because this is the default value)
     */
     
     "dimensions": {
@@ -695,7 +708,7 @@ Example:
           ]
         }
       ]
-    }
+    },
     "attributes": {
       "dataSet": [],
       "series": [],
@@ -703,7 +716,6 @@ Example:
         {
           "id": "ATTR1",
           "name": "Attribute 1",
-          "default": "ATTR1_VALUE_1",
           "values": [
             {
               "id": "ATTR1_VALUE_1",
@@ -718,6 +730,7 @@ Example:
         {
           "id": "ATTR2",
           "name": "Attribute 2",
+          "default": "ATTR2_VALUE_1",
           "values": [
             {
               "id": "ATTR2_VALUE_1",
@@ -727,6 +740,14 @@ Example:
         }
       ]
     }
+    "annotations": [
+        {
+          "title": "Annotation 1 - with index 0",
+          "type": "example",
+          "text": "Sample annotation text",
+          "id": "ANNOT_VALUE1"
+        }
+    ]
 
 For information on how to handle the indices for `observations` 
 see the section dedicated to [handling component values](#handling-component-values).
@@ -913,7 +934,8 @@ Let's say that the following message needs to be processed:
                         }
                     ]
                 }
-            ]},
+            ]
+        },
         "attributes": {
             "dataSet": [],
             "series": [
@@ -941,13 +963,28 @@ Let's say that the following message needs to be processed:
                     ]
                 }
             ]
-        }
+        },
+        "annotations": [
+            {
+              "title": "Sample series annotation title",
+              "type": "example",
+              "text": "Sample series annotation text",
+              "id": "ABC123456"
+            },
+            {
+              "title": "Sample observation annotation title",
+              "type": "example",
+              "text": "Sample observation annotation text",
+              "id": "XYZ98765"
+            }
+        ]        
     },
     "dataSets": [
         {
             "action": "Information",
             "series": {
                 "0": {
+                    "annotations": [0],
                     "attributes": [0],
                     "observations": {
                         "0": [1.5931, 0],
@@ -958,7 +995,7 @@ Let's say that the following message needs to be processed:
                     "attributes": [1],
                     "observations": {
                         "0": [40.3426, 0],
-                        "1": [40.3000, 0]
+                        "1": [40.3000, 0, 1]
                     }
                 }
             }
@@ -971,6 +1008,7 @@ There is one `dataSet` in the message, and it contains two `series`.
 
 ```json
 "0": {
+    "annotations": [0],
     "attributes": [0],
     "observations": {
         "0": [1.5931, 0],
@@ -981,7 +1019,7 @@ There is one `dataSet` in the message, and it contains two `series`.
     "attributes": [1],
     "observations": {
         "0": [40.3426, 0],
-        "1": [40.3000, 0]
+        "1": [40.3000, 0, 1]
     }
 }
 ```
@@ -1075,7 +1113,7 @@ The value 0 identified previously is the index of the item in the
 collection of values for this component. In this case, the attribute value 
 is therefore "Normal value".
 
-The same logic applies for mapping the other observations and its attributes.
+The same logic applies for mapping the other observations, its attributes and annotations.
 
 # Security Considerations
 
