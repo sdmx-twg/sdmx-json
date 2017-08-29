@@ -44,16 +44,41 @@ may not contain fields for data, dimensions and attributes.
 ## message
 
 Message is the top level object and it contains the data as well 
-as the metadata needed to interpret those data.
+as the structural metadata needed to interpret those data.
 
-* header - *Object* *nullable*. *[Header](#header)* contains basic technical information about the message, such as when it was prepared and who has sent it.
-* structure - *Object* *nullable*. *[Structure](#structure)* contains the information needed to interpret the data available in the message, such as the list of concepts used.
-* dataSets - *Array* *nullable*. *DataSets* field is an array of *[dataSet](#dataset)* objects. That's where the data (i.e.: the observations) will be.
+* data - *Object* *nullable*. *[Data](#data)* contains the message's “primary data”.
 * errors - *Array* *nullable*. *Errors* field is an array of *[error](#error)* objects. When appropriate provides a list of error messages in addition to RESTful web services HTTP error status codes.
+* meta - *Object* *nullable*. A *[meta](#meta)* object that contains non-standard meta-information.
+
+The members data and errors MUST NOT coexist in the same message.
 
 Example:
 
     {
+      "data": {
+          # data object #
+      },
+      "errors": [
+        {
+          # error object #
+        }
+      ],
+      "meta": {
+          # meta object #
+      }
+    }
+
+## data
+
+*Object* *nullable*. Header contains the message's “primary data”.
+
+* header - *Object* *nullable*. *[Header](#header)* contains basic technical information about the message, such as when it was prepared and who has sent it.
+* structure - *Object* *nullable*. *[Structure](#structure)* contains the information needed to interpret the data available in the message, such as the list of concepts used.
+* dataSets - *Array* *nullable*. *DataSets* field is an array of *[dataSet](#dataset)* objects. That's where the data (i.e.: the observations) will be.
+
+Example:
+
+    "data": {
       "header": {
           # header object #
       },
@@ -63,11 +88,6 @@ Example:
       "dataSets": [
         {
           # dataSet object #
-        }
-      ],
-      "errors": [
-        {
-          # error object #
         }
       ]
     }
@@ -758,14 +778,32 @@ see the section dedicated to [handling component values](#handling-component-val
 to RESTful web services HTTP error status codes.
 The following pieces of information are to be provided:
 
-* code - *number*. Provides a code number for the error message. Code numbers are defined in the SDMX 2.1 Web Services Guidelines.
-* message - *string*. Provides the error message. Error messages are fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.
+* id - *String* *nullable*. A unique identifier for this particular occurrence of the problem.
+* links - *Array* *nullable*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the error.
+* status - *String* *nullable*. The HTTP status code applicable to this problem, expressed as a string value.
+* code - *Number*. Provides a code number for the error message. Code numbers are defined in the SDMX 2.1 Web Services Guidelines.
+* title - *String* *nullable*. A short, human-readable summary of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
+* detail - *String* *nullable*. A human-readable explanation specific to this occurrence of the problem. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.
+* meta - *Object* *nullable*. A *[meta](#meta)* object containing non-standard meta-information about the error.
 
 Example:
 
     {
       "code": 150,
-      "message": "Invalid number of dimensions in the key parameter"
+      "title": "Invalid number of dimensions in the key parameter"
+    }
+
+## meta
+
+*Object* *nullable*. Used to include non-standard meta-information.
+Any members MAY be specified within `meta` objects.
+**Providing information of the SDMX-JSON version  is recommended.**
+
+Example:
+
+    "meta": {
+      "sdmx-json-version": "1.0",
+      "copyright": "Copyright 2017 Statistics hotline"
     }
 
 # Linking mechanism
@@ -1137,7 +1175,7 @@ a `wsCustomErrorCode`:
 "errors": [
   {
     "code": 150,
-    "message": "Invalid number of dimensions in the key parameter",
+    "title": "Invalid number of dimensions in the key parameter",
     "wsCustomErrorCode": 39272
   }
 ]
