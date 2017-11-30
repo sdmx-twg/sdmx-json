@@ -63,6 +63,7 @@
                 {
                     "id": "TIME_PERIOD",
                     "name": "Time period or range",
+                    "keyPosition": 5,
                     "role": "TIME_PERIOD",
                     "values": [
                         {
