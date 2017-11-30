@@ -77,9 +77,12 @@ Any members MAY be specified within `meta` objects.
 * id - *String*. Unique string that identifies the message for further references.
 * test - *Boolean* *optional*. Indicates whether the message is for test purposes or not. False for normal messages.
 * prepared - *String*. A timestamp indicating when the message was prepared. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
+* content-language *String* *optional*. To indicate all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, using the format defined for the  http Content-Language response header. **The usage of this property is recommended.**
+* lang *String* *optional*. To indicate the main language used in the message for localized elements, using the format defined for the  html meta tag lang property.
 * sender - *Object*. *[Sender](#sender)* contains information about the party that is transmitting the message.
 * receiver - *Object* *optional*. *[Receiver](#receiver)* contains information about the party that is receiving the message. This can be useful if the WS requires authentication.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the header.
+
 
 Example:
 
@@ -89,6 +92,8 @@ Example:
       "id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
       "prepared": "2018-01-03T12:54:12",
       "test": false,
+      "content-language": "en, fr-fr;q=0.8, fr;q=0.7", 
+      "lang": "en",
       "sender: {
         # sender object #
       },
@@ -108,7 +113,7 @@ Example:
 Sender contains the following fields:
 
 * id - *String*. A unique identifier of the party.
-* name - *String* *optional*. A human-readable name of the sender.
+* name - *String* *optional*. A human-readable localised name of the sender. See the section on [localised strings](#localised-strings) on how the message deals with languages.
 * contacts - *Array* *optional*. A collection of *[contacts](#contact)*.
 
 Example:
@@ -129,12 +134,14 @@ Example:
 may contain the following field:
 
 * name - *String*. The contact's name.
-* department - *String* *optional*. The organisational structure for the contact.
-* role - *String* *optional*. The responsibility of the contact.
+* department - *String* *optional*. The localised name of the organisational structure for the contact.
+* role - *String* *optional*. The localised name of the responsibility of the contact.
 * telephone - *Array* *optional*. An array of telephone numbers for the contact.
 * fax - *Array* *optional*. An array of fax numbers for the contact person.
 * uri - *Array* *optional*. An array of uris. Each uri holds an information URL for the contact.
 * email - *Array* *optional*. An array of email addresses for the contact person.
+
+See the section on [localised strings](#localised-strings) on how the message deals with languages.
 
 Example:
 
@@ -272,14 +279,16 @@ as well as the list of `values` used in the message for this particular componen
 Each of the components may contain the following fields:
 
 * id - *String*. Identifier for the component. 
-* name - *String*. Name provides a human-readable name for the component.
-* description - *String* *optional*. Provides a description for the component.
+* name - *String*. Name provides a human-readable localised name for the component.
+* description - *String* *optional*. Provides a localised description for the component.
 * keyPosition - *Number*  *optional*. **This field is mandatory for `dimensions` but not to be supplied for `attributes`.** Indicates the position of the `dimension` in the Data Structure Definition, starting at 0. It needs to be provided also for the special `dimensions` such as Time or Measure dimensions. The information in this field is consistent with the order of `dimensions` in the "key" parameter string (i.e. D.USD.EUR.SP00.A) for data queries in the SDMX API. 
 * role - *String* *optional*. Defines the component role(s), if any. Roles are represented by the id of a concept defined as [SDMX cross-domain concept](https://sdmx.org/wp-content/uploads/01_sdmx_cog_annex_1_cdc_2009.pdf). Several of the concepts defined as SDMX cross-domain concepts are useful for data visualisation, such as for example, the series title ("TITLE"), the unit of measure ("UNIT_MEASURE"), the number of decimals to be displayed ("DECIMALS"), the  country or geographic reference area ("REF_AREA", e.g. when using maps), the period of time to which the measured observation refers ("REF_PERIOD"), the time interval at which observations occur over a given time period ("FREQ"), etc. It is strongly recommended to identify any component that can be useful for data visualisation purposes by using the appropriate SDMX cross-domain concept as role.
 * default - *String* or *Number* *optional*. Defines a default `value` for the component (valid for `attributes` only!). If no value is provided in the data part of the message then this value applies.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the component.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the component. Indices refer back to the array of *annotations* in the structure field.
 * values - *Array*. *Values* field is an array of *[component value](#component-value)* objects. Note that `dimensions` and `attributes` presented at `dataSet` level can only have one single component value.
+
+See the section on [localised strings](#localised-strings) on how the message deals with languages.
 
 Example:
 
@@ -312,11 +321,13 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 *Object* *optional*. A particular value for a component in a message. 
 
 * id - *String*. Unique identifier for a component value.
-* name - *String*. Name provides a human-readable name for the component value.
-* description - *String* *optional*. Description provides a human-readable description of the value. The description is typically longer than the text provided for the name field.
+* name - *String*. Name provides a human-readable localised name for the component value.
+* description - *String* *optional*. Description provides a human-readable localised description of the value. The description is typically longer than the text provided for the name field.
 * start, end - *String* *optional*. Start and end are instances of time that define the actual Gregorian calendar period covered by the values for the time dimension. The algorithm for computing start and end fields for any supported reporting period is defined in the SDMX Technical Notes. These fields should be used only when the component value represents one of the values for the time dimension. Values are considered as inclusive both for the start field and the end field. Values must follow the ISO 8601 syntax for combined dates and times, including time zone. These fields are useful for visualisation tools, when selecting the appropriate point in time for the time axis. Statistical data, can be collected, for example, at the beginning, the middle or the end of the period, or can represent the average of observations through the period. Based on this information and using the start and end fields, it is easy to get or calculate the desired point in time to be used for the time axis.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the component value.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the component value. Indices refer back to the array of *annotations* in the structure field.
+
+See the section on [localised strings](#localised-strings) on how the message deals with languages.
 
 Example:
 
@@ -342,11 +353,13 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 *Object* *optional*. An `annotation` object can be referenced through its `annotations` array index by `structure`, `component`, `component value`, `dataSets`, `series` and `observations`. It contains the following optional information:
 
-* title - *String* *optional*. Provides a title for the annotation.
+* title - *String* *optional*. Provides a localised title for the annotation.
 * type - *String* *optional*. Type is used to distinguish between annotations designed to support various uses. The types are not enumerated, and these can be freely specified by the creator of the annotations. The definitions and use of annotation types should be documented by their creator.
-* text - *String* *optional*. Contains the text of the annotation.
+* text - *String* *optional*. Contains the localised text of the annotation.
 * id - *String* *optional*. ID provides a non-standard identification of an annotation. It can be used to disambiguate annotations.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a link to an additional external resource which may contain or supplement the annotation.
+
+See the section on [localised strings](#localised-strings) on how the message deals with languages.
 
 Example:
 
@@ -778,9 +791,11 @@ to RESTful web services HTTP error status codes.
 The following pieces of information are to be provided:
 
 * code - *Number*. Provides a code number for the error message. Code numbers are defined in the SDMX 2.1 Web Services Guidelines.
-* title - *String* *optional*. A short, human-readable summary of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
-* detail - *String* *optional*. A human-readable explanation specific to this occurrence of the problem. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.
+* title - *String* *optional*. A short, human-readable localised summary of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
+* detail - *String* *optional*. A human-readable localised explanation specific to this occurrence of the problem. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the error.
+
+See the section on [localised strings](#localised-strings) on how the message deals with languages.
 
 Example:
 
@@ -797,7 +812,7 @@ Example:
 
 * href - *String*. Absolute or relative URL of the external resource.
 * rel - *String*. Relationship of the object to the external resource.
-* title - *String* *optional*. A human-friendly description of the target link.
+* title - *String* *optional*. A human-friendly localised description of the target link. See the section on [localised strings](#localised-strings) on how the message deals with languages.
 * type - *String* *optional*. A hint about the type of representation returned by the link.
 * hreflang - *String* *optional*. The natural language of the external link, the same as used in the HTTP Accept-Language request header.
 
@@ -1135,6 +1150,16 @@ collection of values for this component. In this case, the attribute value
 is therefore "Normal value".
 
 The same logic applies for mapping the other observations, its attributes and annotations.
+
+# Localised strings
+
+The first best language match according to the user’s preferred language choices in the http Accept-Language header (or if that is not available than according to the system's default language order) is to be used for each localisable message element. The message does however not indicate the returned language per localisable element.
+In case that there is no such language match for a particular localisable element, it is optional to:
+
+- return the element in a system-default language or alternatively to not return the element
+- indicate available alternative languages for the element's maintainable artefact through links to underlying localised resources
+
+**It is recommended to indicate all languages used anywhere in the message for localised elements through http Content-Language response header (languages of the intended audience) and/or through a “content-language” property in the meta tag.** The main language used can be indicated through the “lang” property in the meta tag.
 
 # Security Considerations
 
