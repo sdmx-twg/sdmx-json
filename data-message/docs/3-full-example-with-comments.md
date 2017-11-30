@@ -2,7 +2,7 @@
 
 ```json
 {
-  "header": {
+  "meta": {
 
     # dynamically generated GUI
     "id": "62b5f19d-f1c9-495d-8446-a3661ed24753",
@@ -13,9 +13,15 @@
     # optional with default false
     "test": false,
 
+    # all languages used anywhere in the message for localisable elements
+    "content-language": "en, fr;q=0.1", 
+
+    # main language used in the message for localisable elements
+    "lang": "en", 
+
     "sender": {
       "id": "ECB",
-      "name": "European Central Bank",
+      "name": "Banque Centrale Européenne",
       "contact": [
         {
           "name": "Statistics hotline",
@@ -59,361 +65,362 @@
   "errors": [
     {
       "code": 123,
-      "message": "Invalid number of dimensions in parameter key"
+      "title": "Invalid number of dimensions in parameter key"
     }
   ],
-  "structure": {
-
-    "links": [
-      {
-        "href": "https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_EXR1/1.0",
-        "rel": "datastructure",
-        "title": "resolvable uri to datastructure"
-      },
-      {
-       "href": "https://sdw-wsrest.ecb.europa.eu/service/dataflow/ECB/EXR",
-        "rel": "dataflow",
-        "title": "resolvable uri to dataflow"
-      },
-      {
-        "href": "https://sdw-wsrest.ecb.europa.eu/service/provisionagreement/ECB/PA_EXR",
-        "rel": "provisionagreement",
-        "title": "resolvable uri to provision agreement"
-      }
-    ],
-
-    "name": "dataflow name",
-    "description": "dataflow description",
-    "dimensions": {
-
-      # dataSet is used only if grouping of dimensions with single values
-      "dataSet": [
-        {
-          "id": "FREQ",
-          "name": "Frequency",
-          "description": "Description for the dimension",
-
-          # 0-based position of dimension in key in user request url
-          "keyPosition": 0,
-
-          # restricted list of dimension and attribute roles (time, frequency,
-          # geo, unit, scalefactor, referenceperiod, ...)
-          "role": "frequency",
-
-          "values": [
-            {
-              "id": "D",
-              "name": "Daily"
-            }
-          ]
-        },
-        {
-          "id": "CURRENCY_DENOM",
-          "name": "Currency denominator",
-          "description": "Description for the dimension",
-          "keyPosition": 3,
-          "values": [
-            {
-              "id": "EUR",
-              "name": "Euro"
-            }
-          ]
-        },
-        {
-          "id": "EXR_TYPE",
-          "name": "Exchange rate type",
-          "description": "Description for the dimension",
-          "keyPosition": 4,
-          "values": [
-            {
-              "id": "SP00",
-              "name": "Spot rate"
-            }
-          ]
-        },
-        {
-          "id": "EXR_SUFFIX",
-          "name": "Series variation - EXR context",
-          "description": "Description for the dimension",
-          "keyPosition": 5,
-          "values": [
-            {
-              "id": "A",
-              "name": "Average or standardised measure for given frequency"
-            }
-          ]
-        }
-      ],
-
-      # only if dimensionAtObservation <> allDimensions
-      "series": [
-        {
-          "id": "CURRENCY",
-          "name": "Currency",
-          "description": "Description for the dimension",
-          "keyPosition": 2,
-          "role": "unit",
-          "values": [
-            {
-              "id": "NZD",
-              "name": "New Zealand dollar"
-            },
-            {
-              "id": "RUB",
-              "name": "Russian rouble"
-            }
-          ]
-        }
-      ],
-
-      # only for dimensions used at observation level
-      "observation": [
-        {
-          "id": "TIME_PERIOD",
-          "name": "Time period or range",
-          "description": "Description for the dimension",
-          "role": "time",
-          "values": [
-            {
-              "id": "2013-01-18",
-              "name": "2013-01-18",
-              "start": "2013-01-18T00:00:00Z",
-              "end": "2013-01-18T23:59:59Z"
-            },
-            {
-              "id": "2013-01-21",
-              "name": "2013-01-21",
-              "start": "2013-01-21T00:00:00Z",
-              "end": "2013-01-21T23:59:59Z"
-            }
-          ]
-        }
-      ]
-    },
-    "attributes": {
-
-      # only for attributes returned at dataset level
-      "dataSet": [],
-
-      # only for attributes returned at series level
-      "series": [
-        {
-          "id": "ID",
-          "name": "Attribute name",
-          "description": "Description for the attribute",
-          "role": null,
-          "default": null,
-
-          # inclusion of attachment level and its format to be decided
-          # e.g. "attachment": [ true, true, true, true, true, true, false ],
-
-          "values": [
-            {
-              # id property is optional to allow for uncoded attributes
-              "id": null,
-              "name": "New Zealand dollar (NZD)"
-            },
-            {
-              "id": null,
-              "name": "Russian rouble (RUB)"
-            }
-          ]
-        }
-      ],
-      "observation": [
-        {
-          "id": "OBS_STATUS",
-          "name": "Observation status",
-          "description": "Description for the attribute",
-          "role": null,
-
-          # optional
-          "default": "A",
-
-          "values": [
-            # a null attribute can be used to shorten the message by
-            # using O index later in message
-            null,
-
-            {
-              "id": "A",
-              "name": "Normal value",
-              "description": "Normal value"
-            }
-          ]
-        }
-      ]
-    },
-    "annotations": [
-      {
-        "title": "AnnotationTitle provides a title for the annotation.",
-        "type": "AnnotationType is used to distinguish between annotations.",
-        "text": "AnnotationText contains the text of the annotation.",
-        "id": "Non-standard identification of an annotation.",
+  "data": {
+      "structure": {
+    
         "links": [
           {
-            "href": "http://www.myorg.org/ws/uri/for/this/annotation",
-            "rel": "description"
+            "href": "https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_EXR1/1.0",
+            "rel": "datastructure",
+            "title": "resolvable uri to datastructure"
+          },
+          {
+           "href": "https://sdw-wsrest.ecb.europa.eu/service/dataflow/ECB/EXR",
+            "rel": "dataflow",
+            "title": "resolvable uri to dataflow"
+          },
+          {
+            "href": "https://sdw-wsrest.ecb.europa.eu/service/provisionagreement/ECB/PA_EXR",
+            "rel": "provisionagreement",
+            "title": "resolvable uri to provision agreement"
+          }
+        ],
+    
+        "name": "dataflow name",
+        "description": "dataflow description",
+        "dimensions": {
+    
+          # dataSet is used only if grouping of dimensions with single values
+          "dataSet": [
+            {
+              "id": "FREQ",
+              "name": "Frequency",
+              "description": "Description for the dimension",
+    
+              # 0-based position of dimension in key in user request url
+              "keyPosition": 0,
+    
+              # restricted list of dimension and attribute roles (time, frequency,
+              # geo, unit, scalefactor, referenceperiod, ...)
+              "role": "frequency",
+    
+              "values": [
+                {
+                  "id": "D",
+                  "name": "Daily"
+                }
+              ]
+            },
+            {
+              "id": "CURRENCY_DENOM",
+              "name": "Currency denominator",
+              "description": "Description for the dimension",
+              "keyPosition": 3,
+              "values": [
+                {
+                  "id": "EUR",
+                  "name": "Euro"
+                }
+              ]
+            },
+            {
+              "id": "EXR_TYPE",
+              "name": "Exchange rate type",
+              "description": "Description for the dimension",
+              "keyPosition": 4,
+              "values": [
+                {
+                  "id": "SP00",
+                  "name": "Spot rate"
+                }
+              ]
+            },
+            {
+              "id": "EXR_SUFFIX",
+              "name": "Series variation - EXR context",
+              "description": "Description for the dimension",
+              "keyPosition": 5,
+              "values": [
+                {
+                  "id": "A",
+                  "name": "Average or standardised measure for given frequency"
+                }
+              ]
+            }
+          ],
+    
+          # only if dimensionAtObservation <> allDimensions
+          "series": [
+            {
+              "id": "CURRENCY",
+              "name": "Currency",
+              "description": "Description for the dimension",
+              "keyPosition": 2,
+              "role": "unit",
+              "values": [
+                {
+                  "id": "NZD",
+                  "name": "New Zealand dollar"
+                },
+                {
+                  "id": "RUB",
+                  "name": "Russian rouble"
+                }
+              ]
+            }
+          ],
+    
+          # only for dimensions used at observation level
+          "observation": [
+            {
+              "id": "TIME_PERIOD",
+              "name": "Time period or range",
+              "description": "Description for the dimension",
+              "role": "time",
+              "values": [
+                {
+                  "id": "2013-01-18",
+                  "name": "2013-01-18",
+                  "start": "2013-01-18T00:00:00Z",
+                  "end": "2013-01-18T23:59:59Z"
+                },
+                {
+                  "id": "2013-01-21",
+                  "name": "2013-01-21",
+                  "start": "2013-01-21T00:00:00Z",
+                  "end": "2013-01-21T23:59:59Z"
+                }
+              ]
+            }
+          ]
+        },
+        "attributes": {
+    
+          # only for attributes returned at dataset level
+          "dataSet": [],
+    
+          # only for attributes returned at series level
+          "series": [
+            {
+              "id": "ID",
+              "name": "Attribute name",
+              "description": "Description for the attribute",
+              "role": null,
+              "default": null,
+    
+              # inclusion of attachment level and its format to be decided
+              # e.g. "attachment": [ true, true, true, true, true, true, false ],
+    
+              "values": [
+                {
+                  # id property is optional to allow for uncoded attributes
+                  "id": null,
+                  "name": "New Zealand dollar (NZD)"
+                },
+                {
+                  "id": null,
+                  "name": "Russian rouble (RUB)"
+                }
+              ]
+            }
+          ],
+          "observation": [
+            {
+              "id": "OBS_STATUS",
+              "name": "Observation status",
+              "description": "Description for the attribute",
+              "role": null,
+    
+              # optional
+              "default": "A",
+    
+              "values": [
+                # a null attribute can be used to shorten the message by
+                # using O index later in message
+                null,
+    
+                {
+                  "id": "A",
+                  "name": "Normal value",
+                  "description": "Normal value"
+                }
+              ]
+            }
+          ]
+        },
+        "annotations": [
+          {
+            "title": "AnnotationTitle provides a title for the annotation.",
+            "type": "AnnotationType is used to distinguish between annotations.",
+            "text": "AnnotationText contains the text of the annotation.",
+            "id": "Non-standard identification of an annotation.",
+            "links": [
+              {
+                "href": "http://www.myorg.org/ws/uri/for/this/annotation",
+                "rel": "description"
+              }
+            ]
           }
         ]
-      }
-    ]
-  },
-  "dataSets": [
-    {
-      "links": [
+      },
+      "dataSets": [
         {
-          "href": "https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/EXR/1.0",
-          "rel": "datastructure"
-        }
-      ],
-
-      "action": "Information",
-
-      # optional first time period in returned message
-      "reportingBegin": "2012-05-04",
-
-      # optional last time period in returned message
-      "reportingEnd": "2012-06-01",
-
-      # optional only for version history
-      "validFrom": "2012-01-01T10:00:00Z",
-
-      # optional only for version history
-      "validTo": "2013-01-01T10:00:00Z",
-
-      # optional only for publication release calendars
-      "publicationYear": "2005",
-
-      # optional only for publication release calendars
-      "publicationPeriod": "2005-Q1",
-
-      # optional as per annotations
-      "annotations": [0],
-
-      # optional as per attributes at dataset level
-      "attributes": [0],
-
-      # 1st alternative (only if series level
-      # (dimensionAtObservation <> allDimensions))
-
-      "series": {
-        "0": {
-          "annotations": [],
-          "attributes": [0],
-          "observations": {
-            "0": [1.5931, 0],
-            "1": [1.5925, 0]
-          }
-        },
-        "1": {
+          "links": [
+            {
+              "href": "https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/EXR/1.0",
+              "rel": "datastructure"
+            }
+          ],
+    
+          "action": "Information",
+    
+          # optional first time period in returned message
+          "reportingBegin": "2012-05-04",
+    
+          # optional last time period in returned message
+          "reportingEnd": "2012-06-01",
+    
+          # optional only for version history
+          "validFrom": "2012-01-01T10:00:00Z",
+    
+          # optional only for version history
+          "validTo": "2013-01-01T10:00:00Z",
+    
+          # optional only for publication release calendars
+          "publicationYear": "2005",
+    
+          # optional only for publication release calendars
+          "publicationPeriod": "2005-Q1",
+    
+          # optional as per annotations
           "annotations": [0],
-          "attributes": [1],
-          "observations": {
-            "0": [40.3426, 0],
-            "1": [40.3000, 0]
-          }
-        }
-      }
-    },
-    {
-      "action": "Information",
-
-      # 2nd alternative (only if no series level
-      #  (dimensionAtObservation == allDimensions))
-
-      "observations": {
-          "0:0": [1.5931, 0],
-          "0:1": [1.5925, 0],
-          "1:0": [40.3426, 0, 0],
-          "1:1": [40.3000, 0, 0]
-      }
-    },
-
-    # In case that the server does not group dimensions
-    # with single values at dataset level
-
-    {
-      "action": "Information",
-
-      # 1st alternative (only if series level
-      # (dimensionAtObservation <> allDimensions))
-
-      "series": {
-         "0:0:0:0:0": {
-            "annotations": [],
-            "attributes": [0],
-            "observations": {
+    
+          # optional as per attributes at dataset level
+          "attributes": [0],
+    
+          # 1st alternative (only if series level
+          # (dimensionAtObservation <> allDimensions))
+    
+          "series": {
+            "0": {
+              "annotations": [],
+              "attributes": [0],
+              "observations": {
                 "0": [1.5931, 0],
                 "1": [1.5925, 0]
-            }
-         },
-         "0:0:0:0:1": {
-            "annotations": [0],
-            "attributes": [1],
-            "observations": {
+              }
+            },
+            "1": {
+              "annotations": [0],
+              "attributes": [1],
+              "observations": {
                 "0": [40.3426, 0],
                 "1": [40.3000, 0]
+              }
             }
-         }
-      }
-    },
-    {
-      "action": "Information",
-
-      # 2nd alternative (only if no series level
-      # (dimensionAtObservation == allDimensions))
-
-      "observations": {
-          "0:0:0:0:0:0": [1.5931, 0],
-          "0:0:0:0:0:1": [1.5925, 0],
-          "0:0:0:0:1:0": [40.3426, 0, 0],
-          "0:0:0:0:1:1": [40.3000, 0, 0]
-      }
-    },
-
-    # In case the client is using the detail parameter
-    # and the server supports it
-
-    {
-      "action": "Information",
-
-      # Detail parameter: serieskeysonly. No observation values,
-      # attributes or annotations.
-
-      "observations": {
-          "0:0": [],
-          "0:1": [],
-          "1:0": [],
-          "1:1": []
-      }
-    },
-    {
-      "action": "Information",
-
-      # Detail parameter: dataonly. No attributes or annotations.
-
-      "observations": {
-          "0:0": [1.5931],
-          "0:1": [1.5925],
-          "1:0": [40.3426],
-          "1:1": [40.3000]
-      }
-    },
-    {
-      "action": "Information",
-
-      # Detail parameter: nodata. No observation values
-      # just attributes and annotations.
-
-      "observations": {
-          "0:0": [0],
-          "0:1": [0],
-          "1:0": [0, 0],
-          "1:1": [0, 0]
-      }
-    }
-  ]
+          }
+        },
+        {
+          "action": "Information",
+    
+          # 2nd alternative (only if no series level
+          #  (dimensionAtObservation == allDimensions))
+    
+          "observations": {
+              "0:0": [1.5931, 0],
+              "0:1": [1.5925, 0],
+              "1:0": [40.3426, 0, 0],
+              "1:1": [40.3000, 0, 0]
+          }
+        },
+    
+        # In case that the server does not group dimensions
+        # with single values at dataset level
+    
+        {
+          "action": "Information",
+    
+          # 1st alternative (only if series level
+          # (dimensionAtObservation <> allDimensions))
+    
+          "series": {
+             "0:0:0:0:0": {
+                "annotations": [],
+                "attributes": [0],
+                "observations": {
+                    "0": [1.5931, 0],
+                    "1": [1.5925, 0]
+                }
+             },
+             "0:0:0:0:1": {
+                "annotations": [0],
+                "attributes": [1],
+                "observations": {
+                    "0": [40.3426, 0],
+                    "1": [40.3000, 0]
+                }
+             }
+          }
+        },
+        {
+          "action": "Information",
+    
+          # 2nd alternative (only if no series level
+          # (dimensionAtObservation == allDimensions))
+    
+          "observations": {
+              "0:0:0:0:0:0": [1.5931, 0],
+              "0:0:0:0:0:1": [1.5925, 0],
+              "0:0:0:0:1:0": [40.3426, 0, 0],
+              "0:0:0:0:1:1": [40.3000, 0, 0]
+          }
+        },
+    
+        # In case the client is using the detail parameter
+        # and the server supports it
+    
+        {
+          "action": "Information",
+    
+          # Detail parameter: serieskeysonly. No observation values,
+          # attributes or annotations.
+    
+          "observations": {
+              "0:0": [],
+              "0:1": [],
+              "1:0": [],
+              "1:1": []
+          }
+        },
+        {
+          "action": "Information",
+    
+          # Detail parameter: dataonly. No attributes or annotations.
+    
+          "observations": {
+              "0:0": [1.5931],
+              "0:1": [1.5925],
+              "1:0": [40.3426],
+              "1:1": [40.3000]
+          }
+        },
+        {
+          "action": "Information",
+    
+          # Detail parameter: nodata. No observation values
+          # just attributes and annotations.
+    
+          "observations": {
+              "0:0": [0],
+              "0:1": [0],
+              "1:0": [0, 0],
+              "1:1": [0, 0]
+          }
+        }
+      ]
+  }
 }
 ```
-
