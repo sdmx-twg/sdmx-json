@@ -59,7 +59,7 @@
   "errors": [
     {
       "code": 123,
-      "message": "Invalid number of dimensions in parameter key"
+      "title": "Invalid number of dimensions in parameter key"
     }
   ],
   "structure": {
@@ -100,7 +100,7 @@
           "id": "CURRENCY_DENOM",
           "name": "Currency denominator",
           "description": "Description for the dimension",
-          "keyPosition": 3,
+          "keyPosition": 2,
           "values": [
             {
               "id": "EUR",
@@ -111,7 +111,7 @@
           "id": "EXR_TYPE",
           "name": "Exchange rate type",
           "description": "Description for the dimension",
-          "keyPosition": 4,
+          "keyPosition": 3,
           "values": [
             {
               "id": "SP00",
@@ -122,7 +122,7 @@
           "id": "EXR_SUFFIX",
           "name": "Series variation - EXR context",
           "description": "Description for the dimension",
-          "keyPosition": 5,
+          "keyPosition": 4,
           "values": [
             {
               "id": "A",
@@ -138,7 +138,7 @@
           "id": "CURRENCY",
           "name": "Currency",
           "description": "Description for the dimension",
-          "keyPosition": 2,
+          "keyPosition": 1,
           "role": "unit",
           "values": [
             {
@@ -158,6 +158,7 @@
           "id": "TIME_PERIOD",
           "name": "Time period or range",
           "description": "Description for the dimension",
+          "keyPosition": 5,
           "role": "time",
           "values": [
             {
