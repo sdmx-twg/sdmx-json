@@ -1,20 +1,21 @@
 {
     "id": "http://sdmx.org/data-message/v0.9.0/schema#",
-    "$schema" : "http://json-schema.org/draft-04/schema#",
+    "$schema" : "http://json-schema.org/draft-05/schema#",
     "description": "Schema for SDMX-JSON data message",
     "type": "object",
-    "required": [ "header" ],
     "properties": {
-        "header": {
-            "$ref": "#/definitions/header"
+        "meta": {
+            "$ref": "#/definitions/meta"
         },
-        "structure": {
-            "$ref": "#/definitions/structure"
-        },
-        "dataSets": {
-            "type": [ "null", "array" ],
-            "items": {
-                "$ref": "#/definitions/dataSet"
+        "data": {
+            "structure": {
+                "$ref": "#/definitions/structure"
+            },
+            "dataSets": {
+                "type": [ "null", "array" ],
+                "items": {
+                    "$ref": "#/definitions/dataSet"
+                }
             }
         },
         "errors": {
@@ -25,20 +26,25 @@
         }
     },
     "definitions": {
-        "header": {
+        "meta": {
             "type": "object",
             "required": [ "id", "prepared", "sender" ],
             "properties": {
+                "schema": {
+                    "type": "string",
+                    "format": "uri"
+                },
                 "id": {
                     "type": "string"
+                },
+                "test": {
+                    "type": [ "null", "boolean" ]
                 },
                 "prepared": {
                     "type": "string",
                     "format": "date-time"
                 },
-                "test": {
-                    "type": [ "null", "boolean" ]
-                },
+
                 "sender": {
                     "$ref": "#/definitions/party"
                 },
@@ -110,14 +116,23 @@
         },
         "error": {
             "type": "object",
-            "required": [ "code", "message" ],
+            "required": [ "code" ],
             "properties": {
                 "code": {
                     "type": "number"
                 },
-                "message": {
+                "title": {
                     "type": "string"
-                }
+                },
+                "detail": {
+                    "type": "string"
+                },
+                 "links": {
+                    "type": [ "null", "array" ],
+                    "items": {
+                        "$ref": "#/definitions/link"
+                    }
+                }               
             }
         },
         "link": {
@@ -129,12 +144,15 @@
                     "format": "uri"
                 },
                 "rel": {
-                    "type": "string"
+                    "type": [ "null", "string" ]
                 },
                 "title": {
                     "type": [ "null", "string" ]
                 },
                 "type": {
+                    "type": [ "null", "string" ]
+                },
+                "hreflang": {
                     "type": [ "null", "string" ]
                 }
             }
