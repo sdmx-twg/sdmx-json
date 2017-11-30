@@ -67,15 +67,16 @@
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": [ "null", "string" ]
                 },
                 "contact": {
                     "type": [ "null", "array" ],
                     "items": {
                         "type": "object",
+                        "required": [ "name" ],
                         "properties": {
                             "name": {
-                                "type": [ "null", "string" ]
+                                "type": "string"
                             },
                             "department": {
                                 "type": [ "null", "string" ]
@@ -122,10 +123,10 @@
                     "type": "number"
                 },
                 "title": {
-                    "type": "string"
+                    "type": [ "null", "string" ]
                 },
                 "detail": {
-                    "type": "string"
+                    "type": [ "null", "string" ]
                 },
                  "links": {
                     "type": [ "null", "array" ],
@@ -144,7 +145,7 @@
                     "format": "uri"
                 },
                 "rel": {
-                    "type": [ "null", "string" ]
+                    "type": "string"
                 },
                 "title": {
                     "type": [ "null", "string" ]
@@ -255,12 +256,13 @@
         },
         "component": {
             "type": "object",
+            "required": [ "id", "values" ],
             "properties": {
                 "id": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": [ "null", "string" ]
                 },
                 "description": {
                     "type": [ "null", "string" ]
@@ -291,12 +293,13 @@
                     "type": "array",
                     "items": {
                         "type": "object",
+                        "required": [ "id" ],
                         "properties": {
                             "id": {
                                 "type": "string"
                             },
                             "name": {
-                                "type": "string"
+                                "type": [ "null", "string" ]
                             },
                             "description": {
                                 "type": [ "null", "string" ]
@@ -322,14 +325,12 @@
                                     "minimum": 0
                                 }
                             }
-                        },
-                        "required": [ "name" ]
+                        }
                     },
                     "minItems": 0,
                     "uniqueItems": true
                 }
-            },
-            "required": [ "name", "values" ]
+            }
         },
         "dataSet": {
             "type": "object",
