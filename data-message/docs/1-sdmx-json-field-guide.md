@@ -44,27 +44,23 @@ may not contain fields for data, dimensions and attributes.
 ## message
 
 Message is the top level object and it contains the data as well 
-as the metadata needed to interpret those data.
+as the structural metadata needed to interpret those data.
 
-* header - *Object* *nullable*. *[Header](#header)* contains basic technical information about the message, such as when it was prepared and who has sent it.
-* structure - *Object* *nullable*. *[Structure](#structure)* contains the information needed to interpret the data available in the message, such as the list of concepts used.
-* dataSets - *Array* *nullable*. *DataSets* field is an array of *[dataSet](#dataset)* objects. That's where the data (i.e.: the observations) will be.
-* errors - *Array* *nullable*. *Errors* field is an array of *[error](#error)* objects. When appropriate provides a list of error messages in addition to RESTful web services HTTP error status codes.
+* meta - *Object* *optional*. A *[meta](#meta)* object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.
+* data - *Object* *optional*. *[Data](#data)* contains the message's “primary data”.
+* errors - *Array* *optional*. *Errors* field is an array of *[error](#error)* objects. When appropriate provides a list of error messages in addition to RESTful web services HTTP error status codes.
+
+The members data and errors MUST NOT coexist in the same message.
 
 Example:
 
     {
-      "header": {
-          # header object #
+      "meta": {
+          # meta object #
       },
-      "structure": {
-          # structure object #
+      "data": {
+          # data object #
       },
-      "dataSets": [
-        {
-          # dataSet object #
-        }
-      ],
       "errors": [
         {
           # error object #
@@ -72,23 +68,26 @@ Example:
       ]
     }
 
-## header
+## meta
 
-*Object* *nullable*. Header contains basic technical information 
+*Object* *optional*. Used to include non-standard meta-information and basic technical information 
 about the message, such as when it was prepared and who has sent it.
-
-* id - *String*. *String*. Unique string that identifies the message for further references.
-* test - *Boolean* *nullable*. Indicates whether the message is for test purposes or not. False for normal messages.
+Any members MAY be specified within `meta` objects.
+* schema - *String* *optional*. Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. **Providing the link to the SDMX-JSON schema is recommended.**
+* id - *String*. Unique string that identifies the message for further references.
+* test - *Boolean* *optional*. Indicates whether the message is for test purposes or not. False for normal messages.
 * prepared - *String*. A timestamp indicating when the message was prepared. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
 * sender - *Object*. *[Sender](#sender)* contains information about the party that is transmitting the message.
-* receiver - *Object* *nullable*. *[Receiver](#receiver)* contains information about the party that is receiving the message. This can be useful if the WS requires authentication.
-* links - *Array* *nullable*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the header.
+* receiver - *Object* *optional*. *[Receiver](#receiver)* contains information about the party that is receiving the message. This can be useful if the WS requires authentication.
+* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the header.
 
 Example:
 
-    "header": {
+    "meta": {
+      "schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/sdmx-json-data-schema.json",
+      "copyright": "Copyright 2017 Statistics hotline",
       "id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
-      "prepared": "2013-01-03T12:54:12",
+      "prepared": "2018-01-03T12:54:12",
       "test": false,
       "sender: {
         # sender object #
@@ -109,8 +108,8 @@ Example:
 Sender contains the following fields:
 
 * id - *String*. A unique identifier of the party.
-* name - *String* *nullable*. A human-readable name of the sender.
-* contacts - *Array* *nullable*. A collection of *[contacts](#contact)*.
+* name - *String* *optional*. A human-readable name of the sender.
+* contacts - *Array* *optional*. A collection of *[contacts](#contact)*.
 
 Example:
 
@@ -130,12 +129,12 @@ Example:
 may contain the following field:
 
 * name - *String*. The contact's name.
-* department - *String* *nullable*. The organisational structure for the contact.
-* role - *String* *nullable*. The responsibility of the contact.
-* telephone - *Array* *nullable*. An array of telephone numbers for the contact.
-* fax - *Array* *nullable*. An array of fax numbers for the contact person.
-* uri - *Array* *nullable*. An array of uris. Each uri holds an information URL for the contact.
-* email - *Array* *nullable*. An array of email addresses for the contact person.
+* department - *String* *optional*. The organisational structure for the contact.
+* role - *String* *optional*. The responsibility of the contact.
+* telephone - *Array* *optional*. An array of telephone numbers for the contact.
+* fax - *Array* *optional*. An array of fax numbers for the contact person.
+* uri - *Array* *optional*. An array of uris. Each uri holds an information URL for the contact.
+* email - *Array* *optional*. An array of email addresses for the contact person.
 
 Example:
 
@@ -151,7 +150,7 @@ Example:
 
 ### receiver
 
-*Object* *nullable*. Information about the party that is receiving the message. 
+*Object* *optional*. Information about the party that is receiving the message. 
 This can be useful if the WS requires authentication. Receiver contains the 
 same fields as [sender](#sender).
 
@@ -159,17 +158,37 @@ same fields as [sender](#sender).
 
 See the section on [linking mechanism](#linking-mechanism) for all information on links.
 
+## data
+
+*Object* *optional*. Header contains the message's “primary data”.
+
+* structure - *Object* *optional*. *[Structure](#structure)* contains the information needed to interpret the data available in the message, such as the list of concepts used.
+* dataSets - *Array* *optional*. *DataSets* field is an array of *[dataSet](#dataset)* objects. That's where the data (i.e.: the observations) will be.
+
+Example:
+
+    "data": {
+      "structure": {
+          # structure object #
+      },
+      "dataSets": [
+        {
+          # dataSet object #
+        }
+      ]
+    }
+
 ## structure
 
-*Object* *nullable*. Provides the structural metadata necessary to interpret the data 
+*Object* *optional*. Provides the structural metadata necessary to interpret the data 
 contained in the message. It tells you which are the components (`dimensions` and `attributes`) 
 used in the message and also describes to which level in the hierarchy (`dataSet`, `series`, 
 `observations`) these components are attached.
 
-* links - *Array* *nullable*. *Links* field is an array of *[link](#link)* objects. A collection of links to structural metadata or to additional information regarding the structure. **Providing links allowing accessing the underlying SDMX Data Structure Definition, Dataflow and/or Provision Agreements is recommended.**
+* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. A collection of links to structural metadata or to additional information regarding the structure. **Providing links allowing accessing the underlying SDMX Data Structure Definition, Dataflow and/or Provision Agreements is recommended.**
 * dimensions - *Object*. Describes the *[dimensions](#dimensions-attributes)* used in the message as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) to which these `dimensions` are attached.
 * attributes - *Object*. Describes the *[attributes](#dimensions-attributes)* used in the message as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) to which these `attributes` are attached.
-* annotations - *Array* *nullable*. *Annotations* field is an array of *[annotation](#annotation)* objects. If appropriate, provides a list of `annotations` that can be referenced by `structure`, `component`, `component value`, `dataSets`, `series` and `observations`.
+* annotations - *Array* *optional*. *Annotations* field is an array of *[annotation](#annotation)* objects. If appropriate, provides a list of `annotations` that can be referenced by `structure`, `component`, `component value`, `dataSets`, `series` and `observations`.
 
 Example:
 
@@ -204,9 +223,9 @@ and/or Provision Agreements is recommended.
 as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) 
 to which these dimensions/attributes are attached. 
 
-* dataSet - *Array* *nullable*. *DataSet* field is an array of *[component](#component)* objects. Optional array to be provided if components (dimensions or attributes) are presented at the `dataSet` level. It is highly recommended to present all dimensions and attributes at the `dataSet` level for which the message contains only 1 single value.
-* series - *Array* *nullable*. *Series* field is an array of *[component](#component)* objects. Optional array to be provided if components (dimensions or attributes) are presented at the `series` level.
-* observation - *Array* *nullable*. *Observation* field is an array of *[component](#component)* objects. Optional array to be provided if components (dimensions or attributes) are presented at the `observation` level. When using the SDMX API, then the dimension(s) specified in the parameter "dimensionAtObservation" would be presented at `observation` level. If "dimensionAtObservation=AllDimensions" then all dimensions, except those with only one value possibly presented at the `dataSet` level, would be presented at `observation` level.
+* dataSet - *Array* *optional*. *DataSet* field is an array of *[component](#component)* objects. Optional array to be provided if components (dimensions or attributes) are presented at the `dataSet` level. It is highly recommended to present all dimensions and attributes at the `dataSet` level for which the message contains only 1 single value.
+* series - *Array* *optional*. *Series* field is an array of *[component](#component)* objects. Optional array to be provided if components (dimensions or attributes) are presented at the `series` level.
+* observation - *Array* *optional*. *Observation* field is an array of *[component](#component)* objects. Optional array to be provided if components (dimensions or attributes) are presented at the `observation` level. When using the SDMX API, then the dimension(s) specified in the parameter "dimensionAtObservation" would be presented at `observation` level. If "dimensionAtObservation=AllDimensions" then all dimensions, except those with only one value possibly presented at the `dataSet` level, would be presented at `observation` level.
 
 Example:
 
@@ -247,19 +266,19 @@ Example:
 
 #### component
 
-*Object* *nullable*. A component represents a `dimension` or an `attribute` used in the message. 
+*Object* *optional*. A component represents a `dimension` or an `attribute` used in the message. 
 It contains basic information about the component (such as its `name` and `id`) 
 as well as the list of `values` used in the message for this particular component.
 Each of the components may contain the following fields:
 
 * id - *String*. Identifier for the component. 
 * name - *String*. Name provides a human-readable name for the component.
-* description - *String* *nullable*. Provides a description for the component.
-* keyPosition - *Number* *nullable*. Indicates the position of the `dimension` in the key (e.g. used in the SDMX API call), starting at 0. This field should not be supplied for `attributes` and it may also be omitted for `dimensions`. This field could be used to build the "key" parameter string (i.e. D.USD.EUR.SP00.A) for data queries, whenever the order of the `dimensions` cannot easily be derived from the structural metadata information available in the data message. 
-* role - *String* *nullable*. Defines the component role(s), if any. Roles are represented by the id of a concept defined as [SDMX cross-domain concept](https://sdmx.org/wp-content/uploads/01_sdmx_cog_annex_1_cdc_2009.pdf). Several of the concepts defined as SDMX cross-domain concepts are useful for data visualisation, such as for example, the series title ("TITLE"), the unit of measure ("UNIT_MEASURE"), the number of decimals to be displayed ("DECIMALS"), the  country or geographic reference area ("REF_AREA", e.g. when using maps), the period of time to which the measured observation refers ("REF_PERIOD"), the time interval at which observations occur over a given time period ("FREQ"), etc. It is strongly recommended to identify any component that can be useful for data visualisation purposes by using the appropriate SDMX cross-domain concept as role.
-* default - *String* or *Number* *nullable*. Defines a default `value` for the component (valid for `attributes` only!). If no value is provided in the data part of the message then this value applies.
-* links - *Array* *nullable*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the component.
-* annotations - *Array* *nullable*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the component. Indices refer back to the array of *annotations* in the structure field.
+* description - *String* *optional*. Provides a description for the component.
+* keyPosition - *Number* *optional*. Indicates the position of the `dimension` in the key (e.g. used in the SDMX API call), starting at 0. This field should not be supplied for `attributes` and it may also be omitted for `dimensions`. This field could be used to build the "key" parameter string (i.e. D.USD.EUR.SP00.A) for data queries, whenever the order of the `dimensions` cannot easily be derived from the structural metadata information available in the data message. 
+* role - *String* *optional*. Defines the component role(s), if any. Roles are represented by the id of a concept defined as [SDMX cross-domain concept](https://sdmx.org/wp-content/uploads/01_sdmx_cog_annex_1_cdc_2009.pdf). Several of the concepts defined as SDMX cross-domain concepts are useful for data visualisation, such as for example, the series title ("TITLE"), the unit of measure ("UNIT_MEASURE"), the number of decimals to be displayed ("DECIMALS"), the  country or geographic reference area ("REF_AREA", e.g. when using maps), the period of time to which the measured observation refers ("REF_PERIOD"), the time interval at which observations occur over a given time period ("FREQ"), etc. It is strongly recommended to identify any component that can be useful for data visualisation purposes by using the appropriate SDMX cross-domain concept as role.
+* default - *String* or *Number* *optional*. Defines a default `value` for the component (valid for `attributes` only!). If no value is provided in the data part of the message then this value applies.
+* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the component.
+* annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the component. Indices refer back to the array of *annotations* in the structure field.
 * values - *Array*. *Values* field is an array of *[component value](#component-value)* objects. Note that `dimensions` and `attributes` presented at `dataSet` level can only have one single component value.
 
 Example:
@@ -290,14 +309,14 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 ##### component value
 
-*Object* *nullable*. A particular value for a component in a message. 
+*Object* *optional*. A particular value for a component in a message. 
 
 * id - *String*. Unique identifier for a component value.
 * name - *String*. Name provides a human-readable name for the component value.
-* description - *String* *nullable*. Description provides a human-readable description of the value. The description is typically longer than the text provided for the name field.
-* start, end - *String* *nullable*. Start and end are instances of time that define the actual Gregorian calendar period covered by the values for the time dimension. The algorithm for computing start and end fields for any supported reporting period is defined in the SDMX Technical Notes. These fields should be used only when the component value represents one of the values for the time dimension. Values are considered as inclusive both for the start field and the end field. Values must follow the ISO 8601 syntax for combined dates and times, including time zone. These fields are useful for visualisation tools, when selecting the appropriate point in time for the time axis. Statistical data, can be collected, for example, at the beginning, the middle or the end of the period, or can represent the average of observations through the period. Based on this information and using the start and end fields, it is easy to get or calculate the desired point in time to be used for the time axis.
-* links - *Array* *nullable*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the component value.
-* annotations - *Array* *nullable*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the component value. Indices refer back to the array of *annotations* in the structure field.
+* description - *String* *optional*. Description provides a human-readable description of the value. The description is typically longer than the text provided for the name field.
+* start, end - *String* *optional*. Start and end are instances of time that define the actual Gregorian calendar period covered by the values for the time dimension. The algorithm for computing start and end fields for any supported reporting period is defined in the SDMX Technical Notes. These fields should be used only when the component value represents one of the values for the time dimension. Values are considered as inclusive both for the start field and the end field. Values must follow the ISO 8601 syntax for combined dates and times, including time zone. These fields are useful for visualisation tools, when selecting the appropriate point in time for the time axis. Statistical data, can be collected, for example, at the beginning, the middle or the end of the period, or can represent the average of observations through the period. Based on this information and using the start and end fields, it is easy to get or calculate the desired point in time to be used for the time axis.
+* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the component value.
+* annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the component value. Indices refer back to the array of *annotations* in the structure field.
 
 Example:
 
@@ -321,13 +340,13 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 ### annotation
 
-*Object* *nullable*. An `annotation` object can be referenced through its `annotations` array index by `structure`, `component`, `component value`, `dataSets`, `series` and `observations`. It contains the following optional information:
+*Object* *optional*. An `annotation` object can be referenced through its `annotations` array index by `structure`, `component`, `component value`, `dataSets`, `series` and `observations`. It contains the following optional information:
 
-* title - *String* *nullable*. Provides a title for the annotation.
-* type - *String* *nullable*. Type is used to distinguish between annotations designed to support various uses. The types are not enumerated, and these can be freely specified by the creator of the annotations. The definitions and use of annotation types should be documented by their creator.
-* text - *String* *nullable*. Contains the text of the annotation.
-* id - *String* *nullable*. ID provides a non-standard identification of an annotation. It can be used to disambiguate annotations.
-* links - *Array* *nullable*. *Links* field is an array of *[link](#link)* objects. If appropriate, a link to an additional external resource which may contain or supplement the annotation.
+* title - *String* *optional*. Provides a title for the annotation.
+* type - *String* *optional*. Type is used to distinguish between annotations designed to support various uses. The types are not enumerated, and these can be freely specified by the creator of the annotations. The definitions and use of annotation types should be documented by their creator.
+* text - *String* *optional*. Contains the text of the annotation.
+* id - *String* *optional*. ID provides a non-standard identification of an annotation. It can be used to disambiguate annotations.
+* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a link to an additional external resource which may contain or supplement the annotation.
 
 Example:
 
@@ -376,22 +395,22 @@ or cross sections, the `observations` will be found under the `series` elements.
 
 The `dataSet` properties are:
 
-* action - *String* *nullable*. Action provides a list of actions, describing the intention of the data transmission from the sender's side.
+* action - *String* *optional*. Action provides a list of actions, describing the intention of the data transmission from the sender's side.
 - `Append` - this is an incremental update for an existing `dataSet` or the provision of new data or documentation (attribute values) formerly absent. If any of the supplied data or metadata is already present, it will not replace these data.
 - `Replace` - data are to be replaced, and may also include additional data to be appended.
 - `Delete` - data are to be deleted.
 - `Information` (default) - data are being exchanged for informational purposes only, and not meant to update a system.
-* reportingBegin - *String* *nullable*. The start of the time period covered by the message.
-* reportingEnd - *String* *nullable*. The end of the time period covered by the message.
-* validFrom - *String* *nullable*. The validFrom indicates the inclusive start time indicating the validity of the information in the data.
-* validTo - *String* *nullable*. The validTo indicates the inclusive end time indicating the validity of the information in the data.
-* publicationYear - *String* *nullable*. The publicationYear holds the ISO 8601 four-digit year.
-* publicationPeriod - *String* *nullable*. The publicationPeriod specifies the period of publication of the data in terms of whatever provisioning agreements might be in force (i.e., "2005-Q1" if that is the time of publication for a `dataSet` published on a quarterly basis).
-* links - *Array* *nullable*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the dataSet.
-* annotations - *Array* *nullable*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the dataSet. Indices refer back to the array of *annotations* in the structure field.
-* attributes - *Array* *nullable*. Collection of indices of the corresponding *values* of all attributes presented at the dataSet level. Each value is an index in the `values` array of the respective *component* object within the `structure.attributes.dataSet` array. This is typically the case for `attributes` that always have the same value for all the `observations` available in the `dataSet`. In order to avoid repetition, that value can simply be presented at the `dataSet` level.
-* series - *Object* *nullable*. A collection of *[series](#series)* objects, to be used when the `observations` contained in the `dataSet` are presented in logical groups (time series or cross-sections), e.g. when using the SDMX API with the parameter "dimensionAtObservation=TIME_PERIOD" (default option) or with the "dimensionAtObservation" parameter with an ID of any other specific `dimension`. This element must **not** be used in case the `dataSet` presents a flat view of `observations`.
-* observations - *Object* *nullable*. Collection of *[observations](#observations)* used in case when a `dataSet` is presented as a flat view of `observations`, e.g. when using the SDMX API with the parameter "dimensionAtObservation=AllDimensions". All `dimensions`, except those with only one `value` possibly presented at the `dataSet` level, would be presented at `observation` level. Alternatively, in case the `observations` are to be presented in logical groups (time series or cross-sections), use the *[series](#series)* element instead.
+* reportingBegin - *String* *optional*. The start of the time period covered by the message.
+* reportingEnd - *String* *optional*. The end of the time period covered by the message.
+* validFrom - *String* *optional*. The validFrom indicates the inclusive start time indicating the validity of the information in the data.
+* validTo - *String* *optional*. The validTo indicates the inclusive end time indicating the validity of the information in the data.
+* publicationYear - *String* *optional*. The publicationYear holds the ISO 8601 four-digit year.
+* publicationPeriod - *String* *optional*. The publicationPeriod specifies the period of publication of the data in terms of whatever provisioning agreements might be in force (i.e., "2005-Q1" if that is the time of publication for a `dataSet` published on a quarterly basis).
+* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the dataSet.
+* annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the dataSet. Indices refer back to the array of *annotations* in the structure field.
+* attributes - *Array* *optional*. Collection of indices of the corresponding *values* of all attributes presented at the dataSet level. Each value is an index in the `values` array of the respective *component* object within the `structure.attributes.dataSet` array. This is typically the case for `attributes` that always have the same value for all the `observations` available in the `dataSet`. In order to avoid repetition, that value can simply be presented at the `dataSet` level.
+* series - *Object* *optional*. A collection of *[series](#series)* objects, to be used when the `observations` contained in the `dataSet` are presented in logical groups (time series or cross-sections), e.g. when using the SDMX API with the parameter "dimensionAtObservation=TIME_PERIOD" (default option) or with the "dimensionAtObservation" parameter with an ID of any other specific `dimension`. This element must **not** be used in case the `dataSet` presents a flat view of `observations`.
+* observations - *Object* *optional*. Collection of *[observations](#observations)* used in case when a `dataSet` is presented as a flat view of `observations`, e.g. when using the SDMX API with the parameter "dimensionAtObservation=AllDimensions". All `dimensions`, except those with only one `value` possibly presented at the `dataSet` level, would be presented at `observation` level. Alternatively, in case the `observations` are to be presented in logical groups (time series or cross-sections), use the *[series](#series)* element instead.
 
 For information on how to handle the indices for `annotations`, `attributes` or 
 `observations` see the section dedicated to [handling component values](#handling-component-values).
@@ -440,7 +459,7 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 ### series
 
-*Object* *nullable*. Collection of series, when the `observations` contained in the `dataSet`
+*Object* *optional*. Collection of series, when the `observations` contained in the `dataSet`
 are used into logical groups (time series or cross-sections). Each underlying series 
 is represented as a name/value pair in the `series` object.
 
@@ -451,9 +470,9 @@ level (indices in the `values` array of the respective *component* object within
 
 The *value* in the name/value pair is an object containing:
 
-* annotations - *Array* *nullable*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the series. Indices refer back to the array of `annotations` in the structure field.
-* attributes - *Array* *nullable*. Collection of indices of the corresponding `values` of all `attributes` presented at the `series` level. Each value is an index in the `values` array of the respective `component` object within the `structure.attributes.series` array. This is typically the case for `attributes` that always have the same value for all the `observations` available in the series. In order to avoid repetition, that value can simply be presented at the `series` level. 
-* observations - *Object* *nullable*. Collection of [observations](#observations) used in case when the `observations` are presented in logical groups (time series or cross-sections), e.g. when using the SDMX API with the parameter "dimensionAtObservation=TIME_PERIOD" (default option) or with the "dimensionAtObservation" parameter with an ID of any other specific `dimension`. Only (this) one `dimension` would be presented at `observation` level for each series.
+* annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the series. Indices refer back to the array of `annotations` in the structure field.
+* attributes - *Array* *optional*. Collection of indices of the corresponding `values` of all `attributes` presented at the `series` level. Each value is an index in the `values` array of the respective `component` object within the `structure.attributes.series` array. This is typically the case for `attributes` that always have the same value for all the `observations` available in the series. In order to avoid repetition, that value can simply be presented at the `series` level. 
+* observations - *Object* *optional*. Collection of [observations](#observations) used in case when the `observations` are presented in logical groups (time series or cross-sections), e.g. when using the SDMX API with the parameter "dimensionAtObservation=TIME_PERIOD" (default option) or with the "dimensionAtObservation" parameter with an ID of any other specific `dimension`. Only (this) one `dimension` would be presented at `observation` level for each series.
 
 Example:
 
@@ -617,7 +636,7 @@ For information on how to handle the indices for `annotations`, `attributes` or
 
 ### observations
 
-*Object* *nullable*. Collection of observations. Each observation is represented as a 
+*Object* *optional*. Collection of observations. Each observation is represented as a 
 name/value pair in the `observations` object.
 
 An observation is uniquely identified through the content of the *name* in the name/value pair, 
@@ -754,31 +773,33 @@ see the section dedicated to [handling component values](#handling-component-val
 
 ## error
 
-*Object* *nullable*. Used to provide a error message in addition 
+*Object* *optional*. Used to provide a error message in addition 
 to RESTful web services HTTP error status codes.
 The following pieces of information are to be provided:
 
-* code - *number*. Provides a code number for the error message. Code numbers are defined in the SDMX 2.1 Web Services Guidelines.
-* message - *string*. Provides the error message. Error messages are fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.
+* code - *Number*. Provides a code number for the error message. Code numbers are defined in the SDMX 2.1 Web Services Guidelines.
+* title - *String* *optional*. A short, human-readable summary of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
+* detail - *String* *optional*. A human-readable explanation specific to this occurrence of the problem. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.
+* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the error.
 
 Example:
 
     {
       "code": 150,
-      "message": "Invalid number of dimensions in the key parameter"
+      "title": "Invalid number of dimensions in the key parameter"
     }
 
 # Linking mechanism
 
 ## link
 
-*Object* *nullable*. A link to an external resource.
+*Object* *optional*. A link to an external resource.
 
 * href - *String*. Absolute or relative URL of the external resource.
 * rel - *String*. Relationship of the object to the external resource.
-* title - *String* *nullable*. A human-friendly description of the target link.
-* type - *String* *nullable*. A hint about the type of representation returned by the link.
-* hreflang - *String* *nullable*. The natural language of the external link, the same as used in the HTTP Accept-Language request header.
+* title - *String* *optional*. A human-friendly description of the target link.
+* type - *String* *optional*. A hint about the type of representation returned by the link.
+* hreflang - *String* *optional*. The natural language of the external link, the same as used in the HTTP Accept-Language request header.
 
 Examples:
 
@@ -1137,7 +1158,7 @@ a `wsCustomErrorCode`:
 "errors": [
   {
     "code": 150,
-    "message": "Invalid number of dimensions in the key parameter",
+    "title": "Invalid number of dimensions in the key parameter",
     "wsCustomErrorCode": 39272
   }
 ]
