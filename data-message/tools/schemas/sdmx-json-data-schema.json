@@ -1,440 +1,447 @@
-{
-    "id": "http://sdmx.org/data-message/v0.9.0/schema#",
-    "$schema" : "http://json-schema.org/draft-05/schema#",
-    "description": "Schema for SDMX-JSON data message",
-    "type": "object",
-    "properties": {
-        "meta": {
-            "$ref": "#/definitions/meta"
-        },
-        "data": {
-            "structure": {
-                "$ref": "#/definitions/structure"
-            },
-            "dataSets": {
-                "type": [ "null", "array" ],
-                "items": {
-                    "$ref": "#/definitions/dataSet"
-                }
-            }
-        },
-        "errors": {
-            "type": [ "null", "array" ],
-            "items": {
-                "$ref": "#/definitions/error"
-            }
-        }
-    },
-    "definitions": {
-        "meta": {
-            "type": "object",
-            "required": [ "id", "prepared", "sender" ],
-            "properties": {
-                "schema": {
-                    "type": "string",
-                    "format": "uri"
-                },
-                "id": {
-                    "type": "string"
-                },
-                "test": {
-                    "type": [ "null", "boolean" ]
-                },
-                "prepared": {
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "content-language": {
-                    "type": [ "null", "string" ]
-                },
-                "lang": {
-                    "type": [ "null", "string" ]
-                },
-                "sender": {
-                    "$ref": "#/definitions/party"
-                },
-                "receiver": {
-                    "$ref": "#/definitions/party"
-                },
-                "links": {
-                    "type": [ "null", "array" ],
-                    "items": {
-                        "$ref": "#/definitions/link"
-                    }
-                }
-            }
-        },
-        "party": {
-            "type": "object",
-            "required": [ "id" ],
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": [ "null", "string" ]
-                },
-                "contact": {
-                    "type": [ "null", "array" ],
-                    "items": {
-                        "type": "object",
-                        "required": [ "name" ],
-                        "properties": {
-                            "name": {
-                                "type": "string"
-                            },
-                            "department": {
-                                "type": [ "null", "string" ]
-                            },
-                            "role": {
-                                "type": [ "null", "string" ]
-                            },
-                            "telephone": {
-                                "type": [ "null", "array" ],
-                                "items": {
-                                    "type": "string"
-                                }
-                            },
-                            "fax": {
-                                "type": [ "null", "array" ],
-                                "items": {
-                                    "type": "string"
-                                }
-                            },
-                            "uri": {
-                                "type": [ "null", "array" ],
-                                "items": {
-                                    "type": "string",
-                                    "format": "uri"
-                                }
-                            },
-                            "email": {
-                                "type": [ "null", "array" ],
-                                "items": {
-                                    "type": "string",
-                                    "format": "email"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "error": {
-            "type": "object",
-            "required": [ "code" ],
-            "properties": {
-                "code": {
-                    "type": "number"
-                },
-                "title": {
-                    "type": [ "null", "string" ]
-                },
-                "detail": {
-                    "type": [ "null", "string" ]
-                },
-                 "links": {
-                    "type": [ "null", "array" ],
-                    "items": {
-                        "$ref": "#/definitions/link"
-                    }
-                }               
-            }
-        },
-        "link": {
-            "type": "object",
-            "required": [ "href", "rel" ],
-            "properties": {
-                "href": {
-                    "type": "string",
-                    "format": "uri"
-                },
-                "rel": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": [ "null", "string" ]
-                },
-                "type": {
-                    "type": [ "null", "string" ]
-                },
-                "hreflang": {
-                    "type": [ "null", "string" ]
-                }
-            }
-        },
-        "structure": {
-            "type": [ "null", "object" ],
-            "required": [ "dimensions" ],
-            "properties": {
-                "links": {
-                    "type": [ "null", "array" ],
-                    "items": {
-                        "$ref": "#/definitions/link"
-                    }
-                },
-                "name": {
-                    "type": [ "null", "string" ]
-                },
-                "description": {
-                    "type": [ "null", "string" ]
-                },
-                "dimensions": {
-                    "type": "object",
-                    "properties": {
-                        "dataSet": {
-                            "type": [ "null", "array" ],
-                            "items": {
-                                "$ref": "#/definitions/component"
-                            },
-                            "uniqueItems": true
-                        },
-                        "series": {
-                            "type": [ "null", "array" ],
-                            "items": {
-                                "$ref": "#/definitions/component"
-                            },
-                            "uniqueItems": true
-                        },
-                        "observation": {
-                            "type": [ "null", "array" ],
-                            "items": {
-                                "$ref": "#/definitions/component"
-                            },
-                            "uniqueItems": true
-                        }
-                    }
-                },
-                "attributes": {
-                    "type": "object",
-                    "properties": {
-                        "dataSet": {
-                            "type": [ "null", "array" ],
-                            "items": {
-                                "$ref": "#/definitions/component"
-                            },
-                            "uniqueItems": true
-                        },
-                        "series": {
-                            "type": [ "null", "array" ],
-                            "items": {
-                                "$ref": "#/definitions/component"
-                            },
-                            "uniqueItems": true
-                        },
-                        "observation": {
-                            "type": [ "null", "array" ],
-                            "items": {
-                                "$ref": "#/definitions/component"
-                            },
-                            "uniqueItems": true
-                        }
-                    }
-                },
-                "annotations": {
-                    "type": [ "null", "array" ],
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "title": {
-                                "type": [ "null", "string" ]
-                            },
-                            "type": {
-                                "type": [ "null", "string" ]
-                            },
-                            "text": {
-                                "type": [ "null", "string" ]
-                            },
-                            "id": {
-                                "type": [ "null", "string" ]
-                            },
-                            "links": {
-                                "type": [ "null", "array" ],
-                                "items": {
-                                    "$ref": "#/definitions/link"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "component": {
-            "type": "object",
-            "required": [ "id", "values" ],
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": [ "null", "string" ]
-                },
-                "description": {
-                    "type": [ "null", "string" ]
-                },
-                "role": {
-                    "type": [ "null", "string" ]
-                },
-                "keyPosition": {
-                    "type": [ "null", "integer" ],
-                    "minimum": 0
-                },
-                "default": {
-                    "type": [ "null", "string" ]
-                },
-                "links": {
-                    "type": [ "null", "array" ],
-                    "items": {
-                        "$ref": "#/definitions/link"
-                },
-                "annotations": {
-                    "type": [ "null", "array" ],
-                    "items": {
-                        "type": [ "integer" ],
-                        "minimum": 0
-                    }
-                },
-                "values": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "required": [ "id" ],
-                        "properties": {
-                            "id": {
-                                "type": "string"
-                            },
-                            "name": {
-                                "type": [ "null", "string" ]
-                            },
-                            "description": {
-                                "type": [ "null", "string" ]
-                            },
-                            "start": {
-                                "type": [ "null", "string" ],
-                                "format": "date-time"
-                            },
-                            "end": {
-                                "type": [ "null", "string" ],
-                                "format": "date-time"
-                            },
-                            "links": {
-                                "type": [ "null", "array" ],
-                                "items": {
-                                    "$ref": "#/definitions/link"
-                                }
-                            },
-                            "annotations": {
-                                "type": [ "null", "array" ],
-                                "items": {
-                                    "type": [ "integer" ],
-                                    "minimum": 0
-                                }
-                            }
-                        }
-                    },
-                    "minItems": 0,
-                    "uniqueItems": true
-                }
-            }
-        },
-        "dataSet": {
-            "type": "object",
-            "properties": {
-                "action": {
-                    "type": "string",
-                    "enum": [ "Information", "Append", "Replace", "Delete" ]
-                },
-                "reportingBegin": {
-                    "type": [ "null", "string" ]
-                },
-                "reportingEnd": {
-                    "type": [ "null", "string" ]
-                },
-                "validFrom": {
-                    "type": [ "null", "string" ],
-                    "format": "date-time"
-                },
-                "validTo": {
-                    "type": [ "null", "string" ],
-                    "format": "date-time"
-                },
-                "publicationYear": {
-                    "type": [ "null", "string" ]
-                },
-                "publicationPeriod": {
-                    "type": [ "null", "string" ]
-                },
-                "annotations": {
-                    "type": [ "null", "array" ],
-                    "items": {
-                        "type": [ "integer" ],
-                        "minimum": 0
-                    }
-                },
-                "attributes": {
-                    "type": [ "null", "array" ],
-                    "items": {
-                        "type": [ "null", "integer" ],
-                        "minimum": 0
-                    }
-                },
-                "observations": {
-                    "type": [ "null", "object" ],
-                    "patternProperties": {
-                        "^[0-9]+(:[0-9]+)*$": {
-                            "type": "array",
-                            "items": {
-                                "type": [ "null", "number" ]
-                            }
-                        }
-                    },
-                    "additionalProperties": false
-                },
-                "series": {
-                    "type": [ "null", "object" ],
-                    "patternProperties": {
-                        "^[0-9]+(:[0-9]+)*$": {
-                            "type": "object",
-                            "properties": {
-                                "annotations": {
-                                    "type": [ "null", "array" ],
-                                    "items": {
-                                        "type": [ "integer" ],
-                                        "minimum": 0
-                                    }
-                                },
-                                "attributes": {
-                                    "type": [ "null", "array" ],
-                                    "items": {
-                                        "type": [ "null", "integer" ],
-                                        "minimum": 0
-                                    }
-                                },
-                                "observations": {
-                                    "type": "object",
-                                    "patternProperties": {
-                                        "^[0-9]+(:[0-9]+)*$": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": [ "null", "number" ]
-                                            }
-                                        }
-                                    },
-                                    "additionalProperties": false
-                                }
-                            },
-                            "additionalProperties": false
-                        }
-                    },
-                    "additionalProperties": false
-                },
-                "links": {
-                    "type": [ "null", "array" ],
-                    "items": {
-                        "$ref": "#/definitions/link"
-                    }
-                }
-            }
-        }
-    }
-}
+	{
+		"id": "http://sdmx.org/data-message/v0.9.0/schema#",
+		"$schema" : "http://json-schema.org/draft-05/schema#",
+		"description": "Schema for SDMX-JSON data message",
+		"type": "object",
+		"properties": {
+			"meta": {
+				"$ref": "#/definitions/meta"
+			},
+			"data": {
+				"structure": {
+					"$ref": "#/definitions/structure"
+				},
+				"dataSets": {
+					"type": [ "null", "array" ],
+					"items": {
+						"$ref": "#/definitions/dataSet"
+					}
+				}
+			},
+			"errors": {
+				"type": [ "null", "array" ],
+				"items": {
+					"$ref": "#/definitions/error"
+				}
+			}
+		},
+		"definitions": {
+			"meta": {
+				"type": "object",
+				"required": [ "id", "prepared", "sender" ],
+				"properties": {
+					"schema": {
+						"type": "string",
+						"format": "uri"
+					},
+					"id": {
+						"type": "string",
+						"pattern": "[A-Za-z0-9_@$-]+"
+					},
+					"test": {
+						"type": [ "null", "boolean" ]
+					},
+					"prepared": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"content-language": {
+						"type": [ "null", "string" ]
+					},
+					"lang": {
+						"type": [ "null", "string" ]
+					},
+					"sender": {
+						"$ref": "#/definitions/party"
+					},
+					"receiver": {
+						"$ref": "#/definitions/party"
+					},
+					"links": {
+						"type": [ "null", "array" ],
+						"items": {
+							"$ref": "#/definitions/link"
+						}
+					}
+				}
+			},
+			"party": {
+				"type": "object",
+				"required": [ "id" ],
+				"properties": {
+					"id": {
+						"type": "string",
+						"pattern": "[A-Za-z0-9_@$-]+"
+					},
+					"name": {
+						"type": [ "null", "string" ]
+					},
+					"contact": {
+						"type": [ "null", "array" ],
+						"items": {
+							"type": "object",
+							"required": [ "name" ],
+							"properties": {
+								"name": {
+									"type": "string"
+								},
+								"department": {
+									"type": [ "null", "string" ]
+								},
+								"role": {
+									"type": [ "null", "string" ]
+								},
+								"telephone": {
+									"type": [ "null", "array" ],
+									"items": {
+										"type": "string"
+									}
+								},
+								"fax": {
+									"type": [ "null", "array" ],
+									"items": {
+										"type": "string"
+									}
+								},
+								"uri": {
+									"type": [ "null", "array" ],
+									"items": {
+										"type": "string",
+										"format": "uri"
+									}
+								},
+								"email": {
+									"type": [ "null", "array" ],
+									"items": {
+										"type": "string",
+										"format": "email"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"error": {
+				"type": "object",
+				"required": [ "code" ],
+				"properties": {
+					"code": {
+						"type": "number"
+					},
+					"title": {
+						"type": [ "null", "string" ]
+					},
+					"detail": {
+						"type": [ "null", "string" ]
+					},
+					 "links": {
+						"type": [ "null", "array" ],
+						"items": {
+							"$ref": "#/definitions/link"
+						}
+					}               
+				}
+			},
+			"link": {
+				"type": "object",
+				"required": [ "href", "rel" ],
+				"properties": {
+					"href": {
+						"type": "string",
+						"format": "uri"
+					},
+					"rel": {
+						"type": "string"
+					},
+					"title": {
+						"type": [ "null", "string" ]
+					},
+					"type": {
+						"type": [ "null", "string" ]
+					},
+					"hreflang": {
+						"type": [ "null", "string" ]
+					}
+				}
+			},
+			"structure": {
+				"type": [ "null", "object" ],
+				"required": [ "dimensions" ],
+				"properties": {
+					"links": {
+						"type": [ "null", "array" ],
+						"items": {
+							"$ref": "#/definitions/link"
+						}
+					},
+					"name": {
+						"type": [ "null", "string" ]
+					},
+					"description": {
+						"type": [ "null", "string" ]
+					},
+					"dimensions": {
+						"type": "object",
+						"properties": {
+							"dataSet": {
+								"type": [ "null", "array" ],
+								"items": {
+									"$ref": "#/definitions/component"
+								},
+								"uniqueItems": true
+							},
+							"series": {
+								"type": [ "null", "array" ],
+								"items": {
+									"$ref": "#/definitions/component"
+								},
+								"uniqueItems": true
+							},
+							"observation": {
+								"type": [ "null", "array" ],
+								"items": {
+									"$ref": "#/definitions/component"
+								},
+								"uniqueItems": true
+							}
+						}
+					},
+					"attributes": {
+						"type": "object",
+						"properties": {
+							"dataSet": {
+								"type": [ "null", "array" ],
+								"items": {
+									"$ref": "#/definitions/component"
+								},
+								"uniqueItems": true
+							},
+							"series": {
+								"type": [ "null", "array" ],
+								"items": {
+									"$ref": "#/definitions/component"
+								},
+								"uniqueItems": true
+							},
+							"observation": {
+								"type": [ "null", "array" ],
+								"items": {
+									"$ref": "#/definitions/component"
+								},
+								"uniqueItems": true
+							}
+						}
+					},
+					"annotations": {
+						"type": [ "null", "array" ],
+						"items": {
+							"type": "object",
+							"properties": {
+								"title": {
+									"type": [ "null", "string" ]
+								},
+								"type": {
+									"type": [ "null", "string" ]
+								},
+								"text": {
+									"type": [ "null", "string" ]
+								},
+								"id": {
+									"type": [ "null", "string" ],
+									"items": {
+										"pattern": "[A-Za-z0-9_@$-]+"
+									}
+								},
+								"links": {
+									"type": [ "null", "array" ],
+									"items": {
+										"$ref": "#/definitions/link"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"component": {
+				"type": "object",
+				"required": [ "id", "values" ],
+				"properties": {
+					"id": {
+						"type": "string",
+						"pattern": "[A-Za-z][A-Za-z0-9_-]*"
+					},
+					"name": {
+						"type": [ "null", "string" ]
+					},
+					"description": {
+						"type": [ "null", "string" ]
+					},
+					"role": {
+						"type": [ "null", "string" ]
+					},
+					"keyPosition": {
+						"type": [ "null", "integer" ],
+						"minimum": 0
+					},
+					"default": {
+						"type": [ "null", "string" ]
+					},
+					"links": {
+						"type": [ "null", "array" ],
+						"items": {
+							"$ref": "#/definitions/link"
+					},
+					"annotations": {
+						"type": [ "null", "array" ],
+						"items": {
+							"type": [ "integer" ],
+							"minimum": 0
+						}
+					},
+					"values": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"required": [ "id" ],
+							"properties": {
+								"id": {
+									"type": "string",
+									"pattern": "[A-Za-z0-9_@$-]+"
+								},
+								"name": {
+									"type": [ "null", "string" ]
+								},
+								"description": {
+									"type": [ "null", "string" ]
+								},
+								"start": {
+									"type": [ "null", "string" ],
+									"format": "date-time"
+								},
+								"end": {
+									"type": [ "null", "string" ],
+									"format": "date-time"
+								},
+								"links": {
+									"type": [ "null", "array" ],
+									"items": {
+										"$ref": "#/definitions/link"
+									}
+								},
+								"annotations": {
+									"type": [ "null", "array" ],
+									"items": {
+										"type": [ "integer" ],
+										"minimum": 0
+									}
+								}
+							}
+						},
+						"minItems": 0,
+						"uniqueItems": true
+					}
+				}
+			},
+			"dataSet": {
+				"type": "object",
+				"properties": {
+					"action": {
+						"type": "string",
+						"enum": [ "Information", "Append", "Replace", "Delete" ]
+					},
+					"reportingBegin": {
+						"type": [ "null", "string" ]
+					},
+					"reportingEnd": {
+						"type": [ "null", "string" ]
+					},
+					"validFrom": {
+						"type": [ "null", "string" ],
+						"format": "date-time"
+					},
+					"validTo": {
+						"type": [ "null", "string" ],
+						"format": "date-time"
+					},
+					"publicationYear": {
+						"type": [ "null", "string" ]
+					},
+					"publicationPeriod": {
+						"type": [ "null", "string" ]
+					},
+					"annotations": {
+						"type": [ "null", "array" ],
+						"items": {
+							"type": [ "integer" ],
+							"minimum": 0
+						}
+					},
+					"attributes": {
+						"type": [ "null", "array" ],
+						"items": {
+							"type": [ "null", "integer" ],
+							"minimum": 0
+						}
+					},
+					"observations": {
+						"type": [ "null", "object" ],
+						"patternProperties": {
+							"^[0-9]+(:[0-9]+)*$": {
+								"type": "array",
+								"items": {
+									"type": [ "null", "number" ]
+								}
+							}
+						},
+						"additionalProperties": false
+					},
+					"series": {
+						"type": [ "null", "object" ],
+						"patternProperties": {
+							"^[0-9]+(:[0-9]+)*$": {
+								"type": "object",
+								"properties": {
+									"annotations": {
+										"type": [ "null", "array" ],
+										"items": {
+											"type": [ "integer" ],
+											"minimum": 0
+										}
+									},
+									"attributes": {
+										"type": [ "null", "array" ],
+										"items": {
+											"type": [ "null", "integer" ],
+											"minimum": 0
+										}
+									},
+									"observations": {
+										"type": "object",
+										"patternProperties": {
+											"^[0-9]+(:[0-9]+)*$": {
+												"type": "array",
+												"items": {
+													"type": [ "null", "number" ]
+												}
+											}
+										},
+										"additionalProperties": false
+									}
+								},
+								"additionalProperties": false
+							}
+						},
+						"additionalProperties": false
+					},
+					"links": {
+						"type": [ "null", "array" ],
+						"items": {
+							"$ref": "#/definitions/link"
+						}
+					}
+				}
+			}
+		}
+	}
