@@ -46,15 +46,18 @@ may not contain fields for data, dimensions and attributes.
 Message is the top level object and it contains the data as well 
 as the structural metadata needed to interpret those data.
 
+* meta - *Object* *optional*. A *[meta](#meta)* object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.
 * data - *Object* *optional*. *[Data](#data)* contains the message's “primary data”.
 * errors - *Array* *optional*. *Errors* field is an array of *[error](#error)* objects. When appropriate provides a list of error messages in addition to RESTful web services HTTP error status codes.
-* meta - *Object* *optional*. A *[meta](#meta)* object that contains non-standard meta-information.
 
 The members data and errors MUST NOT coexist in the same message.
 
 Example:
 
     {
+      "meta": {
+          # meta object #
+      },
       "data": {
           # data object #
       },
@@ -62,42 +65,16 @@ Example:
         {
           # error object #
         }
-      ],
-      "meta": {
-          # meta object #
-      }
-    }
-
-## data
-
-*Object* *optional*. Header contains the message's “primary data”.
-
-* header - *Object* *optional*. *[Header](#header)* contains basic technical information about the message, such as when it was prepared and who has sent it.
-* structure - *Object* *optional*. *[Structure](#structure)* contains the information needed to interpret the data available in the message, such as the list of concepts used.
-* dataSets - *Array* *optional*. *DataSets* field is an array of *[dataSet](#dataset)* objects. That's where the data (i.e.: the observations) will be.
-
-Example:
-
-    "data": {
-      "header": {
-          # header object #
-      },
-      "structure": {
-          # structure object #
-      },
-      "dataSets": [
-        {
-          # dataSet object #
-        }
       ]
     }
 
-## header
+## meta
 
-*Object* *optional*. Header contains basic technical information 
+*Object* *optional*. Used to include non-standard meta-information and basic technical information 
 about the message, such as when it was prepared and who has sent it.
-
-* id - *String*. *String*. Unique string that identifies the message for further references.
+Any members MAY be specified within `meta` objects.
+* schema - *String* *optional*. Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. **Providing the link to the SDMX-JSON schema is recommended.**
+* id - *String*. Unique string that identifies the message for further references.
 * test - *Boolean* *optional*. Indicates whether the message is for test purposes or not. False for normal messages.
 * prepared - *String*. A timestamp indicating when the message was prepared. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
 * sender - *Object*. *[Sender](#sender)* contains information about the party that is transmitting the message.
@@ -106,9 +83,11 @@ about the message, such as when it was prepared and who has sent it.
 
 Example:
 
-    "header": {
+    "meta": {
+      "schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/sdmx-json-data-schema.json",
+      "copyright": "Copyright 2017 Statistics hotline",
       "id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
-      "prepared": "2013-01-03T12:54:12",
+      "prepared": "2018-01-03T12:54:12",
       "test": false,
       "sender: {
         # sender object #
@@ -178,6 +157,26 @@ same fields as [sender](#sender).
 ### link
 
 See the section on [linking mechanism](#linking-mechanism) for all information on links.
+
+## data
+
+*Object* *optional*. Header contains the message's “primary data”.
+
+* structure - *Object* *optional*. *[Structure](#structure)* contains the information needed to interpret the data available in the message, such as the list of concepts used.
+* dataSets - *Array* *optional*. *DataSets* field is an array of *[dataSet](#dataset)* objects. That's where the data (i.e.: the observations) will be.
+
+Example:
+
+    "data": {
+      "structure": {
+          # structure object #
+      },
+      "dataSets": [
+        {
+          # dataSet object #
+        }
+      ]
+    }
 
 ## structure
 
@@ -788,19 +787,6 @@ Example:
     {
       "code": 150,
       "title": "Invalid number of dimensions in the key parameter"
-    }
-
-## meta
-
-*Object* *optional*. Used to include non-standard meta-information.
-Any members MAY be specified within `meta` objects.
-**Providing information of the SDMX-JSON version  is recommended.**
-
-Example:
-
-    "meta": {
-      "sdmx-json-version": "1.0",
-      "copyright": "Copyright 2017 Statistics hotline"
     }
 
 # Linking mechanism
