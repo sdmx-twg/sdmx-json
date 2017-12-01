@@ -87,6 +87,7 @@
                     "id": "TIME_PERIOD",
                     "name": "Time period or range",
                     "role": "TIME_PERIOD",
+                    "keyPosition": 5,
                     "values": [
                         {
                             "id": "2013-01-18",
