@@ -46,7 +46,7 @@
               "role": "role",
               "telephone": ["telephone"],
               "fax": ["fax"],
-              "uri": ["uri"],
+              "uri": ["http://sdmx.org"],
               "email": ["sdmx@xyz.org"]
           }
       ]
@@ -118,7 +118,7 @@
               "id": "CURRENCY_DENOM",
               "name": "Currency denominator",
               "description": "Description for the dimension",
-              "keyPosition": 3,
+              "keyPosition": 2,
               "values": [
                 {
                   "id": "EUR",
@@ -130,7 +130,7 @@
               "id": "EXR_TYPE",
               "name": "Exchange rate type",
               "description": "Description for the dimension",
-              "keyPosition": 4,
+              "keyPosition": 3,
               "values": [
                 {
                   "id": "SP00",
@@ -142,7 +142,7 @@
               "id": "EXR_SUFFIX",
               "name": "Series variation - EXR context",
               "description": "Description for the dimension",
-              "keyPosition": 5,
+              "keyPosition": 4,
               "values": [
                 {
                   "id": "A",
@@ -158,7 +158,7 @@
               "id": "CURRENCY",
               "name": "Currency",
               "description": "Description for the dimension",
-              "keyPosition": 2,
+              "keyPosition": 1,
               "role": "unit",
               "values": [
                 {
@@ -180,6 +180,7 @@
               "name": "Time period or range",
               "description": "Description for the dimension",
               "role": "time",
+              "keyPosition": 5,
               "values": [
                 {
                   "id": "2013-01-18",
@@ -217,11 +218,10 @@
               "values": [
                 {
                   # id property is optional to allow for uncoded attributes
-                  "id": null,
                   "name": "New Zealand dollar (NZD)"
                 },
                 {
-                  "id": null,
+                  # id property is optional to allow for uncoded attributes
                   "name": "Russian rouble (RUB)"
                 }
               ]
@@ -256,7 +256,7 @@
             "title": "AnnotationTitle provides a title for the annotation.",
             "type": "AnnotationType is used to distinguish between annotations.",
             "text": "AnnotationText contains the text of the annotation.",
-            "id": "Non-standard identification of an annotation.",
+            "id": "ANNOTATION01",
             "links": [
               {
                 "href": "http://www.myorg.org/ws/uri/for/this/annotation",
