@@ -199,19 +199,19 @@ Example:
 All SDMX artefact types share the following common object properties:
 
 * id - *String*. Identifier for the resource.
-* uri - *String* *nullable*. The URL address of the resource.
-* urn - *String* *nullable*. URN - typically a URL - which points to an external resource which may contain or supplement the annotation. If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly.
+* uri - *String* *optional*. The URL address of the resource.
+* urn - *String* *optional*. URN - typically a URL - which points to an external resource which may contain or supplement the annotation. If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly.
 * name - *Object* *optional*. A list of human-readable localised *[names](#name)* of the resource.
 * description - *Object* *optional*. A list of human-readable localised descriptions (see *[names](#name)*) of the resource.
-* agencyID - *String* *nullable*. ID of the agency maintaining this resource.
-* version - *String* *nullable*. Version of this resource. It is "1.0" by default.
-* validFrom - *String* *nullable*. A timestamp from which the version is valid. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
-* validTo - *String* *nullable*.  A timestamp from which the version is superceded. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
-* isFinal - *Boolean* *nullable*. True if this is the final version of the resource, otherwise False (draft version).
+* agencyID - *String* *optional*. ID of the agency maintaining this resource.
+* version - *String* *optional*. Version of this resource. It is "1.0" by default.
+* validFrom - *String* *optional*. A timestamp from which the version is valid. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
+* validTo - *String* *optional*.  A timestamp from which the version is superceded. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
+* isFinal - *Boolean* *optional*. True if this is the final version of the resource, otherwise False (draft version).
 * isExternalReference - *Boolean* *nullable*. If set to “true” it indicates that the content of the resource is held externally.
-* isPartial - *Boolean* *nullable*. If set to true, it indicates that the resource contains only a sub-set of items. Only for resources that inherit from the ItemScheme (CategoryScheme, Codelist, ConceptScheme, ReportingTaxonomy, and OrganisationScheme).
-* links - *Array* *nullable*. A collection of links to additional resources for the resource. See the section *[link](#link)*. **It is recommended to systematically include a self-referencing hyperlink (link with "rel"="self").**
-* annotations - *Array* *nullable*. Provides a list of annotation objects.
+* isPartial - *Boolean* *optional*. If set to true, it indicates that the resource contains only a sub-set of items. Only for resources that inherit from the ItemScheme (CategoryScheme, Codelist, ConceptScheme, ReportingTaxonomy, and OrganisationScheme).
+* links - *Array* *optional*. A collection of links to additional resources for the resource. See the section *[link](#link)*. **It is recommended to systematically include a self-referencing hyperlink (link with "rel"="self").**
+* annotations - *Array* *optional*. Provides a list of annotation objects.
 
 Example:
 
