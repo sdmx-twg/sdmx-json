@@ -12,142 +12,197 @@ Before we start, let's clarify a few more things about this guide:
 
 # Field Guide to SDMX-JSON Structure Message Objects
 
-## Message
+## message
 
-Message is the top level object and it contains the requested resources and as well as the metadata needed to interpret those data.
+Message is the top level object and it contains the requested information ("data") as well as the meta-information decribing the (technical) context of the message and, possibly, error information.
 
-* header - *Object* *nullable*. Header contains basic technical information about the message, such as when it was prepared and who has sent it.
-* resources - *Array* *nullable*. Provides a list of resource objects. That's where the requested resources will be.
-* references - *Object* *nullable*. Collection of referenced resource objects. It contains the full information of referenced resources. The properties of the "references" object are the "urn" properties of the referenced resources.
-* errors - *Array* *nullable*. When appropriate provides a list of error messages in addition to RESTful web services HTTP error status codes.
+* meta - *Object* *optional*. A *[meta](#meta)* object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.
+* data - *Object* *optional*. *[Data](#data)* contains the message's “primary data”.
+* errors - *Array* *optional*. *Errors* field is an array of *[error](#error)* objects. When appropriate provides a list of error messages in addition to RESTful web services HTTP error status codes.
+
+The members data and errors MUST NOT coexist in the same message.
 
 Example:
 
-	{
-	  "header": {
-		# header fields #
-	  },
-	  "resources": [
-		# resource objects #
-	  ],
-	  "references": {
-		# referenced resource objects #
-	  },
-	  "errors": [
-		# error messages #
-	  ]
-	}
+    {
+      "meta": {
+          # meta object #
+      },
+      "data": {
+          # data object #
+      },
+      "errors": [
+        {
+          # error object #
+        }
+      ]
+    }
 
-## header
+## meta
 
-*Object* *nullable*. Header contains basic technical information about the message, such as when it was prepared and who has sent it.
-
-* id - *String*. *String*. Unique string that identifies the message for further references.
-* test - *Boolean* *nullable*. Indicates whether the message is for test purposes or not. False for normal messages.
+*Object* *optional*. Used to include non-standard meta-information and basic technical information 
+about the message, such as when it was prepared and who has sent it.
+Any members MAY be specified within `meta` objects.
+* schema - *String* *optional*. Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. **Providing the link to the SDMX-JSON schema is recommended.**
+* id - *String*. Unique string that identifies the message for further references.
+* test - *Boolean* *optional*. Indicates whether the message is for test purposes or not. False for normal messages.
 * prepared - *String*. A timestamp indicating when the message was prepared. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
-* sender - *Object*. Information about the party that is transmitting the message.
-* receiver - *Object* *nullable*. Information about the party that is receiving the message. This can be
-useful if the WS requires authentication.
-* links - *Array* *nullable*. A collection of links to additional resources for the header.
+* content-language *String* *optional*. To indicate all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, using the format defined for the  http Content-Language response header. **The usage of this property is recommended.**
+* lang *String* *optional*. To indicate the main language used in the message for localized elements, using the format defined for the  html meta tag lang property.
+* sender - *Object*. *[Sender](#sender)* contains information about the party that is transmitting the message.
+* receiver - *Object* *optional*. *[Receiver](#receiver)* contains information about the party that is receiving the message. This can be useful if the WS requires authentication.
+* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the header.
+
 
 Example:
 
-	"header": {
-	  "id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
-	  "prepared": "2016-01-03T12:54:12",
-	  "test": false,
-	  "sender": {
-		# sender object #
-	  },
-	  "receiver": {
-		# receiver object #
-	  },
-	  "links": [
-		{
-		  # link object #
-		}
-	  ]
-	}
+    "meta": {
+      "schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/sdmx-json-data-schema.json",
+      "copyright": "Copyright 2017 Statistics hotline",
+      "id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
+      "prepared": "2018-01-03T12:54:12",
+      "test": false,
+      "content-language": "en, fr-fr;q=0.8, fr;q=0.7", 
+      "lang": "en",
+      "sender: {
+        # sender object #
+      },
+      "receiver": {
+        # receiver object #
+      },
+      "links": [
+        {
+          # link object #
+        }
+      ]
+    }
 
 ### sender
 
-*Object*. Information about the party that is transmitting the message. Sender contains the following fields:
+*Object*. Information about the party that is transmitting the message. 
+Sender contains the following fields:
 
 * id - *String*. A unique identifier of the party.
-* name - *String* *nullable*. A human-readable name of the sender.
-* contact - *Array* *nullable*. Information on how the party can be contacted.
+* name - *Object* *optional*. A list of human-readable localised *[names](#name)* of the sender. See the section on [localised strings](#localised-strings) on how the message deals with languages.
+* contacts - *Array* *optional*. A collection of *[contacts](#contact)*.
 
 Example:
 
-	"sender": {
-	  "id": "ECB",
-	  "name": "European Central Bank",
-	  "contact": [
-		# contact details #
-	  ]
-	}
+    "sender": {
+      "id": "ECB",
+      “name”: {
+          # name object #
+      },
+      "contacts": [
+        {
+          # contact objects #
+        }
+      ]
+    }
+
+#### name
+
+*Object* containing all returned localised names, one per object property:
+
+* One or more of: language tag according to [RFC 5646 documentation](https://tools.ietf.org/html/rfc5646#section-2.1) for specifying locals in HTTP - *String*. The localised name.
+
+See the section on [localised strings](#localised-strings) on how the message deals with languages.
+
+Example:
+
+    { 
+      "en": "This is an English name",
+      "en-GB": "This is a British name",
+      "fr": "C'est un nom français"
+    }
 
 #### contact
 
-*Array* *nullable*. A collection of contact details. Each object in the collection may contain the following field:
+*Object*. A collection of contact details. Each object in the collection 
+may contain the following field:
 
-* name - *String*. The contact's name.
-* department - *String* *nullable*. The organisational unit for the contact.
-* role - *String* *nullable*. The responsibility of the contact.
-* telephone - *Array* *nullable*. An array of telephone numbers for the contact.
-* fax - *Array* *nullable*. An array of fax numbers for the contact person.
-* uri - *Array* *nullable*. An array of uris. Each uri holds an information URL for the contact.
-* X400 - *Array* *nullable*. An array of X400. Each X400 holds an X400 address of the contact.
-* email - *Array* *nullable*. An array of email addresses for the contact person.
+* name - *Object* *optional*. A list of human-readable localised *[names](#name)* of the contact.
+* department - *Object* *optional*. A list of human-readable localised *[names](#name)* of the organisational structure for the contact.
+* role - *String* *optional*. The localised name of the responsibility of the contact.
+* telephone - *Array* *optional*. An array of telephone numbers for the contact.
+* fax - *Array* *optional*. An array of fax numbers for the contact person.
+* uri - *Array* *optional*. An array of uris. Each uri holds an information URL for the contact.
+* email - *Array* *optional*. An array of email addresses for the contact person.
+
+See the section on [localised strings](#localised-strings) on how the message deals with languages.
 
 Example:
 
-	"contact": [
-	  {
-		"name": "Statistics hotline",
-		"department": "Statistics hotline",
-		"role": "Statistics hotline",
-		"telephone": [ "+00 0 00 00 00 00" ],
-		"fax": [ "+00 0 00 00 00 01" ],
-		"uri": [ "www.xyz.org" ],
-		"X400": [ "X400" ],
-		"email": [ "statistics@xyz.org" ]
-	  }
-	]
+    {
+      "name": { "en": "Statistics hotline" },
+      "department": { "en": "Statistics hotline" },
+      "role": "Statistics hotline",
+      "telephone": [ "+00 0 00 00 00 00" ],
+      "fax": [ "+00 0 00 00 00 01" ],
+      "uri": [ "www.xyz.org" ],
+      "email": [ "statistics@xyz.org" ]
+    }
 
 ### receiver
 
-*Object* *nullable*. Information about the party that is receiving the message. This can be useful if the WS requires authentication. Receiver contains the same fields as [sender](#sender).
+*Object* *optional*. Information about the party that is receiving the message. 
+This can be useful if the WS requires authentication. Receiver contains the 
+same fields as [sender](#sender).
 
 ### link
 
-*Object* *nullable*. A link to an external resource.
+See the section on [linking mechanism](#linking-mechanism) for all information on links.
 
-* href - *String*. Absolute or relative URL of the external resource.
-* rel - *String*. Relationship of the object to the external resource.
-* title - *String* *nullable*. A human-friendly description of the target link.
-* type - *String* *nullable*. A hint about the type of representation returned by the link.
+## data
 
-See the section about the [linking mechanism](#linking-mechanism) for additional information.
+*Object* *optional*. Header contains the message's “primary data”.
+
+* *[Artefact type]* - *Array* *optional*. This field is an array of objects of one of the corresponding SDMX Information Model artefact types: *dataStructureDefinitions*, *metadataStructureDefinitions*, *categorySchemes*, *conceptSchemes*, *codelists*, *hierarchicalCodelists*, *organisationsSchemes*, *agencySchemes*, *dataProviderSchemes*, *dataConsumerSchemes*, *organisationUnitSchemes*, *dataflows*, *metadataflows*, *reportingTaxonomies*, *provisionAgreements*, *structureSets*, *processes*, *categorisations* and *constraints*. Each of the corresponding object properties is allowed at maximum one time. Contains the requested structural information according to the definition of this artefact. For more information, please see:
+
+    * *[dataStructureDefinitions](#datastructuredefinitions)*
+    * *[metadataStructureDefinitions](#metadatastructuredefinitions)*
+    * *[categorySchemes](#categoryschemes)*
+    * *[conceptSchemes](#conceptschemes)*
+    * *[codelists](#codelists)*
+    * *[hierarchicalCodelists](#hierarchicalcodelists)*
+    * *[organisationsSchemes](#organisationsschemes)*
+    * *[agencySchemes](#agencyschemes)*
+    * *[dataProviderSchemes](#dataproviderschemes)*
+    * *[dataConsumerSchemes](#dataconsumerschemes)*
+    * *[organisationUnitSchemes](#organisationunitschemes)*
+    * *[dataflows](#dataflows)*
+    * *[metadataflows](#metadataflows)*
+    * *[reportingTaxonomies](#reportingtaxonomies)*
+    * *[provisionAgreements](#provisionagreements)*
+    * *[structureSets](#structuresets)*
+    * *[processes](#processes)*
+    * *[categorisations](#categorisations)*
+    * *[constraints](#constraints)*
 
 Example:
 
-	{
-	  "href": "https://registry.sdmx.org/help.html",
-	  "rel": "help",
-	  "title": "Documentation about the SDMX Global Registry",
-	  "type": "text/html"
-	}
+    "data": {
+      "dataStructureDefinitions": [
+        {
+          # dataStructureDefinition object #
+        }
+      ],
+      "dataflows": [
+        {
+          # dataflow object #
+        }
+      ]
+    }
 
-## resource
+### Common SDMX artefact properties
 
-*Object* *nullable*. Provides the information about a requested resource. A resource can be any SDMX artifact that can be requested through a structure request: DataStructureDefinition, MetadataStructureDefinition, CategoryScheme, ConceptScheme, Codelist, HierarchicalCodelist, OrganisationsScheme, AgencyScheme, DataProviderScheme, DataConsumerScheme, OrganisationUnitScheme, Dataflow, Metadataflow, ReportingTaxonomy, ProvisionAgreement, StructureSet, Process, Categorisation, Constraint
+All SDMX artefact types share the following common object properties:
 
 * id - *String*. Identifier for the resource.
 * uri - *String* *nullable*. The URL address of the resource.
 * urn - *String* *nullable*. URN - typically a URL - which points to an external resource which may contain or supplement the annotation. If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly.
-* name - *String* *nullable*. Resource name.
-* description - *String* *nullable*. Description of the resource.
+* name - *Object* *optional*. A list of human-readable localised *[names](#name)* of the resource.
+* description - *Object* *optional*. A list of human-readable localised descriptions (see *[names](#name)*) of the resource.
 * agencyID - *String* *nullable*. ID of the agency maintaining this resource.
 * version - *String* *nullable*. Version of this resource. It is "1.0" by default.
 * validFrom - *String* *nullable*. A timestamp from which the version is valid. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
@@ -155,9 +210,8 @@ Example:
 * isFinal - *Boolean* *nullable*. True if this is the final version of the resource, otherwise False (draft version).
 * isExternalReference - *Boolean* *nullable*. If set to “true” it indicates that the content of the resource is held externally.
 * isPartial - *Boolean* *nullable*. If set to true, it indicates that the resource contains only a sub-set of items. Only for resources that inherit from the ItemScheme (CategoryScheme, Codelist, ConceptScheme, ReportingTaxonomy, and OrganisationScheme).
-* links - *Array* *nullable*. A collection of links to additional resources for the resource. See the section [link](#link).
+* links - *Array* *nullable*. A collection of links to additional resources for the resource. See the section *[link](#link)*. **It is recommended to systematically include a self-referencing hyperlink (link with "rel"="self").**
 * annotations - *Array* *nullable*. Provides a list of annotation objects.
-* items - *Array* *nullable*. Provides a list of items if the resource inherits from the ItemScheme (CategoryScheme, Codelist, ConceptScheme, ReportingTaxonomy, and OrganisationScheme). 
 
 Example:
 
@@ -165,8 +219,8 @@ Example:
 	  "id": "MOBILE_NAVI_PUB",
 	  "uri": "HTTP://www.xyz.org/resource/0123456789",
 	  "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB.DISS:BSI_PUB(1.0)",
-	  "name": "Economic concepts",
-	  "description": "This is the description of Economic concepts",
+	  "name": { "en": "Economic concepts" },
+	  "description": { "en": "This is the description of Economic concepts" },
 	  "agencyID": "ECB.DISS",
 	  "version": "1.0",
 	  "validFrom": "2012-05-04",
@@ -183,26 +237,18 @@ Example:
 		{
 		  # annotation object#
 		}
-	  ],
-	  "items": [
-		{
-		  # item object #
-		}
-	  ],
-	  "contact": [
-		# contact details #
 	  ]
 	}
 
 ### annotation
 
-*Object* *nullable*. Provides all information about an annotation. 
+*Object* *optional*. Provides all information about an annotation. 
 
-* id - *String* *nullable*. ID provides a non-standard identification of an annotation. It can be used to disambiguate annotations.
-* title - *String* *nullable*. Provides a title for the annotation.
-* type - *String* *nullable*. Type is used to distinguish between annotations designed to support various uses. The types are not enumerated, and these can be freely specified by the creator of the annotations. The definitions and use of annotation types should be documented by their creator.
-* url - *String* *nullable*. URI - typically a URL - which points to an external resource which may contain or supplement the annotation. If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly.
-* text - *String* *nullable*. Contains the text of the annotation.
+* id - *String* *optional*. ID provides a non-standard identification of an annotation. It can be used to disambiguate annotations.
+* title - *String* *optional*. A title for the annotation.
+* type - *String* *optional*. Type is used to distinguish between annotations designed to support various uses. The types are not enumerated, and these can be freely specified by the creator of the annotations. The definitions and use of annotation types should be documented by their creator.
+* url - *String* *optional*. URI - typically a URL - which points to an external resource which may contain or supplement the annotation. If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly.
+* text - *Object* *optional*. A list of human-readable localised texts (see *[names](#name)*) of the annotation.
 
 Example:
 
@@ -211,21 +257,38 @@ Example:
 	  "title": "Sample annotation",
 	  "type": "reference",
 	  "url": "http://sample.org/annotations/74747",
-	  "text": "Sample annotation text"
+	  "text": { "en": "Sample annotation text" }
+	}
+
+### Common property of SDMX artefacts of base type "ItemScheme"
+
+All SDMX artefacts of base type "ItemScheme" (CategoryScheme, Codelist, ConceptScheme, ReportingTaxonomy, and OrganisationScheme) share the following common object property:
+
+* items - *Array* *optional*. Provides a list of items if the resource inherits from the ItemScheme . 
+
+Example:
+
+	{
+	  "id": "ITEMSCHEME_EXAMPLE",
+	  "items": [
+		{
+		  # item object #
+		}
+	  ]
 	}
 
 ### item
 
-*Object* *nullable*. Item within the ItemScheme (if the resource is a CategoryScheme, Codelist, ConceptScheme, ReportingTaxonomy, or OrganisationScheme. 
+*Object* *optional*. Item within the ItemScheme (if the resource is a CategoryScheme, Codelist, ConceptScheme, ReportingTaxonomy, or OrganisationScheme. 
 
 * id - *String*. Identifier for the item.
-* uri - *String* *nullable*. The URL address of the item.
-* urn - *String* *nullable*. URN - typically a URL - which points to an external resource which may contain or supplement the annotation. If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly.
-* name - *String* *nullable*. Item name.
-* description - *String* *nullable*. Description of the item. 
-* links - *Array* *nullable*. A collection of links to additional resources for the item. See the section [link](#link).
-* annotations - *Array* *nullable*. Provides a list of annotation objects. See the section [annotation](#annotation).
-* items - *Array* *nullable*. Provides a list of child items of the item.
+* uri - *String* *optional*. The URL address of the item.
+* urn - *String* *optional*. URN - typically a URL - which points to an external resource which may contain or supplement the annotation. If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly.
+* name - *Object* *optional*. A list of human-readable localised *[names](#name)* of the item.
+* description - *Object* *optional*. A list of human-readable localised description (see *[names](#name)*)  of the item.
+* links - *Array* *optional*. A collection of links to additional resources for the item. See the section [link](#link).
+* annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
+* items - *Array* *optional*. Provides a list of child items of the item.
 
 Example:
 
@@ -233,8 +296,8 @@ Example:
 	  "id": "01",
 	  "uri": "http://www.xyz.org/resource/0123456789",
 	  "urn": "urn:sdmx:org.sdmx.infomodel.categoryscheme.Category=SDMX:SDMXStatSubMatDomainsWD1(1.0).1.1",
-	  "name": "Population and migration",
-	  "description": "Description for Population and migration",
+	  "name": { "en": "Population and migration" },
+	  "description": { "en": "Description for Population and migration" },
 	  "links":[
 		{
 		  # link object#
@@ -252,69 +315,99 @@ Example:
 	  ]
 	}
 
-## reference
+### dataStructureDefinitions
 
-*Object* *nullable*. Provides full information about a referenced resource object. See [resource](#resource) for the structure of a resource object. 
+...
 
-Example:
+### metadataStructureDefinitions
 
-	{
-	  "id": "FM",
-	  "uri": "http://www.xyz.org/resource/0123456789",
-	  "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:FM(1.0)",
-	  "name": "Financial market data",
-	  "description": "This is the description of Financial market data",
-	  "agencyID": "ECB",
-	  "version": "1.0",
-	  "validFrom": "2012-05-04",
-	  "validTo": "2015-05-04",
-	  "isFinal": true,
-	  "isExternalReference": false,
-	  "isPartial": false,
-	  "items": [	
-		{
-		  # item object #
-		}
-	  ],
-	  "links": [
-		{
-		  # link object #
-		}
-	  ],
-	  "annotations": [
-		{
-		  # annotation object #
-		}
-	  ]
-	}
+...
 
-References within the "references" object are accessible through the "urn" properties.
+### categorySchemes
 
-Example:
+...
 
-	"references": {
-	  "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:FM(1.0)":
-	  {
-		# referenced resource object #
-	  }
-	}
+### conceptSchemes
 
+...
+
+### codelists
+
+...
+
+### hierarchicalCodelists
+
+...
+
+### organisationsSchemes
+
+...
+
+### agencySchemes
+
+...
+
+### dataProviderSchemes
+
+...
+
+### dataConsumerSchemes
+
+...
+
+### organisationUnitSchemes
+
+...
+
+### dataflows
+
+...
+
+### metadataflows
+
+...
+
+### reportingTaxonomies
+
+...
+
+### provisionAgreements
+
+...
+
+### structureSets
+
+...
+
+### processes
+
+...
+
+### categorisations
+
+...
+
+### constraints
+
+...
 
 ## error
 
-*Object* *nullable*. Provides information about an error message.
+*Object* *optional*. Used to provide a error message in addition to RESTful web services HTTP error status codes. The following pieces of information are to be provided:
 
-* code - *number*. Provides a code number for the error message. Code numbers are defined in the SDMX 2.1 Web Services Guidelines.
-* message - *string*. Provides the error message. Error messages are fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.
+* code - *Number*. Provides a code number for the error message. Code numbers are defined in the SDMX 2.1 Web Services Guidelines.
+* title - *Object* *optional*. A list of short, human-readable localised summary (see *[names](#name)*) of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
+* detail - *Object* *optional*. A list of human-readable localised explanations (see *[names](#name)*) specific to this occurrence of the problem. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.
+* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the error.
+
+See the section on [localised strings](#localised-strings) on how the message deals with languages.
 
 Example:
 
-	"errors": [
-	  {
-		"code": 150,
-		"message": "Invalid number of dimensions in the key parameter"
-	  }
-	]
+    {
+      "code": 150,
+      "title": { "en": "Invalid number of items in the item parameter" }
+    }
 
 # Linking mechanism
 
@@ -329,6 +422,17 @@ SDMX-JSON offers a list of predefined semantics, but implementers are free to ex
   - Miscellaneous: calendar (link to a release calendar), source (information about the source of data), request (the SDMX RESTful query that triggered the SDMX-JSON response).
 
 The *URL* captured in the `href` attribute can be *absolute* or *relative*. If you intend to archive the SDMX-JSON message, it is recommended to use absolute URLs.
+
+
+# Localised strings
+
+At least all language matches according to the user’s preferred language choices in the http Accept-Language header (or if that is not available than according to the system's default languages) are to be provided for each localisable message element.
+In case that there is no such language match for a particular localisable element, it is optional to:
+
+- return the element in the system-default languages or alternatively to not return the element
+- indicate available alternative languages for the element's maintainable artefact through links to underlying localised resources
+
+**It is recommended to indicate all languages used anywhere in the message for localised elements through http Content-Language response header (languages of the intended audience) and/or through a “content-language” property in the meta tag.** The main language used can be indicated through the “lang” property in the meta tag.
 
 
 # Security Considerations
@@ -348,7 +452,7 @@ The snippet below shows an example of an `error` object, extended with a `wsCust
 	"errors": [
 	  {
 		"code": 150,
-		"message": "Invalid number of dimensions in the key parameter",
+		"title": "Invalid number of items in the item parameter"
 		"wsCustomErrorCode": 39272
 	  }
 	]
