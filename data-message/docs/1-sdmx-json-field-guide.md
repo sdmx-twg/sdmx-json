@@ -77,8 +77,7 @@ Any members MAY be specified within `meta` objects.
 * id - *String*. Unique string that identifies the message for further references.
 * test - *Boolean* *optional*. Indicates whether the message is for test purposes or not. False for normal messages.
 * prepared - *String*. A timestamp indicating when the message was prepared. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
-* content-language *String* *optional*. To indicate all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, using the format defined for the  http Content-Language response header. **The usage of this property is recommended.**
-* lang *String* *optional*. To indicate the main language used in the message for localized elements, using the format defined for the  html meta tag lang property.
+* content-languages - *Array* *optional*. Array of *[content-language](content-language)* objects. To indicate all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, representaing in an array format the same information than the http Content-Language response header, e.g. "en, fr-fr;q=0.8, fr;q=0.7". The array's first element indicates the main language used in the message for localized elements. **The usage of this property is recommended.**
 * sender - *Object*. *[Sender](#sender)* contains information about the party that is transmitting the message.
 * receiver - *Object* *optional*. *[Receiver](#receiver)* contains information about the party that is receiving the message. This can be useful if the WS requires authentication.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the header.
@@ -92,8 +91,11 @@ Example:
       "id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
       "prepared": "2018-01-03T12:54:12",
       "test": false,
-      "content-language": "en, fr-fr;q=0.8, fr;q=0.7", 
-      "lang": "en",
+      "content-languages": [
+        {
+          # content-language object #
+        }
+      ],
       "sender: {
         # sender object #
       },
@@ -105,6 +107,20 @@ Example:
           # link object #
         }
       ]
+    }
+
+### content-language
+
+*Object*. To indicate one of the languages used anywhere in the message for localized elements, and thus the languages of the intended audience. See the section on [localised strings](#localised-strings) on how the message deals with languages.
+
+* lang - *String*. The identifyer of the language using IETF Language Tags, the format defined for lang tags in the http Content-Language response header. See: https://tools.ietf.org/html/rfc5646#section-2.1
+* q - *Number* *optional*. A weight value for the preference of that language. The weight is normalized to a real number in the range 0 through 1 with maximal three digits after the decimal point, where 0.001 is the least preferred and 1 is the most preferred; a value of 0 means "not acceptable". If no "q" parameter is present, the default weight is 1.
+
+Example:
+ 
+    {
+      "lang": "en",
+      "q": 0.8
     }
 
 ### sender
@@ -873,18 +889,10 @@ to archive the SDMX-JSON message, it is recommended to use absolute URLs.
 
 # Handling component values
 
-Let's say that the following message needs to be processed:
+Let's say that the following data content of a message needs to be processed:
 
 ```json
 {
-    "header": {
-        "id": "62b5f19d-f1c9-495d-8446-a3661ed24753",
-        "prepared": "2012-11-29T08:40:26Z",
-        "sender": {
-            "id": "ECB",
-            "name": "European Central Bank"
-        }
-    },
     "structure": {
         "id": "ECB_EXR_WEB",
         "links": [
