@@ -47,8 +47,8 @@ Any members MAY be specified within `meta` objects.
 * id - *String*. Unique string that identifies the message for further references.
 * test - *Boolean* *optional*. Indicates whether the message is for test purposes or not. False for normal messages.
 * prepared - *String*. A timestamp indicating when the message was prepared. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
-* content-language *String* *optional*. To indicate all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, using the format defined for the  http Content-Language response header. **The usage of this property is recommended.**
-* lang *String* *optional*. To indicate the main language used in the message for localized elements, using the format defined for the  html meta tag lang property.
+* content-languages *Array* *optional*. Array of *[content-language](content-language)* objects. To indicate all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, representaing in an array format the same information than the http Content-Language response header, e.g. "en, fr-fr;q=0.8, fr;q=0.7". **The usage of this property is recommended.**
+* lang *String* *optional*. To indicate the main or default language used in the message for localized elements, using the format defined for the  html meta tag lang property.
 * sender - *Object*. *[Sender](#sender)* contains information about the party that is transmitting the message.
 * receiver - *Object* *optional*. *[Receiver](#receiver)* contains information about the party that is receiving the message. This can be useful if the WS requires authentication.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the header.
@@ -62,7 +62,11 @@ Example:
       "id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
       "prepared": "2018-01-03T12:54:12",
       "test": false,
-      "content-language": "en, fr-fr;q=0.8, fr;q=0.7", 
+      "content-languages": [
+        {
+          # content-language object #
+	}
+      ],
       "lang": "en",
       "sender: {
         # sender object #
@@ -75,6 +79,20 @@ Example:
           # link object #
         }
       ]
+    }
+
+### content-language
+
+*Object*. To indicate one of the languages used anywhere in the message for localized elements, and thus the languages of the intended audience. See the section on [localised strings](#localised-strings) on how the message deals with languages.
+
+* lang - *String*. The identifyer of the language using IETF Language Tags, the format defined for lang tags in the http Content-Language response header. See: https://tools.ietf.org/html/rfc5646#section-2.1
+* q - *Number* *optional*. A weight value for the preference of that language. The weight is normalized to a real number in the range 0 through 1 with maximal three digits after the decimal point, where 0.001 is the least preferred and 1 is the most preferred; a value of 0 means "not acceptable". If no "q" parameter is present, the default weight is 1.
+
+Example:
+ 
+    {
+      "lang": "en",
+      "q": 0.8
     }
 
 ### sender
@@ -104,7 +122,7 @@ Example:
 
 *Object* containing all returned localised names, one per object property:
 
-* One or more of: language tag according to [RFC 5646 documentation](https://tools.ietf.org/html/rfc5646#section-2.1) for specifying locals in HTTP - *String*. The localised name.
+* One or more of: IETF Language Tag according to [RFC 5646 documentation](https://tools.ietf.org/html/rfc5646#section-2.1) for specifying locals in HTTP - *String*. The localised name.
 
 See the section on [localised strings](#localised-strings) on how the message deals with languages.
 
@@ -159,6 +177,9 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 * *[Artefact type]* - *Array* *optional*. This field is an array of objects of one of the corresponding SDMX Information Model artefact types: *dataStructureDefinitions*, *metadataStructureDefinitions*, *categorySchemes*, *conceptSchemes*, *codelists*, *hierarchicalCodelists*, *organisationsSchemes*, *agencySchemes*, *dataProviderSchemes*, *dataConsumerSchemes*, *organisationUnitSchemes*, *dataflows*, *metadataflows*, *reportingTaxonomies*, *provisionAgreements*, *structureSets*, *processes*, *categorisations* and *constraints*. Each of the corresponding object properties is allowed at maximum one time. Contains the requested structural information according to the definition of this artefact. For more information, please see:
 
+    * *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*
+    * *[Common property of SDMX artefacts of base type "ItemScheme"](#common-property-of-sdmx-artefacts-of-base-type-itemscheme)*
+
     * *[dataStructureDefinitions](#datastructuredefinitions)*
     * *[metadataStructureDefinitions](#metadatastructuredefinitions)*
     * *[categorySchemes](#categoryschemes)*
@@ -209,7 +230,6 @@ All SDMX artefact types share the following common object properties:
 * validTo - *String* *optional*.  A timestamp from which the version is superceded. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
 * isFinal - *Boolean* *optional*. True if this is the final version of the resource, otherwise False (draft version).
 * isExternalReference - *Boolean* *nullable*. If set to “true” it indicates that the content of the resource is held externally.
-* isPartial - *Boolean* *optional*. If set to true, it indicates that the resource contains only a sub-set of items. Only for resources that inherit from the ItemScheme (CategoryScheme, Codelist, ConceptScheme, ReportingTaxonomy, and OrganisationScheme).
 * links - *Array* *optional*. A collection of links to additional resources for the resource. See the section *[link](#link)*. **It is recommended to systematically include a self-referencing hyperlink (link with "rel"="self").**
 * annotations - *Array* *optional*. Provides a list of annotation objects.
 
@@ -227,7 +247,6 @@ Example:
 	  "validTo": "2015-05-04",
 	  "isFinal": true,
 	  "isExternalReference": false,
-	  "isPartial": false,
 	  "links": [
 		{
 		  # link object#
@@ -240,7 +259,7 @@ Example:
 	  ]
 	}
 
-### annotation
+#### annotation
 
 *Object* *optional*. Provides all information about an annotation. 
 
@@ -265,6 +284,7 @@ Example:
 All SDMX artefacts of base type "ItemScheme" (CategoryScheme, Codelist, ConceptScheme, ReportingTaxonomy, and OrganisationScheme) share the following common object property:
 
 * items - *Array* *optional*. Provides a list of items if the resource inherits from the ItemScheme . 
+* isPartial - *Boolean* *optional*. If set to true, it indicates that the resource contains only a sub-set of items.
 
 Example:
 
@@ -274,10 +294,11 @@ Example:
 		{
 		  # item object #
 		}
-	  ]
+	  ],
+	  "isPartial": false
 	}
 
-### item
+#### item
 
 *Object* *optional*. Item within the ItemScheme (if the resource is a CategoryScheme, Codelist, ConceptScheme, ReportingTaxonomy, or OrganisationScheme. 
 
@@ -411,6 +432,41 @@ Example:
 
 # Linking mechanism
 
+## link
+
+*Object* *optional*. A link to an external resource.
+
+* href - *String*. Absolute or relative URL of the external resource.
+* rel - *String*. Relationship of the object to the external resource.
+* title - *Object* *optional*. A list of human-readable localised descriptions (see *[names](#name)*) of the target link. See the section on [localised strings](#localised-strings) on how the message deals with languages.
+* type - *String* *optional*. A hint about the type of representation returned by the link.
+* hreflang - *String* *optional*. The natural language of the external link, the same as used in the HTTP Accept-Language request header.
+
+Examples:
+
+    {
+      "href": "https://registry.sdmx.org/ws/rest/dataflow/ECB/EXR",
+      "rel": "dataflow"
+    }
+    
+    {
+      "href": "https://registry.sdmx.org/ws/rest/datastructure/ECB/ECB_EXR1",
+      "rel": "datastructure"
+    }
+    
+    {
+       "href": "https://registry.sdmx.org/FusionRegistry/ws/rest/provisionagreement/ESTAT/PA_NAMAIN_IDC_N",
+       "rel": "provisionagreement"
+    }
+
+    {
+      "href": "https://registry.sdmx.org/help.html",
+      "rel": "help",
+      "title": { "en": "Documentation about the SDMX Global Registry" },
+      "type": "text/html",
+      "hreflang": "en"
+    }
+
 Collections of links can be attached to various elements in SDMX-JSON.
 
 Similarily with standards such as HTML5 and Atom, link elements in SDMX-JSON *must* define a *URL* (the `href` attribute) and a *semantic* (the `rel` attribute). This allows clients to follow the links they care about and ignore the ones whose semantic they are not interested in. In addition, links in SDMX-JSON *may* define a `title` (a human-friendly description of the target link) and a `type` (a hint about the type of representation returned by the link). Please refer to the [list of Media Types and Subtypes](http://www.iana.org/assignments/media-types/media-types.xhtml) assigned and listed by the IANA for additional information about expected values for the `type` attribute.
@@ -421,8 +477,7 @@ SDMX-JSON offers a list of predefined semantics, but implementers are free to ex
   - RFC5988: alternate, copyright, glossary, help, index.
   - Miscellaneous: calendar (link to a release calendar), source (information about the source of data), request (the SDMX RESTful query that triggered the SDMX-JSON response).
 
-The *URL* captured in the `href` attribute can be *absolute* or *relative*. If you intend to archive the SDMX-JSON message, it is recommended to use absolute URLs.
-
+The *URL* captured in the `href` attribute can be *absolute* or *relative*. **It is recommended to use absolute URLs in case the the SDMX-JSON message is archived.**
 
 # Localised strings
 
