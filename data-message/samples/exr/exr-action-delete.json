@@ -2,8 +2,7 @@
     "meta": {
         "id": "62b5f19d-f1c9-495d-8446-a3661ed24753",
         "prepared": "2012-11-29T08:40:26Z",
-        "content-language": "en, fr;q=0.1",
-        "lang": "en",
+        "content-languages": [ {"lang": "en"}, {"lang": "fr-fr", "q": 0.8}, {"lang": "fr", "q": 0.7} ],
         "sender": {
             "id": "ECB",
             "name": "Banque Centrale Européenne"
