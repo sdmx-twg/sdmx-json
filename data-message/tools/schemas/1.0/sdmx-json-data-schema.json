@@ -51,14 +51,12 @@
                     "type": "string",
                     "format": "date-time"
                 },
-                "content-language": {"type": [
-                    "null",
-                    "string"
-                ]},
-                "lang": {"type": [
-                    "null",
-                    "string"
-                ]},
+                "content-languages": {"type": [
+                        "null",
+                        "array"
+                    ],
+                    "items": {"$ref": "#/definitions/content-language"}
+                },
                 "sender": {"$ref": "#/definitions/party"},
                 "receiver": {"$ref": "#/definitions/party"},
                 "links": {
@@ -67,6 +65,21 @@
                         "array"
                     ],
                     "items": {"$ref": "#/definitions/link"}
+                }
+            }
+        },
+        "content-language": {
+            "type": ["object"],
+            "required": ["lang"],
+            "properties": {
+                "lang": {
+                    "type": "string",
+                    "pattern": "^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$"
+                },
+                "q": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
                 }
             }
         },
