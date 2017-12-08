@@ -154,30 +154,30 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 *Object* *optional*. Header contains the message's “primary data”.
 
-* *[Artefact type]* - *Array* *optional*. This field is an array of objects of one of the corresponding SDMX Information Model artefact types: *dataStructureDefinitions*, *metadataStructureDefinitions*, *categorySchemes*, *conceptSchemes*, *codelists*, *hierarchicalCodelists*, *organisationsSchemes*, *agencySchemes*, *dataProviderSchemes*, *dataConsumerSchemes*, *organisationUnitSchemes*, *dataflows*, *metadataflows*, *reportingTaxonomies*, *provisionAgreements*, *structureSets*, *processes*, *categorisations* and *constraints*. Each of the corresponding object properties is allowed at maximum one time. Contains the requested structural information according to the definition of this artefact. For more information, please see:
+* *[Artefact type]* - *Array* *optional*. This field is an array of objects of one of the corresponding SDMX Information Model artefact types: *dataStructure*, *metadataStructure*, *categoryScheme*, *conceptScheme*, *codelist*, *hierarchicalCodelist*, *organisationsScheme*, *agencyScheme*, *dataProviderScheme*, *dataConsumerScheme*, *organisationUnitScheme*, *dataflow*, *metadataflow*, *reportingTaxonomy*, *provisionAgreement*, *structureSet*, *process*, *categorisation* and *constraint*. Each of the corresponding object properties is allowed at maximum one time. Contains the requested structural information according to the definition of this artefact. For more information, please see:
 
     * *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*
     * *[Common property of SDMX artefacts of base type "ItemScheme"](#common-property-of-sdmx-artefacts-of-base-type-itemscheme)*
 
-    * *[dataStructureDefinitions](#datastructuredefinitions)*
-    * *[metadataStructureDefinitions](#metadatastructuredefinitions)*
-    * *[categorySchemes](#categoryschemes)*
-    * *[conceptSchemes](#conceptschemes)*
-    * *[codelists](#codelists)*
-    * *[hierarchicalCodelists](#hierarchicalcodelists)*
-    * *[organisationsSchemes](#organisationsschemes)*
-    * *[agencySchemes](#agencyschemes)*
-    * *[dataProviderSchemes](#dataproviderschemes)*
-    * *[dataConsumerSchemes](#dataconsumerschemes)*
-    * *[organisationUnitSchemes](#organisationunitschemes)*
-    * *[dataflows](#dataflows)*
-    * *[metadataflows](#metadataflows)*
-    * *[reportingTaxonomies](#reportingtaxonomies)*
-    * *[provisionAgreements](#provisionagreements)*
-    * *[structureSets](#structuresets)*
-    * *[processes](#processes)*
-    * *[categorisations](#categorisations)*
-    * *[constraints](#constraints)*
+    * *[dataStructure](#datastructure)*
+    * *[metadataStructure](#metadatastructure)*
+    * *[categoryScheme](#categoryscheme)*
+    * *[conceptScheme](#conceptscheme)*
+    * *[codelist](#codelist)*
+    * *[hierarchicalCodelist](#hierarchicalcodelist)*
+    * *[organisationsScheme](#organisationsscheme)*
+    * *[agencyScheme](#agencyscheme)*
+    * *[dataProviderScheme](#dataproviderscheme)*
+    * *[dataConsumerScheme](#dataconsumerscheme)*
+    * *[organisationUnitScheme](#organisationunitscheme)*
+    * *[dataflow](#dataflow)*
+    * *[metadataflow](#metadataflow)*
+    * *[reportingTaxonomy](#reportingtaxonomy)*
+    * *[provisionAgreement](#provisionagreement)*
+    * *[structureSet](#structureset)*
+    * *[process](#process)*
+    * *[categorisation](#categorisation)*
+    * *[constraint](#constraint)*
 
 Example:
 
@@ -315,79 +315,79 @@ Example:
 	  ]
 	}
 
-### dataStructureDefinitions
+### dataStructureDefinition
 
 ...
 
-### metadataStructureDefinitions
+### metadataStructureDefinition
 
 ...
 
-### categorySchemes
+### categoryScheme
 
 ...
 
-### conceptSchemes
+### conceptScheme
 
 ...
 
-### codelists
+### codelist
 
 ...
 
-### hierarchicalCodelists
+### hierarchicalCodelist
 
 ...
 
-### organisationsSchemes
+### organisationsScheme
 
 ...
 
-### agencySchemes
+### agencyScheme
 
 ...
 
-### dataProviderSchemes
+### dataProviderScheme
 
 ...
 
-### dataConsumerSchemes
+### dataConsumerScheme
 
 ...
 
-### organisationUnitSchemes
+### organisationUnitScheme
 
 ...
 
-### dataflows
+### dataflow
 
 ...
 
-### metadataflows
+### metadataflow
 
 ...
 
-### reportingTaxonomies
+### reportingTaxonomy
 
 ...
 
-### provisionAgreements
+### provisionAgreement
 
 ...
 
-### structureSets
+### structureSet
 
 ...
 
-### processes
+### process
 
 ...
 
-### categorisations
+### categorisation
 
 ...
 
-### constraints
+### constraint
 
 ...
 
@@ -416,7 +416,7 @@ Example:
 *Object* *optional*. A link to an external resource.
 
 * href - *String*. Absolute or relative URL of the external resource.
-* rel - *String*. Relationship of the object to the external resource.
+* rel - *String*. Relationship of the object to the external resource. See semantics below.
 * title - *Object* *optional*. A list of human-readable localised descriptions (see *[names](#name)*) of the target link. See the section on [localised strings](#localised-strings) on how the message deals with languages.
 * type - *String* *optional*. A hint about the type of representation returned by the link.
 * hreflang - *String* *optional*. The natural language of the external link, the same as used in the HTTP Accept-Language request header.
@@ -452,7 +452,7 @@ Similarily with standards such as HTML5 and Atom, link elements in SDMX-JSON *mu
 
 SDMX-JSON offers a list of predefined semantics, but implementers are free to extend it. The list of predefined semantics comes from the list of SDMX artefacts that can be returned by SDMX RESTful web services, semantics defined in [RFC5988](https://tools.ietf.org/rfc/rfc5988.txt) and additional items deemed to be useful in the context of statistical data dissemination. These semantics are:
 
-  - SDMX artefacts: datastructure, metadatastructure, categoryscheme, conceptscheme, codelist, hierarchicalcodelist, organisationscheme, agencyscheme, dataproviderscheme, dataconsumerscheme, organisationunitscheme, dataflow, metadataflow, reportingtaxonomy, provisionagreement, structureset, process, categorisation, contentconstraint, attachmentconstraint, category, concept, code, organisation, agency, dataprovider, dataconsumer, organisationunit, reportingcategory, data
+  - SDMX artefacts: dataStructure, metadataStructure, categoryScheme, conceptScheme, codelist, hierarchicalCodelist, organisationScheme, agencyScheme, dataProviderScheme, dataConsumerScheme, organisationUnitScheme, dataflow, metadataflow, reportingTaxonomy, provisionAgreement, structureSet, process, categorisation, contentconstraint, attachmentconstraint, category, concept, code, organisation, agency, dataProvider, dataConsumer, organisationUnit, reportingCategory, Data
   - RFC5988: alternate, copyright, glossary, help, index.
   - Miscellaneous: calendar (link to a release calendar), source (information about the source of data), request (the SDMX RESTful query that triggered the SDMX-JSON response).
 
