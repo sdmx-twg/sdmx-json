@@ -350,7 +350,7 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 *Object* *optional*. An `annotation` object can be referenced through its `annotations` array index by `structure`, `component`, `component value`, `dataSets`, `series` and `observations`. It contains the following optional information:
 
-* title - *String* *optional*. Provides a localised title for the annotation.
+* title - *String* *optional*. Provides a non-localised title for the annotation.
 * type - *String* *optional*. Type is used to distinguish between annotations designed to support various uses. The types are not enumerated, and these can be freely specified by the creator of the annotations. The definitions and use of annotation types should be documented by their creator.
 * text - *String* *optional*. Contains the localised text of the annotation.
 * id - *String* *optional*. ID provides a non-standard identification of an annotation. It can be used to disambiguate annotations.
