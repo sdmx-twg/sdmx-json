@@ -63,7 +63,11 @@
                         "keyPosition": 4,
                         "values": [{
                             "id": "A",
-                            "name": "Average or standardised measure for given frequency"
+                            "name": "Average or standardised measure for given frequency",
+                            "parent": {"id": "T"}
+                        },{
+                            "id": "T",
+                            "name": "Name of parent"
                         }]
                     }
                 ],
@@ -94,11 +98,13 @@
                     "values": [
                         {
                             "id": "NZD",
-                            "name": "New Zealand dollar"
+                            "name": "New Zealand dollar",
+                            "order": 28
                         },
                         {
                             "id": "RUB",
-                            "name": "Russian rouble"
+                            "name": "Russian rouble",
+                            "order": 45
                         }
                     ]
                 }]
