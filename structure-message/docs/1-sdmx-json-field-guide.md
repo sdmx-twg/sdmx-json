@@ -337,11 +337,11 @@ Example:
 	  "id": "T"
 	}
 
-### dataStructureDefinition
+### dataStructure
 
 ...
 
-### metadataStructureDefinition
+### metadataStructure
 
 ...
 
@@ -356,6 +356,8 @@ See *[common properties of SDMX artefacts of base type "ItemScheme"](#common-pro
 In addition, `conceptScheme`'s *[item](#item)* artefacts share the following common object properties:
 
 * representation - *Object* *optional*. The *[representation](#representation)* object defines the core representation that are allowed for a concept. The text format allowed for a concept is that which is allowed for any non-target object component.
+
+Example:
 
 	{
 	  "id": "CS_BOP",
@@ -423,6 +425,12 @@ Examples:
 * minValue *Integer* *optional*.
 * maxValue *Integer* *optional*.
 * pattern *String* *optional*.
+
+Example:
+
+	{
+	  "pattern": "^[0-9][0-9]$"
+	}
 
 ### codelist
 
