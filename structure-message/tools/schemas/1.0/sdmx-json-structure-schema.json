@@ -1,7 +1,7 @@
 {
-    "id": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/develop/data-message/tools/schemas/1.0/sdmx-json-data-schema.json",
+    "id": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/develop/structure-message/tools/schemas/1.0/sdmx-json-data-schema.json",
     "$schema": "http://json-schema.org/schema#",
-    "description": "Schema for SDMX-JSON data message",
+    "description": "Schema for SDMX-JSON structure message",
     "type": "object",
     "properties": {
         "meta": {"$ref": "#/definitions/meta"},
@@ -18,15 +18,15 @@
                 },
                 "categoryScheme": {
                     "type": ["null", "array"],
-                    "items": {"$ref": "#/definitions/categorySchemes"}
+                    "items": {"$ref": "#/definitions/itemScheme"}
                 },
                 "conceptScheme": {
                     "type": ["null", "array"],
-                    "items": {"$ref": "#/definitions/conceptScheme"}
+                    "items": {"$ref": "#/definitions/itemScheme"}
                 },
                 "codelist": {
                     "type": ["null", "array"],
-                    "items": {"$ref": "#/definitions/codelist"}
+                    "items": {"$ref": "#/definitions/itemScheme"}
                 },
                 "hierarchicalCodelist": {
                     "type": ["null", "array"],
@@ -34,23 +34,23 @@
                 },
                 "organisationsScheme": {
                     "type": ["null", "array"],
-                    "items": {"$ref": "#/definitions/organisationsScheme"}
+                    "items": {"$ref": "#/definitions/itemScheme"}
                 },
                 "agencyScheme": {
                     "type": ["null", "array"],
-                    "items": {"$ref": "#/definitions/agencyScheme"}
+                    "items": {"$ref": "#/definitions/itemScheme"}
                 },
                 "dataProviderScheme": {
                     "type": ["null", "array"],
-                    "items": {"$ref": "#/definitions/dataProviderScheme"}
+                    "items": {"$ref": "#/definitions/itemScheme"}
                 },
                 "dataConsumerScheme": {
                     "type": ["null", "array"],
-                    "items": {"$ref": "#/definitions/dataConsumerScheme"}
+                    "items": {"$ref": "#/definitions/itemScheme"}
                 },
                 "organisationUnitScheme": {
                     "type": ["null", "array"],
-                    "items": {"$ref": "#/definitions/organisationUnitScheme"}
+                    "items": {"$ref": "#/definitions/itemScheme"}
                 },
                 "dataflow": {
                     "type": ["null", "array"],
@@ -218,52 +218,54 @@
                 }
             }
         },
-        "link": {
-            "type": "object",
-            "required": [
-                "href",
-                "rel"
-            ],
-            "properties": {
-                "href": {
-                    "type": "string",
-                    "format": "uri"
-                },
-                "rel": {"type": "string"},
-                "title": {"$ref": "#/definitions/name"},
-                "type": {"type": [
-                    "null",
-                    "string"
-                ]},
-                "hreflang": {"type": [
-                    "null",
-                    "string"
-                ]}
+        "links": {
+            "type": [ "null", "array" ],
+            "items": {            
+                "type": "object",
+                "required": [ "href", "rel" ],
+                "properties": {
+                    "href": {
+                        "type": "string",
+                        "format": "uri"
+                    },
+                    "rel": {"type": "string"},
+                    "urn": {
+                        "type": [ "null", "string" ],
+                        "format": "urn"
+                    },
+                    "uri": {
+                        "type": [ "null", "string" ],
+                        "format": "uri"
+                    },
+                    "title": {"$ref": "#/definitions/name"},
+                    "type": {
+                        "type": [ "null", "string" ]
+                    },
+                    "hreflang": {
+                        "type": [ "null", "string" ],
+                        "pattern": "^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$"
+                    }
+                }
             }
         },
         "name": {
             "type": ["null", "object"],
             "patternProperties": {
-                "^((?<grandfathered>(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))|((?<language>([A-Za-z]{2,3}(-(?<extlang>[A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-(?<script>[A-Za-z]{4}))?(-(?<region>[A-Za-z]{2}|[0-9]{3}))?(-(?<variant>[A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-(?<extension>[0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(?<privateUse>x(-[A-Za-z0-9]{1,8})+))?)|(?<privateUse>x(-[A-Za-z0-9]{1,8})+))$":
+                "^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$":
                   { "type": "string" }
             }
         },
-        "codelist" : {
+        "itemScheme" : {
             "allOf": [
                 { "$ref": "#/definitions/maintainable" },
                 { "properties": {
-                        "codes": {"$ref": "#/definitions/codes"},
-                        "isPartial": {
-                            "type": [
-                                "null",
-                                 "boolean"
-                            ]
-                        }
+                        "items": { "$ref": "#/definitions/codes" },
+                        "isPartial": { "type": [ "null", "boolean" ] }
                     }
                 }
             ]
         },
-        "codes": {
+        "items": {
             "type": [
                 "null",
                 "array"
@@ -272,19 +274,120 @@
                 "allOf": [
                     { "$ref": "#/definitions/namable" },
                     { "properties": {
-                        "codes": {"$ref": "#/definitions/codes"},
+                        "start": {
+                            "type": ["string"],
+                            "format": "date-time"
+                        },
+                        "end": {
+                            "type": ["string"],
+                            "format": "date-time"
+                        },
                         "parent": {
-                            "type": [
-                                "null",
-                                 "object"
-                             ],
-                             "required": ["id"],
-                             "properties": {
-                                  "id": {
-                                       "type": "string",
-                                       "pattern": "^[A-Za-z0-9_@$\-]+(\.[A-Za-z0-9_@$\-]+)*$"
-                                  }
-                             }
+                            "type": ["object"],
+                            "required": ["id"],
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "pattern": "^[A-Za-z0-9_@$\-]+(\.[A-Za-z0-9_@$\-]+)*$"
+                                }
+                            }
+                        },
+                        "items": {"$ref": "#/definitions/items"},
+                        "representation": {
+                            "type": ["object"],
+                            "properties": {
+                                "urn": {
+                                    "type": ["string"],
+                                    "format": "urn"
+                                },
+                                "id": {
+                                    "type": ["string"],
+                                    "pattern": "^[A-Za-z0-9_@$-]+$"
+                                },
+                                "agencyID": {
+                                    "type": ["string"],
+                                    "pattern": "^[A-Za-z][A-Za-z0-9_\-]*(\.[A-Za-z][A-Za-z0-9_\-]*)*$"
+                                },
+                                "version": {
+                                    "type": ["string"],
+                                    "pattern": "^[0-9]+(\.[0-9]+)*$",
+                                    "default": 1.0
+                                },
+                                "enumerationFormat": {
+                                    "type": ["object"],
+                                    "properties": {
+                                        "textType": {
+                                            "type": "string",
+                                            "enum": ["Alpha", "AlphaNumeric", "Numeric", "BigInteger", "Integer", "Long", "Short", 
+                                                     "Boolean", "URI", "Count", "InclusiveValueRange", "ExclusiveValueRange", 
+                                                     "Incremental", "ObservationalTimePeriod", "StandardTimePeriod", 
+                                                     "BasicTimePeriod", "GregorianTimePeriod", "GregorianYear", 
+                                                     "GregorianYearMonth", "GregorianDay", "ReportingTimePeriod", "ReportingYear", 
+                                                     "ReportingSemester", "ReportingTrimester", "ReportingQuarter", 
+                                                     "ReportingMonth", "ReportingWeek", "ReportingDay", "Month", "MonthDay", 
+                                                     "Day", "Duration"]
+                                        },
+                                        "isSequence": {"type": "boolean"},
+                                        "interval": {"type": "integer"},
+                                        "startValue": {"type": "integer"},
+                                        "endValue": {"type": "integer"},
+                                        "timeInterval": {
+                                            "type": "string", 
+                                            "pattern": "^P((([0-9]*\.?[0-9]*)Y)?(([0-9]*\.?[0-9]*)M)?(([0-9]*\.?[0-9]*)W)?(([0-9]*\.?[0-9]*)D)?)?(T(([0-9]*\.?[0-9]*)H)?(([0-9]*\.?[0-9]*)M)?(([0-9]*\.?[0-9]*)S)?)?$"
+                                        },
+                                        "startTime": {
+                                            "type": "String",
+                                            "anyOf": [
+                                                { "pattern": "^([0-9]{4})$" },
+                                                { "pattern": "^([0-9]{4})-([0-9]{2})$" },
+                                                { "pattern": "^([0-9]{4})-([0-9]{2})-([0-9]{2})$" },
+                                                { "pattern": "^([0-9]{4})-([0-9]{2})-([0-9]{2})(T([0-9]{2})(:([0-9]{2})(:([0-9]{2}))?)?)?(Z)?([\+\-][0-9]{2}:[0-9]{2})?$" },
+                                                { "format": "date-time" },
+                                                { "pattern": "^.{5}A1.*$" },
+                                                { "pattern": "^.{5}S[1-2].*$" },
+                                                { "pattern": "^.{5}T[1-3].*$" },
+                                                { "pattern": "^.{5}Q[1-4].*$" },
+                                                { "pattern": "^.{5}M(0[1-9]|1[0-2]).*$" },
+                                                { "pattern": "^.{5}W(0[1-9]|[1-4][0-9]|5[0-3]).*$" },
+                                                { "pattern": "^.{5}D(0[0-9][1-9]|[1-2][0-9][0-9]|3[0-5][0-9]|36[0-6]).*$" }
+                                            ]
+                                        },
+                                        "endTime": {
+                                            "type": "String",
+                                            "anyOf": [
+                                                { "pattern": "^([0-9]{4})$" },
+                                                { "pattern": "^([0-9]{4})-([0-9]{2})$" },
+                                                { "pattern": "^([0-9]{4})-([0-9]{2})-([0-9]{2})$" },
+                                                { "pattern": "^([0-9]{4})-([0-9]{2})-([0-9]{2})(T([0-9]{2})(:([0-9]{2})(:([0-9]{2}))?)?)?(Z)?([\+\-][0-9]{2}:[0-9]{2})?$" },
+                                                { "format": "date-time" },
+                                                { "pattern": "^.{5}A1.*$" },
+                                                { "pattern": "^.{5}S[1-2].*$" },
+                                                { "pattern": "^.{5}T[1-3].*$" },
+                                                { "pattern": "^.{5}Q[1-4].*$" },
+                                                { "pattern": "^.{5}M(0[1-9]|1[0-2]).*$" },
+                                                { "pattern": "^.{5}W(0[1-9]|[1-4][0-9]|5[0-3]).*$" },
+                                                { "pattern": "^.{5}D(0[0-9][1-9]|[1-2][0-9][0-9]|3[0-5][0-9]|36[0-6]).*$" }
+                                            ]
+                                        },
+                                        "minLength": {"type": "integer", "minimum": 1},
+                                        "maxLength": {"type": "integer", "minimum": 1},
+                                        "minValue": {"type": "integer"},
+                                        "maxValue": {"type": "integer"},
+                                        "pattern": {"type": "String"}
+                                    }
+                                },
+                                "textFormat": {
+                                    "type": "string",
+                                    "enum": ["String", "Alpha", "AlphaNumeric", "Numeric", "BigInteger", "Integer", "Long", "Short", 
+                                             "Decimal", "Float", "Double", "Boolean", "URI", "Count", "InclusiveValueRange", 
+                                             "ExclusiveValueRange", "Incremental", "ObservationalTimePeriod", "StandardTimePeriod", 
+                                             "BasicTimePeriod", "GregorianTimePeriod", "GregorianYear", "GregorianYearMonth", 
+                                             "GregorianDay", "ReportingTimePeriod", "ReportingYear", "ReportingSemester", 
+                                             "ReportingTrimester", "ReportingQuarter", "ReportingMonth", "ReportingWeek", 
+                                             "ReportingDay", "DateTime", "TimeRange", "Month", "MonthDay", "Day", "Time", "Duration", 
+                                             "XHTML"]
+                                }
+                            }
                         }
                     }}
                 ]
@@ -294,17 +397,60 @@
                 "allOf": [
                     { "$ref": "#/definitions/namable" },
                     { "properties": {
-                        "agencyID": { ... },
-                        "isFinal": { ... },
-                        "isExternalReference": { ... },
-                        "version": { ... },
-                        "validFrom": { ... },
-                        "validTo": { ... }
+                        "agencyID": {
+                            "type": [ "null", "string" ],
+                            "pattern": "^[A-Za-z][A-Za-z0-9_\-]*(\.[A-Za-z][A-Za-z0-9_\-]*)*$"
+                        },
+                        "isFinal": {"type": [ "null", "boolean" ]},
+                        "isExternalReference": {"type": [ "null", "boolean" ]},
+                        "version": {
+                            "type": [ "null", "string" ],
+                            "pattern": "^[0-9]+(\.[0-9]+)*$",
+                            "default": 1.0
+                        },
+                        "validFrom": {
+                            "type": [ "null", "string" ],
+                            "format": "date-time"
+                        },
+                        "validTo": {
+                            "type": [ "null", "string" ],
+                            "format": "date-time"
+                        }
                     }}
                 ]
-        }
+        },
         "namable": {
-            // id, urn, uri, name, description, annotations
+            "type": "object",
+            "required": [ "id" ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]*$"
+                },
+                "name": {"$ref": "#/definitions/name"},
+                "description": {"$ref": "#/definitions/name"},
+                "links": {"$ref": "#/definitions/links"},
+                "annotations": {"$ref": "#/definitions/annotations"}
+            }
+        },
+        "annotations": {
+            "type": [ "null", "array" ],
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": [ "null", "string" ],
+                        "pattern": "^[A-Za-z0-9_@$-]+$"
+                    },
+                    "title": {"type": [ "null", "string" ]},
+                    "type": {"type": [ "null", "string" ]},
+                    "text": {"$ref": "#/definitions/name"},
+                    "links": { 
+                        "type": [ "null", "array" ],
+                        "items": {"$ref": "#/definitions/link"}
+                    }
+                }
+            }
         }
     }
 }
