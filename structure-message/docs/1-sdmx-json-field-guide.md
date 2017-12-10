@@ -157,7 +157,7 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 * *[Artefact type]* - *Array* *optional*. This field is an array of objects of one of the corresponding SDMX Information Model artefact types: *dataStructure*, *metadataStructure*, *categoryScheme*, *conceptScheme*, *codelist*, *hierarchicalCodelist*, *organisationsScheme*, *agencyScheme*, *dataProviderScheme*, *dataConsumerScheme*, *organisationUnitScheme*, *dataflow*, *metadataflow*, *reportingTaxonomy*, *provisionAgreement*, *structureSet*, *process*, *categorisation* and *constraint*. Each of the corresponding object properties is allowed at maximum one time. Contains the requested structural information according to the definition of this artefact. For more information, please see:
 
     * *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*
-    * *[Common property of SDMX artefacts of base type "ItemScheme"](#common-property-of-sdmx-artefacts-of-base-type-itemscheme)*
+    * *[Common properties of SDMX artefacts of base type "ItemScheme"](#common-properties-of-sdmx-artefacts-of-base-type-itemscheme)*
 
     * *[dataStructure](#datastructure)*
     * *[metadataStructure](#metadatastructure)*
@@ -199,8 +199,6 @@ Example:
 All SDMX artefact types share the following common object properties:
 
 * id - *String*. Identifier for the resource.
-* uri - *String* *optional*. The URL address of the resource.
-* urn - *String* *optional*. URN - typically a URL - which points to an external resource which may contain or supplement the annotation. If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly.
 * name - *Object* *optional*. A list of human-readable localised *[names](#name)* of the resource.
 * description - *Object* *optional*. A list of human-readable localised descriptions (see *[names](#name)*) of the resource.
 * agencyID - *String* *optional*. ID of the agency maintaining this resource.
@@ -208,16 +206,14 @@ All SDMX artefact types share the following common object properties:
 * validFrom - *String* *optional*. A timestamp from which the version is valid. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
 * validTo - *String* *optional*.  A timestamp from which the version is superceded. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
 * isFinal - *Boolean* *optional*. True if this is the final version of the resource, otherwise False (draft version).
-* isExternalReference - *Boolean* *nullable*. If set to “true” it indicates that the content of the resource is held externally.
-* links - *Array* *optional*. A collection of links to additional resources for the resource. See the section *[link](#link)*. **It is recommended to systematically include a self-referencing hyperlink (link with "rel"="self").**
+* isExternalReference - *Boolean* *optional*. If set to “true” it indicates that the content of the resource is held externally.
+* links - *Array* *optional*. A collection of links to additional resources for the resource. See the section *[link](#link)*. **It is recommended to systematically include as the first link a self-referencing hyperlink (link with "rel"="self") to indicate the URL address of the resource, and its URN.**
 * annotations - *Array* *optional*. Provides a list of annotation objects.
 
 Example:
 
 	{
 	  "id": "MOBILE_NAVI_PUB",
-	  "uri": "HTTP://www.xyz.org/resource/0123456789",
-	  "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB.DISS:BSI_PUB(1.0)",
 	  "name": { "en": "Economic concepts" },
 	  "description": { "en": "This is the description of Economic concepts" },
 	  "agencyID": "ECB.DISS",
@@ -243,10 +239,10 @@ Example:
 *Object* *optional*. Provides all information about an annotation. 
 
 * id - *String* *optional*. ID provides a non-standard identification of an annotation. It can be used to disambiguate annotations.
-* title - *String* *optional*. A title for the annotation.
+* title - *String* *optional*. Provides a non-localised title for the annotation.
 * type - *String* *optional*. Type is used to distinguish between annotations designed to support various uses. The types are not enumerated, and these can be freely specified by the creator of the annotations. The definitions and use of annotation types should be documented by their creator.
-* url - *String* *optional*. URI - typically a URL - which points to an external resource which may contain or supplement the annotation. If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly.
 * text - *Object* *optional*. A list of human-readable localised texts (see *[names](#name)*) of the annotation.
+* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a link to an additional external resource which may contain or supplement the annotation.
 
 Example:
 
@@ -254,27 +250,33 @@ Example:
 	  "id": "74747",
 	  "title": "Sample annotation",
 	  "type": "reference",
-	  "url": "http://sample.org/annotations/74747",
-	  "text": { "en": "Sample annotation text" }
+	  "text": { "en": "Sample annotation text" },
+	  "links": [
+	    {
+	      # link object #
+	    }
+	  ]
 	}
 
-### Common property of SDMX artefacts of base type "ItemScheme"
+### Common properties of SDMX artefacts of base type "ItemScheme"
 
-All SDMX artefacts of base type "ItemScheme" (CategoryScheme, Codelist, ConceptScheme, ReportingTaxonomy, and OrganisationScheme) share the following common object property:
+All SDMX artefacts of base type "ItemScheme" (CategoryScheme, Codelist, ConceptScheme, ReportingTaxonomy, and OrganisationScheme) share the *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
-* items - *Array* *optional*. Provides a list of items if the resource inherits from the ItemScheme . 
+In addition, they share the following common object properties:
+
 * isPartial - *Boolean* *optional*. If set to true, it indicates that the resource contains only a sub-set of items.
+* items - *Array* *optional*. Provides a list of *[items](#item)* if the resource inherits from the ItemScheme. **Note that the order of items is significant. In the use case of a submission of a partial list is is necessary to include preceding and succeeding items to allow determining the correct positioniong of the submitted items.**
 
 Example:
 
 	{
 	  "id": "ITEMSCHEME_EXAMPLE",
+	  "isPartial": false,
 	  "items": [
 		{
 		  # item object #
 		}
-	  ],
-	  "isPartial": false
+	  ]
 	}
 
 #### item
@@ -282,22 +284,23 @@ Example:
 *Object* *optional*. Item within the ItemScheme (if the resource is a CategoryScheme, Codelist, ConceptScheme, ReportingTaxonomy, or OrganisationScheme. 
 
 * id - *String*. Identifier for the item.
-* uri - *String* *optional*. The URL address of the item.
-* urn - *String* *optional*. URN - typically a URL - which points to an external resource which may contain or supplement the annotation. If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly.
 * name - *Object* *optional*. A list of human-readable localised *[names](#name)* of the item.
 * description - *Object* *optional*. A list of human-readable localised description (see *[names](#name)*)  of the item.
+* start, end - *String* *optional*. Start and end are instances of time that define the actual Gregorian calendar period covered by the values for the time dimension. The algorithm for computing start and end fields for any supported reporting period is defined in the SDMX Technical Notes. These fields should be used only when the component value represents one of the values for the time dimension. Values are considered as inclusive both for the start field and the end field. Values must follow the ISO 8601 syntax for combined dates and times, including time zone. These fields are useful for visualisation tools, when selecting the appropriate point in time for the time axis. Statistical data, can be collected, for example, at the beginning, the middle or the end of the period, or can represent the average of observations through the period. Based on this information and using the start and end fields, it is easy to get or calculate the desired point in time to be used for the time axis.
+* parent - *Object* *optional*. Contains a *[parent](#parent)* object to indicate the ID for the parent of the item (which is itself an item) enabling the reconstruction of the ordered item hierarchy.
 * links - *Array* *optional*. A collection of links to additional resources for the item. See the section [link](#link).
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * items - *Array* *optional*. Provides a list of child items of the item.
 
-Example:
+Examples:
 
 	{
 	  "id": "01",
-	  "uri": "http://www.xyz.org/resource/0123456789",
-	  "urn": "urn:sdmx:org.sdmx.infomodel.categoryscheme.Category=SDMX:SDMXStatSubMatDomainsWD1(1.0).1.1",
 	  "name": { "en": "Population and migration" },
 	  "description": { "en": "Description for Population and migration" },
+	  "parent: {
+	    # parent object #
+	  },
 	  "links":[
 		{
 		  # link object#
@@ -310,9 +313,28 @@ Example:
 	  ],
 	  "items": [	
 		{
-		  # item object #
+		  # item object (recursive) #
 		}
 	  ]
+	}
+
+	{
+	  "id": "2010",
+	  "name": "2010",
+	  "start": "2010-01-01T00:00Z",
+	  "end": "2010-12-31T23:59:59Z",
+	}
+
+###### parent
+
+*Object* *optional*. A reference to a parent item.
+
+* id - *String*. Unique identifier of the parent item.
+
+Example:
+
+	{
+	  "id": "T"
 	}
 
 ### dataStructureDefinition
@@ -325,15 +347,88 @@ Example:
 
 ### categoryScheme
 
-...
+See *[common properties of SDMX artefacts of base type "ItemScheme"](#common-properties-of-sdmx-artefacts-of-base-type-itemscheme)*.
 
 ### conceptScheme
 
-...
+See *[common properties of SDMX artefacts of base type "ItemScheme"](#common-properties-of-sdmx-artefacts-of-base-type-itemscheme)*.
+
+In addition, `conceptScheme`'s *[item](#item)* artefacts share the following common object properties:
+
+* representation - *Object* *optional*. The *[representation](#representation)* object defines the core representation that are allowed for a concept. The text format allowed for a concept is that which is allowed for any non-target object component.
+
+	{
+	  "id": "CS_BOP",
+	  "name": { "en": "Balance of Payments Concept Scheme" },
+	  "agencyId": "IMF",
+	  "version": "1.9",
+	  "items": [
+		{
+		  "id": "FREQ",
+		  "name": { "en": "Frequency" },
+		  "representation": {
+			# representation object #
+		  }
+		}
+	  ]
+	}
+
+#### representation
+
+*Object* *optional*. A core representation for a concept. It is either a reference to a codelist which enumerates the possible values that can be used as the representation of this concept, or a text format.
+
+* urn - *String* *optional*. The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details) of a codelist.
+* id - *String* *optional*. Identifier for a codelist.
+* agencyID - *String* *optional*. ID of the agency maintaining the codelist.
+* version - *String* *optional*. Version of the codelist. It is "1.0" by default.
+* enumerationFormat - *Object* *optional*. To be used only with a codelist reference. The *[enumerationFormat](#enumerationformat)* object defines a restricted version of a text format that only allows facets and text types applicable to codes. Although the time facets permit any value, an actual code identifier does not support the necessary characters for time. Therefore these facets should not contain time in their values.
+* textFormat - *String* *optional*. As an exclusive alternative to a codelist reference. It defines the information for describing a full range of text formats and may place restrictions on the values of the other attributes, referred to as "facets". Allowed is only one of the following string values: String, Alpha, AlphaNumeric, Numeric, BigInteger, Integer, Long, Short, Decimal, Float, Double, Boolean, URI, Count, InclusiveValueRange, ExclusiveValueRange, Incremental, ObservationalTimePeriod, StandardTimePeriod, BasicTimePeriod, GregorianTimePeriod, GregorianYear, GregorianYearMonth, GregorianDay, ReportingTimePeriod, ReportingYear, ReportingSemester, ReportingTrimester, ReportingQuarter, ReportingMonth, ReportingWeek, ReportingDay, DateTime, TimeRange, Month, MonthDay, Day, Time, Duration, XHTML.
+
+Examples:
+
+	{
+	  "urn": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_FREQ(2.0)",
+	  "enumerationFormat": {
+		  # enumerationFormat object #
+	  }
+	}
+
+	{
+	  "id": "CL_FREQ",
+	  "agencyID": "SDMX",
+	  "version": "2.0",
+	  "enumerationFormat": {
+		  # enumerationFormat object #
+	  }
+	}
+
+	{
+	  "textFormat": "String"
+	}
+
+##### enumerationFormat
+
+*Object* *optional*. A restricted version of a text format that only allows facets and text types applicable to codes. Although the time facets permit any value, an actual code identifier does not support the necessary characters for time. Therefore these facets should not contain time in their values.
+
+* textType *String* *optional*. One of the types: Alpha, AlphaNumeric, Numeric, BigInteger, Integer, Long, Short, Boolean, URI, Count, InclusiveValueRange, ExclusiveValueRange, Incremental, ObservationalTimePeriod, StandardTimePeriod, BasicTimePeriod, GregorianTimePeriod, GregorianYear, GregorianYearMonth, GregorianDay, ReportingTimePeriod, ReportingYear, ReportingSemester, ReportingTrimester, ReportingQuarter, ReportingMonth, ReportingWeek, ReportingDay, Month, MonthDay, Day, Duration.
+* isSequence *Boolean* *optional*.
+* interval *Integer* *optional*
+* startValue *Integer* *optional*
+* endValue *Integer* *optional*
+* timeInterval *String* *optional*. A valid time duration string.
+* startTime *String* *optional*. A valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
+* endTime *String* *optional*. A valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
+* minLength *Integer* *optional*. A positive integer.
+* maxLength *Integer* *optional*. A positive integer.
+* minValue *Integer* *optional*.
+* maxValue *Integer* *optional*.
+* pattern *String* *optional*.
 
 ### codelist
 
-...
+See *[common properties of SDMX artefacts of base type "ItemScheme"](#common-properties-of-sdmx-artefacts-of-base-type-itemscheme)*.
+
+Note that the SDMX Information Model does not foresee an `items` property for codelist items, hierarchies being expressed through the `parent` property for codelist items. However, for retrieval use cases, implementers can choose to resolve the parent-child relationships also into recursive `items` properties of `items`.
 
 ### hierarchicalCodelist
 
@@ -417,6 +512,8 @@ Example:
 
 * href - *String*. Absolute or relative URL of the external resource.
 * rel - *String*. Relationship of the object to the external resource. See semantics below.
+* urn - *String* *optional*. The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details).
+* uri - *String* *optional*. The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource.
 * title - *Object* *optional*. A list of human-readable localised descriptions (see *[names](#name)*) of the target link. See the section on [localised strings](#localised-strings) on how the message deals with languages.
 * type - *String* *optional*. A hint about the type of representation returned by the link.
 * hreflang - *String* *optional*. The natural language of the external link, the same as used in the HTTP Accept-Language request header.
@@ -424,13 +521,15 @@ Example:
 Examples:
 
     {
-      "href": "https://registry.sdmx.org/ws/rest/dataflow/ECB/EXR",
-      "rel": "dataflow"
+      "href": "https://registry.sdmx.org/ws/rest/datastructure/ECB/ECB_EXR1",
+      "rel": "self",
+      "uri": "http://www.xyz.org/pdf/0123456789"
     }
     
     {
-      "href": "https://registry.sdmx.org/ws/rest/datastructure/ECB/ECB_EXR1",
-      "rel": "datastructure"
+      "href": "https://registry.sdmx.org/ws/rest/dataflow/ECB.DISS/BSI_PUB/1.0",
+      "rel": "dataflow",
+      "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.dataflow=ECB.DISS:BSI_PUB(1.0)"
     }
     
     {
@@ -456,7 +555,7 @@ SDMX-JSON offers a list of predefined semantics, but implementers are free to ex
   - RFC5988: alternate, copyright, glossary, help, index.
   - Miscellaneous: calendar (link to a release calendar), source (information about the source of data), request (the SDMX RESTful query that triggered the SDMX-JSON response).
 
-The *URL* captured in the `href` attribute can be *absolute* or *relative*. **It is recommended to use absolute URLs in case the the SDMX-JSON message is archived.**
+The *URL* captured in the `href` attribute can be *absolute* or *relative*. **It is recommended to use absolute URLs in case the SDMX-JSON message is archived.**
 
 # Localised strings
 
