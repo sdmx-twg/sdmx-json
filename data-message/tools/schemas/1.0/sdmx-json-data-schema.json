@@ -417,16 +417,13 @@
             "type": "array",
             "items": {
                 "type": "object",
-                "required": ["id"],
+                "required": [ "id", "name" ],
                 "properties": {
                     "id": {
                         "type": "string",
                         "pattern": "^[A-Za-z0-9_@$-]+$"
                     },
-                    "name": {"type": [
-                        "null",
-                        "string"
-                    ]},
+                    "name": { "type": [ "string" ] },
                     "description": {"type": [
                         "null",
                         "string"
@@ -444,6 +441,20 @@
                             "string"
                         ],
                         "format": "date-time"
+                    },
+                    "parent": {
+                        "type": ["null", "object"],
+                        "required": ["id"],
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "pattern": "^[A-Za-z0-9_@$-]+$"
+                            }
+                        }
+                    },
+                    "order": {
+                        "type": ["integer"],
+                        "minimum": 0
                     },
                     "links": {
                         "type": [
