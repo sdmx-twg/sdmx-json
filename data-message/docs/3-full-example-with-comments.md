@@ -143,7 +143,16 @@
               "values": [
                 {
                   "id": "A",
-                  "name": "Average or standardised measure for given frequency"
+                  "name": "Average or standardised measure for given frequency",
+                  # the SDMX-JSON data message can also include the parents of dimension values of included data in order to allow for an hierarchical display
+                  "parent": {
+                      "id": "T"
+                  }
+                },
+                # the SDMX-JSON data message can also include the parents of dimension values of included data in order to allow for an hierarchical display
+                {
+                  "id": "T",
+                  "name": "Name of parent"
                 }
               ]
             }
@@ -160,11 +169,13 @@
               "values": [
                 {
                   "id": "NZD",
-                  "name": "New Zealand dollar"
+                  "name": "New Zealand dollar",
+                  "order": 28
                 },
                 {
                   "id": "RUB",
-                  "name": "Russian rouble"
+                  "name": "Russian rouble",
+                  "order": 45
                 }
               ]
             }
