@@ -321,7 +321,7 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 * name - *String*. Name provides a human-readable localised name for the component value.
 * description - *String* *optional*. Description provides a human-readable localised description of the value. The description is typically longer than the text provided for the name field.
 * start, end - *String* *optional*. Start and end are instances of time that define the actual Gregorian calendar period covered by the values for the time dimension. The algorithm for computing start and end fields for any supported reporting period is defined in the SDMX Technical Notes. These fields should be used only when the component value represents one of the values for the time dimension. Values are considered as inclusive both for the start field and the end field. Values must follow the ISO 8601 syntax for combined dates and times, including time zone. These fields are useful for visualisation tools, when selecting the appropriate point in time for the time axis. Statistical data, can be collected, for example, at the beginning, the middle or the end of the period, or can represent the average of observations through the period. Based on this information and using the start and end fields, it is easy to get or calculate the desired point in time to be used for the time axis.
-* parent - *Object* *optional*. Contains a *[parent](#parent)* object to indicate the ID for the parent of the component value (which is itself a component value). **If specified, the parent component value should be included in the component value array even if the message does not contain data for the parent component value itself.** Parents can be included recursively until reaching the rool level.
+* parent - *String* *optional*. Contains the ID for the parent of the component value (which is itself a component value). **If specified, the parent component value should be included in the component value array even if the message does not contain data for the parent component value itself.** Parents can be included recursively until reaching the rool level.
 * order - *Integer* *optional*. Contains the original order number of the component value enabling the reconstruction of the ordered component value hierarchy. Note that, to allow for a streamed message generation, the orders of observations and of component values in the component value array are not significant.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the component value.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the component value. Indices refer back to the array of *annotations* in the structure field.
@@ -336,9 +336,7 @@ Example:
         "description": "Description for 2010.",
         "start": "2010-01-01T00:00Z",
         "end": "2010-12-31T23:59:59Z",
-        "parent: {
-            # parent object #
-        },
+        "parent": "T",
         "order": 56,
         "links": [
           {
@@ -346,18 +344,6 @@ Example:
           }
         ],
         "annotations": [ 5, 49 ]
-    }
-
-###### parent
-
-*Object* *optional*. A reference to a parent component value. If specified, the parent component value itself should be included in the `values` array of the component even if the message does not contain data for this parent component value.
-
-* id - *String*. Unique identifier of the parent component value.
-
-Example:
-
-    {
-        "id": "T"
     }
 
 ###### link
