@@ -353,22 +353,23 @@
 			"description": "ContactType describes the structure of a contact's details.",
 			"type": "object",
 			"properties": {
-				"id": {
-					"$ref": "#/definitions/idType"
-				},
 				"name": {
+					"description": "Name contains a humain-readable name for the contact.",
 					"$ref": "#/definitions/name"
 				},
 				"department": {
-					"$ref": "#/definitions/textType",
-					"description": "Department is designation of the organisational structure by a linguistic expression, within which the contact person works."
+					"description": "Department is a humain-readable designation of the organisational structure by a linguistic expression, within which the contact person works.",
+					"$ref": "#/definitions/textType"
 				},
-				"emails": {
+				"role": {
+					"description": "Role is the humain-readable responsibility of the contact person with respect to the object for which this person is the contact.",
+					"$ref": "#/definitions/textType"
+				},
+				"telephones": {
 					"type": "array",
 					"items": {
-						"description": "Email holds the email address for the contact person.",
-						"type": "string",
-						"format": "email"
+						"description": "Telephone holds the telephone number for the contact person.",
+						"type": "string"
 					}
 				},
 				"faxes": {
@@ -378,14 +379,10 @@
 						"type": "string"
 					}
 				},
-				"role": {
-					"$ref": "#/definitions/textType",
-					"description": "Role is the responsibility of the contact person with respect to the object for which this person is the contact."
-				},
-				"telephones": {
+				"x400s": {
 					"type": "array",
 					"items": {
-						"description": "Telephone holds the telephone number for the contact person.",
+						"description": "X400 holds the X.400 address for the contact person.",
 						"type": "string"
 					}
 				},
@@ -396,11 +393,12 @@
 						"$ref": "#/definitions/uri"
 					}
 				},
-				"x400s": {
+				"emails": {
 					"type": "array",
 					"items": {
-						"description": "X400 holds the X.400 address for the contact person.",
-						"type": "string"
+						"description": "Email holds the email address for the contact person.",
+						"type": "string",
+						"format": "email"
 					}
 				}
 			}
