@@ -443,14 +443,8 @@
                         "format": "date-time"
                     },
                     "parent": {
-                        "type": ["null", "object"],
-                        "required": ["id"],
-                        "properties": {
-                            "id": {
-                                "type": "string",
-                                "pattern": "^[A-Za-z0-9_@$-]+$"
-                            }
-                        }
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_@$-]+$"
                     },
                     "order": {
                         "type": ["integer"],
