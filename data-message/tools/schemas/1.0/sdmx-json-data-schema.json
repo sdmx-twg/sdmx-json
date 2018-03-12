@@ -183,6 +183,7 @@
 			}
 		},
 		"links": {
+			"description": "Links field is an array of link objects. If appropriate, a collection of links to additional external resources for the header.",
 			"type": "array",
 			"items": {
 				"type": "object",
@@ -191,35 +192,93 @@
 						"$ref": "#/definitions/uri"
 					},
 					"rel": {
-						"type": "string"
+						"description": "Relationship of the object to the external resource. See semantics below. Use 'self' to indicate the urn to the parent object.",
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"description": "structure: provides a reference to the data structure or metadata structure definition depending on the context. Other SDMX artefact types can be specified, e.g. dataflow, provisionagreement, etc. For the others please see: https://tools.ietf.org/rfc/rfc5988.txt",
+								"type": "string",
+								"enum": [
+									"agencyscheme",
+									"alternate",
+									"appendix",
+									"bookmark",
+									"categorisation",
+									"categoryscheme",
+									"chapter",
+									"codelist",
+									"conceptscheme",
+									"constraint",
+									"contents",
+									"copyright",
+									"current",
+									"dataflow",
+									"dataconsumerscheme",
+									"dataproviderscheme",
+									"describedby",
+									"edit",
+									"edit-media",
+									"enclosure",
+									"first",
+									"glossary",
+									"help",
+									"hierarchicalcodelist",
+									"hub",
+									"index",
+									"last",
+									"latest-version",
+									"license",
+									"metadataflow",
+									"next",
+									"next-archive",
+									"organisationunitscheme",
+									"payment",
+									"prev",
+									"predecessor-version",
+									"previous",
+									"prev-archive",
+									"process",
+									"provisionagreement",
+									"related",
+									"replies",
+									"reportingtaxonomy",
+									"section",
+									"self",
+									"service",
+									"start",
+									"structure",
+									"structureset",
+									"stylesheet",
+									"subsection",
+									"successor-version",
+									"up",
+									"version-history",
+									"via",
+									"working-copy",
+									"working-copy-of"
+								]
+							}
+						]
 					},
 					"urn": {
-						"type": "string",
-						"format": "urn"
+						"description": "The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details).",
+						"$ref": "#/definitions/urn"
 					},
 					"uri": {
+						"description": "The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource.",
 						"$ref": "#/definitions/uri"
 					},
 					"title": {
 						"$ref": "#/definitions/textType"
 					},
 					"type": {
-						"anyOf": [
-							{
-								"type": "string"
-							},
-							{
-								"description": "structure: provides a reference to the data structure or metadata structure definition depending on the context.",
-								"type": "string",
-								"enum": [
-									"self",
-									"service",
-									"structure"
-								]
-							}
-						]
+						"description": "A hint about the type of representation returned by the link.",
+						"type": "string"
 					},
 					"hreflang": {
+						"description": "The natural language of the external link, the same as used in the HTTP Accept-Language request header.",
 						"type": "string",
 						"pattern": "^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$"
 					}
