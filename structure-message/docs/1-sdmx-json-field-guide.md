@@ -123,9 +123,9 @@ Example:
 may contain the following field:
 
 * id - *String*. Identifier for the resource.
-* name - *Object* *optional*. A list of human-readable localised *[names](#name)* of the contact.
-* department - *Object* *optional*. A list of human-readable localised *[names](#name)* of the organisational structure for the contact.
-* role - *String* *optional*. The localised name of the responsibility of the contact.
+* name - *Object* *optional*. Human-readable localised *[names](#name)* of the contact.
+* department - *Object* *optional*. Human-readable localised *[names](#name)* of the organisational structure for the contact.
+* role - *Object* *optional*. The Hunam-readable localised name of the responsibility of the contact.
 * telephones - *Array* *optional*. An array of telephone numbers for the contact.
 * faxes - *Array* *optional*. An array of fax numbers for the contact person.
 * uris - *Array* *optional*. An array of uris. Each uri holds an information URL for the contact.
@@ -140,7 +140,7 @@ Example:
       "id": "HOTLINE",
       "name": { "en": "Statistics hotline" },
       "department": { "en": "Statistics hotline" },
-      "role": "Statistics hotline",
+      "role": { "en": "Statistics hotline" },
       "telephones": [ "+00 0 00 00 00 00" ],
       "faxes": [ "+00 0 00 00 00 01" ],
       "uris": [ "www.xyz.org" ],
@@ -1401,7 +1401,7 @@ Example:
 *Object*. dataKeySet defines a collection of full or partial data keys (dimension values).
 
 * isIncluded - *Boolean*.
-* keys - Non-empty *array* of *[DataKey](#DataKey)* objects. Data Key contains a set of dimension values which identify a full set of data.
+* keys - Non-empty *array* of *[dataKey](#dataKey)* objects. Data Key contains a set of dimension values which identify a full set of data.
 
 Example:
 
@@ -1414,23 +1414,23 @@ Example:
 		]
 	}
 
-##### DataKey
+##### dataKey
 
 *Object*. DataKey is a region which defines a distinct full or partial data key. The key consists of a set of values, each referencing a dimension and providing a single value for that dimension. The purpose of the key is to define a subset of a data set (i.e. the observed value and data attribute) which have the dimension values provided in this definition. Any dimension not stated explicitly in this key is assumed to be wild carded, thus allowing for the definition of partial data keys.
 
-* keyValues - Non-empty *array* of *[DataKeyValue](#DataKeyValue)* objects.
+* keyValues - Non-empty *array* of *[dataKeyValue](#dataKeyValue)* objects.
 
 Example:
 
 	{
 		"keyValues": [
 			{
-				# DataKeyValue object #
+				# dataKeyValue object #
 			}
 		]
 	}
 
-###### DataKeyValue
+###### dataKeyValue
 
 *Object*. DataKeyValue provides a dimension value for the purpose of defining a distinct data key. Only a single value can be provided for the dimension.
 
