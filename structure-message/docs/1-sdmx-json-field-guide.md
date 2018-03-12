@@ -493,28 +493,28 @@ Examples:
 
 ####### textFormat
 
-*Object* *optional*. TextFormat defines the information for describing a range of text formats restricted to the representations allowed for all components except for target objects, and that does not allow for multi-lingual values..
+*Object* *optional*. TextFormat defines the information for describing a range of text formats restricted to the representations allowed for all components except for target objects, and that does not allow for multi-lingual values.
 
-decimals - *Integer* *optional*. Positive number (minimum: 1).
-endTime - *String* *optional*. A valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
-endValue - *Number* *optional*.
-interval - *Number* *optional*.
-isSequence - *Boolean* *optional*.
-maxLength - *Integer* *optional*. Positive number (minimum: 1).
-maxValue - *Number* *optional*.
-minLength - *Integer* *optional*. Positive number (minimum: 1).
-minValue - *Number* *optional*.
-pattern - *String* *optional*.
-startTime - *String* *optional*. A valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
-startValue - *Number* *optional*.
-textType - *String* *optional*. Allowed is only one of the following string values: String, Alpha, AlphaNumeric, Numeric, BigInteger, Integer, Long, Short, Boolean, URI, Count, InclusiveValueRange, ExclusiveValueRange, Incremental, ObservationalTimePeriod, StandardTimePeriod, BasicTimePeriod, GregorianTimePeriod, GregorianYear, GregorianYearMonth, GregorianDay, ReportingTimePeriod, ReportingYear, ReportingSemester, ReportingTrimester, ReportingQuarter, ReportingMonth, ReportingWeek, ReportingDay, Month, MonthDay, Day, Duration
-timeInterval - *String* *optional*. A valid time duration.
+* decimals - *Integer* *optional*. Positive number (minimum: 1).
+* endTime - *String* *optional*. A valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
+* endValue - *Number* *optional*.
+* interval - *Number* *optional*.
+* isSequence - *Boolean* *optional*.
+* maxLength - *Integer* *optional*. Positive number (minimum: 1).
+* maxValue - *Number* *optional*.
+* minLength - *Integer* *optional*. Positive number (minimum: 1).
+* minValue - *Number* *optional*.
+* pattern - *String* *optional*.
+* startTime - *String* *optional*. A valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
+* startValue - *Number* *optional*.
+* textType - *String* *optional*. Allowed is only one of the following string values: String, Alpha, AlphaNumeric, Numeric, BigInteger, Integer, Long, Short, Boolean, URI, Count, InclusiveValueRange, ExclusiveValueRange, Incremental, ObservationalTimePeriod, StandardTimePeriod, BasicTimePeriod, GregorianTimePeriod, GregorianYear, GregorianYearMonth, GregorianDay, ReportingTimePeriod, ReportingYear, ReportingSemester, ReportingTrimester, ReportingQuarter, ReportingMonth, ReportingWeek, ReportingDay, Month, MonthDay, Day, Duration
+* timeInterval - *String* *optional*. A valid time duration.
 
 Example:
 
 	{
-		textType="String",
-		maxLength=1050
+		textType: "String",
+		maxLength: 1050
 	}
 
 ##### reportingYearStartDay
