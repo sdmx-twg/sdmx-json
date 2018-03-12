@@ -1665,7 +1665,7 @@ The snippet below shows an example of an `error` object, extended with a `wsCust
 	"errors": [
 	  {
 		"code": 150,
-		"title": "Invalid number of items in the item parameter"
+		"title": { "en": "Invalid number of items in the item parameter" }
 		"wsCustomErrorCode": 39272
 	  }
 	]
