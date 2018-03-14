@@ -368,7 +368,7 @@
 								"type": "string"
 							},
 							"text": {
-								"type": "string"
+								"$ref": "#/definitions/textType"
 							},
 							"id": {
 								"type": "string",
