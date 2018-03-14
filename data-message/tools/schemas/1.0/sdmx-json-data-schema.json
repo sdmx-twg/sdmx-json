@@ -453,9 +453,9 @@
 						"pattern": "^[A-Za-z][A-Za-z0-9_-]*$"
 					}
 				},
-				"keyPosition": {
-					"not": {
-					}
+				"relationship": {
+					"$ref": "#/definitions/AttributeRelationshipType",
+					"description": "AttributeRelationship describes how the value of this attribute varies with the values of other components. These relationships expresses the attachment level of the attribute."
 				},
 				"default": {
 					"type": "string"
@@ -665,6 +665,27 @@
 				},
 				"links": {
 					"$ref": "#/definitions/links"
+				}
+			}
+		},
+		"AttributeRelationshipType": {
+			"description": "AttributeRelationshipType defines the structure for stating the relationship between an attribute and other data structure definition components.",
+			"type": "object",
+			"properties": {
+				"dimensions": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/urn",
+						"description": "Urn reference to a local dimension. This is used to reference dimensions in the data structure definition on which the value of this attribute depends. An attribute using this relationship can be either a group, series (or section), or observation level attribute. The attachment level of the attribute will be determined by the data format and which dimensions are referenced."
+					}
+				},
+				"none": {
+					"type": "object",
+					"description": "This is an empty object and means that value of the attribute will not vary with any of the other data structure components. This will always be treated as a data set level attribute."
+				},
+				"primaryMeasure": {
+					"$ref": "#/definitions/urn",
+					"description": "Urn reference to a primary measure locally, where the reference to the data structure definition which defines the primary measure is provided in another context (for example the data structure definition in which the reference occurs). This is used to specify that the value of the attribute is dependent upon the observed value. An attribute with this relationship will always be treated as an observation level attribute."
 				}
 			}
 		},
