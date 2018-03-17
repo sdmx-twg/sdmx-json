@@ -330,9 +330,19 @@
 						"pattern": "^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$"
 					}
 				},
-				"required": [
-					"href",
-					"rel"
+				"anyOf": [
+					{
+						"required": [
+							"href",
+							"rel"
+						]
+					},
+					{
+						"required": [
+							"urn",
+							"rel"
+						]
+					}
 				]
 			}
 		},
@@ -1583,10 +1593,6 @@
 		"Group": {
 			"$ref": "#/definitions/GroupType",
 			"description": "Group describes a group descriptor in a data structure definition. It is a set metadata concepts (and possibly their values) that define a partial key derived from the key descriptor in a data structure definition."
-		},
-		"GroupDimension": {
-			"$ref": "#/definitions/GroupDimensionType",
-			"description": "GroupDimension is a component which contains only a reference to a dimension in the key descriptor (DimensionList). Although it is conventional to declare dimensions in the same order as they are declared in the ordered key, there is no requirement to do so - the ordering of the values of the key are taken from the order in which the dimensions are declared. Note that the id of a dimension may be inherited from its underlying concept - therefore this reference value may actually be the id of the concept."
 		},
 		"Grouping": {
 			"$ref": "#/definitions/GroupingType",
@@ -3140,19 +3146,6 @@
 				}
 			]
 		},
-		"GroupDimensionType": {
-			"description": "GroupDimensionType defines a dimension component with a group key descriptor component list. Although technically a component, this is essentially a reference to a dimension defined in the key descriptor. Therefore, the identification, name, and description, concept identity and representation properties that are typically available for a component are not allowed here, as they are all inherited from the referenced dimension.",
-			"type": "object",
-			"properties": {
-				"dimensionReference": {
-					"$ref": "#/definitions/urn",
-					"description": "DimensionReference provides a urn reference to a dimension defined in the key descriptor of the data structure definition in which this group key descriptor is defined."
-				}
-			},
-			"required": [
-				"dimensionReference"
-			]
-		},
 		"GroupType": {
 			"description": "GroupType describes the structure of a group descriptor in a data structure definition. A group may consist of a of partial key, or collection of distinct cube regions or key sets to which attributes may be attached. The purpose of a group is to specify attributes values which have the same value based on some common dimensionality. All groups declared in the data structure must be unique - that is, you may not have duplicate partial keys. All groups must be given unique identifiers.",
 			"type": "object",
@@ -3172,7 +3165,8 @@
 						"groupDimensions": {
 							"type": "array",
 							"items": {
-								"$ref": "#/definitions/GroupDimension"
+								"$ref": "#/definitions/NCNameIDType",
+								"description": "Array of id's of dimensions defined in the key descriptor (DimensionList). Although it is conventional to declare dimensions in the same order as they are declared in the ordered key, there is no requirement to do so - the ordering of the values of the key are taken from the order in which the dimensions are declared. Note that the id of a dimension may be inherited from its underlying concept - therefore this reference value may actually be the id of the concept."
 							}
 						}
 					}
