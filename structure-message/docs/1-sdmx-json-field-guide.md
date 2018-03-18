@@ -266,12 +266,12 @@ Example:
 
 ### Common properties of SDMX artefacts of base type "ItemScheme"
 
-All SDMX artefacts of base type "ItemScheme" (CategoryScheme, Codelist, ConceptScheme, ReportingTaxonomy, and OrganisationScheme) share the *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+All SDMX artefacts of base type "ItemScheme" (CategoryScheme, ConceptScheme, Codelist, AgencyScheme, DataProviderScheme, DataConsumerScheme, OrganisationUnitScheme and ReportingTaxonomy) share the *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
 In addition, they share the following common object properties:
 
 * isPartial - *Boolean* *optional*. If set to true, it indicates that the resource contains only a sub-set of items.
-* categories/concepts - *Array* *optional*. Provides a list of *[items](#item)* if the resource inherits from the ItemScheme. **Note that the order of items is significant. In the use case of a submission of a partial list is is necessary to include preceding and succeeding items to allow determining the correct positioniong of the submitted items.**
+* categories/concepts/codes/agencies/dataProviders/dataConsumers/organisationUnits/reportingCategories - *Array* *optional*. Provides a list of *[items](#item)* if the resource inherits from the ItemScheme. **Note that the order of items is significant. In the use case of a submission of a partial list is is necessary to include preceding and succeeding items to allow determining the correct positioniong of the submitted items.**
 
 Example:
 
@@ -287,7 +287,7 @@ Example:
 
 #### item
 
-*Object* *optional*. Item within the ItemScheme (if the resource is a CategoryScheme, ConceptScheme, Codelist, AgencyScheme, DataProviderScheme, DataConsumerSchemes, OrganisationUnitSchemes or ReportingTaxonomy. 
+*Object* *optional*. Item within the ItemScheme (if the resource is a CategoryScheme, ConceptScheme, Codelist, AgencyScheme, DataProviderScheme, DataConsumerScheme, OrganisationUnitScheme and ReportingTaxonomy). 
 
 * id - *String*. Identifier for the item.
 * name - *Object* *optional*. A list of human-readable localised *[names](#name)* of the item.
@@ -296,7 +296,7 @@ Example:
 * parent - *String* *optional*. Contains the ID or the URN for the parent of the item (which is itself an item) enabling the reconstruction of the ordered item hierarchy.
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources for the item. See the section [link](#link).
-* categories/concepts/codes/agencies/dataProviders/dataConsumers/organisationUnits/reportingCategories - *Array* *optional*. Provides a list of child items of the item.
+* categories/concepts/codes/agencies/dataProviders/dataConsumers/organisationUnits/reportingCategories - *Array* *optional*. Provides a list of child items of the item. **Note that the order of items is significant. In the use case of a submission of a partial list is is necessary to include preceding and succeeding items to allow determining the correct positioniong of the submitted items.**
 
 Examples:
 
