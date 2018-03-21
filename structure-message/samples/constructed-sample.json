@@ -357,7 +357,7 @@
 							{
 								"href": "https://sdw-wsrest.ecb.europa.eu/service/conceptscheme/ECB/ECB_CONCEPTS/1.0/CURRENCY",
 								"rel": "self",
-								"urn": "urn:sdmx:org.sdmx.infomodel.conceptscheme.ConceptScheme=ECB:ECB_CONCEPTS(1.0).CURRENCY",
+								"urn": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).CURRENCY",
 								"type": "concept",
 								"hreflang": "en"
 							}
@@ -387,7 +387,7 @@
 							{
 								"href": "https://sdw-wsrest.ecb.europa.eu/service/conceptscheme/ECB/ECB_CONCEPTS/1.0/CURRENCY_DENOM",
 								"rel": "self",
-								"urn": "urn:sdmx:org.sdmx.infomodel.conceptscheme.ConceptScheme=ECB:ECB_CONCEPTS(1.0).CURRENCY_DENOM",
+								"urn": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).CURRENCY_DENOM",
 								"type": "concept",
 								"hreflang": "en"
 							}
