@@ -169,15 +169,12 @@
 	                    "id": "TIME_FORMAT",
 	                    "name": {"en": "Time Format"},
 	                    "description": {"en": "Description for the attribute"},
-						"relationship": {
-							"none": {
-							}
-						},
+	                    "relationship": {"none": {}},
 	                    "role": "TIME_FORMAT",
-	                    "default": "P1Y",
+	                    "default": "P1D",
 	                    "values": [{
-	                        "id": "P1Y",
-	                        "name": {"en": "Annual"}
+	                        "id": "P1D",
+	                        "name": {"en": "Daily"}
 	                    }]
 	                }],
 	                "comment for series": "# only for attributes returned at series level",
@@ -185,11 +182,13 @@
 	                    "id": "ID",
 	                    "name": {"en": "Attribute name"},
 	                    "description": {"en": "Description for the attribute"},
-						"relationship": {
-							"dimensions": [
-								"FREQ", "CURRENCY", "CURRENCY_DENOM", "EXR_TYPE", "EXR_SUFFIX"
-							]
-						},
+	                    "relationship": {"dimensions": [
+	                        "FREQ",
+	                        "CURRENCY",
+	                        "CURRENCY_DENOM",
+	                        "EXR_TYPE",
+	                        "EXR_SUFFIX"
+	                    ]},
 	                    "role": null,
 	                    "default": "ID1",
 	                    "comment for values": "# inclusion of attachment level and its format to be decided, e.g. \"attachment\": [ true, true, true, true, true, true, false ],",
@@ -209,9 +208,7 @@
 	                    "id": "OBS_STATUS",
 	                    "name": {"en": "Observation status"},
 	                    "description": {"en": "Description for the attribute"},
-						"relationship": {
-							"primaryMeasure": "OBS_VALUE"
-						},
+	                    "relationship": {"primaryMeasure": "OBS_VALUE"},
 	                    "role": null,
 	                    "comment for default": "# optional",
 	                    "default": "A",
