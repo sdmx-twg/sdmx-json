@@ -1,416 +1,710 @@
 {
-    "id": "http://sdmx.org/data-message/v0.9.0/schema#",
-    "$schema" : "http://json-schema.org/draft-04/schema#",
-    "description": "Schema for SDMX-JSON data message",
-    "type": "object",
-    "required": [ "header" ],
-    "properties": {
-        "header": {
-            "$ref": "#/definitions/header"
-        },
-        "structure": {
-            "$ref": "#/definitions/structure"
-        },
-        "dataSets": {
-            "type": [ "null", "array" ],
-            "items": {
-                "$ref": "#/definitions/dataSet"
-            }
-        },
-        "errors": {
-            "type": [ "null", "array" ],
-            "items": {
-                "$ref": "#/definitions/error"
-            }
-        }
-    },
-    "definitions": {
-        "header": {
-            "type": "object",
-            "required": [ "id", "prepared", "sender" ],
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
-                "prepared": {
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "test": {
-                    "type": [ "null", "boolean" ]
-                },
-                "sender": {
-                    "$ref": "#/definitions/party"
-                },
-                "receiver": {
-                    "$ref": "#/definitions/party"
-                },
-                "links": {
-                    "type": [ "null", "array" ],
-                    "items": {
-                        "$ref": "#/definitions/link"
-                    }
-                }
-            }
-        },
-        "party": {
-            "type": "object",
-            "required": [ "id" ],
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "contact": {
-                    "type": [ "null", "array" ],
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": [ "null", "string" ]
-                            },
-                            "department": {
-                                "type": [ "null", "string" ]
-                            },
-                            "role": {
-                                "type": [ "null", "string" ]
-                            },
-                            "telephone": {
-                                "type": [ "null", "array" ],
+	"id": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/develop/data-message/tools/schemas/1.0/sdmx-json-data-schema.json",
+	"$schema": "http://json-schema.org/schema#",
+	"description": "Schema for SDMX-JSON data message",
+	"type": "object",
+	"properties": {
+		"meta": {
+			"$ref": "#/definitions/meta"
+		},
+		"data": {
+			"type": "object",
+			"properties": {
+				"structure": {
+					"$ref": "#/definitions/structure"
+				},
+				"dataSets": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/dataSet"
+					}
+				}
+			}
+		},
+		"errors": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/error"
+			}
+		}
+	},
+	"definitions": {
+		"meta": {
+			"type": "object",
+			"required": [
+				"id",
+				"prepared",
+				"sender"
+			],
+			"properties": {
+				"schema": {
+					"type": "string",
+					"format": "uri"
+				},
+				"id": {
+					"type": "string",
+					"pattern": "^[A-Za-z0-9_@$-]+$"
+				},
+				"test": {
+					"type": "boolean"
+				},
+				"prepared": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"content-languages": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"pattern": "^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$"
+					}
+				},
+				"sender": {
+					"$ref": "#/definitions/party"
+				},
+				"receivers": {
+					"description": "Receiver is information about the part(y/ies) that is/are the intended recipient(s) of the message. This can be useful if the WS requires authentication.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/party"
+					}
+				},
+				"links": {
+					"$ref": "#/definitions/links"
+				}
+			}
+		},
+		"party": {
+			"type": "object",
+			"required": [
+				"id"
+			],
+			"properties": {
+				"id": {
+					"type": "string",
+					"pattern": "^[A-Za-z0-9_@$-]+$"
+				},
+				"name": {
+					"$ref": "#/definitions/name"
+				},
+				"contact": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"required": [
+							"name"
+						],
+						"properties": {
+							"name": {
+                                "description": "Name contains a humain-readable name for the contact.",
+								"$ref": "#/definitions/name"
+							},
+							"department": {
+                                "description": "Department is a humain-readable designation of the organisational structure by a linguistic expression, within which the contact person works.",
+								"$ref": "#/definitions/textType"
+							},
+							"role": {
+								"description": "Role is the responsibility of the contact person with respect to the object for which this person is the contact.",
+								"$ref": "#/definitions/textType"
+							},
+							"telephones": {
+								"type": "array",
+								"items": {
+            						"description": "Telephone holds the telephone number for the contact person.",
+									"type": "string"
+								}
+							},
+							"faxes": {
+								"type": "array",
+								"items": {
+            						"description": "Fax holds the fax number for the contact person.",
+									"type": "string"
+								}
+							},
+                            "x400s": {
+                                "type": "array",
                                 "items": {
+                                    "description": "X400 holds the X.400 address for the contact person.",
                                     "type": "string"
                                 }
                             },
-                            "fax": {
-                                "type": [ "null", "array" ],
-                                "items": {
-                                    "type": "string"
-                                }
-                            },
-                            "uri": {
-                                "type": [ "null", "array" ],
-                                "items": {
-                                    "type": "string",
-                                    "format": "uri"
-                                }
-                            },
-                            "email": {
-                                "type": [ "null", "array" ],
-                                "items": {
-                                    "type": "string",
-                                    "format": "email"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "error": {
-            "type": "object",
-            "required": [ "code", "message" ],
-            "properties": {
-                "code": {
-                    "type": "number"
-                },
-                "message": {
-                    "type": "string"
-                }
-            }
-        },
-        "link": {
-            "type": "object",
-            "required": [ "href", "rel" ],
-            "properties": {
-                "href": {
-                    "type": "string",
-                    "format": "uri"
-                },
-                "rel": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": [ "null", "string" ]
-                },
-                "type": {
-                    "type": [ "null", "string" ]
-                }
-            }
-        },
-        "structure": {
-            "type": [ "null", "object" ],
-            "required": [ "dimensions" ],
-            "properties": {
-                "links": {
-                    "type": [ "null", "array" ],
-                    "items": {
-                        "$ref": "#/definitions/link"
-                    }
-                },
-                "name": {
-                    "type": [ "null", "string" ]
-                },
-                "description": {
-                    "type": [ "null", "string" ]
-                },
-                "dimensions": {
-                    "type": "object",
-                    "properties": {
-                        "dataSet": {
-                            "type": [ "null", "array" ],
-                            "items": {
-                                "$ref": "#/definitions/component"
-                            },
-                            "uniqueItems": true
-                        },
-                        "series": {
-                            "type": [ "null", "array" ],
-                            "items": {
-                                "$ref": "#/definitions/component"
-                            },
-                            "uniqueItems": true
-                        },
-                        "observation": {
-                            "type": [ "null", "array" ],
-                            "items": {
-                                "$ref": "#/definitions/component"
-                            },
-                            "uniqueItems": true
-                        }
-                    }
-                },
-                "attributes": {
-                    "type": "object",
-                    "properties": {
-                        "dataSet": {
-                            "type": [ "null", "array" ],
-                            "items": {
-                                "$ref": "#/definitions/component"
-                            },
-                            "uniqueItems": true
-                        },
-                        "series": {
-                            "type": [ "null", "array" ],
-                            "items": {
-                                "$ref": "#/definitions/component"
-                            },
-                            "uniqueItems": true
-                        },
-                        "observation": {
-                            "type": [ "null", "array" ],
-                            "items": {
-                                "$ref": "#/definitions/component"
-                            },
-                            "uniqueItems": true
-                        }
-                    }
-                },
-                "annotations": {
-                    "type": [ "null", "array" ],
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "title": {
-                                "type": [ "null", "string" ]
-                            },
-                            "type": {
-                                "type": [ "null", "string" ]
-                            },
-                            "text": {
-                                "type": [ "null", "string" ]
-                            },
-                            "id": {
-                                "type": [ "null", "string" ]
-                            },
-                            "links": {
-                                "type": [ "null", "array" ],
-                                "items": {
-                                    "$ref": "#/definitions/link"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "component": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": [ "null", "string" ]
-                },
-                "role": {
-                    "type": [ "null", "string" ]
-                },
-                "keyPosition": {
-                    "type": [ "null", "integer" ],
-                    "minimum": 0
-                },
-                "default": {
-                    "type": [ "null", "string" ]
-                },
-                "links": {
-                    "type": [ "null", "array" ],
-                    "items": {
-                        "$ref": "#/definitions/link"
-                },
-                "annotations": {
-                    "type": [ "null", "array" ],
-                    "items": {
-                        "type": [ "integer" ],
-                        "minimum": 0
-                    }
-                },
-                "values": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "string"
-                            },
-                            "name": {
-                                "type": "string"
-                            },
-                            "description": {
-                                "type": [ "null", "string" ]
-                            },
-                            "start": {
-                                "type": [ "null", "string" ],
-                                "format": "date-time"
-                            },
-                            "end": {
-                                "type": [ "null", "string" ],
-                                "format": "date-time"
-                            },
-                            "links": {
-                                "type": [ "null", "array" ],
-                                "items": {
-                                    "$ref": "#/definitions/link"
-                                }
-                            },
-                            "annotations": {
-                                "type": [ "null", "array" ],
-                                "items": {
-                                    "type": [ "integer" ],
-                                    "minimum": 0
-                                }
-                            }
-                        },
-                        "required": [ "name" ]
-                    },
-                    "minItems": 0,
-                    "uniqueItems": true
-                }
-            },
-            "required": [ "name", "values" ]
-        },
-        "dataSet": {
-            "type": "object",
-            "properties": {
-                "action": {
-                    "type": "string",
-                    "enum": [ "Information", "Append", "Replace", "Delete" ]
-                },
-                "reportingBegin": {
-                    "type": [ "null", "string" ]
-                },
-                "reportingEnd": {
-                    "type": [ "null", "string" ]
-                },
-                "validFrom": {
-                    "type": [ "null", "string" ],
-                    "format": "date-time"
-                },
-                "validTo": {
-                    "type": [ "null", "string" ],
-                    "format": "date-time"
-                },
-                "publicationYear": {
-                    "type": [ "null", "string" ]
-                },
-                "publicationPeriod": {
-                    "type": [ "null", "string" ]
-                },
-                "annotations": {
-                    "type": [ "null", "array" ],
-                    "items": {
-                        "type": [ "integer" ],
-                        "minimum": 0
-                    }
-                },
-                "attributes": {
-                    "type": [ "null", "array" ],
-                    "items": {
-                        "type": [ "null", "integer" ],
-                        "minimum": 0
-                    }
-                },
-                "observations": {
-                    "type": [ "null", "object" ],
-                    "patternProperties": {
-                        "^[0-9]+(:[0-9]+)*$": {
-                            "type": "array",
-                            "items": {
-                                "type": [ "null", "number" ]
-                            }
-                        }
-                    },
-                    "additionalProperties": false
-                },
-                "series": {
-                    "type": [ "null", "object" ],
-                    "patternProperties": {
-                        "^[0-9]+(:[0-9]+)*$": {
-                            "type": "object",
-                            "properties": {
-                                "annotations": {
-                                    "type": [ "null", "array" ],
-                                    "items": {
-                                        "type": [ "integer" ],
-                                        "minimum": 0
-                                    }
-                                },
-                                "attributes": {
-                                    "type": [ "null", "array" ],
-                                    "items": {
-                                        "type": [ "null", "integer" ],
-                                        "minimum": 0
-                                    }
-                                },
-                                "observations": {
-                                    "type": "object",
-                                    "patternProperties": {
-                                        "^[0-9]+(:[0-9]+)*$": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": [ "null", "number" ]
-                                            }
-                                        }
-                                    },
-                                    "additionalProperties": false
-                                }
-                            },
-                            "additionalProperties": false
-                        }
-                    },
-                    "additionalProperties": false
-                },
-                "links": {
-                    "type": [ "null", "array" ],
-                    "items": {
-                        "$ref": "#/definitions/link"
-                    }
-                }
-            }
-        }
-    }
+                            "uris": {
+								"type": "array",
+								"items": {
+            						"description": "URI holds an information URL for the contact person.",
+									"type": "string",
+									"format": "uri"
+								}
+							},
+							"emails": {
+								"type": "array",
+								"items": {
+            						"description": "Email holds the email address for the contact person.",
+									"type": "string",
+									"format": "email"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"name": {
+			"$ref": "#/definitions/textType",
+			"description": "Name is a reusable element, used for providing a human-readable localised name for an object."
+		},
+		"textType": {
+			"description": "TextType provides for a set of language-specific alternates to be provided for any human-readable constructs in the instance. ",
+			"type": "object",
+			"patternProperties": {
+				"^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$": {
+					"type": "string"
+				}
+			}
+		},
+		"error": {
+			"type": "object",
+			"required": [
+				"code"
+			],
+			"properties": {
+				"code": {
+					"type": "number"
+				},
+				"title": {
+					"$ref": "#/definitions/textType"
+				},
+				"detail": {
+					"$ref": "#/definitions/textType"
+				},
+				"links": {
+					"$ref": "#/definitions/links"
+				}
+			}
+		},
+		"links": {
+			"description": "Links field is an array of link objects. If appropriate, a collection of links to additional external resources for the header.",
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"href": {
+						"$ref": "#/definitions/uri"
+					},
+					"rel": {
+						"description": "Relationship of the object to the external resource. See semantics below. Use 'self' to indicate the urn to the parent object.",
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"description": "structure: provides a reference to the data structure or metadata structure definition depending on the context. Other SDMX artefact types can be specified, e.g. dataflow, provisionagreement, etc. For the others please see: https://tools.ietf.org/rfc/rfc5988.txt",
+								"type": "string",
+								"enum": [
+									"agencyscheme",
+									"alternate",
+									"appendix",
+									"bookmark",
+									"categorisation",
+									"categoryscheme",
+									"chapter",
+									"codelist",
+									"conceptscheme",
+									"constraint",
+									"contents",
+									"copyright",
+									"current",
+									"dataflow",
+									"dataconsumerscheme",
+									"dataproviderscheme",
+									"describedby",
+									"edit",
+									"edit-media",
+									"enclosure",
+									"first",
+									"glossary",
+									"help",
+									"hierarchicalcodelist",
+									"hub",
+									"index",
+									"last",
+									"latest-version",
+									"license",
+									"metadataflow",
+									"next",
+									"next-archive",
+									"organisationunitscheme",
+									"payment",
+									"prev",
+									"predecessor-version",
+									"previous",
+									"prev-archive",
+									"process",
+									"provisionagreement",
+									"related",
+									"replies",
+									"reportingtaxonomy",
+									"section",
+									"self",
+									"service",
+									"start",
+									"structure",
+									"structureset",
+									"stylesheet",
+									"subsection",
+									"successor-version",
+									"up",
+									"version-history",
+									"via",
+									"working-copy",
+									"working-copy-of"
+								]
+							}
+						]
+					},
+					"urn": {
+						"description": "The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details).",
+						"$ref": "#/definitions/urn"
+					},
+					"uri": {
+						"description": "The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource.",
+						"$ref": "#/definitions/uri"
+					},
+					"title": {
+						"$ref": "#/definitions/textType"
+					},
+					"type": {
+						"description": "A hint about the type of representation returned by the link.",
+						"type": "string"
+					},
+					"hreflang": {
+						"description": "The natural language of the external link, the same as used in the HTTP Accept-Language request header.",
+						"type": "string",
+						"pattern": "^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$"
+					}
+				},
+				"required": [
+					"href",
+					"rel"
+				]
+			}
+		},
+		"structure": {
+			"type": "object",
+			"required": [
+				"dimensions"
+			],
+			"properties": {
+				"links": {
+					"$ref": "#/definitions/links"
+				},
+				"name": {
+					"$ref": "#/definitions/name"
+				},
+				"description": {
+					"$ref": "#/definitions/textType"
+				},
+				"dimensions": {
+					"type": "object",
+					"properties": {
+						"dataSet": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/dimension"
+							},
+							"uniqueItems": true
+						},
+						"series": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/dimension"
+							},
+							"uniqueItems": true
+						},
+						"observation": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/dimension"
+							},
+							"uniqueItems": true
+						}
+					}
+				},
+				"attributes": {
+					"type": "object",
+					"properties": {
+						"dataSet": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/attribute"
+							},
+							"uniqueItems": true
+						},
+						"series": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/attribute"
+							},
+							"uniqueItems": true
+						},
+						"observation": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/attribute"
+							},
+							"uniqueItems": true
+						}
+					}
+				},
+				"annotations": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"title": {
+								"description": "AnnotationTitle provides a title for the annotation.",
+								"type": "string"
+							},
+							"type": {
+								"description": "AnnotationType is used to distinguish between annotations designed to support various uses. The types are not enumerated, as these can be specified by the user or creator of the annotations. The definitions and use of annotation types should be documented by their creator.",
+								"type": "string"
+							},
+							"text": {
+								"description": "AnnotationText holds a language-specific string containing the text of the annotation.",
+								"$ref": "#/definitions/textType"
+							},
+							"id": {
+								"description": "Non-standard identification of an annotation.",
+								"type": "string"
+							},
+							"links": {
+								"description": "Links field is an array of link objects. Also used to specify the Annotation URL which points to an external resource which may contain or supplement the annotation (using 'self' as relationship). If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly. If appropriate, a collection of links to additional external resources.",
+								"$ref": "#/definitions/links"
+							}
+						}
+					}
+				}
+			}
+		},
+		"dimension": {
+			"type": "object",
+			"required": [
+				"id",
+				"keyPosition",
+				"values"
+			],
+			"properties": {
+				"id": {
+					"type": "string",
+					"pattern": "^[A-Za-z][A-Za-z0-9_-]*$"
+				},
+				"name": {
+					"$ref": "#/definitions/name"
+				},
+				"description": {
+					"$ref": "#/definitions/textType"
+				},
+				"roles": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"pattern": "^[A-Za-z][A-Za-z0-9_-]*$"
+					}
+				},
+				"keyPosition": {
+					"type": "integer",
+					"minimum": 0
+				},
+				"default": {
+					"type": "string"
+				},
+				"links": {
+					"$ref": "#/definitions/links"
+				},
+				"annotations": {
+					"type": "array",
+					"items": {
+						"type": "integer",
+						"minimum": 0
+					}
+				},
+				"values": {
+					"$ref": "#/definitions/values"
+				}
+			}
+		},
+		"attribute": {
+			"type": "object",
+			"required": [
+				"id",
+				"relationship",
+				"values"
+			],
+			"properties": {
+				"id": {
+					"type": "string",
+					"pattern": "^[A-Za-z][A-Za-z0-9_-]*$"
+				},
+				"name": {
+					"$ref": "#/definitions/name"
+				},
+				"description": {
+					"$ref": "#/definitions/textType"
+				},
+				"roles": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"pattern": "^[A-Za-z][A-Za-z0-9_-]*$"
+					}
+				},
+				"relationship": {
+					"$ref": "#/definitions/AttributeRelationshipType",
+					"description": "AttributeRelationship describes how the value of this attribute varies with the values of other components. These relationships expresses the attachment level of the attribute."
+				},
+				"default": {
+					"type": "string"
+				},
+				"links": {
+					"$ref": "#/definitions/links"
+				},
+				"annotations": {
+					"type": "array",
+					"items": {
+						"type": [
+							"integer"
+						],
+						"minimum": 0
+					}
+				},
+				"values": {
+					"$ref": "#/definitions/attrvalues"
+				}
+			}
+		},
+		"values": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"required": [
+					"id",
+					"name"
+				],
+				"properties": {
+					"id": {
+						"type": "string",
+						"pattern": "^[A-Za-z0-9_@$-]+$"
+					},
+					"name": {
+						"$ref": "#/definitions/name"
+					},
+					"description": {
+						"$ref": "#/definitions/textType"
+					},
+					"start": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"end": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"parent": {
+						"type": "string",
+						"pattern": "^[A-Za-z0-9_@$-]+$"
+					},
+					"order": {
+						"type": "integer",
+						"minimum": 0
+					},
+					"links": {
+						"$ref": "#/definitions/links"
+					},
+					"annotations": {
+						"type": "array",
+						"items": {
+							"type": [
+								"integer"
+							],
+							"minimum": 0
+						}
+					}
+				}
+			},
+			"minItems": 0,
+			"uniqueItems": true
+		},
+		"attrvalues": {
+			"type": "array",
+			"items": {
+				"type": [ "null", "object" ],
+				"properties": {
+					"id": {
+						"type": "string",
+						"pattern": "^[A-Za-z0-9_@$-]+$"
+					},
+					"name": {
+						"$ref": "#/definitions/name"
+					},
+					"description": {
+						"$ref": "#/definitions/textType"
+					},
+					"start": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"end": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"links": {
+						"$ref": "#/definitions/links"
+					},
+					"annotations": {
+						"type": "array",
+						"items": {
+							"type": "integer",
+							"minimum": 0
+						}
+					}
+				}
+			},
+			"minItems": 0,
+			"uniqueItems": true
+		},
+		"dataSet": {
+			"type": "object",
+			"properties": {
+				"action": {
+					"type": "string",
+					"enum": [
+						"Information",
+						"Append",
+						"Replace",
+						"Delete"
+					]
+				},
+				"reportingBegin": {
+					"type": "string"
+				},
+				"reportingEnd": {
+					"type": "string"
+				},
+				"validFrom": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"validTo": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"publicationYear": {
+					"type": "string"
+				},
+				"publicationPeriod": {
+					"type": "string"
+				},
+				"annotations": {
+					"type": "array",
+					"items": {
+						"type": "integer",
+						"minimum": 0
+					}
+				},
+				"attributes": {
+					"type": "array",
+					"items": {
+						"type": "integer",
+						"minimum": 0
+					}
+				},
+				"observations": {
+					"type": "object",
+					"patternProperties": {
+						"^[0-9]+(:[0-9]+)*$": {
+							"type": "array",
+							"items": {
+								"type": "number"
+							}
+						}
+					},
+					"additionalProperties": false
+				},
+				"series": {
+					"type": "object",
+					"patternProperties": {
+						"^[0-9]+(:[0-9]+)*$": {
+							"type": "object",
+							"properties": {
+								"annotations": {
+									"type": "array",
+									"items": {
+										"type": "integer",
+										"minimum": 0
+									}
+								},
+								"attributes": {
+									"type": "array",
+									"items": {
+										"type": "integer",
+										"minimum": 0
+									}
+								},
+								"observations": {
+									"type": "object",
+									"patternProperties": {
+										"^[0-9]+(:[0-9]+)*$": {
+											"type": "array",
+											"items": {
+												"type": "number"
+											}
+										}
+									},
+									"additionalProperties": false
+								}
+							},
+							"additionalProperties": false
+						}
+					},
+					"additionalProperties": false
+				},
+				"links": {
+					"$ref": "#/definitions/links"
+				}
+			},
+			"required": [
+				"links"
+			]
+		},
+		"AttributeRelationshipType": {
+			"description": "AttributeRelationshipType defines the structure for stating the relationship between an attribute and other data structure definition components.",
+			"type": "object",
+			"properties": {
+				"dimensions": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/urn",
+						"description": "Urn reference to a local dimension. This is used to reference dimensions in the data structure definition on which the value of this attribute depends. An attribute using this relationship can be either a group, series (or section), or observation level attribute. The attachment level of the attribute will be determined by the data format and which dimensions are referenced."
+					}
+				},
+				"none": {
+					"type": "object",
+					"description": "This is an empty object and means that value of the attribute will not vary with any of the other data structure components. This will always be treated as a data set level attribute."
+				},
+				"primaryMeasure": {
+					"$ref": "#/definitions/urn",
+					"description": "Urn reference to a primary measure locally, where the reference to the data structure definition which defines the primary measure is provided in another context (for example the data structure definition in which the reference occurs). This is used to specify that the value of the attribute is dependent upon the observed value. An attribute with this relationship will always be treated as an observation level attribute."
+				}
+			}
+		},
+		"uri": {
+			"description": "Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. Providing the link to the SDMX-JSON schema is recommended.",
+			"type": "string",
+			"format": "uri"
+		},
+		"urn": {
+			"type": "string",
+			"format": "urn"
+		}
+	}
 }
