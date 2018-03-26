@@ -107,13 +107,31 @@
                 }]
             },
             "attributes": {
-                "dataSet": [],
+                "dataSet": [{
+	                    "id": "TIME_FORMAT",
+	                    "name": {"en": "Time Format"},
+	                    "description": {"en": "Description for the attribute"},
+						"relationship": {
+							"none": {
+							}
+						},
+	                    "role": "TIME_FORMAT",
+	                    "default": "P1D",
+	                    "values": [{
+	                        "id": "P1D",
+	                        "name": {"en": "Daily"}
+	                    }]
+	                }],
                 "series": [],
                 "observation": [
                     {
                         "id": "TITLE",
                         "name": {"en": "Series title"},
-                        "relationship": {"none": {}},
+						"relationship": {
+							"dimensions": [
+								"FREQ", "CURRENCY", "CURRENCY_DENOM", "EXR_TYPE", "EXR_SUFFIX"
+							]
+						},
                         "role": "TITLE",
                         "values": [
                             {"name": {"en": "New Zealand dollar (NZD)"}},
