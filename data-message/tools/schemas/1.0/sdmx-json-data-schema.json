@@ -362,19 +362,23 @@
 						"type": "object",
 						"properties": {
 							"title": {
+								"description": "AnnotationTitle provides a title for the annotation.",
 								"type": "string"
 							},
 							"type": {
+								"description": "AnnotationType is used to distinguish between annotations designed to support various uses. The types are not enumerated, as these can be specified by the user or creator of the annotations. The definitions and use of annotation types should be documented by their creator.",
 								"type": "string"
 							},
 							"text": {
+								"description": "AnnotationText holds a language-specific string containing the text of the annotation.",
 								"$ref": "#/definitions/textType"
 							},
 							"id": {
-								"type": "string",
-								"pattern": "^[A-Za-z0-9_@$-]+$"
+								"description": "Non-standard identification of an annotation.",
+								"type": "string"
 							},
 							"links": {
+								"description": "Links field is an array of link objects. Also used to specify the Annotation URL which points to an external resource which may contain or supplement the annotation (using 'self' as relationship). If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly. If appropriate, a collection of links to additional external resources.",
 								"$ref": "#/definitions/links"
 							}
 						}
@@ -433,6 +437,7 @@
 			"type": "object",
 			"required": [
 				"id",
+				"relationship",
 				"values"
 			],
 			"properties": {
@@ -532,7 +537,7 @@
 		"attrvalues": {
 			"type": "array",
 			"items": {
-				"type": "object",
+				"type": [ "null", "object" ],
 				"properties": {
 					"id": {
 						"type": "string",
