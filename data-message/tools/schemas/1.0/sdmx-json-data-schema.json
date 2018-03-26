@@ -666,7 +666,10 @@
 				"links": {
 					"$ref": "#/definitions/links"
 				}
-			}
+			},
+			"required": [
+				"links"
+			]
 		},
 		"AttributeRelationshipType": {
 			"description": "AttributeRelationshipType defines the structure for stating the relationship between an attribute and other data structure definition components.",
