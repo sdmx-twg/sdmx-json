@@ -666,6 +666,7 @@
 			"type": "object",
 			"properties": {
 				"id": {
+					"description": "Non-standard identification of an annotation.",
 					"type": "string"
 				},
 				"title": {
@@ -2449,18 +2450,6 @@
 					"$ref": "#/definitions/urn",
 					"description": "Urn reference to a codelist which enumerates the possible values that can be used as the representation of this concept."
 				},
-				"id": {
-					"$ref": "#/definitions/NCNameIDType",
-					"description": "ID of a codelist which enumerates the possible values that can be used as the representation of this concept."
-				},
-				"version": {
-					"$ref": "#/definitions/VersionType",
-					"description": "Version of a codelist which enumerates the possible values that can be used as the representation of this concept."
-				},
-				"agencyID": {
-					"$ref": "#/definitions/NestedNCNameIDType",
-					"description": "AgencyID of a codelist which enumerates the possible values that can be used as the representation of this concept."
-				},
 				"enumerationFormat": {
 					"$ref": "#/definitions/CodededTextFormatType"
 				},
@@ -2534,8 +2523,8 @@
 							"$ref": "#/definitions/ConceptRepresentation"
 						},
 						"isoConceptReference": {
-							"$ref": "#/definitions/ISOConceptReferenceType",
-							"description": "Provides a reference to an ISO 11179 concept."
+							"$ref": "#/definitions/urn",
+							"description": "Provides a urn reference (containing conceptSchemeID, conceptAgency, conceptID) to an ISO 11179 concept."
 						},
 						"parent": {
 							"$ref": "#/definitions/urn",
@@ -3364,26 +3353,6 @@
 						"target"
 					]
 				}
-			]
-		},
-		"ISOConceptReferenceType": {
-			"description": "ISOConceptReferenceType provides a reference to and ISO 11179 concept.",
-			"type": "object",
-			"properties": {
-				"conceptAgency": {
-					"type": "string"
-				},
-				"conceptID": {
-					"type": "string"
-				},
-				"conceptSchemeID": {
-					"type": "string"
-				}
-			},
-			"required": [
-				"conceptAgency",
-				"conceptID",
-				"conceptSchemeID"
 			]
 		},
 		"IdentifiableObjectRepresentationType": {
