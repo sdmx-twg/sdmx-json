@@ -176,6 +176,7 @@
 									"latest-version",
 									"license",
 									"metadataflow",
+									"metadatastructure",
 									"next",
 									"next-archive",
 									"organisationunitscheme",
@@ -318,6 +319,7 @@
 			"description": "AnnotationType provides for non-documentation notes and annotations to be embedded in data and structure messages. It provides optional fields for providing a title, a type description, a URI, and the text of the annotation.",
 			"properties": {
 				"id": {
+					"description": "Non-standard identification of an annotation.",
 					"type": "string"
 				},
 				"text": {
@@ -702,10 +704,6 @@
 				"id": {
 					"$ref": "#/definitions/idType"
 				},
-				"structureRef": {
-					"description": "xs:IDREF. The -value space- of IDREF is the set of all strings that -match- the NCName production in [Namespaces in XML].",
-					"$ref": "#/definitions/NCNameIDType"
-				},
 				"validFrom": {
 					"type": "string",
 					"format": "date-time"
@@ -719,6 +717,9 @@
 				},
 				"name": {
 					"$ref": "#/definitions/name"
+				},
+				"links": {
+					"$ref": "#/definitions/links"
 				},
 				"dataProvider": {
 					"$ref": "#/definitions/urn",
@@ -735,7 +736,7 @@
 			},
 			"required": [
 				"reports",
-				"structureRef"
+				"links"
 			],
 			"type": "object"
 		},
