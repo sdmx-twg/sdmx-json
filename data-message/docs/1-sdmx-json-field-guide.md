@@ -303,7 +303,7 @@ Each of the components may contain the following fields:
 * description - *Object* *optional*. Human-readable localised descriptions (see *[names](#name)*) for the component.
 * keyPosition - *Number*. **This field is mandatory for `dimensions` but not to be supplied for `attributes`.** Indicates the position of the `dimension` in the Data Structure Definition, starting at 0. It needs to be provided also for the special `dimensions` such as Time or Measure dimensions. The information in this field is consistent with the order of `dimensions` in the "key" parameter string (i.e. D.USD.EUR.SP00.A) for data queries in the SDMX API. 
 * roles - *Array* of *String*s *optional*. Defines the component role(s), if any. Roles are represented by the id of a concept defined as [SDMX cross-domain concept](https://sdmx.org/wp-content/uploads/01_sdmx_cog_annex_1_cdc_2009.pdf). Several of the concepts defined as SDMX cross-domain concepts are useful for data visualisation, such as for example, the series title ("TITLE"), the unit of measure ("UNIT_MEASURE"), the number of decimals to be displayed ("DECIMALS"), the  country or geographic reference area ("REF_AREA", e.g. when using maps), the period of time to which the measured observation refers ("REF_PERIOD"), the time interval at which observations occur over a given time period ("FREQ"), etc. It is strongly recommended to identify any component that can be useful for data visualisation purposes by using the appropriate SDMX cross-domain concept as role.
-* relationship - *Object* *optional*. *[Attribute relationship](#attribute_relationship)* (**valid for `attributes` only!**) describes how the value of this attribute varies with the values of other components. These relationships expresses the attachment level of the attribute.
+* relationship - *Object* *optional*. *[Attribute relationship](#attribute-relationship)* (**valid for `attributes` only!**) describes how the value of this attribute varies with the values of other components. This relationship expresses the attachment level of the attribute as defined in the data structure definition. Depending on the message context (especially the data query) an attribute value can however be attached physically in the message at a different level.
 * default - *String* or *Number* *optional*. Defines a default `value` for the component (**valid for `attributes` only!**). If no value is provided in the data part of the message then this value applies.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the component.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the component. Indices refer back to the array of *annotations* in the structure field.
@@ -337,10 +337,8 @@ Example:
 		"id": "SOURCE",
 		"name": { "en": "Source" },
 		"description": { "en": "The source of the data depending on the time period." },
-		"attributeRelationship": {
-			"dimensions": [
-				"TIME_PERIOD"
-			]
+		"relationship": {
+			# attribute-relationship object #
 		},
 		"default": "MAFF_Agricultural Statistics",
 		"links": [
@@ -354,6 +352,32 @@ Example:
 				# component value object #
 			}
 		]
+	}
+
+##### attribute relationship
+
+*Object* *optional*. The attribute's relationship defines the relationship between an attribute and other data structure definition components as defined in the data structure definition. This is also called "attachment level". Depending on the message context (especially the data query) an attribute value can however be attached physically in the message at a different level.
+
+* dimensions - *Array* of *String*s *optional*. One or more URN references to (a) local dimension(s) in the data structure definition on which the value of this attribute depends. 
+* none - Empty *Object* *optional*. This means that value of the attribute will not vary with any of the other data structure components.
+* primaryMeasure - *String* *optional*. URN reference to a primary measure locally as defined in the data structure definition. This is used to specify that the value of the attribute is dependent upon the observed value.
+
+Note that relationships defined in data structure definitions through `attachmentGroups` or a `group` are to be resolved by the server conveniently for the client into above `dimensions`.
+
+Examples:
+
+	{
+		"dimensions": [
+			"FREQ", "CURRENCY"
+		]
+	}
+
+	{
+		"none": {}
+	}
+
+	{
+		"primaryMeasure": "OBS_VALUE"
 	}
 
 
