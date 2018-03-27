@@ -14,7 +14,7 @@ Before we start, let's clarify a few more things about this guide:
 
 ## message
 
-Message is the top level object and it contains the requested information ("(referential) metadata") as well as the meta-information decribing the (technical) context of the message and, possibly, error information.
+Message is the top level object and it contains the requested information (referential metadata) as well as the meta-information decribing the (technical) context of the message and, possibly, error information.
 
 * meta - *Object* *optional*. A *[meta](#meta)* object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.
 * data - *Object* *optional*. *[Data](#data)* contains the message's “primary data”.
@@ -24,19 +24,19 @@ The members data and errors MUST NOT coexist in the same message.
 
 Example:
 
-    {
-      "meta": {
-          # meta object #
-      },
-      "data": {
-          # data object #
-      },
-      "errors": [
-        {
-          # error object #
-        }
-      ]
-    }
+	{
+		"meta": {
+			# meta object #
+		},
+		"data": {
+			# data object #
+		},
+		"errors": [
+			{
+				# error object #
+			}
+		]
+	}
 
 ## meta
 
@@ -55,30 +55,30 @@ Any members MAY be specified within `meta` objects.
 
 Example:
 
-    "meta": {
-      "schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/metadata-message/tools/schemas/sdmx-json-metadata-schema.json",
-      "copyright": "Copyright 2017 Statistics hotline",
-      "id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
-      "prepared": "2018-01-03T12:54:12",
-      "test": false,
-      "content-languages": [ "en", "fr-fr" ],
-      “name”: {
-          # name object #
-      },
-      "sender: {
-        # sender object #
-      },
-      "receivers": [
-        {
-          # receiver object #
-        }
-      ],
-      "links": [
-        {
-          # link object #
-        }
-      ]
-    }
+	"meta": {
+		"schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/metadata-message/tools/schemas/sdmx-json-metadata-schema.json",
+		"copyright": "Copyright 2017 Statistics hotline",
+		"id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
+		"prepared": "2018-01-03T12:54:12",
+		"test": false,
+		"content-languages": [ "en", "fr-fr" ],
+		“name”: {
+			# name object #
+		},
+		"sender: {
+			# sender object #
+		},
+		"receivers": [
+			{
+				# receiver object #
+			}
+		],
+		"links": [
+			{
+				# link object #
+			}
+		]
+	}
 
 ### sender
 
@@ -91,17 +91,17 @@ Sender contains the following fields:
 
 Example:
 
-    "sender": {
-      "id": "ECB",
-      “name”: {
-          # name object #
-      },
-      "contacts": [
-        {
-          # contact objects #
-        }
-      ]
-    }
+	"sender": {
+		"id": "ECB",
+		“name”: {
+			# name object #
+		},
+		"contacts": [
+			{
+				# contact objects #
+			}
+		]
+	}
 
 #### name
 
@@ -113,11 +113,11 @@ See the section on [localised strings](#localised-strings) on how the message de
 
 Example:
 
-    { 
-      "en": "This is an English name",
-      "en-GB": "This is a British name",
-      "fr": "C'est un nom français"
-    }
+	{ 
+		"en": "This is an English name",
+		"en-GB": "This is a British name",
+		"fr": "C'est un nom français"
+	}
 
 #### contact
 
@@ -138,42 +138,42 @@ See the section on [localised strings](#localised-strings) on how the message de
 
 Example:
 
-    {
-      "id": "HOTLINE",
-      "name": { "en": "Statistics hotline" },
-      "department": { "en": "Statistics hotline" },
-      "role": { "en": "Statistics hotline" },
-      "telephones": [ "+00 0 00 00 00 00" ],
-      "faxes": [ "+00 0 00 00 00 01" ],
-      "uris": [ "www.xyz.org" ],
-      "emails": [ "statistics@xyz.org" ]
-    }
+	{
+		"id": "HOTLINE",
+		"name": { "en": "Statistics hotline" },
+		"department": { "en": "Statistics hotline" },
+		"role": { "en": "Statistics hotline" },
+		"telephones": [ "+00 0 00 00 00 00" ],
+		"faxes": [ "+00 0 00 00 00 01" ],
+		"uris": [ "www.xyz.org" ],
+		"emails": [ "statistics@xyz.org" ]
+	}
 
 ### receiver
 
 *Object* *optional*. Information about the party that is receiving the message. 
 This can be useful if the WS requires authentication. Receiver contains the 
-same fields as [sender](#sender).
+same fields as *[sender](#sender)*.
 
 ### link
 
-See the section on [linking mechanism](#linking-mechanism) for all information on links.
+See the section on *[linking mechanism](#linking-mechanism)* for all information on links.
 
 ## data
 
 *Object* *optional*. Header contains the message's “primary data”.
 
-* metadataSets - *Array* *optional*. This field is an array of "metadataSet"](#metadataSet)* objects. A metadata set contains a collection of reported metadata against a set of values for a given full or partial target identifier, as described in a metadata structure definition. The metadata set may contain reported metadata for multiple report structures defined in a metadata structure definition.
+* metadataSets - *Array* *optional*. This field is an array of *[metadataSet](#metadataSet)* objects. A metadata set contains a collection of reported metadata against a set of values for a given full or partial target identifier, as described in a metadata structure definition. The metadata set may contain reported metadata for multiple report structures defined in a metadata structure definition.
 
 Example:
 
-    "data": {
-      "metadataSets": [
-        {
-          # metadataSet object #
-        }
-      ]
-    }
+	"data": {
+		"metadataSets": [
+			{
+				# metadataSet object #
+			}
+		]
+	}
 
 ### metadataSet
 
@@ -182,10 +182,12 @@ Example:
 The `metadataSet` properties are:
 
 * action - *String* *optional*. Action provides a list of actions, describing the intention of the data transmission from the sender's side.
-- `Append` - this is an incremental update for an existing `dataSet` or the provision of new data or documentation (attribute values) formerly absent. If any of the supplied data or metadata is already present, it will not replace these data.
-- `Replace` - data are to be replaced, and may also include additional data to be appended.
-- `Delete` - data are to be deleted.
-- `Information` (default) - data are being exchanged for informational purposes only, and not meant to update a system.
+
+	- `Append` - this is an incremental update for an existing `dataSet` or the provision of new data or documentation (attribute values) formerly absent. If any of the supplied data or metadata is already present, it will not replace these data.
+	- `Replace` - data are to be replaced, and may also include additional data to be appended.
+	- `Delete` - data are to be deleted.
+	- `Information` (default) - data are being exchanged for informational purposes only, and not meant to update a system.
+
 * publicationPeriod - *String* *optional*. The publicationPeriod specifies the period of publication of the data in terms of whatever provisioning agreements might be in force (i.e., "2005-Q1" if that is the time of publication for a `metadataSet` published on a quarterly basis).
 * publicationYear - *String* *optional*. The publicationYear holds the ISO 8601 four-digit year.
 * reportingBegin - *String* *optional*. The start of the time period covered by the message.
@@ -202,7 +204,7 @@ The `metadataSet` properties are:
 
 Example:
 
-    {
+	{
 		"action": "Information",
 		"publicationPeriod": "2018-Q1",
 		"publicationYear": "2018",
@@ -213,14 +215,14 @@ Example:
 		"validFrom": "2018-04-01",
 		"validTo": "2018-07-01",
 		"annotations": [
-		    {
-			    # annotation object #
-		    }
+			{
+				# annotation object #
+			}
 		],
 		"links": [
-		    {
-			    # link object #
-		    }
+			{
+				# link object #
+			}
 		],
 		"name": {
 			"en": "Metadata set"
@@ -228,7 +230,7 @@ Example:
 		"dataProvider": "urn:sdmx:org.sdmx.infomodel.dataproviderscheme.DataproviderScheme=IMF:IMF(1.0).IMF_DISS",
 		"reports": [
 			{
-                # report object #
+				# report object #
 			}
 		]
 	}
@@ -246,15 +248,15 @@ Example:
 Example:
 
 	{
-	  "id": "74747",
-	  "title": "Sample annotation",
-	  "type": "reference",
-	  "text": { "en": "Sample annotation text" },
-	  "links": [
-	    {
-	      # link object #
-	    }
-	  ]
+		"id": "74747",
+		"title": "Sample annotation",
+		"type": "reference",
+		"text": { "en": "Sample annotation text" },
+		"links": [
+			{
+				# link object #
+			}
+		]
 	}
 
 #### link
@@ -442,10 +444,10 @@ See the section on [localised strings](#localised-strings) on how the message de
 
 Example:
 
-    {
-      "code": 150,
-      "title": { "en": "Invalid number of items in the item parameter" }
-    }
+	{
+		"code": 150,
+		"title": { "en": "Invalid number of items in the item parameter" }
+	}
 
 # Linking mechanism
 
@@ -463,30 +465,30 @@ Example:
 
 Examples:
 
-    {
-      "href": "https://registry.sdmx.org/ws/rest/datastructure/ECB/ECB_EXR1",
-      "rel": "self",
-      "uri": "http://www.xyz.org/pdf/0123456789"
-    }
+	{
+		"href": "https://registry.sdmx.org/ws/rest/datastructure/ECB/ECB_EXR1",
+		"rel": "self",
+		"uri": "http://www.xyz.org/pdf/0123456789"
+	}
     
-    {
-      "href": "https://registry.sdmx.org/ws/rest/dataflow/ECB.DISS/BSI_PUB/1.0",
-      "rel": "dataflow",
-      "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.dataflow=ECB.DISS:BSI_PUB(1.0)"
-    }
+	{
+		"href": "https://registry.sdmx.org/ws/rest/dataflow/ECB.DISS/BSI_PUB/1.0",
+		"rel": "dataflow",
+		"urn": "urn:sdmx:org.sdmx.infomodel.datastructure.dataflow=ECB.DISS:BSI_PUB(1.0)"
+	}
     
-    {
-       "href": "https://registry.sdmx.org/FusionRegistry/ws/rest/provisionagreement/ESTAT/PA_NAMAIN_IDC_N",
-       "rel": "provisionagreement"
-    }
+	{
+		"href": "https://registry.sdmx.org/FusionRegistry/ws/rest/provisionagreement/ESTAT/PA_NAMAIN_IDC_N",
+		"rel": "provisionagreement"
+	}
 
-    {
-      "href": "https://registry.sdmx.org/help.html",
-      "rel": "help",
-      "title": { "en": "Documentation about the SDMX Global Registry" },
-      "type": "text/html",
-      "hreflang": "en"
-    }
+	{
+		"href": "https://registry.sdmx.org/help.html",
+		"rel": "help",
+		"title": { "en": "Documentation about the SDMX Global Registry" },
+		"type": "text/html",
+		"hreflang": "en"
+	}
 
 Collections of links can be attached to various elements in SDMX-JSON.
 
@@ -526,10 +528,10 @@ The snippet below shows an example of an `error` object, extended with a `wsCust
 
 	```
 	"errors": [
-	  {
-		"code": 150,
-		"title": { "en": "Invalid number of items in the item parameter" }
-		"wsCustomErrorCode": 39272
-	  }
+		{
+			"code": 150,
+			"title": { "en": "Invalid number of items in the item parameter" }
+			"wsCustomErrorCode": 39272
+		}
 	]
 	```
