@@ -283,9 +283,19 @@
 						"pattern": "^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$"
 					}
 				},
-				"required": [
-					"href",
-					"rel"
+				"anyOf": [
+					{
+						"required": [
+							"href",
+							"rel"
+						]
+					},
+					{
+						"required": [
+							"urn",
+							"rel"
+						]
+					}
 				]
 			}
 		},
@@ -695,7 +705,24 @@
 					"$ref": "#/definitions/urn",
 					"description": "Urn reference to a primary measure locally, where the reference to the data structure definition which defines the primary measure is provided in another context (for example the data structure definition in which the reference occurs). This is used to specify that the value of the attribute is dependent upon the observed value. An attribute with this relationship will always be treated as an observation level attribute."
 				}
-			}
+			},
+			"anyOf": [
+				{
+					"required": [
+						"dimensions"
+					]
+				},
+				{
+					"required": [
+						"none"
+					]
+				},
+				{
+					"required": [
+						"primaryMeasure"
+					]
+				}
+			]
 		},
 		"uri": {
 			"description": "Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. Providing the link to the SDMX-JSON schema is recommended.",
