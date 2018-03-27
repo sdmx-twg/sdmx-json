@@ -323,11 +323,8 @@
 					"type": "string"
 				},
 				"text": {
-					"items": {
-						"$ref": "#/definitions/textType",
-						"description": "AnnotationText holds a language-specific string containing the text of the annotation."
-					},
-					"type": "array"
+					"$ref": "#/definitions/textType",
+					"description": "AnnotationText holds a language-specific string containing the text of the annotation."
 				},
 				"title": {
 					"description": "AnnotationTitle provides a title for the annotation.",
@@ -352,7 +349,7 @@
 				"Delete",
 				"Information"
 			],
-			"pattern": "^([\\d\\--\\.\\:A-Z_a-z·À-ÖØ-öø-ͽͿ-ٟ٪-ۯۺ-޿ߊ-॥॰-৥ৰ-੥ੰ-૥૰-୥୰-௥௰-౥౰-೥೰-൥൰-๏๚-໏໚-༟༪-ဿ၊-ႏႚ-៟៪-᠏᠚-᥅ᥐ-᧏᧚-᩿᪊-᪏᪚-᭏᭚-ᮯᮺ-᰿᱊-ᱏᱚ-῿‌-‍‿-⁀⁰-↏Ⰰ-⿯、-ꘟꘪ-꣏꣚-ꣿꤊ-ꧏ꧚-꩏꩚-꯯꯺-퟿豈-﷏ﷰ-／：-�𐀀-𐒟𐒪-𑁥𑁰-𝟍𝠀-󯿿]+)$",
+			"pattern": "^[-._:A-Za-z0-9]+$",
 			"type": "string"
 		},
 		"BasicTimePeriodType": {
