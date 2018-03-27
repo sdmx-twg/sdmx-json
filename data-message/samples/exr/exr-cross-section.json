@@ -3,6 +3,7 @@
         "schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/develop/data-message/tools/schemas/1.0/sdmx-json-data-schema.json",
         "id": "62b5f19d-f1c9-495d-8446-a3661ed24753",
         "prepared": "2012-11-29T08:40:26Z",
+        "content-language": [ "en", "fr-fr" ],
         "sender": {
             "id": "ECB",
             "name": {"en": "European Central Bank"}
@@ -75,6 +76,7 @@
                     "name": {"en": "Time period or range"},
                     "keyPosition": 5,
                     "role": "TIME_PERIOD",
+                    "keyPosition": 5,
                     "values": [
                         {
                             "id": "2013-01-18",

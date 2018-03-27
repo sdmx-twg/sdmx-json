@@ -3,6 +3,10 @@
         "schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/develop/data-message/tools/schemas/1.0/sdmx-json-data-schema.json",
         "id": "62b5f19d-f1c9-495d-8446-a3661ed24753",
         "prepared": "2012-11-29T08:40:26Z",
+        "content-language": [
+            "en",
+            "fr-fr"
+        ],
         "sender": {
             "id": "ECB",
             "name": {"en": "European Central Bank"}
@@ -108,30 +112,29 @@
             },
             "attributes": {
                 "dataSet": [{
-	                    "id": "TIME_FORMAT",
-	                    "name": {"en": "Time Format"},
-	                    "description": {"en": "Description for the attribute"},
-						"relationship": {
-							"none": {
-							}
-						},
-	                    "role": "TIME_FORMAT",
-	                    "default": "P1D",
-	                    "values": [{
-	                        "id": "P1D",
-	                        "name": {"en": "Daily"}
-	                    }]
-	                }],
+                    "id": "TIME_FORMAT",
+                    "name": {"en": "Time Format"},
+                    "description": {"en": "Description for the attribute"},
+                    "relationship": {"none": {}},
+                    "role": "TIME_FORMAT",
+                    "default": "P1D",
+                    "values": [{
+                        "id": "P1D",
+                        "name": {"en": "Daily"}
+                    }]
+                }],
                 "series": [],
                 "observation": [
                     {
                         "id": "TITLE",
                         "name": {"en": "Series title"},
-						"relationship": {
-							"dimensions": [
-								"FREQ", "CURRENCY", "CURRENCY_DENOM", "EXR_TYPE", "EXR_SUFFIX"
-							]
-						},
+                        "relationship": {"dimensions": [
+                            "FREQ",
+                            "CURRENCY",
+                            "CURRENCY_DENOM",
+                            "EXR_TYPE",
+                            "EXR_SUFFIX"
+                        ]},
                         "role": "TITLE",
                         "values": [
                             {"name": {"en": "New Zealand dollar (NZD)"}},
