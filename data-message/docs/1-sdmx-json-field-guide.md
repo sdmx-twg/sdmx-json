@@ -54,19 +54,19 @@ The members data and errors MUST NOT coexist in the same message.
 
 Example:
 
-    {
-      "meta": {
-          # meta object #
-      },
-      "data": {
-          # data object #
-      },
-      "errors": [
-        {
-          # error object #
-        }
-      ]
-    }
+	{
+		"meta": {
+			# meta object #
+		},
+		"data": {
+			# data object #
+		},
+		"errors": [
+			{
+				# error object #
+			}
+		]
+	}
 
 ## meta
 
@@ -84,27 +84,27 @@ Any members MAY be specified within `meta` objects.
 
 Example:
 
-    "meta": {
-      "schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/sdmx-json-data-schema.json",
-      "copyright": "Copyright 2017 Statistics hotline",
-      "id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
-      "prepared": "2018-01-03T12:54:12",
-      "test": false,
-      "content-languages": [ "en", "fr-fr" ],
-      "sender: {
-        # sender object #
-      },
-      "receivers": [
-        {
-          # receiver object #
-        }
-      ],
-      "links": [
-        {
-          # link object #
-        }
-      ]
-    }
+	"meta": {
+		"schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/sdmx-json-data-schema.json",
+		"copyright": "Copyright 2017 Statistics hotline",
+		"id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
+		"prepared": "2018-01-03T12:54:12",
+		"test": false,
+		"content-languages": [ "en", "fr-fr" ],
+		"sender: {
+			# sender object #
+		},
+		"receivers": [
+			{
+				# receiver object #
+			}
+		],
+		"links": [
+			{
+				# link object #
+			}
+		]
+	}
 
 ### sender
 
@@ -117,17 +117,17 @@ Sender contains the following fields:
 
 Example:
 
-    "sender": {
-      "id": "ECB",
-      “name”: {
-          # name object #
-      },
-      "contacts": [
-        {
-          # contact objects #
-        }
-      ]
-    }
+	"sender": {
+		"id": "ECB",
+		“name”: {
+			# name object #
+		},
+		"contacts": [
+			{
+				# contact objects #
+			}
+		]
+	}
 
 #### name
 
@@ -139,11 +139,11 @@ See the section on [localised strings](#localised-strings) on how the message de
 
 Example:
 
-    { 
-      "en": "This is an English name",
-      "en-GB": "This is a British name",
-      "fr": "C'est un nom français"
-    }
+	{ 
+		"en": "This is an English name",
+		"en-GB": "This is a British name",
+		"fr": "C'est un nom français"
+	}
 
 #### contact
 
@@ -164,16 +164,16 @@ See the section on [localised strings](#localised-strings) on how the message de
 
 Example:
 
-    {
-      "id": "HOTLINE",
-      "name": { "en": "Statistics hotline" },
-      "department": { "en": "Statistics hotline" },
-      "role": { "en": "Statistics hotline" },
-      "telephones": [ "+00 0 00 00 00 00" ],
-      "faxes": [ "+00 0 00 00 00 01" ],
-      "uris": [ "www.xyz.org" ],
-      "emails": [ "statistics@xyz.org" ]
-    }
+	{
+		"id": "HOTLINE",
+		"name": { "en": "Statistics hotline" },
+		"department": { "en": "Statistics hotline" },
+		"role": { "en": "Statistics hotline" },
+		"telephones": [ "+00 0 00 00 00 00" ],
+		"faxes": [ "+00 0 00 00 00 01" ],
+		"uris": [ "www.xyz.org" ],
+		"emails": [ "statistics@xyz.org" ]
+	}
 
 ### receiver
 
@@ -194,16 +194,16 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 Example:
 
-    "data": {
-      "structure": {
-          # structure object #
-      },
-      "dataSets": [
-        {
-          # dataSet object #
-        }
-      ]
-    }
+	"data": {
+		"structure": {
+			# structure object #
+		},
+		"dataSets": [
+			{
+				# dataSet object #
+			}
+		]
+	}
 
 ## structure
 
@@ -219,24 +219,24 @@ used in the message and also describes to which level in the hierarchy (`dataSet
 
 Example:
 
-    "structure": {
-        "links": [
-          {
-            # link object #
-          }
-        ],
-        "dimensions": {
-            # dimensions object #
-        },
-        "attributes": {
-            # attributes object #
-        },
-        "annotations": [
-          {
-            # annotation object #
-          }
-        ]
-    }
+	"structure": {
+		"links": [
+			{
+				# link object #
+			}
+		],
+		"dimensions": {
+			# dimensions object #
+		},
+		"attributes": {
+			# attributes object #
+		},
+		"annotations": [
+			{
+				# annotation object #
+			}
+		]
+	}
 
 ### link
 
@@ -256,40 +256,40 @@ to which these dimensions/attributes are attached.
 
 Example:
 
-    "dimensions": {
-        "dataSet": [
-          {
-            # component object #
-          }
-        ],
-        "series": [
-          {
-            # component object #
-          }
-        ],
-        "observation": [
-          {
-            # component object #
-          }
-        ]
-    }
-    "attributes": {
-        "dataSet": [
-          {
-            # component object #
-          }
-        ],
-        "series": [
-          {
-            # component object #
-          }
-        ],
-        "observation": [
-          {
-            # component object #
-          }
-        ]
-    }
+	"dimensions": {
+		"dataSet": [
+			{
+				# component object #
+			}
+		],
+		"series": [
+			{
+				# component object #
+			}
+		],
+		"observation": [
+			{
+				# component object #
+			}
+		]
+	}
+	"attributes": {
+		"dataSet": [
+			{
+				# component object #
+			}
+		],
+		"series": [
+			{
+				# component object #
+			}
+		],
+		"observation": [
+			{
+				# component object #
+			}
+		]
+	}
 
 #### component
 
@@ -299,10 +299,11 @@ as well as the list of `values` used in the message for this particular componen
 Each of the components may contain the following fields:
 
 * id - *String*. Identifier for the component. 
-* name - *Object*. Human-readable localised *[names](#name)* for the component.
-* description - *Object*. human-readable localised descriptions (see *[names](#name)*) for the component.
-* keyPosition - *Number*  *optional*. **This field is mandatory for `dimensions` but not to be supplied for `attributes`.** Indicates the position of the `dimension` in the Data Structure Definition, starting at 0. It needs to be provided also for the special `dimensions` such as Time or Measure dimensions. The information in this field is consistent with the order of `dimensions` in the "key" parameter string (i.e. D.USD.EUR.SP00.A) for data queries in the SDMX API. 
+* name - *Object* *optional*. Human-readable localised *[names](#name)* for the component.
+* description - *Object* *optional*. Human-readable localised descriptions (see *[names](#name)*) for the component.
+* keyPosition - *Number*. **This field is mandatory for `dimensions` but not to be supplied for `attributes`.** Indicates the position of the `dimension` in the Data Structure Definition, starting at 0. It needs to be provided also for the special `dimensions` such as Time or Measure dimensions. The information in this field is consistent with the order of `dimensions` in the "key" parameter string (i.e. D.USD.EUR.SP00.A) for data queries in the SDMX API. 
 * roles - *Array* of *String*s *optional*. Defines the component role(s), if any. Roles are represented by the id of a concept defined as [SDMX cross-domain concept](https://sdmx.org/wp-content/uploads/01_sdmx_cog_annex_1_cdc_2009.pdf). Several of the concepts defined as SDMX cross-domain concepts are useful for data visualisation, such as for example, the series title ("TITLE"), the unit of measure ("UNIT_MEASURE"), the number of decimals to be displayed ("DECIMALS"), the  country or geographic reference area ("REF_AREA", e.g. when using maps), the period of time to which the measured observation refers ("REF_PERIOD"), the time interval at which observations occur over a given time period ("FREQ"), etc. It is strongly recommended to identify any component that can be useful for data visualisation purposes by using the appropriate SDMX cross-domain concept as role.
+* relationship - *Object* *optional*. *[Attribute relationship](#attribute-relationship)* (**valid for `attributes` only!**) describes how the value of this attribute varies with the values of other components. This relationship expresses the attachment level of the attribute as defined in the data structure definition. Depending on the message context (especially the data query) an attribute value can however be attached physically in the message at a different level.
 * default - *String* or *Number* *optional*. Defines a default `value` for the component (**valid for `attributes` only!**). If no value is provided in the data part of the message then this value applies.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the component.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the component. Indices refer back to the array of *annotations* in the structure field.
@@ -312,25 +313,73 @@ See the section on [localised strings](#localised-strings) on how the message de
 
 Example:
 
-    {
-      "id": "FREQ",
-      "name": { "en": "Frequency" },
-      "description": { "en": "The time interval at which observations occur over a given time period." },
-      "keyPosition": 0,
-      "role": [ "FREQ" ],
-      "default": "A",
-      "links": [
-        {
-          # link object #
-        }
-      ],
-      "annotations": [ 2, 35 ],
-      "values": [
-        {
-          # component value object #
-        }
-      ]
-    }
+	{
+		"id": "FREQ",
+		"name": { "en": "Frequency" },
+		"description": { "en": "The time interval at which observations occur over a given time period." },
+		"keyPosition": 0,
+		"role": [ "FREQ" ],
+		"default": "A",
+		"links": [
+			{
+				# link object #
+			}
+		],
+		"annotations": [ 2, 35 ],
+		"values": [
+			{
+				# component value object #
+			}
+		]
+	}
+
+	{
+		"id": "SOURCE",
+		"name": { "en": "Source" },
+		"description": { "en": "The source of the data depending on the time period." },
+		"relationship": {
+			# attribute-relationship object #
+		},
+		"default": "MAFF_Agricultural Statistics",
+		"links": [
+			{
+				# link object #
+			}
+		],
+		"annotations": [ 2, 35 ],
+		"values": [
+			{
+				# component value object #
+			}
+		]
+	}
+
+##### attribute relationship
+
+*Object* *optional*. The attribute's relationship defines the relationship between an attribute and other data structure definition components as defined in the data structure definition. This is also called "attachment level". Depending on the message context (especially the data query) an attribute value can however be attached physically in the message at a different level.
+
+* dimensions - *Array* of *String*s *optional*. One or more URN references to (a) local dimension(s) in the data structure definition on which the value of this attribute depends. 
+* none - Empty *Object* *optional*. This means that value of the attribute will not vary with any of the other data structure components.
+* primaryMeasure - *String* *optional*. URN reference to a primary measure locally as defined in the data structure definition. This is used to specify that the value of the attribute is dependent upon the observed value.
+
+Note that relationships defined in data structure definitions through `attachmentGroups` or a `group` are to be resolved by the server conveniently for the client into above `dimensions`.
+
+Examples:
+
+	{
+		"dimensions": [
+			"FREQ", "CURRENCY"
+		]
+	}
+
+	{
+		"none": {}
+	}
+
+	{
+		"primaryMeasure": "OBS_VALUE"
+	}
+
 
 ##### link
 
@@ -341,8 +390,8 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 *Object* *optional*. A particular value for a component in a message. 
 
 * id - *String*. Unique identifier for a component value.
-* name - *Object*. Human-readable localised *[names](#name)* for the component value.
-* description - *Object*. human-readable localised descriptions (see *[names](#name)*) of the component value. The description is typically longer than the text provided for the name field.
+* name - *Object* *optional*. Human-readable localised *[names](#name)* for the component value.
+* description - *Object* *optional*. Human-readable localised descriptions (see *[names](#name)*) of the component value. The description is typically longer than the text provided for the name field.
 * start, end - *String* *optional*. Start and end are instances of time that define the actual Gregorian calendar period covered by the values for the time dimension. The algorithm for computing start and end fields for any supported reporting period is defined in the SDMX Technical Notes. These fields should be used only when the component value represents one of the values for the time dimension. Values are considered as inclusive both for the start field and the end field. Values must follow the ISO 8601 syntax for combined dates and times, including time zone. These fields are useful for visualisation tools, when selecting the appropriate point in time for the time axis. Statistical data, can be collected, for example, at the beginning, the middle or the end of the period, or can represent the average of observations through the period. Based on this information and using the start and end fields, it is easy to get or calculate the desired point in time to be used for the time axis.
 * parent - *String* *optional*. Contains the ID for the parent of the component value (which is itself a component value). **If specified, the parent component value should be included in the component value array even if the message does not contain data for the parent component value itself.** Parents can be included recursively until reaching the rool level.
 * order - *Integer* *optional*. Contains the original order number of the component value enabling the reconstruction of the ordered component value hierarchy. Note that, to allow for a streamed message generation, the orders of observations and of component values in the component value array are not significant.
@@ -353,21 +402,21 @@ See the section on [localised strings](#localised-strings) on how the message de
 
 Example:
 
-    {
-        "id": "2010",
-        "name": { "en": "2010" },
-        "description": { "en": "Description for 2010." },
-        "start": "2010-01-01T00:00Z",
-        "end": "2010-12-31T23:59:59Z",
-        "parent": "T",
-        "order": 56,
-        "links": [
-          {
-            # link object #
-          }
-        ],
-        "annotations": [ 5, 49 ]
-    }
+	{
+		"id": "2010",
+		"name": { "en": "2010" },
+		"description": { "en": "Description for 2010." },
+		"start": "2010-01-01T00:00Z",
+		"end": "2010-12-31T23:59:59Z",
+		"parent": "T",
+		"order": 56,
+		"links": [
+			{
+				# link object #
+			}
+		],
+		"annotations": [ 5, 49 ]
+	}
 
 ###### link
 
@@ -387,17 +436,17 @@ See the section on [localised strings](#localised-strings) on how the message de
 
 Example:
 
-    {
-      "title": "Sample annotation",
-      "type": "reference",
-	  "text": { "en": "Sample annotation text" },
-      "id": "74747",
-      "links": [
-        {
-          # link object #
-        }
-      ]
-    }
+	{
+		"title": "Sample annotation",
+		"type": "reference",
+		"text": { "en": "Sample annotation text" },
+		"id": "74747",
+		"links": [
+			{
+				# link object #
+			}
+		]
+	}
 
 #### link
 
@@ -454,41 +503,41 @@ For information on how to handle the indices for `annotations`, `attributes` or
 
 Examples:
 
-    {
-      "action": "Information",
-      "reportingBegin": "2012-05-04",
-      "reportingEnd": "2012-06-01",
-      "validFrom": "2012-01-01T10:00:00Z",
-      "validTo": "2013-01-01T10:00:00Z",
-      "publicationYear": "2005",
-      "publicationPeriod": "2005-Q1",
-      "links": [
-        # links array #
-      ],
-      "annotations": [ 3, 42 ],
-      "attributes": [ 0, null, 0 ],
-      "series": {
-        # series object #
-      }
-    }
+	{
+		"action": "Information",
+		"reportingBegin": "2012-05-04",
+		"reportingEnd": "2012-06-01",
+		"validFrom": "2012-01-01T10:00:00Z",
+		"validTo": "2013-01-01T10:00:00Z",
+		"publicationYear": "2005",
+		"publicationPeriod": "2005-Q1",
+		"links": [
+			# links array #
+		],
+		"annotations": [ 3, 42 ],
+		"attributes": [ 0, null, 0 ],
+		"series": {
+			# series object #
+		}
+	}
 
-    {
-      "action": "Information",
-      "reportingBegin": "2012-05-04",
-      "reportingEnd": "2012-06-01",
-      "validFrom": "2012-01-01T10:00:00Z",
-      "validTo": "2013-01-01T10:00:00Z",
-      "publicationYear": "2005",
-      "publicationPeriod": "2005-Q1",
-      "links": [
-        # links array #
-      ],
-      "annotations": [ 3, 42 ],
-      "attributes": [ 0, null, 0 ],
-      "observations": {
-        # observations object #
-      }
-    }
+	{
+		"action": "Information",
+		"reportingBegin": "2012-05-04",
+		"reportingEnd": "2012-06-01",
+		"validFrom": "2012-01-01T10:00:00Z",
+		"validTo": "2013-01-01T10:00:00Z",
+		"publicationYear": "2005",
+		"publicationPeriod": "2005-Q1",
+		"links": [
+			# links array #
+		],
+		"annotations": [ 3, 42 ],
+		"attributes": [ 0, null, 0 ],
+		"observations": {
+			# observations object #
+		}
+	}
 
 ### link
 
@@ -513,159 +562,159 @@ The *value* in the name/value pair is an object containing:
 
 Example:
 
-    /*
-    For this example, to ease understanding, let's consider a CSV format with 
-    horizontal time series (with header row):
- 
-    DIM1,DIM2,Value for 2016,Value for 2017,ATTR1,ATTR2,ANNOT,ATTR3 for 2016,ATTR3 for 2017
-    DIM1_VALUE_1,DIM2_VALUE_1,1.5931,1.5925,ATTR1_VALUE_2,ATTR2_VALUE_1,,ATTR3_VALUE_1,
-    DIM1_VALUE_1,DIM2_VALUE_2,40.3426,40.3000,ATTR1_VALUE_1,,ANNOT_VALUE1,ATTR3_VALUE_1,ATTR3_VALUE_1
-    
-    In SDMX-JSON, using "dimensionAtObservation=TIME_PERIOD" (default) the observations 
-    are presented in a similar way, grouped by time series (with the TIME_PERIOD dimension 
-    at observation level), but dimension and attribute values are replaced by their indices:
-    */
-    
-    "series": {
-      "0:0": {
-        "attributes": [1, 0],
-        "observations": {
-          "0": [1.5931, 0],
-          "1": [1.5925]
-        }
-      },
-      "0:1": {
-        "annotations": [0],
-        "observations": {
-          "0": [40.3426, 0],
-          "1": [40.3000, 0]
-        }
-      }
-    }
-    
-    /*
-    Series 1: "0:0" corresponds to the 2 indices for "DIM1":"DIM1_VALUE_1", "DIM2":"DIM2_VALUE_1"
-              The attributes for this series are: "ATTR1":"ATTR1_VALUE_2", "ATTR2":"ATTR2_VALUE_1"
-              This series has 2 observations:
-              Observation 1: "0" corresponds to the index for "TIME_PERIOD":"2016"
-                             The value for this observation is: 1.5931
-                             The attribute for this observation is: "ATTR3":"ATTR3_VALUE_1"
-              Observation 2: "1" corresponds to the index for "TIME_PERIOD":"2017"
-                             The value for this observation is: 1.5925
-                             The attribute for this observation is: "ATTR3":"ATTR3_VALUE_2" 
-                             (because this is the default value)
-    Series 2: "0:1" corresponds to the 2 indices for "DIM1":"DIM1_VALUE_1", "DIM2":"DIM2_VALUE_2"
-              The annotation for this series is: "ANNOT":"ANNOT_VALUE1"
-              The attributes for this series are: "ATTR1":"ATTR1_VALUE_1" (because this is the default value)
-              This series has 2 observations:
-              Observation 1: "0" corresponds to the index for "TIME_PERIOD":"2016"
-                             The value for this observation is: 40.3426
-                             The attribute for this observation is: "ATTR3":"ATTR3_VALUE_1"
-              Observation 2: "1" corresponds to the index for "TIME_PERIOD":"2017"
-                             The value for this observation is: 40.3000
-                             The attribute for this observation is: "ATTR3":"ATTR3_VALUE_1"
-    */
-    
-    "dimensions": {
-      "dataSet": [],
-      "series": [
-        {
-          "id": "DIM1",
-          "name": { "en": "Dimension 1" },
-          "values": [
-            {
-              "id": "DIM1_VALUE_1",
-              "name": { "en": "Dimension 1 - Value 1 with index 0" }
-            }
-          ]
-        },
-        {
-          "id": "DIM2",
-          "name": { "en": "Dimension 2" },
-          "values": [
-            {
-              "id": "DIM2_VALUE_1",
-              "name": { "en": "Dimension 2 - Value 1 with index 0" }
-            },
-            {
-              "id": "DIM2_VALUE_2",
-              "name": { "en": "Dimension 2 - Value 2 with index 1" }
-            }
-          ]
-        }
-      ],
-      "observation": [
-        {
-          "id": "TIME_PERIOD",
-          "name": { "en": "Time Period" },
-          "values": [
-            {
-              "id": "2016",
-              "name": { "en": "2016" }
-            },
-            {
-              "id": "2017",
-              "name": { "en": "2017" }
-            }
-          ]
-        }
-      ]
-    },
-    "attributes": {
-      "dataSet": [],
-      "series": [
-        {
-          "id": "ATTR1",
-          "name": { "en": "Attribute 1" },
-          "default": "ATTR1_VALUE_1",
-          "values": [
-            {
-              "id": "ATTR1_VALUE_1",
-              "name": { "en": "Attribute 1 - Value 1 with index 0" }
-            },
-            {
-              "id": "ATTR1_VALUE_2",
-              "name": { "Attribute 1 - Value 2 with index 1" }
-            }
-          ]
-        },
-        {
-          "id": "ATTR2",
-          "name": { "en": "Attribute 2" },
-          "values": [
-            {
-              "id": "ATTR2_VALUE_1",
-              "name": { "en": "Attribute 2 - Value 1 with index 0" }
-            }
-          ]
-        }
-      ],
-      "observation": [
-        {
-          "id": "ATTR3",
-          "name": { "en": "Attribute 3" },
-          "default": "ATTR3_VALUE_2",
-          "values": [
-            {
-              "id": "ATTR3_VALUE_1",
-              "name": { "en": "Attribute 3 - Value 1 with index 0" }
-            },
-            {
-              "id": "ATTR3_VALUE_2",
-              "name": { "en": "Attribute 3 - Value 2 with index 1" }
-            }
-          ]
-        }
-      ]
-    },
-    "annotations": [
-        {
-          "title": "Annotation 1 - with index 0",
-          "type": "example",
-          "text": { "en": "Sample annotation text" },
-          "id": "ANNOT_VALUE1"
-        }
-    ]
+	/*
+	For this example, to ease understanding, let's consider a CSV format with 
+	horizontal time series (with header row):
+
+	DIM1,DIM2,Value for 2016,Value for 2017,ATTR1,ATTR2,ANNOT,ATTR3 for 2016,ATTR3 for 2017
+	DIM1_VALUE_1,DIM2_VALUE_1,1.5931,1.5925,ATTR1_VALUE_2,ATTR2_VALUE_1,,ATTR3_VALUE_1,
+	DIM1_VALUE_1,DIM2_VALUE_2,40.3426,40.3000,ATTR1_VALUE_1,,ANNOT_VALUE1,ATTR3_VALUE_1,ATTR3_VALUE_1
+
+	In SDMX-JSON, using "dimensionAtObservation=TIME_PERIOD" (default) the observations 
+	are presented in a similar way, grouped by time series (with the TIME_PERIOD dimension 
+	at observation level), but dimension and attribute values are replaced by their indices:
+	*/
+
+	"series": {
+		"0:0": {
+			"attributes": [1, 0],
+			"observations": {
+				"0": [1.5931, 0],
+				"1": [1.5925]
+			}
+		},
+		"0:1": {
+			"annotations": [0],
+			"observations": {
+				"0": [40.3426, 0],
+				"1": [40.3000, 0]
+			}
+		}
+	}
+
+	/*
+	Series 1: "0:0" corresponds to the 2 indices for "DIM1":"DIM1_VALUE_1", "DIM2":"DIM2_VALUE_1"
+	          The attributes for this series are: "ATTR1":"ATTR1_VALUE_2", "ATTR2":"ATTR2_VALUE_1"
+	          This series has 2 observations:
+	          Observation 1: "0" corresponds to the index for "TIME_PERIOD":"2016"
+	                         The value for this observation is: 1.5931
+	                         The attribute for this observation is: "ATTR3":"ATTR3_VALUE_1"
+	          Observation 2: "1" corresponds to the index for "TIME_PERIOD":"2017"
+	                         The value for this observation is: 1.5925
+	                         The attribute for this observation is: "ATTR3":"ATTR3_VALUE_2" 
+	                         (because this is the default value)
+	Series 2: "0:1" corresponds to the 2 indices for "DIM1":"DIM1_VALUE_1", "DIM2":"DIM2_VALUE_2"
+	          The annotation for this series is: "ANNOT":"ANNOT_VALUE1"
+	          The attributes for this series are: "ATTR1":"ATTR1_VALUE_1" (because this is the default value)
+	          This series has 2 observations:
+	          Observation 1: "0" corresponds to the index for "TIME_PERIOD":"2016"
+	                         The value for this observation is: 40.3426
+	                         The attribute for this observation is: "ATTR3":"ATTR3_VALUE_1"
+	          Observation 2: "1" corresponds to the index for "TIME_PERIOD":"2017"
+	                         The value for this observation is: 40.3000
+	                         The attribute for this observation is: "ATTR3":"ATTR3_VALUE_1"
+	*/
+
+	"dimensions": {
+		"dataSet": [],
+		"series": [
+			{
+				"id": "DIM1",
+				"name": { "en": "Dimension 1" },
+				"values": [
+					{
+						"id": "DIM1_VALUE_1",
+						"name": { "en": "Dimension 1 - Value 1 with index 0" }
+					}
+				]
+			},
+			{
+				"id": "DIM2",
+				"name": { "en": "Dimension 2" },
+				"values": [
+					{
+						"id": "DIM2_VALUE_1",
+						"name": { "en": "Dimension 2 - Value 1 with index 0" }
+					},
+					{
+						"id": "DIM2_VALUE_2",
+						"name": { "en": "Dimension 2 - Value 2 with index 1" }
+					}
+				]
+			}
+		],
+		"observation": [
+			{
+				"id": "TIME_PERIOD",
+				"name": { "en": "Time Period" },
+				"values": [
+					{
+						"id": "2016",
+						"name": { "en": "2016" }
+					},
+					{
+						"id": "2017",
+						"name": { "en": "2017" }
+					}
+				]
+			}
+		]
+	},
+	"attributes": {
+		"dataSet": [],
+		"series": [
+			{
+				"id": "ATTR1",
+				"name": { "en": "Attribute 1" },
+				"default": "ATTR1_VALUE_1",
+				"values": [
+					{
+						"id": "ATTR1_VALUE_1",
+						"name": { "en": "Attribute 1 - Value 1 with index 0" }
+					},
+					{
+						"id": "ATTR1_VALUE_2",
+						"name": { "Attribute 1 - Value 2 with index 1" }
+					}
+				]
+			},
+			{
+				"id": "ATTR2",
+				"name": { "en": "Attribute 2" },
+				"values": [
+					{
+						"id": "ATTR2_VALUE_1",
+						"name": { "en": "Attribute 2 - Value 1 with index 0" }
+					}
+				]
+			}
+		],
+		"observation": [
+			{
+				"id": "ATTR3",
+				"name": { "en": "Attribute 3" },
+				"default": "ATTR3_VALUE_2",
+				"values": [
+					{
+						"id": "ATTR3_VALUE_1",
+						"name": { "en": "Attribute 3 - Value 1 with index 0" }
+					},
+					{
+						"id": "ATTR3_VALUE_2",
+						"name": { "en": "Attribute 3 - Value 2 with index 1" }
+					}
+				]
+			}
+		]
+	},
+	"annotations": [
+		{
+			"title": "Annotation 1 - with index 0",
+			"type": "example",
+			"text": { "en": "Sample annotation text" },
+			"id": "ANNOT_VALUE1"
+		}
+	]
 
 
 For information on how to handle the indices for `annotations`, `attributes` or 
@@ -704,106 +753,106 @@ The index for an `annotation` is the index in the array of `annotations` in the 
 
 Example:
 
-    /*
-    For this example, to ease understanding, let's consider data in a 
-    flat CSV format (with header row):
+	/*
+	For this example, to ease understanding, let's consider data in a 
+	flat CSV format (with header row):
  
-    DIM1,DIM2,Observation Value,ATTR1,ATTR2,ANNOT
-    DIM1_VALUE_1,DIM2_VALUE_1,105.6,ATTR1_VALUE_1,,ANNOT_VALUE1
-    DIM1_VALUE_1,DIM2_VALUE_2,105.9,ATTR1_VALUE_2,,
-    
-    In SDMX-JSON, the observations are presented in a similar flattened way, 
-    but dimension and attribute values are replaced by their indices:
-    */
-    
-    "observations": {
-      "0:0": [105.6, 0, null, 0],
-      "0:1": [105.9, 1]
-    }
-    
-    /*
-    Observation 1: "0:0" corresponds to the 2 indices for "DIM1":"DIM1_VALUE_1", "DIM2":"DIM2_VALUE_1"
-                   The value for this observation is: 105.6
-                   The attributes for this observation are: 
-                     "ATTR1":"ATTR1_VALUE_1"
-                     "ATTR2":"ATTR2_VALUE_1" (because this is the default value)
-                   The annotation for this observation is: "ANNOT":"ANNOT_VALUE1"
-    Observation 2: "0:1" corresponds to the 2 indices for "DIM1":"DIM1_VALUE_1", "DIM2":"DIM2_VALUE_2"
-                   The value for this observation is: 105.9
-                   The attributes for this observation are: 
-                     "ATTR1":"ATTR1_VALUE_1"
-                     "ATTR2":"ATTR2_VALUE_1" (because this is the default value)
-    */
-    
-    "dimensions": {
-      "dataSet": [],
-      "series": [],
-      "observation": [
-        {
-          "id": "DIM1",
-          "name": { "en": "Dimension 1" },
-          "values": [
-            {
-              "id": "DIM1_VALUE_1",
-              "name": { "en": "Dimension 1 - Value 1 with index 0" }
-            }
-          ]
-        },
-        {
-          "id": "DIM2",
-          "name": { "en": "Dimension 2" },
-          "values": [
-            {
-              "id": "DIM2_VALUE_1",
-              "name": { "en": "Dimension 2 - Value 1 with index 0" }
-            },
-            {
-              "id": "DIM2_VALUE_2",
-              "name": { "en": "Dimension 2 - Value 2 with index 1" }
-            }
-          ]
-        }
-      ]
-    },
-    "attributes": {
-      "dataSet": [],
-      "series": [],
-      "observation": [
-        {
-          "id": "ATTR1",
-          "name": { "en": "Attribute 1" },
-          "values": [
-            {
-              "id": "ATTR1_VALUE_1",
-              "name": { "en": "Attribute 1 - Value 1 with index 0" }
-            },
-            {
-              "id": "ATTR1_VALUE_2",
-              "name": { "en": "Attribute 1 - Value 2 with index 1" }
-            }
-          ]
-        },
-        {
-          "id": "ATTR2",
-          "name": { "en": "Attribute 2" },
-          "default": "ATTR2_VALUE_1",
-          "values": [
-            {
-              "id": "ATTR2_VALUE_1",
-              "name": { "en": "Attribute 2 - Value 1 with index 0" }
-            }
-          ]
-        }
-      ]
-    }
-    "annotations": [
-        {
-          "title": "Annotation 1 - with index 0",
-          "type": "example",
-          "text": { "en": "Sample annotation text" },
-          "id": "ANNOT_VALUE1"
-        }
-    ]
+	DIM1,DIM2,Observation Value,ATTR1,ATTR2,ANNOT
+	DIM1_VALUE_1,DIM2_VALUE_1,105.6,ATTR1_VALUE_1,,ANNOT_VALUE1
+	DIM1_VALUE_1,DIM2_VALUE_2,105.9,ATTR1_VALUE_2,,
+
+	In SDMX-JSON, the observations are presented in a similar flattened way, 
+	but dimension and attribute values are replaced by their indices:
+	*/
+
+	"observations": {
+		"0:0": [105.6, 0, null, 0],
+		"0:1": [105.9, 1]
+	}
+
+	/*
+	Observation 1: "0:0" corresponds to the 2 indices for "DIM1":"DIM1_VALUE_1", "DIM2":"DIM2_VALUE_1"
+	               The value for this observation is: 105.6
+	               The attributes for this observation are: 
+	                 "ATTR1":"ATTR1_VALUE_1"
+	                 "ATTR2":"ATTR2_VALUE_1" (because this is the default value)
+	               The annotation for this observation is: "ANNOT":"ANNOT_VALUE1"
+	Observation 2: "0:1" corresponds to the 2 indices for "DIM1":"DIM1_VALUE_1", "DIM2":"DIM2_VALUE_2"
+	               The value for this observation is: 105.9
+	               The attributes for this observation are: 
+	                 "ATTR1":"ATTR1_VALUE_1"
+	                 "ATTR2":"ATTR2_VALUE_1" (because this is the default value)
+	*/
+
+	"dimensions": {
+		"dataSet": [],
+		"series": [],
+		"observation": [
+			{
+				"id": "DIM1",
+				"name": { "en": "Dimension 1" },
+				"values": [
+					{
+						"id": "DIM1_VALUE_1",
+						"name": { "en": "Dimension 1 - Value 1 with index 0" }
+					}
+				]
+			},
+			{
+				"id": "DIM2",
+				"name": { "en": "Dimension 2" },
+				"values": [
+					{
+						"id": "DIM2_VALUE_1",
+						"name": { "en": "Dimension 2 - Value 1 with index 0" }
+					},
+					{
+						"id": "DIM2_VALUE_2",
+						"name": { "en": "Dimension 2 - Value 2 with index 1" }
+					}
+				]
+			}
+		]
+	},
+	"attributes": {
+		"dataSet": [],
+		"series": [],
+		"observation": [
+			{
+				"id": "ATTR1",
+				"name": { "en": "Attribute 1" },
+				"values": [
+					{
+						"id": "ATTR1_VALUE_1",
+						"name": { "en": "Attribute 1 - Value 1 with index 0" }
+					},
+					{
+						"id": "ATTR1_VALUE_2",
+						"name": { "en": "Attribute 1 - Value 2 with index 1" }
+					}
+				]
+			},
+			{
+				"id": "ATTR2",
+				"name": { "en": "Attribute 2" },
+				"default": "ATTR2_VALUE_1",
+				"values": [
+					{
+						"id": "ATTR2_VALUE_1",
+						"name": { "en": "Attribute 2 - Value 1 with index 0" }
+					}
+				]
+			}
+		]
+	},
+	"annotations": [
+		{
+			"title": "Annotation 1 - with index 0",
+			"type": "example",
+			"text": { "en": "Sample annotation text" },
+			"id": "ANNOT_VALUE1"
+		}
+	]
 
 For information on how to handle the indices for `observations` 
 see the section dedicated to [handling component values](#handling-component-values).
@@ -823,10 +872,10 @@ See the section on [localised strings](#localised-strings) on how the message de
 
 Example:
 
-    {
-      "code": 150,
-      "title": { "en": "Invalid number of dimensions in the key parameter" }
-    }
+	{
+		"code": 150,
+		"title": { "en": "Invalid number of dimensions in the key parameter" }
+	}
 
 # Linking mechanism
 
@@ -844,30 +893,30 @@ Example:
 
 Examples:
 
-    {
-      "href": "https://registry.sdmx.org/ws/rest/datastructure/ECB/ECB_EXR1",
-      "rel": "self",
-      "uri": "http://www.xyz.org/pdf/0123456789"
-    }
+	{
+		"href": "https://registry.sdmx.org/ws/rest/datastructure/ECB/ECB_EXR1",
+		"rel": "self",
+		"uri": "http://www.xyz.org/pdf/0123456789"
+	}
     
-    {
-      "href": "https://registry.sdmx.org/ws/rest/dataflow/ECB.DISS/BSI_PUB/1.0",
-      "rel": "dataflow",
-      "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.dataflow=ECB.DISS:BSI_PUB(1.0)"
-    }
+	{
+		"href": "https://registry.sdmx.org/ws/rest/dataflow/ECB.DISS/BSI_PUB/1.0",
+		"rel": "dataflow",
+		"urn": "urn:sdmx:org.sdmx.infomodel.datastructure.dataflow=ECB.DISS:BSI_PUB(1.0)"
+	}
     
-    {
-       "href": "https://registry.sdmx.org/FusionRegistry/ws/rest/provisionagreement/ESTAT/PA_NAMAIN_IDC_N",
-       "rel": "provisionagreement"
-    }
+	{
+		"href": "https://registry.sdmx.org/FusionRegistry/ws/rest/provisionagreement/ESTAT/PA_NAMAIN_IDC_N",
+		"rel": "provisionagreement"
+	}
 
-    {
-      "href": "https://registry.sdmx.org/help.html",
-      "rel": "help",
-      "title": { "en": "Documentation about the SDMX Global Registry" },
-      "type": "text/html",
-      "hreflang": "en"
-    }
+	{
+		"href": "https://registry.sdmx.org/help.html",
+		"rel": "help",
+		"title": { "en": "Documentation about the SDMX Global Registry" },
+		"type": "text/html",
+		"hreflang": "en"
+	}
 
 Collections of links can be attached to various elements in SDMX-JSON.
 
@@ -886,180 +935,180 @@ The *URL* captured in the `href` attribute can be *absolute* or *relative*. **It
 Let's say that the following data content of a message needs to be processed:
 
 ```json
-{
-    "structure": {
-        "id": "ECB_EXR_WEB",
-        "links": [
-          {
-            "href": "https://sdw-wsrest.ecb.europa.eu/service/dataflow/ECB/EXR/1.0",
-            "rel": "dataflow"
-          }
-        ],
-        "dimensions": {
-            "dataSet": [
-                {
-                    "id": "FREQ",
-                    "name": { "en": "Frequency" },
-                    "keyPosition": 0,
-                    "values": [
-                        {
-                            "id": "D",
-                            "name": { "en": "Daily" }
-                        }
-                    ]
-                },
-                {
-                    "id": "CURRENCY_DENOM",
-                    "name": { "en": "Currency denominator" },
-                    "keyPosition": 2,
-                    "values": [
-                        {
-                            "id": "EUR",
-                            "name": { "en": "Euro" }
-                        }
-                    ]
-                },
-                {
-                    "id": "EXR_TYPE",
-                    "name": { "en": "Exchange rate type" },
-                    "keyPosition": 3,
-                    "values": [
-                        {
-                            "id": "SP00",
-                            "name": { "en": "Spot rate" }
-                        }
-                    ]
-                },
-                {
-                    "id": "EXR_SUFFIX",
-                    "name": { "en": "Series variation - EXR context" },
-                    "keyPosition": 4,
-                    "values": [
-                        {
-                            "id": "A",
-                            "name": { "en": "Average or standardised measure" }
-                        }
-                    ]
-                }
-            ],
-            "series": [
-                {
-                    "id": "CURRENCY",
-                    "name": { "en": "Currency" },
-                    "keyPosition": 1,
-                    "values": [
-                        {
-                            "id": "NZD",
-                            "name": { "en": "New Zealand dollar" }
-                        }, {
-                            "id": "RUB",
-                            "name": { "en": "Russian rouble" }
-                        }
-                    ]
-                }
-            ],
-            "observation": [
-                {
-                    "id": "TIME_PERIOD",
-                    "name": { "en": "Time period or range" },
-                    "values": [
-                        {
-                            "id": "2013-01-18",
-                            "name": { "en": "2013-01-18" }
-                        }, {
-                            "id": "2013-01-21",
-                            "name": { "en": "2013-01-21" }
-                        }
-                    ]
-                }
-            ]
-        },
-        "attributes": {
-            "dataSet": [],
-            "series": [
-                {
-                    "id": "TITLE",
-                    "name": { "en": "Series title" },
-                    "values": [
-                        {
-                            "name": { "en": "New zealand dollar (NZD)" }
-                        }, {
-                            "name": { "en": "Russian rouble (RUB)" }
-                        }
-                    ]
-                }
-            ],
-            "observation": [
-                {
-                    "id": "OBS_STATUS",
-                    "name": { "en": "Observation status" },
-                    "values": [
-                        {
-                            "id": "A",
-                            "name": { "en": "Normal value" }
-                        }
-                    ]
-                }
-            ]
-        },
-        "annotations": [
-            {
-              "title": "Sample series annotation title",
-              "type": "example",
-              "text": { "en": "Sample series annotation text" },
-              "id": "ABC123456"
-            },
-            {
-              "title": "Sample observation annotation title",
-              "type": "example",
-              "text": { "en": "Sample observation annotation text" },
-              "id": "XYZ98765"
-            }
-        ]        
-    },
-    "dataSets": [
-        {
-            "action": "Information",
-            "series": {
-                "0": {
-                    "annotations": [0],
-                    "attributes": [0],
-                    "observations": {
-                        "0": [1.5931, 0],
-                        "1": [1.5925, 0]
-                    }
-                },
-                "1": {
-                    "attributes": [1],
-                    "observations": {
-                        "0": [40.3426, 0],
-                        "1": [40.3000, 0, 1]
-                    }
-                }
-            }
-        }
-    ]
-}
+	{
+		"structure": {
+			"id": "ECB_EXR_WEB",
+			"links": [
+				{
+					"href": "https://sdw-wsrest.ecb.europa.eu/service/dataflow/ECB/EXR/1.0",
+					"rel": "dataflow"
+				}
+			],
+			"dimensions": {
+				"dataSet": [
+					{
+						"id": "FREQ",
+						"name": { "en": "Frequency" },
+						"keyPosition": 0,
+						"values": [
+							{
+								"id": "D",
+								"name": { "en": "Daily" }
+							}
+						]
+					},
+					{
+						"id": "CURRENCY_DENOM",
+						"name": { "en": "Currency denominator" },
+						"keyPosition": 2,
+						"values": [
+							{
+								"id": "EUR",
+								"name": { "en": "Euro" }
+							}
+						]
+					},
+					{
+						"id": "EXR_TYPE",
+						"name": { "en": "Exchange rate type" },
+						"keyPosition": 3,
+						"values": [
+							{
+								"id": "SP00",
+								"name": { "en": "Spot rate" }
+							}
+						]
+					},
+					{
+						"id": "EXR_SUFFIX",
+						"name": { "en": "Series variation - EXR context" },
+						"keyPosition": 4,
+						"values": [
+							{
+								"id": "A",
+								"name": { "en": "Average or standardised measure" }
+							}
+						]
+					}
+				],
+				"series": [
+					{
+						"id": "CURRENCY",
+						"name": { "en": "Currency" },
+						"keyPosition": 1,
+						"values": [
+							{
+								"id": "NZD",
+								"name": { "en": "New Zealand dollar" }
+							}, {
+								"id": "RUB",
+								"name": { "en": "Russian rouble" }
+							}
+						]
+					}
+				],
+				"observation": [
+					{
+						"id": "TIME_PERIOD",
+						"name": { "en": "Time period or range" },
+						"values": [
+							{
+								"id": "2013-01-18",
+								"name": { "en": "2013-01-18" }
+							}, {
+								"id": "2013-01-21",
+								"name": { "en": "2013-01-21" }
+							}
+						]
+					}
+				]
+			},
+			"attributes": {
+				"dataSet": [],
+				"series": [
+					{
+						"id": "TITLE",
+						"name": { "en": "Series title" },
+						"values": [
+							{
+								"name": { "en": "New zealand dollar (NZD)" }
+							}, {
+								"name": { "en": "Russian rouble (RUB)" }
+							}
+						]
+					}
+				],
+				"observation": [
+					{
+						"id": "OBS_STATUS",
+						"name": { "en": "Observation status" },
+						"values": [
+							{
+								"id": "A",
+								"name": { "en": "Normal value" }
+							}
+						]
+					}
+				]
+			},
+			"annotations": [
+				{
+					"title": "Sample series annotation title",
+					"type": "example",
+					"text": { "en": "Sample series annotation text" },
+					"id": "ABC123456"
+				},
+				{
+					"title": "Sample observation annotation title",
+					"type": "example",
+					"text": { "en": "Sample observation annotation text" },
+					"id": "XYZ98765"
+				}
+			]        
+		},
+		"dataSets": [
+			{
+				"action": "Information",
+				"series": {
+					"0": {
+						"annotations": [0],
+						"attributes": [0],
+						"observations": {
+							"0": [1.5931, 0],
+							"1": [1.5925, 0]
+						}
+					},
+					"1": {
+						"attributes": [1],
+						"observations": {
+							"0": [40.3426, 0],
+							"1": [40.3000, 0, 1]
+						}
+					}
+				}
+			}
+		]
+	}
 ```
 
 There is one `dataSet` in the message, and it contains two `series`.
 
 ```json
-"0": {
-    "annotations": [0],
-    "attributes": [0],
-    "observations": {
-        "0": [1.5931, 0],
-        "1": [1.5925, 0]
-    }
-},
-"1": {
-    "attributes": [1],
-    "observations": {
-        "0": [40.3426, 0],
-        "1": [40.3000, 0, 1]
-    }
-}
+	"0": {
+		"annotations": [0],
+		"attributes": [0],
+		"observations": {
+			"0": [1.5931, 0],
+			"1": [1.5925, 0]
+		}
+	},
+	"1": {
+		"attributes": [1],
+		"observations": {
+			"0": [40.3426, 0],
+			"1": [40.3000, 0, 1]
+		}
+	}
 ```
 
 The `structure.dimensions` field tells us that, out of the 6 dimensions, 4 have 
@@ -1067,28 +1116,28 @@ the same value for the 2 series and are therefore attached to the `dataSet` leve
 
 We see that, for the first series, we get the value 0:
 
-    "0": { ... }
+	"0": { ... }
 
 From the structure.dimensions.series information, we know that CURRENCY is 
 the (only) series dimension.
 
 ```json
-"series": [
-  {
-    "id": "CURRENCY",
-    "name": "Currency",
-    "keyPosition": 1,
-    "values": [
-      {
-        "id": "NZD",
-        "name": { "en": "New Zealand dollar" }
-      }, {
-        "id": "RUB",
-        "name": { "en": "Russian rouble" }
-      }
-    ]
-  }
-]
+	"series": [
+		{
+			"id": "CURRENCY",
+			"name": "Currency",
+			"keyPosition": 1,
+			"values": [
+				{
+					"id": "NZD",
+					"name": { "en": "New Zealand dollar" }
+				}, {
+					"id": "RUB",
+					"name": { "en": "Russian rouble" }
+				}
+			]
+		}
+	]
 ```
 
 The value "0" identified previously is the index of the item in the 
@@ -1097,27 +1146,27 @@ value is therefore "New Zealand dollar".
 
 Now, for the first observation of the first series, we get the value 0:
 
-    "0": [...],
+	"0": [...],
 
 From the `structure.dimensions.observation` information, we know that 
 TIME_PERIOD is the (only) dimension at `observation` level.
 
 ```json
-"observation": [
-  {
-    "id": "TIME_PERIOD",
-    "name": { "en": "Time period or range" },
-    "values": [
-      {
-        "id": "2013-01-18",
-        "name": { "en": "2013-01-18" }
-      }, {
-        "id": "2013-01-21",
-        "name": { "en": "2013-01-21" }
-      }
-    ]
-  }
-]
+	"observation": [
+		{
+			"id": "TIME_PERIOD",
+			"name": { "en": "Time period or range" },
+			"values": [
+				{
+					"id": "2013-01-18",
+					"name": { "en": "2013-01-18" }
+				}, {
+					"id": "2013-01-21",
+					"name": { "en": "2013-01-21" }
+				}
+			]
+		}
+	]
 ```
 
 The value "0" identified previously is the index of the item in the 
@@ -1127,24 +1176,24 @@ is therefore "2013-01-18".
 Now, for the first (and only) attribute of the first observation of the 
 first series, we get the value 0 (here the last value in array):
 
-    "0": [1.5931, 0],
+	"0": [1.5931, 0],
 
 From the `structure.attributes.observation` information, we know that 
 OBS_STATUS is the (only) attribute at `observation` level.
 
 ```json
-"observation": [
-  {
-    "id": "OBS_STATUS",
-    "name": { "en": "Observation status" },
-    "values": [
-      {
-        "id": "A",
-        "name": { "en": "Normal value" }
-      }
-    ]
-  }
-]
+	"observation": [
+		{
+			"id": "OBS_STATUS",
+			"name": { "en": "Observation status" },
+			"values": [
+				{
+					"id": "A",
+					"name": { "en": "Normal value" }
+				}
+			]
+		}
+	]
 ```
 
 The value 0 identified previously is the index of the item in the 
@@ -1182,11 +1231,11 @@ The snippet below shows an example of an `error` object, extended with
 a `wsCustomErrorCode`:
 
 ```
-"errors": [
-  {
-    "code": 150,
-    "title": { "en": "Invalid number of dimensions in the key parameter" },
-    "wsCustomErrorCode": 39272
-  }
-]
+	"errors": [
+		{
+			"code": 150,
+			"title": { "en": "Invalid number of dimensions in the key parameter" },
+			"wsCustomErrorCode": 39272
+		}
+	]
 ```

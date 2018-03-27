@@ -1,0 +1,279 @@
+{
+    "meta": {
+        "schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/develop/data-message/tools/schemas/1.0/sdmx-json-data-schema.json",
+        "id": "IT1001",
+        "prepared": "2018-03-11T14:30:47",
+        "test": true,
+        "content-languages": ["en"],
+        "sender": {
+            "id": "NIS",
+            "name": {"en": "National Institute of Statistics of Cambodia"}
+        },
+        "receiver": {
+            "id": "IMF",
+            "name": {"en": "International Monetary Fund"}
+        },
+        "links": [{
+            "href": "http://ws-root/data/MA_545,MILLED_RICE,1.0/ASIKHM002+ASIKHM001../?dimensionAtObservation=AllDimensions&startPeriod=2013&endPeriod=2018",
+            "rel": "self"
+        }]
+    },
+    "data": {
+        "dataSets": [{
+            "links": [{
+                "href": "http://ws-root/datastructure/MA_545/AGRI_DSD/1.0",
+                "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=MA_545:AGRI_DSD(1.0)",
+                "rel": "datastructure"
+            }],
+            "action": "Information",
+            "observations": {
+                "0:0": [
+                    350.154,
+                    0
+                ],
+                "0:1": [
+                    389.385,
+                    1
+                ],
+                "0:2": [
+                    395.729,
+                    2
+                ],
+                "0:3": [
+                    433.638,
+                    3
+                ],
+                "1:0": [
+                    442.996,
+                    0
+                ],
+                "1:1": [
+                    426.588,
+                    1
+                ],
+                "1:2": [
+                    479.686,
+                    2
+                ],
+                "1:3": [
+                    522.296,
+                    3
+                ]
+            }
+        }],
+        "structure": {
+            "links": [
+                {
+                    "href": "http://ws-root/datastructure/MA_545/AGRI_DSD/1.0",
+                    "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=MA_545:AGRI_DSD(1.0)",
+                    "rel": "datastructure"
+                },
+                {
+                    "href": "http://ws-root/dataflow/MA_545/MILLED_RICE/1.0",
+                    "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=MA_545:MILLED_RICE(1.0)",
+                    "rel": "dataflow"
+                }
+            ],
+            "name": {"en": "Milled rice"},
+            "description": {"en": "Milled rice description"},
+            "dimensions": {
+                "dataset": [{
+                    "id": "FREQ",
+                    "name": {"en": "Frequency"},
+                    "keyPosition": 2,
+                    "role": "FREQ",
+                    "values": [{
+                        "id": "A",
+                        "name": {"en": "Annual"},
+                        "links": [{
+                            "href": "http://ws-root/codelist/MA_545/FREQ/1.0/A",
+                            "urn": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=MA_545:FREQ(1.0).A",
+                            "rel": "self"
+                        }]
+                    }],
+                    "links": [{
+                        "href": "http://ws-root/codelist/MA_545/FREQ/1.0",
+                        "urn": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=MA_545:FREQ(1.0)",
+                        "rel": "self"
+                    }]
+                }],
+                "series": [],
+                "observation": [
+                    {
+                        "id": "REF_AREA",
+                        "name": {"en": "Reference area"},
+                        "keyPosition": 0,
+                        "role": ["REF_AREA"],
+                        "values": [
+                            {
+                                "id": "ASIKHM001",
+                                "name": {"en": "Banteay Meanchey"},
+                                "parent": "ASIKHM",
+                                "order": 2,
+                                "links": [{
+                                    "href": "http://ws-root/codelist/MA_545/CL_PROVINCES/1.0/ASIKHM001",
+                                    "urn": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=MA_545:CL_PROVINCES(1.0)ASIKHM001",
+                                    "rel": "self"
+                                }],
+                                "annotations": [0]
+                            },
+                            {
+                                "id": "ASIKHM002",
+                                "name": {"en": "Battambang"},
+                                "parent": "ASIKHM",
+                                "order": 1,
+                                "links": [{
+                                    "href": "http://ws-root/codelist/MA_545/CL_PROVINCES/1.0/ASIKHM002",
+                                    "urn": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=MA_545:CL_PROVINCES(1.0).ASIKHM",
+                                    "rel": "self"
+                                }],
+                                "annotations": [1]
+                            },
+                            {
+                                "id": "ASIKHM",
+                                "name": {"en": "Cambodia"},
+                                "order": 0,
+                                "links": [{
+                                    "href": "http://ws-root/codelist/MA_545/CL_PROVINCES/1.0/ASIKHM",
+                                    "urn": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=MA_545:CL_PROVINCES(1.0).ASIKHM",
+                                    "rel": "self"
+                                }]
+                            }
+                        ],
+                        "links": [{
+                            "href": "http://ws-root/codelist/MA_545/CL_PROVINCES/1.0",
+                            "urn": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=MA_545:CL_PROVINCES(1.0)",
+                            "rel": "self"
+                        }]
+                    },
+                    {
+                        "id": "TIME_PERIOD",
+                        "name": {"en": "Time Period"},
+                        "keyPosition": 3,
+                        "role": ["TIME_PERIOD"],
+                        "values": [
+                            {
+                                "start": "2014-01-01T00:00:00Z",
+                                "end": "2014-12-31T23:59:59Z",
+                                "id": "2014",
+                                "name": {"en": "2014"}
+                            },
+                            {
+                                "start": "2015-01-01T00:00:00Z",
+                                "end": "2015-12-31T23:59:59Z",
+                                "id": "2015",
+                                "name": {"en": "2015"}
+                            },
+                            {
+                                "start": "2016-01-01T00:00:00Z",
+                                "end": "2016-12-31T23:59:59Z",
+                                "id": "2016",
+                                "name": {"en": "2016"}
+                            },
+                            {
+                                "start": "2017-01-01T00:00:00Z",
+                                "end": "2017-12-31T23:59:59Z",
+                                "id": "2017",
+                                "name": {"en": "2017"}
+                            }
+                        ]
+                    }
+                ]
+            },
+            "attributes": {
+                "dataset": [
+                    {
+                        "id": "UNIT_MEASURE",
+                        "name": {"en": "Unit of measure"},
+                        "role": ["UNIT_MEASURE"],
+                        "relationship": {"none": {}},
+                        "values": [{
+                            "id": "TONES",
+                            "name": {"en": "Tones"}
+                        }]
+                    },
+                    {
+                        "id": "UNIT_MULT",
+                        "name": {"en": "Unit multiplier"},
+                        "role": ["UNIT_MULT"],
+                        "relationship": {"none": {}},
+                        "values": [{
+                            "id": "3",
+                            "name": {"en": "Thousands"}
+                        }]
+                    },
+                    {
+                        "id": "BASE_PER",
+                        "name": {"en": "Base Period"},
+                        "role": ["BASE_PER"],
+                        "relationship": {"none": {}},
+                        "values": [{
+                            "id": "2010_100",
+                            "name": {"en": "2010=100"}
+                        }]
+                    },
+                    {
+                        "id": "PREF_SCALE",
+                        "name": {"en": "Preferred scale"},
+                        "role": ["PREF_SCALE"],
+                        "relationship": {"none": {}},
+                        "values": [{
+                            "id": "-3",
+                            "name": {"en": "Thousandth"}
+                        }]
+                    },
+                    {
+                        "id": "DECIMALS",
+                        "name": {"en": "Decimals"},
+                        "role": ["DECIMALS"],
+                        "default": "1",
+                        "relationship": {"none": {}},
+                        "values": [{
+                            "id": "1",
+                            "name": {"en": "One decimal"}
+                        }]
+                    }
+                ],
+                "series": [],
+                "observation": [
+                    {
+                        "id": "SOURCE",
+                        "name": {"en": "Source"},
+                        "relationship": {"dimensions": ["TIME_PERIOD"]},
+                        "values": [
+                            {"name": {"en": "MAFF_Agricultural Statistics_2014"}},
+                            {"name": {"en": "MAFF_Agricultural Statistics_2015"}},
+                            {"name": {"en": "MAFF_Agricultural Statistics_2016"}},
+                            {"name": {"en": "MAFF_Agricultural Statistics_2017"}}
+                        ]
+                    },
+                    {
+                        "id": "OBS_STATUS",
+                        "name": {"en": "Observation status"},
+                        "roles": ["OBS_STATUS"],
+                        "default": "A",
+                        "relationship": {"primaryMeasure": "OBS_VALUE"},
+                        "values": [{
+                            "id": "A",
+                            "name": {"en": "Normal value"}
+                        }]
+                    }
+                ]
+            },
+            "annotations": [
+                {
+                    "title": "Hierarchical name",
+                    "type": "Alternative name",
+                    "text": {"en": "Banteay Meanchey"},
+                    "id": "ALT_NAME"
+                },
+                {
+                    "title": "Hierarchical name",
+                    "type": "Alternative name",
+                    "text": {"en": "Battambang"},
+                    "id": "ALT_NAME"
+                }
+            ]
+        }
+    }
+}
