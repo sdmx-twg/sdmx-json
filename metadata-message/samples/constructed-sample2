@@ -201,7 +201,7 @@
 									"id": "DATASET",
 									"dataSet": {
 										"id": "DATASET1",
-										"dataProvider": "urn:sdmx:org.sdmx.infomodel.dataproviderscheme.DataProviderScheme=IMF:DPS(1.0).DATAPROVIDER1"
+										"dataProvider": "urn:sdmx:org.sdmx.infomodel.dataproviderscheme.DataProvider=IMF:DPS(1.0).DATAPROVIDER1"
 									}
 								}
 							]
