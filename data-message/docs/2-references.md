@@ -14,3 +14,5 @@ SDMX, April 2011
 
 [sdmxws21] *Section 7: Guidelines for the Use of Web Services*, SDMX Standards 2.1,
 SDMX, April 2011
+
+[json api 1.0] *A specification for building APIs in Json*, http://jsonapi.org/, 2015
