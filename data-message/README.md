@@ -22,4 +22,4 @@ limit the amount of server resources.
 See:
 - docs: for the descriptive documentation
 - samples: for message samples
-- tools: for the normative JSON schema usable usable for validation purposes
+- tools: for the normative JSON schema usable for validation purposes
