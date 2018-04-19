@@ -394,7 +394,7 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 * name - *Object* *optional*. Human-readable localised *[names](#name)* for the component value.
 * description - *Object* *optional*. Human-readable localised descriptions (see *[names](#name)*) of the component value. The description is typically longer than the text provided for the name field.
 * start, end - *String* *optional*. Start and end are instances of time that define the actual Gregorian calendar period covered by the values for the time dimension. The algorithm for computing start and end fields for any supported reporting period is defined in the SDMX Technical Notes. These fields should be used only when the component value represents one of the values for the time dimension. Values are considered as inclusive both for the start field and the end field. Values must follow the ISO 8601 syntax for combined dates and times, including time zone. These fields are useful for visualisation tools, when selecting the appropriate point in time for the time axis. Statistical data, can be collected, for example, at the beginning, the middle or the end of the period, or can represent the average of observations through the period. Based on this information and using the start and end fields, it is easy to get or calculate the desired point in time to be used for the time axis.
-* parent - *String* *optional*. Contains the ID for the parent of the component value (which is itself a component value). **If specified, the parent component value should be included in the component value array even if the message does not contain data for the parent component value itself.** Parents can be included recursively until reaching the rool level.
+* parent - *String* *optional*. Contains the ID for the parent of the component value (which is itself a component value). **If specified, the parent component value should be included in the component value array even if the message does not contain data for the parent component value itself.** Parents can be included recursively until reaching the root level.
 * order - *Integer* *optional*. Contains the original order number of the component value enabling the reconstruction of the ordered component value hierarchy. Note that, to allow for a streamed message generation, the orders of observations and of component values in the component value array are not significant.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the component value.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the component value. Indices refer back to the array of *annotations* in the structure field.
@@ -483,10 +483,10 @@ or cross sections, the `observations` will be found under the `series` elements.
 The `dataSet` properties are:
 
 * action - *String* *optional*. Action provides a list of actions, describing the intention of the data transmission from the sender's side.
-- `Append` - this is an incremental update for an existing `dataSet` or the provision of new data or documentation (attribute values) formerly absent. If any of the supplied data or metadata is already present, it will not replace these data.
-- `Replace` - data are to be replaced, and may also include additional data to be appended.
-- `Delete` - data are to be deleted.
-- `Information` (default) - data are being exchanged for informational purposes only, and not meant to update a system.
+  - `Append` - this is an incremental update for an existing `dataSet` or the provision of new data or documentation (attribute values) formerly absent. If any of the supplied data or metadata is already present, it will not replace these data.
+  - `Replace` - data are to be replaced, and may also include additional data to be appended.
+  - `Delete` - data are to be deleted.
+  - `Information` (default) - data are being exchanged for informational purposes only, and not meant to update a system.
 * reportingBegin - *String* *optional*. The start of the time period covered by the message.
 * reportingEnd - *String* *optional*. The end of the time period covered by the message.
 * validFrom - *String* *optional*. The validFrom indicates the inclusive start time indicating the validity of the information in the data.
