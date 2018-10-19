@@ -1205,8 +1205,7 @@ The same logic applies for mapping the other observations, its attributes and an
 
 # Localised strings
 
-The first best language match according to the user’s preferred language choices in the http Accept-Language header (or if that is not available than according to the system's default language order) is to be used for each localisable message element. The message does however not indicate the returned language per localisable element.
-In case that there is no such language match for a particular localisable element, it is optional to:
+At least the available most preferred language match according to the user’s preferred language choices in the http Accept-Language header (or if that is not available than according to the system's default languages) is to be provided for each localisable message element. In case that there is no such language match for a particular localisable element, it is optional to:
 
 - return the element in a system-default language or alternatively to not return the element
 - indicate available alternative languages for the element's maintainable artefact through links to underlying localised resources
