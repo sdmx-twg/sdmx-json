@@ -504,8 +504,7 @@ The *URL* captured in the `href` attribute can be *absolute* or *relative*. **It
 
 # Localised strings
 
-At least all language matches according to the user’s preferred language choices in the http Accept-Language header (or if that is not available than according to the system's default languages) are to be provided for each localisable message element.
-In case that there is no such language match for a particular localisable element, it is optional to:
+At least the available most preferred language match according to the user’s preferred language choices in the http Accept-Language header (or if that is not available than according to the system's default languages) is to be provided for each localisable message element. In case that there is no such language match for a particular localisable element, it is optional to:
 
 - return the element in the system-default languages or alternatively to not return the element
 - indicate available alternative languages for the element's maintainable artefact through links to underlying localised resources
