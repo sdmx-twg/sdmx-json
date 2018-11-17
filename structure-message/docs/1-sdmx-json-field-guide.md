@@ -161,7 +161,7 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 *Object* *optional*. Header contains the message's “primary data”.
 
-* *[Artefact type]* - *Array* *optional*. This field is an array of objects of one of the corresponding SDMX Information Model artefact types: *dataStructure*, *metadataStructure*, *categoryScheme*, *conceptScheme*, *codelist*, *hierarchicalCodelist*, *agencyScheme*, *dataProviderScheme*, *dataConsumerScheme*, *organisationUnitScheme*, *dataflow*, *metadataflow*, *reportingTaxonomy*, *provisionAgreement*, *structureSet*, *process*, *categorisation* and *constraint*. Each of the corresponding object properties is allowed at maximum one time. Contains the requested structural information according to the definition of this artefact. For more information, please see:
+* *[Artefact type]* - *Array* *optional*. This field is an array of objects of one of the corresponding SDMX Information Model artefact types: *dataStructure*, *metadataStructure*, *categoryScheme*, *conceptScheme*, *codelist*, *hierarchicalCodelist*, *agencyScheme*, *dataProviderScheme*, *dataConsumerScheme*, *organisationUnitScheme*, *dataflow*, *metadataflow*, *reportingTaxonomy*, *provisionAgreement*, *structureSet*, *process*, *categorisation*, *contentConstraint* and *attachmentConstraint*. Each of the corresponding object properties is allowed at maximum one time. Contains the requested structural information according to the definition of this artefact. For more information, please see:
 
     * *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*
     * *[Common properties of SDMX artefacts of base type "ItemScheme"](#common-properties-of-sdmx-artefacts-of-base-type-itemscheme)*
@@ -183,7 +183,8 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
     * *[structureSets](#structureset)*
     * *[processes](#process)*
     * *[categorisations](#categorisation)*
-    * *[constraints](#constraint)*
+    * *[contentConstraints](#contentConstraint)*
+    * *[attachmentConstraints](#attachmentConstraint)*
 
 Example:
 
@@ -1136,9 +1137,9 @@ Example:
 		"target": "urn:sdmx:org.sdmx.infomodel.categoryscheme.CategoryScheme=ECB:MOBILE_NAVI(1.0).07"
 	}
 
-### constraint
+### contentConstraint
 
-*Object*. There exists 2 specific types of constraints: content and attachment contraints which have specific restrictions and extension. The inclusion of a key or region in a constraint is determined by first processing the included key sets, and then removing those keys defined in the excluded key sets. If no included key sets are defined, then it is assumed the all possible keys or regions are included, and any excluded key or regions are removed from this complete set.
+*Object*. The inclusion of a key or region in a constraint is determined by first processing the included key sets, and then removing those keys defined in the excluded key sets. If no included key sets are defined, then it is assumed that all possible keys or regions are included, and any excluded key or regions are removed from this complete set.
 
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
@@ -1146,15 +1147,19 @@ See the schema file for more information.
 
 In addition, `constraint` has the following properties:
 
+* type - *String* *optional*. The type attribute indicates whether this constraint states what data is actually present for the constraint attachment ("Actual"), or if it defines what content is allowed ("Allowed"). The default value is "Actual", meaning the data actually present for the constraint attachment.
 * constraintAttachment - *Object* *optional*. The *[constraintAttachment](#constraintAttachment)* object describes the collection of constrainable artefacts that the constraint is attached to.
 * cubeRegions - *Array* *optional*. A list of of *[cubeRegion](#cubeRegion)* objects. CubeRegion describes a set of dimension values which define a region and attributes which relate to the region for the purpose of describing a constraint.
 * dataKeySets - *Array* *optional*. A list of of *[dataKeySet](#dataKeySet)* objects. DataKeySet defines a collection of full or partial data keys.
 * metadataKeySets - *Array* *optional*. A list of *[metadataKeySet](#metadataKeySet)* objects. MetadataKeySet defines a collection of metadata keys.
 * metadataTargetRegions - *Array* *optional*. A list of of *[metadataTargetRegion](#metadataTargetRegion)* objects. Describes a set of target object values for a given report structure which define a region, and the metadata attribute which relate to the target for the purpose of describing a constraint.
+* referencePeriod - *Object* *optional*. The *[referencePeriod](#referencePeriod)* is used to report start date and end date constraints.
+* releaseCalendar - *Object* *optional*. The *[releaseCalendar](#releaseCalendar)* defines dates on which the constrained data is to be made available.
 
 Example: 
 
 	{
+		"type": "Allowed",
 		"id": "EXR_CONSTRAINTS",
 		"version": "1.0",
 		"agencyID": "ECB",
@@ -1193,6 +1198,12 @@ Example:
 				# metadataTargetRegion object #
 			}
 		]
+		"referencePeriod": {
+			# referencePeriod object #
+		}
+		"releaseCalendar": {
+			# releaseCalendar object #
+		}
 	}
 
 #### constraintAttachment
@@ -1565,6 +1576,41 @@ Example:
 			"A"
 		]
 	}
+
+
+#### referencePeriod
+
+*Object*. Specifies the inclusive start and end times.
+
+* startTime - *dateTime*. The startTime attributes contains the inclusive start date for the reference period.
+* endTime - *dateTime*. The endTime attributes contains the inclusive end date for the reference period.
+
+	{
+		"startTime": "2000",
+		"endTime": "2018"
+	}
+
+#### releaseCalendar
+
+*Object*. The ReleaseCalendar describes information about the timing of releases of the constrained data. All of these values use the standard "P7D" - style format.
+
+* offset - *String*. Offset is the interval between January first and the first release of data within the year.
+* periodicity - *String*. Periodicity is the period between releases of the data set.
+* tolerance - *String*. Tolerance is the period after which the release of data may be deemed late.
+
+	{
+		"offset": "30",
+		"periodicity": "12",
+		"tolerance": "2019"
+	}
+
+### attachmentConstraint
+
+*Object*. The inclusion of a key or region in a constraint is determined by first processing the included key sets, and then removing those keys defined in the excluded key sets. If no included key sets are defined, then it is assumed that all possible keys or regions are included, and any excluded key or regions are removed from this complete set.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+See the schema file for more information.
 
 ## error
 
