@@ -1,9 +1,9 @@
 {
 	"meta": {
-		"schema": "a",
+		"schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/develop/structure-message/tools/schemas/1.0/sdmx-json-structure-schema.json",
 		"id": "$",
 		"test": true,
-		"prepared": "a",
+		"prepared": "2017-11-16T11:04:00Z",
 		"content-languages": [
 			"en-GB-oed"
 		],
@@ -25,7 +25,7 @@
 						"en-GB-oed": "a"
 					},
 					"emails": [
-						"a"
+						"smith@example.org"
 					],
 					"faxes": [
 						"a"
@@ -37,7 +37,7 @@
 						"a"
 					],
 					"uris": [
-						"a"
+						"http://www.example.org/data.json"
 					],
 					"x400s": [
 						"a"
@@ -61,7 +61,7 @@
 							"en-GB-oed": "a"
 						},
 						"emails": [
-							"a"
+							"smith@example.org"
 						],
 						"faxes": [
 							"a"
@@ -73,7 +73,7 @@
 							"a"
 						],
 						"uris": [
-							"a"
+							"http://www.example.org/data.json"
 						],
 						"x400s": [
 							"a"
@@ -84,10 +84,10 @@
 		],
 		"links": [
 			{
-				"href": "a",
+				"href": "http://www.example.org/data.json",
 				"rel": "a",
 				"urn": "a",
-				"uri": "a",
+				"uri": "http://www.example.org/data.json",
 				"title": {
 					"en-GB-oed": "a"
 				},
@@ -104,8 +104,8 @@
 				"agencyID": "A.A",
 				"isExternalReference": true,
 				"isFinal": true,
-				"validFrom": "a",
-				"validTo": "a",
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
 				"name": {
 					"en-GB-oed": "a"
 				},
@@ -122,10 +122,10 @@
 						},
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -137,10 +137,10 @@
 				],
 				"links": [
 					{
-						"href": "a",
+						"href": "http://www.example.org/data.json",
 						"rel": "a",
 						"urn": "a",
-						"uri": "a",
+						"uri": "http://www.example.org/data.json",
 						"title": {
 							"en-GB-oed": "a"
 						},
@@ -161,10 +161,10 @@
 								},
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 											"en-GB-oed": "a"
 										},
@@ -176,10 +176,10 @@
 						],
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -199,10 +199,10 @@
 										},
 										"links": [
 											{
-												"href": "a",
+												"href": "http://www.example.org/data.json",
 												"rel": "a",
 												"urn": "a",
-												"uri": "a",
+												"uri": "http://www.example.org/data.json",
 												"title": {
 												},
 												"type": "a",
@@ -213,10 +213,10 @@
 								],
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 										},
 										"type": "a",
@@ -288,10 +288,10 @@
 										},
 										"links": [
 											{
-												"href": "a",
+												"href": "http://www.example.org/data.json",
 												"rel": "a",
 												"urn": "a",
-												"uri": "a",
+												"uri": "http://www.example.org/data.json",
 												"title": {
 												},
 												"type": "a",
@@ -302,10 +302,10 @@
 								],
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 										},
 										"type": "a",
@@ -346,10 +346,10 @@
 								},
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 											"en-GB-oed": "a"
 										},
@@ -361,10 +361,10 @@
 						],
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -384,10 +384,10 @@
 										},
 										"links": [
 											{
-												"href": "a",
+												"href": "http://www.example.org/data.json",
 												"rel": "a",
 												"urn": "a",
-												"uri": "a",
+												"uri": "http://www.example.org/data.json",
 												"title": {
 												},
 												"type": "a",
@@ -398,10 +398,10 @@
 								],
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 										},
 										"type": "a",
@@ -462,10 +462,10 @@
 										},
 										"links": [
 											{
-												"href": "a",
+												"href": "http://www.example.org/data.json",
 												"rel": "a",
 												"urn": "a",
-												"uri": "a",
+												"uri": "http://www.example.org/data.json",
 												"title": {
 												},
 												"type": "a",
@@ -476,10 +476,10 @@
 								],
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 										},
 										"type": "a",
@@ -509,10 +509,10 @@
 										},
 										"links": [
 											{
-												"href": "a",
+												"href": "http://www.example.org/data.json",
 												"rel": "a",
 												"urn": "a",
-												"uri": "a",
+												"uri": "http://www.example.org/data.json",
 												"title": {
 												},
 												"type": "a",
@@ -523,10 +523,10 @@
 								],
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 										},
 										"type": "a",
@@ -559,10 +559,10 @@
 									},
 									"links": [
 										{
-											"href": "a",
+											"href": "http://www.example.org/data.json",
 											"rel": "a",
 											"urn": "a",
-											"uri": "a",
+											"uri": "http://www.example.org/data.json",
 											"title": {
 												"en-GB-oed": "a"
 											},
@@ -574,10 +574,10 @@
 							],
 							"links": [
 								{
-									"href": "a",
+									"href": "http://www.example.org/data.json",
 									"rel": "a",
 									"urn": "a",
-									"uri": "a",
+									"uri": "http://www.example.org/data.json",
 									"title": {
 										"en-GB-oed": "a"
 									},
@@ -586,11 +586,7 @@
 								}
 							],
 							"attachmentConstraint": "a",
-							"groupDimensions": [
-								{
-									"dimensionReference": "a"
-								}
-							]
+							"groupDimensions": [ "a", "b" ]
 						}
 					],
 					"measureList": {
@@ -605,10 +601,10 @@
 								},
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 											"en-GB-oed": "a"
 										},
@@ -620,10 +616,10 @@
 						],
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -642,10 +638,10 @@
 									},
 									"links": [
 										{
-											"href": "a",
+											"href": "http://www.example.org/data.json",
 											"rel": "a",
 											"urn": "a",
-											"uri": "a",
+											"uri": "http://www.example.org/data.json",
 											"title": {
 											},
 											"type": "a",
@@ -656,10 +652,10 @@
 							],
 							"links": [
 								{
-									"href": "a",
+									"href": "http://www.example.org/data.json",
 									"rel": "a",
 									"urn": "a",
-									"uri": "a",
+									"uri": "http://www.example.org/data.json",
 									"title": {
 									},
 									"type": "a",
@@ -713,8 +709,8 @@
 				"agencyID": "A.A",
 				"isExternalReference": true,
 				"isFinal": true,
-				"validFrom": "a",
-				"validTo": "a",
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
 				"name": {
 					"en-GB-oed": "a"
 				},
@@ -731,10 +727,10 @@
 						},
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -746,10 +742,10 @@
 				],
 				"links": [
 					{
-						"href": "a",
+						"href": "http://www.example.org/data.json",
 						"rel": "a",
 						"urn": "a",
-						"uri": "a",
+						"uri": "http://www.example.org/data.json",
 						"title": {
 							"en-GB-oed": "a"
 						},
@@ -771,10 +767,10 @@
 									},
 									"links": [
 										{
-											"href": "a",
+											"href": "http://www.example.org/data.json",
 											"rel": "a",
 											"urn": "a",
-											"uri": "a",
+											"uri": "http://www.example.org/data.json",
 											"title": {
 												"en-GB-oed": "a"
 											},
@@ -786,10 +782,10 @@
 							],
 							"links": [
 								{
-									"href": "a",
+									"href": "http://www.example.org/data.json",
 									"rel": "a",
 									"urn": "a",
-									"uri": "a",
+									"uri": "http://www.example.org/data.json",
 									"title": {
 										"en-GB-oed": "a"
 									},
@@ -809,10 +805,10 @@
 											},
 											"links": [
 												{
-													"href": "a",
+													"href": "http://www.example.org/data.json",
 													"rel": "a",
 													"urn": "a",
-													"uri": "a",
+													"uri": "http://www.example.org/data.json",
 													"title": {
 													},
 													"type": "a",
@@ -823,10 +819,10 @@
 									],
 									"links": [
 										{
-											"href": "a",
+											"href": "http://www.example.org/data.json",
 											"rel": "a",
 											"urn": "a",
-											"uri": "a",
+											"uri": "http://www.example.org/data.json",
 											"title": {
 											},
 											"type": "a",
@@ -852,10 +848,10 @@
 											},
 											"links": [
 												{
-													"href": "a",
+													"href": "http://www.example.org/data.json",
 													"rel": "a",
 													"urn": "a",
-													"uri": "a",
+													"uri": "http://www.example.org/data.json",
 													"title": {
 													},
 													"type": "a",
@@ -866,10 +862,10 @@
 									],
 									"links": [
 										{
-											"href": "a",
+											"href": "http://www.example.org/data.json",
 											"rel": "a",
 											"urn": "a",
-											"uri": "a",
+											"uri": "http://www.example.org/data.json",
 											"title": {
 											},
 											"type": "a",
@@ -895,10 +891,10 @@
 											},
 											"links": [
 												{
-													"href": "a",
+													"href": "http://www.example.org/data.json",
 													"rel": "a",
 													"urn": "a",
-													"uri": "a",
+													"uri": "http://www.example.org/data.json",
 													"title": {
 													},
 													"type": "a",
@@ -909,10 +905,10 @@
 									],
 									"links": [
 										{
-											"href": "a",
+											"href": "http://www.example.org/data.json",
 											"rel": "a",
 											"urn": "a",
-											"uri": "a",
+											"uri": "http://www.example.org/data.json",
 											"title": {
 											},
 											"type": "a",
@@ -940,10 +936,10 @@
 											},
 											"links": [
 												{
-													"href": "a",
+													"href": "http://www.example.org/data.json",
 													"rel": "a",
 													"urn": "a",
-													"uri": "a",
+													"uri": "http://www.example.org/data.json",
 													"title": {
 													},
 													"type": "a",
@@ -954,10 +950,10 @@
 									],
 									"links": [
 										{
-											"href": "a",
+											"href": "http://www.example.org/data.json",
 											"rel": "a",
 											"urn": "a",
-											"uri": "a",
+											"uri": "http://www.example.org/data.json",
 											"title": {
 											},
 											"type": "a",
@@ -983,10 +979,10 @@
 											},
 											"links": [
 												{
-													"href": "a",
+													"href": "http://www.example.org/data.json",
 													"rel": "a",
 													"urn": "a",
-													"uri": "a",
+													"uri": "http://www.example.org/data.json",
 													"title": {
 													},
 													"type": "a",
@@ -997,10 +993,10 @@
 									],
 									"links": [
 										{
-											"href": "a",
+											"href": "http://www.example.org/data.json",
 											"rel": "a",
 											"urn": "a",
-											"uri": "a",
+											"uri": "http://www.example.org/data.json",
 											"title": {
 											},
 											"type": "a",
@@ -1033,10 +1029,10 @@
 									},
 									"links": [
 										{
-											"href": "a",
+											"href": "http://www.example.org/data.json",
 											"rel": "a",
 											"urn": "a",
-											"uri": "a",
+											"uri": "http://www.example.org/data.json",
 											"title": {
 												"en-GB-oed": "a"
 											},
@@ -1048,10 +1044,10 @@
 							],
 							"links": [
 								{
-									"href": "a",
+									"href": "http://www.example.org/data.json",
 									"rel": "a",
 									"urn": "a",
-									"uri": "a",
+									"uri": "http://www.example.org/data.json",
 									"title": {
 										"en-GB-oed": "a"
 									},
@@ -1071,10 +1067,10 @@
 											},
 											"links": [
 												{
-													"href": "a",
+													"href": "http://www.example.org/data.json",
 													"rel": "a",
 													"urn": "a",
-													"uri": "a",
+													"uri": "http://www.example.org/data.json",
 													"title": {
 													},
 													"type": "a",
@@ -1085,10 +1081,10 @@
 									],
 									"links": [
 										{
-											"href": "a",
+											"href": "http://www.example.org/data.json",
 											"rel": "a",
 											"urn": "a",
-											"uri": "a",
+											"uri": "http://www.example.org/data.json",
 											"title": {
 											},
 											"type": "a",
@@ -1151,8 +1147,8 @@
 				"agencyID": "A.A",
 				"isExternalReference": true,
 				"isFinal": true,
-				"validFrom": "a",
-				"validTo": "a",
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
 				"name": {
 					"en-GB-oed": "a"
 				},
@@ -1169,10 +1165,10 @@
 						},
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -1184,10 +1180,10 @@
 				],
 				"links": [
 					{
-						"href": "a",
+						"href": "http://www.example.org/data.json",
 						"rel": "a",
 						"urn": "a",
-						"uri": "a",
+						"uri": "http://www.example.org/data.json",
 						"title": {
 							"en-GB-oed": "a"
 						},
@@ -1215,10 +1211,10 @@
 								},
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 											"en-GB-oed": "a"
 										},
@@ -1230,10 +1226,10 @@
 						],
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -1257,10 +1253,10 @@
 										},
 										"links": [
 											{
-												"href": "a",
+												"href": "http://www.example.org/data.json",
 												"rel": "a",
 												"urn": "a",
-												"uri": "a",
+												"uri": "http://www.example.org/data.json",
 												"title": {
 												},
 												"type": "a",
@@ -1271,10 +1267,10 @@
 								],
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 										},
 										"type": "a",
@@ -1294,8 +1290,8 @@
 				"agencyID": "A.A",
 				"isExternalReference": true,
 				"isFinal": true,
-				"validFrom": "a",
-				"validTo": "a",
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
 				"name": {
 					"en-GB-oed": "a"
 				},
@@ -1312,10 +1308,10 @@
 						},
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -1327,10 +1323,10 @@
 				],
 				"links": [
 					{
-						"href": "a",
+						"href": "http://www.example.org/data.json",
 						"rel": "a",
 						"urn": "a",
-						"uri": "a",
+						"uri": "http://www.example.org/data.json",
 						"title": {
 							"en-GB-oed": "a"
 						},
@@ -1358,10 +1354,10 @@
 								},
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 											"en-GB-oed": "a"
 										},
@@ -1373,10 +1369,10 @@
 						],
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -1422,11 +1418,7 @@
 								"timeInterval": "PYMWDTHMS"
 							}
 						},
-						"isoConceptReference": {
-							"conceptAgency": "a",
-							"conceptID": "a",
-							"conceptSchemeID": "a"
-						},
+						"isoConceptReference": "a",
 						"parent": "a"
 					}
 				]
@@ -1439,8 +1431,8 @@
 				"agencyID": "A.A",
 				"isExternalReference": true,
 				"isFinal": true,
-				"validFrom": "a",
-				"validTo": "a",
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
 				"name": {
 					"en-GB-oed": "a"
 				},
@@ -1457,10 +1449,10 @@
 						},
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -1472,10 +1464,10 @@
 				],
 				"links": [
 					{
-						"href": "a",
+						"href": "http://www.example.org/data.json",
 						"rel": "a",
 						"urn": "a",
-						"uri": "a",
+						"uri": "http://www.example.org/data.json",
 						"title": {
 							"en-GB-oed": "a"
 						},
@@ -1503,10 +1495,10 @@
 								},
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 											"en-GB-oed": "a"
 										},
@@ -1518,10 +1510,10 @@
 						],
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -1541,8 +1533,8 @@
 				"agencyID": "A.A",
 				"isExternalReference": true,
 				"isFinal": true,
-				"validFrom": "a",
-				"validTo": "a",
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
 				"name": {
 					"en-GB-oed": "a"
 				},
@@ -1559,10 +1551,10 @@
 						},
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -1574,10 +1566,10 @@
 				],
 				"links": [
 					{
-						"href": "a",
+						"href": "http://www.example.org/data.json",
 						"rel": "a",
 						"urn": "a",
-						"uri": "a",
+						"uri": "http://www.example.org/data.json",
 						"title": {
 							"en-GB-oed": "a"
 						},
@@ -1604,10 +1596,10 @@
 								},
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 											"en-GB-oed": "a"
 										},
@@ -1619,10 +1611,10 @@
 						],
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -1643,10 +1635,10 @@
 										},
 										"links": [
 											{
-												"href": "a",
+												"href": "http://www.example.org/data.json",
 												"rel": "a",
 												"urn": "a",
-												"uri": "a",
+												"uri": "http://www.example.org/data.json",
 												"title": {
 												},
 												"type": "a",
@@ -1657,18 +1649,18 @@
 								],
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 										},
 										"type": "a",
 										"hreflang": "en-GB-oed"
 									}
 								],
-								"validFrom": "a",
-								"validTo": "a",
+								"validFrom": "2017-11-16T11:04:00Z",
+								"validTo": "2017-11-16T11:04:00Z",
 								"version": "0.0",
 								"code": "a",
 								"codeID": "$",
@@ -1691,10 +1683,10 @@
 									},
 									"links": [
 										{
-											"href": "a",
+											"href": "http://www.example.org/data.json",
 											"rel": "a",
 											"urn": "a",
-											"uri": "a",
+											"uri": "http://www.example.org/data.json",
 											"title": {
 											},
 											"type": "a",
@@ -1705,10 +1697,10 @@
 							],
 							"links": [
 								{
-									"href": "a",
+									"href": "http://www.example.org/data.json",
 									"rel": "a",
 									"urn": "a",
-									"uri": "a",
+									"uri": "http://www.example.org/data.json",
 									"title": {
 									},
 									"type": "a",
@@ -1730,9 +1722,9 @@
 						}
 					}
 				],
-				"includedCodelists": [
-					"a"
-				]
+				"includedCodelists": {
+					"a": ""
+				}
 			}
 		],
 		"agencySchemes": [
@@ -1742,8 +1734,8 @@
 				"agencyID": "A.A",
 				"isExternalReference": true,
 				"isFinal": true,
-				"validFrom": "a",
-				"validTo": "a",
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
 				"name": {
 					"en-GB-oed": "a"
 				},
@@ -1760,10 +1752,10 @@
 						},
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -1775,10 +1767,10 @@
 				],
 				"links": [
 					{
-						"href": "a",
+						"href": "http://www.example.org/data.json",
 						"rel": "a",
 						"urn": "a",
-						"uri": "a",
+						"uri": "http://www.example.org/data.json",
 						"title": {
 							"en-GB-oed": "a"
 						},
@@ -1806,10 +1798,10 @@
 								},
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 											"en-GB-oed": "a"
 										},
@@ -1821,10 +1813,10 @@
 						],
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -1842,7 +1834,7 @@
 									"en-GB-oed": "a"
 								},
 								"emails": [
-									"a"
+									"smith@example.org"
 								],
 								"faxes": [
 									"a"
@@ -1854,7 +1846,7 @@
 									"a"
 								],
 								"uris": [
-									"a"
+									"http://www.example.org/data.json"
 								],
 								"x400s": [
 									"a"
@@ -1872,8 +1864,8 @@
 				"agencyID": "A.A",
 				"isExternalReference": true,
 				"isFinal": true,
-				"validFrom": "a",
-				"validTo": "a",
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
 				"name": {
 					"en-GB-oed": "a"
 				},
@@ -1890,10 +1882,10 @@
 						},
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -1905,10 +1897,10 @@
 				],
 				"links": [
 					{
-						"href": "a",
+						"href": "http://www.example.org/data.json",
 						"rel": "a",
 						"urn": "a",
-						"uri": "a",
+						"uri": "http://www.example.org/data.json",
 						"title": {
 							"en-GB-oed": "a"
 						},
@@ -1936,10 +1928,10 @@
 								},
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 											"en-GB-oed": "a"
 										},
@@ -1951,10 +1943,10 @@
 						],
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -1972,7 +1964,7 @@
 									"en-GB-oed": "a"
 								},
 								"emails": [
-									"a"
+									"smith@example.org"
 								],
 								"faxes": [
 									"a"
@@ -1984,7 +1976,7 @@
 									"a"
 								],
 								"uris": [
-									"a"
+									"http://www.example.org/data.json"
 								],
 								"x400s": [
 									"a"
@@ -2002,8 +1994,8 @@
 				"agencyID": "A.A",
 				"isExternalReference": true,
 				"isFinal": true,
-				"validFrom": "a",
-				"validTo": "a",
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
 				"name": {
 					"en-GB-oed": "a"
 				},
@@ -2020,10 +2012,10 @@
 						},
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -2035,10 +2027,10 @@
 				],
 				"links": [
 					{
-						"href": "a",
+						"href": "http://www.example.org/data.json",
 						"rel": "a",
 						"urn": "a",
-						"uri": "a",
+						"uri": "http://www.example.org/data.json",
 						"title": {
 							"en-GB-oed": "a"
 						},
@@ -2066,10 +2058,10 @@
 								},
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 											"en-GB-oed": "a"
 										},
@@ -2081,10 +2073,10 @@
 						],
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -2102,7 +2094,7 @@
 									"en-GB-oed": "a"
 								},
 								"emails": [
-									"a"
+									"smith@example.org"
 								],
 								"faxes": [
 									"a"
@@ -2114,7 +2106,7 @@
 									"a"
 								],
 								"uris": [
-									"a"
+									"http://www.example.org/data.json"
 								],
 								"x400s": [
 									"a"
@@ -2132,8 +2124,8 @@
 				"agencyID": "A.A",
 				"isExternalReference": true,
 				"isFinal": true,
-				"validFrom": "a",
-				"validTo": "a",
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
 				"name": {
 					"en-GB-oed": "a"
 				},
@@ -2150,10 +2142,10 @@
 						},
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -2165,10 +2157,10 @@
 				],
 				"links": [
 					{
-						"href": "a",
+						"href": "http://www.example.org/data.json",
 						"rel": "a",
 						"urn": "a",
-						"uri": "a",
+						"uri": "http://www.example.org/data.json",
 						"title": {
 							"en-GB-oed": "a"
 						},
@@ -2196,10 +2188,10 @@
 								},
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 											"en-GB-oed": "a"
 										},
@@ -2211,10 +2203,10 @@
 						],
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -2232,7 +2224,7 @@
 									"en-GB-oed": "a"
 								},
 								"emails": [
-									"a"
+									"smith@example.org"
 								],
 								"faxes": [
 									"a"
@@ -2244,7 +2236,7 @@
 									"a"
 								],
 								"uris": [
-									"a"
+									"http://www.example.org/data.json"
 								],
 								"x400s": [
 									"a"
@@ -2263,8 +2255,8 @@
 				"agencyID": "A.A",
 				"isExternalReference": true,
 				"isFinal": true,
-				"validFrom": "a",
-				"validTo": "a",
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
 				"name": {
 					"en-GB-oed": "a"
 				},
@@ -2281,10 +2273,10 @@
 						},
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -2296,10 +2288,10 @@
 				],
 				"links": [
 					{
-						"href": "a",
+						"href": "http://www.example.org/data.json",
 						"rel": "a",
 						"urn": "a",
-						"uri": "a",
+						"uri": "http://www.example.org/data.json",
 						"title": {
 							"en-GB-oed": "a"
 						},
@@ -2317,8 +2309,8 @@
 				"agencyID": "A.A",
 				"isExternalReference": true,
 				"isFinal": true,
-				"validFrom": "a",
-				"validTo": "a",
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
 				"name": {
 					"en-GB-oed": "a"
 				},
@@ -2335,10 +2327,10 @@
 						},
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -2350,10 +2342,10 @@
 				],
 				"links": [
 					{
-						"href": "a",
+						"href": "http://www.example.org/data.json",
 						"rel": "a",
 						"urn": "a",
-						"uri": "a",
+						"uri": "http://www.example.org/data.json",
 						"title": {
 							"en-GB-oed": "a"
 						},
@@ -2371,8 +2363,8 @@
 				"agencyID": "A.A",
 				"isExternalReference": true,
 				"isFinal": true,
-				"validFrom": "a",
-				"validTo": "a",
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
 				"name": {
 					"en-GB-oed": "a"
 				},
@@ -2389,10 +2381,10 @@
 						},
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -2404,10 +2396,10 @@
 				],
 				"links": [
 					{
-						"href": "a",
+						"href": "http://www.example.org/data.json",
 						"rel": "a",
 						"urn": "a",
-						"uri": "a",
+						"uri": "http://www.example.org/data.json",
 						"title": {
 							"en-GB-oed": "a"
 						},
@@ -2435,10 +2427,10 @@
 								},
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 											"en-GB-oed": "a"
 										},
@@ -2450,10 +2442,10 @@
 						],
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -2480,10 +2472,10 @@
 										},
 										"links": [
 											{
-												"href": "a",
+												"href": "http://www.example.org/data.json",
 												"rel": "a",
 												"urn": "a",
-												"uri": "a",
+												"uri": "http://www.example.org/data.json",
 												"title": {
 												},
 												"type": "a",
@@ -2494,10 +2486,10 @@
 								],
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 										},
 										"type": "a",
@@ -2526,8 +2518,8 @@
 				"agencyID": "A.A",
 				"isExternalReference": true,
 				"isFinal": true,
-				"validFrom": "a",
-				"validTo": "a",
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
 				"name": {
 					"en-GB-oed": "a"
 				},
@@ -2544,10 +2536,10 @@
 						},
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -2559,10 +2551,10 @@
 				],
 				"links": [
 					{
-						"href": "a",
+						"href": "http://www.example.org/data.json",
 						"rel": "a",
 						"urn": "a",
-						"uri": "a",
+						"uri": "http://www.example.org/data.json",
 						"title": {
 							"en-GB-oed": "a"
 						},
@@ -2581,8 +2573,8 @@
 				"agencyID": "A.A",
 				"isExternalReference": true,
 				"isFinal": true,
-				"validFrom": "a",
-				"validTo": "a",
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
 				"name": {
 					"en-GB-oed": "a"
 				},
@@ -2599,10 +2591,10 @@
 						},
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -2614,10 +2606,10 @@
 				],
 				"links": [
 					{
-						"href": "a",
+						"href": "http://www.example.org/data.json",
 						"rel": "a",
 						"urn": "a",
-						"uri": "a",
+						"uri": "http://www.example.org/data.json",
 						"title": {
 							"en-GB-oed": "a"
 						},
@@ -2644,10 +2636,10 @@
 								},
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 											"en-GB-oed": "a"
 										},
@@ -2659,10 +2651,10 @@
 						],
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -2682,10 +2674,10 @@
 										},
 										"links": [
 											{
-												"href": "a",
+												"href": "http://www.example.org/data.json",
 												"rel": "a",
 												"urn": "a",
-												"uri": "a",
+												"uri": "http://www.example.org/data.json",
 												"title": {
 													"en-GB-oed": "a"
 												},
@@ -2722,10 +2714,10 @@
 								},
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 											"en-GB-oed": "a"
 										},
@@ -2737,10 +2729,10 @@
 						],
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -2760,10 +2752,10 @@
 										},
 										"links": [
 											{
-												"href": "a",
+												"href": "http://www.example.org/data.json",
 												"rel": "a",
 												"urn": "a",
-												"uri": "a",
+												"uri": "http://www.example.org/data.json",
 												"title": {
 													"en-GB-oed": "a"
 												},
@@ -2800,10 +2792,10 @@
 								},
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 											"en-GB-oed": "a"
 										},
@@ -2815,10 +2807,10 @@
 						],
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -2838,10 +2830,10 @@
 										},
 										"links": [
 											{
-												"href": "a",
+												"href": "http://www.example.org/data.json",
 												"rel": "a",
 												"urn": "a",
-												"uri": "a",
+												"uri": "http://www.example.org/data.json",
 												"title": {
 													"en-GB-oed": "a"
 												},
@@ -2878,10 +2870,10 @@
 								},
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 											"en-GB-oed": "a"
 										},
@@ -2893,10 +2885,10 @@
 						],
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -2916,10 +2908,10 @@
 										},
 										"links": [
 											{
-												"href": "a",
+												"href": "http://www.example.org/data.json",
 												"rel": "a",
 												"urn": "a",
-												"uri": "a",
+												"uri": "http://www.example.org/data.json",
 												"title": {
 													"en-GB-oed": "a"
 												},
@@ -2956,10 +2948,10 @@
 								},
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 											"en-GB-oed": "a"
 										},
@@ -2971,10 +2963,10 @@
 						],
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -2994,10 +2986,10 @@
 										},
 										"links": [
 											{
-												"href": "a",
+												"href": "http://www.example.org/data.json",
 												"rel": "a",
 												"urn": "a",
-												"uri": "a",
+												"uri": "http://www.example.org/data.json",
 												"title": {
 													"en-GB-oed": "a"
 												},
@@ -3037,10 +3029,10 @@
 								},
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 											"en-GB-oed": "a"
 										},
@@ -3052,10 +3044,10 @@
 						],
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -3075,10 +3067,10 @@
 										},
 										"links": [
 											{
-												"href": "a",
+												"href": "http://www.example.org/data.json",
 												"rel": "a",
 												"urn": "a",
-												"uri": "a",
+												"uri": "http://www.example.org/data.json",
 												"title": {
 													"en-GB-oed": "a"
 												},
@@ -3115,10 +3107,10 @@
 								},
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 											"en-GB-oed": "a"
 										},
@@ -3130,10 +3122,10 @@
 						],
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -3154,10 +3146,10 @@
 										},
 										"links": [
 											{
-												"href": "a",
+												"href": "http://www.example.org/data.json",
 												"rel": "a",
 												"urn": "a",
-												"uri": "a",
+												"uri": "http://www.example.org/data.json",
 												"title": {
 													"en-GB-oed": "a"
 												},
@@ -3213,8 +3205,8 @@
 				"agencyID": "A.A",
 				"isExternalReference": true,
 				"isFinal": true,
-				"validFrom": "a",
-				"validTo": "a",
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
 				"name": {
 					"en-GB-oed": "a"
 				},
@@ -3231,10 +3223,10 @@
 						},
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -3246,10 +3238,10 @@
 				],
 				"links": [
 					{
-						"href": "a",
+						"href": "http://www.example.org/data.json",
 						"rel": "a",
 						"urn": "a",
-						"uri": "a",
+						"uri": "http://www.example.org/data.json",
 						"title": {
 							"en-GB-oed": "a"
 						},
@@ -3276,10 +3268,10 @@
 								},
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 											"en-GB-oed": "a"
 										},
@@ -3291,10 +3283,10 @@
 						],
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -3317,10 +3309,10 @@
 									},
 									"links": [
 										{
-											"href": "a",
+											"href": "http://www.example.org/data.json",
 											"rel": "a",
 											"urn": "a",
-											"uri": "a",
+											"uri": "http://www.example.org/data.json",
 											"title": {
 												"en-GB-oed": "a"
 											},
@@ -3347,10 +3339,10 @@
 										},
 										"links": [
 											{
-												"href": "a",
+												"href": "http://www.example.org/data.json",
 												"rel": "a",
 												"urn": "a",
-												"uri": "a",
+												"uri": "http://www.example.org/data.json",
 												"title": {
 													"en-GB-oed": "a"
 												},
@@ -3376,10 +3368,10 @@
 										},
 										"links": [
 											{
-												"href": "a",
+												"href": "http://www.example.org/data.json",
 												"rel": "a",
 												"urn": "a",
-												"uri": "a",
+												"uri": "http://www.example.org/data.json",
 												"title": {
 													"en-GB-oed": "a"
 												},
@@ -3408,10 +3400,10 @@
 										},
 										"links": [
 											{
-												"href": "a",
+												"href": "http://www.example.org/data.json",
 												"rel": "a",
 												"urn": "a",
-												"uri": "a",
+												"uri": "http://www.example.org/data.json",
 												"title": {
 												},
 												"type": "a",
@@ -3422,10 +3414,10 @@
 								],
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 										},
 										"type": "a",
@@ -3446,10 +3438,10 @@
 											},
 											"links": [
 												{
-													"href": "a",
+													"href": "http://www.example.org/data.json",
 													"rel": "a",
 													"urn": "a",
-													"uri": "a",
+													"uri": "http://www.example.org/data.json",
 													"title": {
 													},
 													"type": "a",
@@ -3473,10 +3465,10 @@
 												},
 												"links": [
 													{
-														"href": "a",
+														"href": "http://www.example.org/data.json",
 														"rel": "a",
 														"urn": "a",
-														"uri": "a",
+														"uri": "http://www.example.org/data.json",
 														"title": {
 														},
 														"type": "a",
@@ -3500,10 +3492,10 @@
 												},
 												"links": [
 													{
-														"href": "a",
+														"href": "http://www.example.org/data.json",
 														"rel": "a",
 														"urn": "a",
-														"uri": "a",
+														"uri": "http://www.example.org/data.json",
 														"title": {
 														},
 														"type": "a",
@@ -3529,10 +3521,10 @@
 										},
 										"links": [
 											{
-												"href": "a",
+												"href": "http://www.example.org/data.json",
 												"rel": "a",
 												"urn": "a",
-												"uri": "a",
+												"uri": "http://www.example.org/data.json",
 												"title": {
 												},
 												"type": "a",
@@ -3543,10 +3535,10 @@
 								],
 								"links": [
 									{
-										"href": "a",
+										"href": "http://www.example.org/data.json",
 										"rel": "a",
 										"urn": "a",
-										"uri": "a",
+										"uri": "http://www.example.org/data.json",
 										"title": {
 										},
 										"type": "a",
@@ -3570,8 +3562,8 @@
 				"agencyID": "A.A",
 				"isExternalReference": true,
 				"isFinal": true,
-				"validFrom": "a",
-				"validTo": "a",
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
 				"name": {
 					"en-GB-oed": "a"
 				},
@@ -3588,10 +3580,10 @@
 						},
 						"links": [
 							{
-								"href": "a",
+								"href": "http://www.example.org/data.json",
 								"rel": "a",
 								"urn": "a",
-								"uri": "a",
+								"uri": "http://www.example.org/data.json",
 								"title": {
 									"en-GB-oed": "a"
 								},
@@ -3603,10 +3595,10 @@
 				],
 				"links": [
 					{
-						"href": "a",
+						"href": "http://www.example.org/data.json",
 						"rel": "a",
 						"urn": "a",
-						"uri": "a",
+						"uri": "http://www.example.org/data.json",
 						"title": {
 							"en-GB-oed": "a"
 						},
@@ -3618,290 +3610,293 @@
 				"target": "a"
 			}
 		],
-		"constraints": [
-			{
-				"id": "$",
-				"version": "0.0",
-				"agencyID": "A.A",
-				"isExternalReference": true,
-				"isFinal": true,
-				"validFrom": "a",
-				"validTo": "a",
-				"name": {
-					"en-GB-oed": "a"
-				},
-				"description": {
-					"en-GB-oed": "a"
-				},
-				"annotations": [
-					{
-						"id": "a",
-						"title": "a",
-						"type": "a",
-						"text": {
-							"en-GB-oed": "a"
-						},
-						"links": [
+		"constraints": {
+			"contentConstraints": [
+				{
+					"id": "$",
+					"version": "0.0",
+					"agencyID": "A.A",
+					"isExternalReference": true,
+					"isFinal": true,
+					"validFrom": "2017-11-16T11:04:00Z",
+					"validTo": "2017-11-16T11:04:00Z",
+					"name": {
+						"en-GB-oed": "a"
+					},
+					"description": {
+						"en-GB-oed": "a"
+					},
+					"annotations": [
+						{
+							"id": "a",
+							"title": "a",
+							"type": "a",
+							"text": {
+								"en-GB-oed": "a"
+							},
+							"links": [
+								{
+									"href": "http://www.example.org/data.json",
+									"rel": "a",
+									"urn": "a",
+									"uri": "http://www.example.org/data.json",
+									"title": {
+										"en-GB-oed": "a"
+									},
+									"type": "a",
+									"hreflang": "en-GB-oed"
+								}
+							]
+						}
+					],
+					"links": [
+						{
+							"href": "http://www.example.org/data.json",
+							"rel": "a",
+							"urn": "a",
+							"uri": "http://www.example.org/data.json",
+							"title": {
+								"en-GB-oed": "a"
+							},
+							"type": "a",
+							"hreflang": "en-GB-oed"
+						}
+					],
+					"type": "Allowed",
+					"constraintAttachment": {
+						"dataProvider": "a",
+						"dataSets": [
 							{
-								"href": "a",
-								"rel": "a",
-								"urn": "a",
-								"uri": "a",
-								"title": {
-									"en-GB-oed": "a"
-								},
-								"type": "a",
-								"hreflang": "en-GB-oed"
-							}
-						]
-					}
-				],
-				"links": [
-					{
-						"href": "a",
-						"rel": "a",
-						"urn": "a",
-						"uri": "a",
-						"title": {
-							"en-GB-oed": "a"
-						},
-						"type": "a",
-						"hreflang": "en-GB-oed"
-					}
-				],
-				"constraintAttachment": {
-					"dataProvider": "a",
-					"dataSets": [
-						{
-							"dataProvider": "a",
-							"id": "$"
-						}
-					],
-					"dataStructures": [
-						"a"
-					],
-					"dataflows": [
-						"a"
-					],
-					"metadataSets": [
-						{
-							"dataProvider": "a",
-							"id": "$"
-						}
-					],
-					"metadataStructures": [
-						"a"
-					],
-					"metadataflows": [
-						"a"
-					],
-					"provisionAgreements": [
-						"a"
-					],
-					"queryableDataSources": [
-						{
-							"isRESTDatasource": true,
-							"isWebServiceDatasource": true,
-							"dataURL": "a",
-							"wadlURL": "a",
-							"wsdlURL": "a"
-						}
-					],
-					"simpleDataSources": [
-						"a"
-					]
-				},
-				"cubeRegions": [
-					{
-						"isIncluded": true,
-						"attributes": [
-							{
-								"id": "A",
-								"timeRange": {
-									"afterPeriod": {
-										"period": "1000Z",
-										"isInclusive": true
-									},
-									"beforePeriod": {
-										"period": "1000Z",
-										"isInclusive": true
-									},
-									"endPeriod": {
-										"period": "1000Z",
-										"isInclusive": true
-									},
-									"startPeriod": {
-										"period": "1000Z",
-										"isInclusive": true
-									}
-								},
-								"values": [
-									"a"
-								],
-								"cascadeValues": [
-									"a"
-								]
+								"dataProvider": "a",
+								"id": "$"
 							}
 						],
-						"keyValues": [
+						"dataStructures": [
+							"a"
+						],
+						"dataflows": [
+							"a"
+						],
+						"metadataSets": [
 							{
-								"id": "A",
-								"timeRange": {
-									"afterPeriod": {
-										"period": "1000Z",
-										"isInclusive": true
-									},
-									"beforePeriod": {
-										"period": "1000Z",
-										"isInclusive": true
-									},
-									"endPeriod": {
-										"period": "1000Z",
-										"isInclusive": true
-									},
-									"startPeriod": {
-										"period": "1000Z",
-										"isInclusive": true
-									}
-								},
-								"values": [
-									"a"
-								],
-								"cascadeValues": [
-									"a"
-								]
+								"dataProvider": "a",
+								"id": "$"
 							}
-						]
-					}
-				],
-				"dataKeySets": [
-					{
-						"isIncluded": true,
-						"keys": [
+						],
+						"metadataStructures": [
+							"a"
+						],
+						"metadataflows": [
+							"a"
+						],
+						"provisionAgreements": [
+							"a"
+						],
+						"queryableDataSources": [
 							{
-								"keyValues": [
-									{
-										"id": "A",
-										"value": "a"
-									}
-								]
+								"isRESTDatasource": true,
+								"isWebServiceDatasource": true,
+								"dataURL": "http://www.example.org/data.json",
+								"wadlURL": "http://www.example.org/data.json",
+								"wsdlURL": "http://www.example.org/data.json"
 							}
+						],
+						"simpleDataSources": [
+							"a"
 						]
-					}
-				],
-				"metadataKeySets": [
-					{
-						"isIncluded": true,
-						"keys": [
-							{
-								"metadataTarget": "$",
-								"report": "$",
-								"keyValues": [
-									{
-										"id": "A",
-										"dataKey": {
+					},
+					"cubeRegions": [
+						{
+							"isIncluded": true,
+							"attributes": [
+								{
+									"id": "A",
+									"timeRange": {
+										"afterPeriod": {
+											"period": "1000Z",
+											"isInclusive": true
+										},
+										"beforePeriod": {
+											"period": "1000Z",
+											"isInclusive": true
+										},
+										"endPeriod": {
+											"period": "1000Z",
+											"isInclusive": true
+										},
+										"startPeriod": {
+											"period": "1000Z",
+											"isInclusive": true
+										}
+									},
+									"values": [
+										"a"
+									],
+									"cascadeValues": [
+										"a"
+									]
+								}
+							],
+							"keyValues": [
+								{
+									"id": "A",
+									"timeRange": {
+										"afterPeriod": {
+											"period": "1000Z",
+											"isInclusive": true
+										},
+										"beforePeriod": {
+											"period": "1000Z",
+											"isInclusive": true
+										},
+										"endPeriod": {
+											"period": "1000Z",
+											"isInclusive": true
+										},
+										"startPeriod": {
+											"period": "1000Z",
+											"isInclusive": true
+										}
+									},
+									"values": [
+										"a"
+									],
+									"cascadeValues": [
+										"a"
+									]
+								}
+							]
+						}
+					],
+					"dataKeySets": [
+						{
+							"isIncluded": true,
+							"keys": [
+								{
+									"keyValues": [
+										{
+											"id": "A",
+											"value": "a"
+										}
+									]
+								}
+							]
+						}
+					],
+					"metadataKeySets": [
+						{
+							"isIncluded": true,
+							"keys": [
+								{
+									"metadataTarget": "$",
+									"report": "$",
+									"keyValues": [
+										{
+											"id": "A",
+											"dataKey": {
+												"keyValues": [
+													{
+														"id": "A",
+														"value": "a"
+													}
+												]
+											},
+											"dataSet": {
+												"dataProvider": "a",
+												"id": "$"
+											},
+											"object": "a",
+											"value": "a"
+										}
+									]
+								}
+							]
+						}
+					],
+					"metadataTargetRegions": [
+						{
+							"include": true,
+							"metadataTarget": "$",
+							"report": "$",
+							"attributes": [
+								{
+									"id": "A.A",
+									"timeRange": {
+										"afterPeriod": {
+											"period": "1000Z",
+											"isInclusive": true
+										},
+										"beforePeriod": {
+											"period": "1000Z",
+											"isInclusive": true
+										},
+										"endPeriod": {
+											"period": "1000Z",
+											"isInclusive": true
+										},
+										"startPeriod": {
+											"period": "1000Z",
+											"isInclusive": true
+										}
+									},
+									"values": [
+										"a"
+									],
+									"cascadeValues": [
+										"a"
+									]
+								}
+							],
+							"keyValues": [
+								{
+									"id": "A",
+									"dataKeys": [
+										{
 											"keyValues": [
 												{
 													"id": "A",
 													"value": "a"
 												}
 											]
-										},
-										"dataSet": {
+										}
+									],
+									"dataSets": [
+										{
 											"dataProvider": "a",
 											"id": "$"
+										}
+									],
+									"objects": [
+										"a"
+									],
+									"timeRange": {
+										"afterPeriod": {
+											"period": "1000Z",
+											"isInclusive": true
 										},
-										"object": "a",
-										"value": "a"
-									}
-								]
-							}
-						]
-					}
-				],
-				"metadataTargetRegions": [
-					{
-						"include": true,
-						"metadataTarget": "$",
-						"report": "$",
-						"attributes": [
-							{
-								"id": "A.A",
-								"timeRange": {
-									"afterPeriod": {
-										"period": "1000Z",
-										"isInclusive": true
+										"beforePeriod": {
+											"period": "1000Z",
+											"isInclusive": true
+										},
+										"endPeriod": {
+											"period": "1000Z",
+											"isInclusive": true
+										},
+										"startPeriod": {
+											"period": "1000Z",
+											"isInclusive": true
+										}
 									},
-									"beforePeriod": {
-										"period": "1000Z",
-										"isInclusive": true
-									},
-									"endPeriod": {
-										"period": "1000Z",
-										"isInclusive": true
-									},
-									"startPeriod": {
-										"period": "1000Z",
-										"isInclusive": true
-									}
-								},
-								"values": [
-									"a"
-								],
-								"cascadeValues": [
-									"a"
-								]
-							}
-						],
-						"keyValues": [
-							{
-								"id": "A",
-								"dataKeys": [
-									{
-										"keyValues": [
-											{
-												"id": "A",
-												"value": "a"
-											}
-										]
-									}
-								],
-								"dataSets": [
-									{
-										"dataProvider": "a",
-										"id": "$"
-									}
-								],
-								"objects": [
-									"a"
-								],
-								"timeRange": {
-									"afterPeriod": {
-										"period": "1000Z",
-										"isInclusive": true
-									},
-									"beforePeriod": {
-										"period": "1000Z",
-										"isInclusive": true
-									},
-									"endPeriod": {
-										"period": "1000Z",
-										"isInclusive": true
-									},
-									"startPeriod": {
-										"period": "1000Z",
-										"isInclusive": true
-									}
-								},
-								"values": [
-									"a"
-								]
-							}
-						]
-					}
-				]
-			}
-		]
+									"values": [
+										"a"
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
 	},
 	"errors": [
 		{
@@ -3914,10 +3909,10 @@
 			},
 			"links": [
 				{
-					"href": "a",
+					"href": "http://www.example.org/data.json",
 					"rel": "a",
 					"urn": "a",
-					"uri": "a",
+					"uri": "http://www.example.org/data.json",
 					"title": {
 						"en-GB-oed": "a"
 					},
