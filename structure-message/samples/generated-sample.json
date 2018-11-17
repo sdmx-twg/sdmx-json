@@ -3610,293 +3610,292 @@
 				"target": "a"
 			}
 		],
-		"constraints": {
-			"contentConstraints": [
-				{
-					"id": "$",
-					"version": "0.0",
-					"agencyID": "A.A",
-					"isExternalReference": true,
-					"isFinal": true,
-					"validFrom": "2017-11-16T11:04:00Z",
-					"validTo": "2017-11-16T11:04:00Z",
-					"name": {
-						"en-GB-oed": "a"
-					},
-					"description": {
-						"en-GB-oed": "a"
-					},
-					"annotations": [
-						{
-							"id": "a",
-							"title": "a",
-							"type": "a",
-							"text": {
-								"en-GB-oed": "a"
-							},
-							"links": [
-								{
-									"href": "http://www.example.org/data.json",
-									"rel": "a",
-									"urn": "a",
-									"uri": "http://www.example.org/data.json",
-									"title": {
-										"en-GB-oed": "a"
-									},
-									"type": "a",
-									"hreflang": "en-GB-oed"
-								}
-							]
-						}
-					],
-					"links": [
-						{
-							"href": "http://www.example.org/data.json",
-							"rel": "a",
-							"urn": "a",
-							"uri": "http://www.example.org/data.json",
-							"title": {
-								"en-GB-oed": "a"
-							},
-							"type": "a",
-							"hreflang": "en-GB-oed"
-						}
-					],
-					"type": "Allowed",
-					"constraintAttachment": {
-						"dataProvider": "a",
-						"dataSets": [
+		"contentConstraints": [
+			{
+				"type": "Allowed",
+				"id": "$",
+				"version": "0.0",
+				"agencyID": "A.A",
+				"isExternalReference": true,
+				"isFinal": true,
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
+				"name": {
+					"en-GB-oed": "a"
+				},
+				"description": {
+					"en-GB-oed": "a"
+				},
+				"annotations": [
+					{
+						"id": "a",
+						"title": "a",
+						"type": "a",
+						"text": {
+							"en-GB-oed": "a"
+						},
+						"links": [
 							{
-								"dataProvider": "a",
-								"id": "$"
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "a",
+								"uri": "http://www.example.org/data.json",
+								"title": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
 							}
-						],
-						"dataStructures": [
-							"a"
-						],
-						"dataflows": [
-							"a"
-						],
-						"metadataSets": [
-							{
-								"dataProvider": "a",
-								"id": "$"
-							}
-						],
-						"metadataStructures": [
-							"a"
-						],
-						"metadataflows": [
-							"a"
-						],
-						"provisionAgreements": [
-							"a"
-						],
-						"queryableDataSources": [
-							{
-								"isRESTDatasource": true,
-								"isWebServiceDatasource": true,
-								"dataURL": "http://www.example.org/data.json",
-								"wadlURL": "http://www.example.org/data.json",
-								"wsdlURL": "http://www.example.org/data.json"
-							}
-						],
-						"simpleDataSources": [
-							"a"
 						]
-					},
-					"cubeRegions": [
+					}
+				],
+				"links": [
+					{
+						"href": "http://www.example.org/data.json",
+						"rel": "a",
+						"urn": "a",
+						"uri": "http://www.example.org/data.json",
+						"title": {
+							"en-GB-oed": "a"
+						},
+						"type": "a",
+						"hreflang": "en-GB-oed"
+					}
+				],
+				"type": "Allowed",
+				"constraintAttachment": {
+					"dataProvider": "a",
+					"dataSets": [
 						{
-							"isIncluded": true,
-							"attributes": [
-								{
-									"id": "A",
-									"timeRange": {
-										"afterPeriod": {
-											"period": "1000Z",
-											"isInclusive": true
-										},
-										"beforePeriod": {
-											"period": "1000Z",
-											"isInclusive": true
-										},
-										"endPeriod": {
-											"period": "1000Z",
-											"isInclusive": true
-										},
-										"startPeriod": {
-											"period": "1000Z",
-											"isInclusive": true
-										}
-									},
-									"values": [
-										"a"
-									],
-									"cascadeValues": [
-										"a"
-									]
-								}
-							],
-							"keyValues": [
-								{
-									"id": "A",
-									"timeRange": {
-										"afterPeriod": {
-											"period": "1000Z",
-											"isInclusive": true
-										},
-										"beforePeriod": {
-											"period": "1000Z",
-											"isInclusive": true
-										},
-										"endPeriod": {
-											"period": "1000Z",
-											"isInclusive": true
-										},
-										"startPeriod": {
-											"period": "1000Z",
-											"isInclusive": true
-										}
-									},
-									"values": [
-										"a"
-									],
-									"cascadeValues": [
-										"a"
-									]
-								}
-							]
+							"dataProvider": "a",
+							"id": "$"
 						}
 					],
-					"dataKeySets": [
+					"dataStructures": [
+						"a"
+					],
+					"dataflows": [
+						"a"
+					],
+					"metadataSets": [
 						{
-							"isIncluded": true,
-							"keys": [
-								{
-									"keyValues": [
-										{
-											"id": "A",
-											"value": "a"
-										}
-									]
-								}
-							]
+							"dataProvider": "a",
+							"id": "$"
 						}
 					],
-					"metadataKeySets": [
+					"metadataStructures": [
+						"a"
+					],
+					"metadataflows": [
+						"a"
+					],
+					"provisionAgreements": [
+						"a"
+					],
+					"queryableDataSources": [
 						{
-							"isIncluded": true,
-							"keys": [
-								{
-									"metadataTarget": "$",
-									"report": "$",
-									"keyValues": [
-										{
-											"id": "A",
-											"dataKey": {
-												"keyValues": [
-													{
-														"id": "A",
-														"value": "a"
-													}
-												]
-											},
-											"dataSet": {
-												"dataProvider": "a",
-												"id": "$"
-											},
-											"object": "a",
-											"value": "a"
-										}
-									]
-								}
-							]
+							"isRESTDatasource": true,
+							"isWebServiceDatasource": true,
+							"dataURL": "http://www.example.org/data.json",
+							"wadlURL": "http://www.example.org/data.json",
+							"wsdlURL": "http://www.example.org/data.json"
 						}
 					],
-					"metadataTargetRegions": [
-						{
-							"include": true,
-							"metadataTarget": "$",
-							"report": "$",
-							"attributes": [
-								{
-									"id": "A.A",
-									"timeRange": {
-										"afterPeriod": {
-											"period": "1000Z",
-											"isInclusive": true
-										},
-										"beforePeriod": {
-											"period": "1000Z",
-											"isInclusive": true
-										},
-										"endPeriod": {
-											"period": "1000Z",
-											"isInclusive": true
-										},
-										"startPeriod": {
-											"period": "1000Z",
-											"isInclusive": true
-										}
+					"simpleDataSources": [
+						"a"
+					]
+				},
+				"cubeRegions": [
+					{
+						"isIncluded": true,
+						"attributes": [
+							{
+								"id": "A",
+								"timeRange": {
+									"afterPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
 									},
-									"values": [
-										"a"
-									],
-									"cascadeValues": [
-										"a"
-									]
-								}
-							],
-							"keyValues": [
-								{
-									"id": "A",
-									"dataKeys": [
-										{
+									"beforePeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"endPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"startPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									}
+								},
+								"values": [
+									"a"
+								],
+								"cascadeValues": [
+									"a"
+								]
+							}
+						],
+						"keyValues": [
+							{
+								"id": "A",
+								"timeRange": {
+									"afterPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"beforePeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"endPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"startPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									}
+								},
+								"values": [
+									"a"
+								],
+								"cascadeValues": [
+									"a"
+								]
+							}
+						]
+					}
+				],
+				"dataKeySets": [
+					{
+						"isIncluded": true,
+						"keys": [
+							{
+								"keyValues": [
+									{
+										"id": "A",
+										"value": "a"
+									}
+								]
+							}
+						]
+					}
+				],
+				"metadataKeySets": [
+					{
+						"isIncluded": true,
+						"keys": [
+							{
+								"metadataTarget": "$",
+								"report": "$",
+								"keyValues": [
+									{
+										"id": "A",
+										"dataKey": {
 											"keyValues": [
 												{
 													"id": "A",
 													"value": "a"
 												}
 											]
-										}
-									],
-									"dataSets": [
-										{
+										},
+										"dataSet": {
 											"dataProvider": "a",
 											"id": "$"
-										}
-									],
-									"objects": [
-										"a"
-									],
-									"timeRange": {
-										"afterPeriod": {
-											"period": "1000Z",
-											"isInclusive": true
 										},
-										"beforePeriod": {
-											"period": "1000Z",
-											"isInclusive": true
-										},
-										"endPeriod": {
-											"period": "1000Z",
-											"isInclusive": true
-										},
-										"startPeriod": {
-											"period": "1000Z",
-											"isInclusive": true
-										}
+										"object": "a",
+										"value": "a"
+									}
+								]
+							}
+						]
+					}
+				],
+				"metadataTargetRegions": [
+					{
+						"include": true,
+						"metadataTarget": "$",
+						"report": "$",
+						"attributes": [
+							{
+								"id": "A.A",
+								"timeRange": {
+									"afterPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
 									},
-									"values": [
-										"a"
-									]
-								}
-							]
-						}
-					]
-				}
-			]
-		}
+									"beforePeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"endPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"startPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									}
+								},
+								"values": [
+									"a"
+								],
+								"cascadeValues": [
+									"a"
+								]
+							}
+						],
+						"keyValues": [
+							{
+								"id": "A",
+								"dataKeys": [
+									{
+										"keyValues": [
+											{
+												"id": "A",
+												"value": "a"
+											}
+										]
+									}
+								],
+								"dataSets": [
+									{
+										"dataProvider": "a",
+										"id": "$"
+									}
+								],
+								"objects": [
+									"a"
+								],
+								"timeRange": {
+									"afterPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"beforePeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"endPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"startPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									}
+								},
+								"values": [
+									"a"
+								]
+							}
+						]
+					}
+				]
+			}
+		]
 	},
 	"errors": [
 		{
