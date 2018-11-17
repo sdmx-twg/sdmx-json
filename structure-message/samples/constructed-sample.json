@@ -945,8 +945,9 @@
 				"target": "urn:sdmx:org.sdmx.infomodel.categoryscheme.Category=ECB:MOBILE_NAVI(1.0).07"
 			}
 		],
-		"constraints": [
+		"contentConstraints": [
 			{
+				"type": "Allowed",
 				"id": "EXR_CONSTRAINTS",
 				"version": "1.0",
 				"agencyID": "ECB",
