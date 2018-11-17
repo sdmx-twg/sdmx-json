@@ -1585,6 +1585,8 @@ Example:
 * startTime - *dateTime*. The startTime attributes contains the inclusive start date for the reference period.
 * endTime - *dateTime*. The endTime attributes contains the inclusive end date for the reference period.
 
+Example:
+
 	{
 		"startTime": "2000",
 		"endTime": "2018"
@@ -1597,6 +1599,8 @@ Example:
 * offset - *String*. Offset is the interval between January first and the first release of data within the year.
 * periodicity - *String*. Periodicity is the period between releases of the data set.
 * tolerance - *String*. Tolerance is the period after which the release of data may be deemed late.
+
+Example:
 
 	{
 		"offset": "30",
