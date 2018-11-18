@@ -394,7 +394,7 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 * name - *Object* *optional*. Human-readable localised *[names](#name)* for the component value.
 * description - *Object* *optional*. Human-readable localised descriptions (see *[names](#name)*) of the component value. The description is typically longer than the text provided for the name field.
 * start, end - *String* *optional*. Start and end are instances of time that define the actual Gregorian calendar period covered by the values for the time dimension. The algorithm for computing start and end fields for any supported reporting period is defined in the SDMX Technical Notes. These fields should be used only when the component value represents one of the values for the time dimension. Values are considered as inclusive both for the start field and the end field. Values must follow the ISO 8601 syntax for combined dates and times, including time zone. These fields are useful for visualisation tools, when selecting the appropriate point in time for the time axis. Statistical data, can be collected, for example, at the beginning, the middle or the end of the period, or can represent the average of observations through the period. Based on this information and using the start and end fields, it is easy to get or calculate the desired point in time to be used for the time axis.
-* parent - *String* *optional*. Contains the ID for the parent of the component value (which is itself a component value). **If specified, the parent component value should be included in the component value array even if the message does not contain data for the parent component value itself.** Parents can be included recursively until reaching the root level.
+* parent - *String* *optional*. Contains the ID for the parent of the component value (the component value of the parent might also be present in the message if according observations are also returned).
 * order - *Integer* *optional*. Contains the original order number of the component value enabling the reconstruction of the ordered component value hierarchy. Note that, to allow for a streamed message generation, the orders of observations and of component values in the component value array are not significant.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the component value.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the component value. Indices refer back to the array of *annotations* in the structure field.
@@ -1205,12 +1205,20 @@ The same logic applies for mapping the other observations, its attributes and an
 
 # Localised strings
 
+-- to be redefined \/\/\/\/\/\/
+
+Fixed text element:
+The first best language match according to the user’s preferred language choices in the http Accept-Language header (or if that is not available than according to the system's default language order) is to be used for each localisable message element. The message does however not indicate the returned language per localisable element.
+In case that there is no such language match for a particular localisable element, it is optional to:
+Text object:
 At least the available most preferred language match according to the user’s preferred language choices in the http Accept-Language header (or if that is not available than according to the system's default languages) is to be provided for each localisable message element. In case that there is no such language match for a particular localisable element, it is optional to:
 
 - return the element in a system-default language or alternatively to not return the element
 - indicate available alternative languages for the element's maintainable artefact through links to underlying localised resources
 
 **It is recommended to indicate all languages used anywhere in the message for localised elements through http Content-Language response header (languages of the intended audience) and/or through a “content-language” property in the meta tag.** The main language used can be indicated through the “lang” property in the meta tag.
+
+-- to be redefined /\/\/\/\/\/\
 
 # Security Considerations
 
