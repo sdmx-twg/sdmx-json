@@ -4,14 +4,16 @@
         "id": "IT1001",
         "prepared": "2018-03-11T14:30:47",
         "test": true,
-        "content-languages": ["en"],
+        "contentLanguages": ["en"],
         "sender": {
             "id": "NIS",
-            "name": {"en": "National Institute of Statistics of Cambodia"}
+            "name": "National Institute of Statistics of Cambodia",
+            "names": {"en": "National Institute of Statistics of Cambodia"}
         },
         "receiver": {
             "id": "IMF",
-            "name": {"en": "International Monetary Fund"}
+            "name": "International Monetary Fund",
+            "names": {"en": "International Monetary Fund"}
         },
         "links": [{
             "href": "http://ws-root/data/MA_545,MILLED_RICE,1.0/ASIKHM002+ASIKHM001../?dimensionAtObservation=AllDimensions&startPeriod=2013&endPeriod=2018",
@@ -74,17 +76,21 @@
                     "rel": "dataflow"
                 }
             ],
-            "name": {"en": "Milled rice"},
-            "description": {"en": "Milled rice description"},
+            "name": "Milled rice",
+            "names": {"en": "Milled rice"},
+            "description": "Milled rice description",
+            "descriptions": {"en": "Milled rice description"},
             "dimensions": {
                 "dataset": [{
                     "id": "FREQ",
-                    "name": {"en": "Frequency"},
+                    "name": "Frequency",
+                    "names": {"en": "Frequency"},
                     "keyPosition": 2,
                     "role": "FREQ",
                     "values": [{
                         "id": "A",
-                        "name": {"en": "Annual"},
+                        "name": "Annual",
+                        "names": {"en": "Annual"},
                         "links": [{
                             "href": "http://ws-root/codelist/MA_545/FREQ/1.0/A",
                             "urn": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=MA_545:FREQ(1.0).A",
@@ -101,13 +107,15 @@
                 "observation": [
                     {
                         "id": "REF_AREA",
-                        "name": {"en": "Reference area"},
+                        "name": "Reference area",
+                        "names": {"en": "Reference area"},
                         "keyPosition": 0,
                         "role": ["REF_AREA"],
                         "values": [
                             {
                                 "id": "ASIKHM001",
-                                "name": {"en": "Banteay Meanchey"},
+                                "name": "Banteay Meanchey",
+                                "names": {"en": "Banteay Meanchey"},
                                 "parent": "ASIKHM",
                                 "order": 2,
                                 "links": [{
@@ -119,7 +127,8 @@
                             },
                             {
                                 "id": "ASIKHM002",
-                                "name": {"en": "Battambang"},
+                                "name": "Battambang",
+                                "names": {"en": "Battambang"},
                                 "parent": "ASIKHM",
                                 "order": 1,
                                 "links": [{
@@ -131,7 +140,8 @@
                             },
                             {
                                 "id": "ASIKHM",
-                                "name": {"en": "Cambodia"},
+                                "name": "Cambodia",
+                                "names": {"en": "Cambodia"},
                                 "order": 0,
                                 "links": [{
                                     "href": "http://ws-root/codelist/MA_545/CL_PROVINCES/1.0/ASIKHM",
@@ -148,7 +158,8 @@
                     },
                     {
                         "id": "TIME_PERIOD",
-                        "name": {"en": "Time Period"},
+                        "name": "Time Period",
+                        "names": {"en": "Time Period"},
                         "keyPosition": 3,
                         "role": ["TIME_PERIOD"],
                         "values": [
@@ -156,25 +167,29 @@
                                 "start": "2014-01-01T00:00:00Z",
                                 "end": "2014-12-31T23:59:59Z",
                                 "id": "2014",
-                                "name": {"en": "2014"}
+                                "name": "2014",
+                                "names": {"en": "2014"}
                             },
                             {
                                 "start": "2015-01-01T00:00:00Z",
                                 "end": "2015-12-31T23:59:59Z",
                                 "id": "2015",
-                                "name": {"en": "2015"}
+                                "name": "2015",
+                                "names": {"en": "2015"}
                             },
                             {
                                 "start": "2016-01-01T00:00:00Z",
                                 "end": "2016-12-31T23:59:59Z",
                                 "id": "2016",
-                                "name": {"en": "2016"}
+                                "name": "2016",
+                                "names": {"en": "2016"}
                             },
                             {
                                 "start": "2017-01-01T00:00:00Z",
                                 "end": "2017-12-31T23:59:59Z",
                                 "id": "2017",
-                                "name": {"en": "2017"}
+                                "name": "2017",
+                                "names": {"en": "2017"}
                             }
                         ]
                     }
@@ -184,53 +199,63 @@
                 "dataset": [
                     {
                         "id": "UNIT_MEASURE",
-                        "name": {"en": "Unit of measure"},
+                        "name": "Unit of measure",
+                        "names": {"en": "Unit of measure"},
                         "role": ["UNIT_MEASURE"],
                         "relationship": {"none": {}},
                         "values": [{
                             "id": "TONES",
-                            "name": {"en": "Tones"}
+                            "name": "Tones",
+                            "names": {"en": "Tones"}
                         }]
                     },
                     {
                         "id": "UNIT_MULT",
-                        "name": {"en": "Unit multiplier"},
+                        "name": "Unit multiplier",
+                        "names": {"en": "Unit multiplier"},
                         "role": ["UNIT_MULT"],
                         "relationship": {"none": {}},
                         "values": [{
                             "id": "3",
-                            "name": {"en": "Thousands"}
+                            "name": "Thousands",
+                            "names": {"en": "Thousands"}
                         }]
                     },
                     {
                         "id": "BASE_PER",
-                        "name": {"en": "Base Period"},
+                        "name": "Base Period",
+                        "names": {"en": "Base Period"},
                         "role": ["BASE_PER"],
                         "relationship": {"none": {}},
                         "values": [{
                             "id": "2010_100",
-                            "name": {"en": "2010=100"}
+                            "name": "2010=100",
+                            "names": {"en": "2010=100"}
                         }]
                     },
                     {
                         "id": "PREF_SCALE",
-                        "name": {"en": "Preferred scale"},
+                        "name": "Preferred scale",
+                        "names": {"en": "Preferred scale"},
                         "role": ["PREF_SCALE"],
                         "relationship": {"none": {}},
                         "values": [{
                             "id": "-3",
-                            "name": {"en": "Thousandth"}
+                            "name": "Thousandth",
+                            "names": {"en": "Thousandth"}
                         }]
                     },
                     {
                         "id": "DECIMALS",
-                        "name": {"en": "Decimals"},
+                        "name": "Decimals",
+                        "names": {"en": "Decimals"},
                         "role": ["DECIMALS"],
                         "default": "1",
                         "relationship": {"none": {}},
                         "values": [{
                             "id": "1",
-                            "name": {"en": "One decimal"}
+                            "name": "One decimal",
+                            "names": {"en": "One decimal"}
                         }]
                     }
                 ],
@@ -238,24 +263,27 @@
                 "observation": [
                     {
                         "id": "SOURCE",
-                        "name": {"en": "Source"},
+                        "name": "Source",
+                        "names": {"en": "Source"},
                         "relationship": {"dimensions": ["TIME_PERIOD"]},
                         "values": [
-                            {"name": {"en": "MAFF_Agricultural Statistics_2014"}},
-                            {"name": {"en": "MAFF_Agricultural Statistics_2015"}},
-                            {"name": {"en": "MAFF_Agricultural Statistics_2016"}},
-                            {"name": {"en": "MAFF_Agricultural Statistics_2017"}}
+                            {"name": "MAFF_Agricultural Statistics_2014"},
+                            {"name": "MAFF_Agricultural Statistics_2015"},
+                            {"name": "MAFF_Agricultural Statistics_2016"},
+                            {"name": "MAFF_Agricultural Statistics_2017"}
                         ]
                     },
                     {
                         "id": "OBS_STATUS",
-                        "name": {"en": "Observation status"},
+                        "name": "Observation status",
+                        "names": {"en": "Observation status"},
                         "roles": ["OBS_STATUS"],
                         "default": "A",
                         "relationship": {"primaryMeasure": "OBS_VALUE"},
                         "values": [{
                             "id": "A",
-                            "name": {"en": "Normal value"}
+                            "name": "Normal value",
+                            "names": {"en": "Normal value"}
                         }]
                     }
                 ]
@@ -264,13 +292,15 @@
                 {
                     "title": "Hierarchical name",
                     "type": "Alternative name",
-                    "text": {"en": "Banteay Meanchey"},
+                    "text": "Banteay Meanchey",
+                    "texts": {"en": "Banteay Meanchey"},
                     "id": "ALT_NAME"
                 },
                 {
                     "title": "Hierarchical name",
                     "type": "Alternative name",
-                    "text": {"en": "Battambang"},
+                    "text": "Battambang",
+                    "texts": {"en": "Battambang"},
                     "id": "ALT_NAME"
                 }
             ]
