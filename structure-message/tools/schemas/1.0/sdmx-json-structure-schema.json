@@ -26,7 +26,7 @@
 					"type": "string",
 					"format": "date-time"
 				},
-				"content-languages": {
+				"contentLanguages": {
 					"description": "Array of strings containing the identifyer of all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, representaing in an array format the same information than the http Content-Language response header, e.g. \"en, fr-fr\". See IETF Language Tags: https://tools.ietf.org/html/rfc5646#section-2.1. The array's first element indicates the main language used in the message for localized elements. The usage of this property is recommended.",
 					"type": "array",
 					"items": {
@@ -36,7 +36,11 @@
 				},
 				"name": {
 					"description": "Name provides a name for the transmission. Multiple instances allow for parallel language values.",
-					"$ref": "#/definitions/name"
+					"$ref": "#/definitions/localisedBestMatchText"
+				},
+				"names": {
+					"description": "Name provides a name for the transmission. Multiple instances allow for parallel language values.",
+					"$ref": "#/definitions/localisedText"
 				},
 				"sender": {
 					"description": "Sender is information about the party that is transmitting the message.",
@@ -248,12 +252,20 @@
 						"type": "number"
 					},
 					"title": {
-						"$ref": "#/definitions/textType",
-						"description": "Title contains the title of the message, in parallel language values. A list of short, human-readable localised summary (see names) of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization."
+						"$ref": "#/definitions/localisedBestMatchText",
+						"description": "Title contains the title of the message, in best-match language value. A short, human-readable localised summary of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization."
+					},
+					"titles": {
+						"$ref": "#/definitions/localisedText",
+						"description": "Title contains the title of the message, in parallel language values. A list of short, human-readable localised summary of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization."
 					},
 					"detail": {
-						"$ref": "#/definitions/textType",
-						"description": "Detail contains the detailed text of the message, in parallel language values. A list of human-readable localised explanations (see names) specific to this occurrence of the problem. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error."
+						"$ref": "#/definitions/localisedBestMatchText",
+						"description": "Detail contains the detailed text of the message, in best-match language value. A human-readable localised explanation specific to this occurrence of the problem. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error."
+					},
+					"details": {
+						"$ref": "#/definitions/localisedText",
+						"description": "Detail contains the detailed text of the message, in parallel language values. A list of human-readable localised explanations specific to this occurrence of the problem. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error."
 					},
 					"links": {
 						"$ref": "#/definitions/links",
@@ -278,7 +290,11 @@
 				},
 				"name": {
 					"description": "Name is a human-readable name of the party.",
-					"$ref": "#/definitions/name"
+					"$ref": "#/definitions/localisedBestMatchText"
+				},
+				"names": {
+					"description": "Name is a human-readable name of the party.",
+					"$ref": "#/definitions/localisedText"
 				},
 				"contacts": {
 					"description": "Contact provides contact information for the party in regard to the transmission of the message.",
@@ -381,7 +397,10 @@
 						"$ref": "#/definitions/uri"
 					},
 					"title": {
-						"$ref": "#/definitions/textType"
+						"$ref": "#/definitions/localisedBestMatchText"
+					},
+					"titles": {
+						"$ref": "#/definitions/localisedText"
 					},
 					"type": {
 						"description": "A hint about the type of representation returned by the link.",
@@ -409,34 +428,46 @@
 				]
 			}
 		},
-		"name": {
-			"$ref": "#/definitions/textType",
-			"description": "Name is a reusable element, used for providing a human-readable localised name for an object."
-		},
-		"textType": {
-			"description": "TextType provides for a set of language-specific alternates to be provided for any human-readable constructs.",
-			"type": "object",
+        "localisedBestMatchText": {
+            "type": "string",
+            "description": "localisedBestMatchText is a reusable element, used for providing a human-readable best-language-match texts."
+        },
+        "localisedText": {
+            "description": "localisedText provides for a set of language-specific alternates to be provided for any human-readable constructs in the instance. ",
+            "type": "object",
 			"patternProperties": {
 				"^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$": {
 					"type": "string"
 				}
 			}
-		},
+        },
 		"contactType": {
 			"description": "ContactType describes the structure of a contact's details.",
 			"type": "object",
 			"properties": {
 				"name": {
 					"description": "Name contains a humain-readable name for the contact.",
-					"$ref": "#/definitions/name"
+					"$ref": "#/definitions/localisedBestMatchText"
+				},
+				"names": {
+					"description": "Name contains a humain-readable name for the contact.",
+					"$ref": "#/definitions/localisedText"
 				},
 				"department": {
 					"description": "Department is a humain-readable designation of the organisational structure by a linguistic expression, within which the contact person works.",
-					"$ref": "#/definitions/textType"
+					"$ref": "#/definitions/localisedBestMatchText"
+				},
+				"departments": {
+					"description": "Department is a humain-readable designation of the organisational structure by a linguistic expression, within which the contact person works.",
+					"$ref": "#/definitions/localisedText"
 				},
 				"role": {
 					"description": "Role is the humain-readable responsibility of the contact person with respect to the object for which this person is the contact.",
-					"$ref": "#/definitions/textType"
+					"$ref": "#/definitions/localisedBestMatchText"
+				},
+				"roles": {
+					"description": "Role is the humain-readable responsibility of the contact person with respect to the object for which this person is the contact.",
+					"$ref": "#/definitions/localisedText"
 				},
 				"telephones": {
 					"type": "array",
@@ -488,10 +519,6 @@
 			"items": {
 				"$ref": "#/definitions/AnnotationType"
 			}
-		},
-		"Description": {
-			"$ref": "#/definitions/textType",
-			"description": "Description is a reusable element, used for providing a longer human-readable localised description of an object."
 		},
 		"AnnotableType": {
 			"description": "AnnotableType is an abstract base type used for all annotable artefacts. Any type that provides for annotations should extend this type.",
@@ -547,10 +574,16 @@
 				{
 					"properties": {
 						"name": {
-							"$ref": "#/definitions/name"
+							"$ref": "#/definitions/localisedBestMatchText"
+						},
+						"names": {
+							"$ref": "#/definitions/localisedText"
 						},
 						"description": {
-							"$ref": "#/definitions/Description"
+							"$ref": "#/definitions/localisedBestMatchText"
+						},
+						"descriptions": {
+							"$ref": "#/definitions/localisedText"
 						}
 					}
 				}
@@ -569,10 +602,16 @@
 				{
 					"properties": {
 						"name": {
-							"$ref": "#/definitions/name"
+							"$ref": "#/definitions/localisedBestMatchText"
+						},
+						"names": {
+							"$ref": "#/definitions/localisedText"
 						},
 						"description": {
-							"$ref": "#/definitions/Description"
+							"$ref": "#/definitions/localisedBestMatchText"
+						},
+						"descriptions": {
+							"$ref": "#/definitions/localisedText"
 						}
 					}
 				}
@@ -682,7 +721,11 @@
 					"type": "string"
 				},
 				"text": {
-					"$ref": "#/definitions/textType",
+					"$ref": "#/definitions/localisedBestMatchText",
+					"description": "AnnotationText holds a language-specific string containing the text of the annotation."
+				},
+				"texts": {
+					"$ref": "#/definitions/localisedText",
 					"description": "AnnotationText holds a language-specific string containing the text of the annotation."
 				},
 				"links": {
@@ -2250,7 +2293,10 @@
 					"$ref": "#/definitions/Annotations"
 				},
 				"description": {
-					"$ref": "#/definitions/Description"
+					"$ref": "#/definitions/localisedBestMatchText"
+				},
+				"descriptions": {
+					"$ref": "#/definitions/localisedText"
 				}
 			},
 			"required": [
@@ -4171,7 +4217,11 @@
 							"$ref": "#/definitions/idType"
 						},
 						"condition": {
-							"$ref": "#/definitions/textType",
+							"$ref": "#/definitions/localisedBestMatchText",
+							"description": "Condition is a textual description of the conditions to be met in order for the target step to be proceeded to. It is informational only (not machine-actionable), provided in the best-match language."
+						},
+						"conditions": {
+							"$ref": "#/definitions/localisedText",
 							"description": "Condition is a textual description of the conditions to be met in order for the target step to be proceeded to. It is informational only (not machine-actionable), and may be supplied in multiple, parallel-language form."
 						},
 						"targetStep": {
