@@ -4,7 +4,7 @@
 		"id": "IDREF401067",
 		"test": false,
 		"prepared": "2018-03-17T20:00:51",
-		"content-languages": [
+		"contentLanguages": [
 			"en"
 		],
 		"sender": {
@@ -31,7 +31,8 @@
 				"agencyID": "ECB",
 				"isExternalReference": false,
 				"isFinal": false,
-				"name": {
+				"name": "Exchange Rates",
+				"names": {
 					"en": "Exchange Rates"
 				},
 				"links": [
@@ -269,10 +270,12 @@
 				"agencyID": "ECB",
 				"isExternalReference": true,
 				"isFinal": false,
-				"name": {
+				"name": "Economic concepts",
+				"names": {
 					"en": "Economic concepts"
 				},
-				"description": {
+				"description": "This category scheme is used for the Data Explorer of the ECB SDW mobile application. It is used for grouping all dataflows following the top-level categories displayed on the SDW portal.",
+				"descriptions": {
 					"en": "This category scheme is used for the Data Explorer of the ECB SDW mobile application. It is used for grouping all dataflows following the top-level categories displayed on the SDW portal."
 				},
 				"links": [
@@ -288,10 +291,12 @@
 				"categories": [
 					{
 						"id": "00",
-						"name": {
+						"name": "Parent category",
+						"names": {
 							"en": "Parent category"
 						},
-						"description": {
+						"description": "Parent category example",
+						"descriptions": {
 							"en": "Parent category example"
 						},
 						"links": [
@@ -306,10 +311,12 @@
 						"categories": [
 							{
 								"id": "07",
-								"name": {
+								"name": "Exchange rates",
+								"names": {
 									"en": "Exchange rates"
 								},
-								"description": {
+								"description": "This section shows the euro foreign exchange reference rates that are based on the regular daily concertation procedure between central banks within and outside the European System of Central Banks, which normally takes place at 2.15 p.m. ECB time (CET). It also shows the nominal effective exchange rates of the euro as calculated by the ECB.",
+								"descriptions": {
 									"en": "This section shows the euro foreign exchange reference rates that are based on the regular daily concertation procedure between central banks within and outside the European System of Central Banks, which normally takes place at 2.15 p.m. ECB time (CET). It also shows the nominal effective exchange rates of the euro as calculated by the ECB."
 								},
 								"links": [
@@ -334,7 +341,8 @@
 				"agencyID": "ECB",
 				"isExternalReference": false,
 				"isFinal": false,
-				"name": {
+				"name": "ECB concepts",
+				"names": {
 					"en": "ECB concepts"
 				},
 				"links": [
@@ -350,7 +358,8 @@
 				"concepts": [
 					{
 						"id": "CURRENCY",
-						"name": {
+						"name": "Currency",
+						"names": {
 							"en": "Currency"
 						},
 						"links": [
@@ -365,7 +374,8 @@
 					},
 					{
 						"id": "FREQ",
-						"name": {
+						"name": "Frequency",
+						"names": {
 							"en": "Frequency"
 						},
 						"links": [
@@ -380,7 +390,8 @@
 					},
 					{
 						"id": "CURRENCY_DENOM",
-						"name": {
+						"name": "Currency denominator",
+						"names": {
 							"en": "Currency denominator"
 						},
 						"links": [
@@ -395,7 +406,8 @@
 					},
 					{
 						"id": "EXR_TYPE",
-						"name": {
+						"name": "Exchange rate type",
+						"names": {
 							"en": "Exchange rate type"
 						},
 						"links": [
@@ -410,7 +422,8 @@
 					},
 					{
 						"id": "EXR_SUFFIX",
-						"name": {
+						"name": "Series variation - EXR context",
+						"names": {
 							"en": "Series variation - EXR context"
 						},
 						"links": [
@@ -425,7 +438,8 @@
 					},
 					{
 						"id": "TIME_FORMAT",
-						"name": {
+						"name": "Time format code",
+						"names": {
 							"en": "Time format code"
 						},
 						"links": [
@@ -440,7 +454,8 @@
 					},
 					{
 						"id": "OBS_CONF",
-						"name": {
+						"name": "Observation confidentiality",
+						"names": {
 							"en": "Observation confidentiality"
 						},
 						"links": [
@@ -455,7 +470,8 @@
 					},
 					{
 						"id": "OBS_VALUE",
-						"name": {
+						"name": "OBS_VALUE",
+						"names": {
 							"en": "OBS_VALUE"
 						},
 						"links": [
@@ -478,7 +494,8 @@
 				"agencyID": "ECB",
 				"isExternalReference": false,
 				"isFinal": false,
-				"name": {
+				"name": "Frequency code list",
+				"names": {
 					"en": "Frequency code list"
 				},
 				"links": [
@@ -494,7 +511,8 @@
 				"codes": [
 					{
 						"id": "A",
-						"name": {
+						"name": "Annual",
+						"names": {
 							"en": "Annual"
 						},
 						"links": [
@@ -509,7 +527,8 @@
 					},
 					{
 						"id": "M",
-						"name": {
+						"name": "Monthly",
+						"names": {
 							"en": "Monthly"
 						},
 						"links": [
@@ -524,7 +543,8 @@
 					},
 					{
 						"id": "Q",
-						"name": {
+						"name": "Quarterly",
+						"names": {
 							"en": "Quarterly"
 						},
 						"links": [
@@ -545,7 +565,8 @@
 				"agencyID": "ECB",
 				"isExternalReference": false,
 				"isFinal": false,
-				"name": {
+				"name": "Currency code list",
+				"names": {
 					"en": "Currency code list"
 				},
 				"links": [
@@ -561,7 +582,8 @@
 				"codes": [
 					{
 						"id": "_T",
-						"name": {
+						"name": "All currencies",
+						"names": {
 							"en": "All currencies"
 						},
 						"links": [
@@ -576,7 +598,8 @@
 					},
 					{
 						"id": "EUR",
-						"name": {
+						"name": "Euro",
+						"names": {
 							"en": "Euro"
 						},
 						"links": [
@@ -598,7 +621,8 @@
 				"agencyID": "ECB",
 				"isExternalReference": false,
 				"isFinal": false,
-				"name": {
+				"name": "Currency code list",
+				"names": {
 					"en": "Currency code list"
 				},
 				"links": [
@@ -614,7 +638,8 @@
 				"codes": [
 					{
 						"id": "F",
-						"name": {
+						"name": "Free",
+						"names": {
 							"en": "Free"
 						},
 						"links": [
@@ -635,7 +660,8 @@
 				"agencyID": "ECB",
 				"isExternalReference": false,
 				"isFinal": false,
-				"name": {
+				"name": "Exch. rate series variation code list",
+				"names": {
 					"en": "Exch. rate series variation code list"
 				},
 				"links": [
@@ -651,7 +677,8 @@
 				"codes": [
 					{
 						"id": "A",
-						"name": {
+						"name": "Average",
+						"names": {
 							"en": "Average"
 						},
 						"links": [
@@ -666,7 +693,8 @@
 					},
 					{
 						"id": "E",
-						"name": {
+						"name": "End-of-period",
+						"names": {
 							"en": "End-of-period"
 						},
 						"links": [
@@ -681,7 +709,8 @@
 					},
 					{
 						"id": "P",
-						"name": {
+						"name": "Growth rate to previous period",
+						"names": {
 							"en": "Growth rate to previous period"
 						},
 						"links": [
@@ -696,7 +725,8 @@
 					},
 					{
 						"id": "R",
-						"name": {
+						"name": "Annual rate of change",
+						"names": {
 							"en": "Annual rate of change"
 						},
 						"links": [
@@ -711,7 +741,8 @@
 					},
 					{
 						"id": "S",
-						"name": {
+						"name": "Percentage change since December 1998 (1998Q4 for quarterly data)",
+						"names": {
 							"en": "Percentage change since December 1998 (1998Q4 for quarterly data)"
 						},
 						"links": [
@@ -726,7 +757,8 @@
 					},
 					{
 						"id": "T",
-						"name": {
+						"name": "3-year percentage change",
+						"names": {
 							"en": "3-year percentage change"
 						},
 						"links": [
@@ -747,7 +779,8 @@
 				"agencyID": "ECB",
 				"isExternalReference": false,
 				"isFinal": false,
-				"name": {
+				"name": "Exch. rate series variation code list",
+				"names": {
 					"en": "Exch. rate series variation code list"
 				},
 				"links": [
@@ -763,7 +796,8 @@
 				"codes": [
 					{
 						"id": "NRP0",
-						"name": {
+						"name": "Real harmonised competitiveness indicator Producer Prices deflated",
+						"names": {
 							"en": "Real harmonised competitiveness indicator Producer Prices deflated"
 						},
 						"links": [
@@ -778,7 +812,8 @@
 					},
 					{
 						"id": "ERU1",
-						"name": {
+						"name": "Real effective exch. rate ULC total economy deflated",
+						"names": {
 							"en": "Real effective exch. rate ULC total economy deflated"
 						},
 						"links": [
@@ -793,7 +828,8 @@
 					},
 					{
 						"id": "ERC0",
-						"name": {
+						"name": "Real effective exch. rate CPI deflated",
+						"names": {
 							"en": "Real effective exch. rate CPI deflated"
 						},
 						"links": [
@@ -808,7 +844,8 @@
 					},
 					{
 						"id": "SP00",
-						"name": {
+						"name": "Spot",
+						"names": {
 							"en": "Spot"
 						},
 						"links": [
@@ -823,7 +860,8 @@
 					},
 					{
 						"id": "RR00",
-						"name": {
+						"name": "Reference rate",
+						"names": {
 							"en": "Reference rate"
 						},
 						"links": [
@@ -838,7 +876,8 @@
 					},
 					{
 						"id": "EN00",
-						"name": {
+						"name": "Nominal effective exch. rate",
+						"names": {
 							"en": "Nominal effective exch. rate"
 						},
 						"links": [
@@ -861,7 +900,8 @@
 				"agencyID": "SDMX",
 				"isExternalReference": false,
 				"isFinal": false,
-				"name": {
+				"name": "SDMX Agency Scheme",
+				"names": {
 					"en": "SDMX Agency Scheme"
 				},
 				"links": [
@@ -877,7 +917,8 @@
 				"agencies": [
 					{
 						"id": "ECB",
-						"name": {
+						"name": "European Central Bank",
+						"names": {
 							"en": "European Central Bank"
 						},
 						"links": [
@@ -900,7 +941,8 @@
 				"agencyID": "ECB",
 				"isExternalReference": false,
 				"isFinal": false,
-				"name": {
+				"name": "Exchange Rates",
+				"names": {
 					"en": "Exchange Rates"
 				},
 				"links": [
@@ -929,7 +971,8 @@
 				"agencyID": "ECB",
 				"isExternalReference": false,
 				"isFinal": false,
-				"name": {
+				"name": "Categorise: DATAFLOWECB:EXR(1.0)",
+				"names": {
 					"en": "Categorise: DATAFLOWECB:EXR(1.0)"
 				},
 				"links": [
@@ -953,7 +996,8 @@
 				"agencyID": "ECB",
 				"isExternalReference": false,
 				"isFinal": false,
-				"name": {
+				"name": "Constraints for the EXR dataflow.",
+				"names": {
 					"en": "Constraints for the EXR dataflow."
 				},
 				"links": [
