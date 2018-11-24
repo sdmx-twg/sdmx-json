@@ -1,4 +1,4 @@
-# Introduction
+# Introduction to SDMX-JSON Data Message
 
 Let's first start with a brief introduction of the SDMX information model.
 
