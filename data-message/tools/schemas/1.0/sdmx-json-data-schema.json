@@ -4,8 +4,12 @@
     "description": "Schema for SDMX-JSON data message",
     "type": "object",
     "properties": {
-        "meta": {"$ref": "#/definitions/meta"},
+        "meta": {
+			"description": "A meta object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.",
+            "$ref": "#/definitions/meta"
+        },
         "data": {
+			"description": "Data contains the message's “primary data”.",
             "type": "object",
             "properties": {
                 "structure": {"$ref": "#/definitions/structure"},
@@ -16,12 +20,14 @@
             }
         },
         "errors": {
+			"description": "Errors field is an array of error objects. When appropriate provides a list of error messages in addition to RESTful web services HTTP error status codes.",
             "type": "array",
             "items": {"$ref": "#/definitions/error"}
         }
     },
     "definitions": {
         "meta": {
+			"description": "A meta object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.",
             "type": "object",
             "required": [
                 "id",
@@ -30,26 +36,44 @@
             ],
             "properties": {
                 "schema": {
+					"description": "Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. Providing the link to the SDMX-JSON schema is recommended.",
                     "type": "string",
                     "format": "uri"
                 },
                 "id": {
+					"description": "Unique string assigned by the sender that identifies the message for further references.",
                     "type": "string",
                     "pattern": "^[A-Za-z0-9_@$-]+$"
                 },
-                "test": {"type": "boolean"},
+                "test": {
+					"description": "Test indicates whether the message is for test purposes or not. False for normal messages.",
+                    "type": "boolean"
+                },
                 "prepared": {
+					"description": "A timestamp indicating when the message was prepared. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.",
                     "type": "string",
                     "format": "date-time"
                 },
                 "contentLanguages": {
+					"description": "Array of strings containing the identifyer of all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, representaing in an array format the same information than the http Content-Language response header, e.g. \"en, fr-fr\". See IETF Language Tags: https://tools.ietf.org/html/rfc5646#section-2.1. The array's first element indicates the main language used in the message for localized elements. The usage of this property is recommended.",
                     "type": "array",
                     "items": {
                         "type": "string",
                         "pattern": "^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$"
                     }
                 },
-                "sender": {"$ref": "#/definitions/party"},
+				"name": {
+					"description": "Name provides a name for the transmission. Multiple instances allow for parallel language values.",
+					"$ref": "#/definitions/localisedBestMatchText"
+				},
+				"names": {
+					"description": "Name provides a name for the transmission. Multiple instances allow for parallel language values.",
+					"$ref": "#/definitions/localisedText"
+				},
+                "sender": {
+					"description": "Name provides a name for the transmission. Multiple instances allow for parallel language values.",
+                    "$ref": "#/definitions/party"
+                },
                 "receivers": {
                     "description": "Receiver is information about the part(y/ies) that is/are the intended recipient(s) of the message. This can be useful if the WS requires authentication.",
                     "type": "array",
@@ -63,12 +87,20 @@
             "required": ["id"],
             "properties": {
                 "id": {
+					"description": "The id holds the identification of the party.",
                     "type": "string",
                     "pattern": "^[A-Za-z0-9_@$-]+$"
                 },
-                "name": {"$ref": "#/definitions/localisedBestMatchText"},
-                "names": {"$ref": "#/definitions/localisedText"},
+                "name": {
+					"description": "Name is a human-readable name of the party.",
+                    "$ref": "#/definitions/localisedBestMatchText"
+                },
+                "names": {
+					"description": "List of localised human-readable name of the party.",
+                    "$ref": "#/definitions/localisedText"
+                },
                 "contact": {
+					"description": "Contact provides contact information for the party in regard to the transmission of the message.",
                     "type": "array",
                     "items": {
                         "type": "object",
@@ -150,15 +182,34 @@
             "patternProperties": {"^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$": {"type": "string"}}
         },
         "error": {
+			"description": "Error describes the structure of an error or warning message.",
             "type": "object",
             "required": ["code"],
             "properties": {
-                "code": {"type": "number"},
-                "title": {"$ref": "#/definitions/localisedBestMatchText"},
-                "titles": {"$ref": "#/definitions/localisedText"},
-                "detail": {"$ref": "#/definitions/localisedBestMatchText"},
-                "details": {"$ref": "#/definitions/localisedText"},
-                "links": {"$ref": "#/definitions/links"}
+                "code": {
+					"description": "Provides a code number for the error message. Code numbers are defined in the SDMX 2.1 Web Services Guidelines.",
+                    "type": "number"
+                },
+                "title": {
+					"description": "Title contains the title of the message, in best-match language value. A short, human-readable localised summary of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.",
+                    "$ref": "#/definitions/localisedBestMatchText"
+                },
+                "titles": {
+					"description": "Title contains the title of the message, in parallel language values. A list of short, human-readable localised summary of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.",
+                    "$ref": "#/definitions/localisedText"
+                },
+                "detail": {
+					"description": "Detail contains the detailed text of the message, in best-match language value. A human-readable localised explanation specific to this occurrence of the problem. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.",
+                    "$ref": "#/definitions/localisedBestMatchText"
+                },
+                "details": {
+					"description": "Detail contains the detailed text of the message, in parallel language values. A list of human-readable localised explanations specific to this occurrence of the problem. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.",
+                    "$ref": "#/definitions/localisedText"
+                },
+                "links": {
+					"description": "Links field is an array of link objects. If appropriate, a collection of links to additional external resources for the error.",
+                    "$ref": "#/definitions/links"
+                }
             }
         },
         "links": {
