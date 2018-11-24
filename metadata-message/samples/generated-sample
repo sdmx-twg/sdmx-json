@@ -1,34 +1,39 @@
 {
 	"meta": {
-		"schema": "http://example.com",
+		"schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/develop/metadata-message/tools/schemas/1.0/sdmx-json-metadata-schema.json",
 		"id": "$",
 		"test": true,
-		"prepared": "2018-03-27T00:00:00",
-		"content-language": [
+		"prepared": "2018-03-27T00:00:00Z",
+		"contentLanguages": [
 			"en-GB-oed"
 		],
-		"name": {
+		"name": "a",
+		"names": {
 			"en-GB-oed": "a"
 		},
 		"sender": {
 			"id": "$",
-			"name": {
+			"name": "a",
+			"names": {
 				"en-GB-oed": "a"
 			},
 			"contact": [
 				{
 					"id": "$",
-					"name": {
+					"name": "a",
+					"names": {
 						"en-GB-oed": "a"
 					},
-					"department": {
+					"department": "a",
+					"departments": {
+						"en-GB-oed": "a"
+					},
+					"role": "a",
+					"roles": {
 						"en-GB-oed": "a"
 					},
 					"email": "a",
 					"fax": "a",
-					"role": {
-						"en-GB-oed": "a"
-					},
 					"telephone": "a",
 					"uri": "a",
 					"x400": "a"
@@ -38,23 +43,27 @@
 		"receiver": [
 			{
 				"id": "$",
-				"name": {
+				"name": "a",
+				"names": {
 					"en-GB-oed": "a"
 				},
 				"contact": [
 					{
 						"id": "$",
-						"name": {
+						"name": "a",
+						"names": {
 							"en-GB-oed": "a"
 						},
-						"department": {
+						"department": "a",
+						"departments": {
+							"en-GB-oed": "a"
+						},
+						"role": "a",
+						"roles": {
 							"en-GB-oed": "a"
 						},
 						"email": "a",
 						"fax": "a",
-						"role": {
-							"en-GB-oed": "a"
-						},
 						"telephone": "a",
 						"uri": "a",
 						"x400": "a"
@@ -68,7 +77,8 @@
 				"rel": "a",
 				"urn": "a",
 				"uri": "http://example.com",
-				"title": {
+				"title": "a",
+				"titles": {
 					"en-GB-oed": "a"
 				},
 				"type": "a",
@@ -84,12 +94,13 @@
 				"publicationYear": "1000Z",
 				"reportingBegin": "1000Z",
 				"reportingEnd": "1000Z",
-				"validFrom": "2018-01-27T00:00:00",
-				"validTo": "2018-03-27T00:00:00",
+				"validFrom": "2018-01-27T00:00:00Z",
+				"validTo": "2018-03-27T00:00:00Z",
 				"annotations": [
 					{
 						"id": "a",
-						"text": {
+						"text": "a",
+						"texts": {
 							"en-GB-oed": "a"
 						},
 						"title": "a",
@@ -103,15 +114,17 @@
 						"rel": "a",
 						"urn": "a",
 						"uri": "http://example.com",
-						"title": {
+						"title": "a",
+						"titles": {
 							"en-GB-oed": "a"
 						},
 						"type": "a",
 						"hreflang": "en-GB-oed"
 					}
 				],
-				"name": {
-						"en-GB-oed": "a"
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
 				},
 				"dataProvider": "a",
 				"reports": [
@@ -120,7 +133,8 @@
 						"annotations": [
 							{
 								"id": "a",
-								"text": {
+								"text": "a",
+								"texts": {
 									"en-GB-oed": "a"
 								},
 								"title": "a",
@@ -136,7 +150,8 @@
 									"annotations": [
 										{
 											"id": "a",
-											"text": {
+											"text": "a",
+											"texts": {
 												"en-GB-oed": "a"
 											},
 											"title": "a",
@@ -144,11 +159,13 @@
 											"url": "http://example.com"
 										}
 									],
+									"structuredText": "a",
 									"structuredTexts": {
-											"en-GB-oed": "a"
+										"en-GB-oed": "a"
 									},
+									"text": "a",
 									"texts": {
-											"en-GB-oed": "a"
+										"en-GB-oed": "a"
 									},
 									"attributeSet": {
 										"reportedAttributes": [
@@ -158,7 +175,8 @@
 												"annotations": [
 													{
 														"id": "a",
-														"text": {
+														"text": "a",
+														"texts": {
 															"en-GB-oed": "a"
 														},
 														"title": "a",
@@ -166,11 +184,13 @@
 														"url": "http://example.com"
 													}
 												],
+												"structuredText": "a",
 												"structuredTexts": {
-														"en-GB-oed": "a"
+													"en-GB-oed": "a"
 												},
+												"text": "a",
 												"texts": {
-														"en-GB-oed": "a"
+													"en-GB-oed": "a"
 												},
 												"attributeSet": {
 													"reportedAttributes": [
@@ -180,7 +200,8 @@
 															"annotations": [
 																{
 																	"id": "a",
-																	"text": {
+																	"text": "a",
+																	"texts": {
 																		"en-GB-oed": "a"
 																	},
 																	"title": "a",
@@ -188,11 +209,13 @@
 																	"url": "http://example.com"
 																}
 															],
+															"structuredText": "a",
 															"structuredTexts": {
-																	"en-GB-oed": "a"
+																"en-GB-oed": "a"
 															},
+															"text": "a",
 															"texts": {
-																	"en-GB-oed": "a"
+																"en-GB-oed": "a"
 															}
 														}
 													]
@@ -234,10 +257,12 @@
 	"errors": [
 		{
 			"code": 1.1,
-			"title": {
+			"title": "a",
+			"titles": {
 				"en-GB-oed": "a"
 			},
-			"detail": {
+			"detail": "a",
+			"details": {
 				"en-GB-oed": "a"
 			},
 			"links": [
@@ -246,7 +271,8 @@
 					"rel": "a",
 					"urn": "a",
 					"uri": "http://example.com",
-					"title": {
+					"title": "a",
+					"titles": {
 						"en-GB-oed": "a"
 					},
 					"type": "a",
