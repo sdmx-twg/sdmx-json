@@ -24,19 +24,19 @@ The members data and errors MUST NOT coexist in the same message.
 
 Example:
 
-    {
-      "meta": {
-          # meta object #
-      },
-      "data": {
-          # data object #
-      },
-      "errors": [
-        {
-          # error object #
-        }
-      ]
-    }
+	{
+		"meta": {
+			# meta object #
+		},
+		"data": {
+			# data object #
+		},
+		"errors": [
+			{
+				# error object #
+			}
+		]
+	}
 
 ## meta
 
@@ -47,36 +47,40 @@ Any members MAY be specified within `meta` objects.
 * id - *String*. Unique string that identifies the message for further references.
 * test - *Boolean* *optional*. Indicates whether the message is for test purposes or not. False for normal messages.
 * prepared - *String*. A timestamp indicating when the message was prepared. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
-* content-languages - *Array* *optional*. Array of strings containing the identifyer of all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, representaing in an array format the same information than the http Content-Language response header, e.g. "en, fr-fr". See IETF Language Tags: https://tools.ietf.org/html/rfc5646#section-2.1. The array's first element indicates the main language used in the message for localized elements. **The usage of this property is recommended.** Consult the section on [localised strings](#localised-strings) on how the message deals with languages.
-* name - *Object* *optional*. A list of human-readable localised *[names](#name)* for the transmission. See the section on [localised strings](#localised-strings) on how the message deals with languages.
+* contentLanguages - *Array* *optional*. Array of strings containing the identifyer of all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, representaing in an array format the same information than the http Content-Language response header, e.g. "en, fr-fr". See IETF Language Tags: https://tools.ietf.org/html/rfc5646#section-2.1. The array's first element indicates the main language used in the message for localized elements. **The usage of this property is recommended.**
+* name - *String* *optional*. Human-readable (best-language-match) name for the transmission.
+* names - *Object* *optional*. Human-readable localised *[names](#names)* for the transmission.
 * sender - *Object*. *[Sender](#sender)* contains information about the party that is transmitting the message.
 * receiver - *Object* *optional*. *[Receiver](#receiver)* contains information about the party that is receiving the message. This can be useful if the WS requires authentication.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the header.
 
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
+
 Example:
 
-    "meta": {
-      "schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/sdmx-json-data-schema.json",
-      "copyright": "Copyright 2017 Statistics hotline",
-      "id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
-      "prepared": "2018-01-03T12:54:12",
-      "test": false,
-      "content-languages": [ "en", "fr-fr" ],
-      “name”: {
-          # name object #
-      },
-      "sender: {
-        # sender object #
-      },
-      "receiver": {
-        # receiver object #
-      },
-      "links": [
-        {
-          # link object #
-        }
-      ]
-    }
+	"meta": {
+		"schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/sdmx-json-data-schema.json",
+		"copyright": "Copyright 2017 Statistics hotline",
+		"id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
+		"prepared": "2018-01-03T12:54:12",
+		"test": false,
+		"contentLanguages": [ "en", "fr-fr" ],
+		"name": "Transmission name",
+		"names": {
+			# name object #
+		},
+		"sender": {
+			# sender object #
+		},
+		"receiver": {
+			# receiver object #
+		},
+		"links": [
+			{
+				# link object #
+			}
+		]
+	}
 
 ### sender
 
@@ -84,38 +88,42 @@ Example:
 Sender contains the following fields:
 
 * id - *String*. A unique identifier of the party.
-* name - *Object* *optional*. A list of human-readable localised *[names](#name)* of the sender. See the section on [localised strings](#localised-strings) on how the message deals with languages.
+* name - *String* *nullable*. A human-readable (best-language-match) name of the sender.
+* names - *Object* *optional*. A list of human-readable localised *[names](#names)* of the sender.
 * contacts - *Array* *optional*. A collection of *[contacts](#contact)*. Provides contact information for the party in regard to the transmission of the message.
+
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
 Example:
 
-    "sender": {
-      "id": "ECB",
-      “name”: {
-          # name object #
-      },
-      "contacts": [
-        {
-          # contact objects #
-        }
-      ]
-    }
+	"sender": {
+		"id": "ECB",
+		"name": "European Central Bank",
+		"name": {
+			# name object #
+		},
+		"contacts": [
+			{
+				# contact objects #
+			}
+		]
+	}
 
-#### name
+#### names
 
-*Object* containing all returned localised names, one per object property:
+*Object* containing all appropriate localised names, one per object property:
 
 * One or more of: IETF Language Tag according to [RFC 5646 documentation](https://tools.ietf.org/html/rfc5646#section-2.1) for specifying locals in HTTP - *String*. The localised name.
 
-See the section on [localised strings](#localised-strings) on how the message deals with languages.
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
 Example:
 
-    { 
-      "en": "This is an English name",
-      "en-GB": "This is a British name",
-      "fr": "C'est un nom français"
-    }
+	{ 
+		"en": "This is an English name",
+		"en-GB": "This is a British name",
+		"fr": "C'est un nom français"
+	}
 
 #### contact
 
@@ -123,29 +131,38 @@ Example:
 may contain the following field:
 
 * id - *String*. Identifier for the resource.
-* name - *Object* *optional*. Human-readable localised *[names](#name)* of the contact.
-* department - *Object* *optional*. Human-readable localised *[names](#name)* of the organisational structure for the contact.
-* role - *Object* *optional*. The Hunam-readable localised name of the responsibility of the contact.
+* name - *String* *optional*. Human-readable (best-language-match) name of the contact.
+* names - *Object* *optional*. Human-readable localised *[names](#names)* of the contact.
+* department - *String* *optional*. Human-readable (best-language-match) name of the organisational structure for the contact.
+* departments - *Object* *optional*. Human-readable localised *[names](#names)* of the organisational structure for the contact.
+* role - *String* *optional*. Human-readable (best-language-match) name of the responsibility of the contact.
+* roles - *Object* *optional*. Human-readable localised *[names](#names)* of the responsibility of the contact.
 * telephones - *Array* *optional*. An array of telephone numbers for the contact.
 * faxes - *Array* *optional*. An array of fax numbers for the contact person.
 * uris - *Array* *optional*. An array of uris. Each uri holds an information URL for the contact.
 * emails - *Array* *optional*. An array of email addresses for the contact person.
 * x400s - *Array* *optional*. An array of X.400 addresses for the contact person.
 
-See the section on [localised strings](#localised-strings) on how the message deals with languages.
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
 Example:
 
-    {
-      "id": "HOTLINE",
-      "name": { "en": "Statistics hotline" },
-      "department": { "en": "Statistics hotline" },
-      "role": { "en": "Statistics hotline" },
-      "telephones": [ "+00 0 00 00 00 00" ],
-      "faxes": [ "+00 0 00 00 00 01" ],
-      "uris": [ "www.xyz.org" ],
-      "emails": [ "statistics@xyz.org" ]
-    }
+	{
+		"id": "HOTLINE",
+		"name": "Statistics hotline",
+		"names": { "en": "Statistics hotline",
+		           "fr": "Service d'assistance téléphonique des Statistiques" },
+		"department": "Statistics hotline",
+		"departments": { "en": "Statistics hotline",
+		                 "fr": "Service d'assistance téléphonique des Statistiques" },
+		"role": "Statistics hotline",
+		"roles": { "en": "Statistics hotline",
+		           "fr": "Service d'assistance téléphonique des Statistiques"},
+		"telephones": [ "+00 0 00 00 00 00" ],
+		"faxes": [ "+00 0 00 00 00 01" ],
+		"uris": [ "www.xyz.org" ],
+		"emails": [ "statistics@xyz.org" ]
+	}
 
 ### receiver
 
@@ -188,18 +205,18 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 Example:
 
-    "data": {
-      "dataStructures": [
-        {
-          # dataStructureDefinition object #
-        }
-      ],
-      "dataflows": [
-        {
-          # dataflow object #
-        }
-      ]
-    }
+	"data": {
+		"dataStructures": [
+			{
+				# dataStructureDefinition object #
+			}
+		],
+		"dataflows": [
+			{
+				# dataflow object #
+			}
+		]
+	}
 
 ### Common SDMX artefact properties
 
@@ -208,8 +225,10 @@ All SDMX artefact types share the following common object properties:
 * id - *String*. Identifier for the resource.
 * agencyID - *String* *optional*. ID of the agency maintaining this resource.
 * version - *String* *optional*. Version of this resource. It is "1.0" by default.
-* name - *Object* *optional*. A list of human-readable localised *[names](#name)* of the resource.
-* description - *Object* *optional*. A list of human-readable localised descriptions (see *[names](#name)*) of the resource.
+* name - *String* *optional*. Human-readable (best-language-match) name of the resource.
+* names - *Object* *optional*. Human-readable localised *[names](#names)* of the resource.
+* description - *String* *optional*. Human-readable (best-language-match) description of the resource.
+* descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) of the resource.
 * validFrom - *String* *optional*. A timestamp from which the version is valid. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
 * validTo - *String* *optional*.  A timestamp from which the version is superceded. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
 * isFinal - *Boolean* *optional*. True if this is the final version of the resource, otherwise False (draft version).
@@ -217,28 +236,38 @@ All SDMX artefact types share the following common object properties:
 * annotations - *Array* *optional*. Provides a list of annotation objects.
 * links - *Array* *optional*. A collection of links to additional resources for the resource. See the section *[link](#link)*. **It is recommended to systematically include as the first link a self-referencing hyperlink (link with "rel"="self") to indicate the URL address of the resource, and its URN.**
 
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
+
 Example:
 
 	{
-	  "id": "MOBILE_NAVI_PUB",
-	  "agencyID": "ECB.DISS",
-	  "version": "1.0",
-	  "name": { "en": "Economic concepts" },
-	  "description": { "en": "This is the description of Economic concepts" },
-	  "validFrom": "2012-05-04",
-	  "validTo": "2015-05-04",
-	  "isFinal": true,
-	  "isExternalReference": false,
-	  "annotations":[
-		{
-		  # annotation object#
-		}
-	  ],
-	  "links": [
-		{
-		  # link object#
-		}
-	  ]
+		"id": "MOBILE_NAVI_PUB",
+		"agencyID": "ECB.DISS",
+		"version": "1.0",
+		"name": "Economic concepts",
+		"names": {
+			"en": "Economic concepts",
+			"fr": "Concepts économiques"
+		},
+		"description": "This is the description of Economic concepts",
+		"descriptions": {
+			"en": "This is the description of Economic concepts",
+			"fr": "Ceci est la description des concepts économiques"
+		},
+		"validFrom": "2012-05-04",
+		"validTo": "2015-05-04",
+		"isFinal": true,
+		"isExternalReference": false,
+		"annotations":[
+			{
+				# annotation object#
+			}
+		],
+		"links": [
+			{
+				# link object#
+			}
+		]
 	}
 
 #### annotation
@@ -248,21 +277,28 @@ Example:
 * id - *String* *optional*. ID provides a non-standard identification of an annotation. It can be used to disambiguate annotations.
 * title - *String* *optional*. Provides a non-localised title for the annotation.
 * type - *String* *optional*. Type is used to distinguish between annotations designed to support various uses. The types are not enumerated, and these can be freely specified by the creator of the annotations. The definitions and use of annotation types should be documented by their creator.
-* text - *Object* *optional*. A list of human-readable localised texts (see *[names](#name)*) of the annotation.
+* text - *String* *optional*. A human-readable (best-language-match) text of the annotation.
+* texts - *Object* *optional*. A list of human-readable localised texts (see *[names](#names)*) of the annotation.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a link to an additional external resource which may contain or supplement the annotation.
+
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
 Example:
 
 	{
-	  "id": "74747",
-	  "title": "Sample annotation",
-	  "type": "reference",
-	  "text": { "en": "Sample annotation text" },
-	  "links": [
-	    {
-	      # link object #
-	    }
-	  ]
+		"id": "74747",
+		"title": "Sample annotation",
+		"type": "reference",
+		"text": "Sample annotation text",
+		"texts": {
+			"en": "Sample annotation text",
+			"fr": "Exemple de texte d'annotation"
+		},
+		"links": [
+			{
+				# link object #
+			}
+		]
 	}
 
 ### Common properties of SDMX artefacts of base type "ItemScheme"
@@ -277,13 +313,13 @@ In addition, they share the following common object properties:
 Example:
 
 	{
-	  "id": "MY_DOMAINS",
-	  "isPartial": false,
-	  "categories": [
-		{
-		  # item object #
-		}
-	  ]
+		"id": "MY_DOMAINS",
+		"isPartial": false,
+		"categories": [
+			{
+				# item object #
+			}
+		]
 	}
 
 #### item
@@ -291,43 +327,59 @@ Example:
 *Object* *optional*. Item within the ItemScheme (if the resource is a CategoryScheme, ConceptScheme, Codelist, AgencyScheme, DataProviderScheme, DataConsumerScheme, OrganisationUnitScheme and ReportingTaxonomy). 
 
 * id - *String*. Identifier for the item.
-* name - *Object* *optional*. A list of human-readable localised *[names](#name)* of the item.
-* description - *Object* *optional*. A list of human-readable localised description (see *[names](#name)*)  of the item.
+* name - *String* *optional*. Human-readable (best-language-match) name of the item.
+* names - *Object* *optional*. Human-readable localised *[names](#names)* of the item.
+* description - *String* *optional*. Human-readable (best-language-match) description of the item. The description is typically longer than the text provided for the name field.
+* descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) of the item. A descriptions is typically longer than the text provided for the name field.
 * start, end - *String* *optional*. Start and end are instances of time that define the actual Gregorian calendar period covered by the values for the time dimension. The algorithm for computing start and end fields for any supported reporting period is defined in the SDMX Technical Notes. These fields should be used only when the component value represents one of the values for the time dimension. Values are considered as inclusive both for the start field and the end field. Values must follow the ISO 8601 syntax for combined dates and times, including time zone. These fields are useful for visualisation tools, when selecting the appropriate point in time for the time axis. Statistical data, can be collected, for example, at the beginning, the middle or the end of the period, or can represent the average of observations through the period. Based on this information and using the start and end fields, it is easy to get or calculate the desired point in time to be used for the time axis.
 * parent - *String* *optional*. Contains the ID or the URN for the parent of the item (which is itself an item) enabling the reconstruction of the ordered item hierarchy.
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources for the item. See the section [link](#link).
 * categories/concepts/codes/agencies/dataProviders/dataConsumers/organisationUnits/reportingCategories - *Array* *optional*. Provides a list of child items of the item. **Note that the order of items is significant. In the use case of a submission of a partial list is is necessary to include preceding and succeeding items to allow determining the correct positioniong of the submitted items.**
 
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
+
 Examples:
 
 	{
-	  "id": "01",
-	  "name": { "en": "Population and migration" },
-	  "description": { "en": "Description for Population and migration" },
-	  "parent": "T",
-	  "links":[
-		{
-		  # link object#
-		}
-	  ],
-	  "annotations": [
-		{
-		  # annotation object #
-		}
-	  ],
-	  "categories": [	
-		{
-		  # item object (recursive) #
-		}
-	  ]
+		"id": "01",
+		"name": "Population and migration",
+		"names": {
+			"en": "Population and migration",
+			"fr": "Population et migration"	
+		},
+		"description": "Description for Population and migration",
+		"descriptions": {
+			"en": "Description pour Population et migration",
+			"fr": "Description for Population and migration"
+		},
+		"parent": "T",
+		"links":[
+			{
+				# link object#
+			}
+		],
+		"annotations": [
+			{
+				# annotation object #
+			}
+		],
+		"categories": [	
+			{
+				# item object (recursive) #
+			}
+		]
 	}
 
 	{
-	  "id": "2010",
-	  "name": "2010",
-	  "start": "2010-01-01T00:00Z",
-	  "end": "2010-12-31T23:59:59Z",
+		"id": "2010",
+		"name": "2010",
+		"names": {
+			"en": "2010",
+			"fr": "2010"	
+		},
+		"start": "2010-01-01T00:00Z",
+		"end": "2010-12-31T23:59:59Z",
 	}
 
 ### dataStructure
@@ -777,7 +829,8 @@ Example:
 		"id": "TOPICS",
 		"version": "1.0",
 		"agencyID": "SDMX",
-		"name": {
+		"name": "Topics",
+		"names": {
 			"en-GB-oed": "Topics",
 			"fr": "Thèmes"
 		},
@@ -785,14 +838,16 @@ Example:
 		"categories": [
 			{
 				"id": "TOPIC1",
-				"name": {
+				"name": "Topic 1",
+				"names": {
 					"en-GB-oed": "Topic 1",
 					"fr": "Thème 1"
 				},
 				"categories": [
 					{
 						"id": "SUBTOPIC11",
-						"name": {
+						"name": "Topic 11",
+						"names": {
 							"en-GB-oed": "Topic 11",
 							"fr": "Thème 11"
 						}
@@ -820,22 +875,29 @@ The start and end properties are not used.
 Example:
 
 	{
-	  "id": "CS_BOP",
-	  "name": { "en": "Balance of Payments Concept Scheme" },
-	  "agencyId": "IMF",
-	  "version": "1.9",
-	  "concepts": [
-		{
-		  "id": "FREQ",
-		  "name": { "en": "Frequency" },
-		  "coreRepresentation": {
-			# coreRepresentation object #
-		  },
-		  "isoConceptReference": {
-			# isoConceptReference object #
-		  }
-		}
-	  ]
+		"id": "CS_BOP",
+		"name": "Balance of Payments Concept Scheme",
+		"names": {
+			"en": "Balance of Payments Concept Scheme",
+			"fr": "Schéma des concepts de Balance des paiements"},
+		"agencyId": "IMF",
+		"version": "1.9",
+		"concepts": [
+			{
+				"id": "FREQ",
+				"name": "Frequency",
+				"names": {
+					"en": "Frequency",
+					"fr": "Fréquence"
+				},
+				"coreRepresentation": {
+					# coreRepresentation object #
+				},
+				"isoConceptReference": {
+					# isoConceptReference object #
+				}
+			}
+		]
 	}
 
 #### coreRepresentation
@@ -852,23 +914,23 @@ Example:
 Examples:
 
 	{
-	  "urn": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_FREQ(2.0)",
-	  "enumerationFormat": {
-		  # enumerationFormat object #
-	  }
+		"urn": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_FREQ(2.0)",
+		"enumerationFormat": {
+			# enumerationFormat object #
+		}
 	}
 
 	{
-	  "id": "CL_FREQ",
-	  "agencyID": "SDMX",
-	  "version": "2.0",
-	  "enumerationFormat": {
-		  # enumerationFormat object #
-	  }
+		"id": "CL_FREQ",
+		"agencyID": "SDMX",
+		"version": "2.0",
+		"enumerationFormat": {
+			# enumerationFormat object #
+		}
 	}
 
 	{
-	  "textFormat": "String"
+		"textFormat": "String"
 	}
 
 ##### enumerationFormat
@@ -892,7 +954,7 @@ Examples:
 Example:
 
 	{
-	  "pattern": "^[0-9][0-9]$"
+		  "pattern": "^[0-9][0-9]$"
 	}
 
 #### isoConceptReference
@@ -923,22 +985,28 @@ Example:
 		"id": "CODELIST1",
 		"version": "1.0",
 		"agencyID": "SDMX",
-		"name": {
-			"en": "Code list 1"
+		"name": "Code list 1",
+		"names": {
+			"en": "Code list 1",
+			"fr": "Liste de codes 1"
 		},
 		"isPartial": true,
 		"codes": [
 			{
 				"id": "CODE1",
-				"name": {
-					"en": "Code 1"
+				"name": "Code 1",
+				"names": {
+					"en": "Code 1",
+					"fr": "Code 1"
 				}
 			},
 			{
 				"id": "CODE11",
-				"name": {
-					"en": "Code 11"
-				},
+				"name": "Code 11",
+				"names": {
+					"en": "Code 11",
+					"fr": "Code 11"
+				}
 				"parent": "CODE1"
 			}
 		]
@@ -974,8 +1042,10 @@ Example:
 		"agencyID": "SDMX",
 		"isExternalReference": false,
 		"isFinal": false,
-		"name": {
-			"en": "SDMX Agency Scheme"
+		"name": "SDMX Agency Scheme",
+		"names": {
+			"en": "SDMX Agency Scheme",
+			"fr": "Schéma des agences SDMX"
 		},
 		"links": [
 			{
@@ -988,14 +1058,18 @@ Example:
 		"agencies": [
 			{
 				"id": "SDMX",
-				"name": {
-					"en": "SDMX"
+				"name": "SDMX",
+				"names": {
+					"en": "SDMX",
+					"fr": "SDMX"
 				},
 				"contacts": [
 					{
 						"id": "SDMX",
-						"name": {
-							"en": "SDMX"
+						"name": "SDMX",
+						"names": {
+							"en": "SDMX",
+							"fr": "SDMX"
 						},
 						"uris": [
 							"sdmx.org"
@@ -1051,8 +1125,10 @@ Example:
 		"agencyID": "ECB",
 		"isExternalReference": false,
 		"isFinal": false,
-		"name": {
-			"en": "Exchange Rates"
+		"name": "Exchange Rates",
+		"names": {
+			"en": "Exchange Rates",
+			"fr": "Taux de change"
 		},
 		"links": [
 			{
@@ -1123,8 +1199,10 @@ Example:
 		"agencyID": "ECB",
 		"isExternalReference": false,
 		"isFinal": false,
-		"name": {
-			"en": "Categorise: DATAFLOWECB:EXR(1.0)"
+		"name": "Categorise: DATAFLOWECB:EXR(1.0)",
+		"names": {
+			"en": "Categorise: DATAFLOWECB:EXR(1.0)",
+			"fr": "Catégoriser: DATAFLOWECB:EXR(1.0)"
 		},
 		"links": [
 			{
@@ -1165,8 +1243,10 @@ Example:
 		"agencyID": "ECB",
 		"isExternalReference": false,
 		"isFinal": false,
-		"name": {
-			"en": "Constraints for the EXR dataflow"
+		"name": "Constraints for the EXR dataflow",
+		"names": {
+			"en": "Constraints for the EXR dataflow",
+			"fr": "Constraintes pour le dataflow EXR"
 		},
 		"links": [
 			{
@@ -1621,18 +1701,24 @@ See the schema file for more information.
 *Object* *optional*. Used to provide a error message in addition to RESTful web services HTTP error status codes. The following pieces of information are to be provided:
 
 * code - *Number*. Provides a code number for the error message. Code numbers are defined in the SDMX 2.1 Web Services Guidelines.
-* title - *Object* *optional*. A list of short, human-readable localised summary (see *[names](#name)*) of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
-* detail - *Object* *optional*. A list of human-readable localised explanations (see *[names](#name)*) specific to this occurrence of the problem. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.
+* title - *String* *optional*. A short, human-readable (best-language-match) summary of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
+* titles - *Object* *optional*. A list of short, human-readable localised summaries (see *[names](#names)*) of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
+* detail - *String* *optional*. A human-readable (best-language-match) explanation specific to this occurrence of the problem. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.
+* details - *Object* *optional*. A list of human-readable localised explanations (see *[names](#names)*) specific to this occurrence of the problem. Like titles, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the error.
 
-See the section on [localised strings](#localised-strings) on how the message deals with languages.
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
 Example:
 
-    {
-      "code": 150,
-      "title": { "en": "Invalid number of items in the item parameter" }
-    }
+	{
+		"code": 150,
+		"title": "Invalid number of items in the item parameter",
+		"titles": {
+			"en": "Invalid number of items in the item parameter",
+			"fr": "Nombre invalide d'items dans le paramètre 'item'"
+		}
+	}
 
 # Linking mechanism
 
@@ -1644,36 +1730,43 @@ Example:
 * rel - *String*. Relationship of the object to the external resource. See semantics below.
 * urn - *String* *optional*. The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details).
 * uri - *String* *optional*. The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource.
-* title - *Object* *optional*. A list of human-readable localised descriptions (see *[names](#name)*) of the target link. See the section on [localised strings](#localised-strings) on how the message deals with languages.
+* title - *String* *optional*. A human-readable (best-language-match) description of the target link.
+* titles - *Object* *optional*. A list of human-readable localised descriptions (see *[names](#names)*) of the target link.
 * type - *String* *optional*. A hint about the type of representation returned by the link.
 * hreflang - *String* *optional*. The natural language of the external link, the same as used in the HTTP Accept-Language request header.
 
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
+
 Examples:
 
-    {
-      "href": "https://registry.sdmx.org/ws/rest/datastructure/ECB/ECB_EXR1",
-      "rel": "self",
-      "uri": "http://www.xyz.org/pdf/0123456789"
-    }
-    
-    {
-      "href": "https://registry.sdmx.org/ws/rest/dataflow/ECB.DISS/BSI_PUB/1.0",
-      "rel": "dataflow",
-      "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.dataflow=ECB.DISS:BSI_PUB(1.0)"
-    }
-    
-    {
-       "href": "https://registry.sdmx.org/FusionRegistry/ws/rest/provisionagreement/ESTAT/PA_NAMAIN_IDC_N",
-       "rel": "provisionagreement"
-    }
+	{
+		"href": "https://registry.sdmx.org/ws/rest/datastructure/ECB/ECB_EXR1",
+		"rel": "self",
+		"uri": "http://www.xyz.org/pdf/0123456789"
+	}
 
-    {
-      "href": "https://registry.sdmx.org/help.html",
-      "rel": "help",
-      "title": { "en": "Documentation about the SDMX Global Registry" },
-      "type": "text/html",
-      "hreflang": "en"
-    }
+	{
+		"href": "https://registry.sdmx.org/ws/rest/dataflow/ECB.DISS/BSI_PUB/1.0",
+		"rel": "dataflow",
+		"urn": "urn:sdmx:org.sdmx.infomodel.datastructure.dataflow=ECB.DISS:BSI_PUB(1.0)"
+	}
+
+	{
+		"href": "https://registry.sdmx.org/FusionRegistry/ws/rest/provisionagreement/ESTAT/PA_NAMAIN_IDC_N",
+		"rel": "provisionagreement"
+	}
+
+	{
+		"href": "https://registry.sdmx.org/help.html",
+		"rel": "help",
+		"title": "Documentation about the SDMX Global Registry",
+		"titles": {
+			"en": "Documentation about the SDMX Global Registry",
+			"fr": "Documentation concernant le 'SDMX Global Registry'"
+		},
+		"type": "text/html",
+		"hreflang": "en"
+	}
 
 Collections of links can be attached to various elements in SDMX-JSON.
 
@@ -1687,15 +1780,40 @@ SDMX-JSON offers a list of predefined semantics, but implementers are free to ex
 
 The *URL* captured in the `href` attribute can be *absolute* or *relative*. **It is recommended to use absolute URLs in case the SDMX-JSON message is archived.**
 
-# Localised strings
+# Localised text elements
 
-At least all language matches according to the user’s preferred language choices in the http Accept-Language header (or if that is not available than according to the system's default languages) are to be provided for each localisable message element.
-In case that there is no such language match for a particular localisable element, it is optional to:
+**Localised best-language-match text strings (static properties matched through "Lookup"):**
 
-- return the element in the system-default languages or alternatively to not return the element
+The first best language match according to the user’s preferred language choices expressed through the HTTP content negotiation (Accept-Language header parameter) is to be provided for each localised text element. The message does however not indicate the returned language per localised text element.
+
+This language matching type is called "Lookup", see <https://tools.ietf.org/html/rfc4647#section-3.4>.
+
+Example:
+
+	"name": "Frequency"
+
+**Localised text objects (variable properties matched through "Filtering"):**
+
+All available language matches according to the user’s preferred language choices expressed through the HTTP content negotiation (Accept-Language header parameter) is to be provided for each localised text element. 
+
+This language matching type is called "Filtering", see <https://tools.ietf.org/html/rfc4647#section-3.3>.
+
+Example:
+
+	"names": {
+		"en": "Frequency",
+		"fr": "Fréquence"
+	}
+
+The localised text object needs to be present whenever the related localised best-language-match text strings is present, and especially whenever a localised text is mandatory in the SDMX Information model. Note that localised text (and the knowledge about the locale) is mandatory in structure messages when artefacts are being submitted for storage to a registry or to other databases. The localised text object is important for use cases where multiple languages are required or where the information on the language used is required.
+
+
+In case that there is no language match for a particular localisable element, it is optional to:
+
+- return the element in a system-default language or alternatively to not return the element
 - indicate available alternative languages for the element's maintainable artefact through links to underlying localised resources
 
-**It is recommended to indicate all languages used anywhere in the message for localised elements through http Content-Language response header (languages of the intended audience) and/or through a “content-language” property in the meta tag.** The main language used can be indicated through the “lang” property in the meta tag.
+**It is recommended to indicate all languages used anywhere in the message for localised elements through http Content-Language response header (languages of the intended audience) and/or through a “contentLanguages” property in the meta tag.** The main language used can be indicated through the “lang” property in the meta tag.
 
 
 # Security Considerations
@@ -1713,10 +1831,14 @@ The snippet below shows an example of an `error` object, extended with a `wsCust
 
 	```
 	"errors": [
-	  {
-		"code": 150,
-		"title": { "en": "Invalid number of items in the item parameter" }
-		"wsCustomErrorCode": 39272
-	  }
+		{
+			"code": 150,
+			"title": "Invalid number of items in the item parameter",
+			"titles": {
+				"en": "Invalid number of items in the item parameter",
+				"fr": "Nombre invalide d'items dans le paramètre 'item'"
+			}
+			"wsCustomErrorCode": 39272
+		}
 	]
 	```

@@ -4,20 +4,23 @@
 		"id": "IFS_Metadata",
 		"test": true,
 		"prepared": "2018-03-18T09:30:47-05:00",
-		"content-languages": [
+		"contentLanguages": [
 			"en"
 		],
-		"name": {
+		"name": "IFS_Metadata",
+		"names": {
 			"en": "IFS_Metadata"
 		},
 		"sender": {
 			"id": "IMF",
-			"name": {
+			"name": "International Monetary Fund",
+			"names": {
 				"en": "International Monetary Fund"
 			},
 			"contacts": [
 				{
-					"name": {
+					"name": "StatisticQuery",
+					"names": {
 						"en": "StatisticQuery"
 					},
 					"telephones": [
@@ -29,7 +32,8 @@
 		"receivers": [
 			{
 				"id": "IMF",
-				"name": {
+				"name": "International Monetary Fund",
+				"names": {
 					"en": "International Monetary Fund"
 				}
 			}
