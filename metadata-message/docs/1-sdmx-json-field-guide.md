@@ -65,11 +65,11 @@ Example:
 		"prepared": "2018-01-03T12:54:12",
 		"test": false,
 		"contentLanguages": [ "en", "fr-fr" ],
-		“name”: "Transmission name",
-		“names”: {
+		"name": "Transmission name",
+		"names": {
 			# name object #
 		},
-		"sender: {
+		"sender": {
 			# sender object #
 		},
 		"receivers": [
