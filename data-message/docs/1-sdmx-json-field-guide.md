@@ -77,10 +77,14 @@ Any members MAY be specified within `meta` objects.
 * id - *String*. Unique string that identifies the message for further references.
 * test - *Boolean* *optional*. Indicates whether the message is for test purposes or not. False for normal messages.
 * prepared - *String*. A timestamp indicating when the message was prepared. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
-* contentLanguages - *Array* *optional*. Array of strings containing the identifyer of all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, representaing in an array format the same information than the http Content-Language response header, e.g. "en, fr-fr". See IETF Language Tags: https://tools.ietf.org/html/rfc5646#section-2.1. The array's first element indicates the main language used in the message for localized elements. **The usage of this property is recommended.** See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
+* contentLanguages - *Array* *optional*. Array of strings containing the identifyer of all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, representaing in an array format the same information than the http Content-Language response header, e.g. "en, fr-fr". See IETF Language Tags: https://tools.ietf.org/html/rfc5646#section-2.1. The array's first element indicates the main language used in the message for localized elements. **The usage of this property is recommended.**
+* name - *String* *optional*. Human-readable (best-language-match) name for the transmission.
+* names - *Object* *optional*. Human-readable localised *[names](#names)* for the transmission.
 * sender - *Object*. *[Sender](#sender)* contains information about the party that is transmitting the message.
 * receivers - *Array* *optional* of *[Receiver](#receiver)* objects thats contain information about the party that is receiving the message. This can be useful if the WS requires authentication.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the header.
+
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
 Example:
 
@@ -91,7 +95,11 @@ Example:
 		"prepared": "2018-01-03T12:54:12",
 		"test": false,
 		"contentLanguages": [ "en", "fr-fr" ],
-		"sender: {
+		"name": "Transmission name",
+		"names": {
+			# name object #
+		},
+		"sender": {
 			# sender object #
 		},
 		"receivers": [
