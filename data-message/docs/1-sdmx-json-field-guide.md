@@ -1,4 +1,4 @@
-# Introduction
+# Introduction to SDMX-JSON Data Message
 
 Let's first start with a brief introduction of the SDMX information model.
 
@@ -39,7 +39,7 @@ nulled field and the absence of a field as the same thing.
 - Not all fields appear in all contexts. For example response with error messages
 may not contain fields for data, dimensions and attributes.
 
-# Field Guide to SDMX-JSON Objects
+# Field Guide to SDMX-JSON Data Message Objects
 
 ## message
 
@@ -77,10 +77,14 @@ Any members MAY be specified within `meta` objects.
 * id - *String*. Unique string that identifies the message for further references.
 * test - *Boolean* *optional*. Indicates whether the message is for test purposes or not. False for normal messages.
 * prepared - *String*. A timestamp indicating when the message was prepared. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
-* content-languages - *Array* *optional*. Array of strings containing the identifyer of all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, representaing in an array format the same information than the http Content-Language response header, e.g. "en, fr-fr". See IETF Language Tags: https://tools.ietf.org/html/rfc5646#section-2.1. The array's first element indicates the main language used in the message for localized elements. **The usage of this property is recommended.** Consult the section on [localised strings](#localised-strings) on how the message deals with languages.
+* contentLanguages - *Array* *optional*. Array of strings containing the identifyer of all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, representaing in an array format the same information than the http Content-Language response header, e.g. "en, fr-fr". See IETF Language Tags: https://tools.ietf.org/html/rfc5646#section-2.1. The array's first element indicates the main language used in the message for localized elements. **The usage of this property is recommended.**
+* name - *String* *optional*. Human-readable (best-language-match) name for the transmission.
+* names - *Object* *optional*. Human-readable localised *[names](#names)* for the transmission.
 * sender - *Object*. *[Sender](#sender)* contains information about the party that is transmitting the message.
 * receivers - *Array* *optional* of *[Receiver](#receiver)* objects thats contain information about the party that is receiving the message. This can be useful if the WS requires authentication.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the header.
+
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
 Example:
 
@@ -90,8 +94,12 @@ Example:
 		"id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
 		"prepared": "2018-01-03T12:54:12",
 		"test": false,
-		"content-languages": [ "en", "fr-fr" ],
-		"sender: {
+		"contentLanguages": [ "en", "fr-fr" ],
+		"name": "Transmission name",
+		"names": {
+			# name object #
+		},
+		"sender": {
 			# sender object #
 		},
 		"receivers": [
@@ -112,16 +120,19 @@ Example:
 Sender contains the following fields:
 
 * id - *String*. A unique identifier of the party.
-* name - *Object* *optional*. A list of human-readable localised *[names](#name)* of the sender. See the section on [localised strings](#localised-strings) on how the message deals with languages.
+* name - *String* *nullable*. A human-readable (best-language-match) name of the sender.
+* names - *Object* *optional*. A list of human-readable localised *[names](#names)* of the sender.
 * contacts - *Array* *optional*. A collection of *[contacts](#contact)*. Provides contact information for the party in regard to the transmission of the message.
+
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
 Example:
 
 	"sender": {
 		"id": "ECB",
-		“name”: {
-			# name object #
-		},
+		"name": "European Central Bank",
+		"names": { "en": "European Central Bank",
+				   "fr": "Banque Centrale Européenne" },
 		"contacts": [
 			{
 				# contact objects #
@@ -129,13 +140,13 @@ Example:
 		]
 	}
 
-#### name
+#### names
 
-*Object* containing all returned localised names, one per object property:
+*Object* containing all appropriate localised names, one per object property:
 
 * One or more of: IETF Language Tag according to [RFC 5646 documentation](https://tools.ietf.org/html/rfc5646#section-2.1) for specifying locals in HTTP - *String*. The localised name.
 
-See the section on [localised strings](#localised-strings) on how the message deals with languages.
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
 Example:
 
@@ -151,24 +162,33 @@ Example:
 may contain the following field:
 
 * id - *String*. Identifier for the resource.
-* name - *Object* *optional*. Human-readable localised *[names](#name)* of the contact.
-* department - *Object* *optional*. Human-readable localised *[names](#name)* of the organisational structure for the contact.
-* role - *Object* *optional*. Human-readable localised *[names](#name)* of the responsibility of the contact.
+* name - *String* *optional*. Human-readable (best-language-match) name of the contact.
+* names - *Object* *optional*. Human-readable localised *[names](#names)* of the contact.
+* department - *String* *optional*. Human-readable (best-language-match) name of the organisational structure for the contact.
+* departments - *Object* *optional*. Human-readable localised *[names](#names)* of the organisational structure for the contact.
+* role - *String* *optional*. Human-readable (best-language-match) name of the responsibility of the contact.
+* roles - *Object* *optional*. Human-readable localised *[names](#names)* of the responsibility of the contact.
 * telephones - *Array* *optional*. An array of telephone numbers for the contact.
 * faxes - *Array* *optional*. An array of fax numbers for the contact person.
 * uris - *Array* *optional*. An array of uris. Each uri holds an information URL for the contact.
 * emails - *Array* *optional*. An array of email addresses for the contact person.
 * x400s - *Array* *optional*. An array of X.400 addresses for the contact person.
 
-See the section on [localised strings](#localised-strings) on how the message deals with languages.
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
 Example:
 
 	{
 		"id": "HOTLINE",
-		"name": { "en": "Statistics hotline" },
-		"department": { "en": "Statistics hotline" },
-		"role": { "en": "Statistics hotline" },
+		"name": "Statistics hotline",
+		"names": { "en": "Statistics hotline",
+				   "fr": "Service d'assistance téléphonique des Statistiques" },
+		"department": "Statistics hotline",
+		"departments": { "en": "Statistics hotline",
+						 "fr": "Service d'assistance téléphonique des Statistiques" },
+		"role": "Statistics hotline",
+		"roles": { "en": "Statistics hotline",
+				   "fr": "Service d'assistance téléphonique des Statistiques"},
 		"telephones": [ "+00 0 00 00 00 00" ],
 		"faxes": [ "+00 0 00 00 00 01" ],
 		"uris": [ "www.xyz.org" ],
@@ -299,8 +319,10 @@ as well as the list of `values` used in the message for this particular componen
 Each of the components may contain the following fields:
 
 * id - *String*. Identifier for the component. 
-* name - *Object* *optional*. Human-readable localised *[names](#name)* for the component.
-* description - *Object* *optional*. Human-readable localised descriptions (see *[names](#name)*) for the component.
+* name - *String* *optional*. Human-readable (best-language-match) name for the component.
+* names - *Object* *optional*. Human-readable localised *[names](#names)* for the component.
+* description - *String* *optional*. Human-readable (best-language-match) description for the component.
+* descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) for the component.
 * keyPosition - *Number*. **This field is mandatory for `dimensions` but not to be supplied for `attributes`.** Indicates the position of the `dimension` in the Data Structure Definition, starting at 0. It needs to be provided also for the special `dimensions` such as Time or Measure dimensions. The information in this field is consistent with the order of `dimensions` in the "key" parameter string (i.e. D.USD.EUR.SP00.A) for data queries in the SDMX API. 
 * roles - *Array* of *String*s *optional*. Defines the component role(s), if any. Roles are represented by the id of a concept defined as [SDMX cross-domain concept](https://sdmx.org/wp-content/uploads/01_sdmx_cog_annex_1_cdc_2009.pdf). Several of the concepts defined as SDMX cross-domain concepts are useful for data visualisation, such as for example, the series title ("TITLE"), the unit of measure ("UNIT_MEASURE"), the number of decimals to be displayed ("DECIMALS"), the  country or geographic reference area ("REF_AREA", e.g. when using maps), the period of time to which the measured observation refers ("REF_PERIOD"), the time interval at which observations occur over a given time period ("FREQ"), etc. It is strongly recommended to identify any component that can be useful for data visualisation purposes by using the appropriate SDMX cross-domain concept as role.
 * relationship - *Object*.  **This field is mandatory for `attributes` but not to be supplied for `dimensions`.** *[Attribute relationship](#attribute-relationship)* describes how the value of this attribute varies with the values of other components. This relationship expresses the attachment level of the attribute as defined in the data structure definition. Depending on the message context (especially the data query) an attribute value can however be attached physically in the message at a different level.
@@ -309,14 +331,18 @@ Each of the components may contain the following fields:
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the component. Indices refer back to the array of *annotations* in the structure field.
 * values - *Array*. *Values* field is an array of *[component value](#component-value)* objects. Note that `dimensions` and `attributes` presented at `dataSet` level can only have one single component value.
 
-See the section on [localised strings](#localised-strings) on how the message deals with languages.
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
 Example:
 
 	{
 		"id": "FREQ",
-		"name": { "en": "Frequency" },
-		"description": { "en": "The time interval at which observations occur over a given time period." },
+		"name": "Frequency",
+		"names": { "en": "Frequency", 
+				   "fr": "Fréquence" },
+		"description": "The time interval at which observations occur over a given time period.",
+		"descriptions": { "en": "The time interval at which observations occur over a given time period.",
+						  "fr": "L'intervalle de temps avec lequel les observations sont faites sur une période donnée." },
 		"keyPosition": 0,
 		"role": [ "FREQ" ],
 		"default": "A",
@@ -335,8 +361,12 @@ Example:
 
 	{
 		"id": "SOURCE",
-		"name": { "en": "Source" },
-		"description": { "en": "The source of the data depending on the time period." },
+		"name": "Source",
+		"names": { "en": "Source", 
+				   "fr": "Source" },
+		"description": "The source of the data depending on the time period.",
+		"descriptions": { "en": "The source of the data depending on the time period.",
+						  "fr": "La source des données dependante de la période de temps." },
 		"relationship": {
 			# attribute-relationship object #
 		},
@@ -391,22 +421,28 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 *Object* *optional*. A particular value for a component in a message. 
 
 * id - *String*. Unique identifier for a component value.
-* name - *Object* *optional*. Human-readable localised *[names](#name)* for the component value.
-* description - *Object* *optional*. Human-readable localised descriptions (see *[names](#name)*) of the component value. The description is typically longer than the text provided for the name field.
+* name - *String* *optional*. Human-readable (best-language-match) name for the component value.
+* names - *Object* *optional*. Human-readable localised *[names](#names)* for the component value.
+* description - *String* *optional*. Human-readable (best-language-match) description for the component value. The description is typically longer than the text provided for the name field.
+* descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) for the component value. A descriptions is typically longer than the text provided for the name field.
 * start, end - *String* *optional*. Start and end are instances of time that define the actual Gregorian calendar period covered by the values for the time dimension. The algorithm for computing start and end fields for any supported reporting period is defined in the SDMX Technical Notes. These fields should be used only when the component value represents one of the values for the time dimension. Values are considered as inclusive both for the start field and the end field. Values must follow the ISO 8601 syntax for combined dates and times, including time zone. These fields are useful for visualisation tools, when selecting the appropriate point in time for the time axis. Statistical data, can be collected, for example, at the beginning, the middle or the end of the period, or can represent the average of observations through the period. Based on this information and using the start and end fields, it is easy to get or calculate the desired point in time to be used for the time axis.
 * parent - *String* *optional*. Contains the ID for the parent of the component value (the component value of the parent might also be present in the message if according observations are also returned).
 * order - *Integer* *optional*. Contains the original order number of the component value enabling the reconstruction of the ordered component value hierarchy. Note that, to allow for a streamed message generation, the orders of observations and of component values in the component value array are not significant.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the component value.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the component value. Indices refer back to the array of *annotations* in the structure field.
 
-See the section on [localised strings](#localised-strings) on how the message deals with languages.
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
 Example:
 
 	{
 		"id": "2010",
-		"name": { "en": "2010" },
-		"description": { "en": "Description for 2010." },
+		"name": "2010",
+		"names": { "en": "2010", 
+				   "fr": "2010" },
+		"description": "Description for 2010.",
+		"descriptions": { "en": "Description for 2010.",
+						  "fr": "Déscription pour 2010." },
 		"start": "2010-01-01T00:00Z",
 		"end": "2010-12-31T23:59:59Z",
 		"parent": "T",
@@ -430,17 +466,20 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 * id - *String* *optional*. ID provides a non-standard identification of an annotation. It can be used to disambiguate annotations.
 * title - *String* *optional*. Provides a non-localised title for the annotation.
 * type - *String* *optional*. Type is used to distinguish between annotations designed to support various uses. The types are not enumerated, and these can be freely specified by the creator of the annotations. The definitions and use of annotation types should be documented by their creator.
-* text - *Object* *optional*. A list of human-readable localised texts (see *[names](#name)*) of the annotation.
+* text - *String* *optional*. A human-readable (best-language-match) text of the annotation.
+* texts - *Object* *optional*. A list of human-readable localised texts (see *[names](#names)*) of the annotation.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a link to an additional external resource which may contain or supplement the annotation.
 
-See the section on [localised strings](#localised-strings) on how the message deals with languages.
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
 Example:
 
 	{
 		"title": "Sample annotation",
 		"type": "reference",
-		"text": { "en": "Sample annotation text" },
+		"text": "Sample annotation text",
+		"texts": { "en": "Sample annotation text",
+				  "fr": "Exemple de texte d'annotation" },
 		"id": "74747",
 		"links": [
 			{
@@ -483,10 +522,10 @@ or cross sections, the `observations` will be found under the `series` elements.
 The `dataSet` properties are:
 
 * action - *String* *optional*. Action provides a list of actions, describing the intention of the data transmission from the sender's side.
-- `Append` - this is an incremental update for an existing `dataSet` or the provision of new data or documentation (attribute values) formerly absent. If any of the supplied data or metadata is already present, it will not replace these data.
-- `Replace` - data are to be replaced, and may also include additional data to be appended.
-- `Delete` - data are to be deleted.
-- `Information` (default) - data are being exchanged for informational purposes only, and not meant to update a system.
+  - `Append` - this is an incremental update for an existing `dataSet` or the provision of new data or documentation (attribute values) formerly absent. If any of the supplied data or metadata is already present, it will not replace these data.
+  - `Replace` - data are to be replaced, and may also include additional data to be appended.
+  - `Delete` - data are to be deleted.
+  - `Information` (default) - data are being exchanged for informational purposes only, and not meant to update a system.
 * reportingBegin - *String* *optional*. The start of the time period covered by the message.
 * reportingEnd - *String* *optional*. The end of the time period covered by the message.
 * validFrom - *String* *optional*. The validFrom indicates the inclusive start time indicating the validity of the information in the data.
@@ -621,25 +660,30 @@ Example:
 		"series": [
 			{
 				"id": "DIM1",
-				"name": { "en": "Dimension 1" },
+				"name": "Dimension 1",
+				"names": { "en": "Dimension 1" },
 				"values": [
 					{
 						"id": "DIM1_VALUE_1",
-						"name": { "en": "Dimension 1 - Value 1 with index 0" }
+						"name": "Dimension 1 - Value 1 with index 0",
+						"names": { "en": "Dimension 1 - Value 1 with index 0" }
 					}
 				]
 			},
 			{
 				"id": "DIM2",
-				"name": { "en": "Dimension 2" },
+				"name": "Dimension 2",
+				"names": { "en": "Dimension 2" },
 				"values": [
 					{
 						"id": "DIM2_VALUE_1",
-						"name": { "en": "Dimension 2 - Value 1 with index 0" }
+						"name": "Dimension 2 - Value 1 with index 0",
+						"names": { "en": "Dimension 2 - Value 1 with index 0" }
 					},
 					{
 						"id": "DIM2_VALUE_2",
-						"name": { "en": "Dimension 2 - Value 2 with index 1" }
+						"name": "Dimension 2 - Value 2 with index 1",
+						"names": { "en": "Dimension 2 - Value 2 with index 1" }
 					}
 				]
 			}
@@ -647,15 +691,18 @@ Example:
 		"observation": [
 			{
 				"id": "TIME_PERIOD",
-				"name": { "en": "Time Period" },
+				"name": "Time Period",
+				"names": { "en": "Time Period" },
 				"values": [
 					{
 						"id": "2016",
-						"name": { "en": "2016" }
+						"name": "2016",
+						"names": { "en": "2016" }
 					},
 					{
 						"id": "2017",
-						"name": { "en": "2017" }
+						"name": "2017",
+						"names": { "en": "2017" }
 					}
 				]
 			}
@@ -666,26 +713,31 @@ Example:
 		"series": [
 			{
 				"id": "ATTR1",
-				"name": { "en": "Attribute 1" },
+				"name": "Attribute 1",
+				"names": { "en": "Attribute 1" },
 				"default": "ATTR1_VALUE_1",
 				"values": [
 					{
 						"id": "ATTR1_VALUE_1",
-						"name": { "en": "Attribute 1 - Value 1 with index 0" }
+						"name": "Attribute 1 - Value 1 with index 0",
+						"names": { "en": "Attribute 1 - Value 1 with index 0" }
 					},
 					{
 						"id": "ATTR1_VALUE_2",
-						"name": { "Attribute 1 - Value 2 with index 1" }
+						"name": "Attribute 1 - Value 2 with index 1",
+						"names": { "Attribute 1 - Value 2 with index 1" }
 					}
 				]
 			},
 			{
 				"id": "ATTR2",
-				"name": { "en": "Attribute 2" },
+				"name": "en": "Attribute 2",
+				"names": { "en": "Attribute 2" },
 				"values": [
 					{
 						"id": "ATTR2_VALUE_1",
-						"name": { "en": "Attribute 2 - Value 1 with index 0" }
+						"name": "Attribute 2 - Value 1 with index 0",
+						"names": { "en": "Attribute 2 - Value 1 with index 0" }
 					}
 				]
 			}
@@ -693,16 +745,19 @@ Example:
 		"observation": [
 			{
 				"id": "ATTR3",
-				"name": { "en": "Attribute 3" },
+				"name": "Attribute 3",
+				"names": { "en": "Attribute 3" },
 				"default": "ATTR3_VALUE_2",
 				"values": [
 					{
 						"id": "ATTR3_VALUE_1",
-						"name": { "en": "Attribute 3 - Value 1 with index 0" }
+						"name": "Attribute 3 - Value 1 with index 0",
+						"names": { "en": "Attribute 3 - Value 1 with index 0" }
 					},
 					{
 						"id": "ATTR3_VALUE_2",
-						"name": { "en": "Attribute 3 - Value 2 with index 1" }
+						"name": "Attribute 3 - Value 2 with index 1",
+						"names": { "en": "Attribute 3 - Value 2 with index 1" }
 					}
 				]
 			}
@@ -712,7 +767,8 @@ Example:
 		{
 			"title": "Annotation 1 - with index 0",
 			"type": "example",
-			"text": { "en": "Sample annotation text" },
+			"text": "Sample annotation text",
+			"texts": { "en": "Sample annotation text" },
 			"id": "ANNOT_VALUE1"
 		}
 	]
@@ -791,25 +847,30 @@ Example:
 		"observation": [
 			{
 				"id": "DIM1",
-				"name": { "en": "Dimension 1" },
+				"name": "Dimension 1",
+				"names": { "en": "Dimension 1" },
 				"values": [
 					{
 						"id": "DIM1_VALUE_1",
-						"name": { "en": "Dimension 1 - Value 1 with index 0" }
+						"name": "Dimension 1 - Value 1 with index 0",
+						"names": { "en": "Dimension 1 - Value 1 with index 0" }
 					}
 				]
 			},
 			{
 				"id": "DIM2",
-				"name": { "en": "Dimension 2" },
+				"name": "Dimension 2",
+				"names": { "en": "Dimension 2" },
 				"values": [
 					{
 						"id": "DIM2_VALUE_1",
-						"name": { "en": "Dimension 2 - Value 1 with index 0" }
+						"name": "Dimension 2 - Value 1 with index 0",
+						"names": { "en": "Dimension 2 - Value 1 with index 0" }
 					},
 					{
 						"id": "DIM2_VALUE_2",
-						"name": { "en": "Dimension 2 - Value 2 with index 1" }
+						"name": "Dimension 2 - Value 2 with index 1",
+						"names": { "en": "Dimension 2 - Value 2 with index 1" }
 					}
 				]
 			}
@@ -821,26 +882,31 @@ Example:
 		"observation": [
 			{
 				"id": "ATTR1",
-				"name": { "en": "Attribute 1" },
+				"name": "Attribute 1",
+				"names": { "en": "Attribute 1" },
 				"values": [
 					{
 						"id": "ATTR1_VALUE_1",
-						"name": { "en": "Attribute 1 - Value 1 with index 0" }
+						"name": "Attribute 1 - Value 1 with index 0",
+						"names": { "en": "Attribute 1 - Value 1 with index 0" }
 					},
 					{
 						"id": "ATTR1_VALUE_2",
-						"name": { "en": "Attribute 1 - Value 2 with index 1" }
+						"name": "Attribute 1 - Value 2 with index 1",
+						"names": { "en": "Attribute 1 - Value 2 with index 1" }
 					}
 				]
 			},
 			{
 				"id": "ATTR2",
-				"name": { "en": "Attribute 2" },
+				"name": "Attribute 2",
+				"names": { "en": "Attribute 2" },
 				"default": "ATTR2_VALUE_1",
 				"values": [
 					{
 						"id": "ATTR2_VALUE_1",
-						"name": { "en": "Attribute 2 - Value 1 with index 0" }
+						"name": "Attribute 2 - Value 1 with index 0",
+						"names": { "en": "Attribute 2 - Value 1 with index 0" }
 					}
 				]
 			}
@@ -850,7 +916,8 @@ Example:
 		{
 			"title": "Annotation 1 - with index 0",
 			"type": "example",
-			"text": { "en": "Sample annotation text" },
+			"text": "Sample annotation text",
+			"texts": { "en": "Sample annotation text" },
 			"id": "ANNOT_VALUE1"
 		}
 	]
@@ -865,17 +932,21 @@ to RESTful web services HTTP error status codes.
 The following pieces of information are to be provided:
 
 * code - *Number*. Provides a code number for the error message. Code numbers are defined in the SDMX 2.1 Web Services Guidelines.
-* title - *Object* *optional*. A list of short, human-readable localised summary (see *[names](#name)*) of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
-* detail - *Object* *optional*. A list of human-readable localised explanations (see *[names](#name)*) specific to this occurrence of the problem. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.
+* title - *String* *optional*. A short, human-readable (best-language-match) summary of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
+* titles - *Object* *optional*. A list of short, human-readable localised summaries (see *[names](#names)*) of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
+* detail - *String* *optional*. A human-readable (best-language-match) explanation specific to this occurrence of the problem. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.
+* details - *Object* *optional*. A list of human-readable localised explanations (see *[names](#names)*) specific to this occurrence of the problem. Like titles, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the error.
 
-See the section on [localised strings](#localised-strings) on how the message deals with languages.
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
 Example:
 
 	{
 		"code": 150,
-		"title": { "en": "Invalid number of dimensions in the key parameter" }
+		"title": "Invalid number of dimensions in the key parameter",
+		"titles": { "en": "Invalid number of dimensions in the key parameter"
+					"fr": "Nombre invalide de dimensions dans le paramètre 'key'" }
 	}
 
 # Linking mechanism
@@ -888,9 +959,12 @@ Example:
 * rel - *String*. Relationship of the object to the external resource. See semantics below.
 * urn - *String* *optional*. The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details).
 * uri - *String* *optional*. The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource.
-* title - *Object* *optional*. A list of human-readable localised descriptions (see *[names](#name)*) of the target link. See the section on [localised strings](#localised-strings) on how the message deals with languages.
+* title - *String* *optional*. A human-readable (best-language-match) description of the target link.
+* titles - *Object* *optional*. A list of human-readable localised descriptions (see *[names](#names)*) of the target link.
 * type - *String* *optional*. A hint about the type of representation returned by the link.
 * hreflang - *String* *optional*. The natural language of the external link, the same as used in the HTTP Accept-Language request header.
+
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
 Examples:
 
@@ -914,7 +988,8 @@ Examples:
 	{
 		"href": "https://registry.sdmx.org/help.html",
 		"rel": "help",
-		"title": { "en": "Documentation about the SDMX Global Registry" },
+		"title": "Documentation about the SDMX Global Registry",
+		"titles": { "en": "Documentation about the SDMX Global Registry" },
 		"type": "text/html",
 		"hreflang": "en"
 	}
@@ -949,45 +1024,53 @@ Let's say that the following data content of a message needs to be processed:
 				"dataSet": [
 					{
 						"id": "FREQ",
-						"name": { "en": "Frequency" },
+						"name": "Frequency",
+						"names": { "en": "Frequency" },
 						"keyPosition": 0,
 						"values": [
 							{
 								"id": "D",
-								"name": { "en": "Daily" }
+								"name": "Daily",
+								"names": { "en": "Daily" }
 							}
 						]
 					},
 					{
 						"id": "CURRENCY_DENOM",
-						"name": { "en": "Currency denominator" },
+						"name": "Currency denominator",
+						"names": { "en": "Currency denominator" },
 						"keyPosition": 2,
 						"values": [
 							{
 								"id": "EUR",
-								"name": { "en": "Euro" }
+								"name": "Euro",
+								"names": { "en": "Euro" }
 							}
 						]
 					},
 					{
 						"id": "EXR_TYPE",
-						"name": { "en": "Exchange rate type" },
+						"name": "Exchange rate type",
+						"names": { "en": "Exchange rate type" },
 						"keyPosition": 3,
 						"values": [
 							{
 								"id": "SP00",
-								"name": { "en": "Spot rate" }
+								"name": "Spot rate",
+								"names": { "en": "Spot rate" }
 							}
 						]
 					},
 					{
 						"id": "EXR_SUFFIX",
-						"name": { "en": "Series variation - EXR context" },
+						"name": "Series variation - EXR context",
+						"names": { "en": "Series variation - EXR context" },
 						"keyPosition": 4,
 						"values": [
 							{
 								"id": "A",
-								"name": { "en": "Average or standardised measure" }
+								"name": "Average or standardised measure",
+								"names": { "en": "Average or standardised measure" }
 							}
 						]
 					}
@@ -995,15 +1078,18 @@ Let's say that the following data content of a message needs to be processed:
 				"series": [
 					{
 						"id": "CURRENCY",
-						"name": { "en": "Currency" },
+						"name": "Currency",
+						"names": { "en": "Currency" },
 						"keyPosition": 1,
 						"values": [
 							{
 								"id": "NZD",
-								"name": { "en": "New Zealand dollar" }
+								"name": "New Zealand dollar",
+								"names": { "en": "New Zealand dollar" }
 							}, {
 								"id": "RUB",
-								"name": { "en": "Russian rouble" }
+								"name": "Russian rouble",
+								"names": { "en": "Russian rouble" }
 							}
 						]
 					}
@@ -1011,14 +1097,17 @@ Let's say that the following data content of a message needs to be processed:
 				"observation": [
 					{
 						"id": "TIME_PERIOD",
-						"name": { "en": "Time period or range" },
+						"name": "Time period or range",
+						"names": { "en": "Time period or range" },
 						"values": [
 							{
 								"id": "2013-01-18",
-								"name": { "en": "2013-01-18" }
+								"name": "2013-01-18",
+								"names": { "en": "2013-01-18" }
 							}, {
 								"id": "2013-01-21",
-								"name": { "en": "2013-01-21" }
+								"name": "2013-01-21",
+								"names": { "en": "2013-01-21" }
 							}
 						]
 					}
@@ -1029,11 +1118,14 @@ Let's say that the following data content of a message needs to be processed:
 				"series": [
 					{
 						"id": "TITLE",
-						"name": { "en": "Series title" },
+						"name": "Series title",
+						"names": { "en": "Series title" },
 						"values": [
 							{
-								"name": { "en": "New zealand dollar (NZD)" }
+								"name": "New zealand dollar (NZD)",
+								"names": { "en": "New zealand dollar (NZD)" }
 							}, {
+								"name": "Russian rouble (RUB)",
 								"name": { "en": "Russian rouble (RUB)" }
 							}
 						]
@@ -1042,11 +1134,13 @@ Let's say that the following data content of a message needs to be processed:
 				"observation": [
 					{
 						"id": "OBS_STATUS",
-						"name": { "en": "Observation status" },
+						"name": "Observation status",
+						"names": { "en": "Observation status" },
 						"values": [
 							{
 								"id": "A",
-								"name": { "en": "Normal value" }
+								"name": "Normal value",
+								"names": { "en": "Normal value" }
 							}
 						]
 					}
@@ -1056,13 +1150,15 @@ Let's say that the following data content of a message needs to be processed:
 				{
 					"title": "Sample series annotation title",
 					"type": "example",
-					"text": { "en": "Sample series annotation text" },
+					"text": "Sample series annotation text",
+					"texts": { "en": "Sample series annotation text" },
 					"id": "ABC123456"
 				},
 				{
 					"title": "Sample observation annotation title",
 					"type": "example",
-					"text": { "en": "Sample observation annotation text" },
+					"text": "Sample observation annotation text",
+					"texts": { "en": "Sample observation annotation text" },
 					"id": "XYZ98765"
 				}
 			]        
@@ -1127,14 +1223,17 @@ the (only) series dimension.
 		{
 			"id": "CURRENCY",
 			"name": "Currency",
+			"names": { "en": "Currency" },
 			"keyPosition": 1,
 			"values": [
 				{
 					"id": "NZD",
-					"name": { "en": "New Zealand dollar" }
+					"name": "New Zealand dollar",
+					"names": { "en": "New Zealand dollar" }
 				}, {
 					"id": "RUB",
-					"name": { "en": "Russian rouble" }
+					"name": "Russian rouble",
+					"names": { "en": "Russian rouble" }
 				}
 			]
 		}
@@ -1156,14 +1255,17 @@ TIME_PERIOD is the (only) dimension at `observation` level.
 	"observation": [
 		{
 			"id": "TIME_PERIOD",
-			"name": { "en": "Time period or range" },
+			"name": "Time period or range",
+			"names": { "en": "Time period or range" },
 			"values": [
 				{
 					"id": "2013-01-18",
-					"name": { "en": "2013-01-18" }
+					"name": "2013-01-18",
+					"names": { "en": "2013-01-18" }
 				}, {
 					"id": "2013-01-21",
-					"name": { "en": "2013-01-21" }
+					"name": "2013-01-21",
+					"names": { "en": "2013-01-21" }
 				}
 			]
 		}
@@ -1186,11 +1288,13 @@ OBS_STATUS is the (only) attribute at `observation` level.
 	"observation": [
 		{
 			"id": "OBS_STATUS",
-			"name": { "en": "Observation status" },
+			"name": "Observation status",
+			"names": { "en": "Observation status" },
 			"values": [
 				{
 					"id": "A",
-					"name": { "en": "Normal value" }
+					"name": "Normal value",
+					"names": { "en": "Normal value" }
 				}
 			]
 		}
@@ -1203,21 +1307,47 @@ is therefore "Normal value".
 
 The same logic applies for mapping the other observations, its attributes and annotations.
 
-# Localised strings
+# Localised text elements
 
-The first best language match according to the user’s preferred language choices in the http Accept-Language header (or if that is not available than according to the system's default language order) is to be used for each localisable message element. The message does however not indicate the returned language per localisable element.
-In case that there is no such language match for a particular localisable element, it is optional to:
+**Localised best-language-match text strings (static properties matched through "Lookup"):**
+
+The first best language match according to the user’s preferred language choices expressed through the HTTP content negotiation (Accept-Language header parameter) is to be provided for each localised text element. The message does however not indicate the returned language per localised text element.
+
+This language matching type is called "Lookup", see <https://tools.ietf.org/html/rfc4647#section-3.4>.
+
+Example:
+
+	"name": "Frequency",
+
+**Localised text objects (variable properties matched through "Filtering"):**
+
+All available language matches according to the user’s preferred language choices expressed through the HTTP content negotiation (Accept-Language header parameter) is to be provided for each localised text element. 
+
+This language matching type is called "Filtering", see <https://tools.ietf.org/html/rfc4647#section-3.3>.
+
+Example:
+
+	"names": { "en": "Frequency", 
+			   "fr": "Fréquence" },
+
+
+The localised text object needs to be present whenever the related localised best-language-match text strings is present, and especially whenever a localised text is mandatory in the SDMX Information model. Note that localised text (and the knowledge about the locale) is mandatory in structure messages when artefacts are being submitted for storage to a registry or to other databases. The localised text object is important for use cases where multiple languages are required or where the information on the language used is required.
+
+
+In case that there is no language match for a particular localisable element, it is optional to:
 
 - return the element in a system-default language or alternatively to not return the element
 - indicate available alternative languages for the element's maintainable artefact through links to underlying localised resources
 
-**It is recommended to indicate all languages used anywhere in the message for localised elements through http Content-Language response header (languages of the intended audience) and/or through a “content-language” property in the meta tag.** The main language used can be indicated through the “lang” property in the meta tag.
+**It is recommended to indicate all languages used anywhere in the message for localised elements through http Content-Language response header (languages of the intended audience) and/or through a “contentLanguages” property in the meta tag.** The main language used can be indicated through the “lang” property in the meta tag.
+
 
 # Security Considerations
 
 This document defines a response format for SDMX RESTful Web Services in JSON
 and it raises no new security considerations. SDMX Web Services Guidelines
 includes the security considerations associated with its usage.
+
 
 # Extending SDMX-JSON
 
@@ -1235,7 +1365,8 @@ a `wsCustomErrorCode`:
 	"errors": [
 		{
 			"code": 150,
-			"title": { "en": "Invalid number of dimensions in the key parameter" },
+			"title": "Invalid number of dimensions in the key parameter",
+			"titles": { "en": "Invalid number of dimensions in the key parameter" },
 			"wsCustomErrorCode": 39272
 		}
 	]

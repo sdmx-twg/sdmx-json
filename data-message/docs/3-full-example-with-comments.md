@@ -10,15 +10,19 @@
 	        "prepared": "2012-11-29T08:40:26Z",
 	        "comment for test": "# optional with default false",
 	        "test": false,
-	        "comment for content-languages": "# recommended indication of all languages (potentially) used in message",
-	        "content-languages": ["en"],
+	        "comment for contentLanguages": "# recommended indication of all languages (potentially) used in message",
+	        "contentLanguages": ["en"],
 	        "sender": {
 	            "id": "ECB",
-	            "name": {"en": "European Central Bank"},
+	            "name": "European Central Bank",
+	            "names": {"en": "European Central Bank"},
 	            "contact": [{
-	                "name": {"en": "Statistics hotline"},
-	                "department": {"en": "Statistics Department"},
-	                "role": {"en": "helpdesk"},
+	                "name": "Statistics hotline",
+	                "names": {"en": "Statistics hotline"},
+	                "department": "Statistics Department",
+	                "departments": {"en": "Statistics Department"},
+	                "role": "helpdesk",
+	                "roles": {"en": "helpdesk"},
 	                "telephone": ["+00-00-99999"],
 	                "fax": ["+00-00-88888"],
 	                "uri": ["http://www.xyz.org"],
@@ -28,11 +32,15 @@
 	        "comment for receiver": "# receiver is optional, info from user record if authenticated",
 	        "receiver": {
 	            "id": "SDMX",
-	            "name": {"en": "SDMX"},
+	            "name": "SDMX",
+	            "names": {"en": "SDMX"},
 	            "contact": [{
-	                "name": {"en": "name"},
-	                "department": {"en": "department"},
-	                "role": {"en": "role"},
+	                "name": "name",
+	                "names": {"en": "name"},
+	                "department": "department",
+	                "departments": {"en": "department"},
+	                "role": "role",
+	                "roles": {"en": "role"},
 	                "telephone": ["telephone"],
 	                "fax": ["fax"],
 	                "uri": ["uri"],
@@ -43,13 +51,15 @@
 	            "comment for href": "# include complete URL as used by the client",
 	            "href": "http://www.myorg.org/ws/data/ECB_ICP1/M.PT.N.071100.4.INX",
 	            "rel": "request",
-	            "title": {"en": "Link to the url that returns this response"},
+	            "title": "Link to the url that returns this response",
+	            "titles": {"en": "Link to the url that returns this response"},
 	            "type": "application/json"
 	        }]
 	    },
 	    "errors": [{
 	        "code": 123,
-	        "title": {"en": "Invalid number of dimensions in parameter key"}
+	        "title": "Invalid number of dimensions in parameter key",
+	        "titles": {"en": "Invalid number of dimensions in parameter key"}
 	    }],
 	    "data": {
 	        "structure": {
@@ -58,105 +68,130 @@
 	                    "href": "https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_EXR1/1.0",
 	                    "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_EXR1(1.0)",
 	                    "rel": "datastructure",
-	                    "title": {"en": "resolvable uri to datastructure"}
+	                    "title": "resolvable uri to datastructure",
+	                    "titles": {"en": "resolvable uri to datastructure"}
 	                },
 	                {
 	                    "href": "https://sdw-wsrest.ecb.europa.eu/service/dataflow/ECB/EXR",
 	                    "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:EXR(1.0)",
 	                    "rel": "dataflow",
-	                    "title": {"en": "resolvable uri to dataflow"}
+	                    "title": "resolvable uri to dataflow",
+	                    "titles": {"en": "resolvable uri to dataflow"}
 	                },
 	                {
 	                    "href": "https://sdw-wsrest.ecb.europa.eu/service/provisionagreement/ECB/PA_EXR",
 	                    "urn": "urn:sdmx:org.sdmx.infomodel.provisionagreement.ProvisionAgreement=ECB:PA_EXR(1.0)",
 	                    "rel": "provisionagreement",
-	                    "title": {"en": "resolvable uri to provision agreement"}
+	                    "title": "resolvable uri to provision agreement",
+	                    "titles": {"en": "resolvable uri to provision agreement"}
 	                }
 	            ],
-	            "name": {"en": "dataflow name"},
-	            "description": {"en": "dataflow description"},
+	            "name": "dataflow name",
+	            "names": {"en": "dataflow name"},
+	            "description": "dataflow description",
+	            "descriptions": {"en": "dataflow description"},
 	            "dimensions": {
 	                "comment for dataset": "# dataSet is used only if grouping of dimensions with single values",
 	                "dataSet": [
 	                    {
 	                        "id": "FREQ",
-	                        "name": {"en": "Frequency"},
-	                        "description": {"en": "Description for the dimension"},
+	                        "name": "Frequency",
+	                        "names": {"en": "Frequency"},
+	                        "description": "Description for the dimension",
+	                        "descriptions": {"en": "Description for the dimension"},
 	                        "comment for keyPosition": "# 0-based position of dimension in key in user request url",
 	                        "keyPosition": 0,
 	                        "comment for role": "# restricted list of dimension and attribute roles (time, frequency, geo, unit, scalefactor, referenceperiod, ...)",
 	                        "role": "frequency",
 	                        "values": [{
 	                            "id": "D",
-	                            "name": {"en": "Daily"}
+	                            "name": "Daily",
+	                            "names": {"en": "Daily"}
 	                        }]
 	                    },
 	                    {
 	                        "id": "CURRENCY_DENOM",
-	                        "name": {"en": "Currency denominator"},
-	                        "description": {"en": "Description for the dimension"},
+	                        "name": "Currency denominator",
+	                        "names": {"en": "Currency denominator"},
+	                        "description": "Description for the dimension",
+	                        "descriptions": {"en": "Description for the dimension"},
 	                        "keyPosition": 2,
 	                        "values": [{
 	                            "id": "EUR",
-	                            "name": {"en": "Euro"}
+	                            "name": "Euro",
+	                            "names": {"en": "Euro"}
 	                        }]
 	                    },
 	                    {
 	                        "id": "EXR_TYPE",
-	                        "name": {"en": "Exchange rate type"},
-	                        "description": {"en": "Description for the dimension"},
+	                        "name": "Exchange rate type",
+	                        "names": {"en": "Exchange rate type"},
+	                        "description": "Description for the dimension",
+	                        "descriptions": {"en": "Description for the dimension"},
 	                        "keyPosition": 3,
 	                        "values": [{
 	                            "id": "SP00",
-	                            "name": {"en": "Spot rate"}
+	                            "name": "Spot rate",
+	                            "names": {"en": "Spot rate"}
 	                        }]
 	                    },
 	                    {
 	                        "id": "EXR_SUFFIX",
-	                        "name": {"en": "Series variation - EXR context"},
-	                        "description": {"en": "Description for the dimension"},
+	                        "name": "Series variation - EXR context",
+	                        "names": {"en": "Series variation - EXR context"},
+	                        "description": "Description for the dimension",
+	                        "descriptions": {"en": "Description for the dimension"},
 	                        "keyPosition": 4,
 	                        "values": [{
 	                            "id": "A",
-	                            "name": {"en": "Average or standardised measure for given frequency"}
+	                            "name": "Average or standardised measure for given frequency",
+	                            "names": {"en": "Average or standardised measure for given frequency"}
 	                        }]
 	                    }
 	                ],
 	                "comment for series": "# only if dimensionAtObservation <> allDimensions",
 	                "series": [{
 	                    "id": "CURRENCY",
-	                    "name": {"en": "Currency"},
-	                    "description": {"en": "Description for the dimension"},
+	                    "name": "Currency",
+	                    "names": {"en": "Currency"},
+	                    "description": "Description for the dimension",
+	                    "descriptions": {"en": "Description for the dimension"},
 	                    "keyPosition": 1,
 	                    "role": "unit",
 	                    "values": [
 	                        {
 	                            "id": "NZD",
-	                            "name": {"en": "New Zealand dollar"}
+	                            "name": "New Zealand dollar",
+	                            "names": {"en": "New Zealand dollar"}
 	                        },
 	                        {
 	                            "id": "RUB",
-	                            "name": {"en": "Russian rouble"}
+	                            "name": "Russian rouble",
+	                            "names": {"en": "Russian rouble"}
 	                        }
 	                    ]
 	                }],
 	                "comment for observation": "# only for dimensions used at observation level",
 	                "observation": [{
 	                    "id": "TIME_PERIOD",
-	                    "name": {"en": "Time period or range"},
-	                    "description": {"en": "Description for the dimension"},
+	                    "name": "Time period or range",
+	                    "names": {"en": "Time period or range"},
+	                    "description": "Description for the dimension",
+	                    "descriptions": {"en": "Description for the dimension"},
 	                    "keyPosition": 5,
 	                    "role": "time",
 	                    "values": [
 	                        {
 	                            "id": "2013-01-18",
-	                            "name": {"en": "2013-01-18"},
+	                            "name": "2013-01-18",
+	                            "names": {"en": "2013-01-18"},
 	                            "start": "2013-01-18T00:00:00Z",
 	                            "end": "2013-01-18T23:59:59Z"
 	                        },
 	                        {
 	                            "id": "2013-01-21",
-	                            "name": {"en": "2013-01-21"},
+	                            "name": "2013-01-21",
+	                            "names": {"en": "2013-01-21"},
 	                            "start": "2013-01-21T00:00:00Z",
 	                            "end": "2013-01-21T23:59:59Z"
 	                        }
@@ -167,21 +202,26 @@
 	                "comment for dataSet": "# only for attributes returned at dataset level",
 	                "dataSet": [{
 	                    "id": "TIME_FORMAT",
-	                    "name": {"en": "Time Format"},
-	                    "description": {"en": "Description for the attribute"},
+	                    "name": "Time Format",
+	                    "names": {"en": "Time Format"},
+	                    "description": "Description for the attribute",
+	                    "descriptions": {"en": "Description for the attribute"},
 	                    "relationship": {"none": {}},
 	                    "role": "TIME_FORMAT",
 	                    "default": "P1D",
 	                    "values": [{
 	                        "id": "P1D",
-	                        "name": {"en": "Daily"}
+	                        "name": "Daily",
+	                        "names": {"en": "Daily"}
 	                    }]
 	                }],
 	                "comment for series": "# only for attributes returned at series level",
 	                "series": [{
 	                    "id": "ID",
-	                    "name": {"en": "Attribute name"},
-	                    "description": {"en": "Description for the attribute"},
+	                    "name": "Attribute name",
+	                    "names": {"en": "Attribute name"},
+	                    "description": "Description for the attribute",
+	                    "descriptions": {"en": "Description for the attribute"},
 	                    "relationship": {"dimensions": [
 	                        "FREQ",
 	                        "CURRENCY",
@@ -196,18 +236,22 @@
 	                        {
 	                            "comment for id": "# id property is optional to allow for uncoded attributes",
 	                            "id": "ID1",
-	                            "name": {"en": "New Zealand dollar (NZD)"}
+	                            "name": "New Zealand dollar (NZD)",
+	                            "names": {"en": "New Zealand dollar (NZD)"}
 	                        },
 	                        {
 	                            "id": "ID2",
-	                            "name": {"en": "Russian rouble (RUB)"}
+	                            "name": "Russian rouble (RUB)",
+	                            "names": {"en": "Russian rouble (RUB)"}
 	                        }
 	                    ]
 	                }],
 	                "observation": [{
 	                    "id": "OBS_STATUS",
-	                    "name": {"en": "Observation status"},
-	                    "description": {"en": "Description for the attribute"},
+	                    "name": "Observation status",
+	                    "names": {"en": "Observation status"},
+	                    "description": "Description for the attribute",
+	                    "descriptions": {"en": "Description for the attribute"},
 	                    "relationship": {"primaryMeasure": "OBS_VALUE"},
 	                    "role": null,
 	                    "comment for default": "# optional",
@@ -217,8 +261,10 @@
 	                        null,
 	                        {
 	                            "id": "A",
-	                            "name": {"en": "Normal value"},
-	                            "description": {"en": "Normal value"}
+	                            "name": "Normal value",
+	                            "names": {"en": "Normal value"},
+	                            "description": "Normal value",
+	                            "descriptions": {"en": "Normal value"}
 	                        }
 	                    ]
 	                }]
@@ -226,7 +272,8 @@
 	            "annotations": [{
 	                "title": "AnnotationTitle provides a title for the annotation.",
 	                "type": "AnnotationType is used to distinguish between annotations.",
-	                "text": {"en": "AnnotationText contains the text of the annotation."},
+	                "text": "AnnotationText contains the text of the annotation.",
+	                "texts": {"en": "AnnotationText contains the text of the annotation."},
 	                "id": "Non-standard identification of an annotation.",
 	                "links": [{
 	                    "href": "http://www.myorg.org/ws/uri/for/this/annotation",

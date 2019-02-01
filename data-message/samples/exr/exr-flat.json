@@ -4,7 +4,8 @@
 	        "prepared": "2012-11-29T08:40:26Z",
 	        "sender": {
 	            "id": "ECB",
-	            "name": {"en": "European Central Bank"}
+	            "name": "European Central Bank",
+	            "names": {"en": "European Central Bank"}
 	        }
 	    },
 	    "structure": {
@@ -13,58 +14,69 @@
 	                "href": "https://sdw-wsrest.ecb.europa.eu/service/dataflow/ECB/EXR/1.0",
 	                "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:EXR(1.0)",
 	                "rel": "dataflow",
-	                "title": {"en": "resolvable uri to dataflow"}
+	                "title": "resolvable uri to dataflow",
+	                "titles": {"en": "resolvable uri to dataflow"}
 	            },
 	            {
 	                "href": "https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_EXR1/1.0",
 	                "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_EXR1(1.0)",
 	                "rel": "datastructure",
-	                "title": {"en": "resolvable uri to datastructure"}
+	                "title": "resolvable uri to datastructure",
+	                "titles": {"en": "resolvable uri to datastructure"}
 	            },
 	            {
 	                "href": "https://sdw-wsrest.ecb.europa.eu/service/provisionagreement/ECB/PA_EXR",
 	                "urn": "urn:sdmx:org.sdmx.infomodel.provisionagreement.ProvisionAgreement=ECB:PA_EXR(1.0)",
 	                "rel": "provisionagreement",
-	                "title": {"en": "resolvable uri to provision agreement"}
+	                "title": "resolvable uri to provision agreement",
+	                "titles": {"en": "resolvable uri to provision agreement"}
 	            }
 	        ],
 	        "dimensions": {
 	            "dataSet": [
 	                {
 	                    "id": "FREQ",
-	                    "name": {"en": "Frequency"},
+	                    "name": "Frequency",
+	                    "names": {"en": "Frequency"},
 	                    "keyPosition": 0,
 	                    "role": "FREQ",
 	                    "values": [{
 	                        "id": "D",
-	                        "name": {"en": "Daily"}
+	                        "name": "Daily",
+	                        "names": {"en": "Daily"}
 	                    }]
 	                },
 	                {
 	                    "id": "CURRENCY_DENOM",
-	                    "name": {"en": "Currency denominator"},
+	                    "name": "Currency denominator",
+	                    "names": {"en": "Currency denominator"},
 	                    "keyPosition": 2,
 	                    "values": [{
 	                        "id": "EUR",
-	                        "name": {"en": "Euro"}
+	                        "name": "Euro",
+	                        "names": {"en": "Euro"}
 	                    }]
 	                },
 	                {
 	                    "id": "EXR_TYPE",
-	                    "name": {"en": "Exchange rate type"},
+	                    "name": "Exchange rate type",
+	                    "names": {"en": "Exchange rate type"},
 	                    "keyPosition": 3,
 	                    "values": [{
 	                        "id": "SP00",
-	                        "name": {"en": "Spot rate"}
+	                        "name": "Spot rate",
+	                        "names": {"en": "Spot rate"}
 	                    }]
 	                },
 	                {
 	                    "id": "EXR_SUFFIX",
-	                    "name": {"en": "Series variation - EXR context"},
+	                    "name": "Series variation - EXR context",
+	                    "names": {"en": "Series variation - EXR context"},
 	                    "keyPosition": 4,
 	                    "values": [{
 	                        "id": "A",
-	                        "name": {"en": "Average or standardised measure for given frequency"}
+	                        "name": "Average or standardised measure for given frequency",
+	                        "names": {"en": "Average or standardised measure for given frequency"}
 	                    }]
 	                }
 	            ],
@@ -72,34 +84,40 @@
 	            "observation": [
 	                {
 	                    "id": "CURRENCY",
-	                    "name": {"en": "Currency"},
+	                    "name": "Currency",
+	                    "names": {"en": "Currency"},
 	                    "keyPosition": 1,
 	                    "values": [
 	                        {
 	                            "id": "NZD",
-	                            "name": {"en": "New Zealand dollar"}
+	                            "name": "New Zealand dollar",
+	                            "names": {"en": "New Zealand dollar"}
 	                        },
 	                        {
 	                            "id": "RUB",
-	                            "name": {"en": "Russian rouble"}
+	                            "name": "Russian rouble",
+	                            "names": {"en": "Russian rouble"}
 	                        }
 	                    ]
 	                },
 	                {
 	                    "id": "TIME_PERIOD",
-	                    "name": {"en": "Time period or range"},
+	                    "name": "Time period or range",
+	                    "names": {"en": "Time period or range"},
 	                    "role": "TIME_PERIOD",
 	                    "keyPosition": 5,
 	                    "values": [
 	                        {
 	                            "id": "2013-01-18",
-	                            "name": {"en": "2013-01-18"},
+	                            "name": "2013-01-18",
+	                            "names": {"en": "2013-01-18"},
 	                            "start": "2013-01-18T00:00:00.000Z",
 	                            "end": "2013-01-18T23:59:59.999Z"
 	                        },
 	                        {
 	                            "id": "2013-01-21",
-	                            "name": {"en": "2013-01-21"},
+	                            "name": "2013-01-21",
+	                            "names": {"en": "2013-01-21"},
 	                            "start": "2013-01-21T00:00:00.000Z",
 	                            "end": "2013-01-21T23:59:59.999Z"
 	                        }
@@ -110,21 +128,25 @@
 	        "attributes": {
 	            "dataSet": [{
 	                "id": "TIME_FORMAT",
-	                "name": {"en": "Time Format"},
-	                "description": {"en": "Description for the attribute"},
+	                "name": "Time Format",
+	                "names": {"en": "Time Format"},
+	                "description": "Description for the attribute",
+	                "descriptions": {"en": "Description for the attribute"},
 	                "relationship": {"none": {}},
 	                "role": "TIME_FORMAT",
 	                "default": "P1D",
 	                "values": [{
 	                    "id": "P1D",
-	                    "name": {"en": "Daily"}
+	                    "name": "Daily",
+	                    "names": {"en": "Daily"}
 	                }]
 	            }],
 	            "series": [],
 	            "observation": [
 	                {
 	                    "id": "TITLE",
-	                    "name": {"en": "Series title"},
+	                    "name": "Series title",
+	                    "names": {"en": "Series title"},
 	                    "relationship": {"dimensions": [
 	                        "FREQ",
 	                        "CURRENCY",
@@ -134,18 +156,20 @@
 	                    ]},
 	                    "role": "TITLE",
 	                    "values": [
-	                        {"name": {"en": "New Zealand dollar (NZD)"}},
-	                        {"name": {"en": "Russian rouble (RUB)"}}
+	                        {"name": "New Zealand dollar (NZD)"},
+	                        {"name": "Russian rouble (RUB)"}
 	                    ]
 	                },
 	                {
 	                    "id": "OBS_STATUS",
-	                    "name": {"en": "Observation status"},
+	                    "name": "Observation status",
+	                    "names": {"en": "Observation status"},
 	                    "relationship": {"primaryMeasure": "OBS_VALUE"},
 	                    "role": "OBS_STATUS",
 	                    "values": [{
 	                        "id": "A",
-	                        "name": {"en": "Normal value"}
+	                        "name": "Normal value",
+	                        "names": {"en": "Normal value"}
 	                    }]
 	                }
 	            ]
@@ -153,7 +177,8 @@
 	        "annotations": [{
 	            "title": "Sample observation annotation title",
 	            "type": "example",
-	            "text": {"en": "Sample observation annotation text"},
+	            "text": "Sample observation annotation text",
+	            "texts": {"en": "Sample observation annotation text"},
 	            "id": "XYZ98765"
 	        }]
 	    },
@@ -187,5 +212,6 @@
 	                0
 	            ]
 	        }
-	    }]
-	}
+	    }
+   ]
+}
