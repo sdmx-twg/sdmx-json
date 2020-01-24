@@ -489,11 +489,11 @@ Example:
 
 *Object* *optional*. AttributeRelationship defines the structure for stating the relationship between an attribute and other data structure definition components.
 
-* attachmentGroups - *Array* of *String*s *optional*. One or more URN references to (a) local GroupKey Descriptor(s). This is used to specify that the attribute should always be attached to the groups referenced here. Note that if one of the referenced dimensions is the time dimension, the groups referenced here will be ignored.
-* dimensions - *Array* of *String*s *optional*. One or more URN references to (a) local dimension(s). This is used to reference dimensions in the data structure definition on which the value of this attribute depends. An attribute using this relationship can be either a group, series (or section), or observation level attribute. The attachment level of the attribute will be determined by the data format and which dimensions are referenced.
-* group - *String* *optional*. Urn reference to a local GroupKey Descriptor. This is used as a convenience to referencing all of the dimension defined by the referenced group. The attribute will also be attached to this group.
+* attachmentGroups - *Array* of *String*s *optional*. One or more identifiers of (a) local GroupKey Descriptor(s). This is used to specify that the attribute should always be attached to the groups referenced here. Note that if one of the referenced dimensions is the time dimension, the groups referenced here will be ignored.
+* dimensions - *Array* of *String*s *optional*. One or more identifiers of (a) local dimension(s). This is used to reference dimensions in the data structure definition on which the value of this attribute depends. An attribute using this relationship can be either a group, series (or section), or observation level attribute. The attachment level of the attribute will be determined by the data format and which dimensions are referenced.
+* group - *String* *optional*. Identifier of a local GroupKey Descriptor. This is used as a convenience to referencing all of the dimension defined by the referenced group. The attribute will also be attached to this group.
 * none - Empty *Object* *optional*. This means that value of the attribute will not vary with any of the other data structure components. This will always be treated as a data set level attribute.
-* primaryMeasure - *String* *optional*. Urn reference to a primary measure locally, where the reference to the data structure definition which defines the primary measure is provided in another context (for example the data structure definition in which the reference occurs). This is used to specify that the value of the attribute is dependent upon the observed value. An attribute with this relationship will always be treated as an observation level attribute.
+* primaryMeasure - *String* *optional*. Identifier of the local primary measure, where the reference to the data structure definition which defines the primary measure is provided in another context (for example the data structure definition in which the reference occurs). This is used to specify that the value of the attribute is dependent upon the observed value. An attribute with this relationship will always be treated as an observation level attribute.
 
 Examples:
 
@@ -663,7 +663,7 @@ Example:
 		"type": "Dimension",
 		"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).FREQ",
 		"conceptRoles": [
-			"FREQ"
+			"urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).FREQ"
 		],
 		"localRepresentation": {
 			# localRepresentation object #
@@ -691,7 +691,7 @@ Example:
 		"type": "MeasureDimension",
 		"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).MEASURE",
 		"conceptRoles": [
-			"MEASURE"
+			"urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).MEASURE"
 		],
 		"localRepresentation": {
 			"enumeration": "urn:sdmx:org.sdmx.infomodel.conceptscheme.ConceptScheme=ECB:ECB_MEASURES(1.0)"
