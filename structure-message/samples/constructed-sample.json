@@ -76,7 +76,7 @@
 								},
 								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).TIME_FORMAT",
 								"conceptRoles": [
-									"TIME_FORMAT"
+									"urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).TIME_FORMAT"
 								],
 								"localRepresentation": {
 									"textFormat": {
@@ -129,7 +129,7 @@
 								"type": "Dimension",
 								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).FREQ",
 								"conceptRoles": [
-									"FREQ"
+									"urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).FREQ"
 								],
 								"localRepresentation": {
 									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=ECB:CL_FREQ(1.0)"
