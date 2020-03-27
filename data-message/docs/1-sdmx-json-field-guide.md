@@ -802,7 +802,7 @@ level `attributes` can be omitted if:
 - the `attribute` is not set for this observation (possible for optional attributes) or
 - the `attribute` value for this observation corresponds to the default value.
 
-The data type for observation value is *Number*. The data type for a reported missing 
+The data type for observation value is *number* or *string*. The data type for a reported missing 
 observation value is a *null*. The index for an `attribute` is the corresponding index in the 
 `values` array of the respective `component` object within the `structure.attributes.series` array.
 It is *null*ed for unused optional `attributes` when the attribute index needs to be included. 
