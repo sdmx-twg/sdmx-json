@@ -1,6 +1,10 @@
-# SDMX-JSON Structure Message Prototype
+# Overview
 
-SDMX-JSON Structure Message is a SDMX data exchange format based on JSON.
-Structure Message works together with the SDMX RESTful Web Services API.
-Structure Message focuses on data discovery and it supports all features
-of the SDMX RESTful API for structure queries.
+This repository is used for maintaining the SDMX-JSON messages specifications.
+
+This includes:
+
+- Normative documentation, samples and tools for the SDMX-JSON data message format.
+- Normative documentation and samples for the SDMX-JSON structure message format.
+- Prototype for the SDMX-JSON metadata message format.
+- [Wiki](https://github.com/sdmx-twg/sdmx-json/wiki) for additional information
