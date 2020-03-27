@@ -598,7 +598,7 @@
                 "attributes": {
                     "type": "array",
                     "items": {
-                        "type": "integer",
+                        "type": ["integer", "null"],
                         "minimum": 0
                     }
                 },
@@ -625,7 +625,7 @@
                             "attributes": {
                                 "type": "array",
                                 "items": {
-                                    "type": "integer",
+                                    "type": ["integer", "null"],
                                     "minimum": 0
                                 }
                             },
