@@ -388,9 +388,9 @@ Example:
 
 *Object*. The attribute's relationship defines the relationship between an attribute and other data structure definition components as defined in the data structure definition. This is also called "attachment level". Depending on the message context (especially the data query) an attribute value can however be attached physically in the message at a different level.
 
-* dimensions - *Array* of *String*s *optional*. One or more URN references to (a) local dimension(s) in the data structure definition on which the value of this attribute depends. 
+* dimensions - *Array* of *String*s *optional*. One or more ID(s) of (a) local dimension(s) in the data structure definition on which the value of this attribute depends. 
 * none - Empty *Object* *optional*. This means that value of the attribute will not vary with any of the other data structure components.
-* primaryMeasure - *String* *optional*. URN reference to a primary measure locally as defined in the data structure definition. This is used to specify that the value of the attribute is dependent upon the observed value.
+* primaryMeasure - *String* *optional*. ID of a local primary measure as defined in the data structure definition. This is used to specify that the value of the attribute is dependent upon the observed value.
 
 Exactly one of `dimensions`, `none` and `primaryMeasure` is required.
 Note that relationships defined in data structure definitions through `attachmentGroups` or a `group` are to be resolved by the server conveniently for the client into above `dimensions`.
