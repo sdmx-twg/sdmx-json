@@ -331,7 +331,6 @@ Example:
 * names - *Object* *optional*. Human-readable localised *[names](#names)* of the item.
 * description - *String* *optional*. Human-readable (best-language-match) description of the item. The description is typically longer than the text provided for the name field.
 * descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) of the item. A descriptions is typically longer than the text provided for the name field.
-* start, end - *String* *optional*. Start and end are instances of time that define the actual Gregorian calendar period covered by the values for the time dimension. The algorithm for computing start and end fields for any supported reporting period is defined in the SDMX Technical Notes. These fields should be used only when the component value represents one of the values for the time dimension. Values are considered as inclusive both for the start field and the end field. Values must follow the ISO 8601 syntax for combined dates and times, including time zone. These fields are useful for visualisation tools, when selecting the appropriate point in time for the time axis. Statistical data, can be collected, for example, at the beginning, the middle or the end of the period, or can represent the average of observations through the period. Based on this information and using the start and end fields, it is easy to get or calculate the desired point in time to be used for the time axis.
 * parent - *String* *optional*. Contains the ID or the URN for the parent of the item (which is itself an item) enabling the reconstruction of the ordered item hierarchy.
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources for the item. See the section [link](#link).
@@ -369,17 +368,6 @@ Examples:
 				# item object (recursive) #
 			}
 		]
-	}
-
-	{
-		"id": "2010",
-		"name": "2010",
-		"names": {
-			"en": "2010",
-			"fr": "2010"	
-		},
-		"start": "2010-01-01T00:00Z",
-		"end": "2010-12-31T23:59:59Z",
 	}
 
 ### dataStructure
