@@ -1,0 +1,4302 @@
+{
+	"meta": {
+		"schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/structure-message/tools/schemas/1.0/sdmx-json-structure-schema.json",
+		"id": "$",
+		"test": true,
+		"prepared": "2017-11-16T11:04:00Z",
+		"contentLanguages": [
+			"en-GB-oed"
+		],
+		"name": "a",
+		"names": {
+			"en-GB-oed": "a"
+		},
+		"sender": {
+			"id": "$",
+			"name": "a",
+			"names": {
+				"en-GB-oed": "a"
+			},
+			"contacts": [
+				{
+					"id": "$",
+					"name": "a",
+					"names": {
+						"en-GB-oed": "a"
+					},
+					"department": "a",
+					"departments": {
+						"en-GB-oed": "a"
+					},
+					"emails": [
+						"smith@example.org"
+					],
+					"faxes": [
+						"a"
+					],
+					"role": "a",
+					"roles": {
+						"en-GB-oed": "a"
+					},
+					"telephones": [
+						"a"
+					],
+					"uris": [
+						"http://www.example.org/data.json"
+					],
+					"x400s": [
+						"a"
+					]
+				}
+			]
+		},
+		"receivers": [
+			{
+				"id": "$",
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"contacts": [
+					{
+						"id": "$",
+						"name": "a",
+						"names": {
+							"en-GB-oed": "a"
+						},
+						"department": "a",
+						"departments": {
+							"en-GB-oed": "a"
+						},
+						"emails": [
+							"smith@example.org"
+						],
+						"faxes": [
+							"a"
+						],
+						"role": "a",
+						"roles": {
+							"en-GB-oed": "a"
+						},
+						"telephones": [
+							"a"
+						],
+						"uris": [
+							"http://www.example.org/data.json"
+						],
+						"x400s": [
+							"a"
+						]
+					}
+				]
+			}
+		],
+		"links": [
+			{
+				"href": "http://www.example.org/data.json",
+				"rel": "a",
+				"urn": "urn:a:",
+				"uri": "http://www.example.org/data.json",
+				"title": "a",
+				"titles": {
+					"en-GB-oed": "a"
+				},
+				"type": "a",
+				"hreflang": "en-GB-oed"
+			}
+		]
+	},
+	"data": {
+		"dataStructures": [
+			{
+				"id": "$",
+				"version": "0.0",
+				"agencyID": "A.A",
+				"isExternalReference": true,
+				"isFinal": true,
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"description": "a",
+				"descriptions": {
+					"en-GB-oed": "a"
+				},
+				"annotations": [
+					{
+						"id": "a",
+						"title": "a",
+						"type": "a",
+						"text": "a",
+						"texts": {
+							"en-GB-oed": "a"
+						},
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						]
+					}
+				],
+				"links": [
+					{
+						"href": "http://www.example.org/data.json",
+						"rel": "a",
+						"urn": "urn:a:",
+						"uri": "http://www.example.org/data.json",
+						"title": "a",
+						"titles": {
+							"en-GB-oed": "a"
+						},
+						"type": "a",
+						"hreflang": "en-GB-oed"
+					}
+				],
+				"dataStructureComponents": {
+					"attributeList": {
+						"id": "$",
+						"annotations": [
+							{
+								"id": "a",
+								"title": "a",
+								"type": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						],
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						],
+						"attributes": [
+							{
+								"id": "A",
+								"annotations": [
+									{
+										"id": "a",
+										"title": "a",
+										"type": "a",
+										"text": "a",
+										"texts": {
+											"en-GB-oed": "a"
+										},
+										"links": [
+											{
+												"href": "http://www.example.org/data.json",
+												"rel": "a",
+												"urn": "urn:a:",
+												"uri": "http://www.example.org/data.json",
+												"title": "a",
+												"titles": {
+													"en-GB-oed": "a"
+												},
+												"type": "a",
+												"hreflang": "en-GB-oed"
+											}
+										]
+									}
+								],
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								],
+								"assignmentStatus": "Mandatory",
+								"attributeRelationship": {
+									"attachmentGroups": [
+										"a"
+									],
+									"dimensions": [
+										"a"
+									],
+									"group": "a",
+									"none": {
+									},
+									"primaryMeasure": "a"
+								},
+								"conceptIdentity": "https://a.a",
+								"conceptRoles": [
+									"urn:a:1"
+								],
+								"localRepresentation": {
+									"enumeration": "urn:a",
+									"enumerationFormat": {
+										"endTime": "1000Z",
+										"endValue": 1,
+										"interval": 1,
+										"isSequence": true,
+										"maxLength": 1,
+										"maxValue": 1,
+										"minLength": 1,
+										"minValue": 1,
+										"pattern": "a",
+										"startTime": "1000Z",
+										"startValue": 1,
+										"textType": "String",
+										"timeInterval": "PYMWDTHMS"
+									},
+									"textFormat": {
+										"decimals": 1,
+										"endTime": "1000Z",
+										"endValue": 1.1,
+										"interval": 1.1,
+										"isSequence": true,
+										"maxLength": 1,
+										"maxValue": 1.1,
+										"minLength": 1,
+										"minValue": 1.1,
+										"pattern": "a",
+										"startTime": "1000Z",
+										"startValue": 1.1,
+										"textType": "String",
+										"timeInterval": "PYMWDTHMS"
+									}
+								}
+							}
+						],
+						"reportingYearStartDays": [
+							{
+								"id": "A",
+								"annotations": [
+									{
+										"id": "a",
+										"title": "a",
+										"type": "a",
+										"text": "a",
+										"texts": {
+											"en-GB-oed": "a"
+										},
+										"links": [
+											{
+												"href": "http://www.example.org/data.json",
+												"rel": "a",
+												"urn": "urn:a:",
+												"uri": "http://www.example.org/data.json",
+												"title": "a",
+												"titles": {
+													"en-GB-oed": "a"
+												},
+												"type": "a",
+												"hreflang": "en-GB-oed"
+											}
+										]
+									}
+								],
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								],
+								"assignmentStatus": "Mandatory",
+								"attributeRelationship": {
+									"attachmentGroups": [
+										"a"
+									],
+									"dimensions": [
+										"a"
+									],
+									"group": "a",
+									"none": {
+									},
+									"primaryMeasure": "a"
+								},
+								"conceptIdentity": "https://a",
+								"localRepresentation": {
+									"textFormat": {
+										"textType": "String"
+									}
+								}
+							}
+						]
+					},
+					"dimensionList": {
+						"id": "$",
+						"annotations": [
+							{
+								"id": "a",
+								"title": "a",
+								"type": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						],
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						],
+						"dimensions": [
+							{
+								"id": "A",
+								"annotations": [
+									{
+										"id": "a",
+										"title": "a",
+										"type": "a",
+										"text": "a",
+										"texts": {
+											"en-GB-oed": "a"
+										},
+										"links": [
+											{
+												"href": "http://www.example.org/data.json",
+												"rel": "a",
+												"urn": "urn:a:",
+												"uri": "http://www.example.org/data.json",
+												"title": "a",
+												"titles": {
+													"en-GB-oed": "a"
+												},
+												"type": "a",
+												"hreflang": "en-GB-oed"
+											}
+										]
+									}
+								],
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								],
+								"position": 0,
+								"type": "Dimension",
+								"conceptIdentity": "https://a",
+								"conceptRoles": [
+									"urn:a"
+								],
+								"localRepresentation": {
+									"enumeration": "urn:a",
+									"enumerationFormat": {
+										"endTime": "1000Z",
+										"endValue": 1,
+										"interval": 1,
+										"isSequence": true,
+										"maxLength": 1,
+										"maxValue": 1,
+										"minLength": 1,
+										"minValue": 1,
+										"pattern": "a",
+										"startTime": "1000Z",
+										"startValue": 1,
+										"textType": "String",
+										"timeInterval": "PYMWDTHMS"
+									},
+									"textFormat": {
+										"decimals": 1,
+										"endTime": "1000Z",
+										"endValue": 1.1,
+										"interval": 1.1,
+										"isSequence": true,
+										"maxLength": 1,
+										"maxValue": 1.1,
+										"minLength": 1,
+										"minValue": 1.1,
+										"pattern": "a",
+										"startTime": "1000Z",
+										"startValue": 1.1,
+										"textType": "String",
+										"timeInterval": "PYMWDTHMS"
+									}
+								}
+							}
+						],
+						"measureDimensions": [
+							{
+								"id": "A",
+								"annotations": [
+									{
+										"id": "a",
+										"title": "a",
+										"type": "a",
+										"text": "a",
+										"texts": {
+											"en-GB-oed": "a"
+										},
+										"links": [
+											{
+												"href": "http://www.example.org/data.json",
+												"rel": "a",
+												"urn": "urn:a:",
+												"uri": "http://www.example.org/data.json",
+												"title": "a",
+												"titles": {
+													"en-GB-oed": "a"
+												},
+												"type": "a",
+												"hreflang": "en-GB-oed"
+											}
+										]
+									}
+								],
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								],
+								"position": 0,
+								"type": "Dimension",
+								"conceptIdentity": "https://a",
+								"conceptRoles": [
+									"urn:a"
+								],
+								"localRepresentation": {
+									"enumeration": "urn:a"
+								}
+							}
+						],
+						"timeDimensions": [
+							{
+								"id": "A",
+								"annotations": [
+									{
+										"id": "a",
+										"title": "a",
+										"type": "a",
+										"text": "a",
+										"texts": {
+											"en-GB-oed": "a"
+										},
+										"links": [
+											{
+												"href": "http://www.example.org/data.json",
+												"rel": "a",
+												"urn": "urn:a:",
+												"uri": "http://www.example.org/data.json",
+												"title": "a",
+												"titles": {
+													"en-GB-oed": "a"
+												},
+												"type": "a",
+												"hreflang": "en-GB-oed"
+											}
+										]
+									}
+								],
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								],
+								"position": 0,
+								"type": "Dimension",
+								"conceptIdentity": "https://a",
+								"localRepresentation": {
+									"textFormat": {
+										"endTime": "1000Z",
+										"startTime": "1000Z",
+										"textType": "ObservationalTimePeriod"
+									}
+								}
+							}
+						]
+					},
+					"groups": [
+						{
+							"id": "$",
+							"annotations": [
+								{
+									"id": "a",
+									"title": "a",
+									"type": "a",
+									"text": "a",
+									"texts": {
+										"en-GB-oed": "a"
+									},
+									"links": [
+										{
+											"href": "http://www.example.org/data.json",
+											"rel": "a",
+											"urn": "urn:a:",
+											"uri": "http://www.example.org/data.json",
+											"title": "a",
+											"titles": {
+												"en-GB-oed": "a"
+											},
+											"type": "a",
+											"hreflang": "en-GB-oed"
+										}
+									]
+								}
+							],
+							"links": [
+								{
+									"href": "http://www.example.org/data.json",
+									"rel": "a",
+									"urn": "urn:a:",
+									"uri": "http://www.example.org/data.json",
+									"title": "a",
+									"titles": {
+										"en-GB-oed": "a"
+									},
+									"type": "a",
+									"hreflang": "en-GB-oed"
+								}
+							],
+							"attachmentConstraint": "urn:a",
+							"groupDimensions": [ "a", "b" ]
+						}
+					],
+					"measureList": {
+						"id": "$",
+						"annotations": [
+							{
+								"id": "a",
+								"title": "a",
+								"type": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						],
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						],
+						"primaryMeasure": {
+							"id": "A",
+							"annotations": [
+								{
+									"id": "a",
+									"title": "a",
+									"type": "a",
+									"text": "a",
+									"texts": {
+										"en-GB-oed": "a"
+									},
+									"links": [
+										{
+											"href": "http://www.example.org/data.json",
+											"rel": "a",
+											"urn": "urn:a:",
+											"uri": "http://www.example.org/data.json",
+											"title": "a",
+											"titles": {
+												"en-GB-oed": "a"
+											},
+											"type": "a",
+											"hreflang": "en-GB-oed"
+										}
+									]
+								}
+							],
+							"links": [
+								{
+									"href": "http://www.example.org/data.json",
+									"rel": "a",
+									"urn": "urn:a:",
+									"uri": "http://www.example.org/data.json",
+									"title": "a",
+									"titles": {
+										"en-GB-oed": "a"
+									},
+									"type": "a",
+									"hreflang": "en-GB-oed"
+								}
+							],
+							"conceptIdentity": "https://a",
+							"localRepresentation": {
+								"enumeration": "urn:a",
+								"enumerationFormat": {
+									"endTime": "1000Z",
+									"endValue": 1,
+									"interval": 1,
+									"isSequence": true,
+									"maxLength": 1,
+									"maxValue": 1,
+									"minLength": 1,
+									"minValue": 1,
+									"pattern": "a",
+									"startTime": "1000Z",
+									"startValue": 1,
+									"textType": "String",
+									"timeInterval": "PYMWDTHMS"
+								},
+								"textFormat": {
+									"decimals": 1,
+									"endTime": "1000Z",
+									"endValue": 1.1,
+									"interval": 1.1,
+									"isSequence": true,
+									"maxLength": 1,
+									"maxValue": 1.1,
+									"minLength": 1,
+									"minValue": 1.1,
+									"pattern": "a",
+									"startTime": "1000Z",
+									"startValue": 1.1,
+									"textType": "String",
+									"timeInterval": "PYMWDTHMS"
+								}
+							}
+						}
+					}
+				}
+			}
+		],
+		"metadataStructures": [
+			{
+				"id": "$",
+				"version": "0.0",
+				"agencyID": "A.A",
+				"isExternalReference": true,
+				"isFinal": true,
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"description": "a",
+				"descriptions": {
+					"en-GB-oed": "a"
+				},
+				"annotations": [
+					{
+						"id": "a",
+						"title": "a",
+						"type": "a",
+						"text": "a",
+						"texts": {
+							"en-GB-oed": "a"
+						},
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						]
+					}
+				],
+				"links": [
+					{
+						"href": "http://www.example.org/data.json",
+						"rel": "a",
+						"urn": "urn:a:",
+						"uri": "http://www.example.org/data.json",
+						"title": "a",
+						"titles": {
+							"en-GB-oed": "a"
+						},
+						"type": "a",
+						"hreflang": "en-GB-oed"
+					}
+				],
+				"metadataStructureComponents": {
+					"metadataTargets": [
+						{
+							"id": "$",
+							"annotations": [
+								{
+									"id": "a",
+									"title": "a",
+									"type": "a",
+									"text": "a",
+									"texts": {
+										"en-GB-oed": "a"
+									},
+									"links": [
+										{
+											"href": "http://www.example.org/data.json",
+											"rel": "a",
+											"urn": "urn:a:",
+											"uri": "http://www.example.org/data.json",
+											"title": "a",
+											"titles": {
+												"en-GB-oed": "a"
+											},
+											"type": "a",
+											"hreflang": "en-GB-oed"
+										}
+									]
+								}
+							],
+							"links": [
+								{
+									"href": "http://www.example.org/data.json",
+									"rel": "a",
+									"urn": "urn:a:",
+									"uri": "http://www.example.org/data.json",
+									"title": "a",
+									"titles": {
+										"en-GB-oed": "a"
+									},
+									"type": "a",
+									"hreflang": "en-GB-oed"
+								}
+							],
+							"constraintContentTargets": [
+								{
+									"id": "A",
+									"annotations": [
+										{
+											"id": "a",
+											"title": "a",
+											"type": "a",
+											"text": "a",
+											"texts": {
+												"en-GB-oed": "a"
+											},
+											"links": [
+												{
+													"href": "http://www.example.org/data.json",
+													"rel": "a",
+													"urn": "urn:a:",
+													"uri": "http://www.example.org/data.json",
+													"title": "a",
+													"titles": {
+														"en-GB-oed": "a"
+													},
+													"type": "a",
+													"hreflang": "en-GB-oed"
+												}
+											]
+										}
+									],
+									"links": [
+										{
+											"href": "http://www.example.org/data.json",
+											"rel": "a",
+											"urn": "urn:a:",
+											"uri": "http://www.example.org/data.json",
+											"title": "a",
+											"titles": {
+												"en-GB-oed": "a"
+											},
+											"type": "a",
+											"hreflang": "en-GB-oed"
+										}
+									],
+									"localRepresentation": {
+										"textFormat": {
+											"textType": "KeyValues"
+										}
+									}
+								}
+							],
+							"dataSetTargets": [
+								{
+									"id": "A",
+									"annotations": [
+										{
+											"id": "a",
+											"title": "a",
+											"type": "a",
+											"text": "a",
+											"texts": {
+												"en-GB-oed": "a"
+											},
+											"links": [
+												{
+													"href": "http://www.example.org/data.json",
+													"rel": "a",
+													"urn": "urn:a:",
+													"uri": "http://www.example.org/data.json",
+													"title": "a",
+													"titles": {
+														"en-GB-oed": "a"
+													},
+													"type": "a",
+													"hreflang": "en-GB-oed"
+												}
+											]
+										}
+									],
+									"links": [
+										{
+											"href": "http://www.example.org/data.json",
+											"rel": "a",
+											"urn": "urn:a:",
+											"uri": "http://www.example.org/data.json",
+											"title": "a",
+											"titles": {
+												"en-GB-oed": "a"
+											},
+											"type": "a",
+											"hreflang": "en-GB-oed"
+										}
+									],
+									"localRepresentation": {
+										"textFormat": {
+											"textType": "KeyValues"
+										}
+									}
+								}
+							],
+							"identifiableObjectTargets": [
+								{
+									"id": "A",
+									"annotations": [
+										{
+											"id": "a",
+											"title": "a",
+											"type": "a",
+											"text": "a",
+											"texts": {
+												"en-GB-oed": "a"
+											},
+											"links": [
+												{
+													"href": "http://www.example.org/data.json",
+													"rel": "a",
+													"urn": "urn:a:",
+													"uri": "http://www.example.org/data.json",
+													"title": "a",
+													"titles": {
+														"en-GB-oed": "a"
+													},
+													"type": "a",
+													"hreflang": "en-GB-oed"
+												}
+											]
+										}
+									],
+									"links": [
+										{
+											"href": "http://www.example.org/data.json",
+											"rel": "a",
+											"urn": "urn:a:",
+											"uri": "http://www.example.org/data.json",
+											"title": "a",
+											"titles": {
+												"en-GB-oed": "a"
+											},
+											"type": "a",
+											"hreflang": "en-GB-oed"
+										}
+									],
+									"objectType": "Any",
+									"localRepresentation": {
+										"enumeration": "urn:a",
+										"textFormat": {
+											"textType": "KeyValues"
+										}
+									}
+								}
+							],
+							"keyDescriptorValuesTargets": [
+								{
+									"id": "A",
+									"annotations": [
+										{
+											"id": "a",
+											"title": "a",
+											"type": "a",
+											"text": "a",
+											"texts": {
+												"en-GB-oed": "a"
+											},
+											"links": [
+												{
+													"href": "http://www.example.org/data.json",
+													"rel": "a",
+													"urn": "urn:a:",
+													"uri": "http://www.example.org/data.json",
+													"title": "a",
+													"titles": {
+														"en-GB-oed": "a"
+													},
+													"type": "a",
+													"hreflang": "en-GB-oed"
+												}
+											]
+										}
+									],
+									"links": [
+										{
+											"href": "http://www.example.org/data.json",
+											"rel": "a",
+											"urn": "urn:a:",
+											"uri": "http://www.example.org/data.json",
+											"title": "a",
+											"titles": {
+												"en-GB-oed": "a"
+											},
+											"type": "a",
+											"hreflang": "en-GB-oed"
+										}
+									],
+									"localRepresentation": {
+										"textFormat": {
+											"textType": "KeyValues"
+										}
+									}
+								}
+							],
+							"reportPeriodTargets": [
+								{
+									"id": "A",
+									"annotations": [
+										{
+											"id": "a",
+											"title": "a",
+											"type": "a",
+											"text": "a",
+											"texts": {
+												"en-GB-oed": "a"
+											},
+											"links": [
+												{
+													"href": "http://www.example.org/data.json",
+													"rel": "a",
+													"urn": "urn:a:",
+													"uri": "http://www.example.org/data.json",
+													"title": "a",
+													"titles": {
+														"en-GB-oed": "a"
+													},
+													"type": "a",
+													"hreflang": "en-GB-oed"
+												}
+											]
+										}
+									],
+									"links": [
+										{
+											"href": "http://www.example.org/data.json",
+											"rel": "a",
+											"urn": "urn:a:",
+											"uri": "http://www.example.org/data.json",
+											"title": "a",
+											"titles": {
+												"en-GB-oed": "a"
+											},
+											"type": "a",
+											"hreflang": "en-GB-oed"
+										}
+									],
+									"localRepresentation": {
+										"textFormat": {
+											"endTime": "1000Z",
+											"startTime": "1000Z",
+											"textType": "ObservationalTimePeriod"
+										}
+									}
+								}
+							]
+						}
+					],
+					"reportStructures": [
+						{
+							"metadataAttribute": "a",
+							"metadataTarget": "a",
+							"id": "$",
+							"annotations": [
+								{
+									"id": "a",
+									"title": "a",
+									"type": "a",
+									"text": "a",
+									"texts": {
+										"en-GB-oed": "a"
+									},
+									"links": [
+										{
+											"href": "http://www.example.org/data.json",
+											"rel": "a",
+											"urn": "urn:a:",
+											"uri": "http://www.example.org/data.json",
+											"title": "a",
+											"titles": {
+												"en-GB-oed": "a"
+											},
+											"type": "a",
+											"hreflang": "en-GB-oed"
+										}
+									]
+								}
+							],
+							"links": [
+								{
+									"href": "http://www.example.org/data.json",
+									"rel": "a",
+									"urn": "urn:a:",
+									"uri": "http://www.example.org/data.json",
+									"title": "a",
+									"titles": {
+										"en-GB-oed": "a"
+									},
+									"type": "a",
+									"hreflang": "en-GB-oed"
+								}
+							],
+							"metadataAttributes": [
+								{
+									"id": "A",
+									"annotations": [
+										{
+											"id": "a",
+											"title": "a",
+											"type": "a",
+											"text": "a",
+											"texts": {
+												"en-GB-oed": "a"
+											},
+											"links": [
+												{
+													"href": "http://www.example.org/data.json",
+													"rel": "a",
+													"urn": "urn:a:",
+													"uri": "http://www.example.org/data.json",
+													"title": "a",
+													"titles": {
+														"en-GB-oed": "a"
+													},
+													"type": "a",
+													"hreflang": "en-GB-oed"
+												}
+											]
+										}
+									],
+									"links": [
+										{
+											"href": "http://www.example.org/data.json",
+											"rel": "a",
+											"urn": "urn:a:",
+											"uri": "http://www.example.org/data.json",
+											"title": "a",
+											"titles": {
+												"en-GB-oed": "a"
+											},
+											"type": "a",
+											"hreflang": "en-GB-oed"
+										}
+									],
+									"isPresentational": true,
+									"maxOccurs": 1,
+									"minOccurs": 0,
+									"conceptIdentity": "https://a",
+									"localRepresentation": {
+										"enumeration": "urn:a",
+										"enumerationFormat": {
+											"endTime": "1000Z",
+											"endValue": 1,
+											"interval": 1,
+											"isSequence": true,
+											"maxLength": 1,
+											"maxValue": 1,
+											"minLength": 1,
+											"minValue": 1,
+											"pattern": "a",
+											"startTime": "1000Z",
+											"startValue": 1,
+											"textType": "String",
+											"timeInterval": "PYMWDTHMS"
+										},
+										"textFormat": {
+											"decimals": 1,
+											"endTime": "1000Z",
+											"endValue": 1.1,
+											"interval": 1.1,
+											"isMultiLingual": true,
+											"isSequence": true,
+											"maxLength": 1,
+											"maxValue": 1.1,
+											"minLength": 1,
+											"minValue": 1.1,
+											"pattern": "a",
+											"startTime": "1000Z",
+											"startValue": 1.1,
+											"textType": "String",
+											"timeInterval": "PYMWDTHMS"
+										}
+									}
+								}
+							],
+							"metadataTargets": [
+								"urn:a"
+							]
+						}
+					]
+				}
+			}
+		],
+		"categorySchemes": [
+			{
+				"id": "A",
+				"version": "0.0",
+				"agencyID": "A.A",
+				"isExternalReference": true,
+				"isFinal": true,
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"description": "a",
+				"descriptions": {
+					"en-GB-oed": "a"
+				},
+				"annotations": [
+					{
+						"id": "a",
+						"title": "a",
+						"type": "a",
+						"text": "a",
+						"texts": {
+							"en-GB-oed": "a"
+						},
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						]
+					}
+				],
+				"links": [
+					{
+						"href": "http://www.example.org/data.json",
+						"rel": "a",
+						"urn": "urn:a:",
+						"uri": "http://www.example.org/data.json",
+						"title": "a",
+						"titles": {
+							"en-GB-oed": "a"
+						},
+						"type": "a",
+						"hreflang": "en-GB-oed"
+					}
+				],
+				"isPartial": true,
+				"categories": [
+					{
+						"id": "$",
+						"name": "a",
+						"names": {
+							"en-GB-oed": "a"
+						},
+						"description": "a",
+						"descriptions": {
+							"en-GB-oed": "a"
+						},
+						"annotations": [
+							{
+								"id": "a",
+								"title": "a",
+								"type": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						],
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						],
+						"categories": [
+							{
+								"id": "$",
+								"name": "a",
+								"names": {
+									"en-GB-oed": "a"
+								},
+								"description": "a",
+								"descriptions": {
+									"en-GB-oed": "a"
+								},
+								"annotations": [
+									{
+										"id": "a",
+										"title": "a",
+										"type": "a",
+										"text": "a",
+										"texts": {
+											"en-GB-oed": "a"
+										},
+										"links": [
+											{
+												"href": "http://www.example.org/data.json",
+												"rel": "a",
+												"urn": "urn:a:",
+												"uri": "http://www.example.org/data.json",
+												"title": "a",
+												"titles": {
+													"en-GB-oed": "a"
+												},
+												"type": "a",
+												"hreflang": "en-GB-oed"
+											}
+										]
+									}
+								],
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		],
+		"conceptSchemes": [
+			{
+				"id": "A",
+				"version": "0.0",
+				"agencyID": "A.A",
+				"isExternalReference": true,
+				"isFinal": true,
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"description": "a",
+				"descriptions": {
+					"en-GB-oed": "a"
+				},
+				"annotations": [
+					{
+						"id": "a",
+						"title": "a",
+						"type": "a",
+						"text": "a",
+						"texts": {
+							"en-GB-oed": "a"
+						},
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						]
+					}
+				],
+				"links": [
+					{
+						"href": "http://www.example.org/data.json",
+						"rel": "a",
+						"urn": "urn:a:",
+						"uri": "http://www.example.org/data.json",
+						"title": "a",
+						"titles": {
+							"en-GB-oed": "a"
+						},
+						"type": "a",
+						"hreflang": "en-GB-oed"
+					}
+				],
+				"isPartial": true,
+				"concepts": [
+					{
+						"id": "A",
+						"name": "a",
+						"names": {
+							"en-GB-oed": "a"
+						},
+						"description": "a",
+						"descriptions": {
+							"en-GB-oed": "a"
+						},
+						"annotations": [
+							{
+								"id": "a",
+								"title": "a",
+								"type": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						],
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						],
+						"coreRepresentation": {
+							"enumeration": "urn:a",
+							"id": "A",
+							"version": "0.0",
+							"agencyID": "A.A",
+							"enumerationFormat": {
+								"endTime": "1000Z",
+								"endValue": 1,
+								"interval": 1,
+								"isSequence": true,
+								"maxLength": 1,
+								"maxValue": 1,
+								"minLength": 1,
+								"minValue": 1,
+								"pattern": "a",
+								"startTime": "1000Z",
+								"startValue": 1,
+								"textType": "String",
+								"timeInterval": "PYMWDTHMS"
+							},
+							"textFormat": {
+								"decimals": 1,
+								"endTime": "1000Z",
+								"endValue": 1.1,
+								"interval": 1.1,
+								"isMultiLingual": true,
+								"isSequence": true,
+								"maxLength": 1,
+								"maxValue": 1.1,
+								"minLength": 1,
+								"minValue": 1.1,
+								"pattern": "a",
+								"startTime": "1000Z",
+								"startValue": 1.1,
+								"textType": "String",
+								"timeInterval": "PYMWDTHMS"
+							}
+						},
+						"isoConceptReference": "urn:a",
+						"parent": "urn:a"
+					}
+				]
+			}
+		],
+		"codelists": [
+			{
+				"id": "A",
+				"version": "0.0",
+				"agencyID": "A.A",
+				"isExternalReference": true,
+				"isFinal": true,
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"description": "a",
+				"descriptions": {
+					"en-GB-oed": "a"
+				},
+				"annotations": [
+					{
+						"id": "a",
+						"title": "a",
+						"type": "a",
+						"text": "a",
+						"texts": {
+							"en-GB-oed": "a"
+						},
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						]
+					}
+				],
+				"links": [
+					{
+						"href": "http://www.example.org/data.json",
+						"rel": "a",
+						"urn": "urn:a:",
+						"uri": "http://www.example.org/data.json",
+						"title": "a",
+						"titles": {
+							"en-GB-oed": "a"
+						},
+						"type": "a",
+						"hreflang": "en-GB-oed"
+					}
+				],
+				"isPartial": true,
+				"codes": [
+					{
+						"id": "$",
+						"name": "a",
+						"names": {
+							"en-GB-oed": "a"
+						},
+						"description": "a",
+						"descriptions": {
+							"en-GB-oed": "a"
+						},
+						"annotations": [
+							{
+								"id": "a",
+								"title": "a",
+								"type": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						],
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						],
+						"parent": "$"
+					}
+				]
+			}
+		],
+		"hierarchicalCodelists": [
+			{
+				"id": "$",
+				"version": "0.0",
+				"agencyID": "A.A",
+				"isExternalReference": true,
+				"isFinal": true,
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"description": "a",
+				"descriptions": {
+					"en-GB-oed": "a"
+				},
+				"annotations": [
+					{
+						"id": "a",
+						"title": "a",
+						"type": "a",
+						"text": "a",
+						"texts": {
+							"en-GB-oed": "a"
+						},
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						]
+					}
+				],
+				"links": [
+					{
+						"href": "http://www.example.org/data.json",
+						"rel": "a",
+						"urn": "urn:a:",
+						"uri": "http://www.example.org/data.json",
+						"title": "a",
+						"titles": {
+							"en-GB-oed": "a"
+						},
+						"type": "a",
+						"hreflang": "en-GB-oed"
+					}
+				],
+				"hierarchies": [
+					{
+						"id": "$",
+						"name": "a",
+						"names": {
+							"en-GB-oed": "a"
+						},
+						"description": "a",
+						"descriptions": {
+							"en-GB-oed": "a"
+						},
+						"annotations": [
+							{
+								"id": "a",
+								"title": "a",
+								"type": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						],
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						],
+						"leveled": true,
+						"hierarchicalCodes": [
+							{
+								"id": "$",
+								"annotations": [
+									{
+										"id": "a",
+										"title": "a",
+										"type": "a",
+										"text": "a",
+										"texts": {
+											"en-GB-oed": "a"
+										},
+										"links": [
+											{
+												"href": "http://www.example.org/data.json",
+												"rel": "a",
+												"urn": "urn:a:",
+												"uri": "http://www.example.org/data.json",
+												"title": "a",
+												"titles": {
+													"en-GB-oed": "a"
+												},
+												"type": "a",
+												"hreflang": "en-GB-oed"
+											}
+										]
+									}
+								],
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								],
+								"validFrom": "2017-11-16T11:04:00Z",
+								"validTo": "2017-11-16T11:04:00Z",
+								"version": "0.0",
+								"code": "urn:a",
+								"codeID": "$",
+								"codelistAliasRef": "$",
+								"level": "urn:a"
+							}
+						],
+						"level": {
+							"id": "$",
+							"name": "a",
+							"names": {
+								"en-GB-oed": "a"
+							},
+							"description": "a",
+							"descriptions": {
+								"en-GB-oed": "a"
+							},
+							"annotations": [
+								{
+									"id": "a",
+									"title": "a",
+									"type": "a",
+									"text": "a",
+									"texts": {
+										"en-GB-oed": "a"
+									},
+									"links": [
+										{
+											"href": "http://www.example.org/data.json",
+											"rel": "a",
+											"urn": "urn:a:",
+											"uri": "http://www.example.org/data.json",
+											"title": "a",
+											"titles": {
+												"en-GB-oed": "a"
+											},
+											"type": "a",
+											"hreflang": "en-GB-oed"
+										}
+									]
+								}
+							],
+							"links": [
+								{
+									"href": "http://www.example.org/data.json",
+									"rel": "a",
+									"urn": "urn:a:",
+									"uri": "http://www.example.org/data.json",
+									"title": "a",
+									"titles": {
+										"en-GB-oed": "a"
+									},
+									"type": "a",
+									"hreflang": "en-GB-oed"
+								}
+							],
+							"codingFormat": {
+								"endValue": 1,
+								"interval": 1,
+								"isSequence": true,
+								"maxLength": 1,
+								"maxValue": 1,
+								"minLength": 1,
+								"minValue": 1,
+								"pattern": "a",
+								"startValue": 1,
+								"textType": "Alpha"
+							}
+						}
+					}
+				],
+				"includedCodelists": {
+					"a": "urn:a"
+				}
+			}
+		],
+		"agencySchemes": [
+			{
+				"id": "$",
+				"version": "0.0",
+				"agencyID": "A.A",
+				"isExternalReference": true,
+				"isFinal": true,
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"description": "a",
+				"descriptions": {
+					"en-GB-oed": "a"
+				},
+				"annotations": [
+					{
+						"id": "a",
+						"title": "a",
+						"type": "a",
+						"text": "a",
+						"texts": {
+							"en-GB-oed": "a"
+						},
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						]
+					}
+				],
+				"links": [
+					{
+						"href": "http://www.example.org/data.json",
+						"rel": "a",
+						"urn": "urn:a:",
+						"uri": "http://www.example.org/data.json",
+						"title": "a",
+						"titles": {
+							"en-GB-oed": "a"
+						},
+						"type": "a",
+						"hreflang": "en-GB-oed"
+					}
+				],
+				"isPartial": true,
+				"agencies": [
+					{
+						"id": "A",
+						"name": "a",
+						"names": {
+							"en-GB-oed": "a"
+						},
+						"description": "a",
+						"descriptions": {
+							"en-GB-oed": "a"
+						},
+						"annotations": [
+							{
+								"id": "a",
+								"title": "a",
+								"type": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						],
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						],
+						"contacts": [
+							{
+								"id": "$",
+								"name": "a",
+								"names": {
+									"en-GB-oed": "a"
+								},
+								"department": "a",
+								"departments": {
+									"en-GB-oed": "a"
+								},
+								"emails": [
+									"smith@example.org"
+								],
+								"faxes": [
+									"a"
+								],
+								"role": "a",
+								"roles": {
+									"en-GB-oed": "a"
+								},
+								"telephones": [
+									"a"
+								],
+								"uris": [
+									"http://www.example.org/data.json"
+								],
+								"x400s": [
+									"a"
+								]
+							}
+						]
+					}
+				]
+			}
+		],
+		"dataProviderSchemes": [
+			{
+				"id": "$",
+				"version": "0.0",
+				"agencyID": "A.A",
+				"isExternalReference": true,
+				"isFinal": true,
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"description": "a",
+				"descriptions": {
+					"en-GB-oed": "a"
+				},
+				"annotations": [
+					{
+						"id": "a",
+						"title": "a",
+						"type": "a",
+						"text": "a",
+						"texts": {
+							"en-GB-oed": "a"
+						},
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						]
+					}
+				],
+				"links": [
+					{
+						"href": "http://www.example.org/data.json",
+						"rel": "a",
+						"urn": "urn:a:",
+						"uri": "http://www.example.org/data.json",
+						"title": "a",
+						"titles": {
+							"en-GB-oed": "a"
+						},
+						"type": "a",
+						"hreflang": "en-GB-oed"
+					}
+				],
+				"isPartial": true,
+				"dataProviders": [
+					{
+						"id": "$",
+						"name": "a",
+						"names": {
+							"en-GB-oed": "a"
+						},
+						"description": "a",
+						"descriptions": {
+							"en-GB-oed": "a"
+						},
+						"annotations": [
+							{
+								"id": "a",
+								"title": "a",
+								"type": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						],
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						],
+						"contacts": [
+							{
+								"id": "$",
+								"name": "a",
+								"names": {
+									"en-GB-oed": "a"
+								},
+								"department": "a",
+								"departments": {
+									"en-GB-oed": "a"
+								},
+								"emails": [
+									"smith@example.org"
+								],
+								"faxes": [
+									"a"
+								],
+								"role": "a",
+								"roles": {
+									"en-GB-oed": "a"
+								},
+								"telephones": [
+									"a"
+								],
+								"uris": [
+									"http://www.example.org/data.json"
+								],
+								"x400s": [
+									"a"
+								]
+							}
+						]
+					}
+				]
+			}
+		],
+		"dataConsumerSchemes": [
+			{
+				"id": "$",
+				"version": "0.0",
+				"agencyID": "A.A",
+				"isExternalReference": true,
+				"isFinal": true,
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"description": "a",
+				"descriptions": {
+					"en-GB-oed": "a"
+				},
+				"annotations": [
+					{
+						"id": "a",
+						"title": "a",
+						"type": "a",
+						"text": "a",
+						"texts": {
+							"en-GB-oed": "a"
+						},
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						]
+					}
+				],
+				"links": [
+					{
+						"href": "http://www.example.org/data.json",
+						"rel": "a",
+						"urn": "urn:a:",
+						"uri": "http://www.example.org/data.json",
+						"title": "a",
+						"titles": {
+							"en-GB-oed": "a"
+						},
+						"type": "a",
+						"hreflang": "en-GB-oed"
+					}
+				],
+				"isPartial": true,
+				"dataConsumers": [
+					{
+						"id": "$",
+						"name": "a",
+						"names": {
+							"en-GB-oed": "a"
+						},
+						"description": "a",
+						"descriptions": {
+							"en-GB-oed": "a"
+						},
+						"annotations": [
+							{
+								"id": "a",
+								"title": "a",
+								"type": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						],
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						],
+						"contacts": [
+							{
+								"id": "$",
+								"name": "a",
+								"names": {
+									"en-GB-oed": "a"
+								},
+								"department": "a",
+								"departments": {
+									"en-GB-oed": "a"
+								},
+								"emails": [
+									"smith@example.org"
+								],
+								"faxes": [
+									"a"
+								],
+								"role": "a",
+								"roles": {
+									"en-GB-oed": "a"
+								},
+								"telephones": [
+									"a"
+								],
+								"uris": [
+									"http://www.example.org/data.json"
+								],
+								"x400s": [
+									"a"
+								]
+							}
+						]
+					}
+				]
+			}
+		],
+		"organisationUnitSchemes": [
+			{
+				"id": "$",
+				"version": "0.0",
+				"agencyID": "A.A",
+				"isExternalReference": true,
+				"isFinal": true,
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"description": "a",
+				"descriptions": {
+					"en-GB-oed": "a"
+				},
+				"annotations": [
+					{
+						"id": "a",
+						"title": "a",
+						"type": "a",
+						"text": "a",
+						"texts": {
+							"en-GB-oed": "a"
+						},
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						]
+					}
+				],
+				"links": [
+					{
+						"href": "http://www.example.org/data.json",
+						"rel": "a",
+						"urn": "urn:a:",
+						"uri": "http://www.example.org/data.json",
+						"title": "a",
+						"titles": {
+							"en-GB-oed": "a"
+						},
+						"type": "a",
+						"hreflang": "en-GB-oed"
+					}
+				],
+				"isPartial": true,
+				"organisationUnits": [
+					{
+						"id": "$",
+						"name": "a",
+						"names": {
+							"en-GB-oed": "a"
+						},
+						"description": "a",
+						"descriptions": {
+							"en-GB-oed": "a"
+						},
+						"annotations": [
+							{
+								"id": "a",
+								"title": "a",
+								"type": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						],
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						],
+						"contacts": [
+							{
+								"id": "$",
+								"name": "a",
+								"names": {
+									"en-GB-oed": "a"
+								},
+								"department": "a",
+								"departments": {
+									"en-GB-oed": "a"
+								},
+								"emails": [
+									"smith@example.org"
+								],
+								"faxes": [
+									"a"
+								],
+								"role": "a",
+								"roles": {
+									"en-GB-oed": "a"
+								},
+								"telephones": [
+									"a"
+								],
+								"uris": [
+									"http://www.example.org/data.json"
+								],
+								"x400s": [
+									"a"
+								]
+							}
+						],
+						"parent": "urn:a"
+					}
+				]
+			}
+		],
+		"dataflows": [
+			{
+				"id": "$",
+				"version": "0.0",
+				"agencyID": "A.A",
+				"isExternalReference": true,
+				"isFinal": true,
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"description": "a",
+				"descriptions": {
+					"en-GB-oed": "a"
+				},
+				"annotations": [
+					{
+						"id": "a",
+						"title": "a",
+						"type": "a",
+						"text": "a",
+						"texts": {
+							"en-GB-oed": "a"
+						},
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						]
+					}
+				],
+				"links": [
+					{
+						"href": "http://www.example.org/data.json",
+						"rel": "a",
+						"urn": "urn:a:",
+						"uri": "http://www.example.org/data.json",
+						"title": "a",
+						"titles": {
+							"en-GB-oed": "a"
+						},
+						"type": "a",
+						"hreflang": "en-GB-oed"
+					}
+				],
+				"structure": "urn:a"
+			}
+		],
+		"metadataflows": [
+			{
+				"id": "$",
+				"version": "0.0",
+				"agencyID": "A.A",
+				"isExternalReference": true,
+				"isFinal": true,
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"description": "a",
+				"descriptions": {
+					"en-GB-oed": "a"
+				},
+				"annotations": [
+					{
+						"id": "a",
+						"title": "a",
+						"type": "a",
+						"text": "a",
+						"texts": {
+							"en-GB-oed": "a"
+						},
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						]
+					}
+				],
+				"links": [
+					{
+						"href": "http://www.example.org/data.json",
+						"rel": "a",
+						"urn": "urn:a:",
+						"uri": "http://www.example.org/data.json",
+						"title": "a",
+						"titles": {
+							"en-GB-oed": "a"
+						},
+						"type": "a",
+						"hreflang": "en-GB-oed"
+					}
+				],
+				"structure": "urn:a"
+			}
+		],
+		"reportingTaxonomies": [
+			{
+				"id": "$",
+				"version": "0.0",
+				"agencyID": "A.A",
+				"isExternalReference": true,
+				"isFinal": true,
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"description": "a",
+				"descriptions": {
+					"en-GB-oed": "a"
+				},
+				"annotations": [
+					{
+						"id": "a",
+						"title": "a",
+						"type": "a",
+						"text": "a",
+						"texts": {
+							"en-GB-oed": "a"
+						},
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						]
+					}
+				],
+				"links": [
+					{
+						"href": "http://www.example.org/data.json",
+						"rel": "a",
+						"urn": "urn:a:",
+						"uri": "http://www.example.org/data.json",
+						"title": "a",
+						"titles": {
+							"en-GB-oed": "a"
+						},
+						"type": "a",
+						"hreflang": "en-GB-oed"
+					}
+				],
+				"isPartial": true,
+				"reportingCategories": [
+					{
+						"id": "$",
+						"name": "a",
+						"names": {
+							"en-GB-oed": "a"
+						},
+						"description": "a",
+						"descriptions": {
+							"en-GB-oed": "a"
+						},
+						"annotations": [
+							{
+								"id": "a",
+								"title": "a",
+								"type": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						],
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						],
+						"provisioningMetadata": [
+							"urn:a"
+						],
+						"reportingCategories": [
+							{
+								"id": "$",
+								"name": "a",
+								"names": {
+									"en-GB-oed": "a"
+								},
+								"description": "a",
+								"descriptions": {
+									"en-GB-oed": "a"
+								},
+								"annotations": [
+									{
+										"id": "a",
+										"title": "a",
+										"type": "a",
+										"text": "a",
+										"texts": {
+											"en-GB-oed": "a"
+										},
+										"links": [
+											{
+												"href": "http://www.example.org/data.json",
+												"rel": "a",
+												"urn": "urn:a:",
+												"uri": "http://www.example.org/data.json",
+												"title": "a",
+												"titles": {
+													"en-GB-oed": "a"
+												},
+												"type": "a",
+												"hreflang": "en-GB-oed"
+											}
+										]
+									}
+								],
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								],
+								"provisioningMetadata": [
+									"urn:a"
+								],
+								"structuralMetadata": [
+									"urn:a"
+								]
+							}
+						],
+						"structuralMetadata": [
+							"urn:a"
+						]
+					}
+				]
+			}
+		],
+		"provisionAgreements": [
+			{
+				"id": "$",
+				"version": "0.0",
+				"agencyID": "A.A",
+				"isExternalReference": true,
+				"isFinal": true,
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"description": "a",
+				"descriptions": {
+					"en-GB-oed": "a"
+				},
+				"annotations": [
+					{
+						"id": "a",
+						"title": "a",
+						"type": "a",
+						"text": "a",
+						"texts": {
+							"en-GB-oed": "a"
+						},
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						]
+					}
+				],
+				"links": [
+					{
+						"href": "http://www.example.org/data.json",
+						"rel": "a",
+						"urn": "urn:a:",
+						"uri": "http://www.example.org/data.json",
+						"title": "a",
+						"titles": {
+							"en-GB-oed": "a"
+						},
+						"type": "a",
+						"hreflang": "en-GB-oed"
+					}
+				],
+				"dataProvider": "urn:a",
+				"structureUsage": "urn:a"
+			}
+		],
+		"structureSets": [
+			{
+				"id": "$",
+				"version": "0.0",
+				"agencyID": "A.A",
+				"isExternalReference": true,
+				"isFinal": true,
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"description": "a",
+				"descriptions": {
+					"en-GB-oed": "a"
+				},
+				"annotations": [
+					{
+						"id": "a",
+						"title": "a",
+						"type": "a",
+						"text": "a",
+						"texts": {
+							"en-GB-oed": "a"
+						},
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						]
+					}
+				],
+				"links": [
+					{
+						"href": "http://www.example.org/data.json",
+						"rel": "a",
+						"urn": "urn:a:",
+						"uri": "http://www.example.org/data.json",
+						"title": "a",
+						"titles": {
+							"en-GB-oed": "a"
+						},
+						"type": "a",
+						"hreflang": "en-GB-oed"
+					}
+				],
+				"categorySchemeMaps": [
+					{
+						"id": "$",
+						"name": "a",
+						"names": {
+							"en-GB-oed": "a"
+						},
+						"description": "a",
+						"descriptions": {
+							"en-GB-oed": "a"
+						},
+						"annotations": [
+							{
+								"id": "a",
+								"title": "a",
+								"type": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						],
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						],
+						"categoryMaps": [
+							{
+								"annotations": [
+									{
+										"id": "a",
+										"title": "a",
+										"type": "a",
+										"text": "a",
+										"texts": {
+											"en-GB-oed": "a"
+										},
+										"links": [
+											{
+												"href": "http://www.example.org/data.json",
+												"rel": "a",
+												"urn": "urn:a:",
+												"uri": "http://www.example.org/data.json",
+												"title": "a",
+												"titles": {
+													"en-GB-oed": "a"
+												},
+												"type": "a",
+												"hreflang": "en-GB-oed"
+											}
+										]
+									}
+								],
+								"source": "urn:a",
+								"target": "urn:a"
+							}
+						],
+						"source": "urn:a",
+						"target": "urn:a"
+					}
+				],
+				"codelistMaps": [
+					{
+						"id": "$",
+						"name": "a",
+						"names": {
+							"en-GB-oed": "a"
+						},
+						"description": "a",
+						"descriptions": {
+							"en-GB-oed": "a"
+						},
+						"annotations": [
+							{
+								"id": "a",
+								"title": "a",
+								"type": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						],
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						],
+						"codeMaps": [
+							{
+								"annotations": [
+									{
+										"id": "a",
+										"title": "a",
+										"type": "a",
+										"text": "a",
+										"texts": {
+											"en-GB-oed": "a"
+										},
+										"links": [
+											{
+												"href": "http://www.example.org/data.json",
+												"rel": "a",
+												"urn": "urn:a:",
+												"uri": "http://www.example.org/data.json",
+												"title": "a",
+												"titles": {
+													"en-GB-oed": "a"
+												},
+												"type": "a",
+												"hreflang": "en-GB-oed"
+											}
+										]
+									}
+								],
+								"source": "urn:a",
+								"target": "urn:a"
+							}
+						],
+						"source": "urn:a",
+						"target": "urn:a"
+					}
+				],
+				"conceptSchemeMaps": [
+					{
+						"id": "$",
+						"name": "a",
+						"names": {
+							"en-GB-oed": "a"
+						},
+						"description": "a",
+						"descriptions": {
+							"en-GB-oed": "a"
+						},
+						"annotations": [
+							{
+								"id": "a",
+								"title": "a",
+								"type": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						],
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						],
+						"conceptMaps": [
+							{
+								"annotations": [
+									{
+										"id": "a",
+										"title": "a",
+										"type": "a",
+										"text": "a",
+										"texts": {
+											"en-GB-oed": "a"
+										},
+										"links": [
+											{
+												"href": "http://www.example.org/data.json",
+												"rel": "a",
+												"urn": "urn:a:",
+												"uri": "http://www.example.org/data.json",
+												"title": "a",
+												"titles": {
+													"en-GB-oed": "a"
+												},
+												"type": "a",
+												"hreflang": "en-GB-oed"
+											}
+										]
+									}
+								],
+								"source": "urn:a",
+								"target": "urn:a"
+							}
+						],
+						"source": "urn:a",
+						"target": "urn:a"
+					}
+				],
+				"hybridCodelistMaps": [
+					{
+						"id": "$",
+						"name": "a",
+						"names": {
+							"en-GB-oed": "a"
+						},
+						"description": "a",
+						"descriptions": {
+							"en-GB-oed": "a"
+						},
+						"annotations": [
+							{
+								"id": "a",
+								"title": "a",
+								"type": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						],
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						],
+						"hybridCodeMaps": [
+							{
+								"annotations": [
+									{
+										"id": "a",
+										"title": "a",
+										"type": "a",
+										"text": "a",
+										"texts": {
+											"en-GB-oed": "a"
+										},
+										"links": [
+											{
+												"href": "http://www.example.org/data.json",
+												"rel": "a",
+												"urn": "urn:a:",
+												"uri": "http://www.example.org/data.json",
+												"title": "a",
+												"titles": {
+													"en-GB-oed": "a"
+												},
+												"type": "a",
+												"hreflang": "en-GB-oed"
+											}
+										]
+									}
+								],
+								"source": "urn:a",
+								"target": "urn:a"
+							}
+						],
+						"source": "urn:a",
+						"target": "urn:a"
+					}
+				],
+				"organisationSchemeMaps": [
+					{
+						"id": "$",
+						"name": "a",
+						"names": {
+							"en-GB-oed": "a"
+						},
+						"description": "a",
+						"descriptions": {
+							"en-GB-oed": "a"
+						},
+						"annotations": [
+							{
+								"id": "a",
+								"title": "a",
+								"type": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						],
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						],
+						"organisationMaps": [
+							{
+								"annotations": [
+									{
+										"id": "a",
+										"title": "a",
+										"type": "a",
+										"text": "a",
+										"texts": {
+											"en-GB-oed": "a"
+										},
+										"links": [
+											{
+												"href": "http://www.example.org/data.json",
+												"rel": "a",
+												"urn": "urn:a:",
+												"uri": "http://www.example.org/data.json",
+												"title": "a",
+												"titles": {
+													"en-GB-oed": "a"
+												},
+												"type": "a",
+												"hreflang": "en-GB-oed"
+											}
+										]
+									}
+								],
+								"source": "urn:a",
+								"target": "urn:a"
+							}
+						],
+						"source": "urn:a",
+						"target": "urn:a"
+					}
+				],
+				"relatedStructures": [
+					"urn:a"
+				],
+				"reportingTaxonomyMaps": [
+					{
+						"id": "$",
+						"name": "a",
+						"names": {
+							"en-GB-oed": "a"
+						},
+						"description": "a",
+						"descriptions": {
+							"en-GB-oed": "a"
+						},
+						"annotations": [
+							{
+								"id": "a",
+								"title": "a",
+								"type": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						],
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						],
+						"reportingCategoryMaps": [
+							{
+								"annotations": [
+									{
+										"id": "a",
+										"title": "a",
+										"type": "a",
+										"text": "a",
+										"texts": {
+											"en-GB-oed": "a"
+										},
+										"links": [
+											{
+												"href": "http://www.example.org/data.json",
+												"rel": "a",
+												"urn": "urn:a:",
+												"uri": "http://www.example.org/data.json",
+												"title": "a",
+												"titles": {
+													"en-GB-oed": "a"
+												},
+												"type": "a",
+												"hreflang": "en-GB-oed"
+											}
+										]
+									}
+								],
+								"source": "urn:a",
+								"target": "urn:a"
+							}
+						],
+						"source": "urn:a",
+						"target": "urn:a"
+					}
+				],
+				"structureMaps": [
+					{
+						"id": "$",
+						"name": "a",
+						"names": {
+							"en-GB-oed": "a"
+						},
+						"description": "a",
+						"descriptions": {
+							"en-GB-oed": "a"
+						},
+						"annotations": [
+							{
+								"id": "a",
+								"title": "a",
+								"type": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						],
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						],
+						"isExtension": true,
+						"componentMaps": [
+							{
+								"annotations": [
+									{
+										"id": "a",
+										"title": "a",
+										"type": "a",
+										"text": "a",
+										"texts": {
+											"en-GB-oed": "a"
+										},
+										"links": [
+											{
+												"href": "http://www.example.org/data.json",
+												"rel": "a",
+												"urn": "urn:a:",
+												"uri": "http://www.example.org/data.json",
+												"title": "a",
+												"titles": {
+													"en-GB-oed": "a"
+												},
+												"type": "a",
+												"hreflang": "en-GB-oed"
+											}
+										]
+									}
+								],
+								"representationMapping": {
+									"codelistMap": "urn:a",
+									"toTextFormat": {
+										"decimals": 1,
+										"endTime": "1000Z",
+										"endValue": 1.1,
+										"interval": 1.1,
+										"isMultiLingual": true,
+										"isSequence": true,
+										"maxLength": 1,
+										"maxValue": 1.1,
+										"minLength": 1,
+										"minValue": 1.1,
+										"pattern": "a",
+										"startTime": "1000Z",
+										"startValue": 1.1,
+										"textType": "String",
+										"timeInterval": "PYMWDTHMS"
+									},
+									"toValueType": "Value",
+									"valueMap": {
+										"valueMappings": [
+											{
+												"source": "a",
+												"target": "a"
+											}
+										]
+									}
+								},
+								"source": "urn:a",
+								"target": "urn:a"
+							}
+						],
+						"source": "urn:a",
+						"target": "urn:a"
+					}
+				]
+			}
+		],
+		"processes": [
+			{
+				"id": "$",
+				"version": "0.0",
+				"agencyID": "A.A",
+				"isExternalReference": true,
+				"isFinal": true,
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"description": "a",
+				"descriptions": {
+					"en-GB-oed": "a"
+				},
+				"annotations": [
+					{
+						"id": "a",
+						"title": "a",
+						"type": "a",
+						"text": "a",
+						"texts": {
+							"en-GB-oed": "a"
+						},
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						]
+					}
+				],
+				"links": [
+					{
+						"href": "http://www.example.org/data.json",
+						"rel": "a",
+						"urn": "urn:a:",
+						"uri": "http://www.example.org/data.json",
+						"title": "a",
+						"titles": {
+							"en-GB-oed": "a"
+						},
+						"type": "a",
+						"hreflang": "en-GB-oed"
+					}
+				],
+				"processSteps": [
+					{
+						"id": "$",
+						"name": "a",
+						"names": {
+							"en-GB-oed": "a"
+						},
+						"description": "a",
+						"descriptions": {
+							"en-GB-oed": "a"
+						},
+						"annotations": [
+							{
+								"id": "a",
+								"title": "a",
+								"type": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								]
+							}
+						],
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						],
+						"computation": {
+							"localID": "$",
+							"softwareLanguage": "a",
+							"softwarePackage": "a",
+							"softwareVersion": "a",
+							"annotations": [
+								{
+									"id": "a",
+									"title": "a",
+									"type": "a",
+									"text": "a",
+									"texts": {
+										"en-GB-oed": "a"
+									},
+									"links": [
+										{
+											"href": "http://www.example.org/data.json",
+											"rel": "a",
+											"urn": "urn:a:",
+											"uri": "http://www.example.org/data.json",
+											"title": "a",
+											"titles": {
+												"en-GB-oed": "a"
+											},
+											"type": "a",
+											"hreflang": "en-GB-oed"
+										}
+									]
+								}
+							],
+							"description": "a",
+							"descriptions": {
+								"en-GB-oed": "a"
+							}
+						},
+						"inputs": [
+							{
+								"localID": "$",
+								"annotations": [
+									{
+										"id": "a",
+										"title": "a",
+										"type": "a",
+										"text": "a",
+										"texts": {
+											"en-GB-oed": "a"
+										},
+										"links": [
+											{
+												"href": "http://www.example.org/data.json",
+												"rel": "a",
+												"urn": "urn:a:",
+												"uri": "http://www.example.org/data.json",
+												"title": "a",
+												"titles": {
+													"en-GB-oed": "a"
+												},
+												"type": "a",
+												"hreflang": "en-GB-oed"
+											}
+										]
+									}
+								],
+								"objectReference": "urn:a"
+							}
+						],
+						"outputs": [
+							{
+								"localID": "$",
+								"annotations": [
+									{
+										"id": "a",
+										"title": "a",
+										"type": "a",
+										"text": "a",
+										"texts": {
+											"en-GB-oed": "a"
+										},
+										"links": [
+											{
+												"href": "http://www.example.org/data.json",
+												"rel": "a",
+												"urn": "urn:a:",
+												"uri": "http://www.example.org/data.json",
+												"title": "a",
+												"titles": {
+													"en-GB-oed": "a"
+												},
+												"type": "a",
+												"hreflang": "en-GB-oed"
+											}
+										]
+									}
+								],
+								"objectReference": "urn:a"
+							}
+						],
+						"processSteps": [
+							{
+								"id": "$",
+								"name": "a",
+								"names": {
+									"en-GB-oed": "a"
+								},
+								"description": "a",
+								"descriptions": {
+									"en-GB-oed": "a"
+								},
+								"annotations": [
+									{
+										"id": "a",
+										"title": "a",
+										"type": "a",
+										"text": "a",
+										"texts": {
+											"en-GB-oed": "a"
+										},
+										"links": [
+											{
+												"href": "http://www.example.org/data.json",
+												"rel": "a",
+												"urn": "urn:a:",
+												"uri": "http://www.example.org/data.json",
+												"title": "a",
+												"titles": {
+													"en-GB-oed": "a"
+												},
+												"type": "a",
+												"hreflang": "en-GB-oed"
+											}
+										]
+									}
+								],
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								],
+								"computation": {
+									"localID": "$",
+									"softwareLanguage": "a",
+									"softwarePackage": "a",
+									"softwareVersion": "a",
+									"annotations": [
+										{
+											"id": "a",
+											"title": "a",
+											"type": "a",
+											"text": "a",
+											"texts": {
+												"en-GB-oed": "a"
+											},
+											"links": [
+												{
+													"href": "http://www.example.org/data.json",
+													"rel": "a",
+													"urn": "urn:a:",
+													"uri": "http://www.example.org/data.json",
+													"title": "a",
+													"titles": {
+														"en-GB-oed": "a"
+													},
+													"type": "a",
+													"hreflang": "en-GB-oed"
+												}
+											]
+										}
+									],
+									"description": "a",
+									"descriptions": {
+										"en-GB-oed": "a"
+									}
+								},
+								"inputs": [
+									{
+										"localID": "$",
+										"annotations": [
+											{
+												"id": "a",
+												"title": "a",
+												"type": "a",
+												"text": "a",
+												"texts": {
+													"en-GB-oed": "a"
+												},
+												"links": [
+													{
+														"href": "http://www.example.org/data.json",
+														"rel": "a",
+														"urn": "urn:a:",
+														"uri": "http://www.example.org/data.json",
+														"title": "a",
+														"titles": {
+															"en-GB-oed": "a"
+														},
+														"type": "a",
+														"hreflang": "en-GB-oed"
+													}
+												]
+											}
+										],
+										"objectReference": "urn:a"
+									}
+								],
+								"outputs": [
+									{
+										"localID": "$",
+										"annotations": [
+											{
+												"id": "a",
+												"title": "a",
+												"type": "a",
+												"text": "a",
+												"texts": {
+													"en-GB-oed": "a"
+												},
+												"links": [
+													{
+														"href": "http://www.example.org/data.json",
+														"rel": "a",
+														"urn": "urn:a:",
+														"uri": "http://www.example.org/data.json",
+														"title": "a",
+														"titles": {
+															"en-GB-oed": "a"
+														},
+														"type": "a",
+														"hreflang": "en-GB-oed"
+													}
+												]
+											}
+										],
+										"objectReference": "urn:a"
+									}
+								]
+							}
+						],
+						"transitions": [
+							{
+								"id": "$",
+								"annotations": [
+									{
+										"id": "a",
+										"title": "a",
+										"type": "a",
+										"text": "a",
+										"texts": {
+											"en-GB-oed": "a"
+										},
+										"links": [
+											{
+												"href": "http://www.example.org/data.json",
+												"rel": "a",
+												"urn": "urn:a:",
+												"uri": "http://www.example.org/data.json",
+												"title": "a",
+												"titles": {
+													"en-GB-oed": "a"
+												},
+												"type": "a",
+												"hreflang": "en-GB-oed"
+											}
+										]
+									}
+								],
+								"links": [
+									{
+										"href": "http://www.example.org/data.json",
+										"rel": "a",
+										"urn": "urn:a:",
+										"uri": "http://www.example.org/data.json",
+										"title": "a",
+										"titles": {
+											"en-GB-oed": "a"
+										},
+										"type": "a",
+										"hreflang": "en-GB-oed"
+									}
+								],
+								"localID": "$",
+								"condition": "a",
+								"conditions": {
+									"en-GB-oed": "a"
+								},
+								"targetStep": "urn:a"
+							}
+						]
+					}
+				]
+			}
+		],
+		"categorisations": [
+			{
+				"id": "$",
+				"version": "0.0",
+				"agencyID": "A.A",
+				"isExternalReference": true,
+				"isFinal": true,
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"description": "a",
+				"descriptions": {
+					"en-GB-oed": "a"
+				},
+				"annotations": [
+					{
+						"id": "a",
+						"title": "a",
+						"type": "a",
+						"text": "a",
+						"texts": {
+							"en-GB-oed": "a"
+						},
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						]
+					}
+				],
+				"links": [
+					{
+						"href": "http://www.example.org/data.json",
+						"rel": "a",
+						"urn": "urn:a:",
+						"uri": "http://www.example.org/data.json",
+						"title": "a",
+						"titles": {
+							"en-GB-oed": "a"
+						},
+						"type": "a",
+						"hreflang": "en-GB-oed"
+					}
+				],
+				"source": "urn:a",
+				"target": "urn:a"
+			}
+		],
+		"contentConstraints": [
+			{
+				"id": "$",
+				"version": "0.0",
+				"agencyID": "A.A",
+				"isExternalReference": true,
+				"isFinal": true,
+				"validFrom": "2017-11-16T11:04:00Z",
+				"validTo": "2017-11-16T11:04:00Z",
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"description": "a",
+				"descriptions": {
+					"en-GB-oed": "a"
+				},
+				"annotations": [
+					{
+						"id": "a",
+						"title": "a",
+						"type": "a",
+						"text": "a",
+						"texts": {
+							"en-GB-oed": "a"
+						},
+						"links": [
+							{
+								"href": "http://www.example.org/data.json",
+								"rel": "a",
+								"urn": "urn:a:",
+								"uri": "http://www.example.org/data.json",
+								"title": "a",
+								"titles": {
+									"en-GB-oed": "a"
+								},
+								"type": "a",
+								"hreflang": "en-GB-oed"
+							}
+						]
+					}
+				],
+				"links": [
+					{
+						"href": "http://www.example.org/data.json",
+						"rel": "a",
+						"urn": "urn:a:",
+						"uri": "http://www.example.org/data.json",
+						"title": "a",
+						"titles": {
+							"en-GB-oed": "a"
+						},
+						"type": "a",
+						"hreflang": "en-GB-oed"
+					}
+				],
+				"type": "Allowed",
+				"constraintAttachment": {
+					"dataProvider": "urn:a",
+					"dataSets": [
+						{
+							"dataProvider": "a",
+							"id": "$"
+						}
+					],
+					"dataStructures": [
+						"urn:a"
+					],
+					"dataflows": [
+						"urn:a"
+					],
+					"metadataSets": [
+						{
+							"dataProvider": "a",
+							"id": "$"
+						}
+					],
+					"metadataStructures": [
+						"urn:a"
+					],
+					"metadataflows": [
+						"urn:a"
+					],
+					"provisionAgreements": [
+						"urn:a"
+					],
+					"queryableDataSources": [
+						{
+							"isRESTDatasource": true,
+							"isWebServiceDatasource": true,
+							"dataURL": "http://www.example.org/data.json",
+							"wadlURL": "http://www.example.org/data.json",
+							"wsdlURL": "http://www.example.org/data.json"
+						}
+					],
+					"simpleDataSources": [
+						"a"
+					]
+				},
+				"cubeRegions": [
+					{
+						"isIncluded": true,
+						"attributes": [
+							{
+								"id": "A",
+								"timeRange": {
+									"afterPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"beforePeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"endPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"startPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									}
+								},
+								"values": [
+									"a"
+								],
+								"cascadeValues": [
+									"a"
+								]
+							}
+						],
+						"keyValues": [
+							{
+								"id": "A",
+								"timeRange": {
+									"afterPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"beforePeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"endPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"startPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									}
+								},
+								"values": [
+									"a"
+								],
+								"cascadeValues": [
+									"a"
+								]
+							}
+						]
+					}
+				],
+				"dataKeySets": [
+					{
+						"isIncluded": true,
+						"keys": [
+							{
+								"keyValues": [
+									{
+										"id": "A",
+										"value": "a"
+									}
+								]
+							}
+						]
+					}
+				],
+				"metadataKeySets": [
+					{
+						"isIncluded": true,
+						"keys": [
+							{
+								"metadataTarget": "$",
+								"report": "$",
+								"keyValues": [
+									{
+										"id": "A",
+										"dataKey": {
+											"keyValues": [
+												{
+													"id": "A",
+													"value": "a"
+												}
+											]
+										},
+										"dataSet": {
+											"dataProvider": "urn:a",
+											"id": "$"
+										},
+										"object": "urn:a",
+										"value": "a"
+									}
+								]
+							}
+						]
+					}
+				],
+				"metadataTargetRegions": [
+					{
+						"include": true,
+						"metadataTarget": "$",
+						"report": "$",
+						"attributes": [
+							{
+								"id": "A.A",
+								"timeRange": {
+									"afterPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"beforePeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"endPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"startPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									}
+								},
+								"values": [
+									"a"
+								],
+								"cascadeValues": [
+									"a"
+								]
+							}
+						],
+						"keyValues": [
+							{
+								"id": "A",
+								"dataKeys": [
+									{
+										"keyValues": [
+											{
+												"id": "A",
+												"value": "a"
+											}
+										]
+									}
+								],
+								"dataSets": [
+									{
+										"dataProvider": "urn:a",
+										"id": "$"
+									}
+								],
+								"objects": [
+									"urn:a"
+								],
+								"timeRange": {
+									"afterPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"beforePeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"endPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									},
+									"startPeriod": {
+										"period": "1000Z",
+										"isInclusive": true
+									}
+								},
+								"values": [
+									"a"
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"errors": [
+		{
+			"code": 1.1,
+			"title": "a",
+			"titles": {
+				"en-GB-oed": "a"
+			},
+			"detail": "a",
+			"details": {
+				"en-GB-oed": "a"
+			},
+			"links": [
+				{
+					"href": "http://www.example.org/data.json",
+					"rel": "a",
+					"urn": "urn:a:",
+					"uri": "http://www.example.org/data.json",
+					"title": "a",
+					"titles": {
+						"en-GB-oed": "a"
+					},
+					"type": "a",
+					"hreflang": "en-GB-oed"
+				}
+			]
+		}
+	]
+}

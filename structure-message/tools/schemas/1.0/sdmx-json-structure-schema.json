@@ -1,0 +1,4290 @@
+{
+	"id": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/structure-message/tools/schemas/1.0/sdmx-json-structure-schema.json",
+	"$schema": "http://json-schema.org/schema#",
+	"description": "SDMX-JSON Schema for structure messages",
+	"type": "object",
+	"properties": {
+		"meta": {
+			"description": "A meta object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.",
+			"type": "object",
+			"properties": {
+				"schema": {
+					"description": "Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. Providing the link to the SDMX-JSON schema is recommended.",
+					"$ref": "#/definitions/uri"
+				},
+				"id": {
+					"description": "Unique string assigned by the sender that identifies the message for further references.",
+					"type": "string",
+					"pattern": "^[A-Za-z0-9_@$-]+$"
+				},
+				"test": {
+					"description": "Test indicates whether the message is for test purposes or not. False for normal messages.",
+					"type": "boolean"
+				},
+				"prepared": {
+					"description": "A timestamp indicating when the message was prepared. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.",
+					"type": "string",
+					"format": "date-time"
+				},
+				"contentLanguages": {
+					"description": "Array of strings containing the identifyer of all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, representaing in an array format the same information than the http Content-Language response header, e.g. \"en, fr-fr\". See IETF Language Tags: https://tools.ietf.org/html/rfc5646#section-2.1. The array's first element indicates the main language used in the message for localized elements. The usage of this property is recommended.",
+					"type": "array",
+					"items": {
+						"type": "string",
+						"pattern": "^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$"
+					}
+				},
+				"name": {
+					"description": "Name provides a name for the transmission. Multiple instances allow for parallel language values.",
+					"$ref": "#/definitions/localisedBestMatchText"
+				},
+				"names": {
+					"description": "Name provides a name for the transmission. Multiple instances allow for parallel language values.",
+					"$ref": "#/definitions/localisedText"
+				},
+				"sender": {
+					"description": "Sender is information about the party that is transmitting the message.",
+					"$ref": "#/definitions/party"
+				},
+				"receivers": {
+					"description": "Receiver is information about the part(y/ies) that is/are the intended recipient(s) of the message. This can be useful if the WS requires authentication.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/party"
+					}
+				},
+				"links": {
+					"$ref": "#/definitions/links"
+				}
+			},
+			"required": [
+				"id",
+				"prepared",
+				"sender"
+			]
+		},
+		"data": {
+			"description": "Data contains the message's “primary data”.",
+			"type": "object",
+			"properties": {
+				"dataStructures": {
+					"description": "dataStructures contains a collection of data structure definitions. The data structure definitions may be detailed in full, or referenced from an external structure document or registry service.",
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/DataStructureType",
+						"description": "DataStructure provides the details of a data structure definition, which is defined as a collection of metadata concepts, their structure and usage when used to collect or disseminate data."
+					}
+				},
+				"metadataStructures": {
+					"description": "metadataStructures contains a collection of metadata structure definition descriptions. The metadata structure definitions may be detailed in full, or referenced from an external structure document or registry service.",
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/MetadataStructureType",
+						"description": "metadataStructure provides the details of a metadata structure definition, which is defined as a collection of metadata concepts, their structure and usage when used to collect or disseminate reference metadata. A metadata structure definition performs several functions: it groups sets of objects into \"targets\" against which reference metadata may be reported. Targets define the structure of the reference metadata \"keys\" which identify specific types of reported metadata, and describe the valid values for populating the keys. Also, metadata structure definitions provide a presentational organization of concepts for reporting purposes. The structure of a reference metadata report is derived from this presentational structure."
+					}
+				},
+				"categorySchemes": {
+					"description": "categorySchemes contains a collection of category scheme descriptions. The category schemes may be detailed in full, or referenced from an external structure document or registry service.",
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/CategorySchemeType",
+						"description": "categoryScheme provides the details of a category scheme, which is the descriptive information for an arrangement or division of categories into groups based on characteristics, which the objects have in common. This provides for a simple, leveled hierarchy or categories."
+					}
+				},
+				"conceptSchemes": {
+					"description": "conceptSchemes contains one or more concept schemes, which can be explicitly detailed or referenced from an external structure document or registry service.",
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/ConceptSchemeType",
+						"description": "conceptScheme provides the details of a concept scheme, which is the descriptive information for an arrangement or division of concepts into groups based on characteristics, which the objects have in common. It contains a collection of concept definitions, that may be arranged in simple hierarchies."
+					}
+				},
+				"codelists": {
+					"description": "codelists contains a collection of code list descriptions. The code lists may be detailed in full, or referenced from an external structure document or registry service.",
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/CodelistType",
+						"description": "codelist provides the details of a code list, which is defined as a list from which some statistical concepts (coded concepts) take their values."
+					}
+				},
+				"hierarchicalCodelists": {
+					"description": "hierarchicalCodelists contains a collection of hierarchical code list descriptions. The hierarchical code lists may be detailed in full, or referenced from an external structure document or registry service.",
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/HierarchicalCodelistType",
+						"description": "hierarchicalCodelist provides the details of a hierarchical code list, which is defined as an organised collection of codes that may participate in many parent/child relationships with other codes in the list, as defined by one or more hierarchy of the list."
+					}
+				},
+				"agencySchemes": {
+					"description": "agencySchemes contains a collection of agency scheme descriptions.",
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/AgencySchemeType",
+						"description": "agencyScheme provides the details of an agency scheme, in which agencies are described."
+					}
+				},
+				"dataProviderSchemes": {
+					"description": "dataProviderSchemes contains a collection of data provider schemes descriptions.",
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/DataProviderSchemeType",
+						"description": "dataProviderScheme provides the details of an data provider scheme, in which data providers are described."
+					}
+				},
+				"dataConsumerSchemes": {
+					"description": "dataConsumerSchemes contains a collection of data consumer schemes descriptions.",
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/DataConsumerSchemeType",
+						"description": "dataConsumerScheme provides the details of an data consumer scheme, in which data consumers are described."
+					}
+				},
+				"organisationUnitSchemes": {
+					"description": "organisationUnitSchemes contains a collection of organisation unit schemes descriptions.",
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/OrganisationUnitSchemeType",
+						"description": "organisationUnitScheme provides the details of an organisation unit scheme, in which organisation units are described."
+					}
+				},
+				"dataflows": {
+					"description": "dataflows contains a collection of data flow descriptions. The data flows may be detailed in full, or referenced from an external structure document or registry service.",
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/DataflowType",
+						"description": "dataflow provides the details of a data flow, which is defined as the structure of data that will be provided for different reference periods."
+					}
+				},
+				"metadataflows": {
+					"description": "metadataflows contains a collection of metadata flow descriptions. The metadata flows may be detailed in full, or referenced from an external structure document or registry service.",
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/MetadataflowType",
+						"description": "metadataflow provides the details of a metadata flow, which is defined as the structure of reference metadata that will be provided for different reference periods"
+					}
+				},
+				"reportingTaxonomies": {
+					"description": "reportingTaxonomies contains a collection of reporting taxonomy descriptions. The reporting taxonomies may be detailed in full, or referenced from an external structure document or registry service.",
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/ReportingTaxonomyType",
+						"description": "reportingTaxonomy provides the details of a reporting taxonomy, which is a scheme which defines the composition structure of a data report where each component can be described by an independent data or metadata flow definition."
+					}
+				},
+				"provisionAgreements": {
+					"description": "provisionAgreements contains a collection of provision agreements. The provision agreements may be detailed in full, or referenced from an external structure document or registry service.",
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/ProvisionAgreementType",
+						"description": "provisionAgreement provides the details of a provision agreement, which is an agreement for a data provider to report data or reference metadata against a flow."
+					}
+				},
+				"structureSets": {
+					"description": "structureSets contains a collection of structure set descriptions. The structure sets may be detailed in full, or referenced from an external structure document or registry service.",
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/StructureSetType",
+						"description": "structureSet provides the details or a structure set, which allows components in one structure, structure usage, or item scheme to be mapped to components in another structural component of the same type."
+					}
+				},
+				"processes": {
+					"description": "processes contains a collection of process descriptions. The processes may be detailed in full, or referenced from an external structure document or registry service.",
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/ProcessType",
+						"description": "process provides the details of a process, which is a scheme which defines or documents the operations performed on data in order to validate data or to derive new information according to a given set of rules. It is not meant to support process automation, but serves as a description of how processes occur. The primary use for this structural mechanism is the attachment of reference metadata regarding statistical processing. This must either contain the full details of the category scheme, or provide a name and identification information and reference the full details from an external structure document or registry service."
+					}
+				},
+				"categorisations": {
+					"description": "categorisations contains a collection of structural object categorisations. This container may contain categorisations for many types of objects. The categorisations may be detailed in full, or referenced from an external structure document or registry service.",
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/CategorisationType",
+						"description": "categorisation allows for the association of an identifiable object to a category, providing for the classifications of the reference identifiable object. This must either contain the full details of the categorisation, or provide a name and identification information and reference the full details from an external structure document or registry service."
+					}
+				},
+				"attachmentConstraints": {
+					"description": "attachmentConstraints contains one or more attachment constraint, which can be explicitly detailed or referenced from an external structure document or registry service.",
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/AttachmentConstraintType",
+						"description": "attachmentConstraint describes sub sets of the content of a data or metadata set in terms of the content regions or in terms of the set of key combinations to which attributes or reference metadata (as defined by structure definitions) may be attached."
+					}
+				},
+				"contentConstraints": {
+					"description": "contentConstraints contains one or more content constraint, which can be explicitly detailed or referenced from an external structure document or registry service.",
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/ContentConstraintType",
+						"description": "contentConstraint specifies a sub set of the definition of the allowable or available content of a data or metadata set in terms of the content or in terms of the set of key combinations."
+					}
+				}
+			}
+		},
+		"errors": {
+			"description": "Errors field is an array of error objects. When appropriate provides a list of error messages in addition to RESTful web services HTTP error status codes.",
+			"type": "array",
+			"items": {
+				"description": "Error describes the structure of an error or warning message.",
+				"type": "object",
+				"properties": {
+					"code": {
+						"description": "Provides a code number for the error message. Code numbers are defined in the SDMX 2.1 Web Services Guidelines.",
+						"type": "number"
+					},
+					"title": {
+						"$ref": "#/definitions/localisedBestMatchText",
+						"description": "Title contains the title of the message, in best-match language value. A short, human-readable localised summary of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization."
+					},
+					"titles": {
+						"$ref": "#/definitions/localisedText",
+						"description": "Title contains the title of the message, in parallel language values. A list of short, human-readable localised summary of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization."
+					},
+					"detail": {
+						"$ref": "#/definitions/localisedBestMatchText",
+						"description": "Detail contains the detailed text of the message, in best-match language value. A human-readable localised explanation specific to this occurrence of the problem. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error."
+					},
+					"details": {
+						"$ref": "#/definitions/localisedText",
+						"description": "Detail contains the detailed text of the message, in parallel language values. A list of human-readable localised explanations specific to this occurrence of the problem. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error."
+					},
+					"links": {
+						"$ref": "#/definitions/links",
+						"description": "Links field is an array of link objects. If appropriate, a collection of links to additional external resources for the error."
+					}
+				},
+				"required": [
+					"code"
+				]
+			}
+		}
+	},
+	"definitions": {
+		"party": {
+			"description": "Sender contains information about the party that is transmitting the message.",
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "The id holds the identification of the party.",
+					"type": "string",
+					"pattern": "^[A-Za-z0-9_@$-]+$"
+				},
+				"name": {
+					"description": "Name is a human-readable name of the party.",
+					"$ref": "#/definitions/localisedBestMatchText"
+				},
+				"names": {
+					"description": "Name is a human-readable name of the party.",
+					"$ref": "#/definitions/localisedText"
+				},
+				"contacts": {
+					"description": "Contact provides contact information for the party in regard to the transmission of the message.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/contactType"
+					}
+				}
+			},
+			"required": [
+				"id"
+			]
+		},
+		"links": {
+			"description": "Links field is an array of link objects. If appropriate, a collection of links to additional external resources for the header.",
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"href": {
+						"$ref": "#/definitions/uri"
+					},
+					"rel": {
+						"description": "Relationship of the object to the external resource. See semantics below. Use 'self' to indicate the urn to the parent object.",
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"description": "structure: provides a reference to the data structure or metadata structure definition depending on the context. Other SDMX artefact types can be specified, e.g. dataflow, provisionagreement, etc. For the others please see: https://tools.ietf.org/rfc/rfc5988.txt",
+								"type": "string",
+								"enum": [
+									"agencyscheme",
+									"alternate",
+									"appendix",
+									"bookmark",
+									"categorisation",
+									"categoryscheme",
+									"chapter",
+									"codelist",
+									"conceptscheme",
+									"constraint",
+									"contents",
+									"copyright",
+									"current",
+									"dataflow",
+									"dataconsumerscheme",
+									"dataproviderscheme",
+									"describedby",
+									"edit",
+									"edit-media",
+									"enclosure",
+									"first",
+									"glossary",
+									"help",
+									"hierarchicalcodelist",
+									"hub",
+									"index",
+									"last",
+									"latest-version",
+									"license",
+									"metadataflow",
+									"next",
+									"next-archive",
+									"organisationunitscheme",
+									"payment",
+									"prev",
+									"predecessor-version",
+									"previous",
+									"prev-archive",
+									"process",
+									"provisionagreement",
+									"related",
+									"replies",
+									"reportingtaxonomy",
+									"section",
+									"self",
+									"service",
+									"start",
+									"structure",
+									"structureset",
+									"stylesheet",
+									"subsection",
+									"successor-version",
+									"up",
+									"version-history",
+									"via",
+									"working-copy",
+									"working-copy-of"
+								]
+							}
+						]
+					},
+					"urn": {
+						"description": "The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details).",
+						"$ref": "#/definitions/urn"
+					},
+					"uri": {
+						"description": "The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource.",
+						"$ref": "#/definitions/uri"
+					},
+					"title": {
+						"$ref": "#/definitions/localisedBestMatchText"
+					},
+					"titles": {
+						"$ref": "#/definitions/localisedText"
+					},
+					"type": {
+						"description": "A hint about the type of representation returned by the link.",
+						"type": "string"
+					},
+					"hreflang": {
+						"description": "The natural language of the external link, the same as used in the HTTP Accept-Language request header.",
+						"type": "string",
+						"pattern": "^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$"
+					}
+				},
+				"anyOf": [
+					{
+						"required": [
+							"href",
+							"rel"
+						]
+					},
+					{
+						"required": [
+							"urn",
+							"rel"
+						]
+					}
+				]
+			}
+		},
+        "localisedBestMatchText": {
+            "type": "string",
+            "description": "localisedBestMatchText is a reusable element, used for providing a human-readable best-language-match texts."
+        },
+        "localisedText": {
+            "description": "localisedText provides for a set of language-specific alternates to be provided for any human-readable constructs in the instance. ",
+            "type": "object",
+			"patternProperties": {
+				"^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$": {
+					"type": "string"
+				}
+			}
+        },
+		"contactType": {
+			"description": "ContactType describes the structure of a contact's details.",
+			"type": "object",
+			"properties": {
+				"name": {
+					"description": "Name contains a humain-readable name for the contact.",
+					"$ref": "#/definitions/localisedBestMatchText"
+				},
+				"names": {
+					"description": "Name contains a humain-readable name for the contact.",
+					"$ref": "#/definitions/localisedText"
+				},
+				"department": {
+					"description": "Department is a humain-readable designation of the organisational structure by a linguistic expression, within which the contact person works.",
+					"$ref": "#/definitions/localisedBestMatchText"
+				},
+				"departments": {
+					"description": "Department is a humain-readable designation of the organisational structure by a linguistic expression, within which the contact person works.",
+					"$ref": "#/definitions/localisedText"
+				},
+				"role": {
+					"description": "Role is the humain-readable responsibility of the contact person with respect to the object for which this person is the contact.",
+					"$ref": "#/definitions/localisedBestMatchText"
+				},
+				"roles": {
+					"description": "Role is the humain-readable responsibility of the contact person with respect to the object for which this person is the contact.",
+					"$ref": "#/definitions/localisedText"
+				},
+				"telephones": {
+					"type": "array",
+					"items": {
+						"description": "Telephone holds the telephone number for the contact person.",
+						"type": "string"
+					}
+				},
+				"faxes": {
+					"type": "array",
+					"items": {
+						"description": "Fax holds the fax number for the contact person.",
+						"type": "string"
+					}
+				},
+				"x400s": {
+					"type": "array",
+					"items": {
+						"description": "X400 holds the X.400 address for the contact person.",
+						"type": "string"
+					}
+				},
+				"uris": {
+					"type": "array",
+					"items": {
+						"description": "URI holds an information URL for the contact person.",
+						"$ref": "#/definitions/uri"
+					}
+				},
+				"emails": {
+					"type": "array",
+					"items": {
+						"description": "Email holds the email address for the contact person.",
+						"type": "string",
+						"format": "email"
+					}
+				}
+			}
+		},
+		"idType": {
+			"description": "IDType provides a type which is used for restricting the characters in codes and IDs throughout all SDMX-ML messages. Valid characters include A-Z, a-z, @, 0-9, _, -, $. Regex: [A-Za-z0-9_@$-]+",
+			"type": "string",
+			"pattern": "^[A-Za-z0-9_@$-]+$"
+		},
+		"Annotations": {
+			"description": "Annotations is a reusable element the provides for a collection of annotations. It has been made global so that restrictions of types that extend AnnotatableType my reference it.",
+			"type": "array",
+			"minItems": 1,
+			"items": {
+				"$ref": "#/definitions/AnnotationType"
+			}
+		},
+		"AnnotableType": {
+			"description": "AnnotableType is an abstract base type used for all annotable artefacts. Any type that provides for annotations should extend this type.",
+			"type": "object",
+			"properties": {
+				"annotations": {
+					"$ref": "#/definitions/Annotations"
+				},
+				"links": {
+					"$ref": "#/definitions/links",
+					"description": "Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
+				}
+			}
+		},
+		"IdentifiableType": {
+			"description": "IdentifiableType is an abstract base type for all identifiable objects.",
+			"type": "object",
+			"allOf": [
+				{
+					"properties": {
+						"id": {
+							"$ref": "#/definitions/idType"
+						}
+					}
+				},
+				{
+					"$ref": "#/definitions/AnnotableType"
+				}
+			]			
+		},
+		"IdentifiableTypeWithNCNameID": {
+			"description": "IdentifiableType is an abstract base type for all identifiable objects.",
+			"type": "object",
+			"allOf": [
+				{
+					"properties": {
+						"id": {
+							"$ref": "#/definitions/NCNameIDType"
+						}					}
+				},
+				{
+					"$ref": "#/definitions/AnnotableType"
+				}
+			]			
+		},
+		"NameableType": {
+			"description": "NameableType is an abstract base type for all nameable objects.",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableType"
+				},
+				{
+					"properties": {
+						"name": {
+							"$ref": "#/definitions/localisedBestMatchText"
+						},
+						"names": {
+							"$ref": "#/definitions/localisedText"
+						},
+						"description": {
+							"$ref": "#/definitions/localisedBestMatchText"
+						},
+						"descriptions": {
+							"$ref": "#/definitions/localisedText"
+						}
+					}
+				}
+			],			
+			"required": [
+				"name"
+			]
+		},
+		"NameableTypeWithNCNameID": {
+			"description": "NameableType is an abstract base type for all nameable objects with NCNameID.",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableTypeWithNCNameID"
+				},
+				{
+					"properties": {
+						"name": {
+							"$ref": "#/definitions/localisedBestMatchText"
+						},
+						"names": {
+							"$ref": "#/definitions/localisedText"
+						},
+						"description": {
+							"$ref": "#/definitions/localisedBestMatchText"
+						},
+						"descriptions": {
+							"$ref": "#/definitions/localisedText"
+						}
+					}
+				}
+			],			
+			"required": [
+				"name"
+			]
+		},
+		"MaintainableType": {
+			"description": "MaintainableType is an abstract base type for all maintainable objects.",
+			"type": "object",
+			"allOf": [
+				{
+					"properties": {
+						"version": {
+							"$ref": "#/definitions/VersionType"
+						},
+						"agencyID": {
+							"$ref": "#/definitions/NestedNCNameIDType"
+						}
+					}
+				},
+				{
+					"$ref": "#/definitions/NameableType"
+				},
+				{
+					"properties": {
+						"isExternalReference": {
+							"type": "boolean"
+						},
+						"isFinal": {
+							"type": "boolean"
+						},
+						"validFrom": {
+							"type": "string",
+							"format": "date-time"
+						},
+						"validTo": {
+							"type": "string",
+							"format": "date-time"
+						}
+					}
+				}
+			],			
+			"required": [
+				"id",
+				"agencyID",
+				"name"
+			]
+		},
+		"MaintainableTypeWithNCNameID": {
+			"description": "MaintainableType is an abstract base type for all maintainable objects with NCNameID.",
+			"type": "object",
+			"allOf": [
+				{
+					"properties": {
+						"version": {
+							"$ref": "#/definitions/VersionType"
+						},
+						"agencyID": {
+							"$ref": "#/definitions/NestedNCNameIDType"
+						}
+					}
+				},
+				{
+					"$ref": "#/definitions/NameableTypeWithNCNameID"
+				},
+				{
+					"properties": {
+						"isExternalReference": {
+							"type": "boolean"
+						},
+						"isFinal": {
+							"type": "boolean"
+						},
+						"validFrom": {
+							"type": "string",
+							"format": "date-time"
+						},
+						"validTo": {
+							"type": "string",
+							"format": "date-time"
+						}
+					}
+				}
+			],			
+			"required": [
+				"id",
+				"agencyID",
+				"name"
+			]
+		},
+		"AnnotationType": {
+			"description": "AnnotationType provides for non-documentation notes and annotations to be embedded in data and structure messages. It provides optional fields for providing a title, a type description, a URI, and the text of the annotation.",
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "Non-standard identification of an annotation.",
+					"type": "string"
+				},
+				"title": {
+					"description": "AnnotationTitle provides a title for the annotation.",
+					"type": "string"
+				},
+				"type": {
+					"description": "AnnotationType is used to distinguish between annotations designed to support various uses. The types are not enumerated, as these can be specified by the user or creator of the annotations. The definitions and use of annotation types should be documented by their creator.",
+					"type": "string"
+				},
+				"text": {
+					"$ref": "#/definitions/localisedBestMatchText",
+					"description": "AnnotationText holds a language-specific string containing the text of the annotation."
+				},
+				"texts": {
+					"$ref": "#/definitions/localisedText",
+					"description": "AnnotationText holds a language-specific string containing the text of the annotation."
+				},
+				"links": {
+					"$ref": "#/definitions/links",
+					"description": "Links field is an array of link objects. Also used to specify the Annotation URL which points to an external resource which may contain or supplement the annotation (using 'self' as relationship). If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly. If appropriate, a collection of links to additional external resources."
+				}
+			}
+		},
+		"AttributeValueSetType": {
+			"description": "AttributeValueSetType defines the structure for providing values for a data attribute. If no values are provided, the attribute is implied to include/excluded from the region in which it is defined, with no regard to the value of the data attribute. Note that for metadata attributes which occur within other metadata attributes, a nested identifier can be provided. For example, a value of CONTACT.ADDRESS.STREET refers to the metadata attribute with the identifier STREET which exists in the ADDRESS metadata attribute in the CONTACT metadata attribute, which is defined at the root of the report structure.",
+			"type": "object",
+			"properties": {
+				"id": {
+					"$ref": "#/definitions/SingleNCNameIDType"
+				},
+				"timeRange": {
+					"$ref": "#/definitions/TimeRangeValueType"
+				},
+				"values": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"cascadeValues": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			},
+			"required": [
+				"id"
+			]
+		},
+		"BasicComponentDataType": {
+			"description": "BasicComponentDataType provides an enumerated list of the types of characters allowed in the textType attribute for all non-target object components.",
+			"type": "string",
+			"enum": [
+				"String",
+				"Alpha",
+				"AlphaNumeric",
+				"Numeric",
+				"BigInteger",
+				"Integer",
+				"Long",
+				"Short",
+				"Decimal",
+				"Float",
+				"Double",
+				"Boolean",
+				"URI",
+				"Count",
+				"InclusiveValueRange",
+				"ExclusiveValueRange",
+				"Incremental",
+				"ObservationalTimePeriod",
+				"StandardTimePeriod",
+				"BasicTimePeriod",
+				"GregorianTimePeriod",
+				"GregorianYear",
+				"GregorianYearMonth",
+				"GregorianDay",
+				"ReportingTimePeriod",
+				"ReportingYear",
+				"ReportingSemester",
+				"ReportingTrimester",
+				"ReportingQuarter",
+				"ReportingMonth",
+				"ReportingWeek",
+				"ReportingDay",
+				"DateTime",
+				"TimeRange",
+				"Month",
+				"MonthDay",
+				"Day",
+				"Time",
+				"Duration",
+				"XHTML"
+			]
+		},
+		"BasicTimePeriodType": {
+			"description": "BasicTimePeriodType contains the basic dates and calendar periods. It is a combination of the Gregorian time periods and the date time type..",
+			"type": "string",
+			"anyOf": [
+				{
+					"description": "xs:gYear: GregorianTimePeriodType defines the set of standard calendar periods in SDMX.",
+					"pattern": "^-?([1-9][0-9]{3,}|0[0-9]{3})(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
+				},
+				{
+					"description": "xs:gYearMonth: GregorianTimePeriodType defines the set of standard calendar periods in SDMX.",
+					"pattern": "^-?([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
+				},
+				{
+					"format": "date"
+				},
+				{
+					"format": "date-time"
+				}
+			]
+		},
+		"CubeRegionKeyType": {
+			"description": "CubeRegionKeyType is a type for providing a set of values for a dimension for the purpose of defining a data cube region. A set of distinct value can be provided, or if this dimension is represented as time, and time range can be specified.",
+			"type": "object",
+			"properties": {
+				"id": {
+					"$ref": "#/definitions/SingleNCNameIDType"
+				},
+				"timeRange": {
+					"$ref": "#/definitions/TimeRangeValueType"
+				},
+				"values": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"cascadeValues": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			},
+			"required": [
+				"id"
+			]
+		},
+		"CubeRegionType": {
+			"description": "CubeRegionType defines the structure of a data cube region. This is based on the abstract RegionType and simply refines the key and attribute values to conform with what is applicable for dimensions and attributes, respectively. See the documentation of the base type for more details on how a region is defined.",
+			"type": "object",
+			"properties": {
+				"isIncluded": {
+					"type": "boolean"
+				},
+				"attributes": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/AttributeValueSetType"
+					}
+				},
+				"keyValues": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/CubeRegionKeyType"
+					}
+				}
+			}
+		},
+		"DataKeyType": {
+			"description": "DataKeyType is a region which defines a distinct full or partial data key. The key consists of a set of values, each referencing a dimension and providing a single value for that dimension. The purpose of the key is to define a subset of a data set (i.e. the observed value and data attribute) which have the dimension values provided in this definition. Any dimension not stated explicitly in this key is assumed to be wild carded, thus allowing for the definition of partial data keys.",
+			"type": "object",
+			"properties": {
+				"keyValues": {
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/DataKeyValueType"
+					}
+				}
+			},
+			"required": [
+				"keyValues"
+			]
+		},
+		"DataKeyValueType": {
+			"description": "DataKeyValueType is a type for providing a dimension value for the purpose of defining a distinct data key. Only a single value can be provided for the dimension.",
+			"type": "object",
+			"properties": {
+				"id": {
+					"$ref": "#/definitions/SingleNCNameIDType"
+				},
+				"value": {
+					"$ref": "#/definitions/SimpleKeyValueType"
+				}
+			},
+			"required": [
+				"id",
+				"value"
+			]
+		},
+		"DataType": {
+			"description": "DataTypeType provides an enumerated list of the types of data formats allowed as the for the representation of an object.",
+			"type": "string",
+			"enum": [
+				"String",
+				"Alpha",
+				"AlphaNumeric",
+				"Numeric",
+				"BigInteger",
+				"Integer",
+				"Long",
+				"Short",
+				"Decimal",
+				"Float",
+				"Double",
+				"Boolean",
+				"URI",
+				"Count",
+				"InclusiveValueRange",
+				"ExclusiveValueRange",
+				"Incremental",
+				"ObservationalTimePeriod",
+				"StandardTimePeriod",
+				"BasicTimePeriod",
+				"GregorianTimePeriod",
+				"GregorianYear",
+				"GregorianYearMonth",
+				"GregorianDay",
+				"ReportingTimePeriod",
+				"ReportingYear",
+				"ReportingSemester",
+				"ReportingTrimester",
+				"ReportingQuarter",
+				"ReportingMonth",
+				"ReportingWeek",
+				"ReportingDay",
+				"DateTime",
+				"TimeRange",
+				"Month",
+				"MonthDay",
+				"Day",
+				"Time",
+				"Duration",
+				"XHTML",
+				"KeyValues",
+				"IdentifiableReference",
+				"DataSetReference",
+				"AttachmentConstraintReference"
+			]
+		},
+		"DimensionTypeType": {
+			"description": "DimensionTypeType enumerates the sub-classes of a dimension.",
+			"type": "string",
+			"enum": [
+				"Dimension",
+				"MeasureDimension",
+				"TimeDimension"
+			]
+		},
+		"EmptyType": {
+			"description": "EmptyType is an empty complex type for elements where the presence of the tag indicates all that is necessary.",
+			"type": "object"
+		},
+		"MetadataAttributeValueSetType": {
+			"description": "MetadataAttributeValueSetType defines the structure for providing values for a metadata attribute. If no values are provided, the attribute is implied to include/excluded from the region in which it is defined, with no regard to the value of the metadata attribute.",
+			"type": "object",
+			"properties": {
+				"id": {
+					"$ref": "#/definitions/NestedNCNameIDType"
+				},
+				"timeRange": {
+					"$ref": "#/definitions/TimeRangeValueType"
+				},
+				"values": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"cascadeValues": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			},
+			"required": [
+				"id"
+			]
+		},
+		"MetadataKeyType": {
+			"description": "MetadataKeyType is a region which defines a distinct full or partial metadata key. The key consists of a set of values, each referencing a target object for the metadata target referenced in the metadataTarget attribute, which must be defined in the report structure referenced in the report attribute. Each target object can be assigned a single value. If an target object from the reference metadata target is not included in this key, the value of that is assumed to be all known objects for a reference target object, all possible keys for a key descriptor values target object, or all dates for report period target object. The purpose of this key reference a metadata conforming to a particular report structure for given object or set of objects.",
+			"type": "object",
+			"properties": {
+				"metadataTarget": {
+					"$ref": "#/definitions/idType"
+				},
+				"report": {
+					"$ref": "#/definitions/idType"
+				},
+				"keyValues": {
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/MetadataKeyValueType"
+					}
+				}
+			},
+			"required": [
+				"metadataTarget",
+				"report",
+				"keyValues"
+			]
+		},
+		"MetadataKeyValueType": {
+			"description": "MetadataKeyValueType is a type for providing a target object value for the purpose of defining a distinct metadata key. Only a single value can be provided for the target object.",
+			"type": "object",
+			"properties": {
+				"id": {
+					"$ref": "#/definitions/SingleNCNameIDType"
+				},
+				"dataKey": {
+					"$ref": "#/definitions/DataKeyType"
+				},
+				"dataSet": {
+					"$ref": "#/definitions/SetReferenceType"
+				},
+				"object": {
+					"$ref": "#/definitions/urn",
+					"description": "Urn reference to any object. The type of object actually referenced can be determined from the URN."
+				},
+				"value": {
+					"$ref": "#/definitions/SimpleKeyValueType"
+				}
+			},
+			"required": [
+				"id"
+			]
+		},
+		"MetadataTargetRegionKeyType": {
+			"description": "MetadataTargetRegionKeyType is a type for providing a set of values for a target object in a metadata target of a refence metadata report. A set of values or a time range can be provided for a report period target object. A collection of the respective types of references can be provided for data set reference and identifiable object reference target objects. For a key descriptor values target object, a collection of data keys can be provided.",
+			"type": "object",
+			"properties": {
+				"id": {
+					"$ref": "#/definitions/SingleNCNameIDType"
+				},
+				"dataKeys": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/DataKeyType"
+					}
+				},
+				"dataSets": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/SetReferenceType"
+					}
+				},
+				"objects": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/urn",
+						"description": "Urn reference to any object. The type of object actually referenced can be determined from the URN."
+					}
+				},
+				"timeRange": {
+					"$ref": "#/definitions/TimeRangeValueType"
+				},
+				"values": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			},
+			"required": [
+				"id"
+			]
+		},
+		"MetadataTargetRegionType": {
+			"description": "MetadataTargetRegionType defines the structure of a metadata target region. A metadata target region must define the report structure and the metadata target from that structure on which the region is based. This type is based on the abstract RegionType and simply refines the key and attribute values to conform with what is applicable for target objects and metadata attributes, respectively. See the documentation of the base type for more details on how a region is defined.",
+			"type": "object",
+			"properties": {
+				"include": {
+					"type": "boolean"
+				},
+				"metadataTarget": {
+					"$ref": "#/definitions/idType"
+				},
+				"report": {
+					"$ref": "#/definitions/idType"
+				},
+				"attributes": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/MetadataAttributeValueSetType"
+					}
+				},
+				"keyValues": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/MetadataTargetRegionKeyType"
+					}
+				}
+			},
+			"required": [
+				"metadataTarget",
+				"report"
+			]
+		},
+		"NCNameIDType": {
+			"description": "NCNameIDType restricts the IDType, so that the id may be used to generate valid XML components. IDs created from this type conform to the W3C XML Schema NCNAME type, and therefore can be used as element or attribute names.",
+			"type": "string",
+			"pattern": "^[A-Za-z][A-Za-z0-9_-]*$"
+		},
+		"NestedNCNameIDType": {
+			"description": "NestedNCNameIDType restricts the NestedIDType, so that the id may be used to generate valid XML components. IDs created from this type conform to the W3C XML Schema NCNAME type, and therefore can be used as element or attribute names. Regex: [A-Za-z][A-Za-z0-9_\\-]*(\\.[A-Za-z][A-Za-z0-9_\\-]*)* ",
+			"type": "string",
+			"pattern": "^[A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*$"
+		},
+		"ObjectTypeCodelistType": {
+			"description": "ObjectTypeCodelistType provides an enumeration of all objects outside of the base infomration model class. This includes some abstract object types such as Organsiation and Constraint.",
+			"type": "string",
+			"enum": [
+				"Any",
+				"Agency",
+				"AgencyScheme",
+				"AttachmentConstraint",
+				"Attribute",
+				"AttributeDescriptor",
+				"Categorisation",
+				"Category",
+				"CategorySchemeMap",
+				"CategoryScheme",
+				"Code",
+				"CodeMap",
+				"Codelist",
+				"CodelistMap",
+				"ComponentMap",
+				"Concept",
+				"ConceptMap",
+				"ConceptScheme",
+				"ConceptSchemeMap",
+				"Constraint",
+				"ConstraintTarget",
+				"ContentConstraint",
+				"Dataflow",
+				"DataConsumer",
+				"DataConsumerScheme",
+				"DataProvider",
+				"DataProviderScheme",
+				"DataSetTarget",
+				"DataStructure",
+				"Dimension",
+				"DimensionDescriptor",
+				"DimensionDescriptorValuesTarget",
+				"GroupDimensionDescriptor",
+				"HierarchicalCode",
+				"HierarchicalCodelist",
+				"Hierarchy",
+				"HybridCodelistMap",
+				"HybridCodeMap",
+				"IdentifiableObjectTarget",
+				"Level",
+				"MeasureDescriptor",
+				"MeasureDimension",
+				"Metadataflow",
+				"MetadataAttribute",
+				"MetadataSet",
+				"MetadataStructure",
+				"MetadataTarget",
+				"Organisation",
+				"OrganisationMap",
+				"OrganisationScheme",
+				"OrganisationSchemeMap",
+				"OrganisationUnit",
+				"OrganisationUnitScheme",
+				"PrimaryMeasure",
+				"Process",
+				"ProcessStep",
+				"ProvisionAgreement",
+				"ReportingCategory",
+				"ReportingCategoryMap",
+				"ReportingTaxonomy",
+				"ReportingTaxonomyMap",
+				"ReportingYearStartDay",
+				"ReportPeriodTarget",
+				"ReportStructure",
+				"StructureMap",
+				"StructureSet",
+				"TimeDimension",
+				"Transition"
+			]
+		},
+		"ObservationalTimePeriodType": {
+			"description": "ObservationalTimePeriodType specifies a distinct time period or point in time in SDMX. The time period can either be a Gregorian calendar period, a standard reporting period, a distinct point in time, or a time range with a specific date and duration.",
+			"anyOf": [
+				{
+					"$ref": "#/definitions/BasicTimePeriodType"
+				},
+				{
+					"$ref": "#/definitions/ReportingTimePeriodType"
+				},
+				{
+					"description": "TimeRangeType 1",
+					"type": "string",
+					"pattern": "^.+/P.*T([0-9]+H)?([0-9]+M)?([0-9]+(.[0-9]+)?S)?$"
+				},
+				{
+					"description": "TimeRangeType 2",
+					"type": "string",
+					"pattern": "^.+/P[^T]+$"
+				}
+			]
+		},
+		"OccurenceType": {
+			"description": "OccurenceType is used to express the maximum occurrence of an object. It combines an integer, greater than 1, and the literal text, \"unbounded\", for objects which have no upper limit on its occurrence.",
+			"anyOf": [
+				{
+					"description": "MaxOccursNumberType is a base type used to restrict an integer to be greater than 1, for the purpose of expressing the maximum number of occurrences of an object.",
+					"type": "integer",
+					"minimum": 1
+				},
+				{
+					"description": "UnboundedCodeType provides single textual value of \"unbounded\", for use in OccurentType.",
+					"type": "string",
+					"enum": [
+						"unbounded"
+					]
+				}
+			]
+		},
+		"QueryableDataSourceType": {
+			"description": "QueryableDataSourceType describes a data source which accepts an standard SDMX Query message and responds appropriately.",
+			"type": "object",
+			"properties": {
+				"isRESTDatasource": {
+					"type": "boolean"
+				},
+				"isWebServiceDatasource": {
+					"type": "boolean"
+				},
+				"dataURL": {
+					"description": "DataURL contains the URL of the data source.",
+					"$ref": "#/definitions/uri"
+				},
+				"wadlURL": {
+					"description": "WADLURL provides the location of a WADL instance on the internet which describes the REST protocol of the queryable data source.",
+					"$ref": "#/definitions/uri"
+				},
+				"wsdlURL": {
+					"description": "WSDLURL provides the location of a WSDL instance on the internet which describes the queryable data source.",
+					"$ref": "#/definitions/uri"
+				}
+			},
+			"required": [
+				"isRESTDatasource",
+				"isWebServiceDatasource",
+				"dataURL"
+			]
+		},
+		"ReferencePeriodType": {
+			"description": "Specifies the inclusive start and end times.",
+			"type": "object",
+			"properties": {
+				"endTime": {
+					"type": "string",
+					"pattern": "^-?([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
+				},
+				"startTime": {
+					"type": "string",
+					"pattern": "^-?([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
+				}
+			},
+			"required": [
+				"endTime",
+				"startTime"
+			]
+		},
+		"ReportingDayType": {
+			"description": "ReportingDayType defines a time period of 1 day (P1D) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. The format of a reporting day is YYYY-Dddd (e.g. 2000-D001), where ddd is a three digit day (i.e. 001-366).",
+			"type": "string",
+			"pattern": "^.{5}D(0[0-9][1-9]|[1-2][0-9][0-9]|3[0-5][0-9]|36[0-6]).*$"
+		},
+		"ReportingMonthType": {
+			"description": "ReportingMonthType defines a time period of 1 month (P1M) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. In this case a reporting month will coincide with a calendar month. The format of a reporting month is YYYY-Mmm (e.g. 2000-M01), where mm is a two digit month (i.e. 01-12).",
+			"type": "string",
+			"pattern": "^.{5}M(0[1-9]|1[0-2]).*$"
+		},
+		"ReportingQuarterType": {
+			"description": "ReportingQuarterType defines a time period of 3 months (P3M) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. The format of a reporting quarter is YYYY-Qq (e.g. 2000-Q1), where q is a value between 1 and 4.",
+			"type": "string",
+			"pattern": "^.{5}Q[1-4].*$"
+		},
+		"ReportingSemesterType": {
+			"description": "ReportingSemesterType defines a time period of 6 months (P6M) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. The format of a reporting semester is YYYY-Ss (e.g. 2000-S1), where s is either 1 or 2.",
+			"type": "string",
+			"pattern": "^.{5}S[1-2].*$"
+		},
+		"ReportingTimePeriodType": {
+			"description": "ReportingTimePeriodType defines standard reporting periods in SDMX, which are all in relation to the start day (day-month) of a reporting year which is specified in the specialized reporting year start day attribute. If the reporting year start day is not defined, a day of January 1 is assumed. The reporting year must be epxressed as the year at the beginning of the period. Therfore, if the reproting year runs from April to March, any given reporting year is expressed as the year for April. The general format of a report period can be described as  [year]-[period][time zone]?, where the type of period is designated with a single character followed by a number representing the period. Note that all periods allow for an optional time zone offset. See the details of each member type for the specifics of its format.",
+			"anyOf": [
+				{
+					"$ref": "#/definitions/ReportingYearType"
+				},
+				{
+					"$ref": "#/definitions/ReportingSemesterType"
+				},
+				{
+					"$ref": "#/definitions/ReportingTrimesterType"
+				},
+				{
+					"$ref": "#/definitions/ReportingQuarterType"
+				},
+				{
+					"$ref": "#/definitions/ReportingMonthType"
+				},
+				{
+					"$ref": "#/definitions/ReportingWeekType"
+				},
+				{
+					"$ref": "#/definitions/ReportingDayType"
+				}
+			]
+		},
+		"ReportingTrimesterType": {
+			"description": "ReportingTrimesterType defines a time period of 4 months (P4M) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. The format of a reporting trimester is YYYY-Tt (e.g. 2000-T1), where s is either 1, 2, or 3.",
+			"type": "string",
+			"pattern": "^.{5}T[1-3].*$"
+		},
+		"ReportingWeekType": {
+			"description": "ReportingWeekType defines a time period of 7 days (P7D) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. A standard reporting week is based on the ISO 8601 defintion of a week date, in relation to the reporting period start day. The first week is defined as the week with the first Thursday on or after the reporting year start day. An equivalent definition is the week starting with the Monday nearest in time to the reporting year start day. There are other equivalent defintions, all of which should be adjusted based on the reporting year start day. In the absence of a start day for the reporting year, a day of January 1 is assumed. The format of a reporting week is YYYY-Www (e.g. 2000-W01), where mm is a two digit week (i.e. 01-53).",
+			"type": "string",
+			"pattern": "^.{5}W(0[1-9]|[1-4][0-9]|5[0-3]).*$"
+		},
+		"ReportingYearType": {
+			"description": "ReportingYearType defines a time period of 1 year (P1Y) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. In this case a reporting year will coincide with a calendar year. The format of a reporting year is YYYY-A1 (e.g. 2000-A1). Note that the period value of 1 is fixed.",
+			"type": "string",
+			"pattern": "^.{5}A1.*$"
+		},
+		"SetReferenceType": {
+			"description": "SetReferenceType defines the structure of a reference to a data/metadata set. A full reference to a data provider and the identifier for the data set must be provided. Note that this is not derived from the base reference structure since data/metadata sets are not technically identifiable.",
+			"type": "object",
+			"properties": {
+				"dataProvider": {
+					"$ref": "#/definitions/urn",
+					"description": "DataProvider is a urn reference to a the provider of the data/metadata set."
+				},
+				"id": {
+					"description": "ID contains the identifier of the data/metadata set being referenced.",
+					"$ref": "#/definitions/idType"
+				}
+			},
+			"required": [
+				"dataProvider",
+				"id"
+			]
+		},
+		"SimpleDataType": {
+			"description": "SimpleDataType restricts BasicComponentDataType to specify the allowable data types for a data structure definition component. The XHTML representation is removed as a possible type.",
+			"type": "string",
+			"enum": [
+				"String",
+				"Alpha",
+				"AlphaNumeric",
+				"Numeric",
+				"BigInteger",
+				"Integer",
+				"Long",
+				"Short",
+				"Decimal",
+				"Float",
+				"Double",
+				"Boolean",
+				"URI",
+				"Count",
+				"InclusiveValueRange",
+				"ExclusiveValueRange",
+				"Incremental",
+				"ObservationalTimePeriod",
+				"StandardTimePeriod",
+				"BasicTimePeriod",
+				"GregorianTimePeriod",
+				"GregorianYear",
+				"GregorianYearMonth",
+				"GregorianDay",
+				"ReportingTimePeriod",
+				"ReportingYear",
+				"ReportingSemester",
+				"ReportingTrimester",
+				"ReportingQuarter",
+				"ReportingMonth",
+				"ReportingWeek",
+				"ReportingDay",
+				"DateTime",
+				"TimeRange",
+				"Month",
+				"MonthDay",
+				"Day",
+				"Time",
+				"Duration"
+			]
+		},
+		"SimpleKeyValueType": {
+			"description": "SimpleKeyValueType derives from the SimpleValueType, but does not allow for the cascading of value in the hierarchy, as keys are meant to describe a distinct full or partial key.",
+			"type": "string"
+		},
+		"SingleNCNameIDType": {
+			"description": "SingleNCNameIDType restricts the NestedNCNameIDType to allow only one level. Note that this is the same pattern as the NCNameIDType, but can be used when the base type to be restricted is a nested NCNameIDType (where as the NCNameIDType could only restrict the IDType).",
+			"type": "string",
+			"pattern": "^[A-Za-z][A-Za-z0-9_-]*$"
+		},
+		"StandardTimePeriodType": {
+			"description": "StandardTimePeriodType defines the set of standard time periods in SDMX. This includes the reporting time periods and the basic date type (i.e. the calendar time periods and the dateTime format).",
+			"anyOf": [
+				{
+					"description": "xs:gYear: GregorianTimePeriodType defines the set of standard calendar periods in SDMX.",
+					"type": "string",
+					"pattern": "^-?([1-9][0-9]{3,}|0[0-9]{3})(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
+				},
+				{
+					"description": "xs:gYearMonth: GregorianTimePeriodType defines the set of standard calendar periods in SDMX.",
+					"type": "string",
+					"pattern": "^-?([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
+				},
+				{
+					"type": "string",
+					"format": "date"
+				},
+				{
+					"type": "string",
+					"format": "date-time"
+				},
+				{
+					"$ref": "#/definitions/ReportingTimePeriodType",
+					"description": "ReportingTimePeriodType defines standard reporting periods in SDMX, which are all in relation to the start day (day-month) of a reporting year which is specified in the specialized reporting year start day attribute. If the reporting year start day is not defined, a day of January 1 is assumed. The reporting year must be epxressed as the year at the beginning of the period. Therfore, if the reproting year runs from April to March, any given reporting year is expressed as the year for April. The general format of a report period can be described as  [year]-[period][time zone]?, where the type of period is designated with a single character followed by a number representing the period. Note that all periods allow for an optional time zone offset. See the details of each member type for the specifics of its format."
+				}
+			]
+		},
+		"TimeDataType": {
+			"description": "TimeDataType restricts SimpleDataType to specify the allowable data types for representing a time value.",
+			"type": "string",
+			"enum": [
+				"ObservationalTimePeriod",
+				"StandardTimePeriod",
+				"BasicTimePeriod",
+				"GregorianTimePeriod",
+				"GregorianYear",
+				"GregorianYearMonth",
+				"GregorianDay",
+				"ReportingTimePeriod",
+				"ReportingYear",
+				"ReportingSemester",
+				"ReportingTrimester",
+				"ReportingQuarter",
+				"ReportingMonth",
+				"ReportingWeek",
+				"ReportingDay",
+				"DateTime",
+				"TimeRange"
+			]
+		},
+		"TimePeriodRangeType": {
+			"description": "TimePeriodRangeType defines a time period, and indicates whether it is inclusive in a range.",
+			"type": "object",
+			"properties": {
+				"period": {
+					"$ref": "#/definitions/ObservationalTimePeriodType"
+				},
+				"isInclusive": {
+					"type": "boolean"
+				}
+			}
+		},
+		"TimeRangeValueType": {
+			"description": "TimeRangeValueType allows a time period value to be expressed as a range. It can be expressed as the period before a period, after a period, or between two periods. Each of these properties can specify their inclusion in regards to the range.",
+			"type": "object",
+			"properties": {
+				"afterPeriod": {
+					"$ref": "#/definitions/TimePeriodRangeType",
+					"description": "AfterPeriod is the period after which the period is meant to cover. This date may be inclusive or exclusive in the range."
+				},
+				"beforePeriod": {
+					"$ref": "#/definitions/TimePeriodRangeType",
+					"description": "BeforePeriod is the period before which the period is meant to cover. This date may be inclusive or exclusive in the range."
+				},
+				"endPeriod": {
+					"$ref": "#/definitions/TimePeriodRangeType",
+					"description": "EndPeriod is the end period of the range. This date may be inclusive or exclusive in the range."
+				},
+				"startPeriod": {
+					"$ref": "#/definitions/TimePeriodRangeType",
+					"description": "StartPeriod is the start date or the range that the queried date must occur within. This date may be inclusive or exclusive in the range."
+				}
+			}
+		},
+		"VersionType": {
+			"description": "VersionType is used to communicate version information. The format is restricted to allow for simple incrementing and sorting of version number. The version consists of an unlimited set of numeric components, separated by the '.' character. When processing version, each numeric component (the number preceding and following any '.' character) should be parsed as an integer. Thus, a version of 1.3 and 1.03 would be equivalent, as both the '3' component and the '03' component would parse to an integer value of 3.",
+			"type": "string",
+			"pattern": "^[0-9]+(\\.[0-9]+)*$",
+			"default": 1.0
+		},
+		"Agency": {
+			"$ref": "#/definitions/AgencyType",
+			"description": "Agency is an organisation which maintains structural metadata such as statistical classifications, glossaries, data structure definitions, and metadata structure definitions.."
+		},
+		"Attribute": {
+			"$ref": "#/definitions/AttributeType",
+			"description": "Attribute describes the definition of a data attribute, which is defined as a characteristic of an object or entity."
+		},
+		"AttributeList": {
+			"$ref": "#/definitions/AttributeListType",
+			"description": "AttributeList describes the attribute descriptor for the data structure definition. It is a collection of metadata concepts that define the attributes of the data structure definition."
+		},
+		"Category": {
+			"$ref": "#/definitions/CategoryType",
+			"description": "Category represents a set of nested categories which describe a simple classification hierarchy."
+		},
+		"CategoryMap": {
+			"$ref": "#/definitions/CategoryMapType",
+			"description": "CategoryMap defines the structure of a map which identifies relationships between categories in different category schemes."
+		},
+		"Code": {
+			"$ref": "#/definitions/CodeType",
+			"description": "Code describes a code in a codelist. In addition to the identification and description of the code, basic presentational information is also available. Presentational information not present may be added through the use of annotations."
+		},
+		"CodeMap": {
+			"$ref": "#/definitions/CodeMapType",
+			"description": "CodeMap defines the structure of a map which identifies relationships between codes in different codelists."
+		},
+		"Concept": {
+			"$ref": "#/definitions/ConceptType",
+			"description": "Concept describes the details of a concept within a concept scheme."
+		},
+		"ConceptMap": {
+			"$ref": "#/definitions/ConceptMapType",
+			"description": "ConceptMap defines the structure of a map which identifies relationships between concepts in different concept schemes."
+		},
+		"ConstraintContentTarget": {
+			"$ref": "#/definitions/ConstraintContentTargetType",
+			"description": "ConstraintContentTarget is target object which references an attachment constraint for the purpose of attaching reference metadata data to data key sets or cube regions defined by the constraint."
+		},
+		"DataConsumer": {
+			"$ref": "#/definitions/DataConsumerType",
+			"description": "DataConsumer describes an organisation using data as input for further processing."
+		},
+		"DataProvider": {
+			"$ref": "#/definitions/DataProviderType",
+			"description": "DataProvider describes an organisation that produces data or reference metadata."
+		},
+		"DataSetTarget": {
+			"$ref": "#/definitions/DataSetTargetType",
+			"description": "DataSetTarget is target object which references a data set for the purpose of attaching reference metadata data. A data set reference is a full reference to a data provider and an identifier for the data set."
+		},
+		"DataStructureComponents": {
+			"$ref": "#/definitions/DataStructureComponentsType",
+			"description": "DataStructureComponents defines the grouping of the sets of metadata concepts that have a defined structural role in the data structure definition. Note that for any component or group defined in a data structure definition, its id must be unique. This applies to the identifiers explicitly defined by the components as well as those inherited from the concept identity of a component. For example, if two dimensions take their identity from concepts with same identity (regardless of whether the concepts exist in different schemes) one of the dimensions must be provided a different explicit identifier. Although there are XML schema constraints to help enforce this, these only apply to explicitly assigned identifiers. Identifiers inherited from a concept from which a component takes its identity cannot be validated against this constraint. Therefore, systems processing data structure definitions will have to perform this check outside of the XML validation. There are also three reserved identifiers in a data structure definition; OBS_VALUE, TIME_PERIOD, and REPORTING_PERIOD_START_DAY. These identifiers may not be used outside of their respective defintions (PrimaryMeasure, TimeDimension, and ReportingYearStartDay). This applies to both the explicit identifiers that can be assigned to the components or groups as well as an identifier inherited by a component from its concept identity. For example, if an ordinary dimension (i.e. not the time dimension) takes its concept identity from a concept with the identifier TIME_PERIOD, that dimension must provide a different explicit identifier."
+		},
+		"Dimension": {
+			"$ref": "#/definitions/DimensionType",
+			"description": "Dimension describes the structure of a dimension, which is defined as a statistical concept used (most probably together with other statistical concepts) to identify a statistical series, such as a time series, e.g. a statistical concept indicating certain economic activity or a geographical reference area."
+		},
+		"DimensionList": {
+			"$ref": "#/definitions/DimensionListType",
+			"description": "DimensionList describes the key descriptor for the data structure definition. It is an ordered set of metadata concepts that, combined, classify a statistical series, such as a time series, and whose values, when combined (the key) in an instance such as a data set, uniquely identify a specific series."
+		},
+		"Group": {
+			"$ref": "#/definitions/GroupType",
+			"description": "Group describes a group descriptor in a data structure definition. It is a set metadata concepts (and possibly their values) that define a partial key derived from the key descriptor in a data structure definition."
+		},
+		"IdentifiableObjectTarget": {
+			"$ref": "#/definitions/IdentifiableObjectTargetType",
+			"description": "IdentifiableObjectTarget is target object which references an Identifiable object as defined in the SDMX Information Model. The reference must be complete (i.e. a URN or a complete set of reference fields). For an item object, it is possible to define a local representation of an item scheme from which the item must be referenced."
+		},
+		"KeyDescriptorValuesTarget": {
+			"$ref": "#/definitions/KeyDescriptorValuesTargetType",
+			"description": "KeyDescriptorValuesTarget is target object which references a data key for the purpose of attach reference metadata to portions of data. A data key is a set of dimension references and values for those dimension. This component on its own is not of much use, as the data key only has local references to the dimensions. Therefore it is typical that this is used in combination with some sort of reference to the data (either a data set reference or a reference to the underlying structure, structure usage, or provision agreement of the data."
+		},
+		"MeasureDimension": {
+			"$ref": "#/definitions/MeasureDimensionType",
+			"description": "MeasureDimension is a special type of dimension which defines multiple measures in a data structure. This is represented as any other dimension in a unless it is the observation dimension. It takes it representation from a concept scheme, and this scheme defines the measures and their representations. When data is formatted with this as the observation dimension, these measures can be made explicit or the value of the dimension can be treated as any other dimension. If the measures are explicit, the representation of the observation will be specific to the core representation for each concept in the representation concept scheme. Note that it is necessary that these representations are compliant (the same or derived from) with that of the primary measure."
+		},
+		"MeasureList": {
+			"$ref": "#/definitions/MeasureListType",
+			"description": "MeasureList describes the measure descriptor for a data structure. It contains a single metadata concepts that define the primary measures of a data structure."
+		},
+		"MetadataAttribute": {
+			"$ref": "#/definitions/MetadataAttributeType",
+			"description": "MetadataAttribute defines the a metadata attribute, which is the value of an attribute, such as the instance of a coded or uncoded attribute in a metadata structure definition."
+		},
+		"MetadataStructureComponents": {
+			"$ref": "#/definitions/MetadataStructureComponentsType",
+			"description": "MetadataStructureComponents defines the grouping of the sets of the components that make up the metadata structure definition. All components and component list (target identifiers, identifier components, report structures, and metadata attributes) in the structure definition must have a unique identification."
+		},
+		"MetadataTarget": {
+			"$ref": "#/definitions/MetadataTargetType",
+			"description": "MetadataTarget is a collection of target objects which when taken together describe a structure which defines the key of an object type to which metadata may be attached and serve to disambiguate reference metadata set reports."
+		},
+		"OrganisationMap": {
+			"$ref": "#/definitions/OrganisationMapType",
+			"description": "OrganisationMap relates a source organisation to a target organisation."
+		},
+		"OrganisationUnit": {
+			"$ref": "#/definitions/OrganisationUnitType",
+			"description": "OrganisationUnit describes a generic organisation, which serves not predefined role in SDMX."
+		},
+		"PrimaryMeasure": {
+			"$ref": "#/definitions/PrimaryMeasureType",
+			"description": "PrimaryMeasure defines the structure of the primary measure, which is the concept that is the value of the phenomenon to be measured in a data set. Although this may take its semantic from any concept, this is provided a fixed identifier (OBS_VALUE) so that it may be easily distinguished in data messages."
+		},
+		"ReportPeriodTarget": {
+			"$ref": "#/definitions/ReportPeriodTargetType",
+			"description": "ReportPeriodTarget is target object which specifies a reporting period to which a metadata report applies."
+		},
+		"ReportStructure": {
+			"$ref": "#/definitions/ReportStructureType",
+			"description": "ReportStructure defines a report structure, which comprises a set of metadata attributes that can be defined as a hierarchy, for reporting reference metadata about a target object. The identification of metadata attributes must be unique at any given level of the report structure. Although there are XML schema constraints to help enforce this, these only apply to explicitly assigned identifiers. Identifiers inherited from a concept from which a metadata attribute takes its identity cannot be validated against this constraint. Therefore, systems processing metadata structure definitions will have to perform this check outside of the XML validation."
+		},
+		"ReportingCategory": {
+			"$ref": "#/definitions/ReportingCategoryType",
+			"description": "ReportingCateogry defines a reporting category, which is used to group structure usages into useful sub-packages."
+		},
+		"ReportingCategoryMap": {
+			"$ref": "#/definitions/ReportingCategoryMapType",
+			"description": "ReportingCategoryMap defines the structure of a map which identifies relationships between reporting categories in different reporting taxonomies."
+		},
+		"ReportingYearStartDay": {
+			"$ref": "#/definitions/ReportingYearStartDayType",
+			"description": "ReportingYearStartDay is a specialized data attribute which provides important context to the time dimension. If the value of the time dimension is one of the standard reporting periods (see common:ReportingTimePeriodType) then this attribute is used to state the month and day that the reporting year begins. This provides a reference point from which the actual calendar dates covered by these periods can be determined. If this attribute does not occur in a data set, then the reporting year start day will be assumed to be January 1."
+		},
+		"TimeDimension": {
+			"$ref": "#/definitions/TimeDimensionType",
+			"description": "TimeDimension is a special dimension which designates the period in time in which the data identified by the full series key applies."
+		},
+		"AgencySchemeType": {
+			"description": "AgencySchemeType defines a specific type of organisation scheme which contains only maintenance agencies. The agency scheme maintained by a particular maintenance agency is always provided a fixed identifier and version, and is never final. Therefore, agencies can be added or removed without have to version the scheme. Agencies schemes have no hierarchy, meaning that no agency may define a relationship with another agency in the scheme. In fact, the actual parent agency for an agency in a scheme is the agency which defines the scheme.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/MaintainableType"
+				},
+				{
+					"properties": {
+						"isPartial": {
+							"type": "boolean"
+						},
+						"agencies": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Agency"
+							}
+						}
+					}
+				}
+			]
+		},
+		"AgencyType": {
+			"description": "AgencyType defines the structure of an agency description. The contacts defined for the organisation are specific to the agency role the organisation is serving.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/NameableTypeWithNCNameID"
+				},
+				{
+					"properties": {
+						"contacts": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/contactType"
+							}
+						}
+					}
+				}
+			]
+		},
+		"AttachmentConstraintAttachmentType": {
+			"description": "AttachmentConstraintAttachmentType defines the structure for specifying the object to which an attachment constraints applies.",
+			"type": "object",
+			"properties": {
+				"dataSets": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/SetReferenceType",
+						"description": "DataSet is a urn reference to a data set to which the constraint is attached. Multiple instance can only be used if they have the same underlying structure."
+					}
+				},
+				"dataStructures": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/urn",
+						"description": "Urn reference to a data structure definition object."
+					}
+				},
+				"dataflows": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/urn",
+						"description": "Urn reference to a dataflow object."
+					}
+				},
+				"metadataSets": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/SetReferenceType",
+						"description": "MetadataSet is a urn reference to a metadata set to which the constraint is attached. Multiple instance can only be used if they have the same underlying structure."
+					}
+				},
+				"metadataStructures": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/urn",
+						"description": "Urn reference to a metadata structure definition object."
+					}
+				},
+				"metadataflows": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/urn",
+						"description": "Urn reference to a metadata flow object."
+					}
+				},
+				"provisionAgreements": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/urn",
+						"description": "Urn reference to a provision agreement."
+					}
+				},
+				"simpleDataSources": {
+					"type": "array",
+					"items": {
+						"description": "SimpleDataSource describes a simple data source, which is a URL of a SDMX-ML data or metadata message. Multiple instance can only be used if they have the same underlying structure.",
+						"$ref": "#/definitions/uri"
+					}
+				}
+			}
+		},
+		"AttachmentConstraintType": {
+			"description": "AttachmentConstraintType describes the details of an attachment constraint by defining the data or metadata key sets or component regions that attributes or reference metadata may be attached in the constraint attachment objects.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/MaintainableType"
+				},
+				{
+					"properties": {
+						"constraintAttachment": {
+							"$ref": "#/definitions/AttachmentConstraintAttachmentType"
+						},
+						"dataKeySets": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/DataKeySetType"
+							}
+						},
+						"metadataKeySets": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/MetadataKeySetType"
+							}
+						}
+					}
+				}
+			]
+		},
+		"AttributeListType": {
+			"description": "AttributeListType describes the attribute descriptor for the data structure definition.",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableType"
+				},
+				{
+					"properties": {
+						"attributes": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Attribute"
+							}
+						},
+						"reportingYearStartDays": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ReportingYearStartDay"
+							}
+						}
+					}
+				}
+			]
+		},
+		"AttributeRelationshipType": {
+			"description": "AttributeRelationshipType defines the structure for stating the relationship between an attribute and other data structure definition components.",
+			"type": "object",
+			"properties": {
+				"attachmentGroups": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/NCNameIDType",
+						"description": "Identifier of a local GroupKey Descriptor. This is used to specify that the attribute should always be attached to the groups referenced here. Note that if one of the referenced dimensions is the time dimension, the groups referenced here will be ignored."
+					}
+				},
+				"dimensions": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/NCNameIDType",
+						"description": "Identifier of a local dimension. This is used to reference dimensions in the data structure definition on which the value of this attribute depends. An attribute using this relationship can be either a group, series (or section), or observation level attribute. The attachment level of the attribute will be determined by the data format and which dimensions are referenced."
+					}
+				},
+				"group": {
+					"$ref": "#/definitions/idType",
+					"description": "Identifier of a local GroupKey Descriptor. This is used as a convenience to referencing all of the dimension defined by the referenced group. The attribute will also be attached to this group."
+				},
+				"none": {
+					"$ref": "#/definitions/EmptyType",
+					"description": "This means that value of the attribute will not vary with any of the other data structure components. This will always be treated as a data set level attribute."
+				},
+				"primaryMeasure": {
+					"$ref": "#/definitions/NCNameIDType",
+					"description": "Identifier of the local primary measure, where the reference to the data structure definition which defines the primary measure is provided in another context (for example the data structure definition in which the reference occurs). This is used to specify that the value of the attribute is dependent upon the observed value. An attribute with this relationship will always be treated as an observation level attribute."
+				}
+			}
+		},
+		"AttributeType": {
+			"description": "AttributeType describes the structure of a data attribute, which is defined as a characteristic of an object or entity. The attribute takes its semantic, and in some cases it representation, from its concept identity. An attribute can be coded by referencing a code list from its coded local representation. It can also specify its text format, which is used as the representation of the attribute if a coded representation is not defined. Neither the coded or uncoded representation are necessary, since the attribute may take these from the referenced concept. An attribute specifies its relationship with other data structure components and is given an assignment status. These two properties dictate where in a data message the attribute will be attached, and whether or not the attribute will be required to be given a value. A set of roles defined in concept scheme can be assigned to the attribute.",
+			"type": "object",
+			"required": [
+				"assignmentStatus",
+				"attributeRelationship",
+				"conceptIdentity"
+			],
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableTypeWithNCNameID"
+				},
+				{
+					"properties": {
+						"assignmentStatus": {
+							"$ref": "#/definitions/UsageStatusType"
+						},
+						"attributeRelationship": {
+							"$ref": "#/definitions/AttributeRelationshipType",
+							"description": "AttributeRelationship describes how the value of this attribute varies with the values of other components. These relationships will be used to determine the attachment level of the attribute in the various data formats."
+						},
+						"conceptIdentity": {
+							"$ref": "#/definitions/urn",
+							"description": "Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
+						},
+						"conceptRoles": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/urn",
+								"description": "ConceptRole references concepts which define roles which this attribute serves. If the concept from which the attribute takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here."
+							}
+						},
+						"localRepresentation": {
+							"$ref": "#/definitions/SimpleDataStructureRepresentationType"
+						}
+					}
+				}
+			]
+		},
+		"BasicComponentTextFormatType": {
+			"description": "BasicComponentTextFormatType is a restricted version of the TextFormatType that restricts the text type to the representations allowed for all components except for target objects.",
+			"type": "object",
+			"properties": {
+				"decimals": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"endTime": {
+					"$ref": "#/definitions/StandardTimePeriodType"
+				},
+				"endValue": {
+					"type": "number"
+				},
+				"interval": {
+					"type": "number"
+				},
+				"isMultiLingual": {
+					"type": "boolean"
+				},
+				"isSequence": {
+					"type": "boolean"
+				},
+				"maxLength": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"maxValue": {
+					"type": "number"
+				},
+				"minLength": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"minValue": {
+					"type": "number"
+				},
+				"pattern": {
+					"type": "string"
+				},
+				"startTime": {
+					"$ref": "#/definitions/StandardTimePeriodType"
+				},
+				"startValue": {
+					"type": "number"
+				},
+				"textType": {
+					"$ref": "#/definitions/BasicComponentDataType"
+				},
+				"timeInterval": {
+					"$ref": "#/definitions/duration"
+				}
+			}
+		},
+		"CategorisationType": {
+			"description": "CategorisationType defines the structure for a categorisation. A source object is referenced via an object reference and the target category is referenced via the target category.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/MaintainableType"
+				},
+				{
+					"properties": {
+						"source": {
+							"$ref": "#/definitions/urn",
+							"description": "Source is a urn reference to an object to be categorized."
+						},
+						"target": {
+							"$ref": "#/definitions/urn",
+							"description": "Target is a urn reference to the category that the referenced object is to be mapped to."
+						}
+					}
+				}
+			]
+		},
+		"CategoryMapType": {
+			"description": "CategoryMapType defines the structure for mapping two categories. A local reference is provided both the source and target category.",
+			"type": "object",
+			"properties": {
+				"annotations": {
+					"$ref": "#/definitions/Annotations"
+				},
+				"source": {
+					"$ref": "#/definitions/urn",
+					"description": "Urn reference to a category where the identification of the category scheme which defines it is contained in another context."
+				},
+				"target": {
+					"$ref": "#/definitions/urn",
+					"description": "Urn reference to a category where the identification of the category scheme which defines it is contained in another context."
+				}
+			},
+			"required": [
+				"source",
+				"target"
+			]
+		},
+		"CategorySchemeMapType": {
+			"description": "CategorySchemeMapType defines the structure of a map which identifies relationships between categories in different category schemes.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/NameableType"
+				},
+				{
+					"properties": {
+						"categoryMaps": {
+							"type": "array",
+							"minItems": 1,
+							"items": {
+								"$ref": "#/definitions/CategoryMap"
+							}
+						},
+						"source": {
+							"$ref": "#/definitions/urn",
+							"description": "Urn reference to a category scheme object."
+						},
+						"target": {
+							"$ref": "#/definitions/urn",
+							"description": "Urn reference to a category scheme object."
+						}
+					},
+					"required": [
+						"categoryMaps",
+						"source",
+						"target"
+					]
+				}
+			]
+		},
+		"CategorySchemeType": {
+			"description": "CategorySchemeType describes the structure of a category scheme. A category scheme is the descriptive information for an arrangement or division of categories into groups based on characteristics, which the objects have in common. This provides for a simple, leveled hierarchy or categories.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/MaintainableTypeWithNCNameID"
+				},
+				{
+					"properties": {
+						"isPartial": {
+							"type": "boolean"
+						},
+						"categories": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Category"
+							}
+						}
+					}
+				}
+			]
+		},
+		"CategoryType": {
+			"description": "CategoryType describes the details of a category. A category is defined as an item at any level in a classification. The Category element represents a set of nested categories which are child categories.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/NameableType"
+				},
+				{
+					"properties": {
+						"categories": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Category"
+							}
+						}
+					}
+				}
+			]
+		},
+		"CodeDataType": {
+			"description": "CodeDataType is a restriction of the basic data types that are applicable to codes. Although some of the higher level time period formats are perimitted, it should be noted that any value which contains time (which includes a time zone offset) is not allowable as a code identifier.",
+			"type": "string",
+			"enum": [
+				"String",
+				"Alpha",
+				"AlphaNumeric",
+				"Numeric",
+				"BigInteger",
+				"Integer",
+				"Long",
+				"Short",
+				"Boolean",
+				"URI",
+				"Count",
+				"InclusiveValueRange",
+				"ExclusiveValueRange",
+				"Incremental",
+				"ObservationalTimePeriod",
+				"StandardTimePeriod",
+				"BasicTimePeriod",
+				"GregorianTimePeriod",
+				"GregorianYear",
+				"GregorianYearMonth",
+				"GregorianDay",
+				"ReportingTimePeriod",
+				"ReportingYear",
+				"ReportingSemester",
+				"ReportingTrimester",
+				"ReportingQuarter",
+				"ReportingMonth",
+				"ReportingWeek",
+				"ReportingDay",
+				"Month",
+				"MonthDay",
+				"Day",
+				"Duration"
+			]
+		},
+		"CodeMapType": {
+			"description": "CodeMapType defines the structure for mapping two codes. A local reference is provided both the source and target code.",
+			"type": "object",
+			"properties": {
+				"annotations": {
+					"$ref": "#/definitions/Annotations"
+				},
+				"source": {
+					"$ref": "#/definitions/urn",
+					"description": "Urn reference to a code where the identification of the codelist which defines it is contained in another context."
+				},
+				"target": {
+					"$ref": "#/definitions/urn",
+					"description": "Urn reference to a code where the identification of the codelist which defines it is contained in another context."
+				}
+			},
+			"required": [
+				"source",
+				"target"
+			]
+		},
+		"CodeType": {
+			"description": "CodeType describes the structure of a code. A code is defined as a language independent set of letters, numbers or symbols that represent a concept whose meaning is described in a natural language. Presentational information not present may be added through the use of annotations.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/NameableType"
+				},
+				{
+					"properties": {
+						"parent": {
+							"$ref": "#/definitions/idType",
+							"description": "Parent provides the ability to describe simple hierarchies within a single codelist, by referencing the id value of another code in the same codelist."
+						}
+					}
+				}
+			]
+		},
+		"CodededTextFormatType": {
+			"description": "CodededTextFormatType is a restricted version of the SimpleComponentTextFormatType that only allows factets and text types applicable to codes. Although the time facets permit any value, an actual code identifier does not support the necessary characters for time. Therefore these facets should not contain time in their values.",
+			"type": "object",
+			"properties": {
+				"endTime": {
+					"$ref": "#/definitions/StandardTimePeriodType"
+				},
+				"endValue": {
+					"type": "integer"
+				},
+				"interval": {
+					"type": "integer"
+				},
+				"isSequence": {
+					"type": "boolean"
+				},
+				"maxLength": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"maxValue": {
+					"type": "integer"
+				},
+				"minLength": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"minValue": {
+					"type": "integer"
+				},
+				"pattern": {
+					"type": "string"
+				},
+				"startTime": {
+					"$ref": "#/definitions/StandardTimePeriodType"
+				},
+				"startValue": {
+					"type": "integer"
+				},
+				"textType": {
+					"$ref": "#/definitions/CodeDataType"
+				},
+				"timeInterval": {
+					"$ref": "#/definitions/duration"
+				}
+			}
+		},
+		"CodelistMapType": {
+			"description": "CodelistMapType defines the structure of a map which identifies relationships between codes in different codelists.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/NameableType"
+				},
+				{
+					"properties": {
+						"codeMaps": {
+							"type": "array",
+							"minItems": 1,
+							"items": {
+								"$ref": "#/definitions/CodeMap"
+							}
+						},
+						"source": {
+							"$ref": "#/definitions/urn",
+							"description": "Source provides a urn reference to a codelist."
+						},
+						"target": {
+							"$ref": "#/definitions/urn",
+							"description": "Target provides a urn reference to a codelist."
+						}
+					},
+					"required": [
+						"codeMaps",
+						"source",
+						"target"
+					]
+				}
+			]
+		},
+		"CodelistType": {
+			"description": "CodelistType defines the structure of a codelist. A codelist is defined as a list from which some statistical concepts (coded concepts) take their values.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/MaintainableTypeWithNCNameID"
+				},
+				{
+					"properties": {
+						"isPartial": {
+							"type": "boolean"
+						},
+						"codes": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Code"
+							}
+						}
+					}
+				}
+			]
+		},
+		"CodingTextFormatType": {
+			"type": "object",
+			"properties": {
+				"endValue": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"interval": {
+					"type": "integer"
+				},
+				"isSequence": {
+					"type": "boolean"
+				},
+				"maxLength": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"maxValue": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"minLength": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"minValue": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"pattern": {
+					"type": "string"
+				},
+				"startValue": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"textType": {
+					"$ref": "#/definitions/SimpleCodeDataType"
+				}
+			}
+		},
+		"ComponentMapType": {
+			"description": "ComponentMapType defines the structure for relating a component in a source structure to a component in a target structure.",
+			"type": "object",
+			"properties": {
+				"annotations": {
+					"$ref": "#/definitions/Annotations"
+				},
+				"representationMapping": {
+					"$ref": "#/definitions/RepresentationMapType",
+					"description": "RepresentationMapping describes the mapping rules to map the value of the source component to the target component. Note that is a representation mapping is not supplied, then the value of the source component is mapped directly to the value of the target component without any manipulation."
+				},
+				"source": {
+					"$ref": "#/definitions/urn",
+					"description": "Urn reference to any type of component in a specific component list where the reference to the structure which defines it are provided in another context."
+				},
+				"target": {
+					"$ref": "#/definitions/urn",
+					"description": "Urn reference to any type of component in a specific component list where the reference to the structure which defines it are provided in another context."
+				}
+			},
+			"required": [
+				"source",
+				"target"
+			]
+		},
+		"ComputationType": {
+			"description": "ComputationType describes a computation in a process.",
+			"type": "object",
+			"properties": {
+				"localID": {
+					"$ref": "#/definitions/idType"
+				},
+				"softwareLanguage": {
+					"type": "string"
+				},
+				"softwarePackage": {
+					"type": "string"
+				},
+				"softwareVersion": {
+					"type": "string"
+				},
+				"annotations": {
+					"$ref": "#/definitions/Annotations"
+				},
+				"description": {
+					"$ref": "#/definitions/localisedBestMatchText"
+				},
+				"descriptions": {
+					"$ref": "#/definitions/localisedText"
+				}
+			},
+			"required": [
+				"description"
+			]
+		},
+		"ConceptMapType": {
+			"description": "ConceptMapType defines the structure for mapping two concepts. A local reference is provided both the source and target concept.",
+			"type": "object",
+			"properties": {
+				"annotations": {
+					"$ref": "#/definitions/Annotations"
+				},
+				"source": {
+					"$ref": "#/definitions/urn",
+					"description": "Urn reference to a local concept."
+				},
+				"target": {
+					"$ref": "#/definitions/urn",
+					"description": "Urn reference to a local concept."
+				}
+			},
+			"required": [
+				"source",
+				"target"
+			]
+		},
+		"ConceptRepresentation": {
+			"description": "ConceptRepresentation defines the core representation that are allowed for a concept. The text format allowed for a concept is that which is allowed for any non-target object component.",
+			"type": "object",
+			"properties": {
+				"enumeration": {
+					"$ref": "#/definitions/urn",
+					"description": "Urn reference to a codelist which enumerates the possible values that can be used as the representation of this concept."
+				},
+				"enumerationFormat": {
+					"$ref": "#/definitions/CodededTextFormatType"
+				},
+				"textFormat": {
+					"$ref": "#/definitions/BasicComponentTextFormatType"
+				}
+			}
+		},
+		"ConceptSchemeMapType": {
+			"description": "ConceptSchemeMapType defines the structure of a map which identifies relationships between concepts in different concept schemes.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/NameableType"
+				},
+				{
+					"properties": {
+						"conceptMaps": {
+							"type": "array",
+							"minItems": 1,
+							"items": {
+								"$ref": "#/definitions/ConceptMap"
+							}
+						},
+						"source": {
+							"$ref": "#/definitions/urn",
+							"description": "Urn reference to a concept scheme object."
+						},
+						"target": {
+							"$ref": "#/definitions/urn",
+							"description": "Urn reference to a concept scheme object."
+						}
+					},
+					"required": [
+						"conceptMaps",
+						"source",
+						"target"
+					]
+				}
+			]
+		},
+		"ConceptSchemeType": {
+			"description": "ConceptSchemeType describes the structure of a concept scheme. A concept scheme is the descriptive information for an arrangement or division of concepts into groups based on characteristics, which the objects have in common. It contains a collection of concept definitions, that may be arranged in simple hierarchies.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/MaintainableTypeWithNCNameID"
+				},
+				{
+					"properties": {
+						"isPartial": {
+							"type": "boolean"
+						},
+						"concepts": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Concept"
+							}
+						}
+					}
+				}
+			]
+		},
+		"ConceptType": {
+			"description": "ConceptType describes the details of a concept. A concept is defined as a unit of knowledge created by a unique combination of characteristics. If a concept does not specify a TextFormat or a core representation, then the representation of the concept is assumed to be represented by any set of valid characters (corresponding to the string datatype).",
+			"allOf": [
+				{
+					"$ref": "#/definitions/NameableTypeWithNCNameID"
+				},
+				{
+					"properties": {
+						"coreRepresentation": {
+							"$ref": "#/definitions/ConceptRepresentation"
+						},
+						"isoConceptReference": {
+							"$ref": "#/definitions/urn",
+							"description": "Provides a urn reference (containing conceptSchemeID, conceptAgency, conceptID) to an ISO 11179 concept."
+						},
+						"parent": {
+							"$ref": "#/definitions/urn",
+							"description": "Urn reference to a local concept. Parent captures the semantic relationships between concepts which occur within a single concept scheme. This identifies the concept of which the current concept is a qualification (in the ISO 11179 sense) or subclass."
+						}
+					}
+				}
+			]
+		},
+		"ConstraintContentTargetType": {
+			"description": "ConstraintTargetType defines the structure of a constraint target object. The constraint target object has a fixed representation and identifier.",
+			"type": "object",
+			"required": [
+				"localRepresentation"
+			],
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableTypeWithNCNameID"
+				},
+				{
+					"properties": {
+						"localRepresentation": {
+							"$ref": "#/definitions/ConstraintRepresentationType"
+						}
+					}
+				}
+			]
+		},
+		"ConstraintRepresentationType": {
+			"description": "ConstraintRepresentationType defines the possible local representations of a constraint reference target object. The representation is fixed to always be an attachment constraint reference.",
+			"type": "object",
+			"properties": {
+				"textFormat": {
+					"$ref": "#/definitions/ConstraintTextFormatType"
+				}
+			},
+			"required": [
+				"textFormat"
+			]
+		},
+		"ConstraintTextFormatType": {
+			"description": "ConstraintTextFormatType is a restricted version of the NonFacetedTextFormatType that specifies a fixed AttachmentConstraintReference representation.",
+			"type": "object",
+			"properties": {
+				"textType": {
+					"$ref": "#/definitions/TargetObjectDataType"
+				}
+			}
+		},
+		"ContentConstraintAttachmentType": {
+			"description": "ContentConstraintAttachmentType defines the structure for specifying the target object(s) of a content constraint.",
+			"type": "object",
+			"properties": {
+				"dataProvider": {
+					"$ref": "#/definitions/urn",
+					"description": "dataProvider is a urn reference to a the provider of the data/metadata set to which the constraint is attached. If this is used, then only the release calendar is relevant.."
+				},
+				"dataSet": {
+					"$ref": "#/definitions/SetReferenceType",
+					"description": "dataSet is a urn reference to a data set to which the constraint is attached."
+				},
+				"dataStructures": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/urn",
+						"description": "Urn reference to a data structure definition object to which the constraint is attached. A constraint which is attached to more than one data structure must only express key sets and/or cube regions where the identifiers of the dimensions are common across all structures to which the constraint is attached."
+					}
+				},
+				"dataflows": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/urn",
+						"description": "Urn reference to a dataflow object to which the constraint is attached. A constraint can be attached to more than one dataflow, and the dataflows do not necessarily have to be usages of the same data structure. However, a constraint which is attached to more than one data structure must only express key sets and/or cube regions where the identifiers of the dimensions are common across all structures to which the constraint is attached."
+					}
+				},
+				"metadataSet": {
+					"$ref": "#/definitions/SetReferenceType",
+					"description": "metadataSet is a urn reference to a metadata set to which the constraint is attached."
+				},
+				"metadataStructures": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/urn",
+						"description": "Urn reference to a metadata structure definition to which the constraint is attached. A constraint which is attached to more than one metadata structure must only express key sets and/or target regions where the identifiers of the target objects are common across all structures to which the constraint is attached."
+					}
+				},
+				"metadataflows": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/urn",
+						"description": "Urn reference to a metadata flow object to which the constraint is attached. A constraint can be attached to more than one metadataflow, and the metadataflows do not necessarily have to be usages of the same metadata structure. However, a constraint which is attached to more than one metadata structure must only express key sets and/or target regions where the identifiers of the target objects are common across all structures to which the constraint is attached."
+					}
+				},
+				"provisionAgreements": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/urn",
+						"description": "Urn reference to a provision agreement to which the constraint is attached. A constraint can be attached to more than one provision agreement, and the provision agreements do not necessarily have to be references structure usages based on the same structure. However, a constraint which is attached to more than one provision agreement must only express key sets and/or cube/target regions where the identifier of the components are common across all structures to which the constraint is attached."
+					}
+				},
+				"queryableDataSources": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QueryableDataSourceType",
+						"description": "queryableDataSource describes a queryable data source to which the constraint is attached."
+					}
+				},
+				"simpleDataSource": {
+					"$ref": "#/definitions/uri",
+					"description": "simpleDataSource describes a simple data source, which is a URL of a SDMX-ML data or metadata message."
+				}
+			}
+		},
+		"ContentConstraintType": {
+			"description": "ContentConstraintType describes the details of a content constraint by defining the content regions, key sets, or release information for the constraint attachment objects. Note that if the constraint is for a data provider, then only release calendar information is relevant, as there is no reliable way of determining which data structure is being used to frame constraints in terms of cube regions or key sets.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/MaintainableType"
+				},
+				{
+					"properties": {
+						"type": {
+							"$ref": "#/definitions/ContentConstraintTypeCodeType"
+						},
+						"constraintAttachment": {
+							"$ref": "#/definitions/ContentConstraintAttachmentType",
+							"description": "ConstraintAttachment describes the collection of constrainable artefacts that the constraint is attached to."
+						},
+						"cubeRegions": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/CubeRegionType",
+								"description": "CubeRegion describes a set of dimension values which define a region and attributes which relate to the region for the purpose of describing a constraint."
+							}
+						},
+						"dataKeySets": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/DataKeySetType",
+								"description": "DataKeySet defines a collection of full or partial data keys."
+							}
+						},
+						"metadataKeySets": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/MetadataKeySetType",
+								"description": "MetadataKeySet defines a collection of metadata keys."
+							}
+						},
+						"metadataTargetRegions": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/MetadataTargetRegionType",
+								"description": "MetadataTargetRegion describes a set of target object values for a given report structure which define a region, and the metadata attribute which relate to the target for the purpose of describing a constraint."
+							}
+						},
+						"referencePeriod": {
+							"$ref": "#/definitions/ReferencePeriodType",
+							"description": "ReferencePeriod is used to report start date and end date constraints."
+						},
+						"releaseCalendar": {
+							"$ref": "#/definitions/ReleaseCalendarType",
+							"description": "ReleaseCalendar defines dates on which the constrained data is to be made available."
+						}
+					}
+				}
+			]
+		},
+		"ContentConstraintTypeCodeType": {
+			"description": "ContentConstraintTypeCodeType defines a list of types for a content constraint. A content constraint can state which data is present or which content is allowed for the constraint attachment. If 'Allowed' then the constraint contains the allowed values for attachable object. If 'Actual' then the constraints contains the actual data present for the attachable object.",
+			"type": "string",
+			"enum": [
+				"Allowed",
+				"Actual"
+			]
+		},
+		"DataConsumerSchemeType": {
+			"description": "DataConsumerSchemeType defines a type of organisation scheme which contains only data consumers. The data consumer scheme maintained by a particular maintenance agency is always provided a fixed identifier and version, and is never final. Therefore, consumers can be added or removed without have to version the scheme. This scheme has no hierarchy, meaning that no organisation may define a relationship with another organisation in the scheme.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/MaintainableType"
+				},
+				{
+					"properties": {
+						"isPartial": {
+							"type": "boolean"
+						},
+						"dataConsumers": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/DataConsumer"
+							}
+						}
+					}
+				}
+			]
+		},
+		"DataConsumerType": {
+			"description": "DataConsumerType defines the structure of a data consumer description. The contacts defined for the organisation are specific to the data consumer role the organisation is serving.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/NameableType"
+				},
+				{
+					"properties": {
+						"contacts": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/contactType"
+							}
+						}
+					}
+				}
+			]
+		},
+		"DataKeySetType": {
+			"description": "DataKeySetType defines a collection of full or partial data keys (dimension values).",
+			"type": "object",
+			"properties": {
+				"isIncluded": {
+					"type": "boolean"
+				},
+				"keys": {
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/DataKeyType",
+						"description": "Key contains a set of dimension values which identify a full set of data."
+					}
+				}
+			},
+			"required": [
+				"isIncluded",
+				"keys"
+			]
+		},
+		"DataProviderSchemeType": {
+			"description": "DataProviderSchemeType defines a type of organisation scheme which contains only data providers. The data provider scheme maintained by a particular maintenance agency is always provided a fixed identifier and version, and is never final. Therefore, providers can be added or removed without have to version the scheme. This scheme has no hierarchy, meaning that no organisation may define a relationship with another organisation in the scheme.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/MaintainableType"
+				},
+				{
+					"properties": {
+						"isPartial": {
+							"type": "boolean"
+						},
+						"dataProviders": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/DataProvider"
+							}
+						}
+					}
+				}
+			]
+		},
+		"DataProviderType": {
+			"description": "DataProviderType defines the structure of a data provider description. The contacts defined for the organisation are specific to the data provider role the organisation is serving.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/NameableType"
+				},
+				{
+					"properties": {
+						"contacts": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/contactType"
+							}
+						}
+					}
+				}
+			]
+		},
+		"DataSetRepresentationType": {
+			"description": "DataSetRepresentationType defines the possible local representations of a data set reference target object. The representation is fixed to always be a data set reference.",
+			"type": "object",
+			"properties": {
+				"textFormat": {
+					"$ref": "#/definitions/DataSetTextFormatType"
+				}
+			},
+			"required": [
+				"textFormat"
+			]
+		},
+		"DataSetTargetType": {
+			"description": "DataSetTargetType defines the structure of a data set target object. The data set target object has a fixed representation and identifier.",
+			"type": "object",
+			"required": [
+				"localRepresentation"
+			],
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableTypeWithNCNameID"
+				},
+				{
+					"properties": {
+						"localRepresentation": {
+							"$ref": "#/definitions/DataSetRepresentationType"
+						}
+					}
+				}
+			]
+		},
+		"DataSetTextFormatType": {
+			"description": "DataSetTextFormatType is a restricted version of the NonFacetedTextFormatType that specifies a fixed DataSetReference representation.",
+			"type": "object",
+			"properties": {
+				"textType": {
+					"$ref": "#/definitions/TargetObjectDataType"
+				}
+			}
+		},
+		"DataStructureComponentsType": {
+			"description": "DataStructureComponentsType describes the structure of the grouping to the sets of metadata concepts that have a defined structural role in the data structure definition. At a minimum at least one dimension and a primary measure must be defined.",
+			"type": "object",
+			"properties": {
+				"attributeList": {
+					"$ref": "#/definitions/AttributeList"
+				},
+				"dimensionList": {
+					"$ref": "#/definitions/DimensionList"
+				},
+				"groups": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Group"
+					}
+				},
+				"measureList": {
+					"$ref": "#/definitions/MeasureList"
+				}
+			},
+			"required": [
+				"dimensionList",
+				"measureList"
+			]
+		},
+		"DataStructureType": {
+			"description": "DataStructureType describes the structure of a data structure definition. A data structure definition is defined as a collection of metadata concepts, their structure and usage when used to collect or disseminate data.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/MaintainableType"
+				},
+				{
+					"properties": {
+						"dataStructureComponents": {
+							"$ref": "#/definitions/DataStructureComponents"
+						}
+					}
+				}
+			]
+		},
+		"DataflowType": {
+			"description": "DataflowType describes the structure of a data flow. A data flow is defined as the structure of data that will provided for different reference periods. If this type is not referenced externally, then a reference to a data structure definition must be provided.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/MaintainableType"
+				},
+				{
+					"properties": {
+						"structure": {
+							"$ref": "#/definitions/urn",
+							"description": "Urn reference to the data structure definition which defines the structure of all data for this flow."
+						}
+					}
+				}
+			]
+		},
+		"DimensionListType": {
+			"description": "DimensionListType describes the key descriptor for a data structure definition. The order of the declaration of child dimensions is significant: it is used to describe the order in which they will appear in data formats for which key values are supplied in an ordered fashion (exclusive of the time dimension, which is not represented as a member of the ordered key). Any data structure definition which uses the time dimension should also declare a frequency dimension, conventionally the first dimension in the key (the set of ordered non-time dimensions). If is not necessary to assign a time dimension, as data can be organised in any fashion required.",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableType"
+				},
+				{
+					"properties": {
+						"dimensions": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Dimension"
+							}
+						},
+						"measureDimensions": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/MeasureDimension"
+							}
+						},
+						"timeDimensions": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/TimeDimension"
+							}
+						}
+					}
+				}
+			]
+		},
+		"DimensionType": {
+			"description": "DimensionType describes the structure of an ordinary dimension, which is defined as a statistical concept used (most probably together with other statistical concepts) to identify a statistical series, such as a time series, e.g. a statistical concept indicating certain economic activity or a geographical reference area. The dimension takes its semantic, and in some cases it representation, from its concept identity. A dimension can be coded by referencing a code list from its coded local representation. It can also specify its text format, which is used as the representation of the dimension if a coded representation is not defined. Neither the coded or uncoded representation are necessary, since the dimension may take these from the referenced concept.",
+			"type": "object",
+			"required": [
+				"conceptIdentity"
+			],
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableTypeWithNCNameID"
+				},
+				{
+					"properties": {
+						"position": {
+							"description": "The position attribute specifies the position of the dimension in the data structure definition, starting at 0. It is optional as the position of the dimension in the key descriptor (DimensionList element) always takes precedence over the value supplied here. This is strictly for informational purposes only.",
+							"type": "integer",
+							"minimum": 0
+						},
+						"type": {
+							"description": "The type attribute identifies whether then dimension is a measure dimension, the time dimension, or a regular dimension. Although these are all apparent by the element names, this attribute allows for each dimension to be processed independent of its element as well as maintaining the restriction of only one measure and time dimension while still allowing dimension to occur in any order.",
+							"$ref": "#/definitions/DimensionTypeType"
+						},
+						"conceptIdentity": {
+							"$ref": "#/definitions/urn",
+							"description": "Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
+						},
+						"conceptRoles": {
+							"description": "ConceptRoles references concepts which define roles which this dimension serves. If the concept from which the attribute takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here.",
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/urn",
+								"description": "Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
+							}
+						},
+						"localRepresentation": {
+							"$ref": "#/definitions/SimpleDataStructureRepresentationType"
+						}
+					}
+				}
+			]
+		},
+		"GroupType": {
+			"description": "GroupType describes the structure of a group descriptor in a data structure definition. A group may consist of a of partial key, or collection of distinct cube regions or key sets to which attributes may be attached. The purpose of a group is to specify attributes values which have the same value based on some common dimensionality. All groups declared in the data structure must be unique - that is, you may not have duplicate partial keys. All groups must be given unique identifiers.",
+			"type": "object",
+			"required": [
+				"id"
+			],
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableType"
+				},
+				{
+					"properties": {
+						"attachmentConstraint": {
+							"$ref": "#/definitions/urn",
+							"description": "Urn reference to an attachment constraint that defines the key sets and/or cube regions that attributes may be attached to. This is an alternative to referencing the dimensions, and allows attributes to be attached to data for given values of dimensions."
+						},
+						"groupDimensions": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/NCNameIDType",
+								"description": "Array of id's of dimensions defined in the key descriptor (DimensionList). Although it is conventional to declare dimensions in the same order as they are declared in the ordered key, there is no requirement to do so - the ordering of the values of the key are taken from the order in which the dimensions are declared. Note that the id of a dimension may be inherited from its underlying concept - therefore this reference value may actually be the id of the concept."
+							}
+						}
+					}
+				}
+			]
+		},
+		"HierarchicalCodeType": {
+			"description": "HierarchicalCodeType describes the structure of a hierarchical code. A hierarchical code provides for a reference to a code that is referenced within the hierarchical code list via either a complete reference to a code through a URN, or a local reference which utilizes the included codelist reference alias and the identification of a code from the list. Codes are arranged in a hierarchy by this reference. Note that it is possible to reference a single code such that it has multiple parents within the hierarchy. Further, the hierarchy may or may not be a leveled one.",
+			"type": "object",
+			"required": [
+				"id"
+			],
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableType"
+				},
+				{
+					"properties": {
+						"validFrom": {
+							"type": "string",
+							"format": "date-time"
+						},
+						"validTo": {
+							"type": "string",
+							"format": "date-time"
+						},
+						"version": {
+							"$ref": "#/definitions/VersionType"
+						},
+						"code": {
+							"$ref": "#/definitions/urn",
+							"description": "Code provides a complete, explicit urn reference to the codelist and code."
+						},
+						"codeID": {
+							"$ref": "#/definitions/idType",
+							"description": "CodeID references the id of a code from the codelist that is referenced through the CodelistAliaRef element."
+						},
+						"codelistAliasRef": {
+							"description": "CodelistAliasRef references an alias assigned in a IncludedCodelist element in the containing hierarchical codelist. This is used in conjunction with the CodeID element to reference a code from one of the included codelists.",
+							"$ref": "#/definitions/idType"
+						},
+						"hierarchicalCodes": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/HierarchicalCodeType",
+								"description": "HierarchicalCode is used to nest referenced codes into a value based hierarchy."
+							}
+						},
+						"level": {
+							"$ref": "#/definitions/urn",
+							"description": "Level references (through a urn) a formal level defined within the hierarchy which defines this hierarchical code. This is only necessary if the nesting depth of the hierarchical code does not correspond to the nesting depth of the level to which it belongs (i.e. the hieararchical code is to skip down a level). Otherwise, the code is assumed to exist at the level in which the nesting depth of the level matches the nesting depth of the code."
+						}
+					}
+				}
+			]
+		},
+		"HierarchicalCodelistType": {
+			"description": "HierarchicalCodelistType describes the structure of a hierarchical codelist. A hierarchical code list is defined as an organised collection of codes that may participate in many parent/child relationships with other codes in the list, as defined by one or more hierarchy of the list.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/MaintainableType"
+				},
+				{
+					"properties": {
+						"hierarchies": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/HierarchyType",
+								"description": "Hierarchy describes a classification structure arranged in levels of detail from the broadest to the most detailed level. These levels can be formal or informal, and are not necessary to describe. If the hierarchy does contain levels, then each hierarchical code is assumed to exist in the level where the depths of nesting match."
+							}
+						},
+						"includedCodelists": {
+							"description": "includedCodelists provides a collection of references to the code lists whose codes are arranged in this hierarchical code list.",
+							"type": "object",
+							"patternProperties": {
+								"^[A-Za-z0-9_@$-]+$": {
+									"description": "Alias to the code list whose codes are arranged in this hierarchical code list (referenced through urn). The alias attribute is used to carry the identifier for the referenced codelist, so that codes from that list can be easily referenced by the hierarchical codes contained in the parent hierarchy, without having to repeat the reference to the codelist itself. The alias attribute must be unique within the parent hierarchical codelist. Valid characters for the alias include A-Z, a-z, @, 0-9, _, -, $.",
+									"$ref": "#/definitions/urn"
+								}
+							}
+						}
+					}
+				}
+			]
+		},
+		"HierarchyType": {
+			"description": "The Hierarchy is an abstract type that provides for a classification structure of referenced codes arranged in levels of detail from the broadest to the most detailed level. The levels in which the code exist can be formal or informal.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/NameableType"
+				},
+				{
+					"properties": {
+						"leveled": {
+							"type": "boolean"
+						},
+						"hierarchicalCodes": {
+							"type": "array",
+							"minItems": 1,
+							"items": {
+								"$ref": "#/definitions/HierarchicalCodeType",
+								"description": "HierarchicalCode is used to assemble the codes from the codelist(s) referenced into a hierarchy."
+							}
+						},
+						"level": {
+							"$ref": "#/definitions/LevelType",
+							"description": "In a formally leveled hierarchy, Level describes a group of codes which are characterised by homogeneous coding, and where the parent of each code in the group is at the same higher level of the hierarchy. In a value based hierarchy Level describes information about the codes at the specified nesting level. This structure is recursive to indicate the hierarchy of the levels."
+						}
+					},
+					"required": [
+						"hierarchicalCodes"
+					]
+				}
+			]
+		},
+		"HybridCodeMapType": {
+			"description": "CodeMapType defines the structure for associating a code from a source codelist to a code in a target codelist. Note that either of these may come from a hierarchical codelist.",
+			"type": "object",
+			"properties": {
+				"annotations": {
+					"$ref": "#/definitions/Annotations"
+				},
+				"source": {
+					"$ref": "#/definitions/urn",
+					"description": "Source provides a local reference to the code which is to be mapped. If this code is from a hierarchical codelist, a reference to the hierarchy in which it is defined must also be provided."
+				},
+				"target": {
+					"$ref": "#/definitions/urn",
+					"description": "Target provides a local reference to the code to which the source code is mapped. If this code is from a hierarchical codelist, a reference to the hierarchy in which it is defined must also be provided."
+				}
+			},
+			"required": [
+				"source",
+				"target"
+			]
+		},
+		"HybridCodelistMapType": {
+			"description": "HybridCodelistMapType defines the structure of a map which relates codes (possibly hierarchical) from different code lists.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/NameableType"
+				},
+				{
+					"properties": {
+						"hybridCodeMaps": {
+							"type": "array",
+							"minItems": 1,
+							"items": {
+								"$ref": "#/definitions/HybridCodeMapType",
+								"description": "HybridCodeMap defines the relationship of a code in the source list to code in the target list."
+							}
+						},
+						"source": {
+							"$ref": "#/definitions/urn",
+							"description": "Source provides a urn reference to either a codelist or a hierarchical codelist, from which the codes are to be mapped."
+						},
+						"target": {
+							"$ref": "#/definitions/urn",
+							"description": "Target provides a urn reference to either a codelist or a hierarchical codelist, to which the source codes are to be mapped."
+						}
+					},
+					"required": [
+						"hybridCodeMaps",
+						"source",
+						"target"
+					]
+				}
+			]
+		},
+		"IdentifiableObjectRepresentationType": {
+			"description": "IdentifiableObjectRepresentationType defines the possible local representations of an identifiable object target object.",
+			"type": "object",
+			"properties": {
+				"enumeration": {
+					"$ref": "#/definitions/urn",
+					"description": "Urn reference to an item scheme. Enumeration is only permissible if the object type of the identifiable object target is an item in an item scheme. This enumeration is meant to limit the referencable objects to the items defined in the referenced item scheme."
+				},
+				"textFormat": {
+					"$ref": "#/definitions/IdentifiableObjectTextFormatType"
+				}
+			}
+		},
+		"IdentifiableObjectTargetType": {
+			"description": "IdentifiableObjectTargetType defines the structure of an identifiable target object. The identifiable target object has a fixed representation of a reference and can specify a local representation of any item scheme for the purpose of restricting which items may be referenced. The identifiable object target must specify the object type which the target object is meant to reference.",
+			"type": "object",
+			"required": [
+				"id",
+				"localRepresentation",
+				"objectType"
+			],
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableTypeWithNCNameID"
+				},
+				{
+					"properties": {
+						"objectType": {
+							"$ref": "#/definitions/ObjectTypeCodelistType"
+						},
+						"localRepresentation": {
+							"$ref": "#/definitions/IdentifiableObjectRepresentationType"
+						}
+					}
+				}
+			]
+		},
+		"IdentifiableObjectTextFormatType": {
+			"description": "IdentifiableObjectTextFormatType is a restricted version of the NonFacetedTextFormatType that specifies a fixed IdentifiableReference representation.",
+			"type": "object",
+			"properties": {
+				"textType": {
+					"$ref": "#/definitions/TargetObjectDataType"
+				}
+			}
+		},
+		"InputOutputType": {
+			"description": "InputOutputType describes the structure of an input or output to a process step. It provides a reference to the object that is the input or output.",
+			"type": "object",
+			"properties": {
+				"localID": {
+					"$ref": "#/definitions/idType"
+				},
+				"annotations": {
+					"$ref": "#/definitions/Annotations"
+				},
+				"objectReference": {
+					"$ref": "#/definitions/urn",
+					"description": "ObjectReference is an abstract substitution head that references (through a urn) the object that is an input or output. It is substituted with a concrete reference to an explicit object type."
+				}
+			},
+			"required": [
+				"objectReference"
+			]
+		},
+		"KeyDescriptorValuesRepresentationType": {
+			"description": "KeyDescriptorValuesRepresentationType defines the possible local representations of a key descriptor values target object. The representation is fixed to always be a data key (KeyValues).",
+			"type": "object",
+			"properties": {
+				"textFormat": {
+					"$ref": "#/definitions/KeyDescriptorValuesTextFormatType"
+				}
+			},
+			"required": [
+				"textFormat"
+			]
+		},
+		"KeyDescriptorValuesTargetType": {
+			"description": "KeyDescriptorValuesTargetType defines the structure of a key descriptor values target object. The key descriptor values target object has a fixed representation and identifier.",
+			"type": "object",
+			"required": [
+				"localRepresentation"
+			],
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableTypeWithNCNameID"
+				},
+				{
+					"properties": {
+						"localRepresentation": {
+							"$ref": "#/definitions/KeyDescriptorValuesRepresentationType"
+						}
+					}
+				}
+			]
+		},
+		"KeyDescriptorValuesTextFormatType": {
+			"description": "KeyDescriptorValuesTextFormatType is a restricted version of the NonFacetedTextFormatType that specifies a fixed KeyValues representation.",
+			"type": "object",
+			"properties": {
+				"textType": {
+					"$ref": "#/definitions/TargetObjectDataType"
+				}
+			}
+		},
+		"LevelType": {
+			"description": "LevelType describes a level in a hierarchical codelist. Where level is defined as a group where codes can be characterised by homogeneous coding, and where the parent of each code in the group is at the same higher level of the hierarchy.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/NameableType"
+				},
+				{
+					"properties": {
+						"codingFormat": {
+							"$ref": "#/definitions/CodingTextFormatType",
+							"description": "CodingFormat specifies the text formatting of the codes in this level. This includes facets such as the expected characters and the length of the codes."
+						},
+						"level": {
+							"$ref": "#/definitions/LevelType",
+							"description": "Level describes the next level down in the hierarchy."
+						}
+					}
+				}
+			]
+		},
+		"MeasureDimensionRepresentationType": {
+			"description": "BaseDimensionRepresentationType is an abstract base which defines the representation for a measure dimension.",
+			"type": "object",
+			"properties": {
+				"enumeration": {
+					"$ref": "#/definitions/urn",
+					"description": "Urn reference to a concept scheme object."
+				}
+			},
+			"required": [
+				"enumeration"
+			]
+		},
+		"MeasureDimensionType": {
+			"description": "MeasureDimensionType defines the structure of the measure dimension. It is derived from the base dimension structure, but requires that a coded representation taken from a concept scheme is given.",
+			"type": "object",
+			"required": [
+				"conceptIdentity",
+				"localRepresentation"
+			],
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableTypeWithNCNameID"
+				},
+				{
+					"properties": {
+						"position": {
+							"description": "The position attribute specifies the position of the dimension in the data structure definition, starting at 0. It is optional as the position of the dimension in the key descriptor (DimensionList element) always takes precedence over the value supplied here. This is strictly for informational purposes only.",
+							"type": "integer",
+							"minimum": 0
+						},
+						"type": {
+							"description": "The type attribute identifies whether then dimension is a measure dimension, the time dimension, or a regular dimension. Although these are all apparent by the element names, this attribute allows for each dimension to be processed independent of its element as well as maintaining the restriction of only one measure and time dimension while still allowing dimension to occur in any order.",
+							"$ref": "#/definitions/DimensionTypeType"
+						},
+						"conceptIdentity": {
+							"$ref": "#/definitions/urn",
+							"description": "Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
+						},
+						"conceptRoles": {
+							"description": "ConceptRoles references concepts which define roles which this dimension serves. If the concept from which the attribute takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here.",
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/urn",
+								"description": "Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
+							}
+						},
+						"localRepresentation": {
+							"$ref": "#/definitions/MeasureDimensionRepresentationType"
+						}
+					}
+				}
+			]
+		},
+		"MeasureListType": {
+			"description": "MeasureListType describes the structure of the measure descriptor for a data structure definition. Only a primary may be defined.",
+			"type": "object",
+			"required": [
+				"primaryMeasure"
+			],
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableType"
+				},
+				{
+					"properties": {
+						"primaryMeasure": {
+							"$ref": "#/definitions/PrimaryMeasure"
+						}
+					}
+				}
+			]
+		},
+		"MetadataAttributeRepresentationType": {
+			"description": "MetadataAttributeRepresentationType defines the possible local representations of a metadata attribute.",
+			"type": "object",
+			"properties": {
+				"enumeration": {
+					"$ref": "#/definitions/urn",
+					"description": "Urn reference to a codelist object."
+				},
+				"enumerationFormat": {
+					"$ref": "#/definitions/CodededTextFormatType"
+				},
+				"textFormat": {
+					"$ref": "#/definitions/BasicComponentTextFormatType"
+				}
+			}
+		},
+		"MetadataAttributeType": {
+			"description": "MetadataAttributeType describes the structure of a metadata attribute. The metadata attribute takes its semantic, and in some cases it representation, from its concept identity. A metadata attribute may be coded (via the local representation), uncoded (via the text format), or take no value. In addition to this value, the metadata attribute may also specify subordinate metadata attributes. If a metadata attribute only serves the purpose of containing subordinate metadata attributes, then the isPresentational attribute should be used. Otherwise, it is assumed to also take a value. If the metadata attribute does take a value, and a representation is not defined, it will be inherited from the concept it takes its semantic from. The optional id on the metadata attribute uniquely identifies it within the metadata structured definition. If this id is not supplied, its value is assumed to be that of the concept referenced from the concept identity. Note that a metadata attribute (as identified by the id attribute) definition  must be unique across the entire metadata structure definition (including target identifier, identifier component, and report structure ids). A metadata attribute may be used in multiple report structures and at different levels, but the content (value and/or child metadata attributes and their cardinality) of the metadata attribute cannot change.",
+			"type": "object",
+			"required": [
+				"conceptIdentity"
+			],
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableTypeWithNCNameID"
+				},
+				{
+					"properties": {
+						"isPresentational": {
+							"type": "boolean"
+						},
+						"maxOccurs": {
+							"$ref": "#/definitions/OccurenceType"
+						},
+						"minOccurs": {
+							"type": "integer",
+							"minimum": 0
+						},
+						"conceptIdentity": {
+							"$ref": "#/definitions/urn",
+							"description": "Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
+						},
+						"localRepresentation": {
+							"$ref": "#/definitions/MetadataAttributeRepresentationType"
+						},
+						"metadataAttributes": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/MetadataAttribute"
+							}
+						}
+					}
+				}
+			]
+		},
+		"MetadataKeySetType": {
+			"description": "MetadataKeySetType defines a collection of metadata keys (identifier component values).",
+			"type": "object",
+			"properties": {
+				"isIncluded": {
+					"type": "boolean"
+				},
+				"keys": {
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/MetadataKeyType",
+						"description": "Key contains a set of target object values for a specified report structure which serve to identify which object reference metadata conforming to the specified report structure is available for."
+					}
+				}
+			},
+			"required": [
+				"isIncluded",
+				"keys"
+			]
+		},
+		"MetadataStructureComponentsType": {
+			"description": "MetadataStructureComponentsType describes the structure of the grouping of the sets of the components that make up the metadata structure definition. At a minimum, a full target identifier and at least one report structure must be defined.",
+			"type": "object",
+			"properties": {
+				"metadataTargets": {
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/MetadataTarget"
+					}
+				},
+				"reportStructures": {
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/ReportStructure"
+					}
+				}
+			},
+			"required": [
+				"metadataTargets",
+				"reportStructures"
+			]
+		},
+		"MetadataStructureType": {
+			"description": "MetadataStructureType is used to describe a metadata structure definition, which is defined as a collection of metadata concepts, their structure and usage when used to collect or disseminate reference metadata.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/MaintainableType"
+				},
+				{
+					"properties": {
+						"metadataStructureComponents": {
+							"$ref": "#/definitions/MetadataStructureComponents"
+						}
+					}
+				}
+			]
+		},
+		"MetadataTargetType": {
+			"type": "object",
+			"required": [
+				"id"
+			],
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableType"
+				},
+				{
+					"properties": {
+						"constraintContentTargets": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ConstraintContentTarget"
+							}
+						},
+						"dataSetTargets": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/DataSetTarget"
+							}
+						},
+						"identifiableObjectTargets": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/IdentifiableObjectTarget"
+							}
+						},
+						"keyDescriptorValuesTargets": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/KeyDescriptorValuesTarget"
+							}
+						},
+						"reportPeriodTargets": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ReportPeriodTarget"
+							}
+						}
+					}
+				}
+			]
+		},
+		"MetadataflowType": {
+			"description": "MetadataflowType describes the structure of a metadata flow. A dataflow is defined as the structure of reference metadata that will be provided for different reference periods. If this type is not referenced externally, then a reference to a metadata structure definition must be provided.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/MaintainableType"
+				},
+				{
+					"properties": {
+						"structure": {
+							"$ref": "#/definitions/urn",
+							"description": "Structure provides a urn reference to the metadata structure definition describing the structure of all reference metadata for this flow."
+						}
+					}
+				}
+			]
+		},
+		"OrganisationMapType": {
+			"description": "OrganisationMapType defines the structure for mapping two organisations. A local reference is provided both the source and target organisation.",
+			"type": "object",
+			"properties": {
+				"annotations": {
+					"$ref": "#/definitions/Annotations"
+				},
+				"source": {
+					"$ref": "#/definitions/urn",
+					"description": "Urn reference to an organisation, regardless of type, where the identification of the organisation scheme which defines it is contained in another context."
+				},
+				"target": {
+					"$ref": "#/definitions/urn",
+					"description": "Urn reference to an organisation, regardless of type, where the identification of the organisation scheme which defines it is contained in another context."
+				}
+			},
+			"required": [
+				"source",
+				"target"
+			]
+		},
+		"OrganisationSchemeMapType": {
+			"description": "OrganisationSchemeMapType defines the structure of a map which identifies relationships between organisations in different organisation schemes.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/NameableType"
+				},
+				{
+					"properties": {
+						"organisationMaps": {
+							"type": "array",
+							"minItems": 1,
+							"items": {
+								"$ref": "#/definitions/OrganisationMap"
+							}
+						},
+						"source": {
+							"$ref": "#/definitions/urn",
+							"description": "Urn reference to an organisation scheme regardless of the specific type."
+						},
+						"target": {
+							"$ref": "#/definitions/urn",
+							"description": "Urn reference to an organisation scheme regardless of the specific type."
+						}
+					},
+					"required": [
+						"organisationMaps",
+						"source",
+						"target"
+					]
+				}
+			]
+		},
+		"OrganisationUnitSchemeType": {
+			"description": "OrganisationUnitSchemeType defines a type of organisation scheme which simply defines organisations and there parent child relationships. Organisations in this scheme are assigned no particular role, and may in fact exist within the other type of organisation schemes as well.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/MaintainableType"
+				},
+				{
+					"properties": {
+						"isPartial": {
+							"type": "boolean"
+						},
+						"organisationUnits": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/OrganisationUnit"
+							}
+						}
+					}
+				}
+			]
+		},
+		"OrganisationUnitType": {
+			"description": "OrganisationUnitType defines the structure of an organisation unit description. In addition to general identification and contact information, an organisation unit can specify a relationship with another organisation unit from the same scheme which is its parent organisation.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/NameableType"
+				},
+				{
+					"properties": {
+						"contacts": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/contactType"
+							}
+						},
+						"parent": {
+							"$ref": "#/definitions/urn",
+							"description": "Urn reference to an organisation unit, where the reference to the organisation unit scheme which defines it is provided in another context."
+						}
+					}
+				}
+			]
+		},
+		"PrimaryMeasureType": {
+			"description": "PrimaryMeasureType describes the structure of the primary measure. It describes the observation values for all presentations of the data. The primary measure takes its semantic, and in some cases it representation, from its concept identity (conventionally the OBS_VALUE concept). The primary measure can be coded by referencing a code list from its coded local representation. It can also specify its text format, which is used as the representation of the primary measure if a coded representation is not defined. Neither the coded or uncoded representation are necessary, since the primary measure may take these from the referenced concept. Note that if the data structure declares a measure dimension, the representation of this must be a superset of all possible measure concept representations.",
+			"type": "object",
+			"required": [
+				"conceptIdentity"
+			],
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableTypeWithNCNameID"
+				},
+				{
+					"properties": {
+						"conceptIdentity": {
+							"$ref": "#/definitions/urn",
+							"description": "Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
+						},
+						"localRepresentation": {
+							"$ref": "#/definitions/SimpleDataStructureRepresentationType"
+						}
+					}
+				}
+			]
+		},
+		"ProcessStepType": {
+			"description": "ProcessStepType describes the structure of a process step. A nested process step is automatically sub-ordinate, and followed as the next step. If the following step is conditional, it should be referenced in a transition.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/NameableType"
+				},
+				{
+					"properties": {
+						"computation": {
+							"$ref": "#/definitions/ComputationType",
+							"description": "Computation describes the computations involved in the process, in any form desired by the user (these are informational rather than machine-actionable), and so may be supplied in multiple, parallel-language versions."
+						},
+						"inputs": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/InputOutputType",
+								"description": "Input references an object which is an input to the process step."
+							}
+						},
+						"outputs": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/InputOutputType",
+								"description": "Output references an object which is an output form the process step."
+							}
+						},
+						"processSteps": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ProcessStepType",
+								"description": "ProcessStep defines a process step, which is a specific operation, performed on data in order to validate or to derive new information according to a given set of rules."
+							}
+						},
+						"transitions": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/TransitionType",
+								"description": "Transition describes the next process steps. Each transition in a process step should be evaluated, allowing for multiple process step branches from a single process step."
+							}
+						}
+					}
+				}
+			]
+		},
+		"ProcessType": {
+			"description": "ProcessType describes the structure of a process, which is a scheme which defines or documents the operations performed on data in order to validate data or to derive new information according to a given set of rules. Processes occur in order, and will continue in order unless a transition dictates another step should occur.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/MaintainableType"
+				},
+				{
+					"properties": {
+						"processSteps": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ProcessStepType",
+								"description": "ProcessStep defines a process step, which is a specific operation, performed on data in order to validate or to derive new information according to a given set of rules."
+							}
+						}
+					}
+				}
+			]
+		},
+		"ProvisionAgreementType": {
+			"description": "ProvisionAgreementType describes the structure of a provision agreement. A provision agreement defines an agreement for a data provider to report data or reference metadata against a flow. Attributes which describe how the registry must behave when data or metadata is registered against this provision agreement are supplied.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/MaintainableType"
+				},
+				{
+					"properties": {
+						"dataProvider": {
+							"$ref": "#/definitions/urn",
+							"description": "DataProvider is a urn reference to a pre-existing data (or metadata) provider in the registry."
+						},
+						"structureUsage": {
+							"$ref": "#/definitions/urn",
+							"description": "DataflowReference provides a urn reference to a pre-existing structure usage (i.e. a dataflow or metadataflow) in the registry."
+						}
+					},
+					"required": [
+						"dataProvider",
+						"structureUsage"
+					]
+				}
+			]
+		},
+		"ReleaseCalendarType": {
+			"description": "ReleaseCalendarType describes information about the timing of releases of the constrained data. All of these values use the standard \"P7D\" - style format.",
+			"type": "object",
+			"properties": {
+				"offset": {
+					"description": "Offset is the interval between January first and the first release of data within the year.",
+					"type": "string"
+				},
+				"periodicity": {
+					"description": "Periodicity is the period between releases of the data set.",
+					"type": "string"
+				},
+				"tolerance": {
+					"description": "Tolerance is the period after which the release of data may be deemed late.",
+					"type": "string"
+				}
+			},
+			"required": [
+				"offset",
+				"periodicity",
+				"tolerance"
+			]
+		},
+		"ReportPeriodRepresentationType": {
+			"description": "ReportPeriodRepresentationType defines the possible local representations of a report period target object. The reprentation must be a time period or a subset of this representation.",
+			"type": "object",
+			"properties": {
+				"textFormat": {
+					"$ref": "#/definitions/TimeTextFormatType"
+				}
+			},
+			"required": [
+				"textFormat"
+			]
+		},
+		"ReportPeriodTargetType": {
+			"description": "ReportPeriodTargetType defines the structure of a report period target object. The report period target object has a fixed representation and identifier.",
+			"type": "object",
+			"required": [
+				"localRepresentation"
+			],
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableTypeWithNCNameID"
+				},
+				{
+					"properties": {
+						"localRepresentation": {
+							"$ref": "#/definitions/ReportPeriodRepresentationType"
+						}
+					}
+				}
+			]
+		},
+		"ReportStructureType": {
+			"description": "ReportStructureType describes the structure of a report structure. It comprises a set of metadata attributes that can be defined as a hierarchy, and identifies the potential attachment of these attributes to an object by referencing a target identifier.",
+			"type": "object",
+			"required": [
+				"id",
+				"metadataAttributes",
+				"metadataTargets"
+			],
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableType"
+				},
+				{
+					"properties": {
+						"metadataAttributes": {
+							"type": "array",
+							"minItems": 1,
+							"items": {
+								"$ref": "#/definitions/MetadataAttribute"
+							}
+						},
+						"metadataTargets": {
+							"type": "array",
+							"minItems": 1,
+							"items": {
+								"$ref": "#/definitions/urn",
+								"description": "MetadataTarget references (through a urn) a metadata target defined in the metadata structure definition. A report structure can reference multiple metadata targets which allows a report structure to be reused for attaching metadata to different types of targets."
+							}
+						}
+					}
+				}
+			]
+		},
+		"ReportingCategoryMapType": {
+			"description": "ReportingCategoryMapType defines the structure for mapping two reporting categories. A local reference is provided both the source and target category.",
+			"type": "object",
+			"properties": {
+				"annotations": {
+					"$ref": "#/definitions/Annotations"
+				},
+				"source": {
+					"$ref": "#/definitions/urn",
+					"description": "Urn reference to a reporting category."
+				},
+				"target": {
+					"$ref": "#/definitions/urn",
+					"description": "Urn reference to a reporting category."
+				}
+			},
+			"required": [
+				"source",
+				"target"
+			]
+		},
+		"ReportingCategoryType": {
+			"description": "ReportingCategoryType describes the structure of a reporting category, which groups structure usages into useful sub-packages. Sub ordinate reporting categories can be nested within the category definition.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/NameableType"
+				},
+				{
+					"properties": {
+						"provisioningMetadata": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/urn",
+								"description": "ProvisioningMetadata provides urn references for dataflow and metadataflow references which are grouped in the reporting category. It is assumed that all provisioning metadata objects referenced from a category will be of the same type."
+							}
+						},
+						"reportingCategories": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ReportingCategory"
+							}
+						},
+						"structuralMetadata": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/urn",
+								"description": "StructuralMetadata provides urn references for data structure definition and metadata structure definition references which are grouped in the reporting category. It is assumed that all structural metadata objects referenced from a category will be of the same type."
+							}
+						}
+					}
+				}
+			]
+		},
+		"ReportingTaxonomyMapType": {
+			"description": "ReportingTaxonomyMapType defines the structure of a map which identifies relationships between reporting categories in different reporting taxonomies.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/NameableType"
+				},
+				{
+					"properties": {
+						"reportingCategoryMaps": {
+							"type": "array",
+							"minItems": 1,
+							"items": {
+								"$ref": "#/definitions/ReportingCategoryMap"
+							}
+						},
+						"source": {
+							"$ref": "#/definitions/urn",
+							"description": "Urn reference to a reporting taxonomy object."
+						},
+						"target": {
+							"$ref": "#/definitions/urn",
+							"description": "Urn reference to a reporting taxonomy object."
+						}
+					},
+					"required": [
+						"reportingCategoryMaps",
+						"source",
+						"target"
+					]
+				}
+			]
+		},
+		"ReportingTaxonomyType": {
+			"description": "ReportingTaxonomyType describes the structure of a reporting taxonomy, which is a scheme which defines the composition structure of a data report where each component can be described by an independent structure or structure usage description.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/MaintainableType"
+				},
+				{
+					"properties": {
+						"isPartial": {
+							"type": "boolean"
+						},
+						"reportingCategories": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ReportingCategory"
+							}
+						}
+					}
+				}
+			]
+		},
+		"ReportingYearStartDayRepresentationType": {
+			"description": "ReportingYearStartDayRepresentationType defines the representation for the reporting year start day attribute. Enumerated values are not allowed and the text format is fixed to be a day and month in the ISO 8601 format of '--MM-DD'.",
+			"type": "object",
+			"properties": {
+				"textFormat": {
+					"$ref": "#/definitions/ReportingYearStartDayTextFormatType"
+				}
+			},
+			"required": [
+				"textFormat"
+			]
+		},
+		"ReportingYearStartDayTextFormatType": {
+			"description": "ReportingYearStartDayTextFormatType is a restricted version of the NonFacetedTextFormatType that fixes the value of the text type to be DayMonth. This type exists solely for the purpose of fixing the representation of the reporting year start day attribute.",
+			"type": "object",
+			"properties": {
+				"textType": {
+					"$ref": "#/definitions/SimpleDataType"
+				}
+			}
+		},
+		"ReportingYearStartDayType": {
+			"description": "ReportingYearStartDayType defines the structure of the reporting year start day attribute. The reporting year start day attribute takes its semantic from its concept identity (usually the REPORTING_YEAR_START_DAY concept), yet is always has a fixed identifier (REPORTING_YEAR_START_DAY). The reporting year start day attribute always has a fixed text format, which specifies that the format of its value is always a day and month in the ISO 8601 format of '--MM-DD'. As with any other attribute, an attribute relationship must be specified. this relationship should be carefully selected as it will determin what type of data the data structure definition will allow. For example, if an attribute relationship of none is specified, this will mean the data sets conforming to this data structure definition can only contain data with standard reporting periods where the all reporting periods have the same start day. In this case, data reported as standard reporting periods from two entities with different fiscal year start days could not be contained in the same data set.",
+			"type": "object",
+			"required": [
+				"assignmentStatus",
+				"attributeRelationship",
+				"conceptIdentity",
+				"localRepresentation"
+			],
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableTypeWithNCNameID"
+				},
+				{
+					"properties": {
+						"assignmentStatus": {
+							"$ref": "#/definitions/UsageStatusType"
+						},
+						"attributeRelationship": {
+							"$ref": "#/definitions/AttributeRelationshipType"
+						},
+						"conceptIdentity": {
+							"$ref": "#/definitions/urn",
+							"description": "Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
+						},
+						"localRepresentation": {
+							"$ref": "#/definitions/ReportingYearStartDayRepresentationType"
+						}
+					}
+				}
+			]
+		},
+		"RepresentationMapType": {
+			"description": "RepresentationMapType describes the structure of the mapping of the value of a source to component to a target component. Either a reference to another map defined within the containing structure set or a description of the source and target text formats must be provided. Note that for data structure components, only a reference to a codelist map is relevant, since that is the only type of coded representation allowed in a data structure.",
+			"type": "object",
+			"properties": {
+				"codelistMap": {
+					"$ref": "#/definitions/urn",
+					"description": "CodelistMap references (through a urn) a codelist map defined in the same structure set which maps the enumeration of the representation of the source component to the enumeration of the representation of the target component."
+				},
+				"toTextFormat": {
+					"$ref": "#/definitions/TextFormatType",
+					"description": "ToTextFormat describes the un-coded representation of the target to which the value of the referenced component should be transformed."
+				},
+				"toValueType": {
+					"description": "ToValueType notes whether the value, name, or description of the source value should be used in the target value.",
+					"$ref": "#/definitions/ToValueTypeType"
+				},
+				"valueMap": {
+					"$ref": "#/definitions/ValueMapType",
+					"description": "ValueMap provides for a simple mapping of a source value to a target value without having to define a codelist map. This is available to allow mappings in situations such as the source or target is not being formally coded, or the source and/or target being a measure dimension in which case its representation is not mappable from a codelist map."
+				}
+			}
+		},
+		"SimpleCodeDataType": {
+			"description": "SimpleCodeDataType restricts SimpleDataType to specify the allowable data types for a simple code. The possible values are simply Alpha, AlphaNumeric, or Numeric.",
+			"type": "string",
+			"enum": [
+				"Alpha",
+				"AlphaNumeric",
+				"Numeric"
+			]
+		},
+		"SimpleComponentTextFormatType": {
+			"description": "SimpleComponentTextFormatType is a restricted version of the BasicComponentTextFormatType that does not allow for multi-lingual values.",
+			"type": "object",
+			"properties": {
+				"decimals": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"endTime": {
+					"$ref": "#/definitions/StandardTimePeriodType"
+				},
+				"endValue": {
+					"type": "number"
+				},
+				"interval": {
+					"type": "number"
+				},
+				"isSequence": {
+					"type": "boolean"
+				},
+				"maxLength": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"maxValue": {
+					"type": "number"
+				},
+				"minLength": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"minValue": {
+					"type": "number"
+				},
+				"pattern": {
+					"type": "string"
+				},
+				"startTime": {
+					"$ref": "#/definitions/StandardTimePeriodType"
+				},
+				"startValue": {
+					"type": "number"
+				},
+				"textType": {
+					"$ref": "#/definitions/SimpleDataType"
+				},
+				"timeInterval": {
+					"$ref": "#/definitions/duration"
+				}
+			}
+		},
+		"SimpleDataStructureRepresentationType": {
+			"description": "SimpleDataStructureRepresentationType defines the representation for any non-measure and non-time dimension data structure definition component.",
+			"type": "object",
+			"properties": {
+				"enumeration": {
+					"$ref": "#/definitions/urn",
+					"description": "Urn reference to a codelist"
+				},
+				"enumerationFormat": {
+					"$ref": "#/definitions/CodededTextFormatType"
+				},
+				"textFormat": {
+					"$ref": "#/definitions/SimpleComponentTextFormatType"
+				}
+			}
+		},
+		"StructureMapType": {
+			"description": "StructureMapType defines the structure for mapping components of one structure to components of another structure. A structure may be referenced directly meaning the map applies wherever the structure is used, or it may be a reference via a structure usage meaning the map only applies within the context of that usage. Using the related structures, one can make extrapolations between maps. For example, if data structures, A, B, and C, are all grouped in a related structures container, then a map from data structure A to C and a map from data structure B to C could be used to infer a relation between data structure A to C.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/NameableType"
+				},
+				{
+					"properties": {
+						"isExtension": {
+							"type": "boolean"
+						},
+						"componentMaps": {
+							"type": "array",
+							"minItems": 1,
+							"items": {
+								"$ref": "#/definitions/ComponentMapType",
+								"description": "ComponentMap defines the relationship between the components of the source and target structures, including information on how the value from the source component relates to values in the target component."
+							}
+						},
+						"source": {
+							"$ref": "#/definitions/urn",
+							"description": "Source provides a reference to a structure (data or metadata) or a structure usage (dataflow or metadataflow) from which components defined by the actual structure are to mapped."
+						},
+						"target": {
+							"$ref": "#/definitions/urn",
+							"description": "Target provides a reference to a structure (data or metadata) or a structure usage (dataflow or metadataflow) to which components from the source are to mapped."
+						}
+					},
+					"required": [
+						"componentMaps",
+						"source",
+						"target"
+					]
+				}
+			]
+		},
+		"StructureSetType": {
+			"description": "StructureSetType describes the structure of a structure set. It allows components in one structure, structure usage, or item scheme to be mapped to components in another structural component of the same type.",
+			"allOf": [
+				{
+					"$ref": "#/definitions/MaintainableType"
+				},
+				{
+					"properties": {
+						"categorySchemeMaps": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/CategorySchemeMapType",
+								"description": "CategorySchemeMap links a source and target categories from different schemes where there is a semantic equivalence between them."
+							}
+						},
+						"codelistMaps": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/CodelistMapType",
+								"description": "CodelistMap links a source and target codes from different lists where there is a semantic equivalence between them."
+							}
+						},
+						"conceptSchemeMaps": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ConceptSchemeMapType",
+								"description": "ConceptSchemeMap links a source and target concepts from different schemes where there is a semantic equivalence between them."
+							}
+						},
+						"hybridCodelistMaps": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/HybridCodelistMapType",
+								"description": "HybridCodelistMap links a source and target codes from different codelists, which may be hierarchical or flat, where there is a semantic equivalence between them."
+							}
+						},
+						"organisationSchemeMaps": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/OrganisationSchemeMapType",
+								"description": "OrganisationSchemeMap links a source and target organisations from different schemes where there is a semantic equivalence between them. Organisations are mapped without regard to role."
+							}
+						},
+						"relatedStructures": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/urn",
+								"description": "RelatedStructures contains urn references to structures (data structures and metadata structure definitions) and structure usages (data flows and metadata flows) to indicate that a semantic relationship exist between them. The details of these relationships can be found in the structure maps."
+							}
+						},
+						"reportingTaxonomyMaps": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ReportingTaxonomyMapType",
+								"description": "ReportingTaxonomyMap links a source and target reporting categories from different taxonomies where there is a semantic equivalence between them."
+							}
+						},
+						"structureMaps": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/StructureMapType",
+								"description": "StructureMap maps components from one structure to components to another structure, and can describe how the value of the components are related."
+							}
+						}
+					}
+				}
+			]
+		},
+		"TargetObjectDataType": {
+			"description": "TargetObjectDataType restricts DataType to specify the allowable data types for representing a target object value.",
+			"type": "string",
+			"enum": [
+				"KeyValues",
+				"IdentifiableReference",
+				"DataSetReference",
+				"AttachmentConstraintReference"
+			]
+		},
+		"TextFormatType": {
+			"description": "TextFormatType defines the information for describing a full range of text formats and may place restrictions on the values of the other attributes, referred to as \"facets\".",
+			"type": "object",
+			"properties": {
+				"decimals": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"endTime": {
+					"$ref": "#/definitions/StandardTimePeriodType"
+				},
+				"endValue": {
+					"type": "number"
+				},
+				"interval": {
+					"type": "number"
+				},
+				"isMultiLingual": {
+					"type": "boolean"
+				},
+				"isSequence": {
+					"type": "boolean"
+				},
+				"maxLength": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"maxValue": {
+					"type": "number"
+				},
+				"minLength": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"minValue": {
+					"type": "number"
+				},
+				"pattern": {
+					"type": "string"
+				},
+				"startTime": {
+					"$ref": "#/definitions/StandardTimePeriodType"
+				},
+				"startValue": {
+					"type": "number"
+				},
+				"textType": {
+					"$ref": "#/definitions/DataType"
+				},
+				"timeInterval": {
+					"$ref": "#/definitions/duration"
+				}
+			}
+		},
+		"TimeDimensionRepresentationType": {
+			"description": "TimeDimensionRepresentationType defines the representation for the time dimension. Enumerated values are not allowed.",
+			"type": "object",
+			"properties": {
+				"textFormat": {
+					"$ref": "#/definitions/TimeTextFormatType"
+				}
+			},
+			"required": [
+				"textFormat"
+			]
+		},
+		"TimeDimensionType": {
+			"description": "TimeDimensionType describes the structure of a time dimension. The time dimension takes its semantic from its concept identity (usually the TIME_PERIOD concept), yet is always has a fixed identifier (TIME_PERIOD). The time dimension always has a fixed text format, which specifies that its format is always the in the value set of the observational time period (see common:ObservationalTimePeriodType). It is possible that the format may be a sub-set of the observational time period value set. For example, it is possible to state that the representation might always be a calendar year. See the enumerations of the textType attribute in the LocalRepresentation/TextFormat for more details of the possible sub-sets. It is also possible to facet this representation with start and end dates. The purpose of such facts is to restrict the value of the time dimension to occur within the specified range. If the time dimension is expected to allow for the standard reporting periods (see common:ReportingTimePeriodType) to be used, then it is strongly recommended that the reporting year start day attribute also be included in the data structure definition. When the reporting year start day attribute is used, any standard reporting period values will be assumed to be based on the start day contained in this attribute. If the reporting year start day attribute is not included and standard reporting periods are used, these values will be assumed to be based on a reporting year which begins January 1.",
+			"type": "object",
+			"required": [
+				"conceptIdentity",
+				"localRepresentation"
+			],
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableTypeWithNCNameID"
+				},
+				{
+					"properties": {
+						"position": {
+							"description": "The position attribute specifies the position of the dimension in the data structure definition, starting at 0. It is optional as the position of the dimension in the key descriptor (DimensionList element) always takes precedence over the value supplied here. This is strictly for informational purposes only.",
+							"type": "integer",
+							"minimum": 0
+						},
+						"type": {
+							"description": "The type attribute identifies whether the dimension is a measure dimension, the time dimension, or a regular dimension. Although these are all apparent by the element names, this attribute allows for each dimension to be processed independent of its element as well as maintaining the restriction of only one measure and time dimension while still allowing dimension to occur in any order.",
+							"$ref": "#/definitions/DimensionTypeType"
+						},
+						"conceptIdentity": {
+							"$ref": "#/definitions/urn",
+							"description": "Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
+						},
+						"localRepresentation": {
+							"$ref": "#/definitions/TimeDimensionRepresentationType"
+						}
+					}
+				}
+			]
+		},
+		"TimeTextFormatType": {
+			"description": "TimeTextFormat is a restricted version of the SimpleComponentTextFormatType that only allows time based format and specifies a default ObservationalTimePeriod representation and facets of a start and end time.",
+			"type": "object",
+			"properties": {
+				"endTime": {
+					"$ref": "#/definitions/StandardTimePeriodType"
+				},
+				"startTime": {
+					"$ref": "#/definitions/StandardTimePeriodType"
+				},
+				"textType": {
+					"$ref": "#/definitions/TimeDataType"
+				}
+			}
+		},
+		"ToValueTypeType": {
+			"description": "ToValueTypeType provides an enumeration of available text-equivalents for translation of coded values into textual formats.",
+			"type": "string",
+			"enum": [
+				"Value",
+				"Name",
+				"Description"
+			]
+		},
+		"TransitionType": {
+			"description": "TransitionType describes the details of a transition, which is an expression in a textual or formalised way of the transformation of data between two specific operations performed on the data.",
+			"type": "object",
+			"required": [
+				"condition",
+				"targetStep"
+			],
+			"allOf": [
+				{
+					"$ref": "#/definitions/IdentifiableType"
+				},
+				{
+					"properties": {
+						"localID": {
+							"$ref": "#/definitions/idType"
+						},
+						"condition": {
+							"$ref": "#/definitions/localisedBestMatchText",
+							"description": "Condition is a textual description of the conditions to be met in order for the target step to be proceeded to. It is informational only (not machine-actionable), provided in the best-match language."
+						},
+						"conditions": {
+							"$ref": "#/definitions/localisedText",
+							"description": "Condition is a textual description of the conditions to be met in order for the target step to be proceeded to. It is informational only (not machine-actionable), and may be supplied in multiple, parallel-language form."
+						},
+						"targetStep": {
+							"$ref": "#/definitions/urn",
+							"description": "TargetStep references (through a urn) a process step within the process that should be transitioned to, should the conditions described be met."
+						}
+					}
+				}
+			]
+		},
+		"UsageStatusType": {
+			"description": "UsageStatusType provides a list of enumerated types for indicating whether reporting a given attribute is mandatory or conditional.",
+			"type": "string",
+			"enum": [
+				"Mandatory",
+				"Conditional"
+			]
+		},
+		"ValueMapType": {
+			"description": "ValueMapType contains a collection of value mappings, which give a source and target value.",
+			"type": "object",
+			"properties": {
+				"valueMappings": {
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/ValueMappingType",
+						"description": "ValueMapping provides a source and target value for the purpose of mapping."
+					}
+				}
+			},
+			"required": [
+				"valueMappings"
+			]
+		},
+		"ValueMappingType": {
+			"description": "ValueMappingType specifies the relationship between two values as a source and target.",
+			"type": "object",
+			"properties": {
+				"source": {
+					"type": "string"
+				},
+				"target": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"source",
+				"target"
+			]
+		},
+		"uri": {
+			"description": "Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. Providing the link to the SDMX-JSON schema is recommended.",
+			"type": "string",
+			"format": "uri"
+		},
+		"urn": {
+			"type": "string",
+			"format": "uri"
+		},
+		"duration": {
+			"type": "string",
+			"pattern": "^P((([0-9]*.?[0-9]*)Y)?(([0-9]*.?[0-9]*)M)?(([0-9]*.?[0-9]*)W)?(([0-9]*.?[0-9]*)D)?)?(T(([0-9]*.?[0-9]*)H)?(([0-9]*.?[0-9]*)M)?(([0-9]*.?[0-9]*)S)?)?$"
+		}
+	}
+}
