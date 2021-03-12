@@ -216,7 +216,7 @@ Example:
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the metadata set.
 * name - *String* *optional*. Human-readable (best-language-match) name of the metadata set.
 * names - *Object* *optional*. Human-readable localised *[names](#names)* of the metadata set.
-* metadataProvider - *String* *optional*. DataProvider provides a references to an organisation with the role of data provider that is providing this metadata set. DataProvider is a URN reference to a data provider to which the constraint is attached. If this is used, then only the release calendar is relevant. 
+* metadataProvider - *String* *optional*. MetadataProvider provides a references to an organisation with the role of metadata provider that is providing this metadata set. DataProvider is a URN reference to a data provider to which the constraint is attached. If this is used, then only the release calendar is relevant. 
 * target - *String*. *[Target](#target)* holds a valid SDMX Registry URN (see SDMX Registry Specification for details) of the object to which the reported metadata apply.
 * attributes - Non-empty *array* of recursive *[attribute](#attribute)* objects. Contains the reported metadata attribute values for the reported metadata and recursively their child metadata attributes.
 
