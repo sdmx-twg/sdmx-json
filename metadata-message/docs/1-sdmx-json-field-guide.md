@@ -226,7 +226,7 @@ Example:
 * names - *Object* *optional*. Human-readable localised *[names](#names)* of the metadata set.
 * description - *String* *optional*. Human-readable (best-language-match) description of the metadata set.
 * descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) of the metadata set.
-* target - *String*. *[Target](#target)* holds a valid SDMX Registry URN (see SDMX Registry Specification for details) of the object to which the reported metadata apply.
+* targets - Non-empty *array* of *String*. Each *target* holds a valid SDMX Registry URN (see SDMX Registry Specification for details) of the object to which the reported metadata apply. The same metadata set can be linked to multiple targets.
 * attributes - Non-empty *array* of recursive *[attribute](#attribute)* objects. Contains the reported metadata attribute values for the reported metadata and recursively their child metadata attributes.
 
 See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
@@ -267,7 +267,7 @@ Example:
 			"en": "This is the description of the metadata set",
 			"fr": "Ceci est la description de l'ensemble des métadonnées"
 		},
-		"target": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_EXR1(1.0)",
+		"targets": ["urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_EXR1(1.0)"],
 		"attributes": [
 			{
 				# attribute object #
