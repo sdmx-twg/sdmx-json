@@ -588,9 +588,13 @@
 				"links": {
 					"$ref": "#/definitions/links"
 				},
-				"target": {
-					"$ref": "#/definitions/urn",
-					"description": "Target holds a valid SDMX Registry URN (see SDMX Registry Specification for details) of the object to which the reported metadata apply."
+				"targets": {
+					"items": {
+						"$ref": "#/definitions/urn",
+						"description": "Target holds a valid SDMX Registry URN (see SDMX Registry Specification for details) of the object to which the reported metadata apply."
+					},
+					"minItems": 1,
+					"type": "array"
 				},
 				"attributes": {
 					"items": {
@@ -607,7 +611,7 @@
 					"agencyID",
 					"name",
 					"metadataflow",
-					"target",
+					"targets",
 					"attributes"
 				]},
 				{"required": [
@@ -615,7 +619,7 @@
 					"agencyID",
 					"name",
 					"metadataProvisionAgreement",
-					"target",
+					"targets",
 					"attributes"
 				]}
 			],
