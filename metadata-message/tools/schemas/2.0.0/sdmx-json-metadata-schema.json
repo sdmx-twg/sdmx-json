@@ -628,6 +628,9 @@
 				"id": {
 					"$ref": "#/definitions/idType"
 				},
+				"annotations": {
+					"$ref": "#/definitions/Annotations"
+				},
 				"value": {
 					"type": "string"
 				},
@@ -638,9 +641,6 @@
 					},
 					"minItems": 1,
 					"type": "array"
-				},
-				"annotations": {
-					"$ref": "#/definitions/Annotations"
 				},
 				"structuredText": {
 					"description": "StructuredText allows for mixed content of best-language-match text and XHTML tags. When using this type, one will have to provide a reference to the XHTML schema, since the processing of the tags within this type is strict, meaning that they are validated against the XHTML schema provided.",
@@ -669,6 +669,10 @@
 				{"required": [
 					"id",
 					"value"
+				]},
+				{"required": [
+					"id",
+					"values"
 				]},
 				{"required": [
 					"id",
