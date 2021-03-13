@@ -203,20 +203,29 @@ Example:
 
 *Object*. Contains a collection of reported metadata against a set of values for a given full or partial target identifier, as described in a metadata structure definition. The metadata set may contain reported metadata for multiple report structures defined in a metadata structure definition.
 
+* action - *String* *optional*. Action provides a list of actions, describing the intention of the data transmission from the sender's side.  
+  - `Append` - this is an incremental update for an existing `dataSet` or the provision of new data or documentation (attribute values) formerly absent. If any of the supplied data or metadata is already present, it will not replace these data.
+  - `Replace` - data are to be replaced, and may also include additional data to be appended.
+  - `Delete` - data are to be deleted.
+  - `Information` (default) - data are being exchanged for informational purposes only, and not meant to update a system.  
 * publicationPeriod - *String* *optional*. The publicationPeriod specifies the period of publication of the data in terms of whatever provisioning agreements might be in force (i.e., "2005-Q1" if that is the time of publication for a `metadataSet` published on a quarterly basis).
 * publicationYear - *String* *optional*. The publicationYear holds the ISO 8601 four-digit year.
 * reportingBegin - *String* *optional*. The start of the time period covered by the message.
 * reportingEnd - *String* *optional*. The end of the time period covered by the message.
-* id - *String* *optional*. Identifier for the metadata set.
-* metadataflowRef - *String*. URN reference to the metadataflow definition (either *metadataflowRef* or *metadataProvisionRef* is required).
-* metadataProvisionRef - *String*. URN reference to the metadata provision definition (either *metadataflowRef* or *metadataProvisionRef* is required).
+* id - *String*. Identifier for the metadata set.
+* agencyID - *String*. ID of the agency maintaining this metadata set.
+* version - *String* *optional*. Version of this metadata set according to semantic versioning. If not specified then the metadata set is non-versioned.
+* isExternalReference - *Boolean* *optional*. If set to “true” it indicates that the content of the metadata set is held externally.
+* metadataflow - *String*. URN reference to the metadataflow definition (either *metadataflow* or *metadataProvisionAgreement* is required).
+* metadataProvisionAgreement - *String*. URN reference to the metadata provision definition (either *metadataflow* or *metadataProvisionAgreement* is required).
 * validFrom - *String* *optional*. The validFrom indicates the inclusive start time indicating the validity of the information in the data.
 * validTo - *String* *optional*. The validTo indicates the inclusive end time indicating the validity of the information in the data.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the metadata set.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the metadata set.
-* name - *String* *optional*. Human-readable (best-language-match) name of the metadata set.
+* name - *String*. Human-readable (best-language-match) name of the metadata set.
 * names - *Object* *optional*. Human-readable localised *[names](#names)* of the metadata set.
-* metadataProvider - *String* *optional*. MetadataProvider provides a references to an organisation with the role of metadata provider that is providing this metadata set. DataProvider is a URN reference to a data provider to which the constraint is attached. If this is used, then only the release calendar is relevant. 
+* description - *String* *optional*. Human-readable (best-language-match) description of the metadata set.
+* descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) of the metadata set.
 * target - *String*. *[Target](#target)* holds a valid SDMX Registry URN (see SDMX Registry Specification for details) of the object to which the reported metadata apply.
 * attributes - Non-empty *array* of recursive *[attribute](#attribute)* objects. Contains the reported metadata attribute values for the reported metadata and recursively their child metadata attributes.
 
@@ -225,13 +234,17 @@ See the section on [localised text elements](#localised-text-elements) on how th
 Example:
 
 	{
+		"action": "Information",
 		"publicationPeriod": "2018-Q1",
 		"publicationYear": "2018",
 		"reportingBegin": "1960",
 		"reportingEnd": "2020",
 		"id": "METADATASET",
-		"metadataflowRef": "urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IMFSTAT(1.0)",
-		"metadataProvisionRef": "urn:sdmx:org.sdmx.infomodel.metadataprovision=OECD:ALB_DQAF(1.0.0)",
+		"agencyID": "ECB.DISS",
+		"version": "1.0",
+		"isExternalReference": false,
+		"metadataflow": "urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=ECB.DISS:MDF(1.0)",
+		# "metadataProvisionAgreement": "urn:sdmx:org.sdmx.infomodel.metadataprovision=ECB.DISS:MDPA(1.0.0)",
 		"validFrom": "2018-04-01",
 		"validTo": "2018-07-01",
 		"annotations": [
@@ -249,7 +262,11 @@ Example:
 			"en": "Metadata set",
 			"fr": "Set de métadonnées"
 		},
-		"metadataProvider": "urn:sdmx:org.sdmx.infomodel.dataproviderscheme.DataproviderScheme=IMF:IMF(1.0).IMF_DISS",
+		"description": "This is the description of the metadata set",
+		"descriptions": {
+			"en": "This is the description of the metadata set",
+			"fr": "Ceci est la description de l'ensemble des métadonnées"
+		},
 		"target": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_EXR1(1.0)",
 		"attributes": [
 			{
@@ -263,13 +280,16 @@ Example:
 *Object*. Defines the structure for a reported metadata attribute. A value for the attribute can be supplied as either a single value, or multi-lingual text values (either structured or unstructured). An optional set of child metadata attributes is also available if the metadata attribute definition defines nested metadata attributes.
 
 * id - *String*. ID for the reported metadata attribute.
-* value - *String* *optional*. Value for the reported metadata attribute.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the reported metadata attribute.
+* value - *String* *optional*. Value for the reported metadata attribute.
+* values - Non-empty array of *String* *optional*. Values for the reported metadata attribute.
 * structuredText - *String* *optional*. A human-readable (best-language-match) structured text allowing for mixed content of text and XHTML tags. When using this type, one will have to provide a reference to the XHTML schema, since the processing of the tags within this type is strict, meaning that they are validated against the XHTML schema provided.
 * structuredTexts - *Object* *optional*. A list of human-readable localised structured text (see *[names](#names)*), see above.
 * text - *String* *optional*. A human-readable (best-language-match) unstructured text (without XHTML tags).
 * texts - *Object* *optional*. A list of human-readable localised unstructured text (see *[names](#names)*), see above.
 * attributes - Non-empty *array* of recursive *[attribute](#attribute)* objects. Contains the reported metadata attribute values for the reported metadata and recursively their child metadata attributes.
+
+One of the properties is required: value, values, text or structuredText.
 
 See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
@@ -278,6 +298,7 @@ Example:
 	{
 		"id": "REPORT_ATTRIBUTE1",
 		"value": "CODED_TEXT",
+		"values": ["TEXT1","TEXT2"],
 		"annotations": [
 			{
 				# annotation object #
