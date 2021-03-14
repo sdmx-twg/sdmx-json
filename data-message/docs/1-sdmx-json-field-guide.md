@@ -39,7 +39,7 @@ nulled field and the absence of a field as the same thing.
 - Not all fields appear in all contexts. For example response with error messages
 may not contain fields for data, dimensions and attributes.
 
-# Field Guide to SDMX-JSON Data Message Objects
+# Field Guide to SDMX-JSON 2.0 Data Message Objects (aligned with SDMX 3.0.0)
 
 ## message
 
@@ -233,8 +233,9 @@ used in the message and also describes to which level in the hierarchy (`dataSet
 `observations`) these components are attached.
 
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. A collection of links to structural metadata or to additional information regarding the structure. **Providing links allowing accessing the underlying SDMX Data Structure Definition, Dataflow and/or Provision Agreements is recommended.**
-* dimensions - *Object*. Describes the *[dimensions](#dimensions-attributes)* used in the message as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) to which these `dimensions` are attached.
-* attributes - *Object*. Describes the *[attributes](#dimensions-attributes)* used in the message as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) to which these `attributes` are attached.
+* dimensions - *Object*. Describes the *[dimensions](#dimensions-measures-attributes)* used in the message as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) to which these `dimensions` are attached.
+* measures - *Object* *optional*. Describes the *[measures](#dimensions-measures-attributes)* used in the message. For backward-compatibility, the `measures` object can be omitted if there is only one measure with the ID "OBS_VALUE". In this case, the measure values (of an indeterministic type) are written directly into the dataSet. SDMX 3+.0.0 implementations should always use the `measures` object. In case an SDMX 3+.0.0 data structure definition has no measures, the `measures` object must be present but empty. 
+* attributes - *Object*. Describes the *[attributes](#dimensions-measures-attributes)* used in the message as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) to which these `attributes` are attached.
 * annotations - *Array* *optional*. *Annotations* field is an array of *[annotation](#annotation)* objects. If appropriate, provides a list of `annotations` that can be referenced by `structure`, `component`, `component value`, `dataSets`, `series` and `observations`.
 
 Example:
@@ -247,6 +248,9 @@ Example:
 		],
 		"dimensions": {
 			# dimensions object #
+		},
+		"measures": {
+			# measures object #
 		},
 		"attributes": {
 			# attributes object #
@@ -264,15 +268,14 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 Providing links allowing accessing the underlying SDMX Data Structure Definition, Dataflow
 and/or Provision Agreements is recommended.
 
-### dimensions, attributes
+### dimensions, measures, attributes
 
-*Object*. Describes the dimensions/attributes used in the message 
-as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) 
-to which these dimensions/attributes are attached. 
+*Object*. Describes the dimensions/measures/attributes used in the message 
+as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) to which these dimensions/attributes are attached. 
 
-* dataSet - *Array* *optional*. *DataSet* field is an array of *[component](#component)* objects. Optional array to be provided if components (dimensions or attributes) are presented at the `dataSet` level. It is highly recommended to present all dimensions and attributes at the `dataSet` level for which the message contains only 1 single value.
-* series - *Array* *optional*. *Series* field is an array of *[component](#component)* objects. Optional array to be provided if components (dimensions or attributes) are presented at the `series` level.
-* observation - *Array* *optional*. *Observation* field is an array of *[component](#component)* objects. Optional array to be provided if components (dimensions or attributes) are presented at the `observation` level. When using the SDMX API, then the dimension(s) specified in the parameter "dimensionAtObservation" would be presented at `observation` level. If "dimensionAtObservation=AllDimensions" then all dimensions, except those with only one value possibly presented at the `dataSet` level, would be presented at `observation` level.
+* dataSet - *Array* *optional*. *DataSet* field is an array of *[component](#component)* objects. Optional array to be provided if components (only dimensions or attributes) are presented at the `dataSet` level. It is highly recommended to present all dimensions and attributes at the `dataSet` level for which the message contains only 1 single value.
+* series - *Array* *optional*. *Series* field is an array of *[component](#component)* objects. Optional array to be provided if components (only dimensions or attributes) are presented at the `series` level.
+* observation - *Array* *optional*. *Observation* field is an array of *[component](#component)* objects. Optional array to be provided if components (dimensions, measures or attributes) are presented at the `observation` level. When using the SDMX API, then the dimension(s) specified in the parameter "dimensionAtObservation" would be presented at `observation` level. If "dimensionAtObservation=AllDimensions" then all dimensions, except those with only one value possibly presented at the `dataSet` level, would be presented at `observation` level.
 
 Example:
 
@@ -292,7 +295,14 @@ Example:
 				# component object #
 			}
 		]
-	}
+	},
+	"measures": {
+		"observation": [
+			{
+				# component object #
+			}
+		]
+	},
 	"attributes": {
 		"dataSet": [
 			{
@@ -313,9 +323,12 @@ Example:
 
 #### component
 
-*Object* *optional*. A component represents a `dimension` or an `attribute` used in the message. 
+*Object* *optional*. A component represents a `dimension`, a `measure` or an `attribute` used in the message. 
 It contains basic information about the component (such as its `name` and `id`) 
 as well as the list of `values` used in the message for this particular component.
+Dimensions must always present their values in the `values` array because the dataSets will only be able to use the corresponding indexes of these values in the `values` array.
+Measures should present their values in the `values` array when they are coded. If they are non-coded then the measure values are directly written into the dataSet.
+Attributes should present their values in the `values` array at least when they are coded, or if they are presented at dataset, group or series level (in order to avoid repetition). If they are non-coded and presented at observation level then instead of using the component's `values` array, the attribute values can be directly written into dataSet.
 Each of the components may contain the following fields:
 
 * id - *String*. Identifier for the component. 
@@ -323,9 +336,9 @@ Each of the components may contain the following fields:
 * names - *Object* *optional*. Human-readable localised *[names](#names)* for the component.
 * description - *String* *optional*. Human-readable (best-language-match) description for the component.
 * descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) for the component.
-* keyPosition - *Number*. **This field is mandatory for `dimensions` but not to be supplied for `attributes`.** Indicates the position of the `dimension` in the Data Structure Definition, starting at 0. It needs to be provided also for the special `dimensions` such as Time or Measure dimensions. The information in this field is consistent with the order of `dimensions` in the "key" parameter string (i.e. D.USD.EUR.SP00.A) for data queries in the SDMX API. 
+* keyPosition - *Number*. **This field is mandatory for `dimensions` but not to be supplied for `measures` or `attributes`.** Indicates the position of the `dimension` in the Data Structure Definition, starting at 0. It needs to be provided also for the special `dimensions` such as Time or Measure dimensions. The information in this field is consistent with the order of `dimensions` in the "key" parameter string (i.e. D.USD.EUR.SP00.A) for data queries in the SDMX API. 
 * roles - *Array* of *String*s *optional*. Defines the component role(s), if any. Roles are represented by the id of a concept defined as [SDMX cross-domain concept](https://sdmx.org/wp-content/uploads/01_sdmx_cog_annex_1_cdc_2009.pdf). Several of the concepts defined as SDMX cross-domain concepts are useful for data visualisation, such as for example, the series title ("TITLE"), the unit of measure ("UNIT_MEASURE"), the number of decimals to be displayed ("DECIMALS"), the  country or geographic reference area ("REF_AREA", e.g. when using maps), the period of time to which the measured observation refers ("REF_PERIOD"), the time interval at which observations occur over a given time period ("FREQ"), etc. It is strongly recommended to identify any component that can be useful for data visualisation purposes by using the appropriate SDMX cross-domain concept as role.
-* relationship - *Object*.  **This field is mandatory for `attributes` but not to be supplied for `dimensions`.** *[Attribute relationship](#attribute-relationship)* describes how the value of this attribute varies with the values of other components. This relationship expresses the attachment level of the attribute as defined in the data structure definition. Depending on the message context (especially the data query) an attribute value can however be attached physically in the message at a different level.
+* relationship - *Object*.  **This field is mandatory for `attributes` but not to be supplied for `measures` or `dimensions`.** *[Attribute relationship](#attribute-relationship)* describes how the value of this attribute varies with the values of other components. This relationship expresses the attachment level of the attribute as defined in the data structure definition. Depending on the message context (especially the data query) an attribute value can however be attached physically in the message at a different level.
 * default - *String* or *Number* *optional*. Defines a default `value` for the component (**valid for `attributes` only!**). If no value is provided in the data part of the message then this value applies.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the component.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the component. Indices refer back to the array of *annotations* in the structure field.
@@ -339,13 +352,12 @@ Example:
 		"id": "FREQ",
 		"name": "Frequency",
 		"names": { "en": "Frequency", 
-				   "fr": "Fréquence" },
+			   "fr": "Fréquence" },
 		"description": "The time interval at which observations occur over a given time period.",
 		"descriptions": { "en": "The time interval at which observations occur over a given time period.",
-						  "fr": "L'intervalle de temps avec lequel les observations sont faites sur une période donnée." },
+				  "fr": "L'intervalle de temps avec lequel les observations sont faites sur une période donnée." },
 		"keyPosition": 0,
 		"role": [ "FREQ" ],
-		"default": "A",
 		"links": [
 			{
 				# link object #
@@ -355,6 +367,25 @@ Example:
 		"values": [
 			{
 				# component value object #
+			}
+		]
+	}
+
+	{
+		"id": "OBS_STATUS",
+		"name": "Observation status",
+		"names": { "en": "Observation status", 
+			   "fr": "Statut d'observation" },
+		"role": [ "PRIMARY" ],
+		"links": [
+			{
+				# link object #
+			}
+		],
+		"annotations": [ 2, 35 ],
+		"values": [
+			{
+				# component value object (for coded measures only) #
 			}
 		]
 	}
@@ -390,9 +421,11 @@ Example:
 
 * dimensions - *Array* of *String*s *optional*. One or more ID(s) of (a) local dimension(s) in the data structure definition on which the value of this attribute depends. 
 * none - Empty *Object* *optional*. This means that value of the attribute will not vary with any of the other data structure components.
-* primaryMeasure - *String* *optional*. ID of a local primary measure as defined in the data structure definition. This is used to specify that the value of the attribute is dependent upon the observed value.
+* observation - Empty *Object* *optional*. This means that value of the attribute can vary with each observation.
+* primaryMeasure - *String* *optional*. Deprecated value having the same meaning than the relationship `observation`. For backward-compatibility only.
+* measures - *Array* of *String*s *optional*. One or more ID(s) of (a) local measure(s) in the data structure definition to which the value of this attribute applies. This is only for informational and presentational purposes.
 
-Exactly one of `dimensions`, `none` and `primaryMeasure` is required.
+Exactly one of `dimensions`, `none` and (`observation` or `primaryMeasure`) is required.
 Note that relationships defined in data structure definitions through `attachmentGroups` or a `group` are to be resolved by the server conveniently for the client into above `dimensions`.
 
 Examples:
@@ -408,7 +441,18 @@ Examples:
 	}
 
 	{
-		"primaryMeasure": "OBS_VALUE"
+		"observation": {}
+	}
+
+
+	{
+		"measures": [
+			"MEAS1", "MEAS2"
+		]
+	}
+
+	{
+		"primaryMeasure": "OBS_VALUE"	# Deprecated, for backward-compatibility only.
 	}
 
 
@@ -421,6 +465,12 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 *Object* *optional*. A particular value for a component in a message. 
 
 * id - *String*. Unique identifier for a component value.
+
+
+* value - *String* *optional*. Non-coded value for the component value.
+
+WORK IN PROGRESS
+
 * name - *String* *optional*. Human-readable (best-language-match) name for the component value.
 * names - *Object* *optional*. Human-readable localised *[names](#names)* for the component value.
 * description - *String* *optional*. Human-readable (best-language-match) description for the component value. The description is typically longer than the text provided for the name field.
