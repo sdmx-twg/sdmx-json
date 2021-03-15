@@ -117,7 +117,7 @@
 			]
 		},
 		"statusMessage": {
-			"description": "statusMessage describes the structure of an status message.",
+			"description": "statusMessage describes the structure of an error or warning message.",
 			"type": "object",
 			"properties": {
 				"code": {
