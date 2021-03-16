@@ -20,7 +20,7 @@
 			}
 		},
 		"errors": {
-			"description": "Errors field is an array of error objects. When appropriate provides a list of error messages in addition to RESTful web services HTTP error status codes.",
+			"description": "Errors field is an array of status message objects. When appropriate provides a list of status messages in addition to RESTful web services HTTP error status codes.",
 			"type": "array",
 			"items": {"$ref": "#/definitions/statusMessage"}
 		}
@@ -367,6 +367,11 @@
 							"items": {"$ref": "#/definitions/attribute"},
 							"uniqueItems": true
 						},
+						"dimensionGroup": {
+							"type": "array",
+							"items": {"$ref": "#/definitions/attribute"},
+							"uniqueItems": true
+						},
 						"series": {
 							"type": "array",
 							"items": {"$ref": "#/definitions/attribute"},
@@ -566,7 +571,7 @@
 						"pattern": "^[A-Za-z0-9_@$-]+$"
 					},
 					"value": {
-						"type": "string"
+						"type": ["number", "string"]
 					},
 					"name": {"$ref": "#/definitions/localisedBestMatchText"},
 					"names": {"$ref": "#/definitions/localisedText"},
@@ -620,7 +625,7 @@
 						"pattern": "^[A-Za-z0-9_@$-]+$"
 					},
 					"value": {
-						"type": ["number", "string"]
+						"type": ["number", "string", {"$ref": "#/definitions/localisedText"}]
 					},
 					"values": {"$ref": "#/definitions/valueArray"},
 					"name": {"$ref": "#/definitions/localisedBestMatchText"},
@@ -693,11 +698,26 @@
 						"minimum": 0
 					}
 				},
+				"dimensionGroupAttributes": {
+					"type": "object",
+					"patternProperties": {"^[0-9]*(:[0-9]*)*$": {
+						"type": "array",
+						"items": {"type": [
+							"number",
+							"string",
+							{"$ref": "#/definitions/localisedText"},
+							{"$ref": "#/definitions/valueArray"},
+							"null"
+						]}
+					}},
+					"additionalProperties": false
+				},
 				"observations": {
 					"type": "object",
 					"patternProperties": {"^[0-9]+(:[0-9]+)*$": {
 						"type": "array",
 						"items": {"type": [
+							"integer",
 							"number",
 							"string",
 							{"$ref": "#/definitions/localisedText"},
@@ -738,6 +758,7 @@
 								"patternProperties": {"^[0-9]+(:[0-9]+)*$": {
 									"type": "array",
 									"items": {"type": [
+										"integer",
 										"number",
 										"string",
 										{"$ref": "#/definitions/localisedText"},
@@ -759,11 +780,15 @@
 		"valueArray": {
 			"oneOf": [{
 				"type": "array";
-				"items": {"type": "string"},
+				"items": {"type": "integer"},
 				"minItems": 1
 			},{
 				"type": "array";
 				"items": {"type": "number"},
+				"minItems": 1
+			},{
+				"type": "array";
+				"items": {"type": "string"},
 				"minItems": 1
 			},{
 				"type": "array";
