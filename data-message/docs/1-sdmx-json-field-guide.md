@@ -36,7 +36,7 @@ consuming applications should tolerate the addition of new fields with ease.
 - The ordering of fields in objects is undefined. The fields may appear in any order
 and consuming applications should not rely on any specific ordering. It is safe to consider a
 nulled field and the absence of a field as the same thing.
-- Not all fields appear in all contexts. For example response with error messages
+- Not all fields appear in all contexts. For example response with error status messages
 may not contain fields for data, dimensions and attributes.
 
 # Field Guide to SDMX-JSON 2.0 Data Message Objects (aligned with SDMX 3.0.0)
@@ -327,8 +327,8 @@ Example:
 It contains basic information about the component (such as its `name` and `id`) 
 as well as the list of `values` used in the message for this particular component.
 Dimensions must always present their values in the `values` array because the dataSets will only be able to use the corresponding indexes of these values in the `values` array.
-Measures should present their values in the `values` array when they are coded. If they are non-coded then the measure values are directly written into the dataSet.
-Attributes should present their values in the `values` array at least when they are coded, or if they are presented at dataset, group or series level (in order to avoid repetition). If they are non-coded and presented at observation level then instead of using the component's `values` array, the attribute values can be directly written into dataSet.
+Measures should present their values in the `values` array when they are coded. If they are non-coded then the measure values are directly written into the dataSets.
+Attributes should present their values in the `values` array at least when they are coded, or if they are presented at dataset, group or series level (in order to avoid repetition). If they are non-coded and presented at observation level then instead of using the component's `values` array, the attribute values can be directly written into the dataSets.  
 Each of the components may contain the following fields:
 
 * id - *String*. Identifier for the component. 
@@ -338,11 +338,13 @@ Each of the components may contain the following fields:
 * descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) for the component.
 * keyPosition - *Number*. **This field is mandatory for `dimensions` but not to be supplied for `measures` or `attributes`.** Indicates the position of the `dimension` in the Data Structure Definition, starting at 0. It needs to be provided also for the special `dimensions` such as Time or Measure dimensions. The information in this field is consistent with the order of `dimensions` in the "key" parameter string (i.e. D.USD.EUR.SP00.A) for data queries in the SDMX API. 
 * roles - *Array* of *String*s *optional*. Defines the component role(s), if any. Roles are represented by the id of a concept defined as [SDMX cross-domain concept](https://sdmx.org/wp-content/uploads/01_sdmx_cog_annex_1_cdc_2009.pdf). Several of the concepts defined as SDMX cross-domain concepts are useful for data visualisation, such as for example, the series title ("TITLE"), the unit of measure ("UNIT_MEASURE"), the number of decimals to be displayed ("DECIMALS"), the  country or geographic reference area ("REF_AREA", e.g. when using maps), the period of time to which the measured observation refers ("REF_PERIOD"), the time interval at which observations occur over a given time period ("FREQ"), etc. It is strongly recommended to identify any component that can be useful for data visualisation purposes by using the appropriate SDMX cross-domain concept as role.
+* isMandatory - *Boolean* *optional*. **Only for `measures` and `attributes`.** If `true` then that `measure` or `attribute` is mandatory in the exchange of complete datasets. The default is `false`.
 * relationship - *Object*.  **This field is mandatory for `attributes` but not to be supplied for `measures` or `dimensions`.** *[Attribute relationship](#attribute-relationship)* describes how the value of this attribute varies with the values of other components. This relationship expresses the attachment level of the attribute as defined in the data structure definition. Depending on the message context (especially the data query) an attribute value can however be attached physically in the message at a different level.
+* format - *Object* *optional*. *[Format](#format)* describes the allowed components representation (permitted type and cardinality of the values). It contains essential information to determine the location of the component values and the related necessity of using indexes for referencing.
 * default - *String* or *Number* *optional*. Defines a default `value` for the component (**valid for `attributes` only!**). If no value is provided in the data part of the message then this value applies.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the component.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the component. Indices refer back to the array of *annotations* in the structure field.
-* values - *Array*. *Values* field is an array of *[component value](#component-value)* objects. Note that `dimensions` and `attributes` presented at `dataSet` level can only have one single component value.
+* values - *Array* *optional*. *Values* field is an array of *[component value](#component-value)* objects. Note that `dimensions` and `attributes` presented at `dataSet` level can only have one single component value. ***Values* are mandatory for `dimensions`**, but *optional* for `measures` and `attributes`. Whenever the *values* field is provided, the component values in the dataSets will always contain the corresponding array indexes, otherwise they will contain the values themselves.  
 
 See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
@@ -358,6 +360,9 @@ Example:
 				  "fr": "L'intervalle de temps avec lequel les observations sont faites sur une période donnée." },
 		"keyPosition": 0,
 		"role": [ "FREQ" ],
+		"format": {
+			# format object #
+		},
 		"links": [
 			{
 				# link object #
@@ -377,6 +382,9 @@ Example:
 		"names": { "en": "Observation status", 
 			   "fr": "Statut d'observation" },
 		"role": [ "PRIMARY" ],
+		"format": {
+			# format object #
+		},
 		"links": [
 			{
 				# link object #
@@ -401,6 +409,9 @@ Example:
 		"relationship": {
 			# attribute-relationship object #
 		},
+		"format": {
+			# format object #
+		},
 		"default": "MAFF_Agricultural Statistics",
 		"links": [
 			{
@@ -417,27 +428,27 @@ Example:
 
 ##### attribute relationship
 
-*Object*. The attribute's relationship defines the relationship between an attribute and other data structure definition components as defined in the data structure definition. This is also called "attachment level". Depending on the message context (especially the data query) an attribute value can however be attached physically in the message at a different level.
+*Object*. The attribute's relationship defines the relationship between an attribute and other data structure definition components as defined in the data structure definition. It defines the original "attachment level", but depending on the message context (especially the data query) an attribute value can however be presented physically in the message at a different level. The attribute relationship serves also to define the scope, meaning to which measures an attribute applies.
 
-* dimensions - *Array* of *String*s *optional*. One or more ID(s) of (a) local dimension(s) in the data structure definition on which the value of this attribute depends. 
-* none - Empty *Object* *optional*. This means that value of the attribute will not vary with any of the other data structure components.
-* observation - Empty *Object* *optional*. This means that value of the attribute can vary with each observation.
+* none - Empty *Object* *optional*. This means that value of the attribute will not **vary** with any of the other data structure components.
+* dimensions - *Array* of *String*s *optional*. One or more ID(s) of (a) local dimension(s) in the data structure definition on which the value of this attribute **depends**. 
+* observation - Empty *Object* *optional*. This means that value of the attribute can **vary** with each observation.
 * primaryMeasure - *String* *optional*. Deprecated value having the same meaning than the relationship `observation`. For backward-compatibility only.
-* measures - *Array* of *String*s *optional*. One or more ID(s) of (a) local measure(s) in the data structure definition to which the value of this attribute applies. This is only for informational and presentational purposes.
+* measures - *Array* of *String*s *optional*. One or more ID(s) of (a) local measure(s) in the data structure definition to which the values of this attribute **apply**. This is only for informational and presentational purposes. If the `measures` relationship is not present then the attribute values apply to whole observations.
 
-Exactly one of `dimensions`, `none` and (`observation` or `primaryMeasure`) is required.
+Exactly one of `none`, `dimensions` and (`observation` or `primaryMeasure`) is required.
 Note that relationships defined in data structure definitions through `attachmentGroups` or a `group` are to be resolved by the server conveniently for the client into above `dimensions`.
 
 Examples:
 
 	{
-		"dimensions": [
-			"FREQ", "CURRENCY"
-		]
+		"none": {}
 	}
 
 	{
-		"none": {}
+		"dimensions": [
+			"FREQ", "CURRENCY"
+		]
 	}
 
 	{
@@ -456,6 +467,37 @@ Examples:
 	}
 
 
+##### Format
+
+*Object*. The format object defines the representation for a component. It can be text (including XHTML and multi-lingual values), a simple value, or an enumerated value.
+
+* minOccurs - *Positive number* *optional* The default is 1. **Only for `measures` and `attributes`.** Indicates the minimum number of value that must be reported for the component. If > 1 then the component values will use the `values` property of the component value instead of `id` and `name` or `value`.
+* maxOccurs - *Positive number* *optional* The default is 1. **Only for `measures` and `attributes`.** Indicates the maximum number of values that can be reported for the component. If > 1 then the component values will use the `values` property of the component value instead of `id` and `name` or `value`.
+* textFormat - *String* *optional*. Describes an uncoded textual format. If it is an empty string, then any valid string characters may be used in component values (within the constraints of the other format constraints). If used, the component values will use instead of `id` and `name`:
+  - if `minOccurs` and `maxOccurs` are equal to 1 and if `isMultiLingual` is `false`: the `value` property,
+  - if `minOccurs` and `maxOccurs` are equal to 1 and if `isMultiLingual` is `true`: the `names` property,
+  - otherwise: the `values` property.
+* minLength - *Positive number* *optional*. Specifies the minimum and length of the value in characters.
+* maxLength - *Positive number* *optional*. Specifies the maximum length of the value in characters.
+* minValue - *Decimal* *optional*. Is used for inclusive and exclusive ranges, indicating what the lower bound of the range is. If this is used with an inclusive range, a valid value will be greater than or equal to the value specified here. By default, the minValue is assumed to be inclusive. 
+* maxValue - *Decimal* *optional*. Is used for inclusive and exclusive ranges, indicating what the upper bound of the range is. If this is used with an inclusive range, a valid value will be less than or equal to the value specified here. By default, the maxValue is assumed to be inclusive. 
+* pattern - *String* *optional*. Holds any standard regular expression.
+* isMultiLingual - *Boolean* *optional*. **Only for `measures` and `attributes`.** This indicates for a textFormat of type "string", whether the component value should allow for multiple values in different languages. The default is `false`. If `true`, the component values will use instead of `id` and `name`:
+  -  if `minOccurs` and `maxOccurs` are equal to 1: the `names` property,
+  -  otherwise: the `values` property.
+
+Example:
+
+	{ 
+		"minOccurs": 2,
+		"maxOccurs": 3,
+		"textFormat": "string",
+		"minLength": 4, 
+		"maxLength": 4, 
+		"pattern": "^[A-Za-z][A-Za-z0-9_-]*$",
+		"isMultilingual": true
+	}
+
 ##### link
 
 See the section on [linking mechanism](#linking-mechanism) for all information on links.
@@ -464,15 +506,11 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 *Object* *optional*. A particular value for a component in a message. 
 
-* id - *String*. Unique identifier for a component value.
-
-
-* value - *String* *optional*. Non-coded value for the component value.
-
-WORK IN PROGRESS
-
-* name - *String* *optional*. Human-readable (best-language-match) name for the component value.
-* names - *Object* *optional*. Human-readable localised *[names](#names)* for the component value.
+* id - *String*. Unique identifier for a coded component value.
+* value - *String* *optional* only for non-coded unique non-localised component values, e.g. for non-coded dimensions.
+* values - *Object* *optional* only for non-coded multivalued component values.
+* name - *String* *optional*. Human-readable (best-language-match) name for a coded component value.
+* names - *Object* *optional*. Human-readable localised *[names](#names)* for a coded component value or a non-coded unique localised component value.
 * description - *String* *optional*. Human-readable (best-language-match) description for the component value. The description is typically longer than the text provided for the name field.
 * descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) for the component value. A descriptions is typically longer than the text provided for the name field.
 * start, end - *String* *optional*. Start and end are instances of time that define the actual Gregorian calendar period covered by the values for the time dimension. The algorithm for computing start and end fields for any supported reporting period is defined in the SDMX Technical Notes. These fields should be used only when the component value represents one of the values for the time dimension. Values are considered as inclusive both for the start field and the end field. Values must follow the ISO 8601 syntax for combined dates and times, including time zone. These fields are useful for visualisation tools, when selecting the appropriate point in time for the time axis. Statistical data, can be collected, for example, at the beginning, the middle or the end of the period, or can represent the average of observations through the period. Based on this information and using the start and end fields, it is easy to get or calculate the desired point in time to be used for the time axis.
@@ -489,10 +527,10 @@ Example:
 		"id": "2010",
 		"name": "2010",
 		"names": { "en": "2010", 
-				   "fr": "2010" },
+			   "fr": "2010" },
 		"description": "Description for 2010.",
 		"descriptions": { "en": "Description for 2010.",
-						  "fr": "Déscription pour 2010." },
+				  "fr": "Déscription pour 2010." },
 		"start": "2010-01-01T00:00Z",
 		"end": "2010-12-31T23:59:59Z",
 		"parent": "T",
@@ -503,6 +541,25 @@ Example:
 			}
 		],
 		"annotations": [ 5, 49 ]
+	}
+
+	{
+		"value": "Name X"
+	}
+
+	{
+		"values": ["AAA", "BBB"]
+	}
+
+	{
+		"values": [123.4, 567.8]
+	}
+
+	{
+		"values": [
+			{ "en": "Name 1", "fr": "Nom 1" },
+			{ "en": "Name 2", "fr": "Nom 2" }
+		]
 	}
 
 ###### link
@@ -564,10 +621,11 @@ we have 3 levels in the data part of the message:
 the `dataSet` level, the `series` level and the `observation` level.
 
 `Dimensions` and `attributes` may be specified at any of these 3 levels.
+`Measures` are always specified at the `observation` level.
 
 In case the `dataSet` is a flat list of `observations`, `observations` will be found 
-directly under a `dataSet` object. In case the `dataSet` represents time series 
-or cross sections, the `observations` will be found under the `series` elements.
+directly under a `dataSet` object. In case the `dataSet` represents series of time
+or series of other another dimension, the `observations` will be found under the `series` elements.
 
 The `dataSet` properties are:
 
@@ -584,7 +642,7 @@ The `dataSet` properties are:
 * publicationPeriod - *String* *optional*. The publicationPeriod specifies the period of publication of the data in terms of whatever provisioning agreements might be in force (i.e., "2005-Q1" if that is the time of publication for a `dataSet` published on a quarterly basis).
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the dataSet.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the dataSet. Indices refer back to the array of *annotations* in the structure field.
-* attributes - *Array* *optional*. Collection of indices of the corresponding *values* of all attributes presented at the dataSet level. Each value is an index in the `values` array of the respective *component* object within the `structure.attributes.dataSet` array. This is typically the case for `attributes` that always have the same value for all the `observations` available in the `dataSet`. In order to avoid repetition, that value can simply be presented at the `dataSet` level. When an attribute has no value for a specific `dataSet`, then *null* is used instead of the index.
+* attributes - *Array* *optional*. Collection of *attribute values* or indices of the corresponding *values* of all attributes, depending on the presence of the `values` array in the component definition, presented at the dataSet level. Indexes correspond to the indexes of the `values` array of the respective *component* object within the `structure.attributes.dataSet` array. This is typically the case for `attributes` that always have the same value for all the `observations` available in the `dataSet`. In order to avoid repetition, that value can simply be presented at the `dataSet` level. When an attribute has no value for a specific `dataSet`, then *null* is used instead of the value or its index.
 * series - *Object* *optional*. A collection of *[series](#series)* objects, to be used when the `observations` contained in the `dataSet` are presented in logical groups (time series or cross-sections), e.g. when using the SDMX API with the parameter "dimensionAtObservation=TIME_PERIOD" (default option) or with the "dimensionAtObservation" parameter with an ID of any other specific `dimension`. This element must **not** be used in case the `dataSet` presents a flat view of `observations`.
 * observations - *Object* *optional*. Collection of *[observations](#observations)* used in case when a `dataSet` is presented as a flat view of `observations`, e.g. when using the SDMX API with the parameter "dimensionAtObservation=AllDimensions". All `dimensions`, except those with only one `value` possibly presented at the `dataSet` level, would be presented at `observation` level. Alternatively, in case the `observations` are to be presented in logical groups (time series or cross-sections), use the *[series](#series)* element instead.
 
@@ -605,7 +663,7 @@ Examples:
 			# links array #
 		],
 		"annotations": [ 3, 42 ],
-		"attributes": [ 0, null, 0 ],
+		"attributes": [ 0, null, 456.7, "This is a string value", {"en": "English Text", "fr": "Texte français"}, [123.4, 456.7], ["A", "B"], [{"en": "English Text 1", "fr": "Texte français 1"}, {"en": "English Text 2", "fr": "Texte français 2"}] ],
 		"series": {
 			# series object #
 		}
@@ -623,7 +681,7 @@ Examples:
 			# links array #
 		],
 		"annotations": [ 3, 42 ],
-		"attributes": [ 0, null, 0 ],
+		"attributes": [ 0, null, 456.7, "This is a string value", {"en": "English Text", "fr": "Texte français"}, [123.4, 456.7], ["A", "B"], [{"en": "English Text 1", "fr": "Texte français 1"}, {"en": "English Text 2", "fr": "Texte français 2"}] ],
 		"observations": {
 			# observations object #
 		}
@@ -647,7 +705,7 @@ level (indices in the `values` array of the respective *component* object within
 The *value* in the name/value pair is an object containing:
 
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the series. Indices refer back to the array of `annotations` in the structure field.
-* attributes - *Array* *optional*. Collection of indices of the corresponding `values` of all `attributes` presented at the `series` level. Each value is an index in the `values` array of the respective `component` object within the `structure.attributes.series` array. This is typically the case for `attributes` that always have the same value for all the `observations` available in the series. In order to avoid repetition, that value can simply be presented at the `series` level. When an attribute has no value for a specific series, then *null* is used instead of the index.
+* attributes - *Array* *optional*. Collection of *attribute values* or indices of the corresponding `values` of all `attributes`, depending on the presence of the `values` array in the component definition, presented at the `series` level. Indexes correspond to the indexes in the `values` array of the respective `component` object within the `structure.attributes.series` array. This is typically the case for `attributes` that always have the same value for all the `observations` available in the series. In order to avoid repetition, that value can simply be presented at the `series` level. When an attribute has no value for a specific series, then *null* is used instead of the index.
 * observations - *Object* *optional*. Collection of [observations](#observations) used in case when the `observations` are presented in logical groups (time series or cross-sections), e.g. when using the SDMX API with the parameter "dimensionAtObservation=TIME_PERIOD" (default option) or with the "dimensionAtObservation" parameter with an ID of any other specific `dimension`. Only (this) one `dimension` would be presented at `observation` level for each series.
 
 Example:
@@ -657,7 +715,7 @@ Example:
 	horizontal time series (with header row):
 
 	DIM1,DIM2,Value for 2016,Value for 2017,ATTR1,ATTR2,ANNOT,ATTR3 for 2016,ATTR3 for 2017
-	DIM1_VALUE_1,DIM2_VALUE_1,1.5931,1.5925,ATTR1_VALUE_2,ATTR2_VALUE_1,,ATTR3_VALUE_1,
+	DIM1_VALUE_1,DIM2_VALUE_1,1.5931,1.5925,ATTR1_VALUE_2,"""en:English Text 1;fr:Texte français 1"";""en:English Text 2;fr:Texte français 2""",,ATTR3_VALUE_1,
 	DIM1_VALUE_1,DIM2_VALUE_2,40.3426,40.3000,ATTR1_VALUE_1,,ANNOT_VALUE1,ATTR3_VALUE_1,ATTR3_VALUE_1
 
 	In SDMX-JSON, using "dimensionAtObservation=TIME_PERIOD" (default) the observations 
@@ -667,7 +725,7 @@ Example:
 
 	"series": {
 		"0:0": {
-			"attributes": [1, 0],
+			"attributes": [1, [{"en": "English Text 1", "fr": "Texte français 1"}, {"en": "English Text 2", "fr": "Texte français 2"}]],
 			"observations": {
 				"0": [1.5931, 0],
 				"1": [1.5925]
@@ -783,13 +841,11 @@ Example:
 				"id": "ATTR2",
 				"name": "en": "Attribute 2",
 				"names": { "en": "Attribute 2" },
-				"values": [
-					{
-						"id": "ATTR2_VALUE_1",
-						"name": "Attribute 2 - Value 1 with index 0",
-						"names": { "en": "Attribute 2 - Value 1 with index 0" }
-					}
-				]
+				"format": {
+					"maxOccurs": 2,
+					"textFormat": "string",
+					"isMultiLingual": true
+				}
 			}
 		],
 		"observation": [
@@ -839,11 +895,12 @@ level (indices in the `values` array of the respective `component` object within
 It's one single index for time series and cross-sections representations, but there will be 
 more than one when the data are represented as a flat view of observations.
 
-The *value* in the name/value pair is an array containing the observation value (first position),
-the indices of the corresponding values of `attributes` presented at `observation` level
-(any following position up to the number of `attributes` defined at  `observation` level), and
-the indices of the corresponding values of `annotations` of that observation (any following 
-position). Therefore, elements after the observation value are for the `observation` level 
+The *value* in the name/value pair is an array containing first the values of **all** *measures* or 
+the indexes of these values, depending on the presence of the `values` array in 
+the component definition, followed by the values of **all** *attributes* presented at `observation` 
+level or the indexes of these values, depending on the presence of the `values` array in the 
+component definition, and last the indexes of the values of all `annotations` of that observation. 
+Therefore, the array elements after the `measures` are for the `observation` level 
 `attributes` and for `annotations` of that observation. Elements for `annotations` are only 
 included if there are `annotations` for that observation. **If `annotations` are present for an 
 observation, then all `attributes` defined at `observation` level must be included.** Otherwise, 
@@ -852,11 +909,17 @@ level `attributes` can be omitted if:
 - the `attribute` is not set for this observation (possible for optional attributes) or
 - the `attribute` value for this observation corresponds to the default value.
 
-The data type for observation value is *number* or *string*. The data type for a reported missing 
-observation value is a *null*. The index for an `attribute` is the corresponding index in the 
-`values` array of the respective `component` object within the `structure.attributes.series` array.
-It is *null*ed for unused optional `attributes` when the attribute index needs to be included. 
-The index for an `annotation` is the index in the array of `annotations` in the structure field.
+The data type for the `measure` value/index is *number*, *string*, *object of localised strings*, 
+arrays of these 3 types or *null*. The later is for a reported missing observation value. Indexes 
+for `measure` values are of type *integer* and correspond to the indexes in the `values` array of 
+the respective `component` object within the `structure.measures.observation` array.
+The data type for the `attribute` value/index is *integer*, *number*, *string*, *object of localised 
+strings*, arrays of these 3 types or *null*. The later is for unused optional `attributes` when the 
+attribute position in the array needs to be filled. Indexes for `attribute` values are of type 
+*integer* and correspond to the indexes in the `values` array of the respective `component` object 
+within the `structure.attributes.observation` array.
+The data type for the `annotation` index is *integer*. The index for an `annotation` is the index 
+in the array of `annotations` in the structure field.
 
 Example:
 
