@@ -616,8 +616,7 @@
 					{"required": ["id", "name"]},
 					{"required": ["id", "name", "names"]},
 					{"required": ["value"]},
-					{"required": ["values"]},
-					{"required": ["names"]}
+					{"required": ["values"]}
 				],
 				"properties": {
 					"id": {
@@ -687,13 +686,13 @@
 				"attributes": {
 					"type": "array",
 					"items": {
-						"type": [
-							"integer",
-							"number",
-							"string",
+						"oneOf": [
+							{"type": "integer"},
+							{"type": "number"},
+							{"type": "string"},
 							{"$ref": "#/definitions/localisedText"},
 							{"$ref": "#/definitions/valueArray"},
-							"null"
+							{"type": "null"}
 						],
 						"minimum": 0
 					}
@@ -702,13 +701,17 @@
 					"type": "object",
 					"patternProperties": {"^[0-9]*(:[0-9]*)*$": {
 						"type": "array",
-						"items": {"type": [
-							"number",
-							"string",
-							{"$ref": "#/definitions/localisedText"},
-							{"$ref": "#/definitions/valueArray"},
-							"null"
-						]}
+						"items": {
+							"oneOf": [
+								{"type": "integer"},
+								{"type": "number"},
+								{"type": "string"},
+								{"$ref": "#/definitions/localisedText"},
+								{"$ref": "#/definitions/valueArray"},
+								{"type": "null"}
+							],
+							"minimum": 0
+						}
 					}},
 					"additionalProperties": false
 				},
@@ -716,14 +719,16 @@
 					"type": "object",
 					"patternProperties": {"^[0-9]+(:[0-9]+)*$": {
 						"type": "array",
-						"items": {"type": [
-							"integer",
-							"number",
-							"string",
-							{"$ref": "#/definitions/localisedText"},
-							{"$ref": "#/definitions/valueArray"},
-							"null"
-						]}
+						"items": {
+							"oneOf": [
+								{"type": "integer"},
+								{"type": "number"},
+								{"type": "string"},
+								{"$ref": "#/definitions/localisedText"},
+								{"$ref": "#/definitions/valueArray"},
+								{"type": "null"}
+							]
+						}
 					}},
 					"additionalProperties": false
 				},
@@ -742,13 +747,13 @@
 							"attributes": {
 								"type": "array",
 								"items": {
-									"type": [
-										"integer",
-										"number",
-										"string",
+									"oneOf": [
+										{"type": "integer"},
+										{"type": "number"},
+										{"type": "string"},
 										{"$ref": "#/definitions/localisedText"},
 										{"$ref": "#/definitions/valueArray"},
-										"null"
+										{"type": "null"}
 									],
 									"minimum": 0
 								}
@@ -757,14 +762,16 @@
 								"type": "object",
 								"patternProperties": {"^[0-9]+(:[0-9]+)*$": {
 									"type": "array",
-									"items": {"type": [
-										"integer",
-										"number",
-										"string",
-										{"$ref": "#/definitions/localisedText"},
-										{"$ref": "#/definitions/valueArray"},
-										"null"
-									]}
+									"items": {
+										"oneOf": [
+											{"type": "integer"},
+											{"type": "number"},
+											{"type": "string"},
+											{"$ref": "#/definitions/localisedText"},
+											{"$ref": "#/definitions/valueArray"},
+											{"type": "null"}
+										]
+									}
 								}},
 								"additionalProperties": false
 							}
@@ -779,19 +786,19 @@
 		},
 		"valueArray": {
 			"oneOf": [{
-				"type": "array";
+				"type": "array",
 				"items": {"type": "integer"},
 				"minItems": 1
 			},{
-				"type": "array";
+				"type": "array",
 				"items": {"type": "number"},
 				"minItems": 1
 			},{
-				"type": "array";
+				"type": "array",
 				"items": {"type": "string"},
 				"minItems": 1
 			},{
-				"type": "array";
+				"type": "array",
 				"items": {"$ref": "#/definitions/localisedText"},
 				"minItems": 1
 			}]
