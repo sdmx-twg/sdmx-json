@@ -4,7 +4,7 @@ Let's first start with a brief introduction of the SDMX information model.
 
 In order to make sense of some statistical data, we need to know the concepts
 associated with them. For example, on its own the figure 1.2953 is pretty meaningless,
-but if we know that this is an exchange rate for the US dollar against the euro on
+but if we know that this is an exchange rate for the US dollar against the euro on 
 23 November 2006, it starts making more sense.
 
 There are two types of concepts: dimensions and attributes. Dimensions, when combined,
@@ -228,14 +228,14 @@ Example:
 ## structure
 
 *Object* *optional*. Provides the structural metadata necessary to interpret the data 
-contained in the message. It tells you which are the components (`dimensions` and `attributes`) 
-used in the message and also describes to which level in the hierarchy (`dataSet`, `series`, 
+contained in the message. It tells you which are the components (`dimensions`, `measures` and `attributes`) 
+used in the message and also describes to which level in the hierarchy (`dataSet`, `dimensionGroup`, `series`, 
 `observations`) these components are attached.
 
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. A collection of links to structural metadata or to additional information regarding the structure. **Providing links allowing accessing the underlying SDMX Data Structure Definition, Dataflow and/or Provision Agreements is recommended.**
-* dimensions - *Object*. Describes the *[dimensions](#dimensions-measures-attributes)* used in the message as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) to which these `dimensions` are attached.
-* measures - *Object* *optional*. Describes the *[measures](#dimensions-measures-attributes)* used in the message. For backward-compatibility, the `measures` object can be omitted if there is only one measure with the ID "OBS_VALUE". In this case, the measure values (of an indeterministic type) are written directly into the dataSet. SDMX 3+.0.0 implementations should always use the `measures` object. In case an SDMX 3+.0.0 data structure definition has no measures, the `measures` object must be present but empty. 
-* attributes - *Object*. Describes the *[attributes](#dimensions-measures-attributes)* used in the message as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) to which these `attributes` are attached.
+* dimensions - *Object*. Describes the *[dimensions](#dimensions-measures-attributes)* used in the message as well as the levels (`dataSet`, `series`, `observations`) at which these `dimensions` are presented.
+* measures - *Object* *optional*. Describes the *[measures](#dimensions-measures-attributes)* used in the message. *Measures* are always presented at the `observations` level. For backward-compatibility, the `measures` object can be omitted if there is only one measure with the ID "OBS_VALUE". In this case, the measure values (of an indeterministic type) are written directly into the dataSet. SDMX 3+.0.0 implementations should always use the `measures` object. In case an SDMX 3+.0.0 data structure definition has no measures, the `measures` object must be present but empty. 
+* attributes - *Object*. Describes the *[attributes](#dimensions-measures-attributes)* used in the message as well as the levels (`dataSet`, `dimensionGroup`, `series`, `observations`) at which these *attributes* are presented.
 * annotations - *Array* *optional*. *Annotations* field is an array of *[annotation](#annotation)* objects. If appropriate, provides a list of `annotations` that can be referenced by `structure`, `component`, `component value`, `dataSets`, `series` and `observations`.
 
 Example:
@@ -265,17 +265,16 @@ Example:
 ### link
 
 See the section on [linking mechanism](#linking-mechanism) for all information on links.
-Providing links allowing accessing the underlying SDMX Data Structure Definition, Dataflow
-and/or Provision Agreements is recommended.
+At least the link to the Data Structure Definition, Dataflow or Data Provision Agreement to which the data relates is required.
 
 ### dimensions, measures, attributes
 
-*Object*. Describes the dimensions/measures/attributes used in the message 
-as well as the levels in the hierarchy (`dataSet`, `series`, `observations`) to which these dimensions/attributes are attached. 
+*Object*. Describes the dimensions/measures/attributes used in the message as well as the levels (`dataSet`, `dimensionGroup`, `series`, `observations`) at which these dimensions/measures/attributes are presented. 
 
 * dataSet - *Array* *optional*. *DataSet* field is an array of *[component](#component)* objects. Optional array to be provided if components (only dimensions or attributes) are presented at the `dataSet` level. It is highly recommended to present all dimensions and attributes at the `dataSet` level for which the message contains only 1 single value.
+* dimensionGroup - *Array* *optional*. *DimensionGroup* field is an array of *[component](#component)* objects. Optional array to be provided if components (only attributes) are presented at the `dimensionGroup` level.
 * series - *Array* *optional*. *Series* field is an array of *[component](#component)* objects. Optional array to be provided if components (only dimensions or attributes) are presented at the `series` level.
-* observation - *Array* *optional*. *Observation* field is an array of *[component](#component)* objects. Optional array to be provided if components (dimensions, measures or attributes) are presented at the `observation` level. When using the SDMX API, then the dimension(s) specified in the parameter "dimensionAtObservation" would be presented at `observation` level. If "dimensionAtObservation=AllDimensions" then all dimensions, except those with only one value possibly presented at the `dataSet` level, would be presented at `observation` level.
+* observation - *Array* *optional*. *Observation* field is an array of *[component](#component)* objects. Optional array to be provided if components (dimensions, measures or attributes) are presented at the `observation` level. When using the SDMX API, then the dimension(s) specified in the parameter "dimensionAtObservation" would be presented at `observation` level. If "dimensionAtObservation=AllDimensions" then all dimensions, except those with only one value possibly presented at the `dataSet` level, would be presented at `observation` level. Measures must always be presented at observation level.
 
 Example:
 
@@ -305,6 +304,11 @@ Example:
 	},
 	"attributes": {
 		"dataSet": [
+			{
+				# component object #
+			}
+		],
+		"dimensionGroup": [
 			{
 				# component object #
 			}
@@ -428,7 +432,7 @@ Example:
 
 ##### attribute relationship
 
-*Object*. The attribute's relationship defines the relationship between an attribute and other data structure definition components as defined in the data structure definition. It defines the original "attachment level", but depending on the message context (especially the data query) an attribute value can however be presented physically in the message at a different level. The attribute relationship serves also to define the scope, meaning to which measures an attribute applies.
+*Object*. The attribute's relationship defines the relationship between an attribute and other data structure definition components as defined in the data structure definition. It provides the original "attachment level", but depending on the message context (especially the data query) an attribute value can however be presented physically in the message at a different level. The attribute relationship serves also to define the scope, meaning to which measures an attribute applies.
 
 * none - Empty *Object* *optional*. This means that value of the attribute will not **vary** with any of the other data structure components.
 * dimensions - *Array* of *String*s *optional*. One or more ID(s) of (a) local dimension(s) in the data structure definition on which the value of this attribute **depends**. 
@@ -467,23 +471,22 @@ Examples:
 	}
 
 
-##### Format
+##### format
 
 *Object*. The format object defines the representation for a component. It can be text (including XHTML and multi-lingual values), a simple value, or an enumerated value.
 
 * minOccurs - *Positive number* *optional* The default is 1. **Only for `measures` and `attributes`.** Indicates the minimum number of value that must be reported for the component. If > 1 then the component values will use the `values` property of the component value instead of `id` and `name` or `value`.
 * maxOccurs - *Positive number* *optional* The default is 1. **Only for `measures` and `attributes`.** Indicates the maximum number of values that can be reported for the component. If > 1 then the component values will use the `values` property of the component value instead of `id` and `name` or `value`.
 * textFormat - *String* *optional*. Describes an uncoded textual format. If it is an empty string, then any valid string characters may be used in component values (within the constraints of the other format constraints). If used, the component values will use instead of `id` and `name`:
-  - if `minOccurs` and `maxOccurs` are equal to 1 and if `isMultiLingual` is `false`: the `value` property,
-  - if `minOccurs` and `maxOccurs` are equal to 1 and if `isMultiLingual` is `true`: the `names` property,
+  - if `minOccurs` and `maxOccurs` are equal to 1: the `value` property,
   - otherwise: the `values` property.
 * minLength - *Positive number* *optional*. Specifies the minimum and length of the value in characters.
 * maxLength - *Positive number* *optional*. Specifies the maximum length of the value in characters.
 * minValue - *Decimal* *optional*. Is used for inclusive and exclusive ranges, indicating what the lower bound of the range is. If this is used with an inclusive range, a valid value will be greater than or equal to the value specified here. By default, the minValue is assumed to be inclusive. 
 * maxValue - *Decimal* *optional*. Is used for inclusive and exclusive ranges, indicating what the upper bound of the range is. If this is used with an inclusive range, a valid value will be less than or equal to the value specified here. By default, the maxValue is assumed to be inclusive. 
 * pattern - *String* *optional*. Holds any standard regular expression.
-* isMultiLingual - *Boolean* *optional*. **Only for `measures` and `attributes`.** This indicates for a textFormat of type "string", whether the component value should allow for multiple values in different languages. The default is `false`. If `true`, the component values will use instead of `id` and `name`:
-  -  if `minOccurs` and `maxOccurs` are equal to 1: the `names` property,
+* isMultiLingual - *Boolean* *optional*. **Only for `measures` and `attributes`.** This indicates for a textFormat of type "string", whether the uncoded component value should allow for multiple values in different languages. The default is `false`. If `true`, the component values will use instead of `id` and `name`:
+  -  if `minOccurs` and `maxOccurs` are equal to 1: the `value` property,
   -  otherwise: the `values` property.
 
 Example:
@@ -491,13 +494,20 @@ Example:
 	{ 
 		"minOccurs": 2,
 		"maxOccurs": 3,
-		"textFormat": "string",
+		"textFormat": "String",
 		"minLength": 4, 
 		"maxLength": 4, 
 		"pattern": "^[A-Za-z][A-Za-z0-9_-]*$",
 		"isMultilingual": true
 	}
 
+	{ 
+		"minOccurs": 2,
+		"maxOccurs": 2,
+		"textFormat": "Double",
+		"isMultilingual": false
+	}
+	
 ##### link
 
 See the section on [linking mechanism](#linking-mechanism) for all information on links.
@@ -507,10 +517,10 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 *Object* *optional*. A particular value for a component in a message. 
 
 * id - *String*. Unique identifier for a coded component value.
-* value - *String* *optional* only for non-coded unique non-localised component values, e.g. for non-coded dimensions.
-* values - *Object* *optional* only for non-coded multivalued component values.
 * name - *String* *optional*. Human-readable (best-language-match) name for a coded component value.
-* names - *Object* *optional*. Human-readable localised *[names](#names)* for a coded component value or a non-coded unique localised component value.
+* names - *Object* *optional*. Human-readable localised *[names](#names)* for a coded component value.
+* value - *String* *optional* only for non-coded unique (non-localised or localised) component values, e.g. for non-coded dimensions.
+* values - *Object* *optional* only for non-coded multivalued (non-localised or localised) component values.
 * description - *String* *optional*. Human-readable (best-language-match) description for the component value. The description is typically longer than the text provided for the name field.
 * descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) for the component value. A descriptions is typically longer than the text provided for the name field.
 * start, end - *String* *optional*. Start and end are instances of time that define the actual Gregorian calendar period covered by the values for the time dimension. The algorithm for computing start and end fields for any supported reporting period is defined in the SDMX Technical Notes. These fields should be used only when the component value represents one of the values for the time dimension. Values are considered as inclusive both for the start field and the end field. Values must follow the ISO 8601 syntax for combined dates and times, including time zone. These fields are useful for visualisation tools, when selecting the appropriate point in time for the time axis. Statistical data, can be collected, for example, at the beginning, the middle or the end of the period, or can represent the average of observations through the period. Based on this information and using the start and end fields, it is easy to get or calculate the desired point in time to be used for the time axis.
@@ -544,11 +554,15 @@ Example:
 	}
 
 	{
-		"value": "Name X"
+		"value": "123.4"
 	}
 
 	{
-		"values": ["AAA", "BBB"]
+		"value": "AAA"
+	}
+
+	{
+		"value": { "en": "Value", "fr": "Valeur" }
 	}
 
 	{
@@ -556,9 +570,13 @@ Example:
 	}
 
 	{
+		"values": ["AAA", "BBB"]
+	}
+
+	{
 		"values": [
-			{ "en": "Name 1", "fr": "Nom 1" },
-			{ "en": "Name 2", "fr": "Nom 2" }
+			{ "en": "Value 1", "fr": "Valeur 1" },
+			{ "en": "Value 2", "fr": "Valeur 2" }
 		]
 	}
 
@@ -603,29 +621,16 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 *Object*. That's where the data (i.e.: the `observations`) will be.
 
-In typical cases, the file will contain only one `dataSet`. 
-However, in some cases, such as when retrieving, from an SDMX 2.1 web service, 
-what has changed in the data source since in particular point in time, the web
-service might return more than one `dataSet`.
+In typical cases, the file will contain only one `dataSet`. However, in some cases, such as when retrieving, from an SDMX 2.1 web service, what has changed in the data source since in particular point in time, the web service might return more than one `dataSet`.
 
-There are between 2 and 3 levels in a `dataSet` object, depending on the way 
-the data in the message is organized.
+There are between several levels in a `dataSet` object, depending on the way the data in the message is organized.
+A `dataSet` may contain a flat list of `observations`. In this scenario, we have 2 main levels in the data part of the message: the `dataSet` level and the `observation` level.
+A `dataSet` may also organize observations in logical groups called `series`. These groups can represent time series or series by other dimensions (also called cross-sections). In this scenario, we have 3 main levels in the data part of the message: the `dataSet` level, the `series` level and the `observation` level.
 
-A `dataSet` may contain a flat list of `observations`. In this scenario, 
-we have 2 levels in the data part of the message: 
-the `dataSet` level and the `observation` level.
-
-A `dataSet` may also organize observations in logical groups called `series`. 
-These groups can represent time series or cross-sections. In this scenario, 
-we have 3 levels in the data part of the message: 
-the `dataSet` level, the `series` level and the `observation` level.
-
-`Dimensions` and `attributes` may be specified at any of these 3 levels.
-`Measures` are always specified at the `observation` level.
-
-In case the `dataSet` is a flat list of `observations`, `observations` will be found 
-directly under a `dataSet` object. In case the `dataSet` represents series of time
-or series of other another dimension, the `observations` will be found under the `series` elements.
+`Dimensions` and `attributes` may be presented at any of these main levels. However, attributes attached to only specific dimensions maybe presented also at an intermediate `dimensionGroup` level inbetween the `dataSet` level and the `series` level.
+`Measures` are always presented at the `observation` level.
+In case the `dataSet` is a flat list of `observations`, `observations` will be found directly under a `dataSet` object. In case the `dataSet` represents series of time
+or series of another dimension, the `observations` will be found under the `series` elements.
 
 The `dataSet` properties are:
 
@@ -642,12 +647,12 @@ The `dataSet` properties are:
 * publicationPeriod - *String* *optional*. The publicationPeriod specifies the period of publication of the data in terms of whatever provisioning agreements might be in force (i.e., "2005-Q1" if that is the time of publication for a `dataSet` published on a quarterly basis).
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the dataSet.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the dataSet. Indices refer back to the array of *annotations* in the structure field.
-* attributes - *Array* *optional*. Collection of *attribute values* or indices of the corresponding *values* of all attributes, depending on the presence of the `values` array in the component definition, presented at the dataSet level. Indexes correspond to the indexes of the `values` array of the respective *component* object within the `structure.attributes.dataSet` array. This is typically the case for `attributes` that always have the same value for all the `observations` available in the `dataSet`. In order to avoid repetition, that value can simply be presented at the `dataSet` level. When an attribute has no value for a specific `dataSet`, then *null* is used instead of the value or its index.
+* attributes - *Array* *optional*. *[Attributes](#Attributes)* is a collection of *attribute values or indices of the corresponding values*, depending on the presence of the `values` array in the component definition, of all attributes presented at the `dataSet` level. Indexes correspond to the indexes of the `values` array of the respective *component* object within the `structure.attributes.dataSet` array. This is typically the case for `attributes` that always have the same value for all the `observations` available in the `dataSet`. In order to avoid repetition, that value can simply be presented at the `dataSet` level. When an attribute has no value for a specific `dataSet`, then *null* is used instead of the value or its index.
+* dimensionGroupAttributes - *Object* *optional*. *[DimensionGroupAttributes](#dimensionGroupAttributes)* is a collection of *attribute values or indices of the corresponding values*, depending on the presence of the `values` array in the component definition, of all attributes presented at the `dimensionGroup` level.
 * series - *Object* *optional*. A collection of *[series](#series)* objects, to be used when the `observations` contained in the `dataSet` are presented in logical groups (time series or cross-sections), e.g. when using the SDMX API with the parameter "dimensionAtObservation=TIME_PERIOD" (default option) or with the "dimensionAtObservation" parameter with an ID of any other specific `dimension`. This element must **not** be used in case the `dataSet` presents a flat view of `observations`.
-* observations - *Object* *optional*. Collection of *[observations](#observations)* used in case when a `dataSet` is presented as a flat view of `observations`, e.g. when using the SDMX API with the parameter "dimensionAtObservation=AllDimensions". All `dimensions`, except those with only one `value` possibly presented at the `dataSet` level, would be presented at `observation` level. Alternatively, in case the `observations` are to be presented in logical groups (time series or cross-sections), use the *[series](#series)* element instead.
+* observations - *Object* *optional*. *[Observations](#observations)* is a collection of *measure and/or attribute values or indices of the corresponding values*, depending on the presence of the `values` array in the component definition, of all measures and of all attributes presented at the `observation` level. It also contains the indexes of annotations applying to observations. This collection is used in case when a `dataSet` is presented as a flat view of `observations`, e.g. when using the SDMX API with the parameter "dimensionAtObservation=AllDimensions". All `dimensions`, except those with only one `value` possibly presented at the `dataSet` level, would be presented at `observation` level. Alternatively, in case the `observations` are to be presented in logical groups (time series or cross-sections), the *[series](#series)* element is to be used instead.
 
-For information on how to handle the indices for `annotations`, `attributes` or 
-`observations` see the section dedicated to [handling component values](#handling-component-values).
+For information on how to handle the indexes for `dimensions`, `measures`, `attributes` and `annotations` see the section dedicated to [handling indexes](#handling-indexes).
 
 Examples:
 
@@ -693,20 +698,17 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 ### series
 
-*Object* *optional*. Collection of series, when the `observations` contained in the `dataSet`
-are used into logical groups (time series or cross-sections). Each underlying series 
-is represented as a name/value pair in the `series` object.
+*Object* *optional*. Collection of series in form of JSON *name/value* pairs, when the `observations` contained in the `dataSet` are used into logical groups (time series or cross-sections). Each underlying series is represented as a JSON *name/value pair* ("name": "value") in the `series` object.
 
-A series is uniquely identified through the content of the *name* in the name/value pair, 
-which is the indices of the corresponding `values` of all `dimensions` presented at `series` 
-level (indices in the `values` array of the respective *component* object within the 
-*structure.dimensions.series* array) separated by a colon (":"). 
+The *name* in the JSON *name/value pair* represents the unique series identifier, which is the concatenation of the indexes of the `values` of all `dimensions` presented at `series` level (i.e. indexes of the fields in the `values` array of the respective *component* object within the `structure.dimensions.series` array) separated by a colon character (":"), e.g. "0:0:4:10:2". 
 
-The *value* in the name/value pair is an object containing:
+The *value* in the JSON *name/value pair* is an object containing:
 
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the series. Indices refer back to the array of `annotations` in the structure field.
-* attributes - *Array* *optional*. Collection of *attribute values* or indices of the corresponding `values` of all `attributes`, depending on the presence of the `values` array in the component definition, presented at the `series` level. Indexes correspond to the indexes in the `values` array of the respective `component` object within the `structure.attributes.series` array. This is typically the case for `attributes` that always have the same value for all the `observations` available in the series. In order to avoid repetition, that value can simply be presented at the `series` level. When an attribute has no value for a specific series, then *null* is used instead of the index.
-* observations - *Object* *optional*. Collection of [observations](#observations) used in case when the `observations` are presented in logical groups (time series or cross-sections), e.g. when using the SDMX API with the parameter "dimensionAtObservation=TIME_PERIOD" (default option) or with the "dimensionAtObservation" parameter with an ID of any other specific `dimension`. Only (this) one `dimension` would be presented at `observation` level for each series.
+* attributes - *Array* *optional*. *[Attributes](#Attributes)* is a collection of *attribute values or indexes of the corresponding values*, depending on the presence of the `values` array in the component definition, of all `attributes` presented at the `series` level. Indexes correspond to the indexes in the `values` array of the respective `component` object within the `structure.attributes.series` array. This is typically the case for `attributes` that always have the same value for all the `observations` available in the series. In order to avoid repetition, that value can simply be presented at the `series` level. When an attribute has no value for a specific series, then *null* is used instead of the index.
+* observations - *Object* *optional*. *[Observations](#observations)* is a collection of *measure and/or attribute values or indices of the corresponding values*, depending on the presence of the `values` array in the component definition, of all measures and of all attributes presented at the `observation` level. It also contains the indexes of annotations applying to observations. The `dimension` specified in the "dimensionAtObservation" parameter of the SDMX API is used to identify the observations of a series. By default that dimension is the time dimension (with ID "TIME_PERIOD").
+
+For information on how to handle the indexes for `dimensions`, `measures`, `attributes` and `annotations` see the section dedicated to [handling indexes](#handling-indexes).
 
 Example:
 
@@ -879,79 +881,70 @@ Example:
 		}
 	]
 
-
-For information on how to handle the indices for `annotations`, `attributes` or 
-`observations` see the section dedicated to [handling component values](#handling-component-values).
-
 ### observations
 
-*Object* *optional*. Collection of observations. Each observation is represented as a 
-name/value pair in the `observations` object.
+*Object* *optional*. Collection of observations in form of JSON *name/value pairs*. Each underlying observation is represented as a JSON *name/value pair* in the `observations` object.
 
-An observation is uniquely identified through the content of the *name* in the name/value pair, 
-which is the indices of the corresponding values of all dimensions presented at observation 
-level (indices in the `values` array of the respective `component` object within the 
-`structure.dimensions.observation` array) separated by a colon (":"). 
-It's one single index for time series and cross-sections representations, but there will be 
-more than one when the data are represented as a flat view of observations.
+The *name* in the JSON *name/value pair* represents the unique observation identifier, which is the concatenation of the indexes of the `values` of all `dimensions` presented at `observation` level (i.e. indexes of the fields in the `values` array of the respective *component* object within the `structure.dimensions.observation` array) separated by a colon character (":").
+The `dimension` specified in the "dimensionAtObservation" parameter of the SDMX API is used to identify the observations. By default that dimension is the time dimension (with ID "TIME_PERIOD"). Thus, there is only one single index in the observation identifier, e.g. "2". 
+With "dimensionAtObservation=allDimensions", when the data are represented as a flat view of observations, all dimensions with more than 1 value will be presented at observation level. Here, there can be several concatenated indexes in the observation identifier, e.g. "0:0:4:10:2".
 
-The *value* in the name/value pair is an array containing first the values of **all** *measures* or 
-the indexes of these values, depending on the presence of the `values` array in 
-the component definition, followed by the values of **all** *attributes* presented at `observation` 
-level or the indexes of these values, depending on the presence of the `values` array in the 
-component definition, and last the indexes of the values of all `annotations` of that observation. 
-Therefore, the array elements after the `measures` are for the `observation` level 
-`attributes` and for `annotations` of that observation. Elements for `annotations` are only 
-included if there are `annotations` for that observation. **If `annotations` are present for an 
-observation, then all `attributes` defined at `observation` level must be included.** Otherwise, 
-if the observation has no `annotations`, then beginning from the end of the array, `observation` 
-level `attributes` can be omitted if: 
+The *value* in the JSON *name/value pair* is an array containing:
+
+* first: the values of **all** *measures* or the indexes of these values, depending on the presence of the `values` array in the component definition,
+* followed by: the values of **all** *attributes* presented at `observation` level or the indexes of these values, depending on the presence of the `values` array in the 
+component definition,
+* and last: the indexes of the values of all `annotations` of that observation.
+
+Therefore, the array elements after the `measures` are for the `observation` level `attributes` and for `annotations` of that observation. Elements for `annotations` are only 
+included if there are `annotations` for that observation. **If `annotations` are present for an observation, then all `attributes` defined at `observation` level must be included.** Otherwise, if the observation has no `annotations`, then beginning from the end of the array, `observation` level `attributes` can be omitted if: 
 - the `attribute` is not set for this observation (possible for optional attributes) or
 - the `attribute` value for this observation corresponds to the default value.
 
-The data type for the `measure` value/index is *number*, *string*, *object of localised strings*, 
-arrays of these 3 types or *null*. The later is for a reported missing observation value. Indexes 
-for `measure` values are of type *integer* and correspond to the indexes in the `values` array of 
-the respective `component` object within the `structure.measures.observation` array.
-The data type for the `attribute` value/index is *integer*, *number*, *string*, *object of localised 
-strings*, arrays of these 3 types or *null*. The later is for unused optional `attributes` when the 
-attribute position in the array needs to be filled. Indexes for `attribute` values are of type 
-*integer* and correspond to the indexes in the `values` array of the respective `component` object 
-within the `structure.attributes.observation` array.
-The data type for the `annotation` index is *integer*. The index for an `annotation` is the index 
-in the array of `annotations` in the structure field.
+The data type for the array `measure` and `attribute` elements is *integer*, *number*, *string*, *object of localised strings* (see: *[here](#names)*), arrays of these 4 types or *null*. The last is for a reported `measure` measure value or for unused optional `attributes` when the attribute position in the array needs to be filled.
+Indexes for `measure` values are of type *integer* and correspond to the indexes in the `values` array of the respective `component` object within the `structure.measures.observation` array.
+Indexes for `attribute` values are of type *integer* and correspond to the indexes in the `values` array of the respective `component` object within the `structure.attributes.observation` array.
+The data type for the array `annotation` elements is *integer*. 
+Indexes for `annotation` values correspond to the indexes in the array of `annotations` in the `structure` element.
+
+For information on how to handle the indexes for `dimensions`, `measures`, `attributes` and `annotations` see the section dedicated to [handling indexes](#handling-indexes).
 
 Example:
 
 	/*
-	For this example, to ease understanding, let's consider data in a 
-	flat CSV format (with header row):
+	For this example, to ease understanding, let's consider data in a flat CSV format (with header row):
  
-	DIM1,DIM2,Observation Value,ATTR1,ATTR2,ANNOT
-	DIM1_VALUE_1,DIM2_VALUE_1,105.6,ATTR1_VALUE_1,,ANNOT_VALUE1
-	DIM1_VALUE_1,DIM2_VALUE_2,105.9,ATTR1_VALUE_2,,
+	DIM1,DIM2,MEAS1,MEAS2,ATTR1,ATTR2,ATTR3,ANNOT
+	DIM1_VALUE_1,DIM2_VALUE_1,105.6,120.8,ATTR1_VALUE_1;ATTR1_VALUE_2,ATTR2_VALUE_1,,ANNOT_VALUE1
+	DIM1_VALUE_1,DIM2_VALUE_2,105.9,120.2,ATTR1_VALUE_1,ATTR2_VALUE_2,,
 
 	In SDMX-JSON, the observations are presented in a similar flattened way, 
 	but dimension and attribute values are replaced by their indices:
 	*/
 
 	"observations": {
-		"0:0": [105.6, 0, null, 0],
-		"0:1": [105.9, 1]
+		"0:0": [105.6, 120.8, ["ATTR1_VALUE_1","ATTR1_VALUE_2"], 0, null, 0],
+		"0:1": [105.9, 120.2, ["ATTR1_VALUE_1"], 1]
 	}
 
 	/*
 	Observation 1: "0:0" corresponds to the 2 indices for "DIM1":"DIM1_VALUE_1", "DIM2":"DIM2_VALUE_1"
-	               The value for this observation is: 105.6
+	               The measures for this observation are:
+		         105.6
+		         120.8
 	               The attributes for this observation are: 
-	                 "ATTR1":"ATTR1_VALUE_1"
-	                 "ATTR2":"ATTR2_VALUE_1" (because this is the default value)
-	               The annotation for this observation is: "ANNOT":"ANNOT_VALUE1"
+	                 "ATTR1": "ATTR1_VALUE_1", "ATTR1_VALUE_2"
+			 "ATTR2": "ATTR2_VALUE_1" (0 is the index of the corresponding element in the attribute's "values" array)
+	                 "ATTR2": null (null is used as placeholder before the next array position for the following annotation)
+	               The annotation for this observation is:
+		         "ANNOT": "ANNOT_VALUE1" (0 is the index of the corresponding element in the annotation array)
 	Observation 2: "0:1" corresponds to the 2 indices for "DIM1":"DIM1_VALUE_1", "DIM2":"DIM2_VALUE_2"
-	               The value for this observation is: 105.9
+	               The measures for this observation are:
+		         105.9
+		         120.2
 	               The attributes for this observation are: 
 	                 "ATTR1":"ATTR1_VALUE_1"
-	                 "ATTR2":"ATTR2_VALUE_1" (because this is the default value)
+			 "ATTR2":"ATTR2_VALUE_2" (1 is the index of the corresponding element in the attribute's "values" array)
 	*/
 
 	"dimensions": {
@@ -997,29 +990,38 @@ Example:
 				"id": "ATTR1",
 				"name": "Attribute 1",
 				"names": { "en": "Attribute 1" },
-				"values": [
-					{
-						"id": "ATTR1_VALUE_1",
-						"name": "Attribute 1 - Value 1 with index 0",
-						"names": { "en": "Attribute 1 - Value 1 with index 0" }
-					},
-					{
-						"id": "ATTR1_VALUE_2",
-						"name": "Attribute 1 - Value 2 with index 1",
-						"names": { "en": "Attribute 1 - Value 2 with index 1" }
-					}
-				]
+				"format": {
+					"textFormat": "String",
+					"maxValue": 2
+				}
 			},
 			{
 				"id": "ATTR2",
 				"name": "Attribute 2",
 				"names": { "en": "Attribute 2" },
-				"default": "ATTR2_VALUE_1",
 				"values": [
 					{
 						"id": "ATTR2_VALUE_1",
 						"name": "Attribute 2 - Value 1 with index 0",
 						"names": { "en": "Attribute 2 - Value 1 with index 0" }
+					},
+					{
+						"id": "ATTR2_VALUE_2",
+						"name": "Attribute 2 - Value 2 with index 1",
+						"names": { "en": "Attribute 2 - Value 2 with index 1" }
+					}
+				]
+			},
+			{
+				"id": "ATTR3",
+				"name": "Attribute 3",
+				"names": { "en": "Attribute 3" },
+				"default": "ATTR3_VALUE_1",
+				"values": [
+					{
+						"id": "ATTR3_VALUE_1",
+						"name": "Attribute 3 - Value 1 with index 0",
+						"names": { "en": "Attribute 3 - Value 1 with index 0" }
 					}
 				]
 			}
@@ -1035,21 +1037,16 @@ Example:
 		}
 	]
 
-For information on how to handle the indices for `observations` 
-see the section dedicated to [handling component values](#handling-component-values).
-
 ## error
 
-*Object* *optional*. Used to provide a error message in addition 
-to RESTful web services HTTP error status codes.
-The following pieces of information are to be provided:
+*Object* *optional*. Used to provide status messages in addition to RESTful web services HTTP error status codes. The following pieces of information should be provided:
 
-* code - *Number*. Provides a code number for the error message. Code numbers are defined in the SDMX 2.1 Web Services Guidelines.
-* title - *String* *optional*. A short, human-readable (best-language-match) summary of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
-* titles - *Object* *optional*. A list of short, human-readable localised summaries (see *[names](#names)*) of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
-* detail - *String* *optional*. A human-readable (best-language-match) explanation specific to this occurrence of the problem. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.
-* details - *Object* *optional*. A list of human-readable localised explanations (see *[names](#names)*) specific to this occurrence of the problem. Like titles, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.
-* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the error.
+* code - *Number*. Provides a code number for the status message if appropriate. Standard code numbers are defined in the SDMX 2.1 Web Services Guidelines.
+* title - *String* *optional*. A short, human-readable (best-language-match) summary of the situation that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization.
+* titles - *Object* *optional*. A list of short, human-readable localised summaries (see *[names](#names)*) of the status that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization.
+* detail - *String* *optional*. A human-readable (best-language-match) explanation specific to this occurrence of the status. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status.
+* details - *Object* *optional*. A list of human-readable localised explanations (see *[names](#names)*) specific to this occurrence of the status. Like titles, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status.
+* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the status message.
 
 See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
@@ -1059,7 +1056,7 @@ Example:
 		"code": 150,
 		"title": "Invalid number of dimensions in the key parameter",
 		"titles": { "en": "Invalid number of dimensions in the key parameter"
-					"fr": "Nombre invalide de dimensions dans le paramètre 'key'" }
+			    "fr": "Nombre invalide de dimensions dans le paramètre 'key'" }
 	}
 
 # Linking mechanism
@@ -1119,7 +1116,9 @@ SDMX-JSON offers a list of predefined semantics, but implementers are free to ex
 
 The *URL* captured in the `href` attribute can be *absolute* or *relative*. **It is recommended to use absolute URLs in case the SDMX-JSON message is archived.**
 
-# Handling component values
+# Handling indexes
+
+The purpose of using indexes is to avoid the repetition of space-consuming values of measures, attributes, dimensions and annotations. For the first 2 types, whenever their values are provided directly in the `values` array of the component definition itself, then the datasets must only use the corresponding element indexes in those arrays instead of the real values. Dimensions and annotations will always use the indexes.
 
 Let's say that the following data content of a message needs to be processed:
 
@@ -1321,15 +1320,13 @@ There is one `dataSet` in the message, and it contains two `series`.
 	}
 ```
 
-The `structure.dimensions` field tells us that, out of the 6 dimensions, 4 have 
-the same value for the 2 series and are therefore attached to the `dataSet` level.
+The `structure.dimensions` field tells us that, out of the 6 dimensions, 4 have the same value for the 2 series and are therefore attached to the `dataSet` level.
 
 We see that, for the first series, we get the value 0:
 
 	"0": { ... }
 
-From the structure.dimensions.series information, we know that CURRENCY is 
-the (only) series dimension.
+From the structure.dimensions.series information, we know that CURRENCY is the (only) series dimension.
 
 ```json
 	"series": [
@@ -1353,16 +1350,13 @@ the (only) series dimension.
 	]
 ```
 
-The value "0" identified previously is the index of the item in the 
-collection of values for this component. In this case, the dimension 
-value is therefore "New Zealand dollar".
+The value "0" identified previously is the index of the item in the collection of values for this component. In this case, the dimension value is therefore "New Zealand dollar".
 
 Now, for the first observation of the first series, we get the value 0:
 
 	"0": [...],
 
-From the `structure.dimensions.observation` information, we know that 
-TIME_PERIOD is the (only) dimension at `observation` level.
+From the `structure.dimensions.observation` information, we know that TIME_PERIOD is the (only) dimension at `observation` level.
 
 ```json
 	"observation": [
@@ -1385,17 +1379,13 @@ TIME_PERIOD is the (only) dimension at `observation` level.
 	]
 ```
 
-The value "0" identified previously is the index of the item in the 
-collection of values for this component. In this case, the dimension value 
-is therefore "2013-01-18".
+The value "0" identified previously is the index of the item in the collection of values for this component. In this case, the dimension value is therefore "2013-01-18".
 
-Now, for the first (and only) attribute of the first observation of the 
-first series, we get the value 0 (here the last value in array):
+Now, for the first (and only) attribute of the first observation of the first series, we get the value 0 (here the last value in array):
 
 	"0": [1.5931, 0],
 
-From the `structure.attributes.observation` information, we know that 
-OBS_STATUS is the (only) attribute at `observation` level.
+From the `structure.attributes.observation` information, we know that OBS_STATUS is the (only) attribute at `observation` level.
 
 ```json
 	"observation": [
@@ -1414,9 +1404,7 @@ OBS_STATUS is the (only) attribute at `observation` level.
 	]
 ```
 
-The value 0 identified previously is the index of the item in the 
-collection of values for this component. In this case, the attribute value 
-is therefore "Normal value".
+The value 0 identified previously is the index of the item in the collection of values for this component. In this case, the attribute value is therefore "Normal value".
 
 The same logic applies for mapping the other observations, its attributes and annotations.
 
@@ -1457,22 +1445,14 @@ In case that there is no language match for a particular localisable element, it
 
 # Security Considerations
 
-This document defines a response format for SDMX RESTful Web Services in JSON
-and it raises no new security considerations. SDMX Web Services Guidelines
-includes the security considerations associated with its usage.
+This document defines a response format for SDMX RESTful Web Services in JSON and it raises no new security considerations. SDMX Web Services Guidelines includes the security considerations associated with its usage.
 
 
 # Extending SDMX-JSON
 
-The objects defined in SDMX-JSON are "open", i.e. they can be extended by implementers 
-with properties not defined in this specification. Providers of SDMX-JSON messages 
-are therefore welcome to add support for features not covered in this specification. 
-Whenever appropriate, providers who opt to do so are invited to inform us, 
-so that future versions of SDMX-JSON may integrate these extensions, thereby 
-improving interoperability.
+The objects defined in SDMX-JSON are "open", i.e. they can be extended by implementers with properties not defined in this specification. Providers of SDMX-JSON messages are therefore welcome to add support for features not covered in this specification. Whenever appropriate, providers who opt to do so are invited to inform us, so that future versions of SDMX-JSON may integrate these extensions, thereby improving interoperability.
 
-The snippet below shows an example of an `error` object, extended with 
-a `wsCustomErrorCode`:
+The snippet below shows an example of an `error` object, extended with a `wsCustomErrorCode`:
 
 ```
 	"errors": [
