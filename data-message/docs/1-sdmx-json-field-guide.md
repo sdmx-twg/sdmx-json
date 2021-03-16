@@ -13,7 +13,10 @@ identifying statistical data, but they add useful information (like the unit of 
 or the number of decimals). Dimensions and attributes are known as "components".
 
 The measurement of some phenomenon (e.g. the figure 1.2953 mentioned above) is known as an
-"observation" in SDMX. Observations are grouped together into a "data set". However, there
+"observation" in SDMX. Sometimes, observations can also have several measures, e.g. an 
+estimated value can be complemented with the value corresponding to the upper confidence 
+limit and the value corresponding to the lower confidence limit of the esimation.
+Observations, when exchanged, are grouped together into a "data set". However, there
 can also be an intermediate grouping. For example, all exchange rates for the US dollar
 against the euro can be measured on a daily basis and these measures can then be
 grouped together, in a so-called "time series". Similarly, you can group a collection of
@@ -43,8 +46,7 @@ may not contain fields for data, dimensions and attributes.
 
 ## message
 
-Message is the top level object and it contains the data as well 
-as the structural metadata needed to interpret those data.
+Message is the top level object and it contains the data as well as the structural metadata needed to interpret those data.
 
 * meta - *Object* *optional*. A *[meta](#meta)* object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.
 * data - *Object* *optional*. *[Data](#data)* contains the message's “primary data”.
@@ -158,8 +160,7 @@ Example:
 
 #### contact
 
-*Object*. A collection of contact details. Each object in the collection 
-may contain the following field:
+*Object*. A collection of contact details. Each object in the collection may contain the following field:
 
 * id - *String*. Identifier for the resource.
 * name - *String* *optional*. Human-readable (best-language-match) name of the contact.
@@ -198,8 +199,7 @@ Example:
 ### receiver
 
 *Object* *optional*. Information about the party that is receiving the message. 
-This can be useful if the WS requires authentication. Receiver contains the 
-same fields as [sender](#sender).
+This can be useful if the WS requires authentication. Receiver contains the same fields as [sender](#sender).
 
 ### link
 
@@ -227,12 +227,9 @@ Example:
 
 ## structure
 
-*Object* *optional*. Provides the structural metadata necessary to interpret the data 
-contained in the message. It tells you which are the components (`dimensions`, `measures` and `attributes`) 
-used in the message and also describes to which level in the hierarchy (`dataSet`, `dimensionGroup`, `series`, 
-`observations`) these components are attached.
+*Object* *optional*. Provides the structural metadata necessary to interpret the data contained in the message. It tells you which are the components (`dimensions`, `measures` and `attributes`) used in the message and also describes to which level in the hierarchy (`dataSet`, `dimensionGroup`, `series`, `observations`) these components are attached.
 
-* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. A collection of links to structural metadata or to additional information regarding the structure. **Providing links allowing accessing the underlying SDMX Data Structure Definition, Dataflow and/or Provision Agreements is recommended.**
+* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. A collection of links to structural metadata or to additional information regarding the structure. **At least the link to the Data Structure Definition, Dataflow or Data Provision Agreement to which the data relates is required.**
 * dimensions - *Object*. Describes the *[dimensions](#dimensions-measures-attributes)* used in the message as well as the levels (`dataSet`, `series`, `observations`) at which these `dimensions` are presented.
 * measures - *Object* *optional*. Describes the *[measures](#dimensions-measures-attributes)* used in the message. *Measures* are always presented at the `observations` level. For backward-compatibility, the `measures` object can be omitted if there is only one measure with the ID "OBS_VALUE". In this case, the measure values (of an indeterministic type) are written directly into the dataSet. SDMX 3+.0.0 implementations should always use the `measures` object. In case an SDMX 3+.0.0 data structure definition has no measures, the `measures` object must be present but empty. 
 * attributes - *Object*. Describes the *[attributes](#dimensions-measures-attributes)* used in the message as well as the levels (`dataSet`, `dimensionGroup`, `series`, `observations`) at which these *attributes* are presented.
@@ -265,7 +262,6 @@ Example:
 ### link
 
 See the section on [linking mechanism](#linking-mechanism) for all information on links.
-At least the link to the Data Structure Definition, Dataflow or Data Provision Agreement to which the data relates is required.
 
 ### dimensions, measures, attributes
 
@@ -328,8 +324,7 @@ Example:
 #### component
 
 *Object* *optional*. A component represents a `dimension`, a `measure` or an `attribute` used in the message. 
-It contains basic information about the component (such as its `name` and `id`) 
-as well as the list of `values` used in the message for this particular component.
+It contains basic information about the component (such as its `name` and `id`) as well as the list of `values` used in the message for this particular component.
 Dimensions must always present their values in the `values` array because the dataSets will only be able to use the corresponding indexes of these values in the `values` array.
 Measures should present their values in the `values` array when they are coded. If they are non-coded then the measure values are directly written into the dataSets.
 Attributes should present their values in the `values` array at least when they are coded, or if they are presented at dataset, group or series level (in order to avoid repetition). If they are non-coded and presented at observation level then instead of using the component's `values` array, the attribute values can be directly written into the dataSets.  
@@ -381,25 +376,14 @@ Example:
 	}
 
 	{
-		"id": "OBS_STATUS",
-		"name": "Observation status",
-		"names": { "en": "Observation status", 
-			   "fr": "Statut d'observation" },
+		"id": "OBS_VALUE",
+		"name": "Observation value",
+		"names": { "en": "Observation value", 
+			   "fr": "Valeur d'observation" },
 		"role": [ "PRIMARY" ],
 		"format": {
 			# format object #
-		},
-		"links": [
-			{
-				# link object #
-			}
-		],
-		"annotations": [ 2, 35 ],
-		"values": [
-			{
-				# component value object (for coded measures only) #
-			}
-		]
+		}
 	}
 
 	{
@@ -566,7 +550,7 @@ Example:
 	}
 
 	{
-		"values": [123.4, 567.8]
+		"values": [1234, 567.8]
 	}
 
 	{
