@@ -632,7 +632,7 @@ The `dataSet` properties are:
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the dataSet.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the dataSet. Indices refer back to the array of *annotations* in the structure field.
 * attributes - *Array* *optional*. *[Attributes](#Attributes)* is a collection of *attribute values or indices of the corresponding values*, depending on the presence of the `values` array in the component definition, of all attributes presented at the `dataSet` level. Indexes correspond to the indexes of the `values` array of the respective *component* object within the `structure.attributes.dataSet` array. This is typically the case for `attributes` that always have the same value for all the `observations` available in the `dataSet`. In order to avoid repetition, that value can simply be presented at the `dataSet` level. When an attribute has no value for a specific `dataSet`, then *null* is used instead of the value or its index.
-* dimensionGroupAttributes - *Object* *optional*. *[DimensionGroupAttributes](#dimensionGroupAttributes)* is a collection of *attribute values or indices of the corresponding values*, depending on the presence of the `values` array in the component definition, of all attributes presented at the `dimensionGroup` level.
+* dimensionGroupAttributes - *Object* *optional*. *[DimensionGroupAttributes](#dimensiongroupattributes)* is a collection of *attribute values or indices of the corresponding values*, depending on the presence of the `values` array in the component definition, of all attributes presented at the `dimensionGroup` level.
 * series - *Object* *optional*. A collection of *[series](#series)* objects, to be used when the `observations` contained in the `dataSet` are presented in logical groups (time series or cross-sections), e.g. when using the SDMX API with the parameter "dimensionAtObservation=TIME_PERIOD" (default option) or with the "dimensionAtObservation" parameter with an ID of any other specific `dimension`. This element must **not** be used in case the `dataSet` presents a flat view of `observations`.
 * observations - *Object* *optional*. *[Observations](#observations)* is a collection of *measure and/or attribute values or indices of the corresponding values*, depending on the presence of the `values` array in the component definition, of all measures and of all attributes presented at the `observation` level. It also contains the indexes of annotations applying to observations. This collection is used in case when a `dataSet` is presented as a flat view of `observations`, e.g. when using the SDMX API with the parameter "dimensionAtObservation=AllDimensions". All `dimensions`, except those with only one `value` possibly presented at the `dataSet` level, would be presented at `observation` level. Alternatively, in case the `observations` are to be presented in logical groups (time series or cross-sections), the *[series](#series)* element is to be used instead.
 
@@ -653,6 +653,9 @@ Examples:
 		],
 		"annotations": [ 3, 42 ],
 		"attributes": [ 0, null, 456.7, "This is a string value", {"en": "English Text", "fr": "Texte français"}, [123.4, 456.7], ["A", "B"], [{"en": "English Text 1", "fr": "Texte français 1"}, {"en": "English Text 2", "fr": "Texte français 2"}] ],
+		"dimensionGroupAttributes": {
+			# dimensionGroupAttributes object #
+		},
 		"series": {
 			# series object #
 		}
@@ -671,6 +674,9 @@ Examples:
 		],
 		"annotations": [ 3, 42 ],
 		"attributes": [ 0, null, 456.7, "This is a string value", {"en": "English Text", "fr": "Texte français"}, [123.4, 456.7], ["A", "B"], [{"en": "English Text 1", "fr": "Texte français 1"}, {"en": "English Text 2", "fr": "Texte français 2"}] ],
+		"dimensionGroupAttributes": {
+			# dimensionGroupAttributes object #
+		},
 		"observations": {
 			# observations object #
 		}
@@ -679,6 +685,186 @@ Examples:
 ### link
 
 See the section on [linking mechanism](#linking-mechanism) for all information on links.
+
+
+### dimensionGroupAttributes
+
+*Object* *optional*. Collection of *attribute values or indices of the corresponding values*, depending on the presence of the `values` array in the attribute definition, of all attributes presented at the `dimensionGroup` level in form of JSON *name/value pairs*. In the `dimensionGroupAttributes` object, there is a JSON *name/value pair* for each partial dimension value combination to which those attributes are attached.
+
+The *name* in the JSON *name/value pair* represents the unique (partial) dimension value combination to which the dimensionGroup attribute values are attached. It is the concatenation of the indexes of the `values` of **all** `dimensions` to which the attribute is attached (i.e. indexes of the fields in the `values` array of the respective *component* objects within the `structure.dimensions` object) and of an `empty space` for **all** other dimensions, independently from the dimension's level of presentation elsewhere in the message, separated by a colon character (":"), e.g. "::4:0:". "Partial" combination means that DimensionGroup attributes are not attached to all dimensions but only to a subset. In the example "::4:0:", the data has altogether 5 dimensions (including the time dimension), and the related attribute values are attached only to the 3rd and 4th dimensions, for which the dimension value indexes are 4 and 0. The positions for dimension 1, 2 and 5 are left empty.
+
+The *value* in the JSON *name/value pair* is an array containing the values of **all** *attributes* presented at `dimensionGroup` level or the indexes of these values, depending on the presence of the `values` array in the component definition. If some of the attributes do not have values for a specific included (partial) dimension value combinations then *null* is used instead of a value. Beginning from the end of the array, `DimensionGroup`-level `attributes` can be omitted if the `attribute` has no value for this combination or if the `attribute` value for this combination corresponds to the default value. However, the *name/value pair* is only present if there is at least one corresponding `DimensionGroup`-level `attribute` value.
+
+The data type for the array `attribute` elements is *integer*, *number*, *string*, *object of localised strings* (see: *[here](#names)*), arrays of these 4 types or *null*. Indexes for `attribute` values are of type *integer* and correspond to the indexes in the `values` array of the respective `component` object within the `structure.attributes.dimensionGroup` array.
+
+For information on how to handle the indexes for `dimensions` and `attributes` see the section dedicated to [handling indexes](#handling-indexes).
+
+Example:
+
+	/*
+	For this example, to ease understanding, let's consider a CSV format with horizontal time series (with header row):
+
+	DIM1,DIM2,DIM3,MEAS1,MEAS2,ATTR1_OBS,ATTR2_DIMGROUP,ATTR3_DIMGROUP
+	DIM1_VALUE_1,DIM2_VALUE_1,DIM3_VALUE_1,10,20,ATTR1_VALUE_1,ATTR2_VALUE_1,ATTR3_VALUE_1
+	DIM1_VALUE_1,DIM2_VALUE_1,DIM3_VALUE_2,11,21,ATTR1_VALUE_2,ATTR2_VALUE_2,ATTR3_VALUE_1
+	DIM1_VALUE_1,DIM2_VALUE_2,DIM3_VALUE_1,12,22,ATTR1_VALUE_3,ATTR2_VALUE_1,ATTR3_VALUE_1
+	DIM1_VALUE_1,DIM2_VALUE_2,DIM3_VALUE_2,13,23,ATTR1_VALUE_4,ATTR2_VALUE_2,ATTR3_VALUE_1
+	
+	Note:
+	Attribute ATTR1_OBS is attached at observation level and thus depends on all dimensions.
+	Attribute ATTR2_DIMGROUP is attached to the dimensions DIM1 and DIM3 only. Its values only vary with the values of those dimensions.
+	Attribute ATTR3_DIMGROUP is attached to the dimension DIM1 only. Its values only vary with the values of this dimension.
+	
+	In SDMX-JSON, dimension values are replaced by their indices. Attribute values may be replaced by their indices, which is **not** done in this example:
+	*/
+
+	"dimensionGroupAttributes": {
+		"0::": { null, "ATTR3_VALUE_1" },
+		"0::0": { "ATTR2_VALUE_1" },
+		"0::1": { "ATTR2_VALUE_2" }
+	},
+	"observations": {
+		"0:0": [10, 20, "ATTR1_VALUE_1"],
+		"0:1": [11, 21, "ATTR1_VALUE_2"],
+		"1:0": [12, 22, "ATTR1_VALUE_3"],
+		"1:1": [13, 23, "ATTR1_VALUE_4"]
+	}
+
+	/*
+	dimensionGroup 1: "0::" corresponds to the 1 index for "DIM1":"DIM1_VALUE_1". All other dimensions are discarded. 
+	          The attributes for this dimension group are: "ATTR2_DIMGROUP": null (no correspondance), "ATTR3_DIMGROUP": "ATTR3_VALUE_1"
+          
+	dimensionGroup 2: "0::0" corresponds to the 2 indexes for "DIM1":"DIM1_VALUE_1" and "DIM3":"DIM3_VALUE_1". The "DIM2" dimension is discarded.
+	          The attributes for this dimension group are: "ATTR2_DIMGROUP": "ATTR2_VALUE_1", "ATTR3_DIMGROUP": no correspondance and omitted since last array element
+	
+	dimensionGroup 2: "0::1" corresponds to the 2 indexes for "DIM1":"DIM1_VALUE_1" and "DIM3":"DIM3_VALUE_2". The "DIM2" dimension is discarded.
+	          The attributes for this dimension group are: "ATTR2_DIMGROUP": "ATTR2_VALUE_2", "ATTR3_DIMGROUP": no correspondance and omitted since last array element
+
+	Observation 1: "0:0" corresponds to the 2 indices for "DIM2":"DIM2_VALUE_1", "DIM3":"DIM3_VALUE_1" (DIM1 is omitted since presented at dataSet level to avoid its repetition for each observation)
+	               The measures for this observation are: 
+		         "MEAS1": 10
+		         "MEAS2": 20
+	               The attributes for this observation are: 
+	                 "ATTR1_OBS": "ATTR1_VALUE_1"
+	Observation 2: "0:0" corresponds to the 2 indices for "DIM2":"DIM2_VALUE_1", "DIM3":"DIM3_VALUE_2" (DIM1 is omitted since presented at dataSet level to avoid its repetition for each observation)
+	               The measures for this observation are: 
+		         "MEAS1": 11
+		         "MEAS2": 21
+	               The attributes for this observation are: 
+	                 "ATTR1_OBS": "ATTR1_VALUE_2"
+	Observation 3: "0:0" corresponds to the 2 indices for "DIM2":"DIM2_VALUE_2", "DIM3":"DIM3_VALUE_1" (DIM1 is omitted since presented at dataSet level to avoid its repetition for each observation)
+	               The measures for this observation are: 
+		         "MEAS1": 12
+		         "MEAS2": 22
+	               The attributes for this observation are: 
+	                 "ATTR1_OBS": "ATTR1_VALUE_3"
+	Observation 4: "0:0" corresponds to the 2 indices for "DIM2":"DIM2_VALUE_2", "DIM3":"DIM3_VALUE_2" (DIM1 is omitted since presented at dataSet level to avoid its repetition for each observation)
+	               The measures for this observation are: 
+		         "MEAS1": 13
+		         "MEAS2": 23
+	               The attributes for this observation are: 
+	                 "ATTR1_OBS": "ATTR1_VALUE_4"	  
+	*/
+
+	"dimensions": {
+		"dataSet": [
+			{
+				"id": "DIM1",
+				"name": "Dimension 1",
+				"names": { "en": "Dimension 1" },
+				"values": [
+					{
+						"id": "DIM1_VALUE_1",
+						"name": "Dimension 1 - Value 1 with index 0",
+						"names": { "en": "Dimension 1 - Value 1 with index 0" }
+					}
+				]
+			}
+		],
+		"series": [],
+		"observation": [
+			{
+				"id": "DIM2",
+				"name": "Dimension 2",
+				"names": { "en": "Dimension 2" },
+				"values": [
+					{
+						"id": "DIM2_VALUE_1",
+						"name": "Dimension 2 - Value 1 with index 0",
+						"names": { "en": "Dimension 2 - Value 1 with index 0" }
+					},
+					{
+						"id": "DIM2_VALUE_2",
+						"name": "Dimension 2 - Value 2 with index 1",
+						"names": { "en": "Dimension 2 - Value 2 with index 1" }
+					}
+				]
+			},
+			{
+				"id": "DIM3",
+				"name": "Dimension 3",
+				"names": { "en": "Dimension 3" },
+				"values": [
+					{
+						"id": "DIM3_VALUE_1",
+						"name": "Dimension 3 - Value 1 with index 0",
+						"names": { "en": "Dimension 3 - Value 1 with index 0" }
+					},
+					{
+						"id": "DIM3_VALUE_2",
+						"name": "Dimension 3 - Value 2 with index 1",
+						"names": { "en": "Dimension 3 - Value 2 with index 1" }
+					}
+				]
+			}
+		]
+	},
+	"attributes": {
+		"dataSet": [],
+		"dimensionGroup": [
+			{
+				"id": "ATTR2_DIMGROUP",
+				"name": "Attribute 2",
+				"names": { "en": "Attribute 2" },
+				"default": "ATTR1_VALUE_2",
+				"values": [
+					{
+						"id": "ATTR2_VALUE_1",
+						"name": "Attribute 2 - Value 1 with index 0",
+						"names": { "en": "Attribute 2 - Value 1 with index 0" }
+					},
+					{
+						"id": "ATTR2_VALUE_2",
+						"name": "Attribute 2 - Value 2 with index 1",
+						"names": { "Attribute 2 - Value 2 with index 1" }
+					}
+				]
+			},
+			{
+				"id": "ATTR3_DIMGROUP",
+				"name": "Attribute 3",
+				"names": { "en": "Attribute 3" },
+				"values": [
+					{
+						"id": "ATTR3_VALUE_1",
+						"name": "Attribute 3 - Value 1 with index 0",
+						"names": { "en": "Attribute 3 - Value 1 with index 0" }
+					}
+				]
+			}
+		],
+		"series": [],
+		"observation": [
+			{
+				"id": "ATTR1_OBS",
+				"name": "Attribute 1",
+				"names": { "en": "Attribute 1" }
+			}
+		]
+	}
+	
+	Note:
+	For attribute "ATTR1_OBS", the values are omitted in the attribute definition and thus presented directly in the dataSets' observations (instead of indexes).
 
 ### series
 
@@ -697,21 +883,18 @@ For information on how to handle the indexes for `dimensions`, `measures`, `attr
 Example:
 
 	/*
-	For this example, to ease understanding, let's consider a CSV format with 
-	horizontal time series (with header row):
+	For this example, to ease understanding, let's consider a CSV format with horizontal time series (with header row):
 
 	DIM1,DIM2,Value for 2016,Value for 2017,ATTR1,ATTR2,ANNOT,ATTR3 for 2016,ATTR3 for 2017
-	DIM1_VALUE_1,DIM2_VALUE_1,1.5931,1.5925,ATTR1_VALUE_2,"""en:English Text 1;fr:Texte français 1"";""en:English Text 2;fr:Texte français 2""",,ATTR3_VALUE_1,
-	DIM1_VALUE_1,DIM2_VALUE_2,40.3426,40.3000,ATTR1_VALUE_1,,ANNOT_VALUE1,ATTR3_VALUE_1,ATTR3_VALUE_1
+	DIM1_VALUE_1,DIM2_VALUE_1,1.5931,1.5925,ATTR1_VALUE_1,"""en:English Text 1;fr:Texte français 1"";""en:English Text 2;fr:Texte français 2""",,ATTR3_VALUE_1,
+	DIM1_VALUE_1,DIM2_VALUE_2,40.3426,40.3000,ATTR1_VALUE_2,,ANNOT_VALUE1,ATTR3_VALUE_1,ATTR3_VALUE_1
 
-	In SDMX-JSON, using "dimensionAtObservation=TIME_PERIOD" (default) the observations 
-	are presented in a similar way, grouped by time series (with the TIME_PERIOD dimension 
-	at observation level), but dimension and attribute values are replaced by their indices:
+	In SDMX-JSON, using "dimensionAtObservation=TIME_PERIOD" (default) the observations are presented in a similar way, grouped by time series (with the TIME_PERIOD dimension at observation level), but dimension values are replaced by their indices. Attribute values may also be replaced by their indexes, which - in this example - is done for ATTR1 and ATTR3 but **not** for ATTR2:
 	*/
 
 	"series": {
 		"0:0": {
-			"attributes": [1, [{"en": "English Text 1", "fr": "Texte français 1"}, {"en": "English Text 2", "fr": "Texte français 2"}]],
+			"attributes": [0, [{"en": "English Text 1", "fr": "Texte français 1"}, {"en": "English Text 2", "fr": "Texte français 2"}]],
 			"observations": {
 				"0": [1.5931, 0],
 				"1": [1.5925]
@@ -726,9 +909,14 @@ Example:
 		}
 	}
 
+	DIM1,DIM2,Value for 2016,Value for 2017,ATTR1,ATTR2,ANNOT,ATTR3 for 2016,ATTR3 for 2017
+	DIM1_VALUE_1,DIM2_VALUE_1,1.5931,1.5925,ATTR1_VALUE_1,"""en:English Text 1;fr:Texte français 1"";""en:English Text 2;fr:Texte français 2""",,ATTR3_VALUE_1,
+	DIM1_VALUE_1,DIM2_VALUE_2,40.3426,40.3000,ATTR1_VALUE_2,,ANNOT_VALUE1,ATTR3_VALUE_1,ATTR3_VALUE_1
+
+
 	/*
 	Series 1: "0:0" corresponds to the 2 indices for "DIM1":"DIM1_VALUE_1", "DIM2":"DIM2_VALUE_1"
-	          The attributes for this series are: "ATTR1":"ATTR1_VALUE_2", "ATTR2":"ATTR2_VALUE_1"
+	          The attributes for this series are: "ATTR1":"ATTR1_VALUE_1", "ATTR2":"""en:English Text 1;fr:Texte français 1"";""en:English Text 2;fr:Texte français 2"""
 	          This series has 2 observations:
 	          Observation 1: "0" corresponds to the index for "TIME_PERIOD":"2016"
 	                         The value for this observation is: 1.5931
@@ -739,7 +927,7 @@ Example:
 	                         (because this is the default value)
 	Series 2: "0:1" corresponds to the 2 indices for "DIM1":"DIM1_VALUE_1", "DIM2":"DIM2_VALUE_2"
 	          The annotation for this series is: "ANNOT":"ANNOT_VALUE1"
-	          The attributes for this series are: "ATTR1":"ATTR1_VALUE_1" (because this is the default value)
+	          The attributes for this series are: "ATTR1":"ATTR1_VALUE_2" (omitted because this is the default value and since the only and last attribute)
 	          This series has 2 observations:
 	          Observation 1: "0" corresponds to the index for "TIME_PERIOD":"2016"
 	                         The value for this observation is: 40.3426
@@ -809,7 +997,7 @@ Example:
 				"id": "ATTR1",
 				"name": "Attribute 1",
 				"names": { "en": "Attribute 1" },
-				"default": "ATTR1_VALUE_1",
+				"default": "ATTR1_VALUE_2",
 				"values": [
 					{
 						"id": "ATTR1_VALUE_1",
@@ -864,6 +1052,9 @@ Example:
 			"id": "ANNOT_VALUE1"
 		}
 	]
+	
+	Note:
+	For attribute "ATTR2", the values are omitted in the attribute definition and thus presented directly in the dataSets' observations (instead of indexes).
 
 ### observations
 
@@ -1020,6 +1211,9 @@ Example:
 			"id": "ANNOT_VALUE1"
 		}
 	]
+	
+	Note:
+	For attribute "ATTR1", the values are omitted in the attribute definition and thus presented directly in the dataSets' observations (instead of indexes).
 
 ## error
 
