@@ -617,51 +617,54 @@
 		"compValues": {
 			"type": "array",
 			"items": {
-				"type": [
-					"object"
-				],
-				"oneOf": [
-					{"anyOf": [
-						{"required": ["id", "name"]},
-						{"required": ["id", "name", "names"]}
-					]},
-					{"required": ["value"]},
-					{"required": ["values"]}
-				],
-				"properties": {
-					"id": {
-						"type": "string",
-						"pattern": "^[A-Za-z0-9_@$-]+$"
-					},
-					"value": {
+				"anyOf": [
+					{"type": "null"},
+					{
+						"type": "object",
 						"oneOf": [
-							{"type": "number"},
-							{"type": "string"},
-							{"$ref": "#/definitions/localisedText"}
-						]
-					},
-					"values": {"$ref": "#/definitions/valueArray"},
-					"name": {"$ref": "#/definitions/localisedBestMatchText"},
-					"names": {"$ref": "#/definitions/localisedText"},
-					"description": {"$ref": "#/definitions/localisedBestMatchText"},
-					"descriptions": {"$ref": "#/definitions/localisedText"},
-					"start": {
-						"type": "string",
-						"format": "date-time"
-					},
-					"end": {
-						"type": "string",
-						"format": "date-time"
-					},
-					"links": {"$ref": "#/definitions/links"},
-					"annotations": {
-						"type": "array",
-						"items": {
-							"type": "integer",
-							"minimum": 0
+							{"anyOf": [
+								{"required": ["id", "name"]},
+								{"required": ["id", "name", "names"]}
+							]},
+							{"required": ["value"]},
+							{"required": ["values"]}
+						],
+						"properties": {
+							"id": {
+								"type": "string",
+								"pattern": "^[A-Za-z0-9_@$-]+$"
+							},
+							"value": {
+								"oneOf": [
+									{"type": "number"},
+									{"type": "string"},
+									{"$ref": "#/definitions/localisedText"}
+									]
+							},
+							"values": {"$ref": "#/definitions/valueArray"},
+							"name": {"$ref": "#/definitions/localisedBestMatchText"},
+							"names": {"$ref": "#/definitions/localisedText"},
+							"description": {"$ref": "#/definitions/localisedBestMatchText"},
+							"descriptions": {"$ref": "#/definitions/localisedText"},
+							"start": {
+								"type": "string",
+								"format": "date-time"
+							},
+							"end": {
+								"type": "string",
+								"format": "date-time"
+							},
+							"links": {"$ref": "#/definitions/links"},
+							"annotations": {
+								"type": "array",
+								"items": {
+									"type": "integer",
+									"minimum": 0
+								}
+							}
 						}
 					}
-				}
+				]
 			},
 			"minItems": 1,
 			"uniqueItems": true
