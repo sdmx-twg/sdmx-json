@@ -347,7 +347,8 @@
 							"items": {"$ref": "#/definitions/dimension"},
 							"uniqueItems": true
 						}
-					}
+					},
+					"additionalProperties": false
 				},
 				"measures": {
 					"type": "object",
@@ -357,7 +358,8 @@
 							"items": {"$ref": "#/definitions/measure"},
 							"uniqueItems": true
 						}
-					}
+					},
+					"additionalProperties": false
 				},
 				"attributes": {
 					"type": "object",
@@ -382,7 +384,8 @@
 							"items": {"$ref": "#/definitions/attribute"},
 							"uniqueItems": true
 						}
-					}
+					},
+					"additionalProperties": false
 				},
 				"annotations": {
 					"type": "array",
@@ -524,7 +527,7 @@
 				"annotations": {
 					"type": "array",
 					"items": {
-						"type": ["integer"],
+						"type": "integer",
 						"minimum": 0
 					}
 				},
@@ -561,8 +564,10 @@
 			"items": {
 				"type": "object",
 				"oneOf": [
-					{"required": ["id", "name"]},
-					{"required": ["id", "name", "names"]},
+					{"anyOf": [
+						{"required": ["id", "name"]},
+						{"required": ["id", "name", "names"]}
+					]},
 					{"required": ["value"]}
 				],
 				"properties": {
@@ -571,7 +576,10 @@
 						"pattern": "^[A-Za-z0-9_@$-]+$"
 					},
 					"value": {
-						"type": ["number", "string"]
+						"oneOf": [
+							{"type": "number"},
+							{"type": "string"}
+						]
 					},
 					"name": {"$ref": "#/definitions/localisedBestMatchText"},
 					"names": {"$ref": "#/definitions/localisedText"},
@@ -597,7 +605,7 @@
 					"annotations": {
 						"type": "array",
 						"items": {
-							"type": ["integer"],
+							"type": "integer",
 							"minimum": 0
 						}
 					}
@@ -613,8 +621,10 @@
 					"object"
 				],
 				"oneOf": [
-					{"required": ["id", "name"]},
-					{"required": ["id", "name", "names"]},
+					{"anyOf": [
+						{"required": ["id", "name"]},
+						{"required": ["id", "name", "names"]}
+					]},
 					{"required": ["value"]},
 					{"required": ["values"]}
 				],
@@ -624,7 +634,11 @@
 						"pattern": "^[A-Za-z0-9_@$-]+$"
 					},
 					"value": {
-						"type": ["number", "string", {"$ref": "#/definitions/localisedText"}]
+						"oneOf": [
+							{"type": "number"},
+							{"type": "string"},
+							{"$ref": "#/definitions/localisedText"}
+						]
 					},
 					"values": {"$ref": "#/definitions/valueArray"},
 					"name": {"$ref": "#/definitions/localisedBestMatchText"},
@@ -686,7 +700,7 @@
 				"attributes": {
 					"type": "array",
 					"items": {
-						"oneOf": [
+						"anyOf": [
 							{"type": "integer"},
 							{"type": "number"},
 							{"type": "string"},
@@ -699,10 +713,10 @@
 				},
 				"dimensionGroupAttributes": {
 					"type": "object",
-					"patternProperties": {"^[0-9]*(:[0-9]*)*$": {
+					"patternProperties": {"^([0-9]+(:[0-9]*)*)|((:[0-9]*)*(:[0-9]+)+(:[0-9]*)*)$": {
 						"type": "array",
 						"items": {
-							"oneOf": [
+							"anyOf": [
 								{"type": "integer"},
 								{"type": "number"},
 								{"type": "string"},
@@ -720,7 +734,7 @@
 					"patternProperties": {"^[0-9]+(:[0-9]+)*$": {
 						"type": "array",
 						"items": {
-							"oneOf": [
+							"anyOf": [
 								{"type": "integer"},
 								{"type": "number"},
 								{"type": "string"},
@@ -747,7 +761,7 @@
 							"attributes": {
 								"type": "array",
 								"items": {
-									"oneOf": [
+									"anyOf": [
 										{"type": "integer"},
 										{"type": "number"},
 										{"type": "string"},
@@ -763,7 +777,7 @@
 								"patternProperties": {"^[0-9]+(:[0-9]+)*$": {
 									"type": "array",
 									"items": {
-										"oneOf": [
+										"anyOf": [
 											{"type": "integer"},
 											{"type": "number"},
 											{"type": "string"},
@@ -787,10 +801,6 @@
 		"valueArray": {
 			"oneOf": [{
 				"type": "array",
-				"items": {"type": "integer"},
-				"minItems": 1
-			},{
-				"type": "array",
 				"items": {"type": "number"},
 				"minItems": 1
 			},{
@@ -809,7 +819,8 @@
 			"properties": {
 				"none": {
 					"type": "object",
-					"description": "This is an empty object and means that value of the attribute will not vary with any of the other data structure components. This will always be treated as a dataset level attribute."
+					"description": "This is an empty object and means that value of the attribute will not vary with any of the other data structure components. This will always be treated as a dataset level attribute.",
+					"maxProperties": 0
 				},
 				"dimensions": {
 					"type": "array",
@@ -822,7 +833,8 @@
 				},
 				"observation": {
 					"type": "object",
-					"description": "This is an empty object and means that value of the attribute can vary with each observation."
+					"description": "This is an empty object and means that value of the attribute can vary with each observation.",
+					"maxProperties": 0
 				},
 				"primaryMeasure": {
 					"type": "string",
