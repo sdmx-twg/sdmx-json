@@ -537,7 +537,7 @@
 		"dimFormat": {
 			"type": "object",
 			"properties": {
-				"textFormat": {"type": "string"},
+				"dataType": {"$ref": "#/definitions/simpleDataType"},
 				"minLength": {"type": "integer"},
 				"maxLength": {"type": "integer"},
 				"minValue": {"type": "integer"},
@@ -548,9 +548,9 @@
 		"format": {
 			"type": "object",
 			"properties": {
+				"dataType": {"$ref": "#/definitions/simpleDataType"},
 				"minOccurs":{ "type": "integer" },
 				"maxOccurs":{ "type": "integer" },
-				"textFormat": {"type": "string"},
 				"minLength": {"type": "integer"},
 				"maxLength": {"type": "integer"},
 				"minValue": {"type": "integer"},
@@ -859,6 +859,52 @@
 				{"required": ["none"]},
 				{"required": ["observation"]},
 				{"required": ["primaryMeasure"]}
+			]
+		},
+		"simpleDataType": {
+			"description": "simpleDataType provides an enumerated list of the types of data formats allowed as the for the representation of a data structure definition component, since SDMX 3.0.0 also including XHTML.",
+			"type": "string",
+			"enum": [
+				"String",
+				"Alpha",
+				"AlphaNumeric",
+				"Numeric",
+				"BigInteger",
+				"Integer",
+				"Long",
+				"Short",
+				"Decimal",
+				"Float",
+				"Double",
+				"Boolean",
+				"URI",
+				"Count",
+				"InclusiveValueRange",
+				"ExclusiveValueRange",
+				"Incremental",
+				"ObservationalTimePeriod",
+				"StandardTimePeriod",
+				"BasicTimePeriod",
+				"GregorianTimePeriod",
+				"GregorianYear",
+				"GregorianYearMonth",
+				"GregorianDay",
+				"ReportingTimePeriod",
+				"ReportingYear",
+				"ReportingSemester",
+				"ReportingTrimester",
+				"ReportingQuarter",
+				"ReportingMonth",
+				"ReportingWeek",
+				"ReportingDay",
+				"DateTime",
+				"TimeRange",
+				"Month",
+				"MonthDay",
+				"Day",
+				"Time",
+				"Duration",
+				"XHTML"
 			]
 		},
 		"uri": {
