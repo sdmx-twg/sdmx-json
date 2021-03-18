@@ -1,8 +1,8 @@
 {
     "meta": {
-        "schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/develop/data-message/tools/schemas/1.0/sdmx-json-data-schema.json",
+        "schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/2.0.0/sdmx-json-data-schema.json",
         "id": "62b5f19d-f1c9-495d-8446-a3661ed24753",
-        "prepared": "2012-11-29T08:40:26Z",
+        "prepared": "2021-03-17T22:57:33Z",
         "contentLanguages": [
             "en",
             "fr-fr"
@@ -159,8 +159,8 @@
                         ]},
                         "role": "TITLE",
                         "values": [
-                            {"name": "New Zealand dollar (NZD)"},
-                            {"name": "Russian rouble (RUB)"}
+                            {"value": "New Zealand dollar (NZD)"},
+                            {"value": "Russian rouble (RUB)"}
                         ]
                     },
                     {
