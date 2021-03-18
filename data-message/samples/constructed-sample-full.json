@@ -314,9 +314,9 @@
 						"role":"PRIMARY",
 						"isMandatory":true,
 						"format":{
+							"dataType":"Double",
 							"minOccurs":1,
 							"maxOccurs":1,
-							"textFormat":"Double",
 							"isMultiLingual":false
 						}
 					}
@@ -365,9 +365,9 @@
 							}
 						},
 						"format":{
+							"dataType":"String",
 							"minOccurs":1,
 							"maxOccurs":2,
-							"textFormat":"String",
 							"minLength":5,
 							"maxLength":3000,
 							"isMultiLingual":false
