@@ -1,6 +1,6 @@
 {
     "meta": {
-        "schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/develop/data-message/tools/schemas/1.0/sdmx-json-data-schema.json",
+        "schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/2.0.0/sdmx-json-data-schema.json",
         "id": "IT1001",
         "prepared": "2018-03-11T14:30:47",
         "test": true,
@@ -28,38 +28,76 @@
                 "rel": "datastructure"
             }],
             "action": "Information",
+            "attributes": [0,0,0,0,0,"contact@organisation.org"],
+            "dimensionGroupAttributes": {
+                "::0": [["MAFF_Agricultural Statistics_2014"], null],
+                "::1": [["MAFF_Agricultural Statistics_2015","Other sources"], null],
+                "::2": [["MAFF_Agricultural Statistics_2016"], null],
+                "::3": [["MAFF_Agricultural Statistics_2017"], null],
+                "0:0:": [null, {"en": "Comment for Annual data for Banteay Meanchey", "km": "ផ្តល់យោបល់សម្រាប់ទិន្នន័យប្រចាំឆ្នាំសម្រាប់ខេត្តបន្ទាយមានជ័យ"}],
+                "0:1:": [null, {"en": "Comment for Annual data for Battambang", "km": "ផ្តល់យោបល់សម្រាប់ទិន្នន័យប្រចាំឆ្នាំសម្រាប់ខេត្តបាត់ដំបង"}],
+                "0:2:": [null, {"en": "Comment for Annual data for Cambodia", "km": "ផ្តល់យោបល់សម្រាប់ទិន្នន័យប្រចាំឆ្នាំសម្រាប់ប្រទេសកម្ពុជា"}]
+            },
             "observations": {
                 "0:0": [
                     350.154,
-                    0
+                    null,
+                    "2018-03-18T11:00:00"
                 ],
                 "0:1": [
                     389.385,
-                    1
+                    null,
+                    "2019-03-18T11:00:00"
                 ],
                 "0:2": [
                     395.729,
-                    2
+                    null,
+                    "2020-03-18T11:00:00"
                 ],
                 "0:3": [
                     433.638,
-                    3
+                    null,
+                    "2021-03-18T11:00:00"
                 ],
                 "1:0": [
                     442.996,
-                    0
+                    null,
+                    "2018-03-18T11:00:00"
                 ],
                 "1:1": [
                     426.588,
-                    1
+                    null,
+                    "2019-03-18T11:00:00"
                 ],
                 "1:2": [
                     479.686,
-                    2
+                    null,
+                    "2020-03-18T11:00:00"
                 ],
                 "1:3": [
                     522.296,
-                    3
+                    null,
+                    "2021-03-18T11:00:00"
+                ],
+                "2:0": [
+                    5228.330,
+                    null,
+                    "2018-03-18T11:00:00"
+                ],
+                "2:1": [
+                    5191.833,
+                    null,
+                    "2019-03-18T11:00:00"
+                ],
+                "2:2": [
+                    5197.887,
+                    null,
+                    "2020-03-18T11:00:00"
+                ],
+                "2:3": [
+                    5541.424,
+                    null,
+                    "2021-03-18T11:00:00"
                 ]
             }
         }],
@@ -81,7 +119,7 @@
             "description": "Milled rice description",
             "descriptions": {"en": "Milled rice description"},
             "dimensions": {
-                "dataset": [{
+                "dataSet": [{
                     "id": "FREQ",
                     "name": "Frequency",
                     "names": {"en": "Frequency"},
@@ -195,14 +233,37 @@
                     }
                 ]
             },
+			"measures":{
+				"observation":[
+					{
+						"id":"OBS_VALUE",
+						"name":"Observation Value",
+						"names":{
+							"en":"Observation Value"
+						},
+						"description":"Description for the measure",
+						"descriptions":{
+							"en":"Description for the measure"
+						},
+						"role":"PRIMARY",
+						"isMandatory":true,
+						"format":{
+							"dataType":"Double",
+							"minOccurs":1,
+							"maxOccurs":1,
+							"isMultiLingual":false
+						}
+					}
+				]
+			},
             "attributes": {
-                "dataset": [
+                "dataSet": [
                     {
                         "id": "UNIT_MEASURE",
                         "name": "Unit of measure",
                         "names": {"en": "Unit of measure"},
                         "role": ["UNIT_MEASURE"],
-                        "relationship": {"none": {}},
+                        "relationship": {"observation": {}},
                         "values": [{
                             "id": "TONES",
                             "name": "Tones",
@@ -214,7 +275,7 @@
                         "name": "Unit multiplier",
                         "names": {"en": "Unit multiplier"},
                         "role": ["UNIT_MULT"],
-                        "relationship": {"none": {}},
+                        "relationship": {"observation": {}},
                         "values": [{
                             "id": "3",
                             "name": "Thousands",
@@ -226,7 +287,7 @@
                         "name": "Base Period",
                         "names": {"en": "Base Period"},
                         "role": ["BASE_PER"],
-                        "relationship": {"none": {}},
+                        "relationship": {"observation": {}},
                         "values": [{
                             "id": "2010_100",
                             "name": "2010=100",
@@ -257,48 +318,86 @@
                             "name": "One decimal",
                             "names": {"en": "One decimal"}
                         }]
+                    },
+                    {
+                        "id": "CONTACT_EMAIL",
+                        "name": "Contact E-mail",
+                        "names": {"en": "Contact E-mail"},
+                        "relationship": {"none": {}},
+						"format":{
+							"dataType":"String",
+							"maxOccurs":1,
+                            "pattern": "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}$",
+							"isMultiLingual":false
+						}
                     }
                 ],
-                "series": [],
-                "observation": [
+                "dimensionGroup": [
                     {
                         "id": "SOURCE",
                         "name": "Source",
                         "names": {"en": "Source"},
                         "relationship": {"dimensions": ["TIME_PERIOD"]},
-                        "values": [
-                            {"name": "MAFF_Agricultural Statistics_2014"},
-                            {"name": "MAFF_Agricultural Statistics_2015"},
-                            {"name": "MAFF_Agricultural Statistics_2016"},
-                            {"name": "MAFF_Agricultural Statistics_2017"}
-                        ]
+                        "format": {
+							"dataType":"String",
+							"minOccurs":1,
+							"maxOccurs":2,
+							"isMultiLingual":false
+                        }
                     },
+                    {
+                        "id": "SERIES_COMMENT",
+                        "name": "Time series comment",
+                        "names": {"en": "Time series comment"},
+                        "relationship": {"dimensions": ["FREQ","REF_AREA"]},
+                        "format": {
+							"dataType":"String",
+  							"minOccurs":1,
+							"maxOccurs":1,
+							"isMultiLingual":true
+                        }
+                    }
+                ],
+                "series": [],
+                "observation": [
                     {
                         "id": "OBS_STATUS",
                         "name": "Observation status",
                         "names": {"en": "Observation status"},
                         "roles": ["OBS_STATUS"],
                         "default": "A",
-                        "relationship": {"primaryMeasure": "OBS_VALUE"},
+                        "relationship": {"observation": {}},
                         "values": [{
                             "id": "A",
                             "name": "Normal value",
                             "names": {"en": "Normal value"}
                         }]
+                    },
+                    {
+                        "id": "EMBARGO_TIME",
+                        "name": "Embargo time",
+                        "names": {"en": "Embargo time"},
+                        "roles": ["EMBARGO_TIME"],
+                        "relationship": {"observation": {}},
+                        "format": {
+							"dataType":"BasicTimePeriod",
+							"maxOccurs":1,
+							"isMultiLingual":false
+                        }
                     }
                 ]
             },
             "annotations": [
                 {
                     "title": "Hierarchical name",
-                    "type": "Alternative name",
+                    "type": "ALT_NAME",
                     "text": "Banteay Meanchey",
                     "texts": {"en": "Banteay Meanchey"},
                     "id": "ALT_NAME"
                 },
                 {
                     "title": "Hierarchical name",
-                    "type": "Alternative name",
+                    "type": "ALT_NAME",
                     "text": "Battambang",
                     "texts": {"en": "Battambang"},
                     "id": "ALT_NAME"
