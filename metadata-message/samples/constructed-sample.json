@@ -3,7 +3,7 @@
 		"schema":"https://raw.githubusercontent.com/sdmx-twg/sdmx-json/develop/metadata-message/tools/schemas/1.0/sdmx-json-metadata-schema.json",
 		"id":"GEN",
 		"test":true,
-		"prepared":"2018-03-18T08:00:00-05:00",
+		"prepared":"2021-03-18T08:00:00-05:00",
 		"contentLanguages":[
 			"en"
 		],
