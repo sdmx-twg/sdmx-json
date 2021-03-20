@@ -518,9 +518,9 @@
 			"type": "string"
 		},
 		"VersionType": {
-			"description": "VersionType is used to communicate version information. The format is restricted to allow for simple incrementing and sorting of version number. The version consists of an unlimited set of numeric components, separated by the '.' character. When processing version, each numeric component (the number preceding and following any '.' character) should be parsed as an integer. Thus, a version of 1.3 and 1.03 would be equivalent, as both the '3' component and the '03' component would parse to an integer value of 3.",
+			"description": "VersionType is used to communicate version information. The format is restricted to semantic versioning rules (reduced version without 'build metadata'.",
 			"type": "string",
-			"pattern": "^[0-9]+(\\.[0-9]+)*$",
+			"pattern": "^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?$",
 			"default": 1.0
 		},
 		"MetadataSetType": {
