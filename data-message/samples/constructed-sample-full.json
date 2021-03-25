@@ -99,408 +99,422 @@
 		}
 	],
 	"data":{
-		"structure":{
-			"links":[
-				{
-					"href":"https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_EXR1/1.0",
-					"urn":"urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_EXR1(1.0)",
-					"rel":"datastructure",
-					"title":"resolvable uri to datastructure",
-					"titles":{
-						"en":"resolvable uri to datastructure"
-					}
-				},
-				{
-					"href":"https://sdw-wsrest.ecb.europa.eu/service/dataflow/ECB/EXR",
-					"urn":"urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:EXR(1.0)",
-					"rel":"dataflow",
-					"title":"resolvable uri to dataflow",
-					"titles":{
-						"en":"resolvable uri to dataflow"
-					}
-				},
-				{
-					"href":"https://sdw-wsrest.ecb.europa.eu/service/provisionagreement/ECB/PA_EXR",
-					"urn":"urn:sdmx:org.sdmx.infomodel.provisionagreement.ProvisionAgreement=ECB:PA_EXR(1.0)",
-					"rel":"provisionagreement",
-					"title":"resolvable uri to provision agreement",
-					"titles":{
-						"en":"resolvable uri to provision agreement"
-					}
-				}
-			],
-			"name":"dataflow name",
-			"names":{
-				"en":"dataflow name"
-			},
-			"description":"dataflow description",
-			"descriptions":{
-				"en":"dataflow description"
-			},
-			"dimensions":{
-				"dataSet":[
+		"structure":[
+			{
+				"links":[
 					{
-						"id":"FREQ",
-						"name":"Frequency",
-						"names":{
-							"en":"Frequency"
-						},
-						"description":"Description for the dimension",
-						"descriptions":{
-							"en":"Description for the dimension"
-						},
-						"comment for keyPosition":"# 0-based position of dimension in key in user request url",
-						"keyPosition":0,
-						"comment for role":"# restricted list of dimension and attribute roles (time, frequency, geo, unit, scalefactor, referenceperiod, ...)",
-						"role":"frequency",
-						"values":[
-							{
-								"id":"D",
-								"name":"Daily",
-								"names":{
-									"en":"Daily"
-								}
-							}
-						]
-					},
-					{
-						"id":"CURRENCY_DENOM",
-						"name":"Currency denominator",
-						"names":{
-							"en":"Currency denominator"
-						},
-						"description":"Description for the dimension",
-						"descriptions":{
-							"en":"Description for the dimension"
-						},
-						"keyPosition":2,
-						"values":[
-							{
-								"id":"EUR",
-								"name":"Euro",
-								"names":{
-									"en":"Euro"
-								}
-							}
-						]
-					},
-					{
-						"id":"EXR_TYPE",
-						"name":"Exchange rate type",
-						"names":{
-							"en":"Exchange rate type"
-						},
-						"description":"Description for the dimension",
-						"descriptions":{
-							"en":"Description for the dimension"
-						},
-						"keyPosition":3,
-						"values":[
-							{
-								"id":"SP00",
-								"name":"Spot rate",
-								"names":{
-									"en":"Spot rate"
-								}
-							}
-						]
-					},
-					{
-						"id":"EXR_SUFFIX",
-						"name":"Series variation - EXR context",
-						"names":{
-							"en":"Series variation - EXR context"
-						},
-						"description":"Description for the dimension",
-						"descriptions":{
-							"en":"Description for the dimension"
-						},
-						"keyPosition":4,
-						"values":[
-							{
-								"id":"A",
-								"name":"Average or standardised measure for given frequency",
-								"names":{
-									"en":"Average or standardised measure for given frequency"
-								}
-							}
-						]
-					}
-				],
-				"series":[
-					{
-						"id":"CURRENCY",
-						"name":"Currency",
-						"names":{
-							"en":"Currency"
-						},
-						"description":"Description for the dimension",
-						"descriptions":{
-							"en":"Description for the dimension"
-						},
-						"keyPosition":1,
-						"role":"unit",
-						"values":[
-							{
-								"id":"NZD",
-								"name":"New Zealand dollar",
-								"names":{
-									"en":"New Zealand dollar"
-								}
-							},
-							{
-								"id":"RUB",
-								"name":"Russian rouble",
-								"names":{
-									"en":"Russian rouble"
-								}
-							}
-						]
-					}
-				],
-				"observation":[
-					{
-						"id":"TIME_PERIOD",
-						"name":"Time period or range",
-						"names":{
-							"en":"Time period or range"
-						},
-						"description":"Description for the dimension",
-						"descriptions":{
-							"en":"Description for the dimension"
-						},
-						"keyPosition":5,
-						"role":"time",
-						"values":[
-							{
-								"id":"2013-01-18",
-								"name":"2013-01-18",
-								"names":{
-									"en":"2013-01-18"
-								},
-								"start":"2013-01-18T00:00:00Z",
-								"end":"2013-01-18T23:59:59Z"
-							},
-							{
-								"id":"2013-01-21",
-								"name":"2013-01-21",
-								"names":{
-									"en":"2013-01-21"
-								},
-								"start":"2013-01-21T00:00:00Z",
-								"end":"2013-01-21T23:59:59Z"
-							}
-						]
-					}
-				]
-			},
-			"measures":{
-				"observation":[
-					{
-						"id":"OBS_VALUE",
-						"name":"Observation Value",
-						"names":{
-							"en":"Observation Value"
-						},
-						"description":"Description for the measure",
-						"descriptions":{
-							"en":"Description for the measure"
-						},
-						"relationship":{
-							"observation":{
-								
-							}
-						},
-						"role":"PRIMARY",
-						"isMandatory":true,
-						"format":{
-							"dataType":"Double",
-							"minOccurs":1,
-							"maxOccurs":1,
-							"isMultiLingual":false
+						"href":"https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_EXR1/1.0",
+						"urn":"urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_EXR1(1.0)",
+						"rel":"datastructure",
+						"title":"resolvable uri to datastructure",
+						"titles":{
+							"en":"resolvable uri to datastructure"
 						}
-					}
-				]
-			},
-			"attributes":{
-				"dataSet":[
-					{
-						"id":"TIME_FORMAT",
-						"name":"Time Format",
-						"names":{
-							"en":"Time Format"
-						},
-						"description":"Description for the attribute",
-						"descriptions":{
-							"en":"Description for the attribute"
-						},
-						"relationship":{
-							"none":{	
-							}
-						},
-						"role":"TIME_FORMAT",
-						"default":"P1D",
-						"values":[
-							{
-								"id":"P1D",
-								"name":"Daily",
-								"names":{
-									"en":"Daily"
-								}
-							}
-						]
 					},
 					{
-						"id":"DESCRIPTION",
-						"name":"Description",
-						"names":{
-							"en":"Description"
-						},
-						"description":"Description for the attribute",
-						"descriptions":{
-							"en":"Description for the attribute"
-						},
-						"relationship":{
-							"none":{
-							}
-						},
-						"format":{
-							"dataType":"String",
-							"minOccurs":1,
-							"maxOccurs":2,
-							"minLength":5,
-							"maxLength":3000,
-							"isMultiLingual":false
+						"href":"https://sdw-wsrest.ecb.europa.eu/service/dataflow/ECB/EXR",
+						"urn":"urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:EXR(1.0)",
+						"rel":"dataflow",
+						"title":"resolvable uri to dataflow",
+						"titles":{
+							"en":"resolvable uri to dataflow"
+						}
+					},
+					{
+						"href":"https://sdw-wsrest.ecb.europa.eu/service/provisionagreement/ECB/PA_EXR",
+						"urn":"urn:sdmx:org.sdmx.infomodel.provisionagreement.ProvisionAgreement=ECB:PA_EXR(1.0)",
+						"rel":"provisionagreement",
+						"title":"resolvable uri to provision agreement",
+						"titles":{
+							"en":"resolvable uri to provision agreement"
 						}
 					}
 				],
-				"dimensionGroup":[
-					{
-						"id":"UNIT_MEAS",
-						"name":"Unit of Measure",
-						"names":{
-							"en":"Unit of Measure"
-						},
-						"description":"Description for the attribute",
-						"descriptions":{
-							"en":"Description for the attribute"
-						},
-						"relationship":{
-							"dimensions":[
-								"FREQ",
-								"EXR_TYPE",
-								"CURRENCY"
-							]
-						},
-						"role":"UNIT_MEAS",
-						"values":[
-							{
-								"id":"NC",
-								"name":"National Currency",
-								"names":{
-									"en":"National Currency"
-								}
-							}
-						]
-					}
-				],
-				"series":[
-					{
-						"id":"ID",
-						"name":"Attribute name",
-						"names":{
-							"en":"Attribute name"
-						},
-						"description":"Description for the attribute",
-						"descriptions":{
-							"en":"Description for the attribute"
-						},
-						"relationship":{
-							"dimensions":[
-								"FREQ",
-								"CURRENCY",
-								"CURRENCY_DENOM",
-								"EXR_TYPE",
-								"EXR_SUFFIX"
-							]
-						},
-						"role":null,
-						"default":"ID1",
-						"comment for values":"# inclusion of attachment level and its format to be decided, e.g. \"attachment\": [ true, true, true, true, true, true, false ],",
-						"values":[
-							{
-								"comment for id":"# id property is optional to allow for uncoded attributes",
-								"id":"ID1",
-								"name":"New Zealand dollar (NZD)",
-								"names":{
-									"en":"New Zealand dollar (NZD)"
-								}
-							},
-							{
-								"id":"ID2",
-								"name":"Russian rouble (RUB)",
-								"names":{
-									"en":"Russian rouble (RUB)"
-								}
-							}
-						]
-					}
-				],
-				"observation":[
-					{
-						"id":"OBS_STATUS",
-						"name":"Observation status",
-						"names":{
-							"en":"Observation status"
-						},
-						"description":"Description for the attribute",
-						"descriptions":{
-							"en":"Description for the attribute"
-						},
-						"relationship":{
-							"primaryMeasure":"OBS_VALUE"
-						},
-						"role":null,
-						"comment for default":"# optional",
-						"default":"A",
-						"comment for values":"# a null attribute can be used to shorten the message by using O index later in message",
-						"values":[
-							null,
-							{
-								"id":"A",
-								"name":"Normal value",
-								"names":{
-									"en":"Normal value"
-								},
-								"description":"Normal value",
-								"descriptions":{
-									"en":"Normal value"
-								}
-							}
-						]
-					}
-				]
-			},
-			"annotations":[
-				{
-					"title":"AnnotationTitle provides a title for the annotation.",
-					"type":"AnnotationType is used to distinguish between annotations.",
-					"text":"AnnotationText contains the text of the annotation.",
-					"texts":{
-						"en":"AnnotationText contains the text of the annotation."
-					},
-					"id":"Non-standard identification of an annotation.",
-					"links":[
+				"name":"dataflow name",
+				"names":{
+					"en":"dataflow name"
+				},
+				"description":"dataflow description",
+				"descriptions":{
+					"en":"dataflow description"
+				},
+				"dimensions":{
+					"dataSet":[
 						{
-							"href":"http://www.myorg.org/ws/uri/for/this/annotation",
-							"rel":"description"
+							"id":"FREQ",
+							"name":"Frequency",
+							"names":{
+								"en":"Frequency"
+							},
+							"description":"Description for the dimension",
+							"descriptions":{
+								"en":"Description for the dimension"
+							},
+							"comment for keyPosition":"# 0-based position of dimension in key in user request url",
+							"keyPosition":0,
+							"comment for role":"# restricted list of dimension and attribute roles (time, frequency, geo, unit, scalefactor, referenceperiod, ...)",
+							"role":"frequency",
+							"values":[
+								{
+									"id":"D",
+									"name":"Daily",
+									"names":{
+										"en":"Daily"
+									}
+								}
+							]
+						},
+						{
+							"id":"CURRENCY_DENOM",
+							"name":"Currency denominator",
+							"names":{
+								"en":"Currency denominator"
+							},
+							"description":"Description for the dimension",
+							"descriptions":{
+								"en":"Description for the dimension"
+							},
+							"keyPosition":2,
+							"values":[
+								{
+									"id":"EUR",
+									"name":"Euro",
+									"names":{
+										"en":"Euro"
+									}
+								}
+							]
+						},
+						{
+							"id":"EXR_TYPE",
+							"name":"Exchange rate type",
+							"names":{
+								"en":"Exchange rate type"
+							},
+							"description":"Description for the dimension",
+							"descriptions":{
+								"en":"Description for the dimension"
+							},
+							"keyPosition":3,
+							"values":[
+								{
+									"id":"SP00",
+									"name":"Spot rate",
+									"names":{
+										"en":"Spot rate"
+									}
+								}
+							]
+						},
+						{
+							"id":"EXR_SUFFIX",
+							"name":"Series variation - EXR context",
+							"names":{
+								"en":"Series variation - EXR context"
+							},
+							"description":"Description for the dimension",
+							"descriptions":{
+								"en":"Description for the dimension"
+							},
+							"keyPosition":4,
+							"values":[
+								{
+									"id":"A",
+									"name":"Average or standardised measure for given frequency",
+									"names":{
+										"en":"Average or standardised measure for given frequency"
+									}
+								}
+							]
+						}
+					],
+					"series":[
+						{
+							"id":"CURRENCY",
+							"name":"Currency",
+							"names":{
+								"en":"Currency"
+							},
+							"description":"Description for the dimension",
+							"descriptions":{
+								"en":"Description for the dimension"
+							},
+							"keyPosition":1,
+							"role":"unit",
+							"values":[
+								{
+									"id":"NZD",
+									"name":"New Zealand dollar",
+									"names":{
+										"en":"New Zealand dollar"
+									}
+								},
+								{
+									"id":"RUB",
+									"name":"Russian rouble",
+									"names":{
+										"en":"Russian rouble"
+									}
+								}
+							]
+						}
+					],
+					"observation":[
+						{
+							"id":"TIME_PERIOD",
+							"name":"Time period or range",
+							"names":{
+								"en":"Time period or range"
+							},
+							"description":"Description for the dimension",
+							"descriptions":{
+								"en":"Description for the dimension"
+							},
+							"keyPosition":5,
+							"role":"time",
+							"values":[
+								{
+									"id":"2013-01-18",
+									"name":"2013-01-18",
+									"names":{
+										"en":"2013-01-18"
+									},
+									"start":"2013-01-18T00:00:00Z",
+									"end":"2013-01-18T23:59:59Z"
+								},
+								{
+									"id":"2013-01-21",
+									"name":"2013-01-21",
+									"names":{
+										"en":"2013-01-21"
+									},
+									"start":"2013-01-21T00:00:00Z",
+									"end":"2013-01-21T23:59:59Z"
+								}
+							]
 						}
 					]
-				}
-			]
-		},
+				},
+				"measures":{
+					"observation":[
+						{
+							"id":"OBS_VALUE",
+							"name":"Observation Value",
+							"names":{
+								"en":"Observation Value"
+							},
+							"description":"Description for the measure",
+							"descriptions":{
+								"en":"Description for the measure"
+							},
+							"relationship":{
+								"observation":{
+									
+								}
+							},
+							"role":"PRIMARY",
+							"isMandatory":true,
+							"format":{
+								"dataType":"Double",
+								"minOccurs":1,
+								"maxOccurs":1,
+								"isMultiLingual":false
+							}
+						}
+					]
+				},
+				"attributes":{
+					"dataSet":[
+						{
+							"id":"TIME_FORMAT",
+							"name":"Time Format",
+							"names":{
+								"en":"Time Format"
+							},
+							"description":"Description for the attribute",
+							"descriptions":{
+								"en":"Description for the attribute"
+							},
+							"relationship":{
+								"none":{
+									
+								}
+							},
+							"role":"TIME_FORMAT",
+							"default":"P1D",
+							"values":[
+								{
+									"id":"P1D",
+									"name":"Daily",
+									"names":{
+										"en":"Daily"
+									}
+								}
+							]
+						},
+						{
+							"id":"DESCRIPTION",
+							"name":"Description",
+							"names":{
+								"en":"Description"
+							},
+							"description":"Description for the attribute",
+							"descriptions":{
+								"en":"Description for the attribute"
+							},
+							"relationship":{
+								"none":{
+									
+								}
+							},
+							"format":{
+								"dataType":"String",
+								"minOccurs":1,
+								"maxOccurs":2,
+								"minLength":5,
+								"maxLength":3000,
+								"isMultiLingual":false
+							}
+						}
+					],
+					"dimensionGroup":[
+						{
+							"id":"UNIT_MEAS",
+							"name":"Unit of Measure",
+							"names":{
+								"en":"Unit of Measure"
+							},
+							"description":"Description for the attribute",
+							"descriptions":{
+								"en":"Description for the attribute"
+							},
+							"relationship":{
+								"dimensions":[
+									"FREQ",
+									"EXR_TYPE",
+									"CURRENCY"
+								]
+							},
+							"role":"UNIT_MEAS",
+							"values":[
+								{
+									"id":"NC",
+									"name":"National Currency",
+									"names":{
+										"en":"National Currency"
+									}
+								}
+							]
+						}
+					],
+					"series":[
+						{
+							"id":"ID",
+							"name":"Attribute name",
+							"names":{
+								"en":"Attribute name"
+							},
+							"description":"Description for the attribute",
+							"descriptions":{
+								"en":"Description for the attribute"
+							},
+							"relationship":{
+								"dimensions":[
+									"FREQ",
+									"CURRENCY",
+									"CURRENCY_DENOM",
+									"EXR_TYPE",
+									"EXR_SUFFIX"
+								]
+							},
+							"role":null,
+							"default":"ID1",
+							"comment for values":"# inclusion of attachment level and its format to be decided, e.g. \"attachment\": [ true, true, true, true, true, true, false ],",
+							"values":[
+								{
+									"comment for id":"# id property is optional to allow for uncoded attributes",
+									"id":"ID1",
+									"name":"New Zealand dollar (NZD)",
+									"names":{
+										"en":"New Zealand dollar (NZD)"
+									}
+								},
+								{
+									"id":"ID2",
+									"name":"Russian rouble (RUB)",
+									"names":{
+										"en":"Russian rouble (RUB)"
+									}
+								}
+							]
+						}
+					],
+					"observation":[
+						{
+							"id":"OBS_STATUS",
+							"name":"Observation status",
+							"names":{
+								"en":"Observation status"
+							},
+							"description":"Description for the attribute",
+							"descriptions":{
+								"en":"Description for the attribute"
+							},
+							"relationship":{
+								"primaryMeasure":"OBS_VALUE"
+							},
+							"role":null,
+							"comment for default":"# optional",
+							"default":"A",
+							"comment for values":"# a null attribute can be used to shorten the message by using O index later in message",
+							"values":[
+								null,
+								{
+									"id":"A",
+									"name":"Normal value",
+									"names":{
+										"en":"Normal value"
+									},
+									"description":"Normal value",
+									"descriptions":{
+										"en":"Normal value"
+									}
+								}
+							]
+						}
+					]
+				},
+				"annotations":[
+					{
+						"title":"AnnotationTitle provides a title for the annotation.",
+						"type":"AnnotationType is used to distinguish between annotations.",
+						"text":"AnnotationText contains the text of the annotation.",
+						"texts":{
+							"en":"AnnotationText contains the text of the annotation."
+						},
+						"id":"Non-standard identification of an annotation.",
+						"links":[
+							{
+								"href":"http://www.myorg.org/ws/uri/for/this/annotation",
+								"rel":"description"
+							}
+						]
+					}
+				],
+				"dataSets":[
+					0,
+					1,
+					2,
+					3,
+					4,
+					5,
+					6
+				]
+			}
+		],
 		"dataSets":[
 			{
+				"structure":0,
 				"links":[
 					{
 						"href":"https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_EXR1/1.0",
@@ -573,6 +587,7 @@
 				}
 			},
 			{
+				"structure":0,
 				"links":[
 					{
 						"href":"https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_EXR1/1.0",
@@ -604,6 +619,7 @@
 				}
 			},
 			{
+				"structure":0,
 				"links":[
 					{
 						"href":"https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_EXR1/1.0",
@@ -654,6 +670,7 @@
 				}
 			},
 			{
+				"structure":0,
 				"links":[
 					{
 						"href":"https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_EXR1/1.0",
@@ -685,6 +702,7 @@
 				}
 			},
 			{
+				"structure":0,
 				"links":[
 					{
 						"href":"https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_EXR1/1.0",
@@ -710,6 +728,7 @@
 				}
 			},
 			{
+				"structure":0,
 				"links":[
 					{
 						"href":"https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_EXR1/1.0",
@@ -735,6 +754,7 @@
 				}
 			},
 			{
+				"structure":0,
 				"links":[
 					{
 						"href":"https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_EXR1/1.0",
