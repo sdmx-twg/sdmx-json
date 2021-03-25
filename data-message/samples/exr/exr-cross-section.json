@@ -1,228 +1,329 @@
 {
-    "meta": {
-        "schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/2.0.0/sdmx-json-data-schema.json",
-        "id": "62b5f19d-f1c9-495d-8446-a3661ed24753",
-        "prepared": "2021-03-17T22:57:33Z",
-        "contentLanguages": [ "en", "fr-fr" ],
-        "sender": {
-            "id": "ECB",
-            "name": "European Central Bank",
-            "names": {"en": "European Central Bank"}
-        }
-    },
-    "data": {
-        "structure": {
-            "links": [
-                {
-                    "href": "https://sdw-wsrest.ecb.europa.eu/service/dataflow/ECB/EXR/1.0",
-                    "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:EXR(1.0)",
-                    "rel": "dataflow",
-                    "title": "resolvable uri to dataflow",
-                    "titles": {"en": "resolvable uri to dataflow"}
-                },
-                {
-                    "href": "https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_EXR1/1.0",
-                    "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_EXR1(1.0)",
-                    "rel": "datastructure",
-                    "title": "resolvable uri to datastructure",
-                    "titles": {"en": "resolvable uri to datastructure"}
-                },
-                {
-                    "href": "https://sdw-wsrest.ecb.europa.eu/service/provisionagreement/ECB/PA_EXR",
-                    "urn": "urn:sdmx:org.sdmx.infomodel.provisionagreement.ProvisionAgreement=ECB:PA_EXR(1.0)",
-                    "rel": "provisionagreement",
-                    "title": "resolvable uri to provision agreement",
-                    "titles": {"en": "resolvable uri to provision agreement"}
-                }
-            ],
-            "dimensions": {
-                "dataSet": [
-                    {
-                        "id": "FREQ",
-                        "name": "Frequency",
-                        "names": {"en": "Frequency"},
-                        "role": "FREQ",
-                        "keyPosition": 0,
-                        "values": [{
-                            "id": "D",
-                            "name": "Daily",
-                            "names": {"en": "Daily"}
-                        }]
-                    },
-                    {
-                        "id": "CURRENCY_DENOM",
-                        "name": "Currency denominator",
-                        "names": {"en": "Currency denominator"},
-                        "keyPosition": 2,
-                        "values": [{
-                            "id": "EUR",
-                            "name": "Euro",
-                            "names": {"en": "Euro"}
-                        }]
-                    },
-                    {
-                        "id": "EXR_TYPE",
-                        "name": "Exchange rate type",
-                        "names": {"en": "Exchange rate type"},
-                        "keyPosition": 3,
-                        "values": [{
-                            "id": "SP00",
-                            "name": "Spot rate",
-                            "names": {"en": "Spot rate"}
-                        }]
-                    },
-                    {
-                        "id": "EXR_SUFFIX",
-                        "name": "Series variation - EXR context",
-                        "names": {"en": "Series variation - EXR context"},
-                        "keyPosition": 4,
-                        "values": [{
-                            "id": "A",
-                            "name": "Average or standardised measure for given frequency",
-                            "names": {"en": "Average or standardised measure for given frequency"}
-                        }]
-                    }
-                ],
-                "series": [{
-                    "id": "TIME_PERIOD",
-                    "name": "Time period or range",
-                    "names": {"en": "Time period or range"},
-                    "keyPosition": 5,
-                    "role": "TIME_PERIOD",
-                    "keyPosition": 5,
-                    "values": [
-                        {
-                            "id": "2013-01-18",
-                            "name": "2013-01-18",
-                            "names": {"en": "2013-01-18"},
-                            "start": "2013-01-18T00:00:00.000Z",
-                            "end": "2013-01-18T23:59:59.999Z"
-                        },
-                        {
-                            "id": "2013-01-21",
-                            "name": "2013-01-21",
-                            "names": {"en": "2013-01-21"},
-                            "start": "2013-01-21T00:00:00.000Z",
-                            "end": "2013-01-21T23:59:59.999Z"
-                        }
-                    ]
-                }],
-                "observation": [{
-                    "id": "CURRENCY",
-                    "name": "Currency",
-                    "names": {"en": "Currency"},
-                    "keyPosition": 1,
-                    "values": [
-                        {
-                            "id": "NZD",
-                            "name": "New Zealand dollar",
-                            "names": {"en": "New Zealand dollar"}
-                        },
-                        {
-                            "id": "RUB",
-                            "name": "Russian rouble",
-                            "names": {"en": "Russian rouble"}
-                        }
-                    ]
-                }]
-            },
-            "attributes": {
-                "dataSet": [{
-	                    "id": "TIME_FORMAT",
-	                    "name": "Time Format",
-	                    "names": {"en": "Time Format"},
-	                    "description": "Description for the attribute",
-	                    "descriptions": {"en": "Description for the attribute"},
-						"relationship": {
-							"none": {
-							}
-						},
-	                    "role": "TIME_FORMAT",
-	                    "default": "P1D",
-	                    "values": [{
-	                        "id": "P1D",
-	                        "name": "Daily",
-	                        "names": {"en": "Daily"}
-	                    }]
-	                }],
-                "series": [],
-                "observation": [
-                    {
-                        "id": "OBS_STATUS",
-                        "name": "Observation status",
-                        "names": {"en": "Observation status"},
-                        "relationship": {"primaryMeasure": "OBS_VALUE"},
-                        "values": [{
-                            "id": "A",
-                            "name": "Normal value",
-                            "names": {"en": "Normal value"}
-                        }]
-                    },
-                    {
-                        "id": "TITLE",
-                        "name": "Series title",
-                        "names": {"en": "Series title"},
-						"relationship": {
-							"dimensions": [
-								"FREQ", "CURRENCY", "CURRENCY_DENOM", "EXR_TYPE", "EXR_SUFFIX"
+	"meta":{
+		"schema":"https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/2.0.0/sdmx-json-data-schema.json",
+		"id":"62b5f19d-f1c9-495d-8446-a3661ed24753",
+		"prepared":"2021-03-17T22:57:33Z",
+		"contentLanguages":[
+			"en",
+			"fr-fr"
+		],
+		"sender":{
+			"id":"ECB",
+			"name":"European Central Bank",
+			"names":{
+				"en":"European Central Bank"
+			}
+		}
+	},
+	"data":{
+		"structures":[
+			{
+				"dataSets":[
+					0
+				],
+				"links":[
+					{
+						"href":"https://sdw-wsrest.ecb.europa.eu/service/dataflow/ECB/EXR/1.0",
+						"urn":"urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:EXR(1.0)",
+						"rel":"dataflow",
+						"title":"resolvable uri to dataflow",
+						"titles":{
+							"en":"resolvable uri to dataflow"
+						}
+					},
+					{
+						"href":"https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_EXR1/1.0",
+						"urn":"urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_EXR1(1.0)",
+						"rel":"datastructure",
+						"title":"resolvable uri to datastructure",
+						"titles":{
+							"en":"resolvable uri to datastructure"
+						}
+					},
+					{
+						"href":"https://sdw-wsrest.ecb.europa.eu/service/provisionagreement/ECB/PA_EXR",
+						"urn":"urn:sdmx:org.sdmx.infomodel.provisionagreement.ProvisionAgreement=ECB:PA_EXR(1.0)",
+						"rel":"provisionagreement",
+						"title":"resolvable uri to provision agreement",
+						"titles":{
+							"en":"resolvable uri to provision agreement"
+						}
+					}
+				],
+				"dimensions":{
+					"dataSet":[
+						{
+							"id":"FREQ",
+							"name":"Frequency",
+							"names":{
+								"en":"Frequency"
+							},
+							"role":"FREQ",
+							"keyPosition":0,
+							"values":[
+								{
+									"id":"D",
+									"name":"Daily",
+									"names":{
+										"en":"Daily"
+									}
+								}
 							]
 						},
-                        "role": "TITLE",
-                        "values": [
-                            {"value": "New Zealand dollar (NZD)"},
-                            {"value": "Russian rouble (RUB)"}
-                        ]
-                    }
-                ]
-            },
-            "annotations": [{
-                "title": "Sample series annotation title",
-                "type": "example",
-                "text": "Sample series annotation text",
-                "texts": {"en": "Sample series annotation text"},
-                "id": "ABC123456"
-            }]
-        },
-        "dataSets": [{
-            "links": [{
-                "href": "https://sdw-wsrest.ecb.europa.eu/service/dataflow/ECB/EXR/1.0",
-                "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:EXR(1.0)",
-                "rel": "dataflow"
-            }],
-            "action": "Information",
-            "series": {
-                "0": {
-                    "annotations": [0],
-                    "attributes": [],
-                    "observations": {
-                        "0": [
-                            1.5931,
-                            0,
-                            0
-                        ],
-                        "1": [
-                            40.3426,
-                            0,
-                            1
-                        ]
-                    }
-                },
-                "1": {
-                    "attributes": [],
-                    "observations": {
-                        "0": [
-                            1.5925,
-                            0,
-                            0
-                        ],
-                        "1": [
-                            40.3,
-                            0,
-                            1
-                        ]
-                    }
-                }
-            }
-        }]
-    }
+						{
+							"id":"CURRENCY_DENOM",
+							"name":"Currency denominator",
+							"names":{
+								"en":"Currency denominator"
+							},
+							"keyPosition":2,
+							"values":[
+								{
+									"id":"EUR",
+									"name":"Euro",
+									"names":{
+										"en":"Euro"
+									}
+								}
+							]
+						},
+						{
+							"id":"EXR_TYPE",
+							"name":"Exchange rate type",
+							"names":{
+								"en":"Exchange rate type"
+							},
+							"keyPosition":3,
+							"values":[
+								{
+									"id":"SP00",
+									"name":"Spot rate",
+									"names":{
+										"en":"Spot rate"
+									}
+								}
+							]
+						},
+						{
+							"id":"EXR_SUFFIX",
+							"name":"Series variation - EXR context",
+							"names":{
+								"en":"Series variation - EXR context"
+							},
+							"keyPosition":4,
+							"values":[
+								{
+									"id":"A",
+									"name":"Average or standardised measure for given frequency",
+									"names":{
+										"en":"Average or standardised measure for given frequency"
+									}
+								}
+							]
+						}
+					],
+					"series":[
+						{
+							"id":"TIME_PERIOD",
+							"name":"Time period or range",
+							"names":{
+								"en":"Time period or range"
+							},
+							"keyPosition":5,
+							"role":"TIME_PERIOD",
+							"values":[
+								{
+									"id":"2013-01-18",
+									"name":"2013-01-18",
+									"names":{
+										"en":"2013-01-18"
+									},
+									"start":"2013-01-18T00:00:00.000Z",
+									"end":"2013-01-18T23:59:59.999Z"
+								},
+								{
+									"id":"2013-01-21",
+									"name":"2013-01-21",
+									"names":{
+										"en":"2013-01-21"
+									},
+									"start":"2013-01-21T00:00:00.000Z",
+									"end":"2013-01-21T23:59:59.999Z"
+								}
+							]
+						}
+					],
+					"observation":[
+						{
+							"id":"CURRENCY",
+							"name":"Currency",
+							"names":{
+								"en":"Currency"
+							},
+							"keyPosition":1,
+							"values":[
+								{
+									"id":"NZD",
+									"name":"New Zealand dollar",
+									"names":{
+										"en":"New Zealand dollar"
+									}
+								},
+								{
+									"id":"RUB",
+									"name":"Russian rouble",
+									"names":{
+										"en":"Russian rouble"
+									}
+								}
+							]
+						}
+					]
+				},
+				"attributes":{
+					"dataSet":[
+						{
+							"id":"TIME_FORMAT",
+							"name":"Time Format",
+							"names":{
+								"en":"Time Format"
+							},
+							"description":"Description for the attribute",
+							"descriptions":{
+								"en":"Description for the attribute"
+							},
+							"relationship":{
+								"none":{
+									
+								}
+							},
+							"role":"TIME_FORMAT",
+							"default":"P1D",
+							"values":[
+								{
+									"id":"P1D",
+									"name":"Daily",
+									"names":{
+										"en":"Daily"
+									}
+								}
+							]
+						}
+					],
+					"series":[
+						
+					],
+					"observation":[
+						{
+							"id":"OBS_STATUS",
+							"name":"Observation status",
+							"names":{
+								"en":"Observation status"
+							},
+							"relationship":{
+								"primaryMeasure":"OBS_VALUE"
+							},
+							"values":[
+								{
+									"id":"A",
+									"name":"Normal value",
+									"names":{
+										"en":"Normal value"
+									}
+								}
+							]
+						},
+						{
+							"id":"TITLE",
+							"name":"Series title",
+							"names":{
+								"en":"Series title"
+							},
+							"relationship":{
+								"dimensions":[
+									"FREQ",
+									"CURRENCY",
+									"CURRENCY_DENOM",
+									"EXR_TYPE",
+									"EXR_SUFFIX"
+								]
+							},
+							"role":"TITLE",
+							"values":[
+								{
+									"value":"New Zealand dollar (NZD)"
+								},
+								{
+									"value":"Russian rouble (RUB)"
+								}
+							]
+						}
+					]
+				},
+				"annotations":[
+					{
+						"title":"Sample series annotation title",
+						"type":"example",
+						"text":"Sample series annotation text",
+						"texts":{
+							"en":"Sample series annotation text"
+						},
+						"id":"ABC123456"
+					}
+				]
+			}
+		],
+		"dataSets":[
+			{
+				"structure":0,
+				"links":[
+					{
+						"href":"https://sdw-wsrest.ecb.europa.eu/service/dataflow/ECB/EXR/1.0",
+						"urn":"urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:EXR(1.0)",
+						"rel":"dataflow"
+					}
+				],
+				"action":"Information",
+				"series":{
+					"0":{
+						"annotations":[
+							0
+						],
+						"attributes":[
+							
+						],
+						"observations":{
+							"0":[
+								1.5931,
+								0,
+								0
+							],
+							"1":[
+								40.3426,
+								0,
+								1
+							]
+						}
+					},
+					"1":{
+						"attributes":[
+							
+						],
+						"observations":{
+							"0":[
+								1.5925,
+								0,
+								0
+							],
+							"1":[
+								40.3,
+								0,
+								1
+							]
+						}
+					}
+				}
+			}
+		]
+	}
 }
