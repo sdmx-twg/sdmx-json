@@ -209,15 +209,17 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 *Object* *optional*. Header contains the message's “primary data”.
 
-* structure - *Object* *optional*. *[Structure](#structure)* contains the information needed to interpret the data available in the message, such as the list of concepts used.
+* structures - *Array* *optional*. *Structures* field is an array of *[Structure](#structure)* objects that contain the information needed to interpret the data available in the message, such as the list of concepts used. Since SDMX 3.0.0, SDMX restful web servic requests can query data for several structures. Each returned structure is presented separately. Also the underlying data are presented in separate data sets. 
 * dataSets - *Array* *optional*. *DataSets* field is an array of *[dataSet](#dataset)* objects. That's where the data (i.e.: the observations) will be.
 
 Example:
 
 	"data": {
-		"structure": {
-			# structure object #
-		},
+		"structures": [
+			{
+				# structure object #
+			}
+		],
 		"dataSets": [
 			{
 				# dataSet object #
@@ -234,10 +236,11 @@ Example:
 * measures - *Object* *optional*. Describes the *[measures](#dimensions-measures-attributes)* used in the message. *Measures* are always presented at the `observations` level. For backward-compatibility, the `measures` object can be omitted if there is only one measure with the ID "OBS_VALUE". In this case, the measure values (of an indeterministic type) are written directly into the dataSet. SDMX 3+.0.0 implementations should always use the `measures` object. In case an SDMX 3+.0.0 data structure definition has no measures, the `measures` object must be present but empty. 
 * attributes - *Object*. Describes the *[attributes](#dimensions-measures-attributes)* used in the message as well as the levels (`dataSet`, `dimensionGroup`, `series`, `observations`) at which these *attributes* are presented.
 * annotations - *Array* *optional*. *Annotations* field is an array of *[annotation](#annotation)* objects. If appropriate, provides a list of `annotations` that can be referenced by `structure`, `component`, `component value`, `dataSets`, `series` and `observations`.
+* dataSets - *Array* *optional*. *dataSets* field is an array of integers. It contains the indexes of the *dataSet* objects in the *dataSets* array of the *data* object, which contain the data for this *structure*. If omitted, then all data included in the message are assumed to be described by the *structure*.
 
 Example:
 
-	"structure": {
+	{
 		"links": [
 			{
 				# link object #
@@ -256,7 +259,8 @@ Example:
 			{
 				# annotation object #
 			}
-		]
+		],
+		"dataSets": [0]
 	}
 
 ### link
@@ -605,7 +609,7 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 *Object*. That's where the data (i.e.: the `observations`) will be.
 
-In typical cases, the file will contain only one `dataSet`. However, in some cases, such as when retrieving, from an SDMX 2.1 web service, what has changed in the data source since in particular point in time, the web service might return more than one `dataSet`.
+In typical cases, the file will contain only one `dataSet`. However, in some cases, such as when retrieving, from an SDMX 2.1 web service, what has changed in the data source since in particular point in time, the web service might return more than one `dataSet`. Since SDMX 3.0.0, SDMX restful web servic requests can query data for several structures. In this case, the response includes one or more separate data sets per returned structure.
 
 There are between several levels in a `dataSet` object, depending on the way the data in the message is organized.
 A `dataSet` may contain a flat list of `observations`. In this scenario, we have 2 main levels in the data part of the message: the `dataSet` level and the `observation` level.
@@ -618,6 +622,7 @@ or series of another dimension, the `observations` will be found under the `seri
 
 The `dataSet` properties are:
 
+* structure - *Integer* *optional*. *Structure* contains the index of the *structure* in the *structures* array of the *data* object, which describe the data in this *dataSet*. If omitted, then the data in this *dataSet* are assumed to be described by the first *structure* (default: 0). 
 * action - *String* *optional*. Action provides a list of actions, describing the intention of the data transmission from the sender's side.
   - `Append` - this is an incremental update for an existing `dataSet` or the provision of new data or documentation (attribute values) formerly absent. If any of the supplied data or metadata is already present, it will not replace these data.
   - `Replace` - data are to be replaced, and may also include additional data to be appended.
@@ -641,6 +646,7 @@ For information on how to handle the indexes for `dimensions`, `measures`, `attr
 Examples:
 
 	{
+		"structure": 0,
 		"action": "Information",
 		"reportingBegin": "2012-05-04",
 		"reportingEnd": "2012-06-01",
@@ -662,6 +668,7 @@ Examples:
 	}
 
 	{
+		"structure": 0,
 		"action": "Information",
 		"reportingBegin": "2012-05-04",
 		"reportingEnd": "2012-06-01",
@@ -1302,159 +1309,163 @@ Let's say that the following data content of a message needs to be processed:
 
 ```json
 	{
-		"structure": {
-			"id": "ECB_EXR_WEB",
-			"links": [
-				{
-					"href": "https://sdw-wsrest.ecb.europa.eu/service/dataflow/ECB/EXR/1.0",
-					"rel": "dataflow"
-				}
-			],
-			"dimensions": {
-				"dataSet": [
+		"structures": [
+			{
+				"id": "ECB_EXR_WEB",
+				"links": [
 					{
-						"id": "FREQ",
-						"name": "Frequency",
-						"names": { "en": "Frequency" },
-						"keyPosition": 0,
-						"values": [
-							{
-								"id": "D",
-								"name": "Daily",
-								"names": { "en": "Daily" }
-							}
-						]
-					},
-					{
-						"id": "CURRENCY_DENOM",
-						"name": "Currency denominator",
-						"names": { "en": "Currency denominator" },
-						"keyPosition": 2,
-						"values": [
-							{
-								"id": "EUR",
-								"name": "Euro",
-								"names": { "en": "Euro" }
-							}
-						]
-					},
-					{
-						"id": "EXR_TYPE",
-						"name": "Exchange rate type",
-						"names": { "en": "Exchange rate type" },
-						"keyPosition": 3,
-						"values": [
-							{
-								"id": "SP00",
-								"name": "Spot rate",
-								"names": { "en": "Spot rate" }
-							}
-						]
-					},
-					{
-						"id": "EXR_SUFFIX",
-						"name": "Series variation - EXR context",
-						"names": { "en": "Series variation - EXR context" },
-						"keyPosition": 4,
-						"values": [
-							{
-								"id": "A",
-								"name": "Average or standardised measure",
-								"names": { "en": "Average or standardised measure" }
-							}
-						]
+						"href": "https://sdw-wsrest.ecb.europa.eu/service/dataflow/ECB/EXR/1.0",
+						"rel": "dataflow"
 					}
 				],
-				"series": [
-					{
-						"id": "CURRENCY",
-						"name": "Currency",
-						"names": { "en": "Currency" },
-						"keyPosition": 1,
-						"values": [
-							{
-								"id": "NZD",
-								"name": "New Zealand dollar",
-								"names": { "en": "New Zealand dollar" }
-							}, {
-								"id": "RUB",
-								"name": "Russian rouble",
-								"names": { "en": "Russian rouble" }
-							}
-						]
-					}
-				],
-				"observation": [
-					{
-						"id": "TIME_PERIOD",
-						"name": "Time period or range",
-						"names": { "en": "Time period or range" },
-						"values": [
-							{
-								"id": "2013-01-18",
-								"name": "2013-01-18",
-								"names": { "en": "2013-01-18" }
-							}, {
-								"id": "2013-01-21",
-								"name": "2013-01-21",
-								"names": { "en": "2013-01-21" }
-							}
-						]
-					}
-				]
-			},
-			"attributes": {
-				"dataSet": [],
-				"series": [
-					{
-						"id": "TITLE",
-						"name": "Series title",
-						"names": { "en": "Series title" },
-						"values": [
-							{
-								"name": "New Zealand dollar (NZD)",
-								"names": { "en": "New Zealand dollar (NZD)" }
-							}, {
-								"name": "Russian rouble (RUB)",
-								"name": { "en": "Russian rouble (RUB)" }
-							}
-						]
-					}
-				],
-				"observation": [
-					{
-						"id": "OBS_STATUS",
-						"name": "Observation status",
-						"names": { "en": "Observation status" },
-						"values": [
-							{
-								"id": "A",
-								"name": "Normal value",
-								"names": { "en": "Normal value" }
-							}
-						]
-					}
-				]
-			},
-			"annotations": [
-				{
-					"title": "Sample series annotation title",
-					"type": "example",
-					"text": "Sample series annotation text",
-					"texts": { "en": "Sample series annotation text" },
-					"id": "ABC123456"
+				"dimensions": {
+					"dataSet": [
+						{
+							"id": "FREQ",
+							"name": "Frequency",
+							"names": { "en": "Frequency" },
+							"keyPosition": 0,
+							"values": [
+								{
+									"id": "D",
+									"name": "Daily",
+									"names": { "en": "Daily" }
+								}
+							]
+						},
+						{
+							"id": "CURRENCY_DENOM",
+							"name": "Currency denominator",
+							"names": { "en": "Currency denominator" },
+							"keyPosition": 2,
+							"values": [
+								{
+									"id": "EUR",
+									"name": "Euro",
+									"names": { "en": "Euro" }
+								}
+							]
+						},
+						{
+							"id": "EXR_TYPE",
+							"name": "Exchange rate type",
+							"names": { "en": "Exchange rate type" },
+							"keyPosition": 3,
+							"values": [
+								{
+									"id": "SP00",
+									"name": "Spot rate",
+									"names": { "en": "Spot rate" }
+								}
+							]
+						},
+						{
+							"id": "EXR_SUFFIX",
+							"name": "Series variation - EXR context",
+							"names": { "en": "Series variation - EXR context" },
+							"keyPosition": 4,
+							"values": [
+								{
+									"id": "A",
+									"name": "Average or standardised measure",
+									"names": { "en": "Average or standardised measure" }
+								}
+							]
+						}
+					],
+					"series": [
+						{
+							"id": "CURRENCY",
+							"name": "Currency",
+							"names": { "en": "Currency" },
+							"keyPosition": 1,
+							"values": [
+								{
+									"id": "NZD",
+									"name": "New Zealand dollar",
+									"names": { "en": "New Zealand dollar" }
+								}, {
+									"id": "RUB",
+									"name": "Russian rouble",
+									"names": { "en": "Russian rouble" }
+								}
+							]
+						}
+					],
+					"observation": [
+						{
+							"id": "TIME_PERIOD",
+							"name": "Time period or range",
+							"names": { "en": "Time period or range" },
+							"values": [
+								{
+									"id": "2013-01-18",
+									"name": "2013-01-18",
+									"names": { "en": "2013-01-18" }
+								}, {
+									"id": "2013-01-21",
+									"name": "2013-01-21",
+									"names": { "en": "2013-01-21" }
+								}
+							]
+						}
+					]
 				},
-				{
-					"title": "Sample observation annotation title",
-					"type": "example",
-					"text": "Sample observation annotation text",
-					"texts": { "en": "Sample observation annotation text" },
-					"id": "XYZ98765"
-				}
-			]        
-		},
+				"attributes": {
+					"dataSet": [],
+					"series": [
+						{
+							"id": "TITLE",
+							"name": "Series title",
+							"names": { "en": "Series title" },
+							"values": [
+								{
+									"name": "New Zealand dollar (NZD)",
+									"names": { "en": "New Zealand dollar (NZD)" }
+								}, {
+									"name": "Russian rouble (RUB)",
+									"name": { "en": "Russian rouble (RUB)" }
+								}
+							]
+						}
+					],
+					"observation": [
+						{
+							"id": "OBS_STATUS",
+							"name": "Observation status",
+							"names": { "en": "Observation status" },
+							"values": [
+								{
+									"id": "A",
+									"name": "Normal value",
+									"names": { "en": "Normal value" }
+								}
+							]
+						}
+					]
+				},
+				"annotations": [
+					{
+						"title": "Sample series annotation title",
+						"type": "example",
+						"text": "Sample series annotation text",
+						"texts": { "en": "Sample series annotation text" },
+						"id": "ABC123456"
+					},
+					{
+						"title": "Sample observation annotation title",
+						"type": "example",
+						"text": "Sample observation annotation text",
+						"texts": { "en": "Sample observation annotation text" },
+						"id": "XYZ98765"
+					}
+				],
+				"dataSets": [0]
+			}
+		],
 		"dataSets": [
 			{
+				"structure": 0,
 				"action": "Information",
 				"series": {
 					"0": {
