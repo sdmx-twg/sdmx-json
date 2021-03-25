@@ -31,7 +31,8 @@
 	"data":{
 		"dataSets":[
 			{
-				"structure":0"links":[
+				"structure":0,
+				"links":[
 					{
 						"href":"http://ws-root/datastructure/MA_545/AGRI_DSD/1.0",
 						"urn":"urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=MA_545:AGRI_DSD(1.0)",
@@ -137,7 +138,7 @@
 						"2021-03-18T11:00:00"
 					],
 					"2:0":[
-						5228.330,
+						5228.33,
 						null,
 						"2018-03-18T11:00:00"
 					],
