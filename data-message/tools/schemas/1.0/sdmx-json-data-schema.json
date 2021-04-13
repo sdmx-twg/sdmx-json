@@ -12,7 +12,10 @@
 			"description": "Data contains the message's \u201cprimary data\u201d.",
 			"type": "object",
 			"properties": {
-				"structure": {"$ref": "#/definitions/structure"},
+				"structures": {
+					"type": "array",
+					"items": {"$ref": "#/definitions/structure"}
+				},
 				"dataSets": {
 					"type": "array",
 					"items": {"$ref": "#/definitions/dataSet"}
@@ -324,6 +327,11 @@
 			"type": "object",
 			"required": ["dimensions"],
 			"properties": {
+				"dataSets": {
+					"type": "array",
+					"items": {"type": "integer"},
+					"minItems": 1
+				},
 				"links": {"$ref": "#/definitions/links"},
 				"name": {"$ref": "#/definitions/localisedBestMatchText"},
 				"names": {"$ref": "#/definitions/localisedText"},
@@ -680,6 +688,7 @@
 		"dataSet": {
 			"type": "object",
 			"properties": {
+				"structure": {"type": "integer"},
 				"action": {
 					"type": "string",
 					"enum": [
