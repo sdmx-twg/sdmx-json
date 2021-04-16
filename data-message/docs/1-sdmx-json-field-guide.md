@@ -476,6 +476,7 @@ Examples:
 * isMultiLingual - *Boolean* *optional*. **Only for `measures` and `attributes`.** This indicates for a textFormat of type "string", whether the uncoded component value should allow for multiple values in different languages. The default is `false`. If `true`, the component values will use instead of `id` and `name`:
   -  if `minOccurs` and `maxOccurs` are equal to 1: the `value` property,
   -  otherwise: the `values` property.
+* sentinels - *Array* of *Object*s *optional*. Each object represents a sentinel value which is a coded value (within the value domain of the textFormat) used to explain why data may not be present. 
 
 Example:
 
@@ -486,16 +487,38 @@ Example:
 		"minLength": 4, 
 		"maxLength": 4, 
 		"pattern": "^[A-Za-z][A-Za-z0-9_-]*$",
-		"isMultilingual": true
+		"isMultilingual": true		]
 	}
 
 	{ 
 		"minOccurs": 2,
 		"maxOccurs": 2,
 		"textFormat": "Double",
-		"isMultilingual": false
+		"isMultilingual": false,
+		"sentinels": [
+			{
+				# sentinel value object #
+			}
+		]
 	}
 	
+###### sentinel
+
+*Object*. Represents a sentinel value which is a coded value (within the value domain of the textFormat) used to explain why data may not be present.
+
+* value - *Sting*. Sentinel value (within the value domain of the textFormat) used to explain why data may not be present.
+* name - *String* *optional*. Human-readable (best-language-match) name for the sentinel.
+* names - *Object* *optional*. Human-readable localised *[names](#names)* for the sentinel.
+
+Example:
+
+	{
+		"value": "-1",
+		"name": "Non-response",
+		"names": { "en": "Non-response", 
+			   "fr": "Non-réponse" }
+	}
+
 ##### link
 
 See the section on [linking mechanism](#linking-mechanism) for all information on links.
