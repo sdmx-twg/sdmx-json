@@ -418,6 +418,10 @@ Example:
 		]
 	}
 
+##### link
+
+See the section on [linking mechanism](#linking-mechanism) for all information on links.
+
 ##### attribute relationship
 
 *Object*. The attribute's relationship defines the relationship between an attribute and other data structure definition components as defined in the data structure definition. It provides the original "attachment level", but depending on the message context (especially the data query) an attribute value can however be presented physically in the message at a different level. The attribute relationship serves also to define the scope, meaning to which measures an attribute applies.
@@ -509,6 +513,8 @@ Example:
 * value - *Sting*. Sentinel value (within the value domain of the textFormat) used to explain why data may not be present.
 * name - *String* *optional*. Human-readable (best-language-match) name for the sentinel.
 * names - *Object* *optional*. Human-readable localised *[names](#names)* for the sentinel.
+* description - *String* *optional*. Human-readable (best-language-match) description for the sentinel.
+* descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) for the sentinel.
 
 Example:
 
@@ -516,12 +522,11 @@ Example:
 		"value": "-1",
 		"name": "Non-response",
 		"names": { "en": "Non-response", 
-			   "fr": "Non-réponse" }
+			   "fr": "Non-réponse" },
+		"description": "Description for non-response.",
+		"descriptions": { "en": "Description for non-response.",
+				  "fr": "Description de non-réponse." },
 	}
-
-##### link
-
-See the section on [linking mechanism](#linking-mechanism) for all information on links.
 
 ##### component value
 
