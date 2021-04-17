@@ -564,8 +564,33 @@
 				"minValue": {"type": "integer"},
 				"maxValue": {"type": "integer"},
 				"pattern": {"type": "string"},
-				"isMultiLingual": {"type": "boolean"}
+				"isMultiLingual": {"type": "boolean"},
+				"sentinels": {"$ref": "#/definitions/sentinels"}
 			}
+		},
+		"sentinels": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"anyOf": [
+					{"required": ["value", "name"]},
+					{"required": ["value", "name", "names"]}
+				],
+				"properties": {
+					"value": {
+						"oneOf": [
+							{"type": "number"},
+							{"type": "string"}
+						]
+					},
+					"name": {"$ref": "#/definitions/localisedBestMatchText"},
+					"names": {"$ref": "#/definitions/localisedText"},
+					"description": {"$ref": "#/definitions/localisedBestMatchText"},
+					"descriptions": {"$ref": "#/definitions/localisedText"}
+				}
+			},
+			"minItems": 1,
+			"uniqueItems": true
 		},
 		"dimValues": {
 			"type": "array",
