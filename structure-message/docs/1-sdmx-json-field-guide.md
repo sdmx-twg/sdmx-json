@@ -1,4 +1,4 @@
-# Introduction to SDMX-JSON Structure Message
+# Introduction to SDMX-JSON Structure Message 2.0.0
 
 See the SDMX-JSON Data Message docs for a brief introduction of the SDMX information model. For additional information on the SDMX information model, please refer to the [SDMX documentation](http://sdmx.org/?page_id=10).
 
@@ -10,7 +10,7 @@ Before we start, let's clarify a few more things about this guide:
 - The ordering of properties in objects is undefined. The properties may appear in any order and consuming applications should not rely on any specific ordering. It is safe to consider a nulled property and the absence of a property as the same thing.
 - Not all properties appear in all contexts. For example response with error messages may not contain a data property.
 
-# Field Guide to SDMX-JSON Structure Message Objects
+# Field Guide to SDMX-JSON Structure Message 2.0.0 Objects (aligned with SDMX 3.0.0)
 
 ## message
 
@@ -178,7 +178,7 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 *Object* *optional*. Header contains the message's “primary data”.
 
-* *[Artefact type]* - *Array* *optional*. This field is an array of objects of one of the corresponding SDMX Information Model artefact types: *dataStructure*, *metadataStructure*, *categoryScheme*, *conceptScheme*, *codelist*, *hierarchicalCodelist*, *agencyScheme*, *dataProviderScheme*, *dataConsumerScheme*, *organisationUnitScheme*, *dataflow*, *metadataflow*, *reportingTaxonomy*, *provisionAgreement*, *structureSet*, *process*, *categorisation*, *contentConstraint* and *attachmentConstraint*. Each of the corresponding object properties is allowed at maximum one time. Contains the requested structural information according to the definition of this artefact. For more information, please see:
+* *[Artefact type]* - *Array* *optional*. This field is an array of objects of one of the corresponding SDMX Information Model artefact types: *dataStructure*, *metadataStructure*, *categoryScheme*, *conceptScheme*, *codelist*, *hierarchy*, *hierarchyAssociation*, *agencyScheme*, *dataProviderScheme*, *dataProviderScheme*, *metadataProviderScheme*, *organisationUnitScheme*, *dataflow*, *metadataflow*, *reportingTaxonomy*, *provisionAgreement*, *metadataProvisionAgreement*, *structureMap*, *representationMap*, *conceptSchemeMap*, *categorySchemeMap*, *organisationSchemeMap*, *reportingTaxonomyMap*, *process*, *categorisation*, *dataConstraint*, *metadataConstraint*, *customTypeScheme*, *vtlMappingScheme*, *namePersonalisationScheme*, *rulesetScheme*, *transformationScheme* and *userDefinedOperatorScheme*. Each of the corresponding object properties is allowed at maximum one time. Contains the requested structural information according to the definition of this artefact. For more information, please see:
 
     * *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*
     * *[Common properties of SDMX artefacts of base type "ItemScheme"](#common-properties-of-sdmx-artefacts-of-base-type-itemscheme)*
@@ -188,20 +188,34 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
     * *[categorySchemes](#categoryscheme)*
     * *[conceptSchemes](#conceptscheme)*
     * *[codelists](#codelist)*
-    * *[hierarchicalCodelists](#hierarchicalcodelist)*
+    * *[hierarchies](#hierarchies)*
+    * *[hierarchyAssociations](#hierarchyassociations)*
     * *[agencySchemes](#agencyscheme)*
     * *[dataProviderSchemes](#dataproviderscheme)*
     * *[dataConsumerSchemes](#dataconsumerscheme)*
+    * *[metadataProviderSchemes](#metadataproviderscheme)*
     * *[organisationUnitSchemes](#organisationunitscheme)*
     * *[dataflows](#dataflow)*
     * *[metadataflows](#metadataflow)*
     * *[reportingTaxonomies](#reportingtaxonomy)*
     * *[provisionAgreements](#provisionagreement)*
-    * *[structureSets](#structureset)*
+    * *[metadataProvisionAgreements](#metadataprovisionagreement)*
+    * *[structureMaps](#structuremap)*
+    * *[representationMaps](#representationmap)*
+    * *[conceptSchemeMaps](#conceptschememap)*
+    * *[categorySchemeMaps](#categoryschememap)*
+    * *[organisationSchemeMaps](#organisationschememap)*
+    * *[reportingTaxonomyMaps](#reportingtaxonomymap)*
     * *[processes](#process)*
     * *[categorisations](#categorisation)*
-    * *[contentConstraints](#contentConstraint)*
-    * *[attachmentConstraints](#attachmentConstraint)*
+    * *[dataConstraints](#dataconstraint)*
+    * *[metadataConstraints](#metadataconstraint)*
+    * *[customTypeSchemes](#customtypescheme)*
+    * *[vtlMappingSchemes](#vtlmappingscheme)*
+    * *[namePersonalisationSchemes](#namepersonalisationscheme)*
+    * *[rulesetSchemes](#rulesetscheme)*
+    * *[transformationSchemes](#transformationscheme)*
+    * *[userDefinedOperatorSchemes](#userdefinedoperatorscheme)*
 
 Example:
 
