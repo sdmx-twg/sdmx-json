@@ -188,8 +188,8 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
     * *[categorySchemes](#categoryscheme)*
     * *[conceptSchemes](#conceptscheme)*
     * *[codelists](#codelist)*
-    * *[hierarchies](#hierarchies)*
-    * *[hierarchyAssociations](#hierarchyassociations)*
+    * *[hierarchies](#hierarchy)*
+    * *[hierarchyAssociations](#hierarchyassociation)*
     * *[agencySchemes](#agencyscheme)*
     * *[dataProviderSchemes](#dataproviderscheme)*
     * *[dataConsumerSchemes](#dataconsumerscheme)*
@@ -238,14 +238,13 @@ All SDMX artefact types share the following common object properties:
 
 * id - *String*. Identifier for the resource.
 * agencyID - *String* *optional*. ID of the agency maintaining this resource.
-* version - *String* *optional*. Version of this resource. It is "1.0" by default.
+* version - *String* *optional*. Version of this resource. By default, the artefact is not versioned.
 * name - *String* *optional*. Human-readable (best-language-match) name of the resource.
 * names - *Object* *optional*. Human-readable localised *[names](#names)* of the resource.
 * description - *String* *optional*. Human-readable (best-language-match) description of the resource.
 * descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) of the resource.
 * validFrom - *String* *optional*. A timestamp from which the version is valid. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
 * validTo - *String* *optional*.  A timestamp from which the version is superceded. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
-* isFinal - *Boolean* *optional*. True if this is the final version of the resource, otherwise False (draft version).
 * isExternalReference - *Boolean* *optional*. If set to “true” it indicates that the content of the resource is held externally.
 * annotations - *Array* *optional*. Provides a list of annotation objects.
 * links - *Array* *optional*. A collection of links to additional resources for the resource. See the section *[link](#link)*. **It is recommended to systematically include as the first link a self-referencing hyperlink (link with "rel"="self") to indicate the URL address of the resource, and its URN.**
@@ -257,7 +256,7 @@ Example:
 	{
 		"id": "MOBILE_NAVI_PUB",
 		"agencyID": "ECB.DISS",
-		"version": "1.0",
+		"version": "1.0.0",
 		"name": "Economic concepts",
 		"names": {
 			"en": "Economic concepts",
@@ -270,7 +269,6 @@ Example:
 		},
 		"validFrom": "2012-05-04",
 		"validTo": "2015-05-04",
-		"isFinal": true,
 		"isExternalReference": false,
 		"annotations":[
 			{
@@ -396,7 +394,7 @@ Example:
 
 	{
 		"id": "DSD1",
-		"version": "1.0",
+		"version": "1.0.0",
 		"agencyID": "SDMX",
 		"dataStructureComponents": {
 			# dataStructureComponents object #
@@ -405,12 +403,12 @@ Example:
 
 #### dataStructureComponents
 
-*Object* *optional*. DataStructureComponents describes the structure of the grouping to the sets of metadata concepts that have a defined structural role in the data structure definition. At a minimum at least one dimension and a primary measure must be defined.
+*Object* *optional*. DataStructureComponents describes the structure of the grouping to the sets of structural concepts that have a defined structural role in the data structure definition. At a minimum at least one dimension and a primary measure must be defined.
 
-* attributeList - *Object* *optional*. The *[attributeList](#attributeList)* object is a collection of metadata concepts that define the attributes of the data structure definition. 
-* dimensionList - *Object* *optional*. The *[dimensionList](#dimensionList)* object is an ordered set of structural metadata concepts that, combined, classify a statistical series, such as a time series, and whose values, when combined (the key) in an instance such as a data set, uniquely identify a specific series.
-* groups - *Array* *optional*. Array of *[group](#group)* objects that are sets of structural metadata concepts (and possibly their values) that define a partial key derived from the key descriptor in a data structure definition. 
-* measureList - *Object* *optional*. The *[measureList](#measureList)* object contains a single metadata concepts that define the primary measures of a data structure. 
+* attributeList - *Object* *optional*. The *[attributeList](#attributeList)* object is a collection of structural concepts that define the attributes of the data structure definition. Attributes can relate to one or more measures, and be reported at the level of none, several or all dimensions.
+* dimensionList - *Object* *optional*. The *[dimensionList](#dimensionList)* object is an ordered set of structural concepts that, combined, classify a statistical series, such as a time series, and whose values, when combined (the key) in an instance such as a data set, uniquely identify a specific series.
+* groups - *Array* *optional*. Array of *[group](#group)* objects that are sets of structural concepts (and possibly their values) that define a partial key derived from the key descriptor in a data structure definition. 
+* measureList - *Object* *optional*. The *[measureList](#measureList)* object is a collection of structural concepts that define the measures of the data structure definition. 
 
 Example:
 
@@ -435,7 +433,7 @@ Example:
 
 *Object* *optional*. AttributeList describes the attributes in the data structure definition.
 
-* id - *String*. Identifier for the attributeList.
+* id - *String*. Identifier for the attributeList. It is provided only for completeness. However, its value is fixed to "AttributeDescriptor".
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
 * attributes - *Array* *optional*. The *[attribute](#attribute)* object describes the definition of a data attribute, which is defined as a characteristic of an object or entity.
@@ -466,6 +464,7 @@ Example:
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
 * assignmentStatus - *String*. Indication whether reporting a given attribute is mandatory or conditional. The two possible values are "Mandatory" and "Conditional".
 * attributeRelationship - *Object*. The *[attributeRelationship](#attributeRelationship)* object describes how the value of this attribute varies with the values of other components. These relationships will be used to determine the attachment level of the attribute in the various data formats. 				
+* measureRelationship - *Array* of *String*s *optional*. The measureRelationship array identifies the measures that the attribute applies to. If this is not used, the attribute is assumed to apply to all measures. If used, it contains one or more identifiers of (a) local measure(s).  
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
 * conceptRoles - *Array* of *String*s *optional*. ConceptRole references (through URNs) the concepts which define roles which this attribute serves. If the concept from which the attribute takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here.
 * localRepresentation - *Object* *optional*. The *[localRepresentation](#localRepresentation)* object defines the representation for the attribute.				
@@ -478,6 +477,9 @@ Example:
 		"attributeRelationship": {
 			# attributeRelationship object #
 		},
+		"measureRelationship": [
+			"MEASURE1", "MEASURE2"
+		],
 		"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).OBS_STATUS",
 		"conceptRoles": [
 			"urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).OBS_STATUS"
@@ -491,19 +493,13 @@ Example:
 
 *Object* *optional*. AttributeRelationship defines the structure for stating the relationship between an attribute and other data structure definition components.
 
-* attachmentGroups - *Array* of *String*s *optional*. One or more identifiers of (a) local GroupKey Descriptor(s). This is used to specify that the attribute should always be attached to the groups referenced here. Note that if one of the referenced dimensions is the time dimension, the groups referenced here will be ignored.
 * dimensions - *Array* of *String*s *optional*. One or more identifiers of (a) local dimension(s). This is used to reference dimensions in the data structure definition on which the value of this attribute depends. An attribute using this relationship can be either a group, series (or section), or observation level attribute. The attachment level of the attribute will be determined by the data format and which dimensions are referenced.
 * group - *String* *optional*. Identifier of a local GroupKey Descriptor. This is used as a convenience to referencing all of the dimension defined by the referenced group. The attribute will also be attached to this group.
 * none - Empty *Object* *optional*. This means that value of the attribute will not vary with any of the other data structure components. This will always be treated as a data set level attribute.
-* primaryMeasure - *String* *optional*. Identifier of the local primary measure, where the reference to the data structure definition which defines the primary measure is provided in another context (for example the data structure definition in which the reference occurs). This is used to specify that the value of the attribute is dependent upon the observed value. An attribute with this relationship will always be treated as an observation level attribute.
+* observation - Empty *Object* *optional*.This is used to specify that the value of the attribute is dependent upon the observed value. An attribute with this relationship will always be treated as an observation level attribute.
+
 
 Examples:
-
-	{
-		"attachmentGroups": [
-			"MY_GROUP"
-		]
-	}
 
 	{
 		"dimensions": [
@@ -520,16 +516,17 @@ Examples:
 	}
 
 	{
-		"primaryMeasure": "OBS_VALUE"
+		"observation": {}
 	}
 
 ###### localRepresentation
 
-*Object* *optional*. LocalRepresentation defines the representation for the attribute.
+*Object* *optional*. LocalRepresentation defines the representation for the attribute. A data attribute can be text (including XHTML and multi-lingual values), a simple value, or an enumerated value.
 
 * enumeration - *String* *optional*. Urn reference to a codelist.
-* enumerationFormat - *Object* *optional*. Urn reference to a codelist. The *[enumerationFormat](#enumerationformat)* object defines a restricted version of a text format that only allows facets and text types applicable to codes. Although the time facets permit any value, an actual code identifier does not support the necessary characters for time. Therefore these facets should not contain time in their values.
+* enumerationFormat - *Object* *optional*. The *[enumerationFormat](#enumerationformat)* object defines a restricted version of a *[textFormat](#textFormat)* that only allows facets and text types applicable to codes. Although the time facets permit any value, an actual code identifier does not support the necessary characters for time. Therefore these facets should not contain time in their values.
 * textFormat - *Object* *optional*. The *[textFormat](#textFormat)* object defines the information for describing a range of text formats restricted to the representations allowed for all components except for target objects, and that does not allow for multi-lingual values.
+* maxOccurs - *Number* *optional*. The maxOccurs attribute indicates the maximum number of values that can be reported for the component. The default is 1.
 
 Examples:
 
@@ -550,20 +547,22 @@ Examples:
 
 *Object* *optional*. TextFormat defines the information for describing a range of text formats restricted to the representations allowed for all components except for target objects, and that does not allow for multi-lingual values.
 
-* decimals - *Integer* *optional*. Positive number (minimum: 1).
-* endTime - *String* *optional*. A valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
-* endValue - *Number* *optional*.
-* interval - *Number* *optional*.
-* isSequence - *Boolean* *optional*.
-* maxLength - *Integer* *optional*. Positive number (minimum: 1).
-* maxValue - *Number* *optional*.
-* minLength - *Integer* *optional*. Positive number (minimum: 1).
-* minValue - *Number* *optional*.
-* pattern - *String* *optional*.
-* startTime - *String* *optional*. A valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
-* startValue - *Number* *optional*.
 * textType - *String* *optional*. Allowed is only one of the following string values: String, Alpha, AlphaNumeric, Numeric, BigInteger, Integer, Long, Short, Boolean, URI, Count, InclusiveValueRange, ExclusiveValueRange, Incremental, ObservationalTimePeriod, StandardTimePeriod, BasicTimePeriod, GregorianTimePeriod, GregorianYear, GregorianYearMonth, GregorianDay, ReportingTimePeriod, ReportingYear, ReportingSemester, ReportingTrimester, ReportingQuarter, ReportingMonth, ReportingWeek, ReportingDay, Month, MonthDay, Day, Duration
+* isSequence - *Boolean* *optional*.
+* interval - *Number* *optional*.
+* startValue - *Number* *optional*.
+* endValue - *Number* *optional*.
 * timeInterval - *String* *optional*. A valid time duration.
+* startTime - *String* *optional*. A valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
+* endTime - *String* *optional*. A valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
+* minLength - *Integer* *optional*. Positive number (minimum: 1).
+* maxLength - *Integer* *optional*. Positive number (minimum: 1).
+* minValue - *Number* *optional*.
+* maxValue - *Number* *optional*.
+* decimals - *Integer* *optional*. Positive number (minimum: 1).
+* pattern - *String* *optional*.
+* isMultiLingual - *Boolean* *optional*. The isMultiLingual attribute indicates for a text format of type "string", whether the value should allow for multiple values in different languages. Default: false.
+
 
 Example:
 
@@ -620,7 +619,6 @@ Example:
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
 * dimensions - *Array* *optional*. The *[dimension](#dimension)* object describes the structure of a dimension, which is defined as a statistical concept used (most probably together with other statistical concepts) to identify a statistical series, such as a time series, e.g. a statistical concept indicating certain economic activity or a geographical reference area.
-* measureDimensions - *Array* *optional*. The *[measureDimension](#measureDimension)* object describes a special type of dimension which defines multiple measures in a data structure. This is represented as any other dimension unless it is the observation dimension. It takes its representation from a concept scheme, and this scheme defines the measures and their representations. When data is formatted with this as the observation dimension, these measures can be made explicit or the value of the dimension can be treated as any other dimension. If the measures are explicit, the representation of the observation will be specific to the core representation for each concept in the representation concept scheme. Note that it is necessary that these representations are compliant (the same or derived from) with that of the primary measure.
 * timeDimensions - *Array* *optional*. The *[timeDimension](#timeDimension)* object describes a special dimension which designates the period in time in which the data identified by the full series key applies..
 
 Example:
@@ -630,11 +628,6 @@ Example:
 		"dimensions": [
 			{
 				# dimension object #
-			}
-		],
-		"measureDimensions": [
-			{
-				# measureDimension object #
 			}
 		],
 		"timeDimensions": [
@@ -655,7 +648,7 @@ Example:
 * type - *String* *optional*. The type attribute identifies whether the dimension is a measure dimension, the time dimension, or a regular dimension. Although these are all apparent by the element names, this attribute allows for each dimension to be processed independent of its element as well as maintaining the restriction of only one measure and time dimension while still allowing dimension to occur in any order. The only possible values are: Dimension, MeasureDimension, TimeDimension.
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
 * conceptRoles - *Array* of *String*s *optional*. ConceptRole references concepts (through URNs) which define roles which this dimension serves. If the concept from which the dimension takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here.
-* localRepresentation - *Object* *optional*. The *[localRepresentation](#localRepresentation)* object defines the representation for the dimension.
+* localRepresentation - *Object* *optional*. The *[localRepresentation](#localRepresentation)* object defines the representation for the dimension. Note that for dimensions the maxOccurs property must be 1, thus cannot be changed. Also the isMultiLingual textFormat property cannot be set to true for dimensions.
 
 Example:
 
@@ -671,33 +664,6 @@ Example:
 			# localRepresentation object #
 		}
 	}
-
-##### measureDimension
-
-*Object* *optional*. MeasureDimension defines the structure of the measure dimension. It is derived from the base dimension structure, but requires that a coded representation taken from a concept scheme is given.
-
-* id - *String* *optional*. Identifier for the measure dimension.
-* annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
-* links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
-* position - *Integer* *optional*. Positive integer (minimum: 0). The position attribute specifies the position of the dimension in the data structure definition, starting at 0. It is optional as the position of the dimension in the key descriptor (DimensionList element) always takes precedence over the value supplied here. This is strictly for informational purposes only.
-* type - *String* *optional*. The type attribute identifies whether the dimension is a measure dimension, the time dimension, or a regular dimension. Although these are all apparent by the element names, this attribute allows for each dimension to be processed independent of its element as well as maintaining the restriction of only one measure and time dimension while still allowing dimension to occur in any order. The only possible values are: Dimension, MeasureDimension, TimeDimension.
-* conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
-* conceptRoles - *Array* of *String*s *optional*. ConceptRole references concepts (through URNs) which define roles which this dimension serves. If the concept from which the dimension takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here.
-* localRepresentation - *Object*. The *measureDimension localRepresentation* object has only one required property *enumeration* which has to provide the URN reference to a concept scheme object.
-
-Example:
-
-	{
-		"id": "MEASURE",
-		"position": 5,
-		"type": "MeasureDimension",
-		"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).MEASURE",
-		"conceptRoles": [
-			"urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).MEASURE"
-		],
-		"localRepresentation": {
-			"enumeration": "urn:sdmx:org.sdmx.infomodel.conceptscheme.ConceptScheme=ECB:ECB_MEASURES(1.0)"
-		}
 
 ##### timeDimension
 
@@ -743,20 +709,14 @@ Example:
 
 #### group
 
-*Object* *optional*. Group describes the structure of a group descriptor in a data structure definition. A group may consist of a of partial key, or collection of distinct cube regions or key sets to which attributes may be attached. The purpose of a group is to specify attributes values which have the same value based on some common dimensionality. All groups declared in the data structure must be unique - that is, you may not have duplicate partial keys. All groups must be given unique identifiers.
+*Object* *optional*. Group describes the structure of a group descriptor in a data structure definition. A group consist of a of partial key to which attributes may be attached. The purpose of a group is to specify attributes values which have the same value based on some common dimensionality. All groups declared in the data structure must be unique - that is, you may not have duplicate partial keys. All groups must be given unique identifiers.
 
 * id - *String*. Identifier for the group.
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
-* attachmentConstraint - *String* *optional*. URN reference to an attachment constraint that defines the key sets and/or cube regions that attributes may be attached to. This is an alternative to referencing the dimensions, and allows attributes to be attached to data for given values of dimensions.
 * groupDimensions - *Array* *optional*. Each of the *groupDimension* objects contains only a reference to a dimension in the key descriptor (DimensionList) through its single property *dimensionReference*. Although it is conventional to declare dimensions in the same order as they are declared in the ordered key, there is no requirement to do so - the ordering of the values of the key are taken from the order in which the dimensions are declared. Note that the id of a dimension may be inherited from its underlying concept - therefore this reference value may actually be the id of the concept.
 
 Examples:
-
-	{
-		"id": "GROUP1",
-		"attachmentConstraint": "ATTACHMENTCONSTRAINT"
-	}
 
 	{
 		"id": "GROUP1",
@@ -772,31 +732,34 @@ Examples:
 
 #### measureList
 
-*Object* *optional*. MeasureList describes the structure of the measure descriptor for a data structure definition. Only a primary may be defined.
+*Object* *optional*. MeasureList describes the structure of the measure descriptor for a data structure definition.
 
 * id - *String* *optional*. Identifier for the measureList.
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
-* primaryMeasure - *Object*. The *[primaryMeasure](#primaryMeasure)* object defines the structure of the primary measure, which is the concept that is the value of the phenomenon to be measured in a data set. Although this may take its semantic from any concept, this is provided a fixed identifier (OBS_VALUE) so that it may be easily distinguished in data messages.
+* measures - *Array*. The *[measure](#measure)* object describes the definition of a measure, which is the concept that is the value of the phenomenon to be measured in a data set. Although this may take its semantic from any concept, for a unique measure the common identifier "OBS_VALUE" is recommended.
 
 Example:
 
 	{
 		"id": "MEASURELIST",
-		"primaryMeasure": {
-			# primaryMeasure object #
-		}
+		"measures": [
+			{
+				# measure object #
+			}
+		]
 	}
 		
-#### primaryMeasure
+#### measure
 
-*Object* *optional*. PrimaryMeasure describes the structure of the primary measure. It describes the observation values for all presentations of the data. The primary measure takes its semantic, and in some cases it representation, from its concept identity (conventionally the OBS_VALUE concept). The primary measure can be coded by referencing a code list from its coded local representation. It can also specify its text format, which is used as the representation of the primary measure if a coded representation is not defined. Neither the coded or uncoded representation are necessary, since the primary measure may take these from the referenced concept. Note that if the data structure declares a measure dimension, the representation of this must be a superset of all possible measure concept representations.
+*Object* *optional*. Measure defines the structure of a measure, which is the concept that is the value of the phenomenon to be measured in a data set. In addition to the identifying concept and representation, a usage status and max occurs can be defined. In case of a unique measure, conventionally the use of the "OBS_VALUE" concept is recommended. A measure can be coded by referencing a code list from its coded local representation. It can also specify its text format, which is used as the representation of the measure if a coded representation is not defined. Neither the coded or uncoded representation are necessary, since the measure may take these from the referenced concept.
 
 * id - *String* *optional*. Identifier for the measureList.
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
-* localRepresentation - *Object* *optional*. The *[localRepresentation](#localRepresentation)* object defines the representation for the primaryMeasure.				
+* localRepresentation - *Object* *optional*. The *[localRepresentation](#localRepresentation)* object defines the representation for the measure.
+* usageStatus - *String*. Indicates whether the measure is mandatory or conditional. The two possible values are "Mandatory" and "Conditional".
 
 Example:
 
@@ -805,7 +768,8 @@ Example:
 		"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).OBS_VALUE",
 		"localRepresentation": {
 			# localRepresentation object #
-		}
+		},
+		"usageStatus": "Mandatory"
 	}
 
 ### metadataStructure
@@ -829,7 +793,7 @@ Example:
 
 	{
 		"id": "TOPICS",
-		"version": "1.0",
+		"version": "1.0.0",
 		"agencyID": "SDMX",
 		"name": "Topics",
 		"names": {
@@ -883,7 +847,7 @@ Example:
 			"en": "Balance of Payments Concept Scheme",
 			"fr": "Schéma des concepts de Balance des paiements"},
 		"agencyId": "IMF",
-		"version": "1.9",
+		"version": "1.9.0",
 		"concepts": [
 			{
 				"id": "FREQ",
@@ -925,7 +889,7 @@ Examples:
 	{
 		"id": "CL_FREQ",
 		"agencyID": "SDMX",
-		"version": "2.0",
+		"version": "2.0.0",
 		"enumerationFormat": {
 			# enumerationFormat object #
 		}
@@ -985,7 +949,7 @@ Example:
 
 	{
 		"id": "CODELIST1",
-		"version": "1.0",
+		"version": "1.0.0",
 		"agencyID": "SDMX",
 		"name": "Code list 1",
 		"names": {
@@ -1015,9 +979,17 @@ Example:
 	}
 
 
-### hierarchicalCodelist
+### hierarchy
 
-*Object*. Describes the structure of a hierarchical codelist. A hierarchical code list is defined as an organised collection of codes that may participate in many parent/child relationships with other codes in the list, as defined by one or more hierarchy of the list.
+*Object*. Describes the structure of a hierarchy. A hierarchy is defined as an organised collection of codes that may participate in many parent/child relationships with other codes in the list.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+See the schema file for more information.
+
+### hierarchyAssociation
+
+*Object*. Describes the structure of a hierarchyAssociation. A hierarchyAssociation associates a hiearchy with an identifiable object in the context of another object.
 
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
@@ -1040,10 +1012,9 @@ Example:
 
 	{
 		"id": "AGENCIES",
-		"version": "1.0",
+		"version": "1.0.0",
 		"agencyID": "SDMX",
 		"isExternalReference": false,
-		"isFinal": false,
 		"name": "SDMX Agency Scheme",
 		"names": {
 			"en": "SDMX Agency Scheme",
@@ -1100,6 +1071,15 @@ See *[common properties of SDMX artefacts of base type "ItemScheme"](#common-pro
 
 See the schema file for more information.
 
+### metadataProviderScheme
+
+*Object*. Defines a type of organisation scheme which contains only metadata providers. The metadata provider scheme maintained by a particular maintenance agency is always provided a fixed identifier and version, and is never final. Therefore, providers can be added or removed without have to version the scheme. This scheme has no hierarchy, meaning that no organisation may define a relationship with another organisation in the scheme.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+See *[common properties of SDMX artefacts of base type "ItemScheme"](#common-properties-of-sdmx-artefacts-of-base-type-itemscheme)*.
+
+See the schema file for more information.
+
 ### organisationUnitScheme
 
 *Object*. Defines a type of organisation scheme which simply defines organisations and there parent child relationships. Organisations in this scheme are assigned no particular role, and may in fact exist within the other type of organisation schemes as well.
@@ -1123,10 +1103,9 @@ Example:
 
 	{
 		"id": "EXR",
-		"version": "1.0",
+		"version": "1.0.0",
 		"agencyID": "ECB",
 		"isExternalReference": false,
-		"isFinal": false,
 		"name": "Exchange Rates",
 		"names": {
 			"en": "Exchange Rates",
@@ -1160,15 +1139,63 @@ See the schema file for more information.
 
 ### provisionAgreement
 
-*Object*. Describes the structure of a provision agreement. A provision agreement defines an agreement for a data provider to report data or reference metadata against a flow. Attributes which describe how the registry must behave when data or metadata is registered against this provision agreement are supplied.
+*Object*. Describes the structure of a provision agreement. A provision agreement defines an agreement for a data provider to report data against a flow.
 
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
 See the schema file for more information.
 
-### structureSet
+### metadataProvisionAgreement
 
-*Object*. Describes the structure of a structure set. It allows components in one structure, structure usage, or item scheme to be mapped to components in another structural component of the same type.
+*Object*. Describes the structure of a metadata provision agreement. A metadata provision agreement defines an agreement for a metadata provider to report reference metadata against a flow.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+See the schema file for more information.
+
+### structureMap
+
+*Object*. Describes the structure of a structureMap. StructureMap allows mapping between data structures or dataflows.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+See the schema file for more information.
+
+### representationMap
+
+*Object*. Describes the structure of a representationMap. RepresentationMap allows mapping between representations.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+See the schema file for more information.
+
+### conceptSchemeMap
+
+*Object*. Describes the structure of a conceptSchemeMap. ConceptSchemeMap allows mapping between concepts in different concept schemes.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+See the schema file for more information.
+
+### categorySchemeMap
+
+*Object*. Describes the structure of a categorySchemeMap. CategorySchemeMap allows mapping between categories in different category schemes.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+See the schema file for more information.
+
+### organisationSchemeMap
+
+*Object*. Describes the structure of a organisationSchemeMap. OrganisationSchemeMap allows mapping between organisations in different organisation schemes.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+See the schema file for more information.
+
+### reportingTaxonomyMap
+
+*Object*. Describes the structure of a reportingTaxonomyMap. ReportingTaxonomyMap allows mapping between reporting categories in different reporting taxonomies.
 
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
@@ -1197,10 +1224,9 @@ Example:
 
 	{
 		"id": "53A341E8-D48B-767E-D5FF-E2E3E0E2BB19",
-		"version": "1.0",
+		"version": "1.0.0",
 		"agencyID": "ECB",
 		"isExternalReference": false,
-		"isFinal": false,
 		"name": "Categorise: DATAFLOWECB:EXR(1.0)",
 		"names": {
 			"en": "Categorise: DATAFLOWECB:EXR(1.0)",
@@ -1217,34 +1243,30 @@ Example:
 		"target": "urn:sdmx:org.sdmx.infomodel.categoryscheme.CategoryScheme=ECB:MOBILE_NAVI(1.0).07"
 	}
 
-### contentConstraint
+### dataConstraint
 
-*Object*. The inclusion of a key or region in a constraint is determined by first processing the included key sets, and then removing those keys defined in the excluded key sets. If no included key sets are defined, then it is assumed that all possible keys or regions are included, and any excluded key or regions are removed from this complete set.
+*Object*. DataConstraint specifies a sub set of the definition of the allowable or available content of a data set in terms of the content or in terms of the set of key combinations. The inclusion of a key or region in a constraint is determined by first processing the included key sets, and then removing those keys defined in the excluded key sets. If no included key sets are defined, then it is assumed that all possible keys or regions are included, and any excluded key or regions are removed from this complete set.
 
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
 See the schema file for more information.
 
-In addition, `constraint` has the following properties:
+In addition, `dataConstraint` has the following properties:
 
-* type - *String* *optional*. The type attribute indicates whether this constraint states what data is actually present for the constraint attachment ("Actual"), or if it defines what content is allowed ("Allowed"). The default value is "Actual", meaning the data actually present for the constraint attachment.
+* role - *String* *optional*. The type attribute indicates whether this constraint states what data is actually present for the constraint attachment ("Actual"), or if it defines what content is allowed ("Allowed"). The default value is "Actual", meaning the data actually present for the constraint attachment.
 * constraintAttachment - *Object* *optional*. The *[constraintAttachment](#constraintAttachment)* object describes the collection of constrainable artefacts that the constraint is attached to.
 * cubeRegions - *Array* *optional*. A list of of *[cubeRegion](#cubeRegion)* objects. CubeRegion describes a set of dimension values which define a region and attributes which relate to the region for the purpose of describing a constraint.
 * dataKeySets - *Array* *optional*. A list of of *[dataKeySet](#dataKeySet)* objects. DataKeySet defines a collection of full or partial data keys.
-* metadataKeySets - *Array* *optional*. A list of *[metadataKeySet](#metadataKeySet)* objects. MetadataKeySet defines a collection of metadata keys.
-* metadataTargetRegions - *Array* *optional*. A list of of *[metadataTargetRegion](#metadataTargetRegion)* objects. Describes a set of target object values for a given report structure which define a region, and the metadata attribute which relate to the target for the purpose of describing a constraint.
-* referencePeriod - *Object* *optional*. The *[referencePeriod](#referencePeriod)* is used to report start date and end date constraints.
 * releaseCalendar - *Object* *optional*. The *[releaseCalendar](#releaseCalendar)* defines dates on which the constrained data is to be made available.
 
 Example: 
 
 	{
-		"type": "Allowed",
+		"role": "Allowed",
 		"id": "EXR_CONSTRAINTS",
-		"version": "1.0",
+		"version": "1.0.0",
 		"agencyID": "ECB",
 		"isExternalReference": false,
-		"isFinal": false,
 		"name": "Constraints for the EXR dataflow",
 		"names": {
 			"en": "Constraints for the EXR dataflow",
@@ -1270,19 +1292,54 @@ Example:
 				# dataKeySet object #
 			}
 		],
-		"metadataKeySets": [
+		"releaseCalendar": {
+			# releaseCalendar object #
+		}
+	}
+
+### metadataConstraint
+
+*Object*. MetadataConstraint specifies a sub set of the definition of the allowable content of a metadata set.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+See the schema file for more information.
+
+In addition, `metadataConstraint` has the following properties:
+
+* role - *String* *optional*. The role attribute indicates whether this constraint states what metadata is actually present for the constraint attachment, or if it defines what content is allowed.
+* constraintAttachment - *Object* *optional*. The *[constraintAttachment](#constraintAttachment)* object describes the collection of constrainable artefacts that the constraint is attached to.
+* metadataTargetRegions - *Array* *optional*. A list of of *[metadataTargetRegion](#metadataTargetRegion)* objects which describes the values allowed for metadata attributes.
+* releaseCalendar - *Object* *optional*. The *[releaseCalendar](#releaseCalendar)* defines dates on which the constrained data is to be made available.
+
+Example: 
+
+	{
+		"role": "Allowed",
+		"id": "EXR_CONSTRAINTS",
+		"version": "1.0.0",
+		"agencyID": "ECB",
+		"isExternalReference": false,
+		"name": "Constraints for the EXR dataflow",
+		"names": {
+			"en": "Constraints for the EXR dataflow",
+			"fr": "Constraintes pour le dataflow EXR"
+		},
+		"links": [
 			{
-				# metadataKeySet object #
+				"href": "/constraint/ECB/EXR_CONSTRAINTS/1.0",
+				"rel": "self",
+				"urn": "urn:sdmx:org.sdmx.infomodel.registry.ContentConstraint=ECB:EXR_CONSTRAINTS(1.0)"
 			}
 		],
+		"constraintAttachment": {
+			# constraintAttachment object #
+		},
 		"metadataTargetRegions": [
 			{
 				# metadataTargetRegion object #
 			}
-		]
-		"referencePeriod": {
-			# referencePeriod object #
-		}
+		],
 		"releaseCalendar": {
 			# releaseCalendar object #
 		}
@@ -1537,68 +1594,6 @@ Example:
 		"value": "NRP0"
 	}
 
-#### metadataKeySet
-
-*Object*. metadataKeySet defines a collection of metadata keys (identifier component values).
-
-* isIncluded - *Boolean*.
-* keys - Non-empty *array* of *[MetadataKey](#MetadataKey)* objects. Key contains a set of target object values for a specified report structure which serve to identify which object reference metadata conforming to the specified report structure is available for.
-
-Example:
-
-	{
-		"isIncluded": true,
-		"keys": [
-			{
-				# MetadataKey object #
-			}
-		]
-	}
-
-##### MetadataKey
-
-*Object*. MetadataKey is a region which defines a distinct full or partial metadata key. The key consists of a set of values, each referencing a target object for the metadata target referenced in the metadataTarget attribute, which must be defined in the report structure referenced in the report attribute. Each target object can be assigned a single value. If an target object from the reference metadata target is not included in this key, the value of that is assumed to be all known objects for a reference target object, all possible keys for a key descriptor values target object, or all dates for report period target object. The purpose of this key reference a metadata conforming to a particular report structure for given object or set of objects.
-
-* metadataTarget - *String*. The ID of the metadataTarget.
-* report - *String*. The ID of the report.
-* keyValues - Non-empty *array* of *[MetadataKeyValue](#MetadataKeyValue)* objects. Metadata Key Value provides a target object value for the purpose of defining a distinct metadata key. Only a single value can be provided for the target object.
-
-Example:
-
-	{
-		"metadataTarget": "TARGET",
-		"report": "REPORT",
-		"keyValues": [
-			{
-				# MetadataKeyValue object #
-			}
-		]
-	}
-
-##### MetadataKeyValue
-
-*Object*. MetadataKeyValue provides a target object value for the purpose of defining a distinct metadata key. Only a single value can be provided for the target object.
-
-* id - *String*. The ID of the metadata key.
-* dataKey - *Object* *optional*. *[DataKey](#DataKey)* object. DataKey is a region which defines a distinct full or partial data key. The key consists of a set of values, each referencing a dimension and providing a single value for that dimension. The purpose of the key is to define a subset of a data set (i.e. the observed value and data attribute) which have the dimension values provided in this definition. Any dimension not stated explicitly in this key is assumed to be wild carded, thus allowing for the definition of partial data keys.
-* dataSet - *Object* *optional*. *[dataSet reference](#dataSetReference)* object. DataSet reference is a urn reference to a data set to which the constraint is attached.
-* object - *String* *optional*. Urn reference to any object. The type of object actually referenced can be determined from the URN.
-* value - *String* *optional*. Key values are meant to describe a distinct full or partial key.
-
-Example:
-
-	{
-		"id": "A",
-		"dataKey": {
-			# DataKey object #
-		},
-		"dataSet": {
-			# dataSetReference object #
-		},
-		"object": "a",
-		"value": "a"
-	}
-
 #### metadataTargetRegion
 
 *Object*. metadataTargetRegion defines the structure of a metadata target region. A metadata target region must define the report structure and the metadata target from that structure on which the region is based. This type is based on the abstract RegionType and simply refines the key and attribute values to conform with what is applicable for target objects and metadata attributes, respectively. See the documentation of the base type for more details on how a region is defined.
@@ -1659,21 +1654,6 @@ Example:
 		]
 	}
 
-
-#### referencePeriod
-
-*Object*. Specifies the inclusive start and end times.
-
-* startTime - *dateTime*. The startTime attributes contains the inclusive start date for the reference period.
-* endTime - *dateTime*. The endTime attributes contains the inclusive end date for the reference period.
-
-Example:
-
-	{
-		"startTime": "2000",
-		"endTime": "2018"
-	}
-
 #### releaseCalendar
 
 *Object*. The ReleaseCalendar describes information about the timing of releases of the constrained data. All of these values use the standard "P7D" - style format.
@@ -1690,9 +1670,49 @@ Example:
 		"tolerance": "2019"
 	}
 
-### attachmentConstraint
+### customTypeScheme
 
-*Object*. The inclusion of a key or region in a constraint is determined by first processing the included key sets, and then removing those keys defined in the excluded key sets. If no included key sets are defined, then it is assumed that all possible keys or regions are included, and any excluded key or regions are removed from this complete set.
+*Object*. CustomTypeScheme provides the details of a custom type scheme, in which user defined operators are described.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+See the schema file for more information.
+
+### vtlMappingScheme
+
+*Object*. VtlMappingScheme provides the details of a VTL mapping scheme, in which VTL mappings are described.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+See the schema file for more information.
+
+### namePersonalisationScheme
+
+*Object*. NamePersonalisationScheme provides the details of a name personalisation scheme, in which name personalisations are described.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+See the schema file for more information.
+
+### rulesetScheme
+
+*Object*. RulesetScheme provides the details of a ruleset scheme, in which rulesets are described.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+See the schema file for more information.
+
+### transformationScheme
+
+*Object*. TransformationScheme provides the details of a transformation scheme, in which transformations are described.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+See the schema file for more information.
+
+### userDefinedOperatorScheme
+
+*Object*. UserDefinedOperatorScheme provides the details of a user defined operator scheme, in which user defined operators are described.
 
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
