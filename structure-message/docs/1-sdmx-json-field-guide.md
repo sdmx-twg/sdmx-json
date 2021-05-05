@@ -320,7 +320,8 @@ All SDMX artefacts of base type "ItemScheme" (CategoryScheme, ConceptScheme, Cod
 In addition, they share the following common object properties:
 
 * isPartial - *Boolean* *optional*. If set to true, it indicates that the resource contains only a sub-set of items.
-* categories/concepts/codes/agencies/dataProviders/dataConsumers/organisationUnits/reportingCategories - *Array* *optional*. Provides a list of *[items](#item)* if the resource inherits from the ItemScheme. **Note that the order of items is significant. In the use case of a submission of a partial list is is necessary to include preceding and succeeding items to allow determining the correct positioniong of the submitted items.**
+* categories/concepts/codes/agencies/dataProviders/dataConsumers/metadataProviders/organisationUnits/reportingCategories/
+  customTypes/vtlMappings/namePersonalisations/rulesets/transformations/userDefinedOperators - *Array* *optional*. Provides a list of *[items](#item)* if the resource inherits from the ItemScheme. **Note that the order of items is significant. In the use case of a submission of a partial list is is necessary to include preceding and succeeding items to allow determining the correct positioniong of the submitted items.**
 
 Example:
 
@@ -503,11 +504,10 @@ Example:
 
 *Object* *optional*. AttributeRelationship defines the structure for stating the relationship between an attribute and other data structure definition components.
 
-* dimensions - *Array* of *String*s *optional*. One or more identifiers of (a) local dimension(s). This is used to reference dimensions in the data structure definition on which the value of this attribute depends. An attribute using this relationship can be either a group, series (or section), or observation level attribute. The attachment level of the attribute will be determined by the data format and which dimensions are referenced.
-* group - *String* *optional*. Identifier of a local GroupKey Descriptor. This is used as a convenience to referencing all of the dimension defined by the referenced group. The attribute will also be attached to this group.
-* none - Empty *Object* *optional*. This means that value of the attribute will not vary with any of the other data structure components.
-* observation - Empty *Object* *optional*.This is used to specify that the value of the attribute is dependent upon the observed value. An attribute with this relationship will always be treated as an observation level attribute.
-
+* dimensions - *Array* of *String*s *optional*. One or more identifiers of (a) local dimension(s). This is used to reference dimensions in the data structure definition with which the value of this attribute may vary. An attribute using this relationship can be either a group, series (or section), or observation level attribute. The level at which the attribute values will be presented in data messages depends on the data format and which dimensions are referenced.
+* group - *String* *optional*. Identifier of a local GroupKey Descriptor. This is used as a convenience to referencing all of the dimension defined by the referenced group. The level at which the attribute values will be presented in data messages depends on the data format and which dimensions are referenced. If the group (level) is available in the data format used then the attribute values should be presented at that group level.
+* none - Empty *Object* *optional*. This means that value of the attribute will not vary with any of the local dimensions. The level at which the unique attribute value will be presented in data messages depends on the data format and which dimensions are referenced.
+* observation - Empty *Object* *optional*. This is used to specify that the value of the attribute may vary with any of the local dimensions and thus is dependent upon the observed value. An attribute with this relationship will its values always have presented at observation level.
 
 Examples:
 
@@ -572,13 +572,35 @@ Examples:
 * decimals - *Integer* *optional*. Positive number (minimum: 1).
 * pattern - *String* *optional*.
 * isMultiLingual - *Boolean* *optional*. The isMultiLingual attribute indicates for a text format of type "string", whether the value should allow for multiple values in different languages. Default: false.
-
+* sentinelValues - *Array* *optional*. When present, the sentinelValues array indicates that sentinel values are defined for the text format. Each *[sentinelValue](#sentinelvalue)* object indicates a reserved value in an otherwise open value domain that holds a specific meaning. For example, a value of -1 can be defined to indicate a non-applicable value.
 
 Example:
 
 	{
-		textType: "String",
-		maxLength: 1050
+		"textType": "String",
+		"maxLength": 1050,
+		"sentinelValues": [
+			# sentinelValue object #
+		]
+	}
+
+######## sentinelValue
+
+*Object* *optional*. It defines a reserved value for the text format along with its meaning.
+
+* value - *Number* or *String* *optional*. The sentinel value being described.
+* name - *String* *optional*. Human-readable (best-language-match) name (or meaning) of the sentinel value.
+* names - *Object* *optional*. Human-readable localised *[names](#names)* (or meanings) of the sentinel value.
+
+Example:
+
+	{
+		"value": -1,
+		"name": "Special meaning",
+		"names": {
+			"en": "Special meaning",
+			"fr": "signification particulière"
+		}
 	}
 
 ##### reportingYearStartDay
@@ -800,11 +822,86 @@ Example:
 
 ### metadataStructure
 
-*Object*. Used to describe a metadata structure definition, which is defined as a collection of metadata concepts, their structure and usage when used to collect or disseminate reference metadata.
+*Object*. MetadataStructure provides the details of a metadata structure definition, which is defined as a collection of metadata concepts and their structure when used to collect or disseminate reference metadata. A metadata structure definition performs several functions: it defines a presentational organization of metadata concepts against which reference metadata may be reported. The structure of a reference metadata message is derived from this presentational structure.
 
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
-See the schema file for more information.
+* metadataStructureComponents - *Object* *optional*. The *[dataStructureComponents](#dataStructureComponents)* object defines the grouping of the sets of the components that make up the metadata structure definition. The metadata attributes in the single report structure must have a unique identification.
+
+
+Example:
+
+	{
+		"id": "DSD1",
+		"version": "1.0.0",
+		"agencyID": "SDMX",
+		"metadadataStructureComponents": {
+			# metadataStructureComponent object #
+		}
+	}
+
+#### metadataStructureComponents
+
+*Object*. DataStructureComponents only contains the metadata attribute list.
+
+* metadataAttributeList - *Object* *optional*. The *[metadataAttributeList](#metadataattributelist)* defines the set of metadata attributes that can be defined as a hierarchy, for reporting reference metadata about a target object. The identification of metadata attributes must be unique at any given level of the report structure.
+
+Example:
+
+	{
+		"metadataAttributeList": {
+			# metadataAttributeList object #
+		}
+	}
+
+#### metadataAttributeList
+
+*Object*. metadataAttributeList defines the set of metadata attributes.
+
+* id - *String*. The id attribute is provided in this case for completeness. However, its value is fixed to "MetadataAttributeDescriptor".
+* annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
+* links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
+* metadataAttribute - *Array* *optional*. The *[metadataAttribute](#metadataattribute)* object defines the a metadata attribute, which is the value of an attribute, such as the instance of a coded or uncoded attribute in a metadata structure definition.
+
+
+Example: 
+
+	{
+		"id": "MetadataAttributeDescriptor",
+		"metadataAttribute": [
+			{
+				# attribute object #
+			}
+		]
+	}
+					
+##### metadataAttribute
+
+*Object*. MetadataAttribute describes the structure of a metadata attribute. The metadata attribute takes its semantic, and in some cases it representation, from its concept identity. A metadata attribute may be coded (via the local representation), uncoded (via the text format), or take no value. In addition to this value, the metadata attribute may also specify subordinate metadata attributes. If a metadata attribute only serves the purpose of containing subordinate metadata attributes, then the isPresentational attribute should be used. Otherwise, it is assumed to also take a value. If the metadata attribute does take a value, and a representation is not defined, it will be inherited from the concept it takes its semantic from. The optional id on the metadata attribute uniquely identifies it within the metadata structured definition. If this id is not supplied, its value is assumed to be that of the concept referenced from the concept identity. Note that a metadata attribute (as identified by the id attribute) definition  must be unique across the entire metadata structure definition (including target identifier, identifier component, and report structure ids). A metadata attribute may be used at different levels, but the content (value and/or child metadata attributes and their cardinality) of the metadata attribute cannot change.
+
+
+* id - *String* *optional*. Identifier for the metadata attribute.
+* annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
+* links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
+* conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
+* localRepresentation - *Object* *optional*. The *[localRepresentation](#localRepresentation)* object defines the representation for the attribute.				
+* minOccurs - *Number* *optional*. The (non-negative) minOccurs attribute indicates the minimum number of times this metadata attribute must occur within its parent object. If missing than there is no lower limit on its occurrences.
+* maxOccurs - *Number* *optional*. The maxOccurs attribute (which is greater than 1) indicates the maximum number of times this metadata attribute can occur within its parent object. If missing than there is no upper limit on its occurrences. Implementers should note that that in SDMX-ML an "UnboundedCodeType" is used for that purpose.
+* isPresentational - *Boolean* *optional*. The isPresentational attribute indicates whether the metadata attribute should allow for a value. A value of true, meaning the metadata attribute is presentational means that the attribute only contains child metadata attributes, and does not contain a value. If this attribute is not set to true, and a representation (coded or uncoded) is not defined, then the representation of the metadata attribute will be inherited from the concept from which it takes its identity. The default is false.
+
+Example:
+
+	{
+		"id": "META_ATTR",
+		"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=OECD:OECD_CONCEPTS(1.0).META_ATTR",
+		"localRepresentation": {
+			# localRepresentation object #
+		},
+		"minOccurs": 2,
+		"maxOccurs": 5,
+		"isPresentational": true
+	}
+
 
 ### categoryScheme
 
