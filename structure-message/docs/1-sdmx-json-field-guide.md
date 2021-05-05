@@ -410,7 +410,7 @@ Example:
 *Object* *optional*. DataStructureComponents describes the structure of the grouping to the sets of structural concepts that have a defined structural role in the data structure definition. At a minimum at least one dimension and a primary measure must be defined.
 
 * attributeList - *Object* *optional*. The *[attributeList](#attributeList)* object is a collection of structural concepts that define the attributes of the data structure definition. Attributes can relate to one or more measures, and be reported at the level of none, several or all dimensions.
-* dimensionList - *Object* *optional*. The *[dimensionList](#dimensionList)* object is an ordered set of structural concepts that, combined, classify a statistical series, such as a time series, and whose values, when combined (the key) in an instance such as a data set, uniquely identify a specific series.
+* dimensionList - *Object*. The *[dimensionList](#dimensionList)* object is an ordered set of structural concepts that, combined, classify a statistical series, such as a time series, and whose values, when combined (the key) in an instance such as a data set, uniquely identify a specific series.
 * groups - *Array* *optional*. Array of *[group](#group)* objects that are sets of structural concepts (and possibly their values) that define a partial key derived from the key descriptor in a data structure definition. 
 * measureList - *Object* *optional*. The *[measureList](#measureList)* object is a collection of structural concepts that define the measures of the data structure definition. 
 
