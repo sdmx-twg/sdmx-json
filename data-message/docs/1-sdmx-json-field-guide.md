@@ -209,7 +209,7 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 *Object* *optional*. Header contains the message's “primary data”.
 
-* structures - *Array* *optional*. *Structures* field is an array of *[Structure](#structure)* objects that contain the information needed to interpret the data available in the message, such as the list of concepts used. Since SDMX 3.0.0, SDMX restful web servic requests can query data for several structures. Each returned structure is presented separately. Also the underlying data are presented in separate data sets. 
+* structures - *Array* *optional*. *Structures* field is an array of *[Structure](#structure)* objects that contain the information needed to interpret the data available in the message, such as the list of concepts used. Since SDMX 3.0.0, SDMX restful web service requests can query data for several structures. Each returned structure is presented separately. Also the underlying data are presented in separate data sets. 
 * dataSets - *Array* *optional*. *DataSets* field is an array of *[dataSet](#dataset)* objects. That's where the data (i.e.: the observations) will be.
 
 Example:
@@ -271,7 +271,7 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 *Object*. Describes the dimensions/measures/attributes used in the message as well as the levels (`dataSet`, `dimensionGroup`, `series`, `observations`) at which these dimensions/measures/attributes are presented. 
 
-* dataSet - *Array* *optional*. *DataSet* field is an array of *[component](#component)* objects. Optional array to be provided if components (only dimensions or attributes) are presented at the `dataSet` level. It is highly recommended to present all dimensions and attributes at the `dataSet` level for which the message contains only 1 single value.
+* dataSet - *Array* *optional*. *DataSet* field is an array of *[component](#component)* objects. Optional array to be provided if components (only dimensions or attributes) are presented at the `dataSet` level. It is recommended, when technically feasible, to present all dimensions and attributes at the `dataSet` level for which the message contains only 1 single value, e.g. dimensions with single selections in the query filter and attributes that do not very with any of the dimensions. 
 * dimensionGroup - *Array* *optional*. *DimensionGroup* field is an array of *[component](#component)* objects. Optional array to be provided if components (only attributes) are presented at the `dimensionGroup` level.
 * series - *Array* *optional*. *Series* field is an array of *[component](#component)* objects. Optional array to be provided if components (only dimensions or attributes) are presented at the `series` level.
 * observation - *Array* *optional*. *Observation* field is an array of *[component](#component)* objects. Optional array to be provided if components (dimensions, measures or attributes) are presented at the `observation` level. When using the SDMX API, then the dimension(s) specified in the parameter "dimensionAtObservation" would be presented at `observation` level. If "dimensionAtObservation=AllDimensions" then all dimensions, except those with only one value possibly presented at the `dataSet` level, would be presented at `observation` level. Measures must always be presented at observation level.
@@ -472,7 +472,7 @@ Examples:
 * textFormat - *String* *optional*. Describes an uncoded textual format. If it is an empty string, then any valid string characters may be used in component values (within the constraints of the other format constraints). If used, the component values will use instead of `id` and `name`:
   - if `minOccurs` and `maxOccurs` are equal to 1: the `value` property,
   - otherwise: the `values` property.
-* minLength - *Positive number* *optional*. Specifies the minimum and length of the value in characters.
+* minLength - *Positive number* *optional*. Specifies the minimum length of the value in characters.
 * maxLength - *Positive number* *optional*. Specifies the maximum length of the value in characters.
 * minValue - *Decimal* *optional*. Is used for inclusive and exclusive ranges, indicating what the lower bound of the range is. If this is used with an inclusive range, a valid value will be greater than or equal to the value specified here. By default, the minValue is assumed to be inclusive. 
 * maxValue - *Decimal* *optional*. Is used for inclusive and exclusive ranges, indicating what the upper bound of the range is. If this is used with an inclusive range, a valid value will be less than or equal to the value specified here. By default, the maxValue is assumed to be inclusive. 
@@ -639,7 +639,7 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 In typical cases, the file will contain only one `dataSet`. However, in some cases, such as when retrieving, from an SDMX 2.1 web service, what has changed in the data source since in particular point in time, the web service might return more than one `dataSet`. Since SDMX 3.0.0, SDMX restful web servic requests can query data for several structures. In this case, the response includes one or more separate data sets per returned structure.
 
-There are between several levels in a `dataSet` object, depending on the way the data in the message is organized.
+Several levels may appear in a `dataSet` object, depending on the way data is organized.
 A `dataSet` may contain a flat list of `observations`. In this scenario, we have 2 main levels in the data part of the message: the `dataSet` level and the `observation` level.
 A `dataSet` may also organize observations in logical groups called `series`. These groups can represent time series or series by other dimensions (also called cross-sections). In this scenario, we have 3 main levels in the data part of the message: the `dataSet` level, the `series` level and the `observation` level.
 
@@ -724,13 +724,18 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 ### dimensionGroupAttributes
 
-*Object* *optional*. Collection of *attribute values or indices of the corresponding values*, depending on the presence of the `values` array in the attribute definition, of all attributes presented at the `dimensionGroup` level in form of JSON *name/value pairs*. In the `dimensionGroupAttributes` object, there is a JSON *name/value pair* for each partial dimension value combination to which those attributes are attached.
+*Object* *optional*. Collection of *values or value indexes* of all attributes presented at the `dimensionGroup` level, in form of JSON *name/value pairs*.   
+Values are presented if the attribute definition doesn't contain the `values` array.  
+Indexes of values are presented if the attribute definition does contain the `values` array.
 
-The *name* in the JSON *name/value pair* represents the unique (partial) dimension value combination to which the dimensionGroup attribute values are attached. It is the concatenation of the indexes of the `values` of **all** `dimensions` to which the attribute is attached (i.e. indexes of the fields in the `values` array of the respective *component* objects within the `structure.dimensions` object) and of an `empty space` for **all** other dimensions, independently from the dimension's level of presentation elsewhere in the message, separated by a colon character (":"), e.g. "::4:0:". "Partial" combination means that DimensionGroup attributes are not attached to all dimensions but only to a subset. In the example "::4:0:", the data has altogether 5 dimensions (including the time dimension), and the related attribute values are attached only to the 3rd and 4th dimensions, for which the dimension value indexes are 4 and 0. The positions for dimension 1, 2 and 5 are left empty.
+The `dimensionGroupAttributes` object contains a JSON *name/value pair* for each _partial dimension value combination_ for which a `dimensionGroup` level attribute value exists.
 
-The *value* in the JSON *name/value pair* is an array containing the values of **all** *attributes* presented at `dimensionGroup` level or the indexes of these values, depending on the presence of the `values` array in the component definition. If some of the attributes do not have values for a specific included (partial) dimension value combinations then *null* is used instead of a value. Beginning from the end of the array, `DimensionGroup`-level `attributes` can be omitted if the `attribute` has no value for this combination or if the `attribute` value for this combination corresponds to the default value. However, the *name/value pair* is only present if there is at least one corresponding `DimensionGroup`-level `attribute` value.
+The *name* in the JSON *name/value pair* represents the unique (partial) dimension value combination to which the dimensionGroup attribute values are attached. "Partial" combination means that DimensionGroup attributes are not attached to all dimensions but only to a subset. This combination is the concatenation of the indexes of the corresponding `values` of the `dimensions`, separated by a colon character (":"), e.g. "::4:0:". Note that dimension values to which the attribute value is attached take the indexes from the `values` array of the respective *component* objects within the `structure.dimensions` object, whereas the other dimensions (which are not part of the partial key) have no value (are left empty). All dimensions have therefore their well-defined position in the *name* combination independently from the level at which dimensions are presentated elsewhere in the message.  
+In the example "::4:0:", the data has altogether 5 dimensions (including the time dimension), and the related attribute values are attached only to the 3rd and 4th dimensions, for which the dimension value indexes are 4 and 0. The dimension 1, 2 and 5 have no related value and their positions in the combination are left empty.
 
-The data type for the array `attribute` elements is *integer*, *number*, *string*, *object of localised strings* (see: *[here](#names)*), arrays of these 4 types or *null*. Indexes for `attribute` values are of type *integer* and correspond to the indexes in the `values` array of the respective `component` object within the `structure.attributes.dimensionGroup` array.
+The *value* in the JSON *name/value pair* is an array containing the values or value indexes of **all** dimensionGroup *attributes*. If some of the attributes do not have values for a specific included (partial) dimension value combinations then *null* is used instead of a value. Beginning from the end of the array, `DimensionGroup`-level `attributes` can be omitted if the `attribute` has no value for this combination or if the `attribute` value for this combination corresponds to the default value. However, the *name/value pair* is only present if there is at least one corresponding `DimensionGroup`-level `attribute` value.
+
+The data type for the array `attribute` elements must be *integer*, *number*, *string*, *object of localised strings* (see: *[here](#names)*), arrays of these 4 types or *null*. Indexes for `attribute` values are of type *integer* and correspond to the indexes in the `values` array of the respective `component` object within the `structure.attributes.dimensionGroup` array.
 
 For information on how to handle the indexes for `dimensions` and `attributes` see the section dedicated to [handling indexes](#handling-indexes).
 
@@ -1319,7 +1324,7 @@ Examples:
 
 Collections of links can be attached to various elements in SDMX-JSON.
 
-Similarly with standards such as HTML5 and Atom, link elements in SDMX-JSON *must* define a *URL* (the `href` attribute) and a *semantic* (the `rel` attribute). This allows clients to follow the links they care about and ignore the ones whose semantic they are not interested in. In addition, links in SDMX-JSON *may* define a `title` (a human-friendly description of the target link) and a `type` (a hint about the type of representation returned by the link). Please refer to the [list of Media Types and Subtypes](http://www.iana.org/assignments/media-types/media-types.xhtml) assigned and listed by the IANA for additional information about expected values for the `type` attribute.
+Similarly with standards such as HTML5 and Atom, link elements in SDMX-JSON *must* define a *URL* (the `href` attribute) and a *semantic* (the `rel` attribute). This allows clients to understand the semantics of links, in order to follow those that are of interest to them. In addition, links in SDMX-JSON *may* define a `title` (a human-friendly description of the target link) and a `type` (a hint about the type of representation returned by the link). Please refer to the [list of Media Types and Subtypes](http://www.iana.org/assignments/media-types/media-types.xhtml) assigned and listed by the IANA for additional information about expected values for the `type` attribute.
 
 SDMX-JSON offers a list of predefined semantics, but implementers are free to extend it. The list of predefined semantics comes from the list of SDMX artefacts that can be returned by SDMX RESTful web services, semantics defined in [RFC5988](https://tools.ietf.org/rfc/rfc5988.txt) and additional items deemed to be useful in the context of statistical data dissemination. These semantics are:
 
@@ -1496,19 +1501,28 @@ Let's say that the following data content of a message needs to be processed:
 				"structure": 0,
 				"action": "Information",
 				"series": {
-					"0": {
-						"annotations": [0],
-						"attributes": [0],
+					"0": {					// 0 is the index of the first value of (series-level) CURRENCY dimension: "NZD"
+						"annotations": [0],		// 0 is the index of the first value of annotations: "ABC123456"
+						"attributes": [0],		// 0 is the index of the first value of the (first) (series-level) TITLE attribute: "New Zealand dollar (NZD)"
 						"observations": {
-							"0": [1.5931, 0],
-							"1": [1.5925, 0]
+							"0": [1.5931, 0],	// "0" corresponds to the first value of (obs-level) TIME_PERIOD dimension: "2013-01-18"
+										// 1.5931 is the corresponding observation value
+										// 0 is the index of the first value of (obs-level) OBS_STATUS attribute: "A" 
+							"1": [1.5925, 0]	// "1" corresponds to the second value of (obs-level) TIME_PERIOD dimension: "2013-01-21"
+										// 1.5925 is the corresponding observation value
+										// 0 is the index of the first value of (obs-level) OBS_STATUS attribute: "A"
 						}
 					},
-					"1": {
-						"attributes": [1],
+					"1": {					// 1 is the index of the second value of (series-level) CURRENCY dimension: "RUB"
+						"attributes": [1],		// 1 is the index of the second value of the (first) (series-level) TITLE attribute: "Russian rouble (RUB)"
 						"observations": {
-							"0": [40.3426, 0],
-							"1": [40.3000, 0, 1]
+							"0": [40.3426, 0],	// "0" corresponds to the first value of (obs-level) TIME_PERIOD dimension: "2013-01-18"
+										// 40.3426 is the corresponding observation value
+										// 0 is the index of the first value of (obs-level) OBS_STATUS attribute: "A" 
+							"1": [40.3000, 0, 1]	// "1" corresponds to the second value of (obs-level) TIME_PERIOD dimension: "2013-01-21"
+										// 40.3000 is the corresponding observation value
+										// 0 is the index of the first value of (obs-level) OBS_STATUS attribute: "A"
+										// 1 is the index of the second value of annotations: "XYZ98765" (because there is no other obs-level attribute defined)
 						}
 					}
 				}
