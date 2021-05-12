@@ -861,16 +861,16 @@ Example:
 * id - *String*. The id attribute is provided in this case for completeness. However, its value is fixed to "MetadataAttributeDescriptor".
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
-* metadataAttribute - *Array* *optional*. The *[metadataAttribute](#metadataattribute)* object defines the a metadata attribute, which is the value of an attribute, such as the instance of a coded or uncoded attribute in a metadata structure definition.
+* metadataAttributes - *Array* *optional*. The *[metadataAttribute](#metadataattribute)* object defines the a metadata attribute, which is the value of an attribute, such as the instance of a coded or uncoded attribute in a metadata structure definition.
 
 
 Example: 
 
 	{
 		"id": "MetadataAttributeDescriptor",
-		"metadataAttribute": [
+		"metadataAttributes": [
 			{
-				# attribute object #
+				# metadataattribute object #
 			}
 		]
 	}
@@ -888,7 +888,8 @@ Example:
 * minOccurs - *Number* *optional*. The (non-negative) minOccurs attribute indicates the minimum number of times this metadata attribute must occur within its parent object. If missing than there is no lower limit on its occurrences.
 * maxOccurs - *Number* *optional*. The maxOccurs attribute (which is greater than 1) indicates the maximum number of times this metadata attribute can occur within its parent object. If missing than there is no upper limit on its occurrences. Implementers should note that that in SDMX-ML an "UnboundedCodeType" is used for that purpose.
 * isPresentational - *Boolean* *optional*. The isPresentational attribute indicates whether the metadata attribute should allow for a value. A value of true, meaning the metadata attribute is presentational means that the attribute only contains child metadata attributes, and does not contain a value. If this attribute is not set to true, and a representation (coded or uncoded) is not defined, then the representation of the metadata attribute will be inherited from the concept from which it takes its identity. The default is false.
-
+* metadataAttributes - *Array* *optional*. The *[metadataAttribute](#metadataattribute)* object defines the a child metadata attribute.
+* 
 Example:
 
 	{
@@ -899,7 +900,12 @@ Example:
 		},
 		"minOccurs": 2,
 		"maxOccurs": 5,
-		"isPresentational": true
+		"isPresentational": true,
+		"metadataAttributes": [
+			{
+				# metadataattribute object #
+			}
+		]
 	}
 
 
