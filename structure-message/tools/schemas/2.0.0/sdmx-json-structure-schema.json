@@ -5343,68 +5343,6 @@
 				}
 			]
 		},
-		"TextFormatType":{
-			"description":"TextFormatType defines the information for describing a full range of text formats and may place restrictions on the values of the other attributes, referred to as \"facets\".",
-			"type":"object",
-			"properties":{
-				"textType":{
-					"$ref":"#/definitions/DataType"
-				},
-				"isSequence":{
-					"type":"boolean"
-				},
-				"interval":{
-					"type":"number"
-				},
-				"startValue":{
-					"type":"number"
-				},
-				"endValue":{
-					"type":"number"
-				},
-				"timeInterval":{
-					"$ref":"#/definitions/duration"
-				},
-				"startTime":{
-					"$ref":"#/definitions/StandardTimePeriodType"
-				},
-				"endTime":{
-					"$ref":"#/definitions/StandardTimePeriodType"
-				},
-				"minLength":{
-					"type":"integer",
-					"minimum":1
-				},
-				"maxLength":{
-					"type":"integer",
-					"minimum":1
-				},
-				"minValue":{
-					"type":"number"
-				},
-				"maxValue":{
-					"type":"number"
-				},
-				"decimals":{
-					"type":"integer",
-					"minimum":1
-				},
-				"pattern":{
-					"type":"string"
-				},
-				"isMultiLingual":{
-					"type":"boolean"
-				},
-				"sentinelValues":{
-					"type":"array",
-					"minItems":1,
-					"items":{
-						"$ref":"#/definitions/sentinelValueType",
-						"description":"SentinelValue defines a reserved value for the text format along with its meaning."
-					}
-				}
-			}
-		},
 		"TimeDimensionRepresentationType":{
 			"description":"TimeDimensionRepresentationType defines the representation for the time dimension. Enumerated values are not allowed.",
 			"type":"object",
