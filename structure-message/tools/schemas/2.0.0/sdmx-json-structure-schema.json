@@ -2142,8 +2142,10 @@
 				},
 				{
 					"properties":{
-						"assignmentStatus":{
-							"$ref":"#/definitions/UsageStatusType"
+						"isMandatory":
+						{
+							"type": "boolean",
+							"description":"The isMandatory attribute indicates whether an attribute value must be available for any corresponding existing observation."
 						},
 						"attributeRelationship":{
 							"$ref":"#/definitions/AttributeRelationshipType",
@@ -4438,6 +4440,11 @@
 				},
 				{
 					"properties":{
+						"isMandatory":
+						{
+							"type": "boolean",
+							"description":"The isMandatory attribute indicates whether a measure value must be available for any corresponding existing observation."
+						},
 						"conceptIdentity":{
 							"$ref":"#/definitions/ConceptReferenceType",
 							"description":"Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
@@ -5534,14 +5541,6 @@
 						}
 					}
 				}
-			]
-		},
-		"UsageStatusType":{
-			"description":"UsageStatusType provides a list of enumerated types for indicating whether reporting a given attribute is mandatory or conditional.",
-			"type":"string",
-			"enum":[
-				"Mandatory",
-				"Conditional"
 			]
 		},
 		"ValueMappingType":{
