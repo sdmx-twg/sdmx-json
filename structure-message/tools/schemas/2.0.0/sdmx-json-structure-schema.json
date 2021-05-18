@@ -2132,7 +2132,7 @@
 			"description":"AttributeType describes the structure of a data attribute, which is defined as a characteristic of an object or entity. The attribute takes its semantic, and in some cases it representation, from its concept identity. An attribute can be coded by referencing a code list from its coded local representation. It can also specify its text format, which is used as the representation of the attribute if a coded representation is not defined. Neither the coded or uncoded representation are necessary, since the attribute may take these from the referenced concept. An attribute specifies its relationship with other data structure components and is given an assignment status. These two properties dictate where in a data message the attribute will be attached, and whether or not the attribute will be required to be given a value. A set of roles defined in concept scheme can be assigned to the attribute.",
 			"type":"object",
 			"required":[
-				"assignmentStatus",
+				"isMandatory",
 				"attributeRelationship",
 				"conceptIdentity"
 			],
@@ -4432,6 +4432,7 @@
 			"description":"MeasureType defines the structure of a measure descriptor. In addition to the identifying concept and representation, a usage status and max occurs can be defined.",
 			"type":"object",
 			"required":[
+				"isMandatory",
 				"conceptIdentity"
 			],
 			"allOf":[
@@ -4753,7 +4754,7 @@
 			"description":"ReportingYearStartDayType defines the structure of the reporting year start day attribute. The reporting year start day attribute takes its semantic from its concept identity (usually the REPORTING_YEAR_START_DAY concept), yet is always has a fixed identifier (REPORTING_YEAR_START_DAY). The reporting year start day attribute always has a fixed text format, which specifies that the format of its value is always a day and month in the ISO 8601 format of '--MM-DD'. As with any other attribute, an attribute relationship must be specified. this relationship should be carefully selected as it will determine what type of data the data structure definition will allow. For example, if an attribute relationship of none is specified, this will mean the data sets conforming to this data structure definition can only contain data with standard reporting periods where the all reporting periods have the same start day. In this case, data reported as standard reporting periods from two entities with different fiscal year start days could not be contained in the same data set.",
 			"type":"object",
 			"required":[
-				"assignmentStatus",
+				"isMandatory",
 				"attributeRelationship",
 				"conceptIdentity",
 				"localRepresentation"
@@ -4771,6 +4772,11 @@
 				},
 				{
 					"properties":{
+						"isMandatory":
+						{
+							"type": "boolean",
+							"description":"The isMandatory attribute indicates whether a ReportingYearStartDay attribute value must be available for any corresponding existing observation."
+						},
 						"attributeRelationship":{
 							"$ref":"#/definitions/AttributeRelationshipType"
 						},
