@@ -2814,13 +2814,12 @@
 			"properties":{
 				"minOccurs":{
 					"type":"integer",
-					"minimum":1,
+					"minimum":0,
 					"default":1,
 					"description":"The minOccurs attribute indicates the minimum number of value that must be reported for the component."
 				},
 				"maxOccurs":{
-					"type":"integer",
-					"minimum":1,
+					"$ref":"#/definitions/OccurenceType",
 					"default":1,
 					"description":"The maxOccurs attribute indicates the maximum number of values that can be reported for the component."
 				},
@@ -4151,8 +4150,7 @@
 							"$ref":"#/definitions/CodedTextFormatType"
 						},
 						"maxOccurs":{
-							"type":"integer",
-							"minimum":1,
+							"$ref":"#/definitions/OccurenceType",
 							"default":1
 						},
 						"minOccurs":{
@@ -4171,8 +4169,7 @@
 							"$ref":"#/definitions/BasicComponentTextFormatType"
 						},
 						"maxOccurs":{
-							"type":"integer",
-							"minimum":1,
+							"$ref":"#/definitions/OccurenceType",
 							"default":1
 						},
 						"minOccurs":{
