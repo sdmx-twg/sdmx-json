@@ -4947,8 +4947,7 @@
 							"$ref":"#/definitions/CodedTextFormatType"
 						},
 						"maxOccurs":{
-							"type":"integer",
-							"minimum":1,
+							"$ref":"#/definitions/OccurenceType",
 							"default":1
 						},
 						"minOccurs":{
@@ -4967,8 +4966,7 @@
 							"$ref":"#/definitions/BasicComponentTextFormatType"
 						},
 						"maxOccurs":{
-							"type":"integer",
-							"minimum":1,
+							"$ref":"#/definitions/OccurenceType"1,
 							"default":1
 						},
 						"minOccurs":{
