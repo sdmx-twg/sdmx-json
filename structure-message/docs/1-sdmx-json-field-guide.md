@@ -178,7 +178,7 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 *Object* *optional*. Header contains the message's “primary data”.
 
-* *[Artefact type]* - *Array* *optional*. This field is an array of objects of one of the corresponding SDMX Information Model artefact types: *dataStructure*, *metadataStructure*, *categoryScheme*, *conceptScheme*, *codelist*, *hierarchy*, *hierarchyAssociation*, *agencyScheme*, *dataProviderScheme*, *dataProviderScheme*, *metadataProviderScheme*, *organisationUnitScheme*, *dataflow*, *metadataflow*, *reportingTaxonomy*, *provisionAgreement*, *metadataProvisionAgreement*, *structureMap*, *representationMap*, *conceptSchemeMap*, *categorySchemeMap*, *organisationSchemeMap*, *reportingTaxonomyMap*, *process*, *categorisation*, *dataConstraint*, *metadataConstraint*, *customTypeScheme*, *vtlMappingScheme*, *namePersonalisationScheme*, *rulesetScheme*, *transformationScheme* and *userDefinedOperatorScheme*. Each of the corresponding object properties is allowed at maximum one time. Contains the requested structural information according to the definition of this artefact. For more information, please see:
+* *[Artefact type]* - *Array* *optional*. This field is an array of objects of one of the corresponding SDMX Information Model artefact types: *dataStructure*, *metadataStructure*, *categoryScheme*, *conceptScheme*, *codelist*, *geographicCodelists*, *geoGridCodelists*, *valueLists*, *hierarchy*, *hierarchyAssociation*, *agencyScheme*, *dataProviderScheme*, *dataProviderScheme*, *metadataProviderScheme*, *organisationUnitScheme*, *dataflow*, *metadataflow*, *reportingTaxonomy*, *provisionAgreement*, *metadataProvisionAgreement*, *structureMap*, *representationMap*, *conceptSchemeMap*, *categorySchemeMap*, *organisationSchemeMap*, *reportingTaxonomyMap*, *process*, *categorisation*, *dataConstraint*, *metadataConstraint*, *customTypeScheme*, *vtlMappingScheme*, *namePersonalisationScheme*, *rulesetScheme*, *transformationScheme* and *userDefinedOperatorScheme*. Each of the corresponding object properties is allowed at maximum one time. Contains the requested structural information according to the definition of this artefact. For more information, please see:
 
     * *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*
     * *[Common properties of SDMX artefacts of base type "ItemScheme"](#common-properties-of-sdmx-artefacts-of-base-type-itemscheme)*
@@ -188,6 +188,9 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
     * *[categorySchemes](#categoryscheme)*
     * *[conceptSchemes](#conceptscheme)*
     * *[codelists](#codelist)*
+    * *[geographicCodelists](#geographiccodelist)*
+    * *[geoGridCodelists](#geogridcodelist)*
+    * *[valueLists](#valuelist)*
     * *[hierarchies](#hierarchy)*
     * *[hierarchyAssociations](#hierarchyassociation)*
     * *[agencySchemes](#agencyscheme)*
@@ -315,13 +318,13 @@ Example:
 
 ### Common properties of SDMX artefacts of base type "ItemScheme"
 
-All SDMX artefacts of base type "ItemScheme" (CategoryScheme, ConceptScheme, Codelist, AgencyScheme, DataProviderScheme, DataConsumerScheme, OrganisationUnitScheme and ReportingTaxonomy) share the *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+All SDMX artefacts of base type "ItemScheme" (CategoryScheme, ConceptScheme, Codelist, GeographicCodelist, GeoGridCodelist, AgencyScheme, DataProviderScheme, MetadataProviderSchemes, DataConsumerScheme, OrganisationUnitScheme, ReportingTaxonomy, CustomTypeScheme, VtlMappingScheme, NamePersonalisationScheme, RulesetScheme, UserDefinedOperatorScheme) share the *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
 In addition, they share the following common object properties:
 
 * isPartial - *Boolean* *optional*. If set to true, it indicates that the resource contains only a sub-set of items.
-* categories/concepts/codes/agencies/dataProviders/dataConsumers/metadataProviders/organisationUnits/reportingCategories/
-  customTypes/vtlMappings/namePersonalisations/rulesets/transformations/userDefinedOperators - *Array* *optional*. Provides a list of *[items](#item)* if the resource inherits from the ItemScheme. **Note that the order of items is significant. In the use case of a submission of a partial list is is necessary to include preceding and succeeding items to allow determining the correct positioniong of the submitted items.**
+* categories/concepts/codes/geoFeatureSetCodes/geoGridCodes/agencies/dataProviders/dataConsumers/metadataProviders/organisationUnits/reportingCategories/
+customTypes/vtlMappings/namePersonalisations/rulesets/transformations/userDefinedOperators - *Array* *optional*. Provides a list of *[items](#item)* if the resource inherits from the ItemScheme. **Note that the order of items is significant. In the use case of a submission of a partial list is is necessary to include preceding and succeeding items to allow determining the correct positioniong of the submitted items.**
 
 Example:
 
@@ -337,7 +340,7 @@ Example:
 
 #### item
 
-*Object* *optional*. Item within the ItemScheme (if the resource is a CategoryScheme, ConceptScheme, Codelist, AgencyScheme, DataProviderScheme, DataConsumerScheme, OrganisationUnitScheme and ReportingTaxonomy). 
+*Object* *optional*. Abtract generic item within the ItemScheme (if the resource is a CategoryScheme, ConceptScheme, Codelist, GeographicCodelist, GeoGridCodelist, AgencyScheme, DataProviderScheme, MetadataProviderSchemes, DataConsumerScheme, OrganisationUnitScheme, ReportingTaxonomy, CustomTypeScheme, VtlMappingScheme, NamePersonalisationScheme, RulesetScheme or UserDefinedOperatorScheme). 
 
 * id - *String*. Identifier for the item.
 * name - *String* *optional*. Human-readable (best-language-match) name of the item.
@@ -347,7 +350,8 @@ Example:
 * parent - *String* *optional*. Contains the ID or the URN for the parent of the item (which is itself an item) enabling the reconstruction of the ordered item hierarchy.
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources for the item. See the section [link](#link).
-* categories/concepts/codes/agencies/dataProviders/dataConsumers/organisationUnits/reportingCategories - *Array* *optional*. Provides a list of child items of the item. **Note that the order of items is significant. In the use case of a submission of a partial list is is necessary to include preceding and succeeding items to allow determining the correct positioniong of the submitted items.**
+* categories/concepts/codes/geoFeatureSetCodes/geoGridCodes/agencies/dataProviders/dataConsumers/metadataProviders/organisationUnits/reportingCategories/
+customTypes/vtlMappings/namePersonalisations/rulesets/transformations/userDefinedOperators - *Array* *optional*. Provides a list of child items of the item. **Note that the order of items is significant. In the use case of a submission of a partial list is is necessary to include preceding and succeeding items to allow determining the correct positioniong of the submitted items.**
 
 See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
@@ -473,7 +477,7 @@ Example:
 * id - *String* *optional*. Identifier for the attribute.
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
-* assignmentStatus - *String*. Indication whether reporting a given attribute is mandatory or conditional. The two possible values are "Mandatory" and "Conditional".
+* isMandatory - *Boolean*. Indication whether reporting a given attribute is mandatory or conditional.
 * attributeRelationship - *Object*. The *[attributeRelationship](#attributeRelationship)* object describes how the value of this attribute varies with the values of other components. These relationships will be used to determine the attachment level of the attribute in the various data formats. 				
 * measureRelationship - *Array* of *String*s *optional*. The measureRelationship array identifies the measures that the attribute applies to. If this is not used, the attribute is assumed to apply to all measures. If used, it contains one or more identifiers of (a) local measure(s).  
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
@@ -484,7 +488,7 @@ Example:
 
 	{
 		"id": "OBS_STATUS",
-		"assignmentStatus": "Mandatory",
+		"isMandatory": true,
 		"attributeRelationship": {
 			# attributeRelationship object #
 		},
@@ -533,10 +537,11 @@ Examples:
 
 *Object* *optional*. LocalRepresentation defines the representation for the attribute. A data attribute can be text (including XHTML and multi-lingual values), a simple value, or an enumerated value.
 
-* enumeration - *String* *optional*. Urn reference to a codelist.
+* enumeration - *String* *optional*. Urn reference to a to an item scheme (such as a codelist) or a value list.
 * enumerationFormat - *Object* *optional*. The *[enumerationFormat](#enumerationformat)* object defines a restricted version of a *[textFormat](#textFormat)* that only allows facets and text types applicable to codes. Although the time facets permit any value, an actual code identifier does not support the necessary characters for time. Therefore these facets should not contain time in their values.
 * textFormat - *Object* *optional*. The *[textFormat](#textFormat)* object defines the information for describing a range of text formats restricted to the representations allowed for all components except for target objects, and that does not allow for multi-lingual values.
-* maxOccurs - *Number* *optional*. The maxOccurs attribute indicates the maximum number of values that can be reported for the component. The default is 1.
+* minOccurs - *Integer* *optional*. The (non-negative) minOccurs attribute indicates the minimum number of values that can be reported for the component. If missing than there is no lower limit on its occurrences. The default is 1.
+* maxOccurs - *Integer*/*String* *optional*. The maxOccurs attribute (which - when a number - is greater than 0) indicates the maximum number of values that can be reported for the component. If set to the string "unbounded" than there is no upper limit on its occurrences. The default is 1.
 
 Examples:
 
@@ -610,7 +615,7 @@ Example:
 * id - *String* *optional*. Identifier for the reportingYearStartDay data attribute.
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
-* assignmentStatus - *String*. Indication whether reporting a given attribute is mandatory or conditional. The two possible values are "Mandatory" and "Conditional".
+* isMandatory - *Boolean*. Indication whether reporting a given attribute is mandatory or conditional.
 * attributeRelationship - *Object*. The *[attributeRelationship](#attributeRelationship)* object describes how the value of this attribute varies with the values of other components. These relationships will be used to determine the attachment level of the attribute in the various data formats. 				
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
 * localRepresentation - *Object* *optional*. The *[ReportingYearStartDayRepresentation](#ReportingYearStartDayRepresentation)* object defines the representation for the reporting year start day attribute. Enumerated values are not allowed and the text format is fixed to be a day and month in the ISO 8601 format of '--MM-DD'.  		
@@ -619,7 +624,7 @@ Example:
 
 	{
 		"id": "FISCALYEAR",
-		"assignmentStatus": "Mandatory",
+		"isMandatory": true,
 		"attributeRelationship": {
 			# attributeRelationship object #
 		},
@@ -645,15 +650,15 @@ Example:
 
 ##### metadataAttributeUsage
 
-*Object*. MetadataAttributeUsage defines how a metadata attribute is used in a data structure. This is a local reference to a metadata attribute from the metadata structure referenced by the data structure. An attribute relationship can be defined in order to describe the relationship of the metadata attribute to the data structure components.
+*Object*. MetadataAttributeUsage defines how a metadata attribute is used in a data structure. This is a local reference to a metadata attribute from the metadata structure referenced by this data structure. An attribute relationship can be defined in order to describe the relationship of the metadata attribute to the data structure components.
 
-* metadataAttributeReference - *String*. MetadataAttributeReference is a local urn reference to a metadata attribute defined in the metadata structure referenced by this data structure.
+* metadataAttributeReference - *String*. MetadataAttributeReference is a local (nested ID) reference to a metadata attribute defined in the metadata structure referenced by this data structure.
 * attributeRelationship - *Object*. The *[attributeRelationship](#attributeRelationship)* object defines the relationship between the referenced metadata attribute and the components of the data structure.
 
 Example:
 
 	{
-		"metadataAttributeReference": "urn:sdmx:org.sdmx.infomodel.metadatastructuredefinition.MetadataAttribute=OECD:MSD(1.0.0).ATTR1",
+		"metadataAttributeReference": "ATTR1.ATTR1-1",
 		"attributeRelationship": {
 			# attributeRelationship object #
 		}
@@ -663,7 +668,7 @@ Example:
 
 *Object* *optional*. DimensionList describes the key descriptor for a data structure definition. The order of the declaration of child dimensions is significant: it is used to describe the order in which they will appear in data formats for which key values are supplied in an ordered fashion (exclusive of the time dimension, which is not represented as a member of the ordered key). Any data structure definition which uses the time dimension should also declare a frequency dimension, conventionally the first dimension in the key (the set of ordered non-time dimensions). If is not necessary to assign a time dimension, as data can be organised in any fashion required.
 
-* id - *String*. Identifier for the attributeList.
+* id - *String*. Identifier for the dimensionList. However, this value is fixed to "DimensionDescriptor".
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
 * dimensions - *Array* *optional*. The *[dimension](#dimension)* object describes the structure of a dimension, which is defined as a statistical concept used (most probably together with other statistical concepts) to identify a statistical series, such as a time series, e.g. a statistical concept indicating certain economic activity or a geographical reference area.
@@ -693,7 +698,7 @@ Example:
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
 * position - *Integer* *optional*. Positive integer (minimum: 0). The position attribute specifies the position of the dimension in the data structure definition, starting at 0. It is optional as the position of the dimension in the key descriptor (dimensionList object) always takes precedence over the value supplied here. This is strictly for informational purposes only.
-* type - *String* *optional*. The type attribute identifies whether the dimension is a measure dimension, the time dimension, or a regular dimension. Although these are all apparent by the element names, this attribute allows for each dimension to be processed independent of its element as well as maintaining the restriction of only one measure and time dimension while still allowing dimension to occur in any order. The only possible values are: Dimension, MeasureDimension, TimeDimension.
+* type - *String* *optional*. Fixed to "Dimension". Although the dimension type is apparent by the element name, this attribute allows for each dimension to be processed independent of its element as well as maintaining the restriction of only one time dimension while still allowing dimension to occur in any order.
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
 * conceptRoles - *Array* of *String*s *optional*. ConceptRole references concepts (through URNs) which define roles which this dimension serves. If the concept from which the dimension takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here.
 * localRepresentation - *Object* *optional*. The *[localRepresentation](#localRepresentation)* object defines the representation for the dimension. Note that for dimensions the maxOccurs property must be 1, thus cannot be changed. Also the isMultiLingual textFormat property cannot be set to true for dimensions.
@@ -717,11 +722,11 @@ Example:
 
 *Object* *optional*. TimeDimension describes the structure of a time dimension. The time dimension takes its semantic from its concept identity (usually the TIME_PERIOD concept), yet is always has a fixed identifier (TIME_PERIOD). The time dimension always has a fixed text format, which specifies that its format is always the in the value set of the observational time period (see common:ObservationalTimePeriodType). It is possible that the format may be a sub-set of the observational time period value set. For example, it is possible to state that the representation might always be a calendar year. See the enumerations of the textType attribute in the LocalRepresentation/TextFormat for more details of the possible sub-sets. It is also possible to facet this representation with start and end dates. The purpose of such facts is to restrict the value of the time dimension to occur within the specified range. If the time dimension is expected to allow for the standard reporting periods (see common:ReportingTimePeriodType) to be used, then it is strongly recommended that the reporting year start day attribute also be included in the data structure definition. When the reporting year start day attribute is used, any standard reporting period values will be assumed to be based on the start day contained in this attribute. If the reporting year start day attribute is not included and standard reporting periods are used, these values will be assumed to be based on a reporting year which begins January 1.
 
-* id - *String* *optional*. Identifier for the time dimension.
+* id - *String* *optional*. Identifier for the time dimension. Fixed to "TIME_PERIOD".
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
 * position - *Integer* *optional*. Positive integer (minimum: 0). The position attribute specifies the position of the dimension in the data structure definition, starting at 0. It is optional as the position of the dimension in the key descriptor (DimensionList element) always takes precedence over the value supplied here. This is strictly for informational purposes only.
-* type - *String* *optional*. The type attribute identifies whether the dimension is a measure dimension, the time dimension, or a regular dimension. Although these are all apparent by the element names, this attribute allows for each dimension to be processed independent of its element as well as maintaining the restriction of only one measure and time dimension while still allowing dimension to occur in any order. The only possible values are: Dimension, MeasureDimension, TimeDimension.
+* type - *String* *optional*. Fixed to "TimeDimension". Although the dimension type is apparent by the element name, this attribute allows for each dimension to be processed independent of its element as well as maintaining the restriction of only one time dimension while still allowing dimension to occur in any order.
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
 * localRepresentation - *Object*. The *localRepresentation* object has only one required property *[textFormat](#timeDimensionTextFormat)* which defines the representation for the time dimension.
 
@@ -746,13 +751,17 @@ Example:
 * endTime - *String* *optional*. End time for the time dimension.
 * startTime - *String* *optional*. Start time for the time dimension.
 * textType - *String* *optional*. Any of the following values: ObservationalTimePeriod, StandardTimePeriod, BasicTimePeriod, GregorianTimePeriod, GregorianYear, GregorianYearMonth, GregorianDay, ReportingTimePeriod, ReportingYear, ReportingSemester, ReportingTrimester, ReportingQuarter, ReportingMonth, ReportingWeek, ReportingDay, DateTime, TimeRange.
+* sentinelValues - *Array* *optional*. When present, the sentinelValues array indicates that sentinel values are defined for the text format. Each *[sentinelValue](#sentinelvalue)* object indicates a reserved value in an otherwise open value domain that holds a specific meaning.
 
 Example:
 
 	{
 		"endTime": "2050",
 		"startTime": "1960",
-		"textType": "ObservationalTimePeriod"
+		"textType": "ObservationalTimePeriod",
+		"sentinelValues": [
+			# sentinelValue object #
+		]
 	}
 
 #### group
@@ -762,19 +771,15 @@ Example:
 * id - *String*. Identifier for the group.
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
-* groupDimensions - *Array* *optional*. Each of the *groupDimension* objects contains only a reference to a dimension in the key descriptor (DimensionList) through its single property *dimensionReference*. Although it is conventional to declare dimensions in the same order as they are declared in the ordered key, there is no requirement to do so - the ordering of the values of the key are taken from the order in which the dimensions are declared. Note that the id of a dimension may be inherited from its underlying concept - therefore this reference value may actually be the id of the concept.
+* groupDimensions - *Array* *optional*. Contains local references (by ID) to dimensions in the key descriptor (DimensionList). Although it is conventional to declare dimensions in the same order as they are declared in the ordered key, there is no requirement to do so - the ordering of the values of the key are taken from the order in which the dimensions are declared. Note that the id of a dimension may be inherited from its underlying concept - therefore this reference value may actually be the id of the concept.
 
 Examples:
 
 	{
 		"id": "GROUP1",
 		"groupDimensions": [
-			{
-				"dimensionReference": "CURRENCY"
-			},
-			{
-				"dimensionReference": "CURRENCY_DENOM"
-			}
+			"CURRENCY",
+			"CURRENCY_DENOM"
 		]
 	}
 
@@ -782,7 +787,7 @@ Examples:
 
 *Object* *optional*. MeasureList describes the structure of the measure descriptor for a data structure definition.
 
-* id - *String* *optional*. Identifier for the measureList.
+* id - *String* *optional*. Identifier for the measureList. Fixed to "MeasureDescriptor".
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
 * measures - *Array*. The *[measure](#measure)* object describes the definition of a measure, which is the concept that is the value of the phenomenon to be measured in a data set. Although this may take its semantic from any concept, for a unique measure the common identifier "OBS_VALUE" is recommended.
@@ -790,7 +795,7 @@ Examples:
 Example:
 
 	{
-		"id": "MEASURELIST",
+		"id": "MeasureDescriptor",
 		"measures": [
 			{
 				# measure object #
@@ -802,12 +807,12 @@ Example:
 
 *Object* *optional*. Measure defines the structure of a measure, which is the concept that is the value of the phenomenon to be measured in a data set. In addition to the identifying concept and representation, a usage status and max occurs can be defined. In case of a unique measure, conventionally the use of the "OBS_VALUE" concept is recommended. A measure can be coded by referencing a code list from its coded local representation. It can also specify its text format, which is used as the representation of the measure if a coded representation is not defined. Neither the coded or uncoded representation are necessary, since the measure may take these from the referenced concept.
 
-* id - *String* *optional*. Identifier for the measureList.
+* id - *String* *optional*. Identifier for the measure.
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
 * localRepresentation - *Object* *optional*. The *[localRepresentation](#localRepresentation)* object defines the representation for the measure.
-* usageStatus - *String*. Indicates whether the measure is mandatory or conditional. The two possible values are "Mandatory" and "Conditional".
+* isMandatory - *Boolean*. Indication whether reporting a given attribute is mandatory or conditional.
 
 Example:
 
@@ -817,7 +822,7 @@ Example:
 		"localRepresentation": {
 			# localRepresentation object #
 		},
-		"usageStatus": "Mandatory"
+		"isMandatory": true
 	}
 
 ### metadataStructure
@@ -885,8 +890,8 @@ Example:
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
 * localRepresentation - *Object* *optional*. The *[localRepresentation](#localRepresentation)* object defines the representation for the attribute.				
-* minOccurs - *Number* *optional*. The (non-negative) minOccurs attribute indicates the minimum number of times this metadata attribute must occur within its parent object. If missing than there is no lower limit on its occurrences.
-* maxOccurs - *Number* *optional*. The maxOccurs attribute (which is greater than 1) indicates the maximum number of times this metadata attribute can occur within its parent object. If missing than there is no upper limit on its occurrences. Implementers should note that that in SDMX-ML an "UnboundedCodeType" is used for that purpose.
+* minOccurs - *Integer* *optional*. The (non-negative) minOccurs attribute indicates the minimum number of times this metadata attribute must occur within its parent object. If missing than there is no lower limit on its occurrences. The default is 1.
+* maxOccurs - *Integer*/*String* *optional*. The maxOccurs attribute (which - when a number - is greater than 0) indicates the maximum number of times this metadata attribute can occur within its parent object. If set to the string "unbounded" than there is no upper limit on its occurrences. The default is 1.
 * isPresentational - *Boolean* *optional*. The isPresentational attribute indicates whether the metadata attribute should allow for a value. A value of true, meaning the metadata attribute is presentational means that the attribute only contains child metadata attributes, and does not contain a value. If this attribute is not set to true, and a representation (coded or uncoded) is not defined, then the representation of the metadata attribute will be inherited from the concept from which it takes its identity. The default is false.
 * metadataAttributes - *Array* *optional*. The *[metadataAttribute](#metadataattribute)* object defines the a child metadata attribute.
 * 
@@ -990,7 +995,8 @@ Example:
 				},
 				"isoConceptReference": {
 					# isoConceptReference object #
-				}
+				},
+				"parent": "COMMON_CONCEPTS"
 			}
 		]
 	}
@@ -1000,25 +1006,15 @@ Example:
 *Object* *optional*. A core representation for a concept. It is either a reference to a codelist which enumerates the possible values that can be used as the representation of this concept, or a text format.
 
 * enumeration - *String* *optional*. Urn reference to a codelist which enumerates the possible values that can be used as the representation of this concept. This must be a valid SDMX Registry URN (see SDMX Registry Specification for details) of a codelist.
-* id - *String* *optional*. Identifier for a codelist.
-* agencyID - *String* *optional*. ID of the agency maintaining the codelist.
-* version - *String* *optional*. Version of the codelist. It is "1.0" by default.
 * enumerationFormat - *Object* *optional*. To be used only with a codelist reference. The *[enumerationFormat](#enumerationformat)* object defines a restricted version of a text format that only allows facets and text types applicable to codes. Although the time facets permit any value, an actual code identifier does not support the necessary characters for time. Therefore these facets should not contain time in their values.
 * textFormat - *String* *optional*. As an exclusive alternative to a codelist reference. It defines the information for describing a full range of text formats and may place restrictions on the values of the other attributes, referred to as "facets". Allowed is only one of the following string values: String, Alpha, AlphaNumeric, Numeric, BigInteger, Integer, Long, Short, Decimal, Float, Double, Boolean, URI, Count, InclusiveValueRange, ExclusiveValueRange, Incremental, ObservationalTimePeriod, StandardTimePeriod, BasicTimePeriod, GregorianTimePeriod, GregorianYear, GregorianYearMonth, GregorianDay, ReportingTimePeriod, ReportingYear, ReportingSemester, ReportingTrimester, ReportingQuarter, ReportingMonth, ReportingWeek, ReportingDay, DateTime, TimeRange, Month, MonthDay, Day, Time, Duration, XHTML.
+* minOccurs - *Integer* *optional*. The (non-negative) minOccurs attribute indicatesthe minimum number of value that must be reported for the component. If missing than there is no lower limit on its occurrences. The default is 1.
+* maxOccurs - *Integer*/*String* *optional*. The maxOccurs attribute (which - when a number - is greater than 0) indicates the maximum number of values that can be reported for the component. If set to the string "unbounded" than there is no upper limit on its occurrences.
 
 Examples:
 
 	{
-		"urn": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_FREQ(2.0)",
-		"enumerationFormat": {
-			# enumerationFormat object #
-		}
-	}
-
-	{
-		"id": "CL_FREQ",
-		"agencyID": "SDMX",
-		"version": "2.0.0",
+		"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_FREQ(2.0)",
 		"enumerationFormat": {
 			# enumerationFormat object #
 		}
@@ -1106,6 +1102,33 @@ Example:
 			}
 		]
 	}
+
+
+### geographicCodelist
+
+*Object*. Describes the structure of a geographic codelist. It comprises a set of GeoFeatureSetCodes, by adding a value in the Code that follows a pattern to represent a geo feature set.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+See the schema file for more information.
+
+
+### geoGridCodelist
+
+*Object*. Describes the structure of a geographic grid code list. These define a geographical grid composed of cells representing regular squared portions of the Earth.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+See the schema file for more information.
+
+
+### valueList
+
+*Object*. Describes the structure of value list. These represent a closed set of values the can occur for a dimension, measure, or attribute. These may be values, or values with names and descriptions (similar to a codelist).
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+See the schema file for more information.
 
 
 ### hierarchy
