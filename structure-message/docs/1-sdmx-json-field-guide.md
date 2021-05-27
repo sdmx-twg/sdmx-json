@@ -1405,7 +1405,7 @@ See the schema file for more information.
 
 In addition, `dataConstraint` has the following properties:
 
-* role - *String* *optional*. The type attribute indicates whether this constraint states what data is actually present for the constraint attachment ("Actual"), or if it defines what content is allowed ("Allowed"). The default value is "Actual", meaning the data actually present for the constraint attachment.
+* role - *String*. The type attribute indicates whether this constraint states what data is actually present for the constraint attachment ("Actual"), or if it defines what content is allowed ("Allowed"). Actual data constraints cannot be managed (retrieved or uploaded) through standard structure queries since they are to be generated dynamically through data availability queries according to the real current data availability. Actual data constraints should thus not be (semantically) versioned.
 * constraintAttachment - *Object* *optional*. The *[constraintAttachment](#constraintAttachment)* object describes the collection of constrainable artefacts that the constraint is attached to.
 * cubeRegions - *Array* *optional*. A list of of *[cubeRegion](#cubeRegion)* objects. CubeRegion describes a set of dimension values which define a region and attributes which relate to the region for the purpose of describing a constraint.
 * dataKeySets - *Array* *optional*. A list of of *[dataKeySet](#dataKeySet)* objects. DataKeySet defines a collection of full or partial data keys.
@@ -1459,7 +1459,7 @@ See the schema file for more information.
 
 In addition, `metadataConstraint` has the following properties:
 
-* role - *String* *optional*. The role attribute indicates whether this constraint states what metadata is actually present for the constraint attachment, or if it defines what content is allowed.
+* role - *String*. The role attribute is fixed to "Allowed" and indicates that this constraint defines what content is allowed.
 * constraintAttachment - *Object* *optional*. The *[constraintAttachment](#constraintAttachment)* object describes the collection of constrainable artefacts that the constraint is attached to.
 * metadataTargetRegions - *Array* *optional*. A list of of *[metadataTargetRegion](#metadataTargetRegion)* objects which describes the values allowed for metadata attributes.
 * releaseCalendar - *Object* *optional*. The *[releaseCalendar](#releaseCalendar)* defines dates on which the constrained data is to be made available.
