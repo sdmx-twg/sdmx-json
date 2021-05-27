@@ -1950,7 +1950,7 @@
 			]
 		},
 		"MetadataConstraintType":{
-			"description":"MetadataConstraintType defines the structure of a metadata constraint. A metadata constraint can specify allowed attribute values for metadata described by the constrained artefact.",
+			"description":"MetadataConstraintType defines the structure of a metadata constraint. A metadata constraint can specify allowed attribute values for metadata described by the constrained artefact. The constraint attachment is restricted to constrainable artefacts related to metadata, and the only possible role is 'Allowed'.",
 			"type":"object",
 			"allOf":[
 				{
@@ -1959,8 +1959,8 @@
 				{
 					"properties":{
 						"role":{
-							"$ref":"#/definitions/ConstraintRoleType",
-							"description":"The role attribute indicates whether this constraint states what data is actually present for the constraint attachment, or if it defines what content is allowed."
+							"const":"Allowed",
+							"description":"The fixed 'Allowed' role attribute indicates that this constraint defines what content is allowed."
 						},
 						"constraintAttachment":{
 							"$ref":"#/definitions/MetadataConstraintAttachmentType",
@@ -1978,7 +1978,10 @@
 								"description":"MetadataTargetRegion describes the values allowed for metadata attributes."
 							}
 						}
-					}
+					},
+					"required":[
+						"role"
+					]
 				}
 			]
 		},
@@ -3113,7 +3116,10 @@
 								"description":"CubeRegion defines a slice of the data set (dimensions and attribute values) for the constrained artefacet. A set of included and/or excluded regions can be described."
 							}
 						}
-					}
+					},
+					"required":[
+						"role"
+					]
 				}
 			]
 		},
@@ -4966,7 +4972,7 @@
 							"$ref":"#/definitions/BasicComponentTextFormatType"
 						},
 						"maxOccurs":{
-							"$ref":"#/definitions/OccurenceType"1,
+							"$ref":"#/definitions/OccurenceType",
 							"default":1
 						},
 						"minOccurs":{
