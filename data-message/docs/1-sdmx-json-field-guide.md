@@ -491,7 +491,7 @@ Example:
 		"minLength": 4, 
 		"maxLength": 4, 
 		"pattern": "^[A-Za-z][A-Za-z0-9_-]*$",
-		"isMultilingual": true		]
+		"isMultilingual": true
 	}
 
 	{ 
