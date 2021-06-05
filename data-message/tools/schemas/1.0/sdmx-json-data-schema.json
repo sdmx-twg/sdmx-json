@@ -568,7 +568,7 @@
 					"minimum":1
 				},
 				"pattern":{"type":"string"},
-				"sentinels": {"$ref": "#/definitions/sentinels"}
+				"sentinelValues": {"$ref": "#/definitions/sentinelValues"}
 			}
 		},
 		"format": {
@@ -598,7 +598,7 @@
 				},
 				"pattern":{"type":"string"},
 				"isMultiLingual":{"type":"boolean"},
-				"sentinels": {"$ref": "#/definitions/sentinels"},
+				"sentinelValues": {"$ref": "#/definitions/sentinelValues"},
 				"maxOccurs":{
 					"$ref":"#/definitions/OccurenceType",
 					"default":1
@@ -610,7 +610,7 @@
 				}
 			}
 		},
-		"sentinels": {
+		"sentinelValues": {
 			"type": "array",
 			"items": {
 				"type": "object",
@@ -620,8 +620,9 @@
 				],
 				"properties": {
 					"value": {
-						"oneOf": [
+						"anyOf": [
 							{"type": "number"},
+							{"type": "integer"},
 							{"type": "string"}
 						]
 					},
@@ -1011,12 +1012,12 @@
 				{
 					"description":"xs:gYear: GregorianTimePeriodType defines the set of standard calendar periods in SDMX.",
 					"type":"string",
-					"pattern":"^-?([1-9][0-9]{3,}|0[0-9]{3})(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
+					"pattern":"^([1-9][0-9]{3,}|0[0-9]{3})(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
 				},
 				{
 					"description":"xs:gYearMonth: GregorianTimePeriodType defines the set of standard calendar periods in SDMX.",
 					"type":"string",
-					"pattern":"^-?([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
+					"pattern":"^([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
 				},
 				{
 					"type":"string",
@@ -1027,42 +1028,9 @@
 					"format":"date-time"
 				},
 				{
-					"$ref":"#/definitions/ReportingTimePeriodType",
+					"type":"string",
+					"pattern":"^\\d{4}\\-([ASTQ]\\d{1}|[MW]\\d{2}|[D]\\d{3})(Z|((\\+|\\-)\\d{2}:\\d{2}))?$",
 					"description":"ReportingTimePeriodType defines standard reporting periods in SDMX, which are all in relation to the start day (day-month) of a reporting year which is specified in the specialized reporting year start day attribute. If the reporting year start day is not defined, a day of January 1 is assumed. The reporting year must be epxressed as the year at the beginning of the period. Therfore, if the reproting year runs from April to March, any given reporting year is expressed as the year for April. The general format of a report period can be described as  [year]-[period][time zone]?, where the type of period is designated with a single character followed by a number representing the period. Note that all periods allow for an optional time zone offset. See the details of each member type for the specifics of its format."
-				}
-			]
-		},
-		"ReportingTimePeriodType":{
-			"description":"ReportingTimePeriodType defines standard reporting periods in SDMX, which are all in relation to the start day (day-month) of a reporting year which is specified in the specialized reporting year start day attribute. If the reporting year start day is not defined, a day of January 1 is assumed. The reporting year must be epxressed as the year at the beginning of the period. Therfore, if the reproting year runs from April to March, any given reporting year is expressed as the year for April. The general format of a report period can be described as  [year]-[period][time zone]?, where the type of period is designated with a single character followed by a number representing the period. Note that all periods allow for an optional time zone offset. See the details of each member type for the specifics of its format.",
-			"type":"string",
-			"anyOf":[
-				{
-					"description":"ReportingYearType defines a time period of 1 year (P1Y) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. In this case a reporting year will coincide with a calendar year. The format of a reporting year is YYYY-A1 (e.g. 2000-A1). Note that the period value of 1 is fixed.",
-					"pattern":"^.{5}A1.*$"
-				},
-				{
-					"description":"ReportingSemesterType defines a time period of 6 months (P6M) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. The format of a reporting semester is YYYY-Ss (e.g. 2000-S1), where s is either 1 or 2.",
-					"pattern":"^.{5}S[1-2].*$"
-				},
-				{
-					"description":"ReportingTrimesterType defines a time period of 4 months (P4M) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. The format of a reporting trimester is YYYY-Tt (e.g. 2000-T1), where s is either 1, 2, or 3.",
-					"pattern":"^.{5}T[1-3].*$"
-				},
-				{
-					"description":"ReportingQuarterType defines a time period of 3 months (P3M) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. The format of a reporting quarter is YYYY-Qq (e.g. 2000-Q1), where q is a value between 1 and 4.",
-					"pattern":"^.{5}Q[1-4].*$"
-				},
-				{
-					"description":"ReportingMonthType defines a time period of 1 month (P1M) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. In this case a reporting month will coincide with a calendar month. The format of a reporting month is YYYY-Mmm (e.g. 2000-M01), where mm is a two digit month (i.e. 01-12).",
-					"pattern":"^.{5}M(0[1-9]|1[0-2]).*$"
-				},
-				{
-					"description":"ReportingWeekType defines a time period of 7 days (P7D) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. A standard reporting week is based on the ISO 8601 defintion of a week date, in relation to the reporting period start day. The first week is defined as the week with the first Thursday on or after the reporting year start day. An equivalent definition is the week starting with the Monday nearest in time to the reporting year start day. There are other equivalent defintions, all of which should be adjusted based on the reporting year start day. In the absence of a start day for the reporting year, a day of January 1 is assumed. The format of a reporting week is YYYY-Www (e.g. 2000-W01), where mm is a two digit week (i.e. 01-53).",
-					"pattern":"^.{5}W(0[1-9]|[1-4][0-9]|5[0-3]).*$"
-				},
-				{
-					"description":"ReportingDayType defines a time period of 1 day (P1D) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. The format of a reporting day is YYYY-Dddd (e.g. 2000-D001), where ddd is a three digit day (i.e. 001-366).",
-					"pattern":"^.{5}D(0[0-9][1-9]|[1-2][0-9][0-9]|3[0-5][0-9]|36[0-6]).*$"
 				}
 			]
 		},
