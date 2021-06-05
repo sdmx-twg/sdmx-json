@@ -472,7 +472,7 @@ Example:
 					
 ##### attribute
 
-*Object* *optional*. Attribute describes the structure of a data attribute, which is defined as a characteristic of an object or entity. The attribute takes its semantic, and in some cases it representation, from its concept identity. An attribute can be coded by referencing a code list from its coded local representation. It can also specify its text format, which is used as the representation of the attribute if a coded representation is not defined. Neither the coded or uncoded representation are necessary, since the attribute may take these from the referenced concept. An attribute specifies its relationship with other data structure components and is given an assignment status. These two properties dictate where in a data message the attribute will be attached, and whether or not the attribute will be required to be given a value. A set of roles defined in concept scheme can be assigned to the attribute.
+*Object* *optional*. Attribute describes the structure of a data attribute, which is defined as a characteristic of an object or entity. The attribute takes its semantic, and in some cases it representation, from its concept identity. An attribute can be coded by referencing a code list from its coded local representation. It can also specify its data format, which is used as the representation of the attribute if a coded representation is not defined. Neither the coded or uncoded representation are necessary, since the attribute may take these from the referenced concept. An attribute specifies its relationship with other data structure components and is given an assignment status. These two properties dictate where in a data message the attribute will be attached, and whether or not the attribute will be required to be given a value. A set of roles defined in concept scheme can be assigned to the attribute.
 
 * id - *String* *optional*. Identifier for the attribute.
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
@@ -538,10 +538,10 @@ Examples:
 *Object* *optional*. LocalRepresentation defines the representation for the attribute. A data attribute can be text (including XHTML and multi-lingual values), a simple value, or an enumerated value.
 
 * enumeration - *String* *optional*. Urn reference to a to an item scheme (such as a codelist) or a value list.
-* enumerationFormat - *Object* *optional*. The *[enumerationFormat](#enumerationformat)* object defines a restricted version of a *[textFormat](#textFormat)* that only allows facets and text types applicable to codes. Although the time facets permit any value, an actual code identifier does not support the necessary characters for time. Therefore these facets should not contain time in their values.
-* textFormat - *Object* *optional*. The *[textFormat](#textFormat)* object defines the information for describing a range of text formats restricted to the representations allowed for all components except for target objects, and that does not allow for multi-lingual values.
-* minOccurs - *Integer* *optional*. The (non-negative) minOccurs attribute indicates the minimum number of values that can be reported for the component. If missing than there is no lower limit on its occurrences. The default is 1.
-* maxOccurs - *Integer*/*String* *optional*. The maxOccurs attribute (which - when a number - is greater than 0) indicates the maximum number of values that can be reported for the component. If set to the string "unbounded" than there is no upper limit on its occurrences. The default is 1.
+* enumerationFormat - *Object* *optional*. The *[enumerationFormat](#enumerationformat)* object defines a restricted version of a *[format](#format)* that only allows facets and text types applicable to codes. Although the time facets permit any value, an actual code identifier does not support the necessary characters for time. Therefore these facets should not contain time in their values.
+* format - *Object* *optional*. As an exclusive alternative to a codelist reference the *[format](#format)* object defines the information for describing a full range of data formats and may place restrictions on the component's values.
+* minOccurs - *Non-negative Integer* *optional*. Indicates the minimum number of values that can be reported for the component. If missing than there is no lower limit on its occurrences. The default is 1.
+* maxOccurs - *Positive Integer*/*String* *optional*. Indicates the maximum number of values that can be reported for the component. If set to the string "unbounded" than there is no upper limit on its occurrences. The default is 1.
 
 Examples:
 
@@ -553,37 +553,66 @@ Examples:
 	}
 
 	{
-		"textFormat": {
-			# textFormat object #
+		"format": {
+			# format object #
 		}
 	}
 
-####### textFormat
+##### enumerationFormat
 
-*Object* *optional*. TextFormat defines the information for describing a range of text formats restricted to the representations allowed for all components except for target objects, and that does not allow for multi-lingual values.
+*Object* *optional*. A restricted version of the *[format](#format)* that only allows facets and text types applicable to codes. Although the time facets permit any value, an actual code identifier does not support the necessary characters for time. Therefore these facets should not contain time in their values.
 
-* textType - *String* *optional*. Allowed is only one of the following string values: String, Alpha, AlphaNumeric, Numeric, BigInteger, Integer, Long, Short, Boolean, URI, Count, InclusiveValueRange, ExclusiveValueRange, Incremental, ObservationalTimePeriod, StandardTimePeriod, BasicTimePeriod, GregorianTimePeriod, GregorianYear, GregorianYearMonth, GregorianDay, ReportingTimePeriod, ReportingYear, ReportingSemester, ReportingTrimester, ReportingQuarter, ReportingMonth, ReportingWeek, ReportingDay, Month, MonthDay, Day, Duration
-* isSequence - *Boolean* *optional*.
-* interval - *Number* *optional*.
-* startValue - *Number* *optional*.
-* endValue - *Number* *optional*.
-* timeInterval - *String* *optional*. A valid time duration.
-* startTime - *String* *optional*. A valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
-* endTime - *String* *optional*. A valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
-* minLength - *Integer* *optional*. Positive number (minimum: 1).
-* maxLength - *Integer* *optional*. Positive number (minimum: 1).
-* minValue - *Number* *optional*.
-* maxValue - *Number* *optional*.
-* decimals - *Integer* *optional*. Positive number (minimum: 1).
-* pattern - *String* *optional*.
-* isMultiLingual - *Boolean* *optional*. The isMultiLingual attribute indicates for a text format of type "string", whether the value should allow for multiple values in different languages. Default: false.
-* sentinelValues - *Array* *optional*. When present, the sentinelValues array indicates that sentinel values are defined for the text format. Each *[sentinelValue](#sentinelvalue)* object indicates a reserved value in an otherwise open value domain that holds a specific meaning. For example, a value of -1 can be defined to indicate a non-applicable value.
+* dataType - *String* *optional*. Describes the type of data format allowed for the representation of the component. Only the following dataTypes are supported: "String",
+ "Alpha", "AlphaNumeric", "Numeric", "BigInteger", "Integer", "Long", "Short", "Boolean", "URI", "Count", "InclusiveValueRange", "ExclusiveValueRange", "Incremental", "ObservationalTimePeriod", "StandardTimePeriod", "BasicTimePeriod", "GregorianTimePeriod", "GregorianYear", "GregorianYearMonth", "GregorianDay", "ReportingTimePeriod", "ReportingYear", "ReportingSemester", "ReportingTrimester", "ReportingQuarter", "ReportingMonth", "ReportingWeek", "ReportingDay", "Month", "MonthDay", "Day" and "Duration". Time `dimensions` (having the id and role "TIME_PERIOD") only support the types "ObservationalTimePeriod", "StandardTimePeriod", "BasicTimePeriod", "GregorianTimePeriod", "GregorianYear", "GregorianYearMonth", "GregorianDay", "ReportingTimePeriod", "ReportingYear", "ReportingSemester", "ReportingTrimester", "ReportingQuarter", "ReportingMonth", "ReportingWeek" and "ReportingDay". The default data type is "String" except for time `dimensions`, which takes "ObservationalTimePeriod" as default.
+* isSequence - *Boolean* *optional*. Indicates whether the values are intended to be ordered, and it may work in combination with the interval, startValue, and endValue attributes or the timeInterval, startTime, and endTime, attributes. If this attribute holds a value of 'true', a start value or time and a numeric or time interval must supplied. If an end value is not given, then the sequence continues indefinitely.
+* interval - *Integer* *optional*. Specifies the permitted interval (increment) in a sequence. In order for this to be used, the isSequence attribute must have a value of 'true'.
+* startValue - *Number* *optional*. Is used in conjunction with the isSequence and interval attributes (which must be set in order to use this attribute). This attribute is used for a numeric sequence, and indicates the starting point of the sequence. This value is mandatory for a numeric sequence to be expressed.
+* endValue - *Number* *optional*.  Is used in conjunction with the isSequence and interval attributes (which must be set in order to use this attribute). This attribute is used for a numeric sequence, and indicates that ending point (if any) of the sequence.
+* timeInterval - *String* *optional*. Indicates the permitted duration in a time sequence. It complies with the time duration specification of the ISO 8601 standard. In order for this to be used, the isSequence attribute must have a value of 'true'.
+* startTime - *String* *optional*. Is used in conjunction with the isSequence and timeInterval attributes (which must be set in order to use this attribute). This attribute is used for a time sequence, and indicates the start time of the sequence. This value is mandatory for a time sequence to be expressed. It must be a valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
+* endTime - *String* *optional*. Is used in conjunction with the isSequence and timeInterval attributes (which must be set in order to use this attribute). This attribute is used for a time sequence, and indicates that ending point (if any) of the sequence. It must be a valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
+* minLength - *Positive integer* *optional*. Specifies the minimum length of the value in characters.
+* maxLength - *Positive integer* *optional*. Specifies the maximum length of the value in characters.
+* minValue - *Number* *optional*. Is used for inclusive and exclusive ranges, indicating what the lower bound of the range is. If this is used with an inclusive range, a valid value will be greater than or equal to the value specified here. By default, the minValue is assumed to be inclusive.
+* maxValue - *Number* *optional*. Is used for inclusive and exclusive ranges, indicating what the upper bound of the range is. If this is used with an inclusive range, a valid value will be less than or equal to the value specified here. By default, the maxValue is assumed to be inclusive.
+* pattern - *String* *optional*. Holds any standard regular expression.
 
 Example:
 
 	{
-		"textType": "String",
+		"dataType": "String",
+		"pattern": "^[0-9][0-9]$"
+	}
+
+####### format
+
+*Object* *optional*. Format defines the information for describing a range of data formats restricted to the representations allowed for all components except for target objects.
+
+* dataType - *String* *optional*. Describes the type of data format allowed for the representation of the component. Only the following dataTypes are supported: "String",
+ "Alpha", "AlphaNumeric", "Numeric", "BigInteger", "Integer", "Long", "Short", "Decimal", "Float", "Double", "Boolean", "URI", "Count", "InclusiveValueRange", "ExclusiveValueRange", "Incremental", "ObservationalTimePeriod", "StandardTimePeriod", "BasicTimePeriod", "GregorianTimePeriod", "GregorianYear", "GregorianYearMonth", "GregorianDay", "ReportingTimePeriod", "ReportingYear", "ReportingSemester", "ReportingTrimester", "ReportingQuarter", "ReportingMonth", "ReportingWeek", "ReportingDay", "DateTime", "TimeRange", "Month", "MonthDay", "Day", "Time", "Duration", "GeospatialInformation" and "XHTML". `Dimensions` do not support the type "XHTML". Time `dimensions` (having the id and role "TIME_PERIOD") only support the types "ObservationalTimePeriod", "StandardTimePeriod", "BasicTimePeriod", "GregorianTimePeriod", "GregorianYear", "GregorianYearMonth", "GregorianDay", "ReportingTimePeriod", "ReportingYear", "ReportingSemester", "ReportingTrimester", "ReportingQuarter", "ReportingMonth", "ReportingWeek", "ReportingDay", "DateTime", "TimeRange". The default data type is "String" except for time `dimensions`, which takes "ObservationalTimePeriod" as default.
+* isSequence - *Boolean* *optional*. Indicates whether the values are intended to be ordered, and it may work in combination with the interval, startValue, and endValue attributes or the timeInterval, startTime, and endTime, attributes. If this attribute holds a value of 'true', a start value or time and a numeric or time interval must supplied. If an end value is not given, then the sequence continues indefinitely.
+* interval - *Integer* *optional*. Specifies the permitted interval (increment) in a sequence. In order for this to be used, the isSequence attribute must have a value of 'true'.
+* startValue - *Number* *optional*. Is used in conjunction with the isSequence and interval attributes (which must be set in order to use this attribute). This attribute is used for a numeric sequence, and indicates the starting point of the sequence. This value is mandatory for a numeric sequence to be expressed.
+* endValue - *Number* *optional*.  Is used in conjunction with the isSequence and interval attributes (which must be set in order to use this attribute). This attribute is used for a numeric sequence, and indicates that ending point (if any) of the sequence.
+* timeInterval - *String* *optional*. Indicates the permitted duration in a time sequence. It complies with the time duration specification of the ISO 8601 standard. In order for this to be used, the isSequence attribute must have a value of 'true'.
+* startTime - *String* *optional*. Is used in conjunction with the isSequence and timeInterval attributes (which must be set in order to use this attribute). This attribute is used for a time sequence, and indicates the start time of the sequence. This value is mandatory for a time sequence to be expressed. It must be a valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
+* endTime - *String* *optional*. Is used in conjunction with the isSequence and timeInterval attributes (which must be set in order to use this attribute). This attribute is used for a time sequence, and indicates that ending point (if any) of the sequence. It must be a valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
+* minLength - *Positive integer* *optional*. Specifies the minimum length of the value in characters.
+* maxLength - *Positive integer* *optional*. Specifies the maximum length of the value in characters.
+* minValue - *Number* *optional*. Is used for inclusive and exclusive ranges, indicating what the lower bound of the range is. If this is used with an inclusive range, a valid value will be greater than or equal to the value specified here. By default, the minValue is assumed to be inclusive.
+* maxValue - *Number* *optional*. Is used for inclusive and exclusive ranges, indicating what the upper bound of the range is. If this is used with an inclusive range, a valid value will be less than or equal to the value specified here. By default, the maxValue is assumed to be inclusive.
+* decimals - *Positive integer* *optional*. Indicates the number of characters allowed after the decimal separator.
+* pattern - *String* *optional*. Holds any standard regular expression.
+* isMultiLingual - *Boolean* *optional*. **Only for `measures` and `attributes`.** This indicates for a text format of type "String" or "XHTML", whether the uncoded component value should allow for multiple values in different languages. The default is `false`. 
+* sentinelValues - *Array* of *Object*s *optional*. When present, the sentinelValues array indicates that sentinel values are defined for the data format. Each *[sentinelValue](#sentinelvalue)* object indicates a reserved value in an otherwise open value domain that holds a specific meaning. For example, a value of -1 can be defined to indicate a non-applicable value.
+
+Example:
+
+	{
+		"dataType": "String",
 		"maxLength": 1050,
+		"pattern": "^[A-Za-z][A-Za-z0-9_-]*$",
+		"isMultilingual": true,
 		"sentinelValues": [
 			# sentinelValue object #
 		]
@@ -591,11 +620,13 @@ Example:
 
 ######## sentinelValue
 
-*Object* *optional*. It defines a reserved value for the text format along with its meaning.
+*Object*. It defines a reserved value (within the value domain of the data format) along with its meaning.
 
 * value - *Number* or *String* *optional*. The sentinel value being described.
 * name - *String* *optional*. Human-readable (best-language-match) name (or meaning) of the sentinel value.
 * names - *Object* *optional*. Human-readable localised *[names](#names)* (or meanings) of the sentinel value.
+* description - *String* *optional*. Human-readable (best-language-match) description for the sentinel value.
+* descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) for the sentinel value.
 
 Example:
 
@@ -604,8 +635,11 @@ Example:
 		"name": "Special meaning",
 		"names": {
 			"en": "Special meaning",
-			"fr": "signification particulière"
-		}
+			"fr": "Signification particulière"
+		},
+		"description": "Description for special meaning.",
+		"descriptions": { "en": "Description for special meaning.",
+				  "fr": "Description de signification particulière." }
 	}
 
 ##### reportingYearStartDay
@@ -636,16 +670,19 @@ Example:
 
 ##### ReportingYearStartDayRepresentation
 
-*Object* *optional*. ReportingYearStartDayRepresentation defines the representation for the reporting year start day attribute. Enumerated values are not allowed and the text format is fixed to be a day and month in the ISO 8601 format of '--MM-DD'.
+*Object* *optional*. ReportingYearStartDayRepresentation defines the representation for the reporting year start day attribute. Enumerated values are not allowed and the data format is fixed to be a day and month in the ISO 8601 format of '--MM-DD'.
 
-* textFormat - *Object*. The *textFormat* object has only one single property *textType* fixed to "MonthDay". This type exists solely for the purpose of fixing the representation of the reporting year start day attribute.
+* format - *Object*. The *format* object has only one single property *dataType* fixed to "MonthDay". This type exists solely for the purpose of fixing the representation of the reporting year start day attribute.
+* minOccurs - *Non-negative Integer* *optional*. Indicates the minimum number of values that can be reported for the component. If missing than there is no lower limit on its occurrences. The default is 1.
+* maxOccurs - *Positive Integer*. Indicates the maximum number of values that can be reported for the component. It is fixed to 1.
 
 Example:
 
 	{
-		"textFormat": {
-			"textType": "MonthDay"
-		}
+		"format": {
+			"dataType": "MonthDay"
+		},
+		"maxOccurs": 1
 	}
 
 ##### metadataAttributeUsage
@@ -701,7 +738,7 @@ Example:
 * type - *String* *optional*. Fixed to "Dimension". Although the dimension type is apparent by the element name, this attribute allows for each dimension to be processed independent of its element as well as maintaining the restriction of only one time dimension while still allowing dimension to occur in any order.
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
 * conceptRoles - *Array* of *String*s *optional*. ConceptRole references concepts (through URNs) which define roles which this dimension serves. If the concept from which the dimension takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here.
-* localRepresentation - *Object* *optional*. The *[localRepresentation](#localRepresentation)* object defines the representation for the dimension. Note that for dimensions the maxOccurs property must be 1, thus cannot be changed. Also the isMultiLingual textFormat property cannot be set to true for dimensions.
+* localRepresentation - *Object* *optional*. The *[localRepresentation](#localRepresentation)* object defines the representation for the dimension. Note that for dimensions the maxOccurs property must be 1, thus cannot be changed. Also the isMultiLingual format property cannot be set to true for dimensions.
 
 Example:
 
@@ -720,7 +757,7 @@ Example:
 
 ##### timeDimension
 
-*Object* *optional*. TimeDimension describes the structure of a time dimension. The time dimension takes its semantic from its concept identity (usually the TIME_PERIOD concept), yet is always has a fixed identifier (TIME_PERIOD). The time dimension always has a fixed text format, which specifies that its format is always the in the value set of the observational time period (see common:ObservationalTimePeriodType). It is possible that the format may be a sub-set of the observational time period value set. For example, it is possible to state that the representation might always be a calendar year. See the enumerations of the textType attribute in the LocalRepresentation/TextFormat for more details of the possible sub-sets. It is also possible to facet this representation with start and end dates. The purpose of such facts is to restrict the value of the time dimension to occur within the specified range. If the time dimension is expected to allow for the standard reporting periods (see common:ReportingTimePeriodType) to be used, then it is strongly recommended that the reporting year start day attribute also be included in the data structure definition. When the reporting year start day attribute is used, any standard reporting period values will be assumed to be based on the start day contained in this attribute. If the reporting year start day attribute is not included and standard reporting periods are used, these values will be assumed to be based on a reporting year which begins January 1.
+*Object* *optional*. TimeDimension describes the structure of a time dimension. The time dimension takes its semantic from its concept identity (usually the TIME_PERIOD concept), yet is always has a fixed identifier (TIME_PERIOD). The time dimension always has a fixed text format, which specifies that its format is always the in the value set of the observational time period (see common:ObservationalTimePeriodType). It is possible that the format may be a sub-set of the observational time period value set. For example, it is possible to state that the representation might always be a calendar year. See the enumerations of the dataType attribute in the localRepresentation/format for more details of the possible sub-sets. It is also possible to facet this representation with start and end dates. The purpose of such facts is to restrict the value of the time dimension to occur within the specified range. If the time dimension is expected to allow for the standard reporting periods (see common:ReportingTimePeriodType) to be used, then it is strongly recommended that the reporting year start day attribute also be included in the data structure definition. When the reporting year start day attribute is used, any standard reporting period values will be assumed to be based on the start day contained in this attribute. If the reporting year start day attribute is not included and standard reporting periods are used, these values will be assumed to be based on a reporting year which begins January 1.
 
 * id - *String* *optional*. Identifier for the time dimension. Fixed to "TIME_PERIOD".
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
@@ -728,7 +765,7 @@ Example:
 * position - *Integer* *optional*. Positive integer (minimum: 0). The position attribute specifies the position of the dimension in the data structure definition, starting at 0. It is optional as the position of the dimension in the key descriptor (DimensionList element) always takes precedence over the value supplied here. This is strictly for informational purposes only.
 * type - *String* *optional*. Fixed to "TimeDimension". Although the dimension type is apparent by the element name, this attribute allows for each dimension to be processed independent of its element as well as maintaining the restriction of only one time dimension while still allowing dimension to occur in any order.
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
-* localRepresentation - *Object*. The *localRepresentation* object has only one required property *[textFormat](#timeDimensionTextFormat)* which defines the representation for the time dimension.
+* localRepresentation - *Object*. The *localRepresentation* object has only one required property *format* of type *[timeDimensionFormat](#timedimensionformat)* which defines the representation for the time dimension.
 
 Example:
 
@@ -738,19 +775,19 @@ Example:
 		"type": "TimeDimension",
 		"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).TIME_PERIOD",
 		"localRepresentation": {
-			"textFormat": {
-				# timeDimension textFormat object #
+			"format": {
+				# timeDimension format object #
 			}
 		}
 	}
 
-##### timeDimensionTextFormat
+##### timeDimensionFormat
 
-*Object* *optional*. The timeDimension textFormat only allows time based format and specifies a default ObservationalTimePeriod representation and facets of a start and end time.
+*Object* *optional*. The timeDimension format only allows time based format and specifies a default ObservationalTimePeriod representation and facets of a start and end time.
 
 * endTime - *String* *optional*. End time for the time dimension.
 * startTime - *String* *optional*. Start time for the time dimension.
-* textType - *String* *optional*. Any of the following values: ObservationalTimePeriod, StandardTimePeriod, BasicTimePeriod, GregorianTimePeriod, GregorianYear, GregorianYearMonth, GregorianDay, ReportingTimePeriod, ReportingYear, ReportingSemester, ReportingTrimester, ReportingQuarter, ReportingMonth, ReportingWeek, ReportingDay, DateTime, TimeRange.
+* dataType - *String* *optional*. Any of the following values: ObservationalTimePeriod, StandardTimePeriod, BasicTimePeriod, GregorianTimePeriod, GregorianYear, GregorianYearMonth, GregorianDay, ReportingTimePeriod, ReportingYear, ReportingSemester, ReportingTrimester, ReportingQuarter, ReportingMonth, ReportingWeek, ReportingDay, DateTime, TimeRange.
 * sentinelValues - *Array* *optional*. When present, the sentinelValues array indicates that sentinel values are defined for the text format. Each *[sentinelValue](#sentinelvalue)* object indicates a reserved value in an otherwise open value domain that holds a specific meaning.
 
 Example:
@@ -758,7 +795,7 @@ Example:
 	{
 		"endTime": "2050",
 		"startTime": "1960",
-		"textType": "ObservationalTimePeriod",
+		"dataType": "ObservationalTimePeriod",
 		"sentinelValues": [
 			# sentinelValue object #
 		]
@@ -890,11 +927,11 @@ Example:
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
 * localRepresentation - *Object* *optional*. The *[localRepresentation](#localRepresentation)* object defines the representation for the attribute.				
-* minOccurs - *Integer* *optional*. The (non-negative) minOccurs attribute indicates the minimum number of times this metadata attribute must occur within its parent object. If missing than there is no lower limit on its occurrences. The default is 1.
-* maxOccurs - *Integer*/*String* *optional*. The maxOccurs attribute (which - when a number - is greater than 0) indicates the maximum number of times this metadata attribute can occur within its parent object. If set to the string "unbounded" than there is no upper limit on its occurrences. The default is 1.
+* minOccurs - *Non-negative integer* *optional*. Indicates the minimum number of times this metadata attribute must occur within its parent object. If missing than there is no lower limit on its occurrences. The default is 1.
+* maxOccurs - *Positive integer*/*String* *optional*. Indicates the maximum number of times this metadata attribute can occur within its parent object. If set to the string "unbounded" than there is no upper limit on its occurrences. The default is 1.
 * isPresentational - *Boolean* *optional*. The isPresentational attribute indicates whether the metadata attribute should allow for a value. A value of true, meaning the metadata attribute is presentational means that the attribute only contains child metadata attributes, and does not contain a value. If this attribute is not set to true, and a representation (coded or uncoded) is not defined, then the representation of the metadata attribute will be inherited from the concept from which it takes its identity. The default is false.
 * metadataAttributes - *Array* *optional*. The *[metadataAttribute](#metadataattribute)* object defines the a child metadata attribute.
-* 
+
 Example:
 
 	{
@@ -1007,9 +1044,9 @@ Example:
 
 * enumeration - *String* *optional*. Urn reference to a codelist which enumerates the possible values that can be used as the representation of this concept. This must be a valid SDMX Registry URN (see SDMX Registry Specification for details) of a codelist.
 * enumerationFormat - *Object* *optional*. To be used only with a codelist reference. The *[enumerationFormat](#enumerationformat)* object defines a restricted version of a text format that only allows facets and text types applicable to codes. Although the time facets permit any value, an actual code identifier does not support the necessary characters for time. Therefore these facets should not contain time in their values.
-* textFormat - *String* *optional*. As an exclusive alternative to a codelist reference. It defines the information for describing a full range of text formats and may place restrictions on the values of the other attributes, referred to as "facets". Allowed is only one of the following string values: String, Alpha, AlphaNumeric, Numeric, BigInteger, Integer, Long, Short, Decimal, Float, Double, Boolean, URI, Count, InclusiveValueRange, ExclusiveValueRange, Incremental, ObservationalTimePeriod, StandardTimePeriod, BasicTimePeriod, GregorianTimePeriod, GregorianYear, GregorianYearMonth, GregorianDay, ReportingTimePeriod, ReportingYear, ReportingSemester, ReportingTrimester, ReportingQuarter, ReportingMonth, ReportingWeek, ReportingDay, DateTime, TimeRange, Month, MonthDay, Day, Time, Duration, XHTML.
-* minOccurs - *Integer* *optional*. The (non-negative) minOccurs attribute indicatesthe minimum number of value that must be reported for the component. If missing than there is no lower limit on its occurrences. The default is 1.
-* maxOccurs - *Integer*/*String* *optional*. The maxOccurs attribute (which - when a number - is greater than 0) indicates the maximum number of values that can be reported for the component. If set to the string "unbounded" than there is no upper limit on its occurrences.
+* format - *Object* *optional*. As an exclusive alternative to a codelist reference the *[format](#format)* object defines the information for describing a full range of data formats and may place restrictions on the component's values.
+* minOccurs - *Non-negative Integer* *optional*. Indicates the minimum number of values that can be reported for the component. If missing than there is no lower limit on its occurrences. The default is 1.
+* maxOccurs - *Positive Integer*/*String* *optional*. Indicates the maximum number of values that can be reported for the component. If set to the string "unbounded" than there is no upper limit on its occurrences. The default is 1.
 
 Examples:
 
@@ -1021,31 +1058,9 @@ Examples:
 	}
 
 	{
-		"textFormat": "String"
-	}
-
-##### enumerationFormat
-
-*Object* *optional*. A restricted version of a text format that only allows facets and text types applicable to codes. Although the time facets permit any value, an actual code identifier does not support the necessary characters for time. Therefore these facets should not contain time in their values.
-
-* textType *String* *optional*. One of the types: String, Alpha, AlphaNumeric, Numeric, BigInteger, Integer, Long, Short, Boolean, URI, Count, InclusiveValueRange, ExclusiveValueRange, Incremental, ObservationalTimePeriod, StandardTimePeriod, BasicTimePeriod, GregorianTimePeriod, GregorianYear, GregorianYearMonth, GregorianDay, ReportingTimePeriod, ReportingYear, ReportingSemester, ReportingTrimester, ReportingQuarter, ReportingMonth, ReportingWeek, ReportingDay, Month, MonthDay, Day, Duration.
-* isSequence *Boolean* *optional*.
-* interval *Integer* *optional*
-* startValue *Integer* *optional*
-* endValue *Integer* *optional*
-* timeInterval *String* *optional*. A valid time duration string.
-* startTime *String* *optional*. A valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
-* endTime *String* *optional*. A valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
-* minLength *Integer* *optional*. A positive integer.
-* maxLength *Integer* *optional*. A positive integer.
-* minValue *Integer* *optional*.
-* maxValue *Integer* *optional*.
-* pattern *String* *optional*.
-
-Example:
-
-	{
-		  "pattern": "^[0-9][0-9]$"
+		"format": {
+			# format object #
+		}
 	}
 
 #### isoConceptReference
