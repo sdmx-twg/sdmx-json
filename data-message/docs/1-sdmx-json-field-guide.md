@@ -343,7 +343,7 @@ Each of the components may contain the following fields:
 * roles - *Array* of *String*s *optional*. Defines the component role(s), if any. Roles are represented by the id of a concept defined as [SDMX cross-domain concept](https://sdmx.org/wp-content/uploads/01_sdmx_cog_annex_1_cdc_2009.pdf). Several of the concepts defined as SDMX cross-domain concepts are useful for data visualisation, such as for example, the series title ("TITLE"), the unit of measure ("UNIT_MEASURE"), the number of decimals to be displayed ("DECIMALS"), the  country or geographic reference area ("REF_AREA", e.g. when using maps), the period of time to which the measured observation refers ("REF_PERIOD"), the time interval at which observations occur over a given time period ("FREQ"), etc. It is strongly recommended to identify any component that can be useful for data visualisation purposes by using the appropriate SDMX cross-domain concept as role.
 * isMandatory - *Boolean* *optional*. **Only for `measures` and `attributes`.** If `true` then that `measure` or `attribute` is mandatory in the exchange of complete datasets. The default is `false`.
 * relationship - *Object*.  **This field is mandatory for `attributes` but not to be supplied for `measures` or `dimensions`.** *[Attribute relationship](#attribute-relationship)* describes how the value of this attribute varies with the values of other components. This relationship expresses the attachment level of the attribute as defined in the data structure definition. Depending on the message context (especially the data query) an attribute value can however be attached physically in the message at a different level.
-* format - *Object* *optional*. *[Format](#format)* describes the allowed components representation (permitted type and cardinality of the values). It contains essential information to determine the location of the component values and the related necessity of using indexes for referencing.
+* format - *Object* *optional*. *[Format](#format)* describes the allowed components representation (permitted type and cardinality of the values). It contains essential information to determine the location of the component values and the related necessity of using indexes for referencing. It is only used when the component values are not defined by an enumerated list of identifiable items (codelist).
 * default - *String* or *Number* *optional*. Defines a default `value` for the component (**valid for `attributes` only!**). If no value is provided in the data part of the message then this value applies.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the component.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the component. Indices refer back to the array of *annotations* in the structure field.
@@ -465,29 +465,38 @@ Examples:
 
 ##### format
 
-*Object*. The format object defines the representation for a component. It can be text (including XHTML and multi-lingual values), a simple value, or an enumerated value.
+*Object*. The format object defines the representation for a component. It describes the possible content for component values, which could be text (including XHTML and multi-lingual values), a simple value or multiple values.
 
-* minOccurs - *Positive number* *optional* The default is 1. **Only for `measures` and `attributes`.** Indicates the minimum number of value that must be reported for the component. If > 1 then the component values will use the `values` property of the component value instead of `id` and `name` or `value`.
-* maxOccurs - *Positive number* *optional* The default is 1. **Only for `measures` and `attributes`.** Indicates the maximum number of values that can be reported for the component. If > 1 then the component values will use the `values` property of the component value instead of `id` and `name` or `value`.
-* textFormat - *String* *optional*. Describes an uncoded textual format. If it is an empty string, then any valid string characters may be used in component values (within the constraints of the other format constraints). If used, the component values will use instead of `id` and `name`:
+* minOccurs - *Non-negative integer* *optional* **Only for `measures` and `attributes`.** Indicates the minimum number of value that must be reported for the component. If missing than there is no lower limit on its occurrences. If > 1 then the component values will use the `values` property of the component value instead of `id` and `name` or `value`. The default is 1. 
+* maxOccurs - *Positive integer*/*String* *optional* **Only for `measures` and `attributes`.** Indicates the maximum number of values that can be reported for the component. If set to the string "unbounded" than there is no upper limit on its occurrences. If > 1 then the component values will use the `values` property of the component value instead of `id` and `name` or `value`. The default is 1. 
+* dataType - *String* *optional*. Describes the type of data format allowed for the representation of the component. Only the following dataTypes are supported: "String",
+ "Alpha", "AlphaNumeric", "Numeric", "BigInteger", "Integer", "Long", "Short", "Decimal", "Float", "Double", "Boolean", "URI", "Count", "InclusiveValueRange", "ExclusiveValueRange", "Incremental", "ObservationalTimePeriod", "StandardTimePeriod", "BasicTimePeriod", "GregorianTimePeriod", "GregorianYear", "GregorianYearMonth", "GregorianDay", "ReportingTimePeriod", "ReportingYear", "ReportingSemester", "ReportingTrimester", "ReportingQuarter", "ReportingMonth", "ReportingWeek", "ReportingDay", "DateTime", "TimeRange", "Month", "MonthDay", "Day", "Time", "Duration", "GeospatialInformation" and "XHTML". `Dimensions` do not support the type "XHTML". Time `dimensions` (having the id and role "TIME_PERIOD") only support the types "ObservationalTimePeriod", "StandardTimePeriod", "BasicTimePeriod", "GregorianTimePeriod", "GregorianYear", "GregorianYearMonth", "GregorianDay", "ReportingTimePeriod", "ReportingYear", "ReportingSemester", "ReportingTrimester", "ReportingQuarter", "ReportingMonth", "ReportingWeek", "ReportingDay", "DateTime", "TimeRange". The default data type is "String" except for time `dimensions`, which takes "ObservationalTimePeriod" as default. If used then the component values will use instead of `id` and `name`:
   - if `minOccurs` and `maxOccurs` are equal to 1: the `value` property,
   - otherwise: the `values` property.
-* minLength - *Positive number* *optional*. Specifies the minimum length of the value in characters.
-* maxLength - *Positive number* *optional*. Specifies the maximum length of the value in characters.
-* minValue - *Decimal* *optional*. Is used for inclusive and exclusive ranges, indicating what the lower bound of the range is. If this is used with an inclusive range, a valid value will be greater than or equal to the value specified here. By default, the minValue is assumed to be inclusive. 
-* maxValue - *Decimal* *optional*. Is used for inclusive and exclusive ranges, indicating what the upper bound of the range is. If this is used with an inclusive range, a valid value will be less than or equal to the value specified here. By default, the maxValue is assumed to be inclusive. 
+* isSequence - *Boolean* *optional*. Indicates whether the values are intended to be ordered, and it may work in combination with the interval, startValue, and endValue attributes or the timeInterval, startTime, and endTime, attributes. If this attribute holds a value of 'true', a start value or time and a numeric or time interval must supplied. If an end value is not given, then the sequence continues indefinitely.
+* interval - *Integer* *optional*. Specifies the permitted interval (increment) in a sequence. In order for this to be used, the isSequence attribute must have a value of 'true'.
+* startValue - *Number* *optional*. Is used in conjunction with the isSequence and interval attributes (which must be set in order to use this attribute). This attribute is used for a numeric sequence, and indicates the starting point of the sequence. This value is mandatory for a numeric sequence to be expressed.
+* endValue - *Number* *optional*. Is used in conjunction with the isSequence and interval attributes (which must be set in order to use this attribute). This attribute is used for a numeric sequence, and indicates that ending point (if any) of the sequence.
+* timeInterval - *String* *optional*. Indicates the permitted duration in a time sequence. It complies with the time duration specification of the ISO 8601 standard. In order for this to be used, the isSequence attribute must have a value of 'true'.
+* startTime - *String* *optional*. Is used in conjunction with the isSequence and timeInterval attributes (which must be set in order to use this attribute). This attribute is used for a time sequence, and indicates the start time of the sequence. This value is mandatory for a time sequence to be expressed. It must be a valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
+* endTime - *String* *optional*. Is used in conjunction with the isSequence and timeInterval attributes (which must be set in order to use this attribute). This attribute is used for a time sequence, and indicates that ending point (if any) of the sequence. It must be a valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
+* minLength - *Positive integer* *optional*. Specifies the minimum length of the value in characters.
+* maxLength - *Positive integer* *optional*. Specifies the maximum length of the value in characters.
+* minValue - *Number* *optional*. Is used for inclusive and exclusive ranges, indicating what the lower bound of the range is. If this is used with an inclusive range, a valid value will be greater than or equal to the value specified here. By default, the minValue is assumed to be inclusive. 
+* maxValue - *Number* *optional*. Is used for inclusive and exclusive ranges, indicating what the upper bound of the range is. If this is used with an inclusive range, a valid value will be less than or equal to the value specified here. By default, the maxValue is assumed to be inclusive. 
+* decimals - *Positive integer* *optional*. Indicates the number of characters allowed after the decimal separator.
 * pattern - *String* *optional*. Holds any standard regular expression.
-* isMultiLingual - *Boolean* *optional*. **Only for `measures` and `attributes`.** This indicates for a textFormat of type "string", whether the uncoded component value should allow for multiple values in different languages. The default is `false`. If `true`, the component values will use instead of `id` and `name`:
+* isMultiLingual - *Boolean* *optional*. **Only for `measures` and `attributes`.** This indicates for a text format of type "String" or "XHTML", whether the uncoded component value should allow for multiple values in different languages. The default is `false`. If `true`, the component values will use instead of `id` and `name`:
   -  if `minOccurs` and `maxOccurs` are equal to 1: the `value` property,
   -  otherwise: the `values` property.
-* sentinels - *Array* of *Object*s *optional*. Each object represents a sentinel value which is a coded value (within the value domain of the textFormat) used to explain why data may not be present. 
+* sentinelValues - *Array* of *Object*s *optional*. When present, the sentinelValues array indicates that sentinel values are defined for the data format. Each *[sentinelValue](#sentinelvalue)* object indicates a reserved value in an otherwise open value domain that holds a specific meaning. For example, a value of -1 can be defined to indicate a non-applicable value. 
 
 Example:
 
 	{ 
 		"minOccurs": 2,
 		"maxOccurs": 3,
-		"textFormat": "String",
+		"dataType": "String",
 		"minLength": 4, 
 		"maxLength": 4, 
 		"pattern": "^[A-Za-z][A-Za-z0-9_-]*$",
@@ -497,24 +506,24 @@ Example:
 	{ 
 		"minOccurs": 2,
 		"maxOccurs": 2,
-		"textFormat": "Double",
+		"dataType": "Double",
 		"isMultilingual": false,
-		"sentinels": [
+		"sentinelValues": [
 			{
 				# sentinel value object #
 			}
 		]
 	}
 	
-###### sentinel
+###### sentinelValue
 
-*Object*. Represents a sentinel value which is a coded value (within the value domain of the textFormat) used to explain why data may not be present.
+*Object*. It defines a reserved value (within the value domain of the data format) along with its meaning.
 
-* value - *Sting*. Sentinel value (within the value domain of the textFormat) used to explain why data may not be present.
-* name - *String* *optional*. Human-readable (best-language-match) name for the sentinel.
-* names - *Object* *optional*. Human-readable localised *[names](#names)* for the sentinel.
-* description - *String* *optional*. Human-readable (best-language-match) description for the sentinel.
-* descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) for the sentinel.
+* value - *Number* or *String* *optional*. The sentinel value (within the value domain of the data format) being described.
+* name - *String* *optional*. Human-readable (best-language-match) name (or meaning) of the sentinel value.
+* names - *Object* *optional*. Human-readable localised *[names](#names)* (or meanings) of the sentinel value.
+* description - *String* *optional*. Human-readable (best-language-match) description for the sentinel value.
+* descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) for the sentinel value.
 
 Example:
 
@@ -525,7 +534,7 @@ Example:
 			   "fr": "Non-réponse" },
 		"description": "Description for non-response.",
 		"descriptions": { "en": "Description for non-response.",
-				  "fr": "Description de non-réponse." },
+				  "fr": "Description de non-réponse." }
 	}
 
 ##### component value
@@ -1057,7 +1066,7 @@ Example:
 				"names": { "en": "Attribute 2" },
 				"format": {
 					"maxOccurs": 2,
-					"textFormat": "string",
+					"dataType": "String",
 					"isMultiLingual": true
 				}
 			}
@@ -1206,7 +1215,7 @@ Example:
 				"name": "Attribute 1",
 				"names": { "en": "Attribute 1" },
 				"format": {
-					"textFormat": "String",
+					"dataType": "String",
 					"maxValue": 2
 				}
 			},
