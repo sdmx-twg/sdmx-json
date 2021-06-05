@@ -1041,7 +1041,7 @@
 			]
 		},
 		"BasicComponentDataType":{
-			"description":"BasicComponentDataType provides an enumerated list of the types of characters allowed in the textType attribute for all non-target object components.",
+			"description":"BasicComponentDataType provides an enumerated list of the types of characters allowed in the dataType attribute for all non-target object components.",
 			"type":"string",
 			"enum":[
 				"String",
@@ -1088,16 +1088,16 @@
 			]
 		},
 		"BasicTimePeriodType":{
-			"description":"BasicTimePeriodType contains the basic dates and calendar periods. It is a combination of the Gregorian time periods and the date time type..",
+			"description":"BasicTimePeriodType contains the basic dates and calendar periods. It is a combination of the Gregorian time periods and the date time type.",
 			"type":"string",
 			"anyOf":[
 				{
 					"description":"xs:gYear: GregorianTimePeriodType defines the set of standard calendar periods in SDMX.",
-					"pattern":"^-?([1-9][0-9]{3,}|0[0-9]{3})(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
+					"pattern":"^([1-9][0-9]{3,}|0[0-9]{3})(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
 				},
 				{
 					"description":"xs:gYearMonth: GregorianTimePeriodType defines the set of standard calendar periods in SDMX.",
-					"pattern":"^-?([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
+					"pattern":"^([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
 				},
 				{
 					"format":"date"
@@ -1487,16 +1487,16 @@
 			]
 		},
 		"ReferencePeriodType":{
-			"description":"Specifies the inclusive start and end times.",
+			"description":"Specifies the inclusive start and end times for the reference period.",
 			"type":"object",
 			"properties":{
 				"endTime":{
 					"type":"string",
-					"pattern":"^-?([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
+					"format":"date-time"
 				},
 				"startTime":{
 					"type":"string",
-					"pattern":"^-?([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
+					"format":"date-time"
 				}
 			},
 			"required":[
@@ -1504,66 +1504,10 @@
 				"startTime"
 			]
 		},
-		"ReportingDayType":{
-			"description":"ReportingDayType defines a time period of 1 day (P1D) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. The format of a reporting day is YYYY-Dddd (e.g. 2000-D001), where ddd is a three digit day (i.e. 001-366).",
-			"type":"string",
-			"pattern":"^.{5}D(0[0-9][1-9]|[1-2][0-9][0-9]|3[0-5][0-9]|36[0-6]).*$"
-		},
-		"ReportingMonthType":{
-			"description":"ReportingMonthType defines a time period of 1 month (P1M) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. In this case a reporting month will coincide with a calendar month. The format of a reporting month is YYYY-Mmm (e.g. 2000-M01), where mm is a two digit month (i.e. 01-12).",
-			"type":"string",
-			"pattern":"^.{5}M(0[1-9]|1[0-2]).*$"
-		},
-		"ReportingQuarterType":{
-			"description":"ReportingQuarterType defines a time period of 3 months (P3M) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. The format of a reporting quarter is YYYY-Qq (e.g. 2000-Q1), where q is a value between 1 and 4.",
-			"type":"string",
-			"pattern":"^.{5}Q[1-4].*$"
-		},
-		"ReportingSemesterType":{
-			"description":"ReportingSemesterType defines a time period of 6 months (P6M) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. The format of a reporting semester is YYYY-Ss (e.g. 2000-S1), where s is either 1 or 2.",
-			"type":"string",
-			"pattern":"^.{5}S[1-2].*$"
-		},
 		"ReportingTimePeriodType":{
-			"description":"ReportingTimePeriodType defines standard reporting periods in SDMX, which are all in relation to the start day (day-month) of a reporting year which is specified in the specialized reporting year start day attribute. If the reporting year start day is not defined, a day of January 1 is assumed. The reporting year must be epxressed as the year at the beginning of the period. Therfore, if the reproting year runs from April to March, any given reporting year is expressed as the year for April. The general format of a report period can be described as  [year]-[period][time zone]?, where the type of period is designated with a single character followed by a number representing the period. Note that all periods allow for an optional time zone offset. See the details of each member type for the specifics of its format.",
-			"anyOf":[
-				{
-					"$ref":"#/definitions/ReportingYearType"
-				},
-				{
-					"$ref":"#/definitions/ReportingSemesterType"
-				},
-				{
-					"$ref":"#/definitions/ReportingTrimesterType"
-				},
-				{
-					"$ref":"#/definitions/ReportingQuarterType"
-				},
-				{
-					"$ref":"#/definitions/ReportingMonthType"
-				},
-				{
-					"$ref":"#/definitions/ReportingWeekType"
-				},
-				{
-					"$ref":"#/definitions/ReportingDayType"
-				}
-			]
-		},
-		"ReportingTrimesterType":{
-			"description":"ReportingTrimesterType defines a time period of 4 months (P4M) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. The format of a reporting trimester is YYYY-Tt (e.g. 2000-T1), where s is either 1, 2, or 3.",
+			"description":"ReportingTimePeriodType defines standard reporting periods in SDMX, which are all in relation to the start day (day-month) of a reporting year which is specified in the specialized reporting year start day attribute. If the reporting year start day is not defined, a day of January 1 is assumed. The reporting year must be epxressed as the year at the beginning of the period. Therfore, if the reproting year runs from April to March, any given reporting year is expressed as the year for April. The general format of a report period can be described as  [year]-[period][time zone]?, where the type of period is designated with a single character followed by a number representing the period. Note that all periods allow for an optional time zone offset. See the details of each member type for the specifics of its format. It can be one one the following sub-types: (1) ReportingYearType defines a time period of 1 year (P1Y) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. In this case a reporting year will coincide with a calendar year. The format of a reporting year is YYYY-A1 (e.g. 2000-A1). Note that the period value of 1 is fixed. (2) ReportingSemesterType defines a time period of 6 months (P6M) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. The format of a reporting semester is YYYY-Ss (e.g. 2000-S1), where s is either 1 or 2. (3) ReportingTrimesterType defines a time period of 4 months (P4M) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. The format of a reporting trimester is YYYY-Tt (e.g. 2000-T1), where s is either 1, 2, or 3. (4) ReportingQuarterType defines a time period of 3 months (P3M) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. The format of a reporting quarter is YYYY-Qq (e.g. 2000-Q1), where q is a value between 1 and 4. (5) ReportingMonthType defines a time period of 1 month (P1M) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. In this case a reporting month will coincide with a calendar month. The format of a reporting month is YYYY-Mmm (e.g. 2000-M01), where mm is a two digit month (i.e. 01-12). (6) ReportingWeekType defines a time period of 7 days (P7D) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. A standard reporting week is based on the ISO 8601 defintion of a week date, in relation to the reporting period start day. The first week is defined as the week with the first Thursday on or after the reporting year start day. An equivalent definition is the week starting with the Monday nearest in time to the reporting year start day. There are other equivalent defintions, all of which should be adjusted based on the reporting year start day. In the absence of a start day for the reporting year, a day of January 1 is assumed. The format of a reporting week is YYYY-Www (e.g. 2000-W01), where mm is a two digit week (i.e. 01-53). (7) ReportingDayType defines a time period of 1 day (P1D) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. The format of a reporting day is YYYY-Dddd (e.g. 2000-D001), where ddd is a three digit day (i.e. 001-366).",
 			"type":"string",
-			"pattern":"^.{5}T[1-3].*$"
-		},
-		"ReportingWeekType":{
-			"description":"ReportingWeekType defines a time period of 7 days (P7D) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. A standard reporting week is based on the ISO 8601 defintion of a week date, in relation to the reporting period start day. The first week is defined as the week with the first Thursday on or after the reporting year start day. An equivalent definition is the week starting with the Monday nearest in time to the reporting year start day. There are other equivalent defintions, all of which should be adjusted based on the reporting year start day. In the absence of a start day for the reporting year, a day of January 1 is assumed. The format of a reporting week is YYYY-Www (e.g. 2000-W01), where mm is a two digit week (i.e. 01-53).",
-			"type":"string",
-			"pattern":"^.{5}W(0[1-9]|[1-4][0-9]|5[0-3]).*$"
-		},
-		"ReportingYearType":{
-			"description":"ReportingYearType defines a time period of 1 year (P1Y) in relation to a reporting year which has a start day (day-month) specified in the specialized reporting year start day attribute. In the absence of a start day for the reporting year, a day of January 1 is assumed. In this case a reporting year will coincide with a calendar year. The format of a reporting year is YYYY-A1 (e.g. 2000-A1). Note that the period value of 1 is fixed.",
-			"type":"string",
-			"pattern":"^.{5}A1.*$"
+			"pattern":"^\\d{4}\\-([ASTQ]\\d{1}|[MW]\\d{2}|[D]\\d{3})(Z|((\\+|\\-)\\d{2}:\\d{2}))?$"
 		},
 		"SetReferenceType":{
 			"description":"SetReferenceType defines the structure of a reference to a data/metadata set. A full reference to a data provider and the identifier for the data set must be provided. Note that this is not derived from the base reference structure since data/metadata sets are not technically identifiable.",
@@ -1644,12 +1588,12 @@
 				{
 					"description":"xs:gYear: GregorianTimePeriodType defines the set of standard calendar periods in SDMX.",
 					"type":"string",
-					"pattern":"^-?([1-9][0-9]{3,}|0[0-9]{3})(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
+					"pattern":"^([1-9][0-9]{3,}|0[0-9]{3})(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
 				},
 				{
 					"description":"xs:gYearMonth: GregorianTimePeriodType defines the set of standard calendar periods in SDMX.",
 					"type":"string",
-					"pattern":"^-?([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
+					"pattern":"^([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$"
 				},
 				{
 					"type":"string",
@@ -2184,7 +2128,7 @@
 			"description":"BasicComponentTextFormatType is a restricted version of the TextFormatType that restricts the text type to the representations allowed for all components except for target objects.",
 			"type":"object",
 			"properties":{
-				"textType":{
+				"dataType":{
 					"$ref":"#/definitions/BasicComponentDataType"
 				},
 				"isSequence":{
@@ -2403,7 +2347,7 @@
 			"description":"CodedTextFormatType is a restricted version of the SimpleComponentTextFormatType that only allows factets and text types applicable to codes. Although the time facets permit any value, an actual code identifier does not support the necessary characters for time. Therefore these facets should not contain time in their values.",
 			"type":"object",
 			"properties":{
-				"textType":{
+				"dataType":{
 					"$ref":"#/definitions/CodeDataType"
 				},
 				"isSequence":{
@@ -2739,7 +2683,7 @@
 		"CodingTextFormatType":{
 			"type":"object",
 			"properties":{
-				"textType":{
+				"dataType":{
 					"$ref":"#/definitions/SimpleCodeDataType"
 				},
 				"isSequence":{
@@ -2814,29 +2758,54 @@
 		"ConceptRepresentationType":{
 			"description":"ConceptRepresentationType defines the core representation that are allowed for a concept. The text format allowed for a concept is that which is allowed for any non-target object component.",
 			"type":"object",
-			"properties":{
-				"minOccurs":{
-					"type":"integer",
-					"minimum":0,
-					"default":1,
-					"description":"The minOccurs attribute indicates the minimum number of value that must be reported for the component."
+			"oneOf":[
+				{
+					"properties":{
+						"enumeration":{
+							"$ref":"#/definitions/CodelistReferenceType",
+							"description":"Urn reference to a codelist which enumerates the possible values that can be used as the representation of this concept."
+						},
+						"enumerationFormat":{
+							"$ref":"#/definitions/CodedTextFormatType"
+						},
+						"minOccurs":{
+							"type":"integer",
+							"minimum":0,
+							"default":1,
+							"description":"The minOccurs attribute indicates the minimum number of value that must be reported for the component."
+						},
+						"maxOccurs":{
+							"$ref":"#/definitions/OccurenceType",
+							"default":1,
+							"description":"The maxOccurs attribute indicates the maximum number of values that can be reported for the component."
+						}
+					},
+					"required":[
+						"enumeration"
+					]
 				},
-				"maxOccurs":{
-					"$ref":"#/definitions/OccurenceType",
-					"default":1,
-					"description":"The maxOccurs attribute indicates the maximum number of values that can be reported for the component."
-				},
-				"enumeration":{
-					"$ref":"#/definitions/CodelistReferenceType",
-					"description":"Urn reference to a codelist which enumerates the possible values that can be used as the representation of this concept."
-				},
-				"enumerationFormat":{
-					"$ref":"#/definitions/CodedTextFormatType"
-				},
-				"textFormat":{
-					"$ref":"#/definitions/BasicComponentTextFormatType"
+				{
+					"properties":{
+						"format":{
+							"$ref":"#/definitions/BasicComponentTextFormatType"
+						},
+						"minOccurs":{
+							"type":"integer",
+							"minimum":0,
+							"default":1,
+							"description":"The minOccurs attribute indicates the minimum number of value that must be reported for the component."
+						},
+						"maxOccurs":{
+							"$ref":"#/definitions/OccurenceType",
+							"default":1,
+							"description":"The maxOccurs attribute indicates the maximum number of values that can be reported for the component."
+						}
+					},
+					"required":[
+						"format"
+					]
 				}
-			}
+			]
 		},
 		"ConceptSchemeMapType":{
 			"description":"ConceptSchemeMapType defines the structure of a map which identifies relationships between concepts in different concept schemes.",
@@ -4171,7 +4140,7 @@
 				},
 				{
 					"properties":{
-						"textFormat":{
+						"format":{
 							"$ref":"#/definitions/BasicComponentTextFormatType"
 						},
 						"maxOccurs":{
@@ -4185,7 +4154,7 @@
 						}
 					},
 					"required":[
-						"textFormat"
+						"format"
 					]
 				}
 			]
@@ -4237,12 +4206,12 @@
 				},
 				{
 					"properties":{
-						"textFormat":{
+						"format":{
 							"$ref":"#/definitions/BasicComponentTextFormatType"
 						}
 					},
 					"required":[
-						"textFormat"
+						"format"
 					]
 				}
 			]
@@ -4723,7 +4692,7 @@
 			"description":"ReportingYearStartDayRepresentationType defines the representation for the reporting year start day attribute. Enumerated values are not allowed and the text format is fixed to be a day and month in the ISO 8601 format of '--MM-DD'.",
 			"type":"object",
 			"properties":{
-				"textFormat":{
+				"format":{
 					"$ref":"#/definitions/ReportingYearStartDayTextFormatType"
 				},
 				"maxOccurs":{
@@ -4736,7 +4705,7 @@
 				}
 			},
 			"required":[
-				"textFormat",
+				"format",
 				"maxOccurs"
 			]
 		},
@@ -4744,12 +4713,12 @@
 			"description":"ReportingYearStartDayTextFormatType is a restricted version of the NonFacetedTextFormatType that fixes the value of the text type to be MonthDay. This type exists solely for the purpose of fixing the representation of the reporting year start day attribute.",
 			"type":"object",
 			"properties":{
-				"textType":{
+				"dataType":{
 					"const":"MonthDay"
 				}
 			},
 			"required":[
-				"textType"
+				"dataType"
 			],
 			"additionalProperties":false
 		},
@@ -4881,14 +4850,14 @@
 			"description":"SimpleComponentTextFormatType is a restricted version of the BasicComponentTextFormatType that does not allow for multi-lingual values.",
 			"type":"object",
 			"properties":{
-				"textType":{
+				"dataType":{
 					"$ref":"#/definitions/SimpleDataType"
 				},
 				"isSequence":{
 					"type":"boolean"
 				},
 				"interval":{
-					"type":"number"
+					"type":"integer"
 				},
 				"startValue":{
 					"type":"number"
@@ -4965,7 +4934,7 @@
 				},
 				{
 					"properties":{
-						"textFormat":{
+						"format":{
 							"$ref":"#/definitions/BasicComponentTextFormatType"
 						},
 						"maxOccurs":{
@@ -4979,7 +4948,7 @@
 						}
 					},
 					"required":[
-						"textFormat"
+						"format"
 					]
 				}
 			]
@@ -5004,12 +4973,12 @@
 				},
 				{
 					"properties":{
-						"textFormat":{
+						"format":{
 							"$ref":"#/definitions/SimpleComponentTextFormatType"
 						}
 					},
 					"required":[
-						"textFormat"
+						"format"
 					]
 				}
 			]
@@ -5351,16 +5320,16 @@
 			"description":"TimeDimensionRepresentationType defines the representation for the time dimension. Enumerated values are not allowed.",
 			"type":"object",
 			"properties":{
-				"textFormat":{
+				"format":{
 					"$ref":"#/definitions/TimeTextFormatType"
 				}
 			},
 			"required":[
-				"textFormat"
+				"format"
 			]
 		},
 		"TimeDimensionType":{
-			"description":"TimeDimensionType describes the structure of a time dimension. The time dimension takes its semantic from its concept identity (usually the TIME_PERIOD concept), yet is always has a fixed identifier (TIME_PERIOD). The time dimension always has a fixed text format, which specifies that its format is always the in the value set of the observational time period (see common:ObservationalTimePeriodType). It is possible that the format may be a sub-set of the observational time period value set. For example, it is possible to state that the representation might always be a calendar year. See the enumerations of the textType attribute in the LocalRepresentation/TextFormat for more details of the possible sub-sets. It is also possible to facet this representation with start and end dates. The purpose of such facts is to restrict the value of the time dimension to occur within the specified range. If the time dimension is expected to allow for the standard reporting periods (see common:ReportingTimePeriodType) to be used, then it is strongly recommended that the reporting year start day attribute also be included in the data structure definition. When the reporting year start day attribute is used, any standard reporting period values will be assumed to be based on the start day contained in this attribute. If the reporting year start day attribute is not included and standard reporting periods are used, these values will be assumed to be based on a reporting year which begins January 1.",
+			"description":"TimeDimensionType describes the structure of a time dimension. The time dimension takes its semantic from its concept identity (usually the TIME_PERIOD concept), yet is always has a fixed identifier (TIME_PERIOD). The time dimension always has a fixed text format, which specifies that its format is always the in the value set of the observational time period (see common:ObservationalTimePeriodType). It is possible that the format may be a sub-set of the observational time period value set. For example, it is possible to state that the representation might always be a calendar year. See the enumerations of the dataType attribute in the LocalRepresentation/format for more details of the possible sub-sets. It is also possible to facet this representation with start and end dates. The purpose of such facts is to restrict the value of the time dimension to occur within the specified range. If the time dimension is expected to allow for the standard reporting periods (see common:ReportingTimePeriodType) to be used, then it is strongly recommended that the reporting year start day attribute also be included in the data structure definition. When the reporting year start day attribute is used, any standard reporting period values will be assumed to be based on the start day contained in this attribute. If the reporting year start day attribute is not included and standard reporting periods are used, these values will be assumed to be based on a reporting year which begins January 1.",
 			"type":"object",
 			"required":[
 				"conceptIdentity",
@@ -5409,7 +5378,7 @@
 				"startTime":{
 					"$ref":"#/definitions/StandardTimePeriodType"
 				},
-				"textType":{
+				"dataType":{
 					"$ref":"#/definitions/TimeDataType"
 				},
 				"sentinelValues":{
@@ -5425,8 +5394,9 @@
 		"sentinelValueType":{
 			"description":"sentinelValueType defines the structure of a sentinel value. A sentinel value is reserved value in an otherwise open value domain with a specific meaning.",
 			"type":"object",
-			"required":[
-				"value"
+			"anyOf": [
+				{"required": ["value", "name"]},
+				{"required": ["value", "name", "names"]}
 			],
 			"properties":{
 				"value":{
@@ -5450,7 +5420,9 @@
 				"names":{
 					"description":"Human-readable localised names (or meanings) of the sentinel value.",
 					"$ref":"#/definitions/localisedText"
-				}
+				},
+				"description": {"$ref": "#/definitions/localisedBestMatchText"},
+				"descriptions": {"$ref": "#/definitions/localisedText"}
 			}
 		},
 		"TransitionType":{
