@@ -898,23 +898,57 @@
 		"valueArray": {
 			"oneOf": [{
 				"type": "array",
-				"items": {"type": "integer"},
+				"items": {
+					"anyOf": [
+						{"type": "integer"},
+						{"type": "null"}
+					]
+				},
 				"minItems": 1
 			},{
 				"type": "array",
-				"items": {"type": "number"},
+				"items": {
+					"anyOf": [
+						{"type": "number"},
+						{"type": "null"}
+					]
+				},
 				"minItems": 1
 			},{
 				"type": "array",
-				"items": {"type": "boolean"},
+				"items": {
+					"anyOf": [
+						{"type": "boolean"},
+						{"type": "null"}
+					]
+				},
 				"minItems": 1
 			},{
 				"type": "array",
-				"items": {"type": "string"},
+				"items": {
+					"anyOf": [
+						{"type": "string"},
+						{"type": "null"}
+					]
+				},
 				"minItems": 1
 			},{
 				"type": "array",
-				"items": {"$ref": "#/definitions/localisedText"},
+				"items": {
+					"anyOf": [
+						{"$ref": "#/definitions/localisedText"},
+						{"type": "null"}
+					]
+				},
+				"minItems": 1
+			},{
+				"type": "array",
+				"items": {
+					"anyOf": [
+						{"$ref": "#/definitions/valueArray"},
+						{"type": "null"}
+					]
+				},
 				"minItems": 1
 			}]
 		},
