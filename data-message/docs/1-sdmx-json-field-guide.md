@@ -544,8 +544,8 @@ Example:
 * id - *String*. Unique identifier for a coded component value.
 * name - *String* *optional*. Human-readable (best-language-match) name for a coded component value.
 * names - *Object* *optional*. Human-readable localised *[names](#names)* for a coded component value.
-* value - *String* *optional* only for non-coded unique (non-localised or localised) component values, e.g. for non-coded dimensions.
-* values - *Object* *optional* only for non-coded multivalued (non-localised or localised) component values.
+* value - *String*, *Number*, *Integer*, *Boolean* or localised *[Strings](#names)* *optional*. Only for non-coded unique (non-localised or localised) component values, e.g. for non-coded dimensions.
+* values - *Array* *optional* of *String*, *Number*, *Integer*, *Boolean*, localised *[Strings](#names)* and recursive *Array* of such arrays. Only for non-coded multivalued (non-localised or localised) component values. Only nested multi-valued metadata attribute values (according to the nesting defined in the Metadata Structure Definition) can use arrays of arrays.
 * description - *String* *optional*. Human-readable (best-language-match) description for the component value. The description is typically longer than the text provided for the name field.
 * descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) for the component value. A descriptions is typically longer than the text provided for the name field.
 * start, end - *String* *optional*. Start and end are instances of time that define the actual Gregorian calendar period covered by the values for the time dimension. The algorithm for computing start and end fields for any supported reporting period is defined in the SDMX Technical Notes. These fields should be used only when the component value represents one of the values for the time dimension. Values are considered as inclusive both for the start field and the end field. Values must follow the ISO 8601 syntax for combined dates and times, including time zone. These fields are useful for visualisation tools, when selecting the appropriate point in time for the time axis. Statistical data, can be collected, for example, at the beginning, the middle or the end of the period, or can represent the average of observations through the period. Based on this information and using the start and end fields, it is easy to get or calculate the desired point in time to be used for the time axis.
@@ -602,6 +602,13 @@ Example:
 		"values": [
 			{ "en": "Value 1", "fr": "Valeur 1" },
 			{ "en": "Value 2", "fr": "Valeur 2" }
+		]
+	}
+
+	{
+		"values": [
+			["CONTACT 1 Name 1","CONTACT 1 Name 2"],
+			["CONTACT 2 Name 1","CONTACT 2 Name 2"]
 		]
 	}
 
