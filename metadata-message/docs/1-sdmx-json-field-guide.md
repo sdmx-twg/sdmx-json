@@ -281,12 +281,8 @@ Example:
 
 * id - *String*. ID for the reported metadata attribute.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the reported metadata attribute.
-* value - *String* *optional*. Value for the reported metadata attribute.
-* values - Non-empty array of *String* *optional*. Values for the reported metadata attribute.
-* structuredText - *String* *optional*. A human-readable (best-language-match) structured text allowing for mixed content of text and XHTML tags. When using this type, one will have to provide a reference to the XHTML schema, since the processing of the tags within this type is strict, meaning that they are validated against the XHTML schema provided.
-* structuredTexts - *Object* *optional*. A list of human-readable localised structured text (see *[names](#names)*), see above.
-* text - *String* *optional*. A human-readable (best-language-match) unstructured text (without XHTML tags).
-* texts - *Object* *optional*. A list of human-readable localised unstructured text (see *[names](#names)*), see above.
+* format - *Object* *optional*. *[Format](#format)* describes the allowed metadata attribute representation. It is only used when the component values are not defined by an enumerated list of identifiable items (codelist).
+* value - *String*, *Number*, *Integer*, *Boolean* or localised *String* (see *[names](#names)*) optional. Value for the reported metadata attribute. Also HTML strings are supported.
 * attributes - Non-empty *array* of recursive *[attribute](#attribute)* objects. Contains the reported metadata attribute values for the reported metadata and recursively their child metadata attributes.
 
 One of the properties is required: value, values, text or structuredText.
@@ -297,26 +293,90 @@ Example:
 
 	{
 		"id": "REPORT_ATTRIBUTE1",
+		"format": {
+			# format object #
+		},
 		"value": "CODED_TEXT",
-		"values": ["TEXT1","TEXT2"],
 		"annotations": [
 			{
 				# annotation object #
 			}
 		],
-		"structuredText": "<p>An XHTML text</p>",
-		"structuredTexts": {
-			"en": "<p>An XHTML text</p>"
-		},
-		"text": "A text",
-		"texts": {
-			"en": "A text"
-		},
 		"attributes": [
 			{
 				# attribute object #
 			}
 		]
+	}
+
+		"value": "<p>An XHTML text</p>"
+		
+		"value": {
+			"en": "<p>An XHTML text</p>"
+		}
+
+##### format
+
+*Object*. The format object defines the representation for a component. It describes the possible content for component values, which could be text (including XHTML and multi-lingual values).
+
+* dataType - *String* *optional*. Describes the type of data format allowed for the representation of the component. Only the following dataTypes are supported: "String",
+ "Alpha", "AlphaNumeric", "Numeric", "BigInteger", "Integer", "Long", "Short", "Decimal", "Float", "Double", "Boolean", "URI", "Count", "InclusiveValueRange", "ExclusiveValueRange", "Incremental", "ObservationalTimePeriod", "StandardTimePeriod", "BasicTimePeriod", "GregorianTimePeriod", "GregorianYear", "GregorianYearMonth", "GregorianDay", "ReportingTimePeriod", "ReportingYear", "ReportingSemester", "ReportingTrimester", "ReportingQuarter", "ReportingMonth", "ReportingWeek", "ReportingDay", "DateTime", "TimeRange", "Month", "MonthDay", "Day", "Time", "Duration", "GeospatialInformation" and "XHTML". The default data type is "String". 
+* isSequence - *Boolean* *optional*. Indicates whether the values are intended to be ordered, and it may work in combination with the interval, startValue, and endValue attributes or the timeInterval, startTime, and endTime, attributes. If this attribute holds a value of 'true', a start value or time and a numeric or time interval must supplied. If an end value is not given, then the sequence continues indefinitely.
+* interval - *Integer* *optional*. Specifies the permitted interval (increment) in a sequence. In order for this to be used, the isSequence attribute must have a value of 'true'.
+* startValue - *Number* *optional*. Is used in conjunction with the isSequence and interval attributes (which must be set in order to use this attribute). This attribute is used for a numeric sequence, and indicates the starting point of the sequence. This value is mandatory for a numeric sequence to be expressed.
+* endValue - *Number* *optional*. Is used in conjunction with the isSequence and interval attributes (which must be set in order to use this attribute). This attribute is used for a numeric sequence, and indicates that ending point (if any) of the sequence.
+* timeInterval - *String* *optional*. Indicates the permitted duration in a time sequence. It complies with the time duration specification of the ISO 8601 standard. In order for this to be used, the isSequence attribute must have a value of 'true'.
+* startTime - *String* *optional*. Is used in conjunction with the isSequence and timeInterval attributes (which must be set in order to use this attribute). This attribute is used for a time sequence, and indicates the start time of the sequence. This value is mandatory for a time sequence to be expressed. It must be a valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
+* endTime - *String* *optional*. Is used in conjunction with the isSequence and timeInterval attributes (which must be set in order to use this attribute). This attribute is used for a time sequence, and indicates that ending point (if any) of the sequence. It must be a valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
+* minLength - *Positive integer* *optional*. Specifies the minimum length of the value in characters.
+* maxLength - *Positive integer* *optional*. Specifies the maximum length of the value in characters.
+* minValue - *Number* *optional*. Is used for inclusive and exclusive ranges, indicating what the lower bound of the range is. If this is used with an inclusive range, a valid value will be greater than or equal to the value specified here. By default, the minValue is assumed to be inclusive. 
+* maxValue - *Number* *optional*. Is used for inclusive and exclusive ranges, indicating what the upper bound of the range is. If this is used with an inclusive range, a valid value will be less than or equal to the value specified here. By default, the maxValue is assumed to be inclusive. 
+* decimals - *Positive integer* *optional*. Indicates the number of characters allowed after the decimal separator.
+* pattern - *String* *optional*. Holds any standard regular expression.
+* isMultiLingual - *Boolean* *optional*. This indicates for a text format of type "String" or "XHTML", whether the uncoded component value should allow for multiple values in different languages. The default is `false`.
+* sentinelValues - *Array* of *Object*s *optional*. When present, the sentinelValues array indicates that sentinel values are defined for the data format. Each *[sentinelValue](#sentinelvalue)* object indicates a reserved value in an otherwise open value domain that holds a specific meaning. For example, a value of -1 can be defined to indicate a non-applicable value. 
+
+Example:
+
+	{ 
+		"dataType": "String",
+		"minLength": 4, 
+		"maxLength": 4, 
+		"pattern": "^[A-Za-z][A-Za-z0-9_-]*$",
+		"isMultilingual": true
+	}
+
+	{ 
+		"dataType": "Double",
+		"isMultilingual": false,
+		"sentinelValues": [
+			{
+				# sentinel value object #
+			}
+		]
+	}
+	
+###### sentinelValue
+
+*Object*. It defines a reserved value (within the value domain of the data format) along with its meaning.
+
+* value - *Number* or *String* *optional*. The sentinel value (within the value domain of the data format) being described.
+* name - *String* *optional*. Human-readable (best-language-match) name (or meaning) of the sentinel value.
+* names - *Object* *optional*. Human-readable localised *[names](#names)* (or meanings) of the sentinel value.
+* description - *String* *optional*. Human-readable (best-language-match) description for the sentinel value.
+* descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) for the sentinel value.
+
+Example:
+
+	{
+		"value": "-1",
+		"name": "Non-response",
+		"names": { "en": "Non-response", 
+			   "fr": "Non-réponse" },
+		"description": "Description for non-response.",
+		"descriptions": { "en": "Description for non-response.",
+				  "fr": "Description de non-réponse." }
 	}
 
 #### annotation
