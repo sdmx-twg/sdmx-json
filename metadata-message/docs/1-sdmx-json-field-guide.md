@@ -244,7 +244,7 @@ Example:
 		"version": "1.0",
 		"isExternalReference": false,
 		"metadataflow": "urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=ECB.DISS:MDF(1.0)",
-		# "metadataProvisionAgreement": "urn:sdmx:org.sdmx.infomodel.metadataprovision=ECB.DISS:MDPA(1.0.0)",
+		# "metadataProvisionAgreement": "urn:sdmx:org.sdmx.infomodel.registry.MetadataProvisionAgreement=ECB.DISS:MDPA(1.0.0)",
 		"validFrom": "2018-04-01",
 		"validTo": "2018-07-01",
 		"annotations": [
