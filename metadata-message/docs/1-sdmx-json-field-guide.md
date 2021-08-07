@@ -281,8 +281,8 @@ Example:
 
 * id - *String*. ID for the reported metadata attribute.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the reported metadata attribute.
-* format - *Object* *optional*. *[Format](#format)* describes the allowed metadata attribute representation. It is only used when the component values are not defined by an enumerated list of identifiable items (codelist).
-* value - *String*, *Number*, *Integer*, *Boolean* or localised *String* (see *[names](#names)*) optional. Value for the reported metadata attribute. Also HTML strings are supported.
+* format - *Object* *optional*. *[Format](#format)* describes the allowed metadata attribute representation. It is only used when the metadata attributes are not defined by an enumerated list of identifiable items (codelist).
+* value - *String*, *Number*, *Integer*, *Boolean* or localised *String* (see *[names](#names)*) *object*, *optional*. Value for the reported metadata attribute. Also HTML strings are supported.
 * attributes - Non-empty *array* of recursive *[attribute](#attribute)* objects. Contains the reported metadata attribute values for the reported metadata and recursively their child metadata attributes.
 
 One of the properties is required: value, values, text or structuredText.
