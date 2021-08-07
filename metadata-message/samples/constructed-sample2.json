@@ -1,6 +1,6 @@
 {
 	"meta":{
-		"schema":"https://raw.githubusercontent.com/sdmx-twg/sdmx-json/develop/metadata-message/tools/schemas/1.0/sdmx-json-metadata-schema.json",
+		"schema":"https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/metadata-message/tools/schemas/2.0.0/sdmx-json-metadata-schema.json",
 		"id":"IFS_Metadata",
 		"test":true,
 		"prepared":"2018-03-18T09:30:47-05:00",
@@ -60,7 +60,7 @@
 				"id":"METADATASET1",
 				"agencyID":"IMF",
 				"name":"METADATASET1",
-				"metadataflow":"IMF:IFS(1.0)",
+				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IFS(1.0)",
 				"links":[
 					{
 						"href":"http://sdmx.webservice.org/root/metadata",
@@ -104,7 +104,7 @@
 				"id":"DATA_KEY_REPORT",
 				"agencyID":"IMF",
 				"name":"METADATASET1",
-				"metadataProvisionAgreement":"IMF:MDPA_IFS(1.0)",
+				"metadataProvisionAgreement":"urn:sdmx:org.sdmx.infomodel.registry.MetadataProvisionAgreement=IMF:MDPA_IFS(1.0)",
 				"attributes":[
 					{
 						"id":"SOURCE",
@@ -137,7 +137,7 @@
 				"id":"DATASET_REPORT",
 				"agencyID":"IMF",
 				"name":"METADATASET1",
-				"metadataflow":"IMF:IFS(1.0)",
+				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IFS(1.0)",
 				"attributes":[
 					{
 						"id":"CLASS_SYSTEM",
@@ -145,14 +145,14 @@
 					}
 				],
 				"targets":[
-					"urn:sdmx:org.sdmx.infomodel.dataproviderscheme.DataProvider=IMF:DPS(1.0).DATAPROVIDER1"
+					"urn:sdmx:org.sdmx.infomodel.base.DataProvider=IMF:DPS(1.0).DATAPROVIDER1"
 				]
 			},
 			{
 				"id":"STRUCTURE_REPORT",
 				"agencyID":"IMF",
 				"name":"METADATASET1",
-				"metadataflow":"IMF:IFS(1.0)",
+				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IFS(1.0)",
 				"attributes":[
 					{
 						"id":"COVERAGE",
@@ -167,7 +167,7 @@
 				"id":"STRUCTURE_REPORT",
 				"agencyID":"IMF",
 				"name":"METADATASET1",
-				"metadataflow":"IMF:IFS(1.0)",
+				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IFS(1.0)",
 				"attributes":[
 					{
 						"id":"COVERAGE",
