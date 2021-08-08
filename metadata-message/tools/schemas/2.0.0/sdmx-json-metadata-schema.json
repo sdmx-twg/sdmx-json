@@ -1,7 +1,7 @@
 {
 	"id":"https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/metadata-message/tools/schemas/2.0.0/sdmx-json-metadata-schema.json",
 	"$schema":"http://json-schema.org/schema#",
-	"description":"JSON Schema for SDMX-JSON referential metadata messages, version 2.0.0",
+	"description":"SDMX-JSON 2.0.0 Schema for SDMX 3.0.0 referential metadata messages",
 	"type":"object",
 	"properties":{
 		"meta":{
@@ -354,7 +354,7 @@
 			"pattern":"^[A-Za-z0-9_@$-]+$",
 			"type":"string"
 		},
-		"Annotations":{
+		"AnnotationsType":{
 			"description":"Annotations is a reusable element the provides for a collection of annotations. It has been made global so that restrictions of types that extend AnnotatableType my reference it.",
 			"type":"array",
 			"items":{
@@ -369,17 +369,6 @@
 					"description":"Non-standard identification of an annotation.",
 					"type":"string"
 				},
-				"value":{
-					"description":"AnnotationValue holds a string containing the non-localised value of the annotation."
-				},
-				"text":{
-					"description":"AnnotationText holds a string containing a language-specific text of the annotation.",
-					"$ref":"#/definitions/localisedBestMatchText"
-				},
-				"texts":{
-					"description":"AnnotationText holds a string containing the language-specific text of the annotation.",
-					"$ref":"#/definitions/localisedText"
-				},
 				"title":{
 					"description":"AnnotationTitle provides a title for the annotation.",
 					"type":"string"
@@ -388,9 +377,17 @@
 					"description":"AnnotationType is used to distinguish between annotations designed to support various uses. The types are not enumerated, as these can be specified by the user or creator of the annotations. The definitions and use of annotation types should be documented by their creator.",
 					"type":"string"
 				},
-				"url":{
-					"description":"AnnotationURL is a URI - typically a URL - which points to an external resource which may contain or supplement the annotation. If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly.",
-					"$ref":"#/definitions/uri"
+				"value":{
+					"description":"AnnotationValue holds a string containing the non-localised value text of the annotation.",
+					"type":"string"
+				},
+				"text":{
+					"description":"AnnotationText holds a string containing a language-specific text of the annotation.",
+					"$ref":"#/definitions/localisedBestMatchText"
+				},
+				"texts":{
+					"description":"AnnotationText holds a string containing the language-specific text of the annotation.",
+					"$ref":"#/definitions/localisedText"
 				},
 				"links":{
 					"description":"Links field is an array of link objects. Also used to specify the Annotation URL which points to an external resource which may contain or supplement the annotation (using 'self' as relationship). If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly. If appropriate, a collection of links to additional external resources.",
@@ -571,7 +568,7 @@
 					"format":"date-time"
 				},
 				"annotations":{
-					"$ref":"#/definitions/Annotations"
+					"$ref":"#/definitions/AnnotationsType"
 				},
 				"name":{
 					"$ref":"#/definitions/localisedBestMatchText"
@@ -637,7 +634,7 @@
 					"$ref":"#/definitions/idType"
 				},
 				"annotations":{
-					"$ref":"#/definitions/Annotations"
+					"$ref":"#/definitions/AnnotationsType"
 				},
 				"format":{
 					"$ref":"#/definitions/format"
