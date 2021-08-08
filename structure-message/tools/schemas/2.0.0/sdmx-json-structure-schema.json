@@ -9,8 +9,8 @@
 			"type":"object",
 			"properties":{
 				"schema":{
-					"description":"Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. Providing the link to the SDMX-JSON schema is recommended.",
-					"$ref":"#/definitions/uri"
+					"$ref":"#/definitions/uri",
+					"description":"Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. Providing the link to the SDMX-JSON schema is recommended."
 				},
 				"id":{
 					"description":"Unique string assigned by the sender that identifies the message for further references.",
@@ -35,16 +35,16 @@
 					}
 				},
 				"name":{
-					"description":"Name provides a name for the transmission. Multiple instances allow for parallel language values.",
-					"$ref":"#/definitions/localisedBestMatchText"
+					"$ref":"#/definitions/localisedBestMatchText",
+					"description":"Name provides a name for the transmission. Multiple instances allow for parallel language values."
 				},
 				"names":{
-					"description":"Name provides a name for the transmission. Multiple instances allow for parallel language values.",
-					"$ref":"#/definitions/localisedText"
+					"$ref":"#/definitions/localisedText",
+					"description":"Name provides a name for the transmission. Multiple instances allow for parallel language values."
 				},
 				"sender":{
-					"description":"Sender is information about the party that is transmitting the message.",
-					"$ref":"#/definitions/party"
+					"$ref":"#/definitions/party",
+					"description":"Sender is information about the party that is transmitting the message."
 				},
 				"receivers":{
 					"description":"Receiver is information about the part(y/ies) that is/are the intended recipient(s) of the message. This can be useful if the WS requires authentication.",
@@ -737,8 +737,42 @@
 				}
 			]
 		},
-		"Annotations":{
-			"description":"Annotations is a reusable element the provides for a collection of annotations. It has been made global so that restrictions of types that extend AnnotatableType my reference it.",
+		"AnnotationType":{
+			"description":"AnnotationType provides for non-documentation notes and annotations to be embedded in data and structure messages. It provides optional fields for providing a title, a type description, a URI, and the text of the annotation.",
+			"type":"object",
+			"properties":{
+				"id":{
+					"description":"Non-standard identification of an annotation.",
+					"type":"string"
+				},
+				"title":{
+					"description":"AnnotationTitle provides a title for the annotation.",
+					"type":"string"
+				},
+				"type":{
+					"description":"AnnotationType is used to distinguish between annotations designed to support various uses. The types are not enumerated, as these can be specified by the user or creator of the annotations. The definitions and use of annotation types should be documented by their creator.",
+					"type":"string"
+				},
+				"value":{
+					"description":"AnnotationValue holds a string containing the non-localised value text of the annotation.",
+					"type":"string"
+				},
+				"text":{
+					"description":"AnnotationText holds a language-specific string containing the text of the annotation.",
+					"$ref":"#/definitions/localisedBestMatchText"
+				},
+				"texts":{
+					"description":"AnnotationText holds a language-specific string containing the text of the annotation.",
+					"$ref":"#/definitions/localisedText"
+				},
+				"links":{
+					"description":"Links field is an array of link objects. Also used to specify the Annotation URL which points to an external resource which may contain or supplement the annotation (using 'self' as relationship). If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly. If appropriate, a collection of links to additional external resources.",
+					"$ref":"#/definitions/links"
+				}
+			}
+		},
+		"AnnotationsType":{
+			"description":"AnnotationsType is a reusable element the provides for a collection of annotations. It has been made global so that restrictions of types that extend AnnotableType my reference it.",
 			"type":"array",
 			"minItems":1,
 			"items":{
@@ -750,11 +784,7 @@
 			"type":"object",
 			"properties":{
 				"annotations":{
-					"$ref":"#/definitions/Annotations"
-				},
-				"links":{
-					"$ref":"#/definitions/links",
-					"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
+					"$ref":"#/definitions/AnnotationsType"
 				}
 			}
 		},
@@ -766,6 +796,10 @@
 					"properties":{
 						"id":{
 							"$ref":"#/definitions/idType"
+						},
+						"links":{
+							"$ref":"#/definitions/links",
+							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
 						}
 					}
 				},
@@ -782,6 +816,10 @@
 					"properties":{
 						"id":{
 							"$ref":"#/definitions/NCNameIDType"
+						},
+						"links":{
+							"$ref":"#/definitions/links",
+							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
 						}
 					}
 				},
@@ -915,6 +953,10 @@
 						"validTo":{
 							"type":"string",
 							"format":"date-time"
+						},
+						"links":{
+							"$ref":"#/definitions/links",
+							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
 						}
 					}
 				}
@@ -963,36 +1005,6 @@
 				"agencyID",
 				"name"
 			]
-		},
-		"AnnotationType":{
-			"description":"AnnotationType provides for non-documentation notes and annotations to be embedded in data and structure messages. It provides optional fields for providing a title, a type description, a URI, and the text of the annotation.",
-			"type":"object",
-			"properties":{
-				"id":{
-					"description":"Non-standard identification of an annotation.",
-					"type":"string"
-				},
-				"title":{
-					"description":"AnnotationTitle provides a title for the annotation.",
-					"type":"string"
-				},
-				"type":{
-					"description":"AnnotationType is used to distinguish between annotations designed to support various uses. The types are not enumerated, as these can be specified by the user or creator of the annotations. The definitions and use of annotation types should be documented by their creator.",
-					"type":"string"
-				},
-				"text":{
-					"$ref":"#/definitions/localisedBestMatchText",
-					"description":"AnnotationText holds a language-specific string containing the text of the annotation."
-				},
-				"texts":{
-					"$ref":"#/definitions/localisedText",
-					"description":"AnnotationText holds a language-specific string containing the text of the annotation."
-				},
-				"links":{
-					"$ref":"#/definitions/links",
-					"description":"Links field is an array of link objects. Also used to specify the Annotation URL which points to an external resource which may contain or supplement the annotation (using 'self' as relationship). If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly. If appropriate, a collection of links to additional external resources."
-				}
-			}
 		},
 		"ComponentValueSetType":{
 			"description":"ComponentValueSetType defines the structure for providing values for a data attributes, measures, or metadata attributes. If no values are provided, the component is implied to include/excluded from the region in which it is defined, with no regard to the value of the component. Note that for metadata attributes which occur within other metadata attributes, a nested identifier can be provided. For example, a value of CONTACT.ADDRESS.STREET refers to the metadata attribute with the identifier STREET which exists in the ADDRESS metadata attribute in the CONTACT metadata attribute, which is defined at the root of the report structure.",
@@ -1942,6 +1954,10 @@
 							"const":"AttributeDescriptor",
 							"description":"The id attribute is provided in this case for completeness. However, its value is fixed to AttributeDescriptor."
 						},
+						"links":{
+							"$ref":"#/definitions/links",
+							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
+						},
 						"attributes":{
 							"type":"array",
 							"items":{
@@ -1983,6 +1999,10 @@
 							"const":"MetadataAttributeDescriptor",
 							"description":"The id attribute is provided in this case for completeness. However, its value is fixed to MetadataAttributeDescriptor."
 						},
+						"links":{
+							"$ref":"#/definitions/links",
+							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
+						},
 						"metadataAttributes":{
 							"type":"array",
 							"minItems":1,
@@ -2004,7 +2024,14 @@
 			],
 			"allOf":[
 				{
+					"$ref":"#/definitions/AnnotableType"
+				},
+				{
 					"properties":{
+						"links":{
+							"$ref":"#/definitions/links",
+							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
+						},
 						"metadataAttributeReference":{
 							"$ref":"#/definitions/NestedIDType",
 							"description":"MetadataAttributeReference is a local reference (nested ID) to a metadata attribute defined in the metadata structure referenced by this data structure."
@@ -2014,9 +2041,6 @@
 							"description":"The attributeRelationship defines the relationship between the referenced metadata attribute and the components of the data structure."
 						}
 					}
-				},
-				{
-					"$ref":"#/definitions/AnnotableType"
 				}
 			]
 		},
@@ -2742,7 +2766,7 @@
 					"type":"string"
 				},
 				"annotations":{
-					"$ref":"#/definitions/Annotations"
+					"$ref":"#/definitions/AnnotationsType"
 				},
 				"description":{
 					"$ref":"#/definitions/localisedBestMatchText"
@@ -3339,6 +3363,10 @@
 					"properties":{
 						"id":{
 							"const":"DimensionDescriptor"
+						},
+						"links":{
+							"$ref":"#/definitions/links",
+							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
 						}
 					}
 				},
@@ -4076,7 +4104,7 @@
 					"$ref":"#/definitions/idType"
 				},
 				"annotations":{
-					"$ref":"#/definitions/Annotations"
+					"$ref":"#/definitions/AnnotationsType"
 				},
 				"objectReference":{
 					"$ref":"#/definitions/urn",
@@ -4167,6 +4195,10 @@
 					"properties":{
 						"id":{
 							"const":"MeasureDescriptor"
+						},
+						"links":{
+							"$ref":"#/definitions/links",
+							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
 						}
 					}
 				},
@@ -4733,14 +4765,18 @@
 			],
 			"allOf":[
 				{
+					"$ref":"#/definitions/AnnotableType"
+				},
+				{
 					"properties":{
 						"id":{
 							"const":"REPORTING_YEAR_START_DAY"
+						},
+						"links":{
+							"$ref":"#/definitions/links",
+							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
 						}
 					}
-				},
-				{
-					"$ref":"#/definitions/AnnotableType"
 				},
 				{
 					"properties":{
@@ -5340,6 +5376,10 @@
 					"properties":{
 						"id":{
 							"const":"TIME_PERIOD"
+						},
+						"links":{
+							"$ref":"#/definitions/links",
+							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
 						}
 					}
 				},
