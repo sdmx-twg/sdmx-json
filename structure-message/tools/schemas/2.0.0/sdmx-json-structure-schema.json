@@ -3382,12 +3382,9 @@
 								"description":"Dimension describes the structure of a dimension, which is defined as a statistical concept used (most probably together with other statistical concepts) to identify a statistical series, such as a time series, e.g. a statistical concept indicating certain economic activity or a geographical reference area."
 							}
 						},
-						"timeDimensions":{
-							"type":"array",
-							"items":{
-								"$ref":"#/definitions/TimeDimensionType",
-								"description":"TimeDimension is a special dimension which designates the period in time in which the data identified by the full series key applies."
-							}
+						"timeDimension":{
+							"$ref":"#/definitions/TimeDimensionType",
+							"description":"TimeDimension is a special dimension which designates the period in time in which the data identified by the full series key applies."
 						}
 					}
 				}
