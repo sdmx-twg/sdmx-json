@@ -623,6 +623,7 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 * id - *String* *optional*. ID provides a non-standard identification of an annotation. It can be used to disambiguate annotations.
 * title - *String* *optional*. Provides a non-localised title for the annotation.
 * type - *String* *optional*. Type is used to distinguish between annotations designed to support various uses. The types are not enumerated, and these can be freely specified by the creator of the annotations. The definitions and use of annotation types should be documented by their creator.
+* value - *String* *optional*. A non-localised value text of the annotation.
 * text - *String* *optional*. A human-readable (best-language-match) text of the annotation.
 * texts - *Object* *optional*. A list of human-readable localised texts (see *[names](#names)*) of the annotation.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a link to an additional external resource which may contain or supplement the annotation.
@@ -634,9 +635,12 @@ Example:
 	{
 		"title": "Sample annotation",
 		"type": "reference",
+		"value": "123456",
 		"text": "Sample annotation text",
-		"texts": { "en": "Sample annotation text",
-				  "fr": "Exemple de texte d'annotation" },
+		"texts": {
+			"en": "Sample annotation text",
+			"fr": "Exemple de texte d'annotation"
+		},
 		"id": "74747",
 		"links": [
 			{
@@ -1299,7 +1303,7 @@ Example:
 
 *Object* *optional*. A link to an external resource.
 
-* href - *String*. Absolute or relative URL of the external resource.
+* href - *String* or . Absolute or relative URL of the external resource.
 * rel - *String*. Relationship of the object to the external resource. See semantics below.
 * urn - *String* *optional*. The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details).
 * uri - *String* *optional*. The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource.
