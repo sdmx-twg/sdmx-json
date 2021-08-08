@@ -1,7 +1,7 @@
 {
 	"id": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/2.0.0/sdmx-json-data-schema.json",
 	"$schema": "http://json-schema.org/schema#",
-	"description": "Schema for SDMX-JSON data message",
+	"description": "SDMX-JSON 2.0.0 Schema for SDMX 3.0.0 data messages",
 	"type": "object",
 	"properties": {
 		"meta": {
@@ -400,6 +400,10 @@
 					"items": {
 						"type": "object",
 						"properties": {
+							"id": {
+								"description": "Non-standard identification of an annotation.",
+								"type": "string"
+							},
 							"title": {
 								"description": "AnnotationTitle provides a title for the annotation.",
 								"type": "string"
@@ -408,6 +412,10 @@
 								"description": "AnnotationType is used to distinguish between annotations designed to support various uses. The types are not enumerated, as these can be specified by the user or creator of the annotations. The definitions and use of annotation types should be documented by their creator.",
 								"type": "string"
 							},
+							"value":{
+								"description":"AnnotationValue holds a string containing the non-localised value text of the annotation.",
+								"type":"string"
+							},
 							"text": {
 								"description": "AnnotationText holds a best language match string containing the text of the annotation.",
 								"$ref": "#/definitions/localisedBestMatchText"
@@ -415,10 +423,6 @@
 							"texts": {
 								"description": "AnnotationText holds language-specific strings containing the texts of the annotation.",
 								"$ref": "#/definitions/localisedText"
-							},
-							"id": {
-								"description": "Non-standard identification of an annotation.",
-								"type": "string"
 							},
 							"links": {
 								"description": "Links field is an array of link objects. Also used to specify the Annotation URL which points to an external resource which may contain or supplement the annotation (using 'self' as relationship). If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly. If appropriate, a collection of links to additional external resources.",
