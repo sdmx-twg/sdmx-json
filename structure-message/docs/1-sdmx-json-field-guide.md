@@ -710,8 +710,8 @@ Example:
 * id - *String*. Identifier for the dimensionList. However, this value is fixed to "DimensionDescriptor".
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
-* dimensions - *Array* *optional*. The *[dimension](#dimension)* object describes the structure of a dimension, which is defined as a statistical concept used (most probably together with other statistical concepts) to identify a statistical series, such as a time series, e.g. a statistical concept indicating certain economic activity or a geographical reference area.
-* timeDimensions - *Array* *optional*. The *[timeDimension](#timeDimension)* object describes a special dimension which designates the period in time in which the data identified by the full series key applies..
+* dimensions - *Array* *optional* of *[dimension](#dimension)* objects that describe the structure of a dimension, which is defined as a statistical concept used (most probably together with other statistical concepts) to identify a statistical series, such as a time series, e.g. a statistical concept indicating certain economic activity or a geographical reference area.
+* timeDimension - *Object* *optional*. The *[timeDimension](#timeDimension)* object describes a special dimension which designates the period in time in which the data identified by the full series key applies..
 
 Example:
 
@@ -722,11 +722,9 @@ Example:
 				# dimension object #
 			}
 		],
-		"timeDimensions": [
-			{
-				# timeDimension object #
-			}
-		],
+		"timeDimension": {
+			# timeDimension object #
+		},
 	}
 
 ##### dimension
