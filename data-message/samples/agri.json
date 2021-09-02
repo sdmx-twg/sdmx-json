@@ -452,7 +452,7 @@
 								"PREF_SCALE"
 							],
 							"relationship":{
-								"none":{
+								"dataflow":{
 									
 								}
 							},
@@ -477,7 +477,7 @@
 							],
 							"default":"1",
 							"relationship":{
-								"none":{
+								"dataflow":{
 									
 								}
 							},
@@ -498,7 +498,7 @@
 								"en":"Contact E-mail"
 							},
 							"relationship":{
-								"none":{
+								"dataflow":{
 									
 								}
 							},
