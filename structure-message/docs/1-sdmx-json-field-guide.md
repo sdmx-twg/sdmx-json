@@ -705,13 +705,13 @@ Example:
 
 #### dimensionList
 
-*Object* *optional*. DimensionList describes the key descriptor for a data structure definition. The order of the declaration of child dimensions is significant: it is used to describe the order in which they will appear in data formats for which key values are supplied in an ordered fashion (exclusive of the time dimension, which is not represented as a member of the ordered key). Any data structure definition which uses the time dimension should also declare a frequency dimension, conventionally the first dimension in the key (the set of ordered non-time dimensions). If is not necessary to assign a time dimension, as data can be organised in any fashion required.
+*Object* *optional*. DimensionList describes the key descriptor for a data structure definition. The order of the declaration of child dimensions is significant: it is used to describe the order in which they will appear in data formats for which key values are supplied in an ordered fashion (exclusive of the time dimension, which is not represented as a member of the ordered key). Any data structure definition which uses the time dimension should also declare a frequency dimension, conventionally the first dimension in the key (the set of ordered non-time dimensions). It is not necessary to assign a time dimension, as data can be organised in any fashion required.
 
 * id - *String*. Identifier for the dimensionList. However, this value is fixed to "DimensionDescriptor".
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
-* dimensions - *Array* *optional* of *[dimension](#dimension)* objects that describe the structure of a dimension, which is defined as a statistical concept used (most probably together with other statistical concepts) to identify a statistical series, such as a time series, e.g. a statistical concept indicating certain economic activity or a geographical reference area.
-* timeDimension - *Object* *optional*. The *[timeDimension](#timeDimension)* object describes a special dimension which designates the period in time in which the data identified by the full series key applies..
+* dimensions - *Array* *optional* of *[dimension](#dimension)* objects that describe the structure of a dimension, which is defined as a statistical concept used (most probably together with other statistical concepts) to identify a statistical series, such as a time series, e.g. a statistical concept indicating certain economic activity or a geographical reference area. The list must not include the time dimension.
+* timeDimension - *Object* *optional*. The *[timeDimension](#timeDimension)* object describes a special dimension which designates the period in time in which the data identified by the full series key applies.
 
 Example:
 
@@ -734,7 +734,7 @@ Example:
 * id - *String* *optional*. Identifier for the dimension.
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
-* position - *Integer* *optional*. Positive integer (minimum: 0). The position attribute specifies the position of the dimension in the data structure definition, starting at 0. It is optional as the position of the dimension in the key descriptor (dimensionList object) always takes precedence over the value supplied here. This is strictly for informational purposes only.
+* position - *Integer* *optional*. Positive integer (minimum: 0). The position attribute informs about the position of the dimension in the data structure definition, starting at 0. It is optional as the position of the dimension in the key descriptor (dimensionList object) always takes precedence over the value supplied here. This is strictly for informational purposes only.
 * type - *String* *optional*. Fixed to "Dimension". Although the dimension type is apparent by the element name, this attribute allows for each dimension to be processed independent of its element as well as maintaining the restriction of only one time dimension while still allowing dimension to occur in any order.
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
 * conceptRoles - *Array* of *String*s *optional*. ConceptRole references concepts (through URNs) which define roles which this dimension serves. If the concept from which the dimension takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here.
