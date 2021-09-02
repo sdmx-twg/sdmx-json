@@ -426,19 +426,19 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 *Object*. The attribute's relationship defines the relationship between an attribute and other data structure definition components as defined in the data structure definition. It provides the original "attachment level", but depending on the message context (especially the data query) an attribute value can however be presented physically in the message at a different level. The attribute relationship serves also to define the scope, meaning to which measures an attribute applies.
 
-* none - Empty *Object* *optional*. This means that value of the attribute will not **vary** with any of the other data structure components.
+* dataflow - Empty *Object* *optional*. This means that the value of the attribute **varies** per dataflow. It is the data modeller's responsibility to design or use non-overlapping dataflows that do not have observations in common, otherwise the integrity of dataflow-specific attribute values is not assured by the model, e.g. when querying those data through its DSD.
 * dimensions - *Array* of *String*s *optional*. One or more ID(s) of (a) local dimension(s) in the data structure definition on which the value of this attribute **depends**. 
 * observation - Empty *Object* *optional*. This means that value of the attribute can **vary** with each observation.
 * primaryMeasure - *String* *optional*. Deprecated value having the same meaning than the relationship `observation`. For backward-compatibility only.
 * measures - *Array* of *String*s *optional*. One or more ID(s) of (a) local measure(s) in the data structure definition to which the values of this attribute **apply**. This is only for informational and presentational purposes. If the `measures` relationship is not present then the attribute values apply to whole observations.
 
-Exactly one of `none`, `dimensions` and (`observation` or `primaryMeasure`) is required.
+Exactly one of `dataflow`, `dimensions` and (`observation` or `primaryMeasure`) is required.
 Note that relationships defined in data structure definitions through `attachmentGroups` or a `group` are to be resolved by the server conveniently for the client into above `dimensions`.
 
 Examples:
 
 	{
-		"none": {}
+		"dataflow": {}
 	}
 
 	{
@@ -675,7 +675,7 @@ The `dataSet` properties are:
   - `Append` - this is an incremental update for an existing `dataSet` or the provision of new data or documentation (attribute values) formerly absent. If any of the supplied data or metadata is already present, it will not replace these data.
   - `Replace` - data are to be replaced, and may also include additional data to be appended.
   - `Delete` - data are to be deleted.
-  - `Information` (default) - data are being exchanged for informational purposes only, and not meant to update a system.
+  - `Information` (default) - data are being exchanged for informational purposes only. When used to update a system, the `Append` action is assumed.
 * reportingBegin - *String* *optional*. The start of the time period covered by the message.
 * reportingEnd - *String* *optional*. The end of the time period covered by the message.
 * validFrom - *String* *optional*. The validFrom indicates the inclusive start time indicating the validity of the information in the data.
@@ -1575,7 +1575,9 @@ The `structure.dimensions` field tells us that, out of the 6 dimensions, 4 have 
 
 We see that, for the first series, we get the value 0:
 
+```json
 	"0": { ... }
+```
 
 From the structure.dimensions.series information, we know that CURRENCY is the (only) series dimension.
 
@@ -1605,7 +1607,9 @@ The value "0" identified previously is the index of the item in the collection o
 
 Now, for the first observation of the first series, we get the value 0:
 
+```json
 	"0": [...],
+```
 
 From the `structure.dimensions.observation` information, we know that TIME_PERIOD is the (only) dimension at `observation` level.
 
@@ -1669,7 +1673,9 @@ This language matching type is called "Lookup", see <https://tools.ietf.org/html
 
 Example:
 
+```json
 	"name": "Frequency",
+```
 
 **Localised text objects (variable properties matched through "Filtering"):**
 
@@ -1679,8 +1685,10 @@ This language matching type is called "Filtering", see <https://tools.ietf.org/h
 
 Example:
 
+```json
 	"names": { "en": "Frequency", 
-			   "fr": "Fréquence" },
+		   "fr": "Fréquence" },
+```
 
 
 The localised text object needs to be present whenever the related localised best-language-match text strings is present, and especially whenever a localised text is mandatory in the SDMX Information model. Note that localised text (and the knowledge about the locale) is mandatory in structure messages when artefacts are being submitted for storage to a registry or to other databases. The localised text object is important for use cases where multiple languages are required or where the information on the language used is required.
@@ -1705,7 +1713,7 @@ The objects defined in SDMX-JSON are "open", i.e. they can be extended by implem
 
 The snippet below shows an example of an `error` object, extended with a `wsCustomErrorCode`:
 
-```
+```json
 	"errors": [
 		{
 			"code": 150,
