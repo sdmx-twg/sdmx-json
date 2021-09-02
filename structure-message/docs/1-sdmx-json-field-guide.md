@@ -395,7 +395,7 @@ Examples:
 
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
-* dataStructureComponents - *Object* *optional*. The *[dataStructureComponents](#dataStructureComponents)* object defines the grouping of the sets of structural metadata concepts that have a defined structural role in the data structure definition, like dimensions, measure dimension, time dimension, primary measure and attributes. Note that for any component or group defined in a data structure definition, its id must be unique. This applies to the identifiers explicitly defined by the components as well as those inherited from the concept identity of a component. For example, if two dimensions take their identity from concepts with same identity (regardless of whether the concepts exist in different schemes) one of the dimensions must be provided a different explicit identifier. Although there are XML schema constraints to help enforce this, these only apply to explicitly assigned identifiers. Identifiers inherited from a concept from which a component takes its identity cannot be validated against this constraint. Therefore, systems processing data structure definitions will have to perform this check outside of the XML validation. There are also three reserved identifiers in a data structure definition; OBS_VALUE, TIME_PERIOD, and REPORTING_PERIOD_START_DAY. These identifiers may not be used outside of their respective defintions (PrimaryMeasure, TimeDimension, and ReportingYearStartDay). This applies to both the explicit identifiers that can be assigned to the components or groups as well as an identifier inherited by a component from its concept identity. For example, if an ordinary dimension (i.e. not the time dimension) takes its concept identity from a concept with the identifier TIME_PERIOD, that dimension must provide a different explicit identifier.
+* dataStructureComponents - *Object* *optional*. The *[dataStructureComponents](#dataStructureComponents)* object defines the grouping of the sets of structural metadata concepts that have a defined structural role in the data structure definition, like dimensions and time dimension, measures, attributes and relationships with external metadata attributes. Note that for any component or group defined in a data structure definition, its id must be unique. This applies to the identifiers explicitly defined by the components as well as those inherited from the concept identity of a component. For example, if two dimensions take their identity from concepts with same identity (regardless of whether the concepts exist in different schemes) one of the dimensions must be provided a different explicit identifier. Although there are XML schema constraints to help enforce this, these only apply to explicitly assigned identifiers. Identifiers inherited from a concept from which a component takes its identity cannot be validated against this constraint. Therefore, systems processing data structure definitions will have to perform this check outside of the XML validation. There are also three reserved identifiers in a data structure definition: TIME_PERIOD, REPORTING_PERIOD_START_DAY and REPORTING_PERIOD_END_DAY. These identifiers may not be used outside of their respective defintions (TimeDimension and Attribute). This applies to both the explicit identifier that can be assigned to the components or groups as well as an identifier inherited by a component from its concept identity. For example, if an ordinary dimension (i.e. not the time dimension) takes its concept identity from a concept with the identifier TIME_PERIOD, that dimension must provide a different explicit identifier.
 * metadata - *String* *optional*. The URN of a a metadata structure definition. A data structure definition may be related to a metadata structure definition in order to use its metadata attributes as part of the data. Note that the referenced metadata set cannot contain nested metadata attributes, as these are not supported in the data. By default all metadata attributes can be associated at any level of the data. However, a metadata attribute usage can be used to provide a specific attribute relationshp for a given metadata attribute.
 
 
@@ -446,8 +446,7 @@ Example:
 * id - *String*. Identifier for the attributeList. It is provided only for completeness. However, its value is fixed to "AttributeDescriptor".
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
-* attributes - *Array* *optional*. The *[attribute](#attribute)* object describes the definition of a data attribute, which is defined as a characteristic of an object or entity.
-* reportingYearStartDays - *Array* *optional*. The *[reportingYearStartDay](#reportingyearstartday)* object is a specialized data attribute which provides important context to the time dimension. If the value of the time dimension is one of the standard reporting periods (see common:ReportingTimePeriodType) then this attribute is used to state the month and day that the reporting year begins. This provides a reference point from which the actual calendar dates covered by these periods can be determined. If this attribute does not occur in a data set, then the reporting year start day will be assumed to be January 1.
+* attributes - *Array* *optional*. The *[attribute](#attribute)* object describes the definition of a data attribute, which is defined as a characteristic of an object or entity. The attribute list may contain the specialized data attribute that states the month and day at which the reporting year begins or ends, and which provides important context to the time dimension when the value of the time dimension is one of the standard reporting periods. This attribute provides a reference point from which the actual calendar dates covered by these periods can be determined. If this attribute does not occur in a data set, then the reporting year start/end day will be assumed to be January 1/December 31. This attribute can be recognised by its identifier "REPORTING_PERIOD_START_DAY" or "REPORTING_PERIOD_END_DAY".
 * metadataAttributeUsages - *Array* *optional*. The *[metadataAttributeUsage](#metadataattributeusage)* object refines the details of how a metadata attribute from the metadata structure referenced from the data structure is used. By default, metadata attributes can be expressed at any level of the data. This allows an attribute relationship to be defined in order restrict the reporing of a metadata attribute to a specific part of the data.
 
 
@@ -458,11 +457,6 @@ Example:
 		"attributes": [
 			{
 				# attribute object #
-			}
-		],
-		"reportingYearStartDays": [
-			{
-				# reportingYearStartDay object #
 			}
 		],
 		"metadataAttributeUsages": [
@@ -482,9 +476,9 @@ Example:
 * isMandatory - *Boolean*. Indication whether reporting a given attribute is mandatory or conditional.
 * attributeRelationship - *Object*. The *[attributeRelationship](#attributeRelationship)* object describes how the value of this attribute varies with the values of other components. These relationships will be used to determine the attachment level of the attribute in the various data formats. 				
 * measureRelationship - *Array* of *String*s *optional*. The measureRelationship array identifies the measures that the attribute applies to. If this is not used, the attribute is assumed to apply to all measures. If used, it contains one or more identifiers of (a) local measure(s).  
-* conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
-* conceptRoles - *Array* of *String*s *optional*. ConceptRole references (through URNs) the concepts which define roles which this attribute serves. If the concept from which the attribute takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here.
-* localRepresentation - *Object* *optional*. The *[localRepresentation](#localRepresentation)* object defines the representation for the attribute.				
+* conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context. The reporting year start and end day attributes take their semantics from their respective concept identity (usually the REPORTING_YEAR_START_DAY and REPORTING_YEAR_END_DAY concepts), yet always have a fixed identifier (REPORTING_YEAR_START_DAY and REPORTING_YEAR_END_DAY).  
+* conceptRoles - *Array* of *String*s *optional*. ConceptRole references (through URNs) the concepts which define roles which this attribute serves. 
+* localRepresentation - *Object* *optional*. The *[localRepresentation](#localRepresentation)* object defines the representation for the attribute. The representation for the reporting year start or end day attribute that has the conceptRole with concept ID "REPORTING_PERIOD_START_DAY"/"REPORTING_PERIOD_END_DAY" and states the month and day at which the reporting year begins or ends, does not allow for enumerated values and its text format is fixed to be a day and month in the ISO 8601 format of '--MM-DD'.
 
 Example:
 
@@ -505,6 +499,26 @@ Example:
 			# localRepresentation object #
 		}
 	}
+	
+	Reporting year start day attribute:
+
+	{
+		"id": "REPORTING_YEAR_START_DAY",
+		"isMandatory": true,
+		"attributeRelationship": {
+			"dataflow": {}
+		},
+		"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).REPORTING_YEAR_START_DAY",
+		"conceptRoles": [
+			"urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).REPORTING_YEAR_START_DAY"
+		],
+		"localRepresentation": {
+			"format": {
+				"dataType": "MonthDay"
+			},
+			"maxOccurs": 1
+		}
+	}
 
 ###### attributeRelationship
 
@@ -514,6 +528,8 @@ Example:
 * dimensions - *Array* of *String*s *optional*. One or more identifiers of (a) local dimension(s). This is used to reference dimensions in the data structure definition with which the value of this attribute may vary. An attribute using this relationship can be either a group, series (or section), or observation level attribute. The level at which the attribute values will be presented in data messages depends on the data format and which dimensions are referenced.
 * group - *String* *optional*. Identifier of a local GroupKey Descriptor. This is used as a convenience to referencing all of the dimension defined by the referenced group. The level at which the attribute values will be presented in data messages depends on the data format and which dimensions are referenced. If the group (level) is available in the data format used then the attribute values should be presented at that group level.
 * observation - Empty *Object* *optional*. This is used to specify that the value of the attribute may vary with any of the local dimensions and thus is dependent upon the observed value. An attribute with this relationship will its values always have presented at observation level.
+
+As with any other attribute, this relationship should be carefully selected also for the reporting year start or end day attribute as it will determine what type of data the data structure definition will allow. For example, if an attribute relationship of `dataflow` is specified, this will mean that the data sets for this dataflow can only contain data with standard reporting periods where the all reporting periods have the same start day. In this case, data reported as standard reporting periods from two entities with different fiscal year start days could not be contained in the same data set.
 
 Examples:
 
@@ -541,9 +557,11 @@ Examples:
 
 * enumeration - *String* *optional*. Urn reference to a to an item scheme (such as a codelist) or a value list.
 * enumerationFormat - *Object* *optional*. The *[enumerationFormat](#enumerationformat)* object defines a restricted version of a *[format](#format)* that only allows facets and text types applicable to codes. Although the time facets permit any value, an actual code identifier does not support the necessary characters for time. Therefore these facets should not contain time in their values.
-* format - *Object* *optional*. As an exclusive alternative to a codelist reference the *[format](#format)* object defines the information for describing a full range of data formats and may place restrictions on the component's values.
+* format - *Object* *optional*. As an exclusive alternative to a codelist reference the *[format](#format)* object defines the information for describing a full range of data formats and may place restrictions on the component's values. 
 * minOccurs - *Non-negative Integer* *optional*. Indicates the minimum number of values that can be reported for the component. If missing than there is no lower limit on its occurrences. The default is 1.
 * maxOccurs - *Positive Integer*/*String* *optional*. Indicates the maximum number of values that can be reported for the component. If set to the string "unbounded" than there is no upper limit on its occurrences. The default is 1.
+
+The representation for the reporting year start/end day attribute that has the identifier "REPORTING_PERIOD_START_DAY"/"REPORTING_PERIOD_END_DAY" and states the month and day at which the reporting year begins/ends, does not allow for enumerated values and its text format is fixed to be a day and month in the ISO 8601 format of '--MM-DD'. Its *format* has thus only one single property *dataType* fixed to "MonthDay". This type exists solely for the purpose of fixing the representation of the reporting year start/end day attribute. Its maxOccurs property is a *Positive Integer* and is fixed to 1.
 
 Examples:
 
@@ -558,6 +576,15 @@ Examples:
 		"format": {
 			# format object #
 		}
+	}
+
+	Local representation of the reporting year start/end day attributes:
+ 
+	{
+		"format": {
+			"dataType": "MonthDay"
+		},
+		"maxOccurs": 1
 	}
 
 ##### enumerationFormat
@@ -642,49 +669,6 @@ Example:
 		"description": "Description for special meaning.",
 		"descriptions": { "en": "Description for special meaning.",
 				  "fr": "Description de signification particulière." }
-	}
-
-##### reportingYearStartDay
-
-*Object* *optional*. ReportingYearStartDay defines the structure of the reporting year start day attribute. The reporting year start day attribute takes its semantic from its concept identity (usually the REPORTING_YEAR_START_DAY concept), yet is always has a fixed identifier (REPORTING_YEAR_START_DAY). The reporting year start day attribute always has a fixed text format, which specifies that the format of its value is always a day and month in the ISO 8601 format of '--MM-DD'. As with any other attribute, an attribute relationship must be specified. this relationship should be carefully selected as it will determin what type of data the data structure definition will allow. For example, if an attribute relationship of none is specified, this will mean the data sets conforming to this data structure definition can only contain data with standard reporting periods where the all reporting periods have the same start day. In this case, data reported as standard reporting periods from two entities with different fiscal year start days could not be contained in the same data set.
-
-* id - *String* *optional*. Identifier for the reportingYearStartDay data attribute.
-* annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
-* links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
-* isMandatory - *Boolean*. Indication whether reporting a given attribute is mandatory or conditional.
-* attributeRelationship - *Object*. The *[attributeRelationship](#attributeRelationship)* object describes how the value of this attribute varies with the values of other components. These relationships will be used to determine the attachment level of the attribute in the various data formats. 				
-* conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
-* localRepresentation - *Object* *optional*. The *[ReportingYearStartDayRepresentation](#ReportingYearStartDayRepresentation)* object defines the representation for the reporting year start day attribute. Enumerated values are not allowed and the text format is fixed to be a day and month in the ISO 8601 format of '--MM-DD'.  		
-
-Example:
-
-	{
-		"id": "FISCALYEAR",
-		"isMandatory": true,
-		"attributeRelationship": {
-			# attributeRelationship object #
-		},
-		"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).FISCALYEAR",
-		"localRepresentation": {
-			# ReportingYearStartDayRepresentation object #
-		}
-	}
-
-##### ReportingYearStartDayRepresentation
-
-*Object* *optional*. ReportingYearStartDayRepresentation defines the representation for the reporting year start day attribute. Enumerated values are not allowed and the data format is fixed to be a day and month in the ISO 8601 format of '--MM-DD'.
-
-* format - *Object*. The *format* object has only one single property *dataType* fixed to "MonthDay". This type exists solely for the purpose of fixing the representation of the reporting year start day attribute.
-* minOccurs - *Non-negative Integer* *optional*. Indicates the minimum number of values that can be reported for the component. If missing than there is no lower limit on its occurrences. The default is 1.
-* maxOccurs - *Positive Integer*. Indicates the maximum number of values that can be reported for the component. It is fixed to 1.
-
-Example:
-
-	{
-		"format": {
-			"dataType": "MonthDay"
-		},
-		"maxOccurs": 1
 	}
 
 ##### metadataAttributeUsage
