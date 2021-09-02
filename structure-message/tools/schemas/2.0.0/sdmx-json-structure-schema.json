@@ -2050,6 +2050,17 @@
 			"oneOf":[
 				{
 					"required":[
+						"dataflow"
+					],
+					"properties":{
+						"dataflow":{
+							"$ref":"#/definitions/EmptyType",
+							"description":"This means that the value of the attribute varies per dataflow. It is the data modeller's responsibility to design or use non-overlapping dataflows that do not have observations in common, otherwise the integrity of dataflow-specific attribute values is not assured by the model, e.g. when querying those data through its DSD. The level at which the unique attribute value will be presented in data messages depends on the data format."
+						}
+					}
+				},
+				{
+					"required":[
 						"dimensions"
 					],
 					"properties":{
@@ -2072,17 +2083,6 @@
 						"group":{
 							"$ref":"#/definitions/idType",
 							"description":"Identifier of a local GroupKey Descriptor. This is used as a convenience to referencing all of the dimension defined by the referenced group. The level at which the attribute values will be presented in data messages depends on the data format and which dimensions are referenced. If the group (level) is available in the data format used then the attribute values should be presented at that group level."
-						}
-					}
-				},
-				{
-					"required":[
-						"none"
-					],
-					"properties":{
-						"none":{
-							"$ref":"#/definitions/EmptyType",
-							"description":"This means that value of the attribute will not vary with any of the dimensions. The attribute will always be treated as a data structure level attribute. The level at which the unique attribute value will be presented in data messages depends on the data format."
 						}
 					}
 				},
@@ -4752,7 +4752,7 @@
 			"additionalProperties":false
 		},
 		"ReportingYearStartDayType":{
-			"description":"ReportingYearStartDayType defines the structure of the reporting year start day attribute. The reporting year start day attribute takes its semantic from its concept identity (usually the REPORTING_YEAR_START_DAY concept), yet is always has a fixed identifier (REPORTING_YEAR_START_DAY). The reporting year start day attribute always has a fixed text format, which specifies that the format of its value is always a day and month in the ISO 8601 format of '--MM-DD'. As with any other attribute, an attribute relationship must be specified. this relationship should be carefully selected as it will determine what type of data the data structure definition will allow. For example, if an attribute relationship of none is specified, this will mean the data sets conforming to this data structure definition can only contain data with standard reporting periods where the all reporting periods have the same start day. In this case, data reported as standard reporting periods from two entities with different fiscal year start days could not be contained in the same data set.",
+			"description":"ReportingYearStartDayType defines the structure of the reporting year start day attribute. The reporting year start day attribute takes its semantic from its concept identity (usually the REPORTING_YEAR_START_DAY concept), yet is always has a fixed identifier (REPORTING_YEAR_START_DAY). The reporting year start day attribute always has a fixed text format, which specifies that the format of its value is always a day and month in the ISO 8601 format of '--MM-DD'. As with any other attribute, an attribute relationship must be specified. this relationship should be carefully selected as it will determine what type of data the data structure definition will allow. For example, if an attribute relationship of `dataflow` is specified, this will mean the data sets conforming to this data structure definition can only contain data with standard reporting periods where the all reporting periods have the same start day. In this case, data reported as standard reporting periods from two entities with different fiscal year start days could not be contained in the same data set.",
 			"type":"object",
 			"required":[
 				"isMandatory",
