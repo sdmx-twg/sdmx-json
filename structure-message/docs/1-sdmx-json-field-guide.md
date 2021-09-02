@@ -415,7 +415,7 @@ Example:
 
 *Object* *optional*. DataStructureComponents describes the structure of the grouping to the sets of structural concepts that have a defined structural role in the data structure definition. At a minimum at least one dimension and a primary measure must be defined.
 
-* attributeList - *Object* *optional*. The *[attributeList](#attributeList)* object is a collection of structural concepts that define the attributes of the data structure definition. Attributes can relate to one or more measures, and be reported at the level of none, several or all dimensions.
+* attributeList - *Object* *optional*. The *[attributeList](#attributeList)* object is a collection of structural concepts that define the attributes of the data structure definition. Attributes can relate to one or more measures, and be reported at the level of dataflow, several or all dimensions (observation).
 * dimensionList - *Object*. The *[dimensionList](#dimensionList)* object is an ordered set of structural concepts that, combined, classify a statistical series, such as a time series, and whose values, when combined (the key) in an instance such as a data set, uniquely identify a specific series.
 * groups - *Array* *optional*. Array of *[group](#group)* objects that are sets of structural concepts (and possibly their values) that define a partial key derived from the key descriptor in a data structure definition. 
 * measureList - *Object* *optional*. The *[measureList](#measureList)* object is a collection of structural concepts that define the measures of the data structure definition. 
@@ -510,12 +510,16 @@ Example:
 
 *Object* *optional*. AttributeRelationship defines the structure for stating the relationship between an attribute and other data structure definition components.
 
+* dataflow - Empty *Object* *optional*. This means that the value of the attribute **varies** per dataflow. It is the data modeller's responsibility to design or use non-overlapping dataflows that do not have observations in common, otherwise the integrity of dataflow-specific attribute values is not assured by the model, e.g. when querying those data through its DSD. The level at which the unique attribute value will be presented in data messages depends on the data format and which dimensions are referenced.
 * dimensions - *Array* of *String*s *optional*. One or more identifiers of (a) local dimension(s). This is used to reference dimensions in the data structure definition with which the value of this attribute may vary. An attribute using this relationship can be either a group, series (or section), or observation level attribute. The level at which the attribute values will be presented in data messages depends on the data format and which dimensions are referenced.
 * group - *String* *optional*. Identifier of a local GroupKey Descriptor. This is used as a convenience to referencing all of the dimension defined by the referenced group. The level at which the attribute values will be presented in data messages depends on the data format and which dimensions are referenced. If the group (level) is available in the data format used then the attribute values should be presented at that group level.
-* none - Empty *Object* *optional*. This means that value of the attribute will not vary with any of the local dimensions. The level at which the unique attribute value will be presented in data messages depends on the data format and which dimensions are referenced.
 * observation - Empty *Object* *optional*. This is used to specify that the value of the attribute may vary with any of the local dimensions and thus is dependent upon the observed value. An attribute with this relationship will its values always have presented at observation level.
 
 Examples:
+
+	{
+		"dataflow": {}
+	}
 
 	{
 		"dimensions": [
@@ -525,10 +529,6 @@ Examples:
 
 	{
 		"group": "MY_GROUP"
-	}
-
-	{
-		"none": {}
 	}
 
 	{
