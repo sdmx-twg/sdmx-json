@@ -960,9 +960,9 @@
 			"description": "AttributeRelationshipType defines the structure for stating the relationship between an attribute and other data structure definition components.",
 			"type": "object",
 			"properties": {
-				"none": {
+				"dataflow": {
 					"type": "object",
-					"description": "This is an empty object and means that value of the attribute will not vary with any of the other data structure components. This will always be treated as a dataset level attribute.",
+					"description": "This is an empty object and means that the value of the attribute varies per dataflow. It is the data modeller's responsibility to design or use non-overlapping dataflows that do not have observations in common, otherwise the integrity of dataflow-specific attribute values is not assured by the model, e.g. when querying those data through its DSD.",
 					"maxProperties": 0
 				},
 				"dimensions": {
@@ -996,7 +996,7 @@
 			},
 			"oneOf": [
 				{"required": ["dimensions"]},
-				{"required": ["none"]},
+				{"required": ["dataflow"]},
 				{"required": ["observation"]},
 				{"required": ["primaryMeasure"]}
 			]
