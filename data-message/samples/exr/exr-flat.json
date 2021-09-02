@@ -194,7 +194,7 @@
 								"en":"Description for the attribute"
 							},
 							"relationship":{
-								"none":{
+								"dataflow":{
 									
 								}
 							},
