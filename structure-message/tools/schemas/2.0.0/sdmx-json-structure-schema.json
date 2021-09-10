@@ -347,7 +347,7 @@
 					}
 				},
 				"vtlMappingSchemes":{
-					"description":"metadataConstraints contains one or more vtl mapping schemes, which can be explicitly detailed or referenced from an external structure document or registry service.",
+					"description":"vtlMappingSchemes contains one or more vtl mapping schemes, which can be explicitly detailed or referenced from an external structure document or registry service.",
 					"type":"array",
 					"minItems":1,
 					"items":{
@@ -920,7 +920,7 @@
 			]
 		},
 		"MaintainableWithoutVersionType":{
-			"description":"MaintainableWithoutVersionType is an abstract base type for all maintainable objects without version (and fixed id).",
+			"description":"MaintainableWithoutVersionType is an abstract base type for all maintainable objects without version (and fixed id). For the moment, the version number is fixed to '1.0'",
 			"type":"object",
 			"allOf":[
 				{
@@ -928,6 +928,9 @@
 				},
 				{
 					"properties":{
+						"version":{
+							"const":"1.0"
+						},
 						"agencyID":{
 							"$ref":"#/definitions/NestedNCNameIDType"
 						},
@@ -1757,7 +1760,8 @@
 							"const":"AGENCIES"
 						},
 						"isPartial":{
-							"type":"boolean"
+							"type":"boolean",
+							"description":"isPartial, if true, indicates that only the relevant portion of the agency scheme is being communicated."
 						},
 						"agencies":{
 							"type":"array",
@@ -1906,7 +1910,7 @@
 			]
 		},
 		"MetadataConstraintType":{
-			"description":"MetadataConstraintType defines the structure of a metadata constraint. A metadata constraint can specify allowed attribute values for metadata described by the constrained artefact. The constraint attachment is restricted to constrainable artefacts related to metadata, and the only possible role is 'Allowed'.",
+			"description":"MetadataConstraintType defines the structure of a metadata constraint, which specifies a sub set of the definition of the allowable content of a metadata set. A metadata constraint can specify allowed attribute values for metadata described by the constrained artefact. The constraint attachment is restricted to constrainable artefacts related to metadata, and the only possible role is 'Allowed'.",
 			"type":"object",
 			"allOf":[
 				{
@@ -1931,7 +1935,7 @@
 							"maxItems":2,
 							"items":{
 								"$ref":"#/definitions/MetadataTargetRegionType",
-								"description":"MetadataTargetRegion describes the values allowed for metadata attributes."
+								"description":"MetadataTargetRegion describes the values allowed for metadata attributes. A set of either included or excluded regions can be described."
 							}
 						}
 					},
@@ -2206,7 +2210,7 @@
 					"minItems":1,
 					"items":{
 						"$ref":"#/definitions/sentinelValueType",
-						"description":"SentinelValue defines a reserved value for the text format along with its meaning."
+						"description":"SentinelValue defines a value that has a special meaning within the text format representation of a component."
 					}
 				}
 			}
@@ -2274,7 +2278,8 @@
 				{
 					"properties":{
 						"isPartial":{
-							"type":"boolean"
+							"type":"boolean",
+							"description":"isPartial, if true, indicates that only the relevant portion of the category scheme is being communicated."
 						},
 						"categories":{
 							"type":"array",
@@ -2358,7 +2363,7 @@
 				{
 					"properties":{
 						"parent":{
-							"$ref":"#/definitions/idType",
+							"$ref":"#/definitions/SingleNCNameIDType",
 							"description":"Parent provides the ability to describe simple hierarchies within a single codelist, by referencing the id value of another code in the same codelist."
 						}
 					},
@@ -2426,7 +2431,8 @@
 				{
 					"properties":{
 						"isPartial":{
-							"type":"boolean"
+							"type":"boolean",
+							"description":"isPartial, if true, indicates that only the relevant portion of the codelist is being communicated. This is used in cases where a codelist is returned for a data structure in the context of a constraint."
 						},
 						"codes":{
 							"type":"array",
@@ -2461,7 +2467,8 @@
 					],
 					"properties":{
 						"isPartial":{
-							"type":"boolean"
+							"type":"boolean",
+							"description":"isPartial, if true, indicates that only the relevant portion of the geographic codelist is being communicated."
 						},
 						"geoType":{
 							"const":"GeographicCodelist"
@@ -2513,7 +2520,8 @@
 					],
 					"properties":{
 						"isPartial":{
-							"type":"boolean"
+							"type":"boolean",
+							"description":"isPartial, if true, indicates that only the relevant portion of the geogrid codelist is being communicated."
 						},
 						"geoType":{
 							"const":"GeoGridCodelist"
@@ -2615,7 +2623,7 @@
 					"properties":{
 						"prefix":{
 							"type":"string",
-							"description":"Defines a prefix that will be prepend to included codes when they conflict with other codes included via extension."
+							"description":"A reference to a codelist may contain a prefix. If a prefix is provided, this prefix will be applied to all the codes in the codelist before they are imported into the extended codelist."
 						},
 						"codelist":{
 							"$ref":"#/definitions/CodelistReferenceType",
@@ -2667,8 +2675,9 @@
 					"items":{
 						"type":"string",
 						"pattern":"^[A-Za-z0-9_@$-]+%?$",
-						"description":"A wildcard-suffix '%' expression that is evaluated to determine codes selected for inclusion/exclusion."
-					}
+						"description":"WildcardedMemberValue allows for an optional wildcard character ('%') at the end of an identifier."
+					},
+					"description":"A wildcard expression that is evaluated to determine codes selected for inclusion/exclusion."
 				},
 				"memberValues":{
 					"type":"array",
@@ -2682,17 +2691,18 @@
 		},
 		"MemberValueType":{
 			"type":"object",
-			"required":[
-				"value"
-			],
-			"properties":{
-				"value":{
+			"allOf":[
+				{
 					"$ref":"#/definitions/idType"
 				},
-				"cascadeValues":{
-					"$ref":"#/definitions/CascadeSelectionType"
+				{
+					"properties":{
+						"cascadeValues":{
+							"$ref":"#/definitions/CascadeSelectionType"
+						}
+					}
 				}
-			}
+			]
 		},
 		"CascadeSelectionType":{
 			"oneOf":[
@@ -2743,10 +2753,6 @@
 				},
 				"pattern":{
 					"type":"string"
-				},
-				"hasSentinelValues":{
-					"type":"boolean",
-					"description":"The hasSentinelValues property indicates that sentinel values are defined for the text format. A sentinel value is a reserved value in an otherwise open value domain that holds a specific meaning. For example, a value of -1 can be defined to indicate a non-applicable value."
 				}
 			}
 		},
@@ -2906,7 +2912,8 @@
 				{
 					"properties":{
 						"isPartial":{
-							"type":"boolean"
+							"type":"boolean",
+							"description":"isPartial, if true, indicates that only the relevant portion of the concept scheme is being communicated."
 						},
 						"concepts":{
 							"type":"array",
@@ -2952,7 +2959,7 @@
 							"description":"Provides a reference to an ISO 11179 concept."
 						},
 						"parent":{
-							"$ref":"#/definitions/idType",
+							"$ref":"#/definitions/SingleNCNameIDType",
 							"description":"ID of a local concept. Parent captures the semantic relationships between concepts which occur within a single concept scheme. This identifies the concept of which the current concept is a qualification (in the ISO 11179 sense) or subclass."
 						}
 					},
@@ -3107,7 +3114,7 @@
 							"type":"array",
 							"items":{
 								"$ref":"#/definitions/CubeRegionType",
-								"description":"CubeRegion defines a slice of the data set (dimensions and attribute values) for the constrained artefacet. A set of included and/or excluded regions can be described."
+								"description":"CubeRegion defines a slice of the data set (dimensions and attribute values) for the constrained artefacet. A set of either included or excluded regions can be described."
 							}
 						}
 					},
@@ -3138,7 +3145,8 @@
 							"const":"DATA_CONSUMERS"
 						},
 						"isPartial":{
-							"type":"boolean"
+							"type":"boolean",
+							"description":"isPartial, if true, indicates that only the relevant portion of the data consumer scheme is being communicated."
 						},
 						"dataConsumers":{
 							"type":"array",
@@ -3178,7 +3186,8 @@
 			"type":"object",
 			"properties":{
 				"isIncluded":{
-					"type":"boolean"
+					"type":"boolean",
+					"description":"The isIncluded attribute indicates whether the keys defined in this key set are inclusive or exclusive to the constraint."
 				},
 				"keys":{
 					"type":"array",
@@ -3207,7 +3216,8 @@
 							"const":"DATA_PROVIDERS"
 						},
 						"isPartial":{
-							"type":"boolean"
+							"type":"boolean",
+							"description":"isPartial, if true, indicates that only the relevant portion of the data provider scheme is being communicated."
 						},
 						"dataProviders":{
 							"type":"array",
@@ -3233,7 +3243,8 @@
 							"const":"METADATA_PROVIDERS"
 						},
 						"isPartial":{
-							"type":"boolean"
+							"type":"boolean",
+							"description":"isPartial, if true, indicates that only the relevant portion of the metadata provider scheme is being communicated."
 						},
 						"metadataProviders":{
 							"type":"array",
@@ -3571,7 +3582,8 @@
 					],
 					"properties":{
 						"isPartial":{
-							"type":"boolean"
+							"type":"boolean",
+							"description":"isPartial, if true, indicates that only the relevant portion of the custom type scheme is being communicated."
 						},
 						"vtlVersion":{
 							"type":"string"
@@ -3644,7 +3656,8 @@
 				{
 					"properties":{
 						"isPartial":{
-							"type":"boolean"
+							"type":"boolean",
+							"description":"isPartial, if true, indicates that only the relevant portion of the vtl mapping scheme is being communicated."
 						},
 						"vtlMappings":{
 							"type":"array",
@@ -3833,7 +3846,8 @@
 					],
 					"properties":{
 						"isPartial":{
-							"type":"boolean"
+							"type":"boolean",
+							"description":"isPartial, if true, indicates that only the relevant portion of the name personalisation scheme is being communicated."
 						},
 						"vtlVersion":{
 							"type":"string"
@@ -3893,7 +3907,8 @@
 					],
 					"properties":{
 						"isPartial":{
-							"type":"boolean"
+							"type":"boolean",
+							"description":"isPartial, if true, indicates that only the relevant portion of the ruleset scheme is being communicated."
 						},
 						"vtlVersion":{
 							"type":"string"
@@ -3957,7 +3972,8 @@
 					],
 					"properties":{
 						"isPartial":{
-							"type":"boolean"
+							"type":"boolean",
+							"description":"isPartial, if true, indicates that only the relevant portion of the transformation scheme is being communicated."
 						},
 						"vtlVersion":{
 							"type":"string"
@@ -4045,7 +4061,8 @@
 					],
 					"properties":{
 						"isPartial":{
-							"type":"boolean"
+							"type":"boolean",
+							"description":"isPartial, if true, indicates that only the relevant portion of the user defined operator scheme is being communicated."
 						},
 						"vtlVersion":{
 							"type":"string"
@@ -4391,7 +4408,8 @@
 							"$ref":"#/definitions/idType"
 						},
 						"isPartial":{
-							"type":"boolean"
+							"type":"boolean",
+							"description":"isPartial, if true, indicates that only the relevant portion of the organisation unit scheme is being communicated."
 						},
 						"organisationUnits":{
 							"type":"array",
@@ -4705,7 +4723,8 @@
 				{
 					"properties":{
 						"isPartial":{
-							"type":"boolean"
+							"type":"boolean"",
+							"description":"isPartial, if true, indicates that only the relevant sub set of the reporting categories is being communicated."
 						},
 						"reportingCategories":{
 							"type":"array",
@@ -4947,7 +4966,7 @@
 					"minItems":1,
 					"items":{
 						"$ref":"#/definitions/sentinelValueType",
-						"description":"SentinelValue defines a reserved value for the text format along with its meaning."
+						"description":"SentinelValue defines a value that has a special meaning within the text format representation of a component."
 					}
 				}
 			}
@@ -5437,13 +5456,13 @@
 					"minItems":1,
 					"items":{
 						"$ref":"#/definitions/sentinelValueType",
-						"description":"SentinelValue defines a reserved value for the time text format along with its meaning."
+						"description":"SentinelValue defines a value that has a special meaning within the text format representation of a component."
 					}
 				}
 			}
 		},
 		"sentinelValueType":{
-			"description":"sentinelValueType defines the structure of a sentinel value. A sentinel value is reserved value in an otherwise open value domain with a specific meaning.",
+			"description":"SentinelValueType defines the structure of a sentinel value. A sentinel is a value that has a special meaning within the text format representation of a component. The value is associated with a multi-lingual name and description.",
 			"type":"object",
 			"anyOf": [
 				{"required": ["value", "name"]},
@@ -5601,12 +5620,12 @@
 		"DataProviderReferenceType":{
 			"description":"DataProviderReferenceType is a type for referencing a data provider. It consists of a URN.",
 			"type":"string",
-			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.base\\.DataProvider=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)(\\.[A-Za-z0-9_@$-]+)$"
+			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.base\\.DataProvider=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):DATA_PROVIDERS\\(1\\.0\\)(\\.[A-Za-z0-9_@$-]+)$"
 		},
 		"MetadataProviderReferenceType":{
 			"description":"MetadataProviderReferenceType is a type for referencing a metadata provider. It consists of a URN.",
 			"type":"string",
-			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.base\\.MetadataProvider=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)(\\.[A-Za-z0-9_@$-]+)$"
+			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.base\\.MetadataProvider=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):METADATA_PROVIDERS\\(1\\.0\\)(\\.[A-Za-z0-9_@$-]+)$"
 		},
 		"MetadataStructureReferenceType":{
 			"description":"MetadataStructureReferenceType is a type for referencing a metadata structure definition object. It consists of a URN.",
