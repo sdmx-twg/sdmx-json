@@ -1055,6 +1055,52 @@
 				"id"
 			]
 		},
+		"DataComponentValueSetType":{
+			"description":"DataComponentValueSetType defines the structure for providing values for a data attributes, measures, or metadata attributes. If no values are provided, the component is implied to include/excluded from the region in which it is defined, with no regard to the value of the component. Note that for metadata attributes which occur within other metadata attributes, a nested identifier can be provided. For example, a value of CONTACT.ADDRESS.STREET refers to the metadata attribute with the identifier STREET which exists in the ADDRESS metadata attribute in the CONTACT metadata attribute, which is defined at the root of the report structure.",
+			"type":"object",
+			"allOf":[
+				{
+					"properties":{
+						"id":{
+							"$ref":"#/definitions/NestedNCNameIDType"
+						},
+						"include":{
+							"type":"boolean",
+							"description":"The include attribute indicates whether the values provided for the referenced component are to be included are excluded from the region in which they are defined."
+						},
+						"removePrefix":{
+							"type":"boolean",
+							"description":"The removePrefix attribute indicates whether codes should keep or not the prefix, as defined in the extension of codelist."
+						}
+					}
+				},
+				{
+					"oneOf":[
+						{
+							"properties":{
+								"timeRange":{
+									"$ref":"#/definitions/TimeRangeValueType"
+								}
+							}
+						},
+						{
+							"properties":{
+								"values":{
+									"type":"array",
+									"minItems":1,
+									"items":{
+										"$ref":"#/definitions/DataComponentValueType"
+									}
+								}
+							}
+						}
+					]
+				}
+			],
+			"required":[
+				"id"
+			]
+		},
 		"BasicComponentDataType":{
 			"description":"BasicComponentDataType provides an enumerated list of the types of characters allowed in the dataType attribute for all non-target object components.",
 			"type":"string",
@@ -1138,6 +1184,12 @@
 						"removePrefix":{
 							"type":"boolean",
 							"description":"The removePrefix attribute indicates whether codes should keep or not the prefix, as defined in the extension of codelist."
+						},
+						"validFrom":{
+							"$ref":"#/definitions/StandardTimePeriodType"
+						},
+						"validTo":{
+							"$ref":"#/definitions/StandardTimePeriodType"
 						}
 					}
 				},
@@ -1172,54 +1224,68 @@
 			"description":"CubeRegionType defines the structure of a data cube region. This is based on the abstract RegionType and simply refines the key and attribute values to conform with what is applicable for dimensions and attributes, respectively. See the documentation of the base type for more details on how a region is defined.",
 			"type":"object",
 			"additionalProperties":true,
-			"properties":{
-				"include":{
-					"type":"boolean",
-					"default":true,
-					"description":"The include attribute indicates that the region is to be included or excluded within the context in which it is defined. For example, if the regions is defined as part of a content constraint, the exclude flag would mean the data identified by the region is not present."
+			"allOf":[
+				{
+					"$ref":"#/definitions/AnnotableType"
 				},
-				"components":{
-					"type":"array",
-					"items":{
-						"$ref":"#/definitions/ComponentValueSetType",
-						"description":"Component contains a reference to a component (data attribute, metadata attribute, or measure) and provides a collection of values for the referenced component. This serves to state that for the key which defines the region, the components that are specified here have or do not have (depending on the include attribute of the value set) the values provided. It is possible to provide a component reference without specifying values, for the purpose of stating the component is absent (include = false) or present with an unbounded set of values. As opposed to key components, which are assumed to be wild carded if absent, no assumptions are made about the absence of a component. Only components which are explicitly stated to be present or absent from the region will be know. All unstated components for the set cannot be assumed to absent or present."
-					}
-				},
-				"keyValues":{
-					"type":"array",
-					"items":{
-						"$ref":"#/definitions/CubeRegionKeyType",
-						"description":"KeyValue contains a reference to a component which disambiguates the data (i.e. a dimension) and provides a collection of values for the component. The collection of values can be flagged as being inclusive or exclusive to the region being defined. Any key component that is not included is assumed to be wild carded, which is to say that the cube includes all possible values for the un-referenced key components. Further, this assumption applies to the values of the components as well. The values for any given component can only be sub-setted in the region by explicit inclusion or exclusion. For example, a dimension X which has the possible values of 1, 2, 3 is assumed to have all of these values if a key value is not defined. If a key value is defined with an inclusion attribute of true and the values of 1 and 2, the only the values of 1 and 2 for dimension X are included in the definition of the region. If the key value is defined with an inclusion attribute of false and the value of 1, then the values of 2 and 3 for dimension X are included in the definition of the region. Note that any given key component must only be referenced once in the region."
+				{
+					"properties":{
+						"include":{
+							"type":"boolean",
+							"default":true,
+							"description":"The include attribute indicates that the region is to be included or excluded within the context in which it is defined. For example, if the regions is defined as part of a content constraint, the exclude flag would mean the data identified by the region is not present."
+						},
+						"components":{
+							"type":"array",
+							"items":{
+								"$ref":"#/definitions/ComponentValueSetType",
+								"description":"Component contains a reference to a component (data attribute, metadata attribute, or measure) and provides a collection of values for the referenced component. This serves to state that for the key which defines the region, the components that are specified here have or do not have (depending on the include attribute of the value set) the values provided. It is possible to provide a component reference without specifying values, for the purpose of stating the component is absent (include = false) or present with an unbounded set of values. As opposed to key components, which are assumed to be wild carded if absent, no assumptions are made about the absence of a component. Only components which are explicitly stated to be present or absent from the region will be know. All unstated components for the set cannot be assumed to absent or present."
+							}
+						},
+						"keyValues":{
+							"type":"array",
+							"items":{
+								"$ref":"#/definitions/CubeRegionKeyType",
+								"description":"KeyValue contains a reference to a component which disambiguates the data (i.e. a dimension) and provides a collection of values for the component. The collection of values can be flagged as being inclusive or exclusive to the region being defined. Any key component that is not included is assumed to be wild carded, which is to say that the cube includes all possible values for the un-referenced key components. Further, this assumption applies to the values of the components as well. The values for any given component can only be sub-setted in the region by explicit inclusion or exclusion. For example, a dimension X which has the possible values of 1, 2, 3 is assumed to have all of these values if a key value is not defined. If a key value is defined with an inclusion attribute of true and the values of 1 and 2, the only the values of 1 and 2 for dimension X are included in the definition of the region. If the key value is defined with an inclusion attribute of false and the value of 1, then the values of 2 and 3 for dimension X are included in the definition of the region. Note that any given key component must only be referenced once in the region."
+							}
+						}
 					}
 				}
-			}
+			]
 		},
 		"DataKeyType":{
 			"description":"DataKeyType is a region which defines a distinct full or partial data key. The key consists of a set of values, each referencing a dimension and providing a single value for that dimension. The purpose of the key is to define a subset of a data set (i.e. the observed value and data attribute) which have the dimension values provided in this definition. Any dimension not stated explicitly in this key is assumed to be wild carded, thus allowing for the definition of partial data keys.",
 			"type":"object",
+			"additionalProperties":true,
 			"properties":{
+				"annotations":{
+					"$ref":"#/definitions/AnnotationsType"
+				},
 				"keyValues":{
 					"type":"array",
-					"minItems":1,
+					"minItems":0,
 					"items":{
 						"$ref":"#/definitions/DataKeyValueType"
 					}
 				},
 				"components":{
 					"type":"array",
-					"minItems":1,
+					"minItems":0,
 					"items":{
-						"$ref":"#/definitions/ComponentValueSetType"
+						"$ref":"#/definitions/DataComponentValueSetType"
 					}
 				},
 				"include":{
 					"const":true,
 					"description":"The include attribute has a fixed value of true for a distinct key, since such a key is always assumed to identify existing data or metadata."
+				},
+				"validFrom":{
+					"$ref":"#/definitions/StandardTimePeriodType"
+				},
+				"validTo":{
+					"$ref":"#/definitions/StandardTimePeriodType"
 				}
-			},
-			"required":[
-				"keyValues"
-			]
+			}
 		},
 		"DataKeyValueType":{
 			"description":"DataKeyValueType is a type for providing a dimension value for the purpose of defining a distinct data key. Only a single value can be provided for the dimension.",
@@ -1354,19 +1420,41 @@
 				},
 				{
 					"type":"object",
-					"oneOf":[
-						{
-							"required":[
-								"value",
-								"cascadeValues"
-							]
+					"required":[
+						"value"
+					],
+					"properties":{
+						"value":{
+							"type":"string"
 						},
-						{
-							"required":[
-								"value",
-								"lang"
-							]
+						"cascadeValues":{
+							"$ref":"#/definitions/CascadeSelectionType",
+							"default":false
+						},
+						"lang":{
+							"type":"string",
+							"pattern":"^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$"
+						},
+						"validFrom":{
+							"$ref":"#/definitions/StandardTimePeriodType"
+						},
+						"validTo":{
+							"$ref":"#/definitions/StandardTimePeriodType"
 						}
+					}
+				}
+			]
+		},
+		"DataComponentValueType":{
+			"description":"DataComponentValueType derives from the SimpleComponentValueType, but does not allow for validity dates.",
+			"oneOf":[
+				{
+					"type":"string"
+				},
+				{
+					"type":"object",
+					"required":[
+						"value"
 					],
 					"properties":{
 						"value":{
@@ -1387,12 +1475,24 @@
 		"MetadataTargetRegionType":{
 			"description":"MetadataTargetRegionType defines the structure of a metadata target region. A metadata target region must define the report structure and the metadata target from that structure on which the region is based. This type is based on the abstract RegionType and simply refines the key and attribute values to conform with what is applicable for target objects and metadata attributes, respectively. See the documentation of the base type for more details on how a region is defined.",
 			"type":"object",
+			"additionalProperties":true,
 			"properties":{
+				"include":{
+					"type":"boolean",
+					"default":true,
+					"description":"The include attribute indicates that the region is to be included or excluded within the context in which it is defined. For example, if the regions is defined as part of a content constraint, the exclude flag would mean the data identified by the region is not present."
+				},
 				"components":{
 					"type":"array",
 					"items":{
 						"$ref":"#/definitions/MetadataAttributeValueSetType"
 					}
+				},
+				"validFrom":{
+					"$ref":"#/definitions/StandardTimePeriodType"
+				},
+				"validTo":{
+					"$ref":"#/definitions/StandardTimePeriodType"
 				}
 			}
 		},
@@ -3112,6 +3212,7 @@
 						},
 						"cubeRegions":{
 							"type":"array",
+							"maxItems":2,
 							"items":{
 								"$ref":"#/definitions/CubeRegionType",
 								"description":"CubeRegion defines a slice of the data set (dimensions and attribute values) for the constrained artefacet. A set of either included or excluded regions can be described."
@@ -4723,7 +4824,7 @@
 				{
 					"properties":{
 						"isPartial":{
-							"type":"boolean"",
+							"type":"boolean",
 							"description":"isPartial, if true, indicates that only the relevant sub set of the reporting categories is being communicated."
 						},
 						"reportingCategories":{
