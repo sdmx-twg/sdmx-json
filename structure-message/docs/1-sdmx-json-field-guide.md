@@ -241,7 +241,7 @@ All SDMX artefact types share the following common object properties:
 
 * id - *String*. Identifier for the resource.
 * agencyID - *String* *optional*. ID of the agency maintaining this resource.
-* version - *String* *optional*. Version of this resource. By default, the artefact is not versioned.
+* version - *String* *optional*. Version of this resource. Can be a legacy version with two version parts (e.g. '1.0') for fully mutable artefacts, or a semantic version according to SDMX versioning rules with 3 parts (e.g. '1.0.0') for immutable artefacts or with 4 parts (e.g. '1.0.0-draft') for artefacts allowed to change within a certain scope.
 * name - *String* *optional*. Human-readable (best-language-match) name of the resource.
 * names - *Object* *optional*. Human-readable localised *[names](#names)* of the resource.
 * description - *String* *optional*. Human-readable (best-language-match) description of the resource.
@@ -413,7 +413,7 @@ Example:
 
 #### dataStructureComponents
 
-*Object* *optional*. DataStructureComponents describes the structure of the grouping to the sets of structural concepts that have a defined structural role in the data structure definition. At a minimum at least one dimension and a primary measure must be defined.
+*Object* *optional*. DataStructureComponents describes the structure of the grouping to the sets of structural concepts that have a defined structural role in the data structure definition. At a minimum at least one dimension must be defined.
 
 * attributeList - *Object* *optional*. The *[attributeList](#attributeList)* object is a collection of structural concepts that define the attributes of the data structure definition. Attributes can relate to one or more measures, and be reported at the level of dataflow, several or all dimensions (observation).
 * dimensionList - *Object*. The *[dimensionList](#dimensionList)* object is an ordered set of structural concepts that, combined, classify a statistical series, such as a time series, and whose values, when combined (the key) in an instance such as a data set, uniquely identify a specific series.
@@ -473,7 +473,7 @@ Example:
 * id - *String* *optional*. Identifier for the attribute.
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
-* isMandatory - *Boolean*. Indication whether reporting a given attribute is mandatory or conditional.
+* usage - Constant *String* `mandatory` or `optional` *optional*. Indication whether reporting a given attribute is mandatory or optional. Default: `optional`, except for REPORTING_YEAR_START_DAY and REPORTING_YEAR_END_DAY attributes, for which the default is `mandatory`. 
 * attributeRelationship - *Object*. The *[attributeRelationship](#attributeRelationship)* object describes how the value of this attribute varies with the values of other components. These relationships will be used to determine the attachment level of the attribute in the various data formats. 				
 * measureRelationship - *Array* of *String*s *optional*. The measureRelationship array identifies the measures that the attribute applies to. If this is not used, the attribute is assumed to apply to all measures. If used, it contains one or more identifiers of (a) local measure(s).  
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context. The reporting year start and end day attributes take their semantics from their respective concept identity (usually the REPORTING_YEAR_START_DAY and REPORTING_YEAR_END_DAY concepts), yet always have a fixed identifier (REPORTING_YEAR_START_DAY and REPORTING_YEAR_END_DAY).  
@@ -484,7 +484,7 @@ Example:
 
 	{
 		"id": "OBS_STATUS",
-		"isMandatory": true,
+		"usage": "optional",
 		"attributeRelationship": {
 			# attributeRelationship object #
 		},
@@ -504,7 +504,7 @@ Example:
 
 	{
 		"id": "REPORTING_YEAR_START_DAY",
-		"isMandatory": true,
+		"usage": "mandatory",
 		"attributeRelationship": {
 			"dataflow": {}
 		},
@@ -525,7 +525,8 @@ Example:
 *Object* *optional*. AttributeRelationship defines the structure for stating the relationship between an attribute and other data structure definition components.
 
 * dataflow - Empty *Object* *optional*. This means that the value of the attribute **varies** per dataflow. It is the data modeller's responsibility to design or use non-overlapping dataflows that do not have observations in common, otherwise the integrity of dataflow-specific attribute values is not assured by the model, e.g. when querying those data through its DSD. The level at which the unique attribute value will be presented in data messages depends on the data format and which dimensions are referenced.
-* dimensions - *Array* of *String*s *optional*. One or more identifiers of (a) local dimension(s). This is used to reference dimensions in the data structure definition with which the value of this attribute may vary. An attribute using this relationship can be either a group, series (or section), or observation level attribute. The level at which the attribute values will be presented in data messages depends on the data format and which dimensions are referenced.
+* dimensions - *Array* of *String*s *optional*. One or more identifiers of (a) local dimension(s). This is used to reference dimensions in the data structure definition with which the value of this attribute may vary. An attribute using this relationship can be either a group, series (or section), or observation level attribute. The level at which the attribute values will be presented in data messages depends on the data format and which dimensions are referenced. The array cannot be empty.
+* areDimensionsOptional - *Array* of *Boolean*s *optional*. This is used to indicate those dimensions to which the attributes might optionally not be attached. The array structure must follow that for the dimensions. The array cannot be empty.
 * group - *String* *optional*. Identifier of a local GroupKey Descriptor. This is used as a convenience to referencing all of the dimension defined by the referenced group. The level at which the attribute values will be presented in data messages depends on the data format and which dimensions are referenced. If the group (level) is available in the data format used then the attribute values should be presented at that group level.
 * observation - Empty *Object* *optional*. This is used to specify that the value of the attribute may vary with any of the local dimensions and thus is dependent upon the observed value. An attribute with this relationship will its values always have presented at observation level.
 
@@ -540,6 +541,9 @@ Examples:
 	{
 		"dimensions": [
 			"FREQ", "CURRENCY"
+		]
+		"areDimensionsOptional": [
+			false, true
 		]
 	}
 
@@ -718,8 +722,7 @@ Example:
 * id - *String* *optional*. Identifier for the dimension.
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
-* position - *Integer* *optional*. Positive integer (minimum: 0). The position attribute informs about the position of the dimension in the data structure definition, starting at 0. It is optional as the position of the dimension in the key descriptor (dimensionList object) always takes precedence over the value supplied here. This is strictly for informational purposes only.
-* type - *String* *optional*. Fixed to "Dimension". Although the dimension type is apparent by the element name, this attribute allows for each dimension to be processed independent of its element as well as maintaining the restriction of only one time dimension while still allowing dimension to occur in any order.
+* position - *Integer* *optional*. Positive integer (minimum: 0). The order of the dimensions in the key descriptor (DimensionList element) defines the order of the dimensions in the data structure, starting at 0. This position attribute explicitly specifies the position of the dimension in the data structure. It is optional and if specified must be consistent with the position of the dimension in the key descriptor.
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
 * conceptRoles - *Array* of *String*s *optional*. ConceptRole references concepts (through URNs) which define roles which this dimension serves. If the concept from which the dimension takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here.
 * localRepresentation - *Object* *optional*. The *[localRepresentation](#localRepresentation)* object defines the representation for the dimension. Note that for dimensions the maxOccurs property must be 1, thus cannot be changed. Also the isMultiLingual format property cannot be set to true for dimensions.
@@ -729,7 +732,6 @@ Example:
 	{
 		"id": "FREQ",
 		"position": 0,
-		"type": "Dimension",
 		"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).FREQ",
 		"conceptRoles": [
 			"urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).FREQ"
@@ -745,9 +747,7 @@ Example:
 
 * id - *String* *optional*. Identifier for the time dimension. Fixed to "TIME_PERIOD".
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
-* links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
-* position - *Integer* *optional*. Positive integer (minimum: 0). The position attribute specifies the position of the dimension in the data structure definition, starting at 0. It is optional as the position of the dimension in the key descriptor (DimensionList element) always takes precedence over the value supplied here. This is strictly for informational purposes only.
-* type - *String* *optional*. Fixed to "TimeDimension". Although the dimension type is apparent by the element name, this attribute allows for each dimension to be processed independent of its element as well as maintaining the restriction of only one time dimension while still allowing dimension to occur in any order.
+* links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).lowing dimension to occur in any order.
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
 * localRepresentation - *Object*. The *localRepresentation* object has only one required property *format* of type *[timeDimensionFormat](#timedimensionformat)* which defines the representation for the time dimension.
 
@@ -755,8 +755,6 @@ Example:
 
 	{
 		"id": "TIME_PERIOD",
-		"position": 6,
-		"type": "TimeDimension",
 		"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).TIME_PERIOD",
 		"localRepresentation": {
 			"format": {
@@ -833,7 +831,7 @@ Example:
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
 * localRepresentation - *Object* *optional*. The *[localRepresentation](#localRepresentation)* object defines the representation for the measure.
-* isMandatory - *Boolean*. Indication whether reporting a given attribute is mandatory or conditional.
+* usage - Constant *String* `mandatory` or `optional` *optional*. Indication whether reporting a given measure is mandatory or optional. Default: `optional`. 
 
 Example:
 
@@ -843,7 +841,7 @@ Example:
 		"localRepresentation": {
 			# localRepresentation object #
 		},
-		"isMandatory": true
+		"usage": "optional"
 	}
 
 ### metadataStructure
@@ -1613,48 +1611,57 @@ Example:
 
 *Object*. CubeRegion defines the structure of a data cube region. This is based on the abstract RegionType and simply refines the key and attribute values to conform with what is applicable for dimensions and attributes, respectively. See the documentation of the base type for more details on how a region is defined.
 
-* isIncluded - *Boolean* *optional*.
-* attributes - *Array* *optional*. A list of of *AttributeValueSet* objects described in *[ValueSet](#ValueSet)* defines the structure for providing values for a data attribute. If no values are provided, the attribute is implied to include/excluded from the region in which it is defined, with no regard to the value of the data attribute. Note that for metadata attributes which occur within other metadata attributes, a nested identifier can be provided. For example, a value of CONTACT.ADDRESS.STREET refers to the metadata attribute with the identifier STREET which exists in the ADDRESS metadata attribute in the CONTACT metadata attribute, which is defined at the root of the report structure.
-* keyValues - *Array* *optional*. A list of of *CubeRegionKey* objects described in *[ValueSet](#ValueSet)* for providing a set of values for a dimension for the purpose of defining a data cube region. A set of distinct value can be provided, or if this dimension is represented as time, and time range can be specified. 
+* include - *Boolean* *optional*. Default: `true`. The include attribute indicates that the region is to be included or excluded within the context in which it is defined. For example, if the regions is defined as part of a content constraint, the exclude flag would mean the data identified by the region is not present.
+* components - *Array* *optional* of *[ComponentValueSet](#ComponentValueSet)* objects containing a reference to a component (data attribute, metadata attribute, or measure) and providing a collection of values for the referenced component. This serves to state that for the key which defines the region, the components that are specified here have or do not have (depending on the include attribute of the value set) the values provided. It is possible to provide a component reference without specifying values, for the purpose of stating the component is absent (include = false) or present with an unbounded set of values. As opposed to key components, which are assumed to be wild carded if absent, no assumptions are made about the absence of a component. Only components which are explicitly stated to be present or absent from the region will be know. All unstated components for the set cannot be assumed to absent or present.
+* keyValues - *Array* *optional* of *[CubeRegionKey](#CubeRegionKey)* objects containing a reference to a component which disambiguates the data (i.e. a dimension) and providing a collection of values for the component. The collection of values can be flagged as being inclusive or exclusive to the region being defined. Any key component that is not included is assumed to be wild carded, which is to say that the cube includes all possible values for the un-referenced key components. Further, this assumption applies to the values of the components as well. The values for any given component can only be sub-setted in the region by explicit inclusion or exclusion. For example, a dimension X which has the possible values of 1, 2, 3 is assumed to have all of these values if a key value is not defined. If a key value is defined with an inclusion attribute of true and the values of 1 and 2, the only the values of 1 and 2 for dimension X are included in the definition of the region. If the key value is defined with an inclusion attribute of false and the value of 1, then the values of 2 and 3 for dimension X are included in the definition of the region. Note that any given key component must only be referenced once in the region. 
 
 Example:
 
 	{
-		"isIncluded": true,
-		"attributes": [
+		"include": true,
+		"components": [
 			{
-				# ValueSet object #
+				# ComponentValueSet object #
 			}
 		],
 		"keyValues": [
 			{
-				# ValueSet object #
+				# CubeRegionKey object #
 			}
 		]
 	}
 		
-##### ValueSet
+##### ComponentValueSet
 
-*Object*. ValueSet 
+*Object*. ComponentValueSet defines the structure for providing values for a data attributes, measures, or metadata attributes. If no values are provided, the component is implied to include/excluded from the region in which it is defined, with no regard to the value of the component. Note that for metadata attributes which occur within other metadata attributes, a nested identifier can be provided. For example, a value of CONTACT.ADDRESS.STREET refers to the metadata attribute with the identifier STREET which exists in the ADDRESS metadata attribute in the CONTACT metadata attribute, which is defined at the root of the report structure. 
 
 * id - *String*. 
+* include - *Boolean* *optional*. The include attribute indicates whether the values provided for the referenced component are to be included are excluded from the region in which they are defined.
+* removePrefix - *Boolean* *optional*. The removePrefix attribute indicates whether codes should keep or not the prefix, as defined in the extension of codelist.
 * timeRange - *Object* *optional*. A *[TimeRangeValue](#TimeRangeValue)* object.
-* values - *Array* *optional* of *string*s. 
-* cascadeValues - *Array* *optional* of *string*s. CascadeValues identifies which values in the previous array should be cascaded.
+* values - Non-empty *array* *optional* of *String*s and *[SimpleComponentValue](#SimpleComponentValue)* objects.
+Only one of timeRange or values properties is allowed.
+
 
 Example:
 
 	{
 		"id": "EXR_TYPE",
+		"include": true,
+		"removePrefix": false,
+		"values": {
+			"NRP0", "NN00", "NRD0", "NRU1"
+			# SimpleComponentValue object #
+		}
+	}
+	
+	{
+		"id": "EXR_TYPE",
+		"include": true,
+		"removePrefix": false,
 		"timeRange": {
 			# TimeRangeValue object #
-		},
-		"values": [
-			"NRP0", "NN00", "NRD0", "NRU1"
-		],
-		"cascadeValues": [
-			"NRU1"
-		]
+		}
 	}
 
 ###### TimeRangeValue
@@ -1697,6 +1704,65 @@ Example:
 		"isInclusive": true
 	}
 
+###### SimpleComponentValue
+
+*Object*. SimpleComponentValue contains a simple value for a component, and if that value is from a code list, the ability to indicate that child codes in a simple hierarchy are part of the value set of the component for the region.
+
+* value - *String*. 
+* lang - *String* *optional*. IETF Language Tag according to [RFC 5646 documentation](https://tools.ietf.org/html/rfc5646#section-2.1) for specifying locals in HTTP - *String*. The localised name.
+* cascadeValues - *Boolean* *optional* or constant *string* `excluderoot`. CascadeValues identifies if the value should be cascaded.
+* validFrom - *String* *optional*. A timestamp from which the value is valid. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
+* validTo - *String* *optional*.  A timestamp from which the value is superceded. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
+
+Example:
+
+	{
+		"value": "NRP0",
+		"lang": "en",
+		"cascadeValues": "excluderoot",
+		"validFrom": "2021-09-01",
+		"validTo":"2021-09-30"
+	}
+
+##### CubeRegionKey
+
+*Object*. CubeRegionKey provids a set of values for a dimension for the purpose of defining a data cube region. A set of distinct value can be provided, or if this dimension is represented as time, and time range can be specified. 
+
+* id - *String*. 
+* include - *Boolean* *optional*. The include attribute indicates whether the values provided for the referenced component are to be included are excluded from the region in which they are defined.
+* removePrefix - *Boolean* *optional*. The removePrefix attribute indicates whether codes should keep or not the prefix, as defined in the extension of codelist.
+* validFrom - *String* *optional*. A timestamp from which the set of values is valid. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
+* validTo - *String* *optional*.  A timestamp from which the set of values is superceded. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
+* timeRange - *Object* *optional*. A *[TimeRangeValue](#TimeRangeValue)* object.
+* values - Non-empty *array* *optional* of *String*s and *[SimpleComponentValue](#SimpleComponentValue)* objects.
+Only one of timeRange or values properties is allowed.
+
+
+Example:
+
+	{
+		"id": "EXR_TYPE",
+		"include": true,
+		"removePrefix": false,
+		"validFrom": "2021-09-01",
+		"validTo":"2021-09-30",
+		"values": {
+			"NRP0", "NN00", "NRD0", "NRU1"
+			# SimpleComponentValue object #
+		}
+	}
+	
+	{
+		"id": "EXR_TYPE",
+		"include": true,
+		"removePrefix": false,
+		"validFrom": "2021-09-01",
+		"validTo":"2021-09-30",
+		"timeRange": {
+			# TimeRangeValue object #
+		}
+	}
+
 #### dataKeySet
 
 *Object*. dataKeySet defines a collection of full or partial data keys (dimension values).
@@ -1719,14 +1785,26 @@ Example:
 
 *Object*. DataKey is a region which defines a distinct full or partial data key. The key consists of a set of values, each referencing a dimension and providing a single value for that dimension. The purpose of the key is to define a subset of a data set (i.e. the observed value and data attribute) which have the dimension values provided in this definition. Any dimension not stated explicitly in this key is assumed to be wild carded, thus allowing for the definition of partial data keys.
 
+* include - *Boolean*.
+* validFrom - *String* *optional*. A timestamp from which the region is valid. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
+* validTo - *String* *optional*.  A timestamp from which the region is superceded. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
 * keyValues - Non-empty *array* of *[dataKeyValue](#dataKeyValue)* objects.
+* components - Non-empty *array* of *[dataComponentValueSet](#dataComponentValueSet)* objects.
 
 Example:
 
 	{
+		"include": "true",
+		"validFrom": "2021-09-01",
+		"validTo":"2021-09-30",
 		"keyValues": [
 			{
 				# dataKeyValue object #
+			}
+		],
+		"components": [
+			{
+				# dataComponentValueSet object #
 			}
 		]
 	}
@@ -1736,12 +1814,65 @@ Example:
 *Object*. DataKeyValue provides a dimension value for the purpose of defining a distinct data key. Only a single value can be provided for the dimension.
 
 * id - *String*. 
-* value - *String*. 
+* include - *Boolean*. The include attribute indicates whether the values provided for the referenced component are to be included are excluded from the region in which they are defined.
+* removePrefix - *Boolean*. The removePrefix attribute indicates whether codes should keep or not the prefix, as defined in the extension of codelist.
+* value - *String*.
 
 Example:
 
 	{
 		"id": "EXR_TYPE",
+		"include": true,
+		"removePrefix": false,
+		"value": "NRP0"
+	}
+
+
+###### dataComponentValueSet
+
+*Object*. dataComponentValueSet defines the structure for providing values for a data attributes, measures, or metadata attributes. If no values are provided, the component is implied to include/excluded from the region in which it is defined, with no regard to the value of the component. Note that for metadata attributes which occur within other metadata attributes, a nested identifier can be provided. For example, a value of CONTACT.ADDRESS.STREET refers to the metadata attribute with the identifier STREET which exists in the ADDRESS metadata attribute in the CONTACT metadata attribute, which is defined at the root of the report structure.
+
+* id - *String*. 
+* include - *Boolean* *optional*. The include attribute indicates whether the values provided for the referenced component are to be included are excluded from the region in which they are defined.
+* removePrefix - *Boolean* *optional*. The removePrefix attribute indicates whether codes should keep or not the prefix, as defined in the extension of codelist.
+* timeRange - *Object* *optional*. A *[TimeRangeValue](#TimeRangeValue)* object.
+* values - Non-empty *array* *optional* of *String*s and *[DataComponentValue](#DataComponentValue)* objects.
+Only one of timeRange or values properties is allowed.
+
+Example:
+
+	{
+		"id": "EXR_TYPE",
+		"include": true,
+		"removePrefix": false,
+		"values": {
+			"DIM"
+			# DataComponentValue object #
+		}
+	}
+	
+	{
+		"id": "EXR_TYPE",
+		"include": true,
+		"removePrefix": false,
+		"timeRange": {
+			# TimeRangeValue object #
+		}
+	}	
+
+###### DataComponentValue
+
+*Object*. DataComponentValue contains a simple value for a component, and if that value is from a code list, the ability to indicate that child codes in a simple hierarchy are part of the value set of the component for the region.
+
+* cascadeValues - *Boolean* *optional* or constant *string* `excluderoot`. CascadeValues identifies if the value should be cascaded.
+* lang - *String* *optional*. IETF Language Tag according to [RFC 5646 documentation](https://tools.ietf.org/html/rfc5646#section-2.1) for specifying locals in HTTP - *String*. The localised name.
+* value - *String*. 
+
+Example:
+
+	{
+		"cascadeValues": "excluderoot",
+		"lang": "en",
 		"value": "NRP0"
 	}
 
