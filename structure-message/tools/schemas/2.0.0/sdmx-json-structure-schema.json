@@ -1012,45 +1012,48 @@
 		"ComponentValueSetType":{
 			"description":"ComponentValueSetType defines the structure for providing values for a data attributes, measures, or metadata attributes. If no values are provided, the component is implied to include/excluded from the region in which it is defined, with no regard to the value of the component. Note that for metadata attributes which occur within other metadata attributes, a nested identifier can be provided. For example, a value of CONTACT.ADDRESS.STREET refers to the metadata attribute with the identifier STREET which exists in the ADDRESS metadata attribute in the CONTACT metadata attribute, which is defined at the root of the report structure.",
 			"type":"object",
-			"allOf":[
-				{
-					"properties":{
-						"id":{
-							"$ref":"#/definitions/NestedNCNameIDType"
-						},
-						"include":{
-							"type":"boolean",
-							"description":"The include attribute indicates whether the values provided for the referenced component are to be included are excluded from the region in which they are defined."
-						},
-						"removePrefix":{
-							"type":"boolean",
-							"description":"The removePrefix attribute indicates whether codes should keep or not the prefix, as defined in the extension of codelist."
-						}
+			"properties":{
+				"id":{
+					"$ref":"#/definitions/NestedNCNameIDType"
+				},
+				"include":{
+					"type":"boolean",
+					"description":"The include attribute indicates whether the values provided for the referenced component are to be included are excluded from the region in which they are defined."
+				},
+				"removePrefix":{
+					"type":"boolean",
+					"description":"The removePrefix attribute indicates whether codes should keep or not the prefix, as defined in the extension of codelist."
+				},
+				"timeRange":{
+					"$ref":"#/definitions/TimeRangeValueType"
+				},
+				"values":{
+					"type":"array",
+					"minItems":1,
+					"items":{
+						"$ref":"#/definitions/SimpleComponentValueType"
 					}
+				}
+			},
+			"anyOf":[
+				{},
+				{
+					"required":[
+						"timeRange"
+					]
 				},
 				{
-					"oneOf":[
-						{
-							"properties":{
-								"timeRange":{
-									"$ref":"#/definitions/TimeRangeValueType"
-								}
-							}
-						},
-						{
-							"properties":{
-								"values":{
-									"type":"array",
-									"minItems":1,
-									"items":{
-										"$ref":"#/definitions/SimpleComponentValueType"
-									}
-								}
-							}
-						}
+					"required":[
+						"values"
 					]
 				}
 			],
+			"not":{
+				"required":[
+					"timeRange",
+					"values"
+				]
+			},
 			"required":[
 				"id"
 			]
@@ -1058,45 +1061,48 @@
 		"DataComponentValueSetType":{
 			"description":"DataComponentValueSetType defines the structure for providing values for a data attributes, measures, or metadata attributes. If no values are provided, the component is implied to include/excluded from the region in which it is defined, with no regard to the value of the component. Note that for metadata attributes which occur within other metadata attributes, a nested identifier can be provided. For example, a value of CONTACT.ADDRESS.STREET refers to the metadata attribute with the identifier STREET which exists in the ADDRESS metadata attribute in the CONTACT metadata attribute, which is defined at the root of the report structure.",
 			"type":"object",
-			"allOf":[
-				{
-					"properties":{
-						"id":{
-							"$ref":"#/definitions/NestedNCNameIDType"
-						},
-						"include":{
-							"type":"boolean",
-							"description":"The include attribute indicates whether the values provided for the referenced component are to be included are excluded from the region in which they are defined."
-						},
-						"removePrefix":{
-							"type":"boolean",
-							"description":"The removePrefix attribute indicates whether codes should keep or not the prefix, as defined in the extension of codelist."
-						}
+			"properties":{
+				"id":{
+					"$ref":"#/definitions/NestedNCNameIDType"
+				},
+				"include":{
+					"type":"boolean",
+					"description":"The include attribute indicates whether the values provided for the referenced component are to be included are excluded from the region in which they are defined."
+				},
+				"removePrefix":{
+					"type":"boolean",
+					"description":"The removePrefix attribute indicates whether codes should keep or not the prefix, as defined in the extension of codelist."
+				},
+				"timeRange":{
+					"$ref":"#/definitions/TimeRangeValueType"
+				},
+				"values":{
+					"type":"array",
+					"minItems":1,
+					"items":{
+						"$ref":"#/definitions/DataComponentValueType"
 					}
+				}
+			},
+			"anyOf":[
+				{},
+				{
+					"required":[
+						"timeRange"
+					]
 				},
 				{
-					"oneOf":[
-						{
-							"properties":{
-								"timeRange":{
-									"$ref":"#/definitions/TimeRangeValueType"
-								}
-							}
-						},
-						{
-							"properties":{
-								"values":{
-									"type":"array",
-									"minItems":1,
-									"items":{
-										"$ref":"#/definitions/DataComponentValueType"
-									}
-								}
-							}
-						}
+					"required":[
+						"values"
 					]
 				}
 			],
+			"not":{
+				"required":[
+					"timeRange",
+					"values"
+				]
+			},
 			"required":[
 				"id"
 			]
@@ -1171,51 +1177,54 @@
 		"CubeRegionKeyType":{
 			"description":"CubeRegionKeyType is a type for providing a set of values for a dimension for the purpose of defining a data cube region. A set of distinct value can be provided, or if this dimension is represented as time, and time range can be specified.",
 			"type":"object",
-			"allOf":[
-				{
-					"properties":{
-						"id":{
-							"$ref":"#/definitions/SingleNCNameIDType"
-						},
-						"include":{
-							"type":"boolean",
-							"description":"The include attribute indicates whether the values provided for the referenced component are to be included are excluded from the region in which they are defined."
-						},
-						"removePrefix":{
-							"type":"boolean",
-							"description":"The removePrefix attribute indicates whether codes should keep or not the prefix, as defined in the extension of codelist."
-						},
-						"validFrom":{
-							"$ref":"#/definitions/StandardTimePeriodType"
-						},
-						"validTo":{
-							"$ref":"#/definitions/StandardTimePeriodType"
-						}
+			"properties":{
+				"id":{
+					"$ref":"#/definitions/SingleNCNameIDType"
+				},
+				"include":{
+					"type":"boolean",
+					"description":"The include attribute indicates whether the values provided for the referenced component are to be included are excluded from the region in which they are defined."
+				},
+				"removePrefix":{
+					"type":"boolean",
+					"description":"The removePrefix attribute indicates whether codes should keep or not the prefix, as defined in the extension of codelist."
+				},
+				"validFrom":{
+					"$ref":"#/definitions/StandardTimePeriodType"
+				},
+				"validTo":{
+					"$ref":"#/definitions/StandardTimePeriodType"
+				},
+				"timeRange":{
+					"$ref":"#/definitions/TimeRangeValueType"
+				},
+				"values":{
+					"type":"array",
+					"minItems":1,
+					"items":{
+						"$ref":"#/definitions/SimpleComponentValueType"
 					}
+				}
+			},
+			"anyOf":[
+				{},
+				{
+					"required":[
+						"timeRange"
+					]
 				},
 				{
-					"oneOf":[
-						{
-							"properties":{
-								"timeRange":{
-									"$ref":"#/definitions/TimeRangeValueType"
-								}
-							}
-						},
-						{
-							"properties":{
-								"values":{
-									"type":"array",
-									"minItems":1,
-									"items":{
-										"$ref":"#/definitions/SimpleComponentValueType"
-									}
-								}
-							}
-						}
+					"required":[
+						"values"
 					]
 				}
 			],
+			"not":{
+				"required":[
+					"timeRange",
+					"values"
+				]
+			},
 			"required":[
 				"id"
 			]
@@ -1368,46 +1377,49 @@
 		"MetadataAttributeValueSetType":{
 			"description":"MetadataAttributeValueSetType defines the structure for providing values for a metadata attribute. If no values are provided, the attribute is implied to include/excluded from the region in which it is defined, with no regard to the value of the metadata attribute.",
 			"type":"object",
-			"allOf":[
-				{
-					"properties":{
-						"id":{
-							"$ref":"#/definitions/NestedNCNameIDType",
-							"description":"The id attribute provides the identifier for the component for which values are being provided. This base type allows for a nested identifier to be provided, for the purpose of referencing a nested component (i.e. a metadata attribute). However, specific implementations will restrict this representation to only allow single level identifiers where appropriate."
-						},
-						"include":{
-							"type":"boolean",
-							"description":"The include attribute indicates whether the values provided for the referenced component are to be included are excluded from the region in which they are defined."
-						},
-						"removePrefix":{
-							"type":"boolean",
-							"description":"The removePrefix attribute indicates whether codes should keep or not the prefix, as defined in the extension of codelist."
-						}
+			"properties":{
+				"id":{
+					"$ref":"#/definitions/NestedNCNameIDType",
+					"description":"The id attribute provides the identifier for the component for which values are being provided. This base type allows for a nested identifier to be provided, for the purpose of referencing a nested component (i.e. a metadata attribute). However, specific implementations will restrict this representation to only allow single level identifiers where appropriate."
+				},
+				"include":{
+					"type":"boolean",
+					"description":"The include attribute indicates whether the values provided for the referenced component are to be included are excluded from the region in which they are defined."
+				},
+				"removePrefix":{
+					"type":"boolean",
+					"description":"The removePrefix attribute indicates whether codes should keep or not the prefix, as defined in the extension of codelist."
+				},
+				"timeRange":{
+					"$ref":"#/definitions/TimeRangeValueType"
+				},
+				"values":{
+					"type":"array",
+					"minItems":1,
+					"items":{
+						"$ref":"#/definitions/SimpleComponentValueType"
 					}
+				}
+			},
+			"anyOf":[
+				{},
+				{
+					"required":[
+						"timeRange"
+					]
 				},
 				{
-					"oneOf":[
-						{
-							"properties":{
-								"timeRange":{
-									"$ref":"#/definitions/TimeRangeValueType"
-								}
-							}
-						},
-						{
-							"properties":{
-								"values":{
-									"type":"array",
-									"minItems":1,
-									"items":{
-										"$ref":"#/definitions/SimpleComponentValueType"
-									}
-								}
-							}
-						}
+					"required":[
+						"values"
 					]
 				}
 			],
+			"not":{
+				"required":[
+					"timeRange",
+					"values"
+				]
+			},
 			"required":[
 				"id"
 			]
@@ -1758,7 +1770,10 @@
 					"type":"boolean",
 					"default":true
 				}
-			}
+			},
+			"required":[
+				"period"
+			]
 		},
 		"TimeRangeValueType":{
 			"description":"TimeRangeValueType allows a time period value to be expressed as a range. It can be expressed as the period before a period, after a period, or between two periods. Each of these properties can specify their inclusion in regards to the range.",
@@ -2715,42 +2730,41 @@
 		"CodelistExtensionType":{
 			"description":"CodelistExtensionType defines the structure of a codelist to be extended by the codelist defining the extension. It provides a reference to the extended codelist and selection criteria to indicate the codes to be included in the extending codelist.",
 			"type":"object",
-			"required":[
-				"codelist"
-			],
-			"allOf":[
+			"properties":{
+				"prefix":{
+					"type":"string",
+					"description":"A reference to a codelist may contain a prefix. If a prefix is provided, this prefix will be applied to all the codes in the codelist before they are imported into the extended codelist."
+				},
+				"codelist":{
+					"$ref":"#/definitions/CodelistReferenceType",
+					"description":"Reference to a codelist object through a URN."
+				},
+				"inclusiveCodeSelection":{
+					"$ref":"#/definitions/CodeSelectionType",
+					"description":"Selection of codes from the referenced (extended) codelist to be included in the extending codelist."
+				},
+				"exclusiveCodeSelection":{
+					"$ref":"#/definitions/CodeSelectionType",
+					"description":"Selection of codes from the referenced (extended) codelist to be excluded in the extending codelist."
+				}
+			},
+			"anyOf": [
+				{},
 				{
-					"properties":{
-						"prefix":{
-							"type":"string",
-							"description":"A reference to a codelist may contain a prefix. If a prefix is provided, this prefix will be applied to all the codes in the codelist before they are imported into the extended codelist."
-						},
-						"codelist":{
-							"$ref":"#/definitions/CodelistReferenceType",
-							"description":"Reference to a codelist object through a URN."
-						}
-					}
+					"required":["inclusiveCodeSelection"]
 				},
 				{
-					"oneOf":[
-						{
-							"properties":{
-								"inclusiveCodeSelection":{
-									"$ref":"#/definitions/CodeSelectionType",
-									"description":"Selection of codes from the referenced (extended) codelist to be included in the extending codelist."
-								}
-							}
-						},
-						{
-							"properties":{
-								"exclusiveCodeSelection":{
-									"$ref":"#/definitions/CodeSelectionType",
-									"description":"Selection of codes from the referenced (extended) codelist to be excluded in the extending codelist."
-								}
-							}
-						}
-					]
+					"required":["exclusiveCodeSelection"]
 				}
+			],
+			"not": {
+				"required":[
+					"inclusiveCodeSelection",
+					"exclusiveCodeSelection"
+				]
+			},
+			"required":[
+				"codelist"
 			]
 		},
 		"CodeSelectionType":{
@@ -4753,32 +4767,34 @@
 								"$ref":"#/definitions/ReportingCategoryType",
 								"description":"ReportingCategory defines a reporting category, which is used to group structure usages into useful sub-packages."
 							}
-						}
-					},
-					"oneOf":[
-						{
-							"properties":{
-								"structuralMetadata":{
-									"type":"array",
-									"items":{
-										"$ref":"#/definitions/StructureReferenceType",
-										"description":"StructuralMetadata provides urn references for data structure definition and metadata structure definition references which are grouped in the reporting category. It is assumed that all structural metadata objects referenced from a category will be of the same type."
-									}
-								}
+						},
+						"structuralMetadata":{
+							"type":"array",
+							"items":{
+								"$ref":"#/definitions/StructureReferenceType",
+								"description":"StructuralMetadata provides urn references for data structure definition and metadata structure definition references which are grouped in the reporting category. It is assumed that all structural metadata objects referenced from a category will be of the same type."
 							}
 						},
-						{
-							"properties":{
-								"provisioningMetadata":{
-									"type":"array",
-									"items":{
-										"$ref":"#/definitions/StructureUsageReferenceType",
-										"description":"ProvisioningMetadata provides urn references for dataflow and metadataflow references which are grouped in the reporting category. It is assumed that all provisioning metadata objects referenced from a category will be of the same type."
-									}
-								}
+						"provisioningMetadata":{
+							"type":"array",
+							"items":{
+								"$ref":"#/definitions/StructureUsageReferenceType",
+								"description":"ProvisioningMetadata provides urn references for dataflow and metadataflow references which are grouped in the reporting category. It is assumed that all provisioning metadata objects referenced from a category will be of the same type."
 							}
 						}
-					]
+					},
+					"anyOf":[
+						{},
+						{
+							"required":["structuralMetadata"]
+						},
+						{
+							"required":["provisioningMetadata"]
+						}
+					],
+					"not":{
+						"required":["structuralMetadata", "provisioningMetadata"]
+					}
 				}
 			]
 		},
