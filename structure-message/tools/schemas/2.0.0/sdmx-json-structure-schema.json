@@ -29,6 +29,7 @@
 				"contentLanguages":{
 					"description":"Array of strings containing the identifyer of all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, representaing in an array format the same information than the http Content-Language response header, e.g. \"en, fr-fr\". See IETF Language Tags: https://tools.ietf.org/html/rfc5646#section-2.1. The array's first element indicates the main language used in the message for localized elements. The usage of this property is recommended.",
 					"type":"array",
+					"uniqueItems":true,
 					"items":{
 						"type":"string",
 						"pattern":"^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$"
@@ -1933,6 +1934,7 @@
 					"properties":{
 						"metadataSets":{
 							"type":"array",
+							"uniqueItems": true,
 							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/SetReferenceType",
@@ -1948,6 +1950,7 @@
 					"properties":{
 						"simpleDataSources":{
 							"type":"array",
+							"uniqueItems": true,
 							"minItems":1,
 							"items":{
 								"description":"SimpleDataSource describes a simple data source, which is a URL of a SDMX-ML data or metadata message. Multiple instance can only be used if they have the same underlying structure.",
@@ -1963,6 +1966,7 @@
 					"properties":{
 						"metadataStructures":{
 							"type":"array",
+							"uniqueItems": true,
 							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/MetadataStructureReferenceType",
@@ -1985,6 +1989,7 @@
 					"properties":{
 						"metadataflows":{
 							"type":"array",
+							"uniqueItems": true,
 							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/MetadataflowReferenceType",
@@ -2007,6 +2012,7 @@
 					"properties":{
 						"metadataProvisionAgreements":{
 							"type":"array",
+							"uniqueItems": true,
 							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/MetadataProvisionAgreementReferenceType",
@@ -2187,10 +2193,19 @@
 						"dimensions":{
 							"description":"This is used to reference dimensions in the data structure definition on which the value of this attribute depends. An attribute using this relationship can be either a group, series (or section), or observation level attribute. The attachment level of the attribute will be determined by the data format and which dimensions are referenced.",
 							"type":"array",
+							"uniqueItems":true,
 							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/NCNameIDType",
 								"description":"One or more identifiers of (a) local dimension(s)."
+							}
+						},
+						"areDimensionsOptional":{
+							"description":"This is used to indicate those dimensions to which the attributes might optionally not be attached. The array structure must follow that for the dimensions.",
+							"type":"array",
+							"minItems":1,
+							"items":{
+								"type":"boolean"
 							}
 						}
 					}
@@ -2223,7 +2238,6 @@
 			"description":"AttributeType describes the structure of a data attribute, which is defined as a characteristic of an object or entity. The attribute takes its semantic, and in some cases it representation, from its concept identity. An attribute can be coded by referencing a code list from its coded local representation. It can also specify its text format, which is used as the representation of the attribute if a coded representation is not defined. Neither the coded or uncoded representation are necessary, since the attribute may take these from the referenced concept. An attribute specifies its relationship with other data structure components and is given an assignment status. These two properties dictate where in a data message the attribute will be attached, and whether or not the attribute will be required to be given a value. A set of roles defined in concept scheme can be assigned to the attribute.",
 			"type":"object",
 			"required":[
-				"isMandatory",
 				"attributeRelationship",
 				"conceptIdentity"
 			],
@@ -2233,10 +2247,10 @@
 				},
 				{
 					"properties":{
-						"isMandatory":
-						{
-							"type": "boolean",
-							"description":"The isMandatory attribute indicates whether an attribute value must be available for any corresponding existing observation."
+						"usage": {
+							"$ref": "#/definitions/UsageType",
+							"default":"optional",
+							"description":"The usage attribute indicates whether an attribute value must be available for any corresponding existing observation."
 						},
 						"attributeRelationship":{
 							"$ref":"#/definitions/AttributeRelationshipType",
@@ -2244,6 +2258,7 @@
 						},
 						"measureRelationship":{
 							"type":"array",
+							"uniqueItems":true,
 							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/NCNameIDType"
@@ -2785,6 +2800,7 @@
 			"properties":{
 				"wildcardedMemberValues":{
 					"type":"array",
+					"uniqueItems":true,
 					"minItems":1,
 					"items":{
 						"type":"string",
@@ -3105,6 +3121,7 @@
 					"properties":{
 						"dataSets":{
 							"type":"array",
+							"uniqueItems": true,
 							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/SetReferenceType",
@@ -3120,6 +3137,7 @@
 					"properties":{
 						"simpleDataSources":{
 							"type":"array",
+							"uniqueItems": true,
 							"minItems":1,
 							"items":{
 								"description":"SimpleDataSource describes a simple data source, which is a URL of a SDMX-ML data or metadata message. Multiple instance can only be used if they have the same underlying structure.",
@@ -3135,6 +3153,7 @@
 					"properties":{
 						"dataStructures":{
 							"type":"array",
+							"uniqueItems": true,
 							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/DataStructureReferenceType",
@@ -3157,6 +3176,7 @@
 					"properties":{
 						"dataflows":{
 							"type":"array",
+							"uniqueItems": true,
 							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/DataflowReferenceType",
@@ -3179,6 +3199,7 @@
 					"properties":{
 						"provisionAgreements":{
 							"type":"array",
+							"uniqueItems": true,
 							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/ProvisionAgreementReferenceType",
@@ -3455,7 +3476,7 @@
 					"properties":{
 						"dataStructureComponents":{
 							"$ref":"#/definitions/DataStructureComponentsType",
-							"description":"DataStructureComponents defines the grouping of the sets of metadata concepts that have a defined structural role in the data structure definition. Note that for any component or group defined in a data structure definition, its id must be unique. This applies to the identifiers explicitly defined by the components as well as those inherited from the concept identity of a component. For example, if two dimensions take their identity from concepts with same identity (regardless of whether the concepts exist in different schemes) one of the dimensions must be provided a different explicit identifier. Although there are XML schema constraints to help enforce this, these only apply to explicitly assigned identifiers. Identifiers inherited from a concept from which a component takes its identity cannot be validated against this constraint. Therefore, systems processing data structure definitions will have to perform this check outside of the XML validation. There are also three reserved identifiers in a data structure definition; TIME_PERIOD, REPORTING_PERIOD_START_DAY and REPORTING_PERIOD_END_DAY. These identifiers may not be used outside of their respective defintions (TimeDimension and Attribute). This applies to both the explicit identifiers that can be assigned to the components or groups as well as an identifier inherited by a component from its concept identity. For example, if an ordinary dimension (i.e. not the time dimension) takes its concept identity from a concept with the identifier TIME_PERIOD, that dimension must provide a different explicit identifier."
+							"description":"DataStructureComponents defines the grouping of the sets of metadata concepts that have a defined structural role in the data structure definition. Note that for any component or group defined in a data structure definition, its id must be unique. This applies to the identifiers explicitly defined by the components as well as those inherited from the concept identity of a component. For example, if two dimensions take their identity from concepts with same identity (regardless of whether the concepts exist in different schemes) one of the dimensions must be provided a different explicit identifier. Although there are XML schema constraints to help enforce this, these only apply to explicitly assigned identifiers. Identifiers inherited from a concept from which a component takes its identity cannot be validated against this constraint. Therefore, systems processing data structure definitions will have to perform this check outside of the XML validation. There are also two reserved identifiers in a data structure definition; TIME_PERIOD, and REPORTING_YEAR_START_DAY. These identifiers may not be used outside of their respective defintions (TimeDimension and ReportingYearStartDay). This applies to both the explicit identifiers that can be assigned to the components or groups as well as an identifier inherited by a component from its concept identity. For example, if an ordinary dimension (i.e. not the time dimension) takes its concept identity from a concept with the identifier TIME_PERIOD, that dimension must provide a different explicit identifier."
 						},
 						"metadata":{
 							"$ref":"#/definitions/MetadataStructureReferenceType",
@@ -3530,13 +3551,9 @@
 				{
 					"properties":{
 						"position":{
-							"description":"The position attribute specifies the position of the dimension in the data structure definition, starting at 0. It is optional as the position of the dimension in the key descriptor (DimensionList element) always takes precedence over the value supplied here. This is strictly for informational purposes only.",
+							"description":"The order of the dimensions in the key descriptor (DimensionList element) defines the order of the dimensions in the data structure. This position attribute explicitly specifies the position of the dimension in the data structure, starting at 0. It is optional and if specified must be consistent with the position of the dimension in the key descriptor.",
 							"type":"integer",
 							"minimum":0
-						},
-						"type":{
-							"description":"The type attribute identifies whether the dimension is the time dimension or a regular dimension. Although these are both apparent by the element names, this attribute allows for each dimension to be processed independent of its element as well as maintaining the restriction of only one time dimension while still allowing dimensions to occur in any order.",
-							"const":"Dimension"
 						},
 						"conceptIdentity":{
 							"$ref":"#/definitions/ConceptReferenceType",
@@ -3545,6 +3562,7 @@
 						"conceptRoles":{
 							"description":"ConceptRoles references concepts which define roles which this dimension serves. If the concept from which the attribute takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here.",
 							"type":"array",
+							"uniqueItems": true,
 							"items":{
 								"$ref":"#/definitions/ConceptReferenceType",
 								"description":"Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
@@ -3571,6 +3589,7 @@
 					"properties":{
 						"groupDimensions":{
 							"type":"array",
+							"uniqueItems":true,
 							"items":{
 								"$ref":"#/definitions/NCNameIDType",
 								"description":"Array of id's of dimensions defined in the key descriptor (DimensionList). Although it is conventional to declare dimensions in the same order as they are declared in the ordered key, there is no requirement to do so - the ordering of the values of the key are taken from the order in which the dimensions are declared. Note that the id of a dimension may be inherited from its underlying concept - therefore this reference value may actually be the id of the concept."
@@ -3909,6 +3928,7 @@
 			"properties":{
 				"keys":{
 					"type":"array",
+					"uniqueItems":true,
 					"minItems":1,
 					"items":{
 						"$ref":"#/definitions/SingleNCNameIDType",
@@ -4114,6 +4134,7 @@
 						},
 						"rulesetSchemes":{
 							"type":"array",
+							"uniqueItems":true,
 							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/RulesetSchemeReferenceType",
@@ -4122,6 +4143,7 @@
 						},
 						"userDefinedOperatorSchemes":{
 							"type":"array",
+							"uniqueItems":true,
 							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/UserDefinedOperatorSchemeReferenceType",
@@ -4195,6 +4217,7 @@
 						},
 						"rulesetSchemes":{
 							"type":"array",
+							"uniqueItems":true,
 							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/RulesetSchemeReferenceType",
@@ -4465,6 +4488,7 @@
 						},
 						"targets":{
 							"type":"array",
+							"uniqueItems":true,
 							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/WildcardObjectReferenceType",
@@ -4564,7 +4588,7 @@
 			]
 		},
 		"MeasureType":{
-			"description":"MeasureType defines the structure of a measure descriptor. In addition to the identifying concept and representation, a usage status and max occurs can be defined.",
+			"description":"MeasureType defines the structure of a measure descriptor. In addition to the identifying concept and representation, a mandatory usage and max occurs can be defined.",
 			"type":"object",
 			"required":[
 				"isMandatory",
@@ -4576,10 +4600,10 @@
 				},
 				{
 					"properties":{
-						"isMandatory":
-						{
-							"type": "boolean",
-							"description":"The isMandatory attribute indicates whether a measure value must be available for any corresponding existing observation."
+						"usage": {
+							"$ref": "#/definitions/UsageType",
+							"default":"optional",
+							"description":"The usage attribute indicates whether a measure value must be available for any corresponding existing observation."
 						},
 						"conceptIdentity":{
 							"$ref":"#/definitions/ConceptReferenceType",
@@ -4588,6 +4612,7 @@
 						"conceptRoles":{
 							"description":"ConceptRole references concepts which define roles which this measure serves. If the concept from which the attribute takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here.",
 							"type":"array",
+							"uniqueItems":true,
 							"items":{
 								"$ref":"#/definitions/ConceptReferenceType",
 								"description":"Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
@@ -4712,6 +4737,7 @@
 						},
 						"targets":{
 							"type":"array",
+							"uniqueItems":true,
 							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/WildcardObjectReferenceType"
@@ -4770,6 +4796,7 @@
 						},
 						"structuralMetadata":{
 							"type":"array",
+							"uniqueItems":true,
 							"items":{
 								"$ref":"#/definitions/StructureReferenceType",
 								"description":"StructuralMetadata provides urn references for data structure definition and metadata structure definition references which are grouped in the reporting category. It is assumed that all structural metadata objects referenced from a category will be of the same type."
@@ -4777,6 +4804,7 @@
 						},
 						"provisioningMetadata":{
 							"type":"array",
+							"uniqueItems":true,
 							"items":{
 								"$ref":"#/definitions/StructureUsageReferenceType",
 								"description":"ProvisioningMetadata provides urn references for dataflow and metadataflow references which are grouped in the reporting category. It is assumed that all provisioning metadata objects referenced from a category will be of the same type."
@@ -4894,7 +4922,6 @@
 			"type":"object",
 			"required":[
 				"id",
-				"isMandatory",
 				"attributeRelationship",
 				"conceptIdentity",
 				"localRepresentation"
@@ -4927,17 +4954,35 @@
 							"$ref":"#/definitions/links",
 							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
 						},
-						"isMandatory":
-						{
-							"type": "boolean",
+						"usage": {
+							"$ref": "#/definitions/UsageType",
+							"default":"mandatory",
 							"description":"The isMandatory attribute indicates whether a ReportingYearStartDay/ReportingYearEndDay attribute value must be available for any corresponding existing observation."
 						},
 						"attributeRelationship":{
-							"$ref":"#/definitions/AttributeRelationshipType"
+							"$ref":"#/definitions/AttributeRelationshipType",
+							"description":"AttributeRelationship describes how the value of this attribute varies with the values of other components. These relationships will be used to determine the attachment level of the attribute in the various data formats."
+						},
+						"measureRelationship":{
+							"type":"array",
+							"uniqueItems":true,
+							"minItems":1,
+							"items":{
+								"$ref":"#/definitions/NCNameIDType"
+							},
+							"description":"The measureRelationship array identifies the measures that the attribute applies to. If this is not used, the attribute is assumed to apply to all measures. If used, it contains one or more identifiers of (a) local measure(s)."
 						},
 						"conceptIdentity":{
 							"$ref":"#/definitions/ConceptReferenceType",
 							"description":"Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
+						},
+						"conceptRoles":{
+							"type":"array",
+							"uniqueItems":true,
+							"items":{
+								"$ref":"#/definitions/ConceptReferenceType",
+								"description":"ConceptRole references concepts which define roles which this attribute serves. If the concept from which the attribute takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here."
+							}
 						},
 						"localRepresentation":{
 							"$ref":"#/definitions/ReportingYearStartOrEndDayRepresentationType"
@@ -5137,7 +5182,7 @@
 			]
 		},
 		"SimpleDataStructureRepresentationType":{
-			"description":"SimpleDataStructureRepresentationType defines the representation for any non-measure and non-time dimension data structure definition component.",
+			"description":"SimpleDataStructureRepresentationType defines the representation for any non-time dimension data structure definition component.",
 			"type":"object",
 			"oneOf":[
 				{
@@ -5535,15 +5580,6 @@
 				},
 				{
 					"properties":{
-						"position":{
-							"description":"The position attribute specifies the position of the dimension in the data structure definition, starting at 0. It is optional as the position of the dimension in the key descriptor (DimensionList element) always takes precedence over the value supplied here. This is strictly for informational purposes only.",
-							"type":"integer",
-							"minimum":0
-						},
-						"type":{
-							"description":"The type attribute identifies whether the dimension is the time dimension or a regular dimension. Although these are both apparent by the element names, this attribute allows for each dimension to be processed independent of its element as well as maintaining the restriction of only one time dimension while still allowing dimensions to occur in any order.",
-							"const":"TimeDimension"
-						},
 						"conceptIdentity":{
 							"$ref":"#/definitions/ConceptReferenceType",
 							"description":"Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
@@ -5642,6 +5678,14 @@
 						}
 					}
 				}
+			]
+		},
+		"UsageType": {
+			"description": "An enumeration of optional | mandatory to indicate the usage of an attribute or measure.",
+			"type": "string",
+			"enum": [
+				"mandatory",
+				"optional"
 			]
 		},
 		"ValueMappingType":{
