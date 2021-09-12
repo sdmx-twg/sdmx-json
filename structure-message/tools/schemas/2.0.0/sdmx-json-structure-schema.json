@@ -5736,8 +5736,8 @@
 							"description":"Condition is a textual description of the conditions to be met in order for the target step to be proceeded to. It is informational only (not machine-actionable), and may be supplied in multiple, parallel-language form."
 						},
 						"targetStep":{
-							"$ref":"#/definitions/idType",
-							"description":"TargetStep references (by ID) a local process step within the process that should be transitioned to, should the conditions described be met."
+							"$ref":"#/definitions/NestedIDType",
+							"description":"TargetStep references (by nested ID) a local process or sub-process step within the process that should be transitioned to, should the conditions described be met."
 						}
 					}
 				}
