@@ -559,7 +559,7 @@ Examples:
 
 *Object* *optional*. LocalRepresentation defines the representation for the attribute. A data attribute can be text (including XHTML and multi-lingual values), a simple value, or an enumerated value.
 
-* enumeration - *String* *optional*. Urn reference to an item scheme (such as a codelist) or a value list.
+* enumeration - *String* *optional*. Urn reference to an item scheme (such as a codelist) or a value list. Dimensions cannot reference a value list.
 * enumerationFormat - *Object* *optional*. The *[enumerationFormat](#enumerationformat)* object defines a restricted version of a *[format](#format)* that only allows facets and text types applicable to items (codes) in the referenced scheme. Although the time facets permit any value, an actual code identifier does not support the necessary characters for time. Therefore these facets should not contain time in their values.
 * format - *Object* *optional*. As an exclusive alternative to an item scheme reference the *[format](#format)* object defines the information for describing a full range of data formats and may place restrictions on the component's values. 
 * minOccurs - *Non-negative Integer* *optional*. Indicates the minimum number of values that can be reported for the component. If missing than there is no lower limit on its occurrences. The default is 1.
@@ -1029,7 +1029,7 @@ Example:
 
 *Object* *optional*. A core representation for a concept. It is either a reference to a codelist which enumerates the possible values that can be used as the representation of this concept, or a text format.
 
-* enumeration - *String* *optional*. Urn reference to a codelist which enumerates the possible values that can be used as the representation of this concept. This must be a valid SDMX Registry URN (see SDMX Registry Specification for details) of a codelist.
+* enumeration - *String* *optional*. Urn reference to a codelist or valuelist which enumerates the possible values that can be used as the representation of this concept. This must be a valid SDMX Registry URN (see SDMX Registry Specification for details) of a codelist.
 * enumerationFormat - *Object* *optional*. To be used only with a codelist reference. The *[enumerationFormat](#enumerationformat)* object defines a restricted version of a text format that only allows facets and text types applicable to codes. Although the time facets permit any value, an actual code identifier does not support the necessary characters for time. Therefore these facets should not contain time in their values.
 * format - *Object* *optional*. As an exclusive alternative to a codelist reference the *[format](#format)* object defines the information for describing a full range of data formats and may place restrictions on the component's values.
 * minOccurs - *Non-negative Integer* *optional*. Indicates the minimum number of values that can be reported for the component. If missing than there is no lower limit on its occurrences. The default is 1.
