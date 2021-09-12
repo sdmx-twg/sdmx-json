@@ -5418,10 +5418,10 @@
 				},
 				{
 					"required":[
-						"sourceTargetMaps"
+						"mappedComponents"
 					],
 					"properties":{
-						"sourceTargetMaps":{
+						"mappedComponents":{
 							"type":"array",
 							"minItems":1,
 							"items":{
