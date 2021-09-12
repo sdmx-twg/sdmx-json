@@ -154,7 +154,7 @@
 					"type":"array",
 					"minItems":1,
 					"items":{
-						"$ref":"#/definitions/HiearchyAssociationType",
+						"$ref":"#/definitions/HierarchyAssociationType",
 						"description":"hierarchyAssociation provides the details of a hiearchy assoication, which associates a hiearchy with an identifiable object in the context of another object."
 					}
 				},
@@ -1036,6 +1036,9 @@
 					}
 				}
 			},
+			"required":[
+				"id"
+			],
 			"anyOf":[
 				{},
 				{
@@ -1054,10 +1057,7 @@
 					"timeRange",
 					"values"
 				]
-			},
-			"required":[
-				"id"
-			]
+			}
 		},
 		"DataComponentValueSetType":{
 			"description":"DataComponentValueSetType defines the structure for providing values for a data attributes, measures, or metadata attributes. If no values are provided, the component is implied to include/excluded from the region in which it is defined, with no regard to the value of the component. Note that for metadata attributes which occur within other metadata attributes, a nested identifier can be provided. For example, a value of CONTACT.ADDRESS.STREET refers to the metadata attribute with the identifier STREET which exists in the ADDRESS metadata attribute in the CONTACT metadata attribute, which is defined at the root of the report structure.",
@@ -1085,6 +1085,9 @@
 					}
 				}
 			},
+			"required":[
+				"id"
+			],
 			"anyOf":[
 				{},
 				{
@@ -1103,10 +1106,7 @@
 					"timeRange",
 					"values"
 				]
-			},
-			"required":[
-				"id"
-			]
+			}
 		},
 		"BasicComponentDataType":{
 			"description":"BasicComponentDataType provides an enumerated list of the types of characters allowed in the dataType attribute for all non-target object components.",
@@ -1207,6 +1207,9 @@
 					}
 				}
 			},
+			"required":[
+				"id"
+			],
 			"anyOf":[
 				{},
 				{
@@ -1225,15 +1228,11 @@
 					"timeRange",
 					"values"
 				]
-			},
-			"required":[
-				"id"
-			]
+			}
 		},
 		"CubeRegionType":{
 			"description":"CubeRegionType defines the structure of a data cube region. This is based on the abstract RegionType and simply refines the key and attribute values to conform with what is applicable for dimensions and attributes, respectively. See the documentation of the base type for more details on how a region is defined.",
 			"type":"object",
-			"additionalProperties":true,
 			"allOf":[
 				{
 					"$ref":"#/definitions/AnnotableType"
@@ -1266,7 +1265,6 @@
 		"DataKeyType":{
 			"description":"DataKeyType is a region which defines a distinct full or partial data key. The key consists of a set of values, each referencing a dimension and providing a single value for that dimension. The purpose of the key is to define a subset of a data set (i.e. the observed value and data attribute) which have the dimension values provided in this definition. Any dimension not stated explicitly in this key is assumed to be wild carded, thus allowing for the definition of partial data keys.",
 			"type":"object",
-			"additionalProperties":true,
 			"properties":{
 				"annotations":{
 					"$ref":"#/definitions/AnnotationsType"
@@ -1402,6 +1400,9 @@
 					}
 				}
 			},
+			"required":[
+				"id"
+			],
 			"anyOf":[
 				{},
 				{
@@ -1420,10 +1421,7 @@
 					"timeRange",
 					"values"
 				]
-			},
-			"required":[
-				"id"
-			]
+			}
 		},
 		"SimpleComponentValueType":{
 			"description":"SimpleComponentValueType contains a simple value for a component, and if that value is from a code list, the ability to indicate that child codes in a simple hierarchy are part of the value set of the component for the region.",
@@ -1488,7 +1486,6 @@
 		"MetadataTargetRegionType":{
 			"description":"MetadataTargetRegionType defines the structure of a metadata target region. A metadata target region must define the report structure and the metadata target from that structure on which the region is based. This type is based on the abstract RegionType and simply refines the key and attribute values to conform with what is applicable for target objects and metadata attributes, respectively. See the documentation of the base type for more details on how a region is defined.",
 			"type":"object",
-			"additionalProperties":true,
 			"properties":{
 				"include":{
 					"type":"boolean",
@@ -1883,7 +1880,7 @@
 							"type":"array",
 							"items":{
 								"$ref":"#/definitions/AgencyType",
-								"description":"Agency is an organisation which maintains structural metadata such as statistical classifications, glossaries, key family structural definitions, and metadata structure definitions."
+								"description":"Agency is an organisation which maintains structural metadata such as classifications, concepts, data structures, and metadata structures."
 							}
 						}
 					}
@@ -2763,6 +2760,9 @@
 					"description":"Selection of codes from the referenced (extended) codelist to be excluded in the extending codelist."
 				}
 			},
+			"required":[
+				"codelist"
+			],
 			"anyOf": [
 				{},
 				{
@@ -2777,10 +2777,7 @@
 					"inclusiveCodeSelection",
 					"exclusiveCodeSelection"
 				]
-			},
-			"required":[
-				"codelist"
-			]
+			}
 		},
 		"CodeSelectionType":{
 			"description":"CodeSelectionType defines the structure for code selection to be used as inclusive or exclusive extensions.",
@@ -3600,7 +3597,7 @@
 			]
 		},
 		"HierarchicalCodeType":{
-			"description":"HierarchicalCodeType describes the structure of a hierarchical code. A hierarchical code provides for a reference to a code that is referenced within the hierarchical code list via a complete reference to a code through a URN. Codes are arranged in a hierarchy by this reference. Note that it is possible to reference a single code such that it has multiple parents within the hierarchy. Further, the hierarchy may or may not be a leveled one.",
+			"description":"HierarchicalCodeType describes the structure of a hierarchical code. A hierarchical code provides for a reference to a code that is referenced within the hierarchical code list via either a complete reference to a code through either a URN or full set of reference fields. Codes are arranged in a hierarchy by this reference. Note that it is possible to reference a single code such that it has multiple parents within the hierarchy. Further, the hierarchy may or may not be a leveled one.",
 			"type":"object",
 			"required":[
 				"id",
@@ -3674,7 +3671,7 @@
 				}
 			]
 		},
-		"HiearchyAssociationType":{
+		"HierarchyAssociationType":{
 			"description":"HierarchyAssociationType defines the structure of a hiearchy association, which links a hierarchy with and identifiable object in the context of another object (e.g. a dimension within the context of a dataflow).",
 			"type":"object",
 			"allOf":[
@@ -3896,7 +3893,7 @@
 					"description":"Identfies a sub space of the mapped dataflow that the mapping applies to. This is a collection of references to the dimensions that make up the space."
 				},
 				"method":{
-					"oneOf":[
+					"anyOf":[
 						{
 							"type":"string",
 							"description":"A simple string type that allows for other mapping methods."
@@ -3946,7 +3943,7 @@
 					"description":"Identfies a super space of the mapped dataflow that the mapping applies to. This is a collection of references to the dimensions that make up the space."
 				},
 				"method":{
-					"oneOf":[
+					"anyOf":[
 						{
 							"type":"string",
 							"description":"A simple string type that allows for other mapping methods."
@@ -4426,7 +4423,7 @@
 							"type":"integer",
 							"minimum":0,
 							"default":1,
-							"description":"The minOccurs attribute indicates the minimum number of times this metadata attribute can occur within its parent object."
+							"description":"The minOccurs attribute indicates the minimum number of times this metadata attribute must occur within its parent object."
 						},
 						"conceptIdentity":{
 							"$ref":"#/definitions/ConceptReferenceType",
@@ -4447,12 +4444,12 @@
 			]
 		},
 		"MetadataStructureComponentsType":{
-			"description":"MetadataStructureComponentsType describes the structure of the grouping of the sets of the metadata attributes that make up the metadata structure definition. At a minimum, at least one metadata attribute must be defined.",
+			"description":"MetadataStructureComponentsType describes the structure of one set of components, the metadata attribute list, that make up the metadata structure definition. At a minimum, at least one metadata attribute must be defined.",
 			"type":"object",
 			"properties":{
 				"metadataAttributeList":{
 					"$ref":"#/definitions/MetadataAttributeListType",
-					"description":"MetadataAttributeList defines the set of metadata attributes that can be defined as a hierarchy, for reporting reference metadata about a target object. The identification of metadata attributes must be unique at any given level of the report structure. Although there are XML schema constraints to help enforce this, these only apply to explicitly assigned identifiers. Identifiers inherited from a concept from which a metadata attribute takes its identity cannot be validated against this constraint. Therefore, systems processing metadata structure definitions will have to perform this check outside of the XML validation."
+					"description":"MetadataAttributeList defines the set of metadata attributes that can be defined as a hierarchy, for reporting reference metadata about a target object. The identification of metadata attributes must be unique at any given level of the metadata structure. Although there are XML schema constraints to help enforce this, these only apply to explicitly assigned identifiers. Identifiers inherited from a concept from which a metadata attribute takes its identity cannot be validated against this constraint. Therefore, systems processing metadata structure definitions will have to perform this check outside of the XML validation."
 				}
 			}
 		},
@@ -4467,7 +4464,7 @@
 					"properties":{
 						"metadataStructureComponents":{
 							"$ref":"#/definitions/MetadataStructureComponentsType",
-							"description":"MetadataStructureComponents defines the grouping of the sets of the components that make up the metadata structure definition. The metadata attributes in the single report structure must have a unique identification."
+							"description":"MetadataStructureComponents defines the grouping of the sets of the components that make up the metadata structure definition."
 						}
 					}
 				}
@@ -4783,9 +4780,6 @@
 					"$ref":"#/definitions/NameableType"
 				},
 				{
-					"required":[
-						"id"
-					],
 					"properties":{
 						"reportingCategories":{
 							"type":"array",
@@ -4811,6 +4805,9 @@
 							}
 						}
 					},
+					"required":[
+						"id"
+					],
 					"anyOf":[
 						{},
 						{
@@ -4931,25 +4928,14 @@
 					"$ref":"#/definitions/AnnotableType"
 				},
 				{
-					"oneOf":[
-						{
-							"properties":{
-								"id":{
-									"const":"REPORTING_YEAR_START_DAY"
-								}
-							}
-						},
-						{
-							"properties":{
-								"id":{
-									"const":"REPORTING_YEAR_END_DAY"
-								}
-							}
-						}
-					]
-				},
-				{
 					"properties":{
+						"id":{
+							"type":"string",
+							"enum":[
+								"REPORTING_YEAR_START_DAY",
+								"REPORTING_YEAR_END_DAY"
+							]
+						},
 						"links":{
 							"$ref":"#/definitions/links",
 							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
@@ -5000,32 +4986,58 @@
 				},
 				{
 					"properties":{
-						"sourceCodelists":{
+						"source":{
 							"type":"array",
 							"minItems":1,
 							"items":{
-								"$ref":"#/definitions/CodelistReferenceType"
+								"type":"object",
+								"properties":{
+									"codelists":{
+										"$ref":"#/definitions/CodelistReferenceType"
+									},
+									"dataTypes":{
+										"$ref":"#/definitions/DataType"
+									}
+								},
+								"oneOf":[
+									{
+										"required":[
+											"codelists"
+										]
+									},
+									{
+										"required":[
+											"dataTypes"
+										]
+									}
+								]
 							}
 						},
-						"sourceDataTypes":{
+						"target":{
 							"type":"array",
 							"minItems":1,
 							"items":{
-								"$ref":"#/definitions/DataType"
-							}
-						},
-						"targetCodelists":{
-							"type":"array",
-							"minItems":1,
-							"items":{
-								"$ref":"#/definitions/CodelistReferenceType"
-							}
-						},
-						"targetDataTypes":{
-							"type":"array",
-							"minItems":1,
-							"items":{
-								"$ref":"#/definitions/DataType"
+								"type":"object",
+								"properties":{
+									"codelists":{
+										"$ref":"#/definitions/CodelistReferenceType"
+									},
+									"dataTypes":{
+										"$ref":"#/definitions/DataType"
+									}
+								},
+								"oneOf":[
+									{
+										"required":[
+											"codelists"
+										]
+									},
+									{
+										"required":[
+											"dataTypes"
+										]
+									}
+								]
 							}
 						},
 						"representationMappings":{
@@ -5036,31 +5048,9 @@
 							}
 						}
 					},
-					"oneOf":[
-						{
-							"required":[
-								"sourceCodelists"
-							]
-						},
-						{
-							"required":[
-								"sourceDataTypes"
-							]
-						}
-					]
-				},
-				{
-					"oneOf":[
-						{
-							"required":[
-								"targetCodelists"
-							]
-						},
-						{
-							"required":[
-								"targetDataTypes"
-							]
-						}
+					"required":[
+						"source",
+						"target"
 					]
 				}
 			]
@@ -5212,7 +5202,7 @@
 			]
 		},
 		"StructureMapType":{
-			"description":"StructureMapType defines the structure for mapping components of one structure to components of another structure. A structure may be referenced directly meaning the map applies wherever the structure is used, or it may be a reference via a structure usage meaning the map only applies within the context of that usage. Using the related structures, one can make extrapolations between maps. For example, if key families, A, B, and C, are all grouped in a related structures container, then a map from key family A to C and a map from key family B to C could be used to infer a relation between key family A to C.",
+			"description":"StructureMapType defines the structure for mapping components of one structure to components of another structure. A structure may be referenced directly meaning the map applies wherever the structure is used, or it may be a reference via a structure usage meaning the map only applies within the context of that usage. Using the related structures, one can make extrapolations between maps. For example, if key families, A, B, and C, are all grouped in a related structures container, then a map from data structure A to C and a map from data structure B to C could be used to infer a relation between data structure A to C.",
 			"type":"object",
 			"allOf":[
 				{
@@ -5272,8 +5262,7 @@
 					"required":[
 						"source",
 						"target",
-						"componentMaps",
-						"fixedValueMaps"
+						"componentMaps"
 					]
 				}
 			]
@@ -5296,22 +5285,13 @@
 						},
 						"epochPeriod":{
 							"description":"EpochPeriod defines an enumeration of epoch period types.",
-							"oneOf":[
-								{
-									"const":"nanosecond"
-								},
-								{
-									"const":"millisecond"
-								},
-								{
-									"const":"microsecond"
-								},
-								{
-									"const":"second"
-								},
-								{
-									"const":"day"
-								}
+							"type":"string",
+							"enum":[
+								"nanosecond",
+								"millisecond",
+								"microsecond",
+								"second",
+								"day"
 							]
 						}
 					}
@@ -5351,25 +5331,38 @@
 				},
 				{
 					"required":[
-						"source",
-						"target"
+						"sourceTargetMaps"
 					],
 					"properties":{
-						"source":{
+						"sourceTargetMaps":{
 							"type":"array",
 							"minItems":1,
 							"items":{
-								"$ref":"#/definitions/NestedIDType",
-								"description":"(Nested) ID of a local source component."
+								"type":"object",
+								"required":[
+									"source",
+									"target"
+								],
+								"properties":{
+									"source":{
+										"$ref":"#/definitions/NestedIDType",
+										"description":"(Nested) ID of a local source component."
+									},
+									"target":{
+										"$ref":"#/definitions/NestedIDType",
+										"description":"(Nested) ID of a local target component."
+									}
+								}
 							}
 						},
-						"target":{
-							"type":"array",
-							"minItems":1,
-							"items":{
-								"$ref":"#/definitions/NestedIDType",
-								"description":"(Nested) ID of a local target component."
-							}
+						"resolvePeriod":{
+							"type":"string",
+							"enum":[
+								"startOfPeriod",
+								"endOfPeriod",
+								"midPeriod"
+							],
+							"description":"Indicates the point in time to resolve to when mapping from low fequency periods to higher frequency periods."
 						}
 					}
 				},
@@ -5421,7 +5414,7 @@
 					],
 					"properties":{
 						"frequencyId":{
-							"type":"string"
+							"$ref":"#/definitions/idType"
 						},
 						"datePattern":{
 							"type":"string"
@@ -5458,45 +5451,12 @@
 								"$ref":"#/definitions/NestedIDType",
 								"description":"(Nested) ID of a local target component."
 							}
+						},
+						"representationMap":{
+							"$ref":"#/definitions/RepresentationMapReferenceType",
+							"description":"URN for referencing a representation map object."
 						}
 					}
-				},
-				{
-					"oneOf":[
-						{
-							"required":[
-								"representationMap"
-							],
-							"properties":{
-								"representationMap":{
-									"$ref":"#/definitions/RepresentationMapReferenceType",
-									"description":"URN for referencing a representation map object."
-								}
-							}
-						},
-						{
-							"required":[
-								"epochMap"
-							],
-							"properties":{
-								"epochMap":{
-									"$ref":"#/definitions/idType",
-									"description":"ID of a local epoch map object."
-								}
-							}
-						},
-						{
-							"required":[
-								"datePatternMap"
-							],
-							"properties":{
-								"datePatternMap":{
-									"$ref":"#/definitions/idType",
-									"description":"ID of a local date pattern map object."
-								}
-							}
-						}
-					]
 				}
 			]
 		},
