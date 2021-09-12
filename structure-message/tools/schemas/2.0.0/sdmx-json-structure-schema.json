@@ -29,6 +29,7 @@
 				"contentLanguages":{
 					"description":"Array of strings containing the identifyer of all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, representaing in an array format the same information than the http Content-Language response header, e.g. \"en, fr-fr\". See IETF Language Tags: https://tools.ietf.org/html/rfc5646#section-2.1. The array's first element indicates the main language used in the message for localized elements. The usage of this property is recommended.",
 					"type":"array",
+					"minItems":1,
 					"uniqueItems":true,
 					"items":{
 						"type":"string",
@@ -50,6 +51,7 @@
 				"receivers":{
 					"description":"Receiver is information about the part(y/ies) that is/are the intended recipient(s) of the message. This can be useful if the WS requires authentication.",
 					"type":"array",
+					"minItems":1,
 					"items":{
 						"$ref":"#/definitions/party"
 					}
@@ -453,6 +455,7 @@
 				"contacts":{
 					"description":"Contact provides contact information for the party in regard to the transmission of the message.",
 					"type":"array",
+					"minItems":1,
 					"items":{
 						"$ref":"#/definitions/contactType"
 					}
@@ -686,6 +689,7 @@
 				},
 				"telephones":{
 					"type":"array",
+					"minItems":1,
 					"items":{
 						"description":"Telephone holds the telephone number for the contact person.",
 						"type":"string"
@@ -693,6 +697,7 @@
 				},
 				"faxes":{
 					"type":"array",
+					"minItems":1,
 					"items":{
 						"description":"Fax holds the fax number for the contact person.",
 						"type":"string"
@@ -700,6 +705,7 @@
 				},
 				"x400s":{
 					"type":"array",
+					"minItems":1,
 					"items":{
 						"description":"X400 holds the X.400 address for the contact person.",
 						"type":"string"
@@ -707,6 +713,7 @@
 				},
 				"uris":{
 					"type":"array",
+					"minItems":1,
 					"items":{
 						"description":"URI holds an information URL for the contact person.",
 						"$ref":"#/definitions/uri"
@@ -714,6 +721,7 @@
 				},
 				"emails":{
 					"type":"array",
+					"minItems":1,
 					"items":{
 						"description":"Email holds the email address for the contact person.",
 						"type":"string",
@@ -1246,6 +1254,7 @@
 						},
 						"components":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/ComponentValueSetType",
 								"description":"Component contains a reference to a component (data attribute, metadata attribute, or measure) and provides a collection of values for the referenced component. This serves to state that for the key which defines the region, the components that are specified here have or do not have (depending on the include attribute of the value set) the values provided. It is possible to provide a component reference without specifying values, for the purpose of stating the component is absent (include = false) or present with an unbounded set of values. As opposed to key components, which are assumed to be wild carded if absent, no assumptions are made about the absence of a component. Only components which are explicitly stated to be present or absent from the region will be know. All unstated components for the set cannot be assumed to absent or present."
@@ -1253,6 +1262,7 @@
 						},
 						"keyValues":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/CubeRegionKeyType",
 								"description":"KeyValue contains a reference to a component which disambiguates the data (i.e. a dimension) and provides a collection of values for the component. The collection of values can be flagged as being inclusive or exclusive to the region being defined. Any key component that is not included is assumed to be wild carded, which is to say that the cube includes all possible values for the un-referenced key components. Further, this assumption applies to the values of the components as well. The values for any given component can only be sub-setted in the region by explicit inclusion or exclusion. For example, a dimension X which has the possible values of 1, 2, 3 is assumed to have all of these values if a key value is not defined. If a key value is defined with an inclusion attribute of true and the values of 1 and 2, the only the values of 1 and 2 for dimension X are included in the definition of the region. If the key value is defined with an inclusion attribute of false and the value of 1, then the values of 2 and 3 for dimension X are included in the definition of the region. Note that any given key component must only be referenced once in the region."
@@ -1486,25 +1496,33 @@
 		"MetadataTargetRegionType":{
 			"description":"MetadataTargetRegionType defines the structure of a metadata target region. A metadata target region must define the report structure and the metadata target from that structure on which the region is based. This type is based on the abstract RegionType and simply refines the key and attribute values to conform with what is applicable for target objects and metadata attributes, respectively. See the documentation of the base type for more details on how a region is defined.",
 			"type":"object",
-			"properties":{
-				"include":{
-					"type":"boolean",
-					"default":true,
-					"description":"The include attribute indicates that the region is to be included or excluded within the context in which it is defined. For example, if the regions is defined as part of a content constraint, the exclude flag would mean the data identified by the region is not present."
+			"allOf":[
+				{
+					"$ref":"#/definitions/AnnotableType"
 				},
-				"components":{
-					"type":"array",
-					"items":{
-						"$ref":"#/definitions/MetadataAttributeValueSetType"
+				{
+					"properties":{
+						"include":{
+							"type":"boolean",
+							"default":true,
+							"description":"The include attribute indicates that the region is to be included or excluded within the context in which it is defined. For example, if the regions is defined as part of a content constraint, the exclude flag would mean the data identified by the region is not present."
+						},
+						"components":{
+							"type":"array",
+							"minItems":1,
+							"items":{
+								"$ref":"#/definitions/MetadataAttributeValueSetType"
+							}
+						},
+						"validFrom":{
+							"$ref":"#/definitions/StandardTimePeriodType"
+						},
+						"validTo":{
+							"$ref":"#/definitions/StandardTimePeriodType"
+						}
 					}
-				},
-				"validFrom":{
-					"$ref":"#/definitions/StandardTimePeriodType"
-				},
-				"validTo":{
-					"$ref":"#/definitions/StandardTimePeriodType"
 				}
-			}
+			]
 		},
 		"NestedIDType":{
 			"description":"NestedIDType is the least restrictive form of an identifier used throughout all SDMX-ML messages. It allows for a hierarchical identifier, with each portion separated by the '.' character. For the identifier portions, valid characters include A-Z, a-z, @, 0-9, _, -, $.",
@@ -1878,6 +1896,7 @@
 						},
 						"agencies":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/AgencyType",
 								"description":"Agency is an organisation which maintains structural metadata such as classifications, concepts, data structures, and metadata structures."
@@ -1898,6 +1917,7 @@
 					"properties":{
 						"contacts":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/contactType"
 							}
@@ -1972,6 +1992,7 @@
 						},
 						"queryableDataSources":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/QueryableDataSourceType",
 								"description":"queryableDataSource describes a queryable data source to which the constraint is attached."
@@ -1995,6 +2016,7 @@
 						},
 						"queryableDataSources":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/QueryableDataSourceType",
 								"description":"queryableDataSource describes a queryable data source to which the constraint is attached."
@@ -2018,6 +2040,7 @@
 						},
 						"queryableDataSources":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/QueryableDataSourceType",
 								"description":"queryableDataSource describes a queryable data source to which the constraint is attached."
@@ -2050,6 +2073,7 @@
 						},
 						"metadataTargetRegions":{
 							"type":"array",
+							"minItems":1,
 							"maxItems":2,
 							"items":{
 								"$ref":"#/definitions/MetadataTargetRegionType",
@@ -2082,6 +2106,7 @@
 						},
 						"attributes":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"anyOf":[
 									{
@@ -2097,6 +2122,7 @@
 						},
 						"metadataAttributeUsages":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/MetadataAttributeUsageType",
 								"description":"MetadataAttributeUsage refines the details of how a metadata attribute from the metadata structure referenced from the data structure is used. By default, metadata attributes can be expressed at any level of the data. This allows an attribute relationship to be defined in order restrict the reporing of a metadata attribute to a specific part of the data."
@@ -2268,6 +2294,7 @@
 						},
 						"conceptRoles":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/ConceptReferenceType",
 								"description":"ConceptRole references concepts which define roles which this attribute serves. If the concept from which the attribute takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here."
@@ -2410,6 +2437,7 @@
 						},
 						"categories":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/CategoryType",
 								"description":"Category represents a set of nested categories which describe a simple classification hierarchy."
@@ -2430,6 +2458,7 @@
 					"properties":{
 						"categories":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/CategoryType"
 							}
@@ -3044,6 +3073,7 @@
 						},
 						"concepts":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/ConceptType",
 								"description":"Concept describes the details of a concept within a concept scheme."
@@ -3159,6 +3189,7 @@
 						},
 						"queryableDataSources":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/QueryableDataSourceType",
 								"description":"queryableDataSource describes a queryable data source to which the constraint is attached."
@@ -3182,6 +3213,7 @@
 						},
 						"queryableDataSources":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/QueryableDataSourceType",
 								"description":"queryableDataSource describes a queryable data source to which the constraint is attached."
@@ -3205,6 +3237,7 @@
 						},
 						"queryableDataSources":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/QueryableDataSourceType",
 								"description":"queryableDataSource describes a queryable data source to which the constraint is attached."
@@ -3237,6 +3270,7 @@
 						},
 						"dataKeySets":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/DataKeySetType",
 								"description":"DataKeySet defines a full, distinct set of dimension values and the attribute values associated with the key."
@@ -3244,6 +3278,7 @@
 						},
 						"cubeRegions":{
 							"type":"array",
+							"minItems":1,
 							"maxItems":2,
 							"items":{
 								"$ref":"#/definitions/CubeRegionType",
@@ -3283,6 +3318,7 @@
 						},
 						"dataConsumers":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/DataConsumerType",
 								"description":"DataConsumer describes an organisation using data as input for further processing."
@@ -3303,6 +3339,7 @@
 					"properties":{
 						"contacts":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/contactType"
 							}
@@ -3354,6 +3391,7 @@
 						},
 						"dataProviders":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/DataProviderType",
 								"description":"DataProvider describes an organisation that produces data."
@@ -3381,6 +3419,7 @@
 						},
 						"metadataProviders":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/MetadataProviderType",
 								"description":"MetadataProvider describes an organisation that produces metadata."
@@ -3401,6 +3440,7 @@
 					"properties":{
 						"contacts":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/contactType"
 							}
@@ -3423,6 +3463,7 @@
 					"properties":{
 						"contacts":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/contactType"
 							}
@@ -3448,6 +3489,7 @@
 				},
 				"groups":{
 					"type":"array",
+					"minItems":1,
 					"items":{
 						"$ref":"#/definitions/GroupType",
 						"description":"Group describes a group descriptor in a data structure definition. It is a set metadata concepts (and possibly their values) that define a partial key derived from the key descriptor in a data structure definition."
@@ -3522,6 +3564,7 @@
 					"properties":{
 						"dimensions":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/DimensionType",
 								"description":"Dimension describes the structure of a dimension, which is defined as a statistical concept used (most probably together with other statistical concepts) to identify a statistical series, such as a time series, e.g. a statistical concept indicating certain economic activity or a geographical reference area."
@@ -3559,6 +3602,7 @@
 						"conceptRoles":{
 							"description":"ConceptRoles references concepts which define roles which this dimension serves. If the concept from which the attribute takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here.",
 							"type":"array",
+							"minItems":1,
 							"uniqueItems": true,
 							"items":{
 								"$ref":"#/definitions/ConceptReferenceType",
@@ -3586,6 +3630,7 @@
 					"properties":{
 						"groupDimensions":{
 							"type":"array",
+							"minItems":1,
 							"uniqueItems":true,
 							"items":{
 								"$ref":"#/definitions/NCNameIDType",
@@ -3721,6 +3766,7 @@
 						},
 						"customTypes":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/CustomTypeType",
 								"description":"CustomType details a custom type within a custom type scheme."
@@ -3792,6 +3838,7 @@
 						},
 						"vtlMappings":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/VtlMappingType",
 								"description":"VtlMapping details a mapping between SDMX and VTL transformation."
@@ -3986,6 +4033,7 @@
 						},
 						"namePersonalisations":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/NamePersonalisationType",
 								"description":"NamePersonalisation details a name personalisation that is used in a transformation."
@@ -4047,6 +4095,7 @@
 						},
 						"rulesets":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/RulesetType",
 								"description":"Ruleset details a ruleset within a ruleset scheme."
@@ -4112,6 +4161,7 @@
 						},
 						"transformations":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/TransformationType",
 								"description":"Transformation describes the details of a single transformation within a transformation scheme."
@@ -4203,6 +4253,7 @@
 						},
 						"userDefinedOperators":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/UserDefinedOperatorType",
 								"description":"UserDefinedOperator details a user defined operators within a user defined operator scheme."
@@ -4359,6 +4410,7 @@
 					"properties":{
 						"measures":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/MeasureType",
 								"description":"Measure defines the structure of a measure, which is the concept that is the value of the phenomenon to be measured in a data set."
@@ -4549,6 +4601,7 @@
 						},
 						"organisationUnits":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/OrganisationUnitType",
 								"description":"OrganisationUnit describes a generic organisation, which serves not predefined role in SDMX."
@@ -4569,6 +4622,7 @@
 					"properties":{
 						"contacts":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/contactType"
 							}
@@ -4588,7 +4642,6 @@
 			"description":"MeasureType defines the structure of a measure descriptor. In addition to the identifying concept and representation, a mandatory usage and max occurs can be defined.",
 			"type":"object",
 			"required":[
-				"isMandatory",
 				"conceptIdentity"
 			],
 			"allOf":[
@@ -4609,6 +4662,7 @@
 						"conceptRoles":{
 							"description":"ConceptRole references concepts which define roles which this measure serves. If the concept from which the attribute takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here.",
 							"type":"array",
+							"minItems":1,
 							"uniqueItems":true,
 							"items":{
 								"$ref":"#/definitions/ConceptReferenceType",
@@ -4637,6 +4691,7 @@
 						},
 						"inputs":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/InputOutputType",
 								"description":"Input references an object which is an input to the process step."
@@ -4644,6 +4699,7 @@
 						},
 						"outputs":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/InputOutputType",
 								"description":"Output references an object which is an output form the process step."
@@ -4651,6 +4707,7 @@
 						},
 						"processSteps":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/ProcessStepType",
 								"description":"ProcessStep defines a process step, which is a specific operation, performed on data in order to validate or to derive new information according to a given set of rules."
@@ -4658,6 +4715,7 @@
 						},
 						"transitions":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/TransitionType",
 								"description":"Transition describes the next process steps. Each transition in a process step should be evaluated, allowing for multiple process step branches from a single process step."
@@ -4681,6 +4739,7 @@
 					"properties":{
 						"processSteps":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/ProcessStepType",
 								"description":"ProcessStep defines a process step, which is a specific operation, performed on data in order to validate or to derive new information according to a given set of rules."
@@ -4783,6 +4842,7 @@
 					"properties":{
 						"reportingCategories":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/ReportingCategoryType",
 								"description":"ReportingCategory defines a reporting category, which is used to group structure usages into useful sub-packages."
@@ -4790,6 +4850,7 @@
 						},
 						"structuralMetadata":{
 							"type":"array",
+							"minItems":1,
 							"uniqueItems":true,
 							"items":{
 								"$ref":"#/definitions/StructureReferenceType",
@@ -4798,6 +4859,7 @@
 						},
 						"provisioningMetadata":{
 							"type":"array",
+							"minItems":1,
 							"uniqueItems":true,
 							"items":{
 								"$ref":"#/definitions/StructureUsageReferenceType",
@@ -4870,6 +4932,7 @@
 						},
 						"reportingCategories":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/ReportingCategoryType",
 								"description":"ReportingCategory defines a reporting category, which is used to group structure usages into useful sub-packages."
@@ -4943,7 +5006,7 @@
 						"usage": {
 							"$ref": "#/definitions/UsageType",
 							"default":"mandatory",
-							"description":"The isMandatory attribute indicates whether a ReportingYearStartDay/ReportingYearEndDay attribute value must be available for any corresponding existing observation."
+							"description":"The usage attribute indicates whether a ReportingYearStartDay/ReportingYearEndDay attribute value must be available for any corresponding existing observation."
 						},
 						"attributeRelationship":{
 							"$ref":"#/definitions/AttributeRelationshipType",
@@ -4964,6 +5027,7 @@
 						},
 						"conceptRoles":{
 							"type":"array",
+							"minItems":1,
 							"uniqueItems":true,
 							"items":{
 								"$ref":"#/definitions/ConceptReferenceType",
@@ -5495,6 +5559,7 @@
 					"properties":{
 						"values":{
 							"type":"array",
+							"minItems":1,
 							"items":{
 								"type":"string",
 								"description":"The fixed value for the component."
