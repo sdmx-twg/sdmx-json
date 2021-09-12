@@ -1660,24 +1660,6 @@
 			"type":"string",
 			"pattern":"^\\d{4}\\-([ASTQ]\\d{1}|[MW]\\d{2}|[D]\\d{3})(Z|((\\+|\\-)\\d{2}:\\d{2}))?$"
 		},
-		"SetReferenceType":{
-			"description":"SetReferenceType defines the structure of a reference to a data/metadata set. A full reference to a data provider and the identifier for the data set must be provided. Note that this is not derived from the base reference structure since data/metadata sets are not technically identifiable.",
-			"type":"object",
-			"properties":{
-				"dataProvider":{
-					"$ref":"#/definitions/DataProviderReferenceType",
-					"description":"DataProvider is a urn reference to a the provider of the data/metadata set."
-				},
-				"id":{
-					"description":"ID contains the identifier of the data/metadata set being referenced.",
-					"$ref":"#/definitions/idType"
-				}
-			},
-			"required":[
-				"dataProvider",
-				"id"
-			]
-		},
 		"SimpleDataType":{
 			"description":"SimpleDataType restricts BasicComponentDataType to specify the allowable data types for a data structure definition component. The XHTML representation is removed as a possible type.",
 			"type":"string",
@@ -1962,7 +1944,7 @@
 							"uniqueItems":true,
 							"minItems":1,
 							"items":{
-								"$ref":"#/definitions/SetReferenceType",
+								"$ref":"#/definitions/MetadataSetReferenceType",
 								"description":"MetadataSet is a urn reference to a metadata set to which the constraint is attached. Multiple instance can only be used if they have the same underlying structure."
 							}
 						}
@@ -3134,22 +3116,6 @@
 						"dataProvider":{
 							"$ref":"#/definitions/DataProviderReferenceType",
 							"description":"dataProvider is a urn reference to a the provider of the data/metadata set to which the constraint is attached. If this is used, then only the release calendar is relevant.."
-						}
-					}
-				},
-				{
-					"required":[
-						"dataSets"
-					],
-					"properties":{
-						"dataSets":{
-							"type":"array",
-							"uniqueItems":true,
-							"minItems":1,
-							"items":{
-								"$ref":"#/definitions/SetReferenceType",
-								"description":"DataSet is a urn reference to a data set to which the constraint is attached. Multiple instance can only be used if they have the same underlying structure."
-							}
 						}
 					}
 				},
@@ -5793,6 +5759,11 @@
 			"description":"MetadataProvisionAgreementReferenceType is a type for referencing a metadata provision agreement. It consists of a URN.",
 			"type":"string",
 			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.registry\\.MetadataProvisionAgreement=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
+		},
+		"MetadataSetReferenceType":{
+			"description":"MetadataSetReferenceType is a type for referencing a metadata set. It consists of a URN.",
+			"type":"string",
+			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.metadatastructure\\.MetadataSet=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
 		},
 		"MetadataAttributeReferenceType":{
 			"description":"MetadataAttributeReferenceType is a type for referencing a metadata attribute object in a metadata structur. It consists of a URN.",
