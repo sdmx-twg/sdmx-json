@@ -2931,7 +2931,7 @@
 				{
 					"properties":{
 						"enumeration":{
-							"$ref":"#/definitions/CodelistReferenceType",
+							"$ref":"#/definitions/AnyCodelistReferenceType",
 							"description":"Urn reference to a codelist which enumerates the possible values that can be used as the representation of this concept."
 						},
 						"enumerationFormat":{
@@ -4283,7 +4283,7 @@
 				{
 					"properties":{
 						"enumeration":{
-							"$ref":"#/definitions/EnumerationReferenceType",
+							"$ref":"#/definitions/AnyCodelistReferenceType",
 							"description":"Urn reference to an item scheme or value list."
 						},
 						"enumerationFormat":{
@@ -4983,7 +4983,7 @@
 								"type":"object",
 								"properties":{
 									"codelists":{
-										"$ref":"#/definitions/CodelistReferenceType"
+										"$ref":"#/definitions/AnyCodelistReferenceType"
 									},
 									"dataTypes":{
 										"$ref":"#/definitions/DataType"
@@ -5010,7 +5010,7 @@
 								"type":"object",
 								"properties":{
 									"codelists":{
-										"$ref":"#/definitions/CodelistReferenceType"
+										"$ref":"#/definitions/AnyCodelistReferenceType"
 									},
 									"dataTypes":{
 										"$ref":"#/definitions/DataType"
@@ -5116,7 +5116,7 @@
 				{
 					"properties":{
 						"enumeration":{
-							"$ref":"#/definitions/EnumerationReferenceType",
+							"$ref":"#/definitions/AnyCodelistReferenceType",
 							"description":"Reference to an item scheme or a value list. It consists of a URN."
 						},
 						"enumerationFormat":{
@@ -5808,7 +5808,12 @@
 		"CodelistReferenceType":{
 			"description":"CodelistReferenceType is a type for referencing a codelist object. It consists of a URN.",
 			"type":"string",
-			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.((codelist\\.((Codelist)|(Hierarchy)|(ValueList))))=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
+			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.codelist\\.Codelist=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
+		},
+		"AnyCodelistReferenceType":{
+			"description":"AnyCodelistReferenceType is a type for referencing a codelist or valuelist object. It consists of a URN.",
+			"type":"string",
+			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.codelist\\.((Codelist)|(ValueList))=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
 		},
 		"CodeReferenceType":{
 			"description":"CodeReferenceType is a type for referencing a code object. It consists of a URN.",
