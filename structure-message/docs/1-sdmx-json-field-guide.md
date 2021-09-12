@@ -617,7 +617,7 @@ Example:
 		"pattern": "^[0-9][0-9]$"
 	}
 
-####### format
+###### format
 
 *Object* *optional*. Format defines the information for describing a range of data formats restricted to the representations allowed for all components except for target objects.
 
@@ -651,7 +651,7 @@ Example:
 		]
 	}
 
-######## sentinelValue
+###### sentinelValue
 
 *Object*. It defines a reserved value (within the value domain of the data format) along with its meaning.
 
@@ -1739,7 +1739,7 @@ Example:
 		}
 	}
 
-####### TimePeriodRange
+###### TimePeriodRange
 
 *Object*. TimePeriodRange defines a time period, and indicates whether it is inclusive in a range.
 
