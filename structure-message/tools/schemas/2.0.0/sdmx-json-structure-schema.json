@@ -2059,7 +2059,7 @@
 			]
 		},
 		"MetadataConstraintType":{
-			"description":"MetadataConstraintType defines the structure of a metadata constraint, which specifies a sub set of the definition of the allowable content of a metadata set. A metadata constraint can specify allowed attribute values for metadata described by the constrained artefact. The constraint attachment is restricted to constrainable artefacts related to metadata, and the only possible role is 'Allowed'.",
+			"description":"MetadataConstraintType defines the structure of a metadata constraint, which specifies a sub set of the definition of the allowable content of a metadata set. A metadata constraint can specify allowed attribute values for metadata described by the constrained artefact. The constraint attachment is restricted to constrainable artefacts related to metadata, and the only possible role is 'Allowed'. Unless the artefact is returned as a stub, it must contain the 'role' property.",
 			"type":"object",
 			"allOf":[
 				{
@@ -2088,10 +2088,7 @@
 								"description":"MetadataTargetRegion describes the values allowed for metadata attributes. A set of either included or excluded regions can be described."
 							}
 						}
-					},
-					"required":[
-						"role"
-					]
+					}
 				}
 			]
 		},
@@ -2399,7 +2396,7 @@
 			]
 		},
 		"CategorySchemeMapType":{
-			"description":"CategorySchemeMapType defines the structure of a map which identifies relationships between categories in different category schemes.",
+			"description":"CategorySchemeMapType defines the structure of a map which identifies relationships between categories in different category schemes. Unless the artefact is returned as a stub, it must contain the 'source' and 'target' properties.",
 			"type":"object",
 			"allOf":[
 				{
@@ -2422,11 +2419,7 @@
 							"$ref":"#/definitions/CategorySchemeReferenceType",
 							"description":"Urn reference to a concept scheme object."
 						}
-					},
-					"required":[
-						"source",
-						"target"
-					]
+					}
 				}
 			]
 		},
@@ -2619,16 +2612,13 @@
 			]
 		},
 		"GeographicCodelistType":{
-			"description":"GeographicCodelistType defines the sturcture of a geographic codelist. It comprises a set of GeoFeatureSetCodes, by adding a value in the Code that follows a pattern to represent a geo feature set.",
+			"description":"GeographicCodelistType defines the sturcture of a geographic codelist. It comprises a set of GeoFeatureSetCodes, by adding a value in the Code that follows a pattern to represent a geo feature set. Unless the artefact is returned as a stub, it must contain the 'geoType' property.",
 			"type":"object",
 			"allOf":[
 				{
 					"$ref":"#/definitions/MaintainableTypeWithNCNameID"
 				},
 				{
-					"required":[
-						"geoType"
-					],
 					"properties":{
 						"isPartial":{
 							"type":"boolean",
@@ -2671,17 +2661,13 @@
 			]
 		},
 		"GeoGridCodelistType":{
-			"description":"GeoGridCodelistType defines the structure of a geographic grid code list. These define a geographical grid composed of cells representing regular squared portions of the Earth.",
+			"description":"GeoGridCodelistType defines the structure of a geographic grid code list. These define a geographical grid composed of cells representing regular squared portions of the Earth. Unless the artefact is returned as a stub, it must contain the 'geoType' and 'gridDefinition' properties.",
 			"type":"object",
 			"allOf":[
 				{
 					"$ref":"#/definitions/MaintainableTypeWithNCNameID"
 				},
 				{
-					"required":[
-						"geoType",
-						"gridDefinition"
-					],
 					"properties":{
 						"isPartial":{
 							"type":"boolean",
@@ -3009,7 +2995,7 @@
 			]
 		},
 		"ConceptSchemeMapType":{
-			"description":"ConceptSchemeMapType defines the structure of a map which identifies relationships between concepts in different concept schemes.",
+			"description":"ConceptSchemeMapType defines the structure of a map which identifies relationships between concepts in different concept schemes. Unless the artefact is returned as a stub, it must contain the 'source' and 'target' properties.",
 			"type":"object",
 			"allOf":[
 				{
@@ -3032,11 +3018,7 @@
 							"$ref":"#/definitions/ConceptSchemeReferenceType",
 							"description":"Urn reference to a concept scheme object."
 						}
-					},
-					"required":[
-						"source",
-						"target"
-					]
+					}
 				}
 			]
 		},
@@ -3262,7 +3244,7 @@
 			]
 		},
 		"DataConstraintType":{
-			"description":"DataConstraintType defines the structure of a data constraint. A data constraint can specify either the available set of keys (DataKeySet) or set of component values (CubeRegion) in a data source, or the allowable keys that can be constructed from a data structure definition. Multiple such constraints may be present for a constrained artefact. For instance, there may be a constraing that specifies the values allowed for the data source (role is 'Allowed') which can be used for validation or for constructing a partial code list, whilst another constraing can specify the actual content of a data source (role is 'Actual').",
+			"description":"DataConstraintType defines the structure of a data constraint. A data constraint can specify either the available set of keys (DataKeySet) or set of component values (CubeRegion) in a data source, or the allowable keys that can be constructed from a data structure definition. Multiple such constraints may be present for a constrained artefact. For instance, there may be a constraing that specifies the values allowed for the data source (role is 'Allowed') which can be used for validation or for constructing a partial code list, whilst another constraing can specify the actual content of a data source (role is 'Actual'). Unless the artefact is returned as a stub, it must contain the 'role' property.",
 			"type":"object",
 			"allOf":[
 				{
@@ -3299,10 +3281,7 @@
 								"description":"CubeRegion defines a slice of the data set (dimensions and attribute values) for the constrained artefacet. A set of either included or excluded regions can be described."
 							}
 						}
-					},
-					"required":[
-						"role"
-					]
+					}
 				}
 			]
 		},
@@ -3698,7 +3677,7 @@
 			]
 		},
 		"HierarchyType":{
-			"description":"The Hierarchy is an abstract type that provides for a classification structure of referenced codes arranged in levels of detail from the broadest to the most detailed level. The levels in which the code exist can be formal or informal.",
+			"description":"The Hierarchy is an abstract type that provides for a classification structure of referenced codes arranged in levels of detail from the broadest to the most detailed level. The levels in which the code exist can be formal or informal. Unless the artefact is returned as a stub, it must contain the 'hierarchicalCodes' and 'hasFormalLevels' properties.",
 			"type":"object",
 			"allOf":[
 				{
@@ -3722,16 +3701,12 @@
 							"type":"boolean",
 							"description":"If “true”, this indicates a hierarchy where the structure is arranged in levels of detail from the broadest to the most detailed level. If “false”, this indicates a hierarchy structure where the items in the hierarchy have no formal level structure."
 						}
-					},
-					"required":[
-						"hierarchicalCodes",
-						"hasFormalLevels"
-					]
+					}
 				}
 			]
 		},
 		"HierarchyAssociationType":{
-			"description":"HierarchyAssociationType defines the structure of a hiearchy association, which links a hierarchy with and identifiable object in the context of another object (e.g. a dimension within the context of a dataflow).",
+			"description":"HierarchyAssociationType defines the structure of a hiearchy association, which links a hierarchy with and identifiable object in the context of another object (e.g. a dimension within the context of a dataflow). Unless the artefact is returned as a stub, it must contain the 'linkedHierarchy' and 'linkedObject' properties.",
 			"type":"object",
 			"allOf":[
 				{
@@ -3751,25 +3726,18 @@
 							"$ref":"#/definitions/urn",
 							"description":"The context within which the association is performed."
 						}
-					},
-					"required":[
-						"linkedHierarchy",
-						"linkedObject"
-					]
+					}
 				}
 			]
 		},
 		"CustomTypeSchemeType":{
-			"description":"CustomTypeSchemeType defines a collection of custom types that are used in transformations.",
+			"description":"CustomTypeSchemeType defines a collection of custom types that are used in transformations. Unless the artefact is returned as a stub, it must contain the 'vtlVersion' property.",
 			"type":"object",
 			"allOf":[
 				{
 					"$ref":"#/definitions/MaintainableType"
 				},
 				{
-					"required":[
-						"vtlVersion"
-					],
 					"properties":{
 						"isPartial":{
 							"type":"boolean",
@@ -4027,16 +3995,13 @@
 			}
 		},
 		"NamePersonalisationSchemeType":{
-			"description":"NamePersonalisationSchemeType defines a set of personalisations of VTL standard names that are used in a set of transformations.",
+			"description":"NamePersonalisationSchemeType defines a set of personalisations of VTL standard names that are used in a set of transformations. Unless the artefact is returned as a stub, it must contain the 'vtlVersion' property.",
 			"type":"object",
 			"allOf":[
 				{
 					"$ref":"#/definitions/MaintainableType"
 				},
 				{
-					"required":[
-						"vtlVersion"
-					],
 					"properties":{
 						"isPartial":{
 							"type":"boolean",
@@ -4089,16 +4054,13 @@
 			]
 		},
 		"RulesetSchemeType":{
-			"description":"RulesetSchemeType defines a collection of rulesets that are used in transformations.",
+			"description":"RulesetSchemeType defines a collection of rulesets that are used in transformations. Unless the artefact is returned as a stub, it must contain the 'vtlVersion' property.",
 			"type":"object",
 			"allOf":[
 				{
 					"$ref":"#/definitions/MaintainableType"
 				},
 				{
-					"required":[
-						"vtlVersion"
-					],
 					"properties":{
 						"isPartial":{
 							"type":"boolean",
@@ -4155,16 +4117,13 @@
 			]
 		},
 		"TransformationSchemeType":{
-			"description":"TransformationSchemeType describes the structure of a transformation scheme. A transformation scheme contains a set of transformations to be executed together (in the same run). It can contain any number of transformations that produce any number of results.",
+			"description":"TransformationSchemeType describes the structure of a transformation scheme. A transformation scheme contains a set of transformations to be executed together (in the same run). It can contain any number of transformations that produce any number of results. Unless the artefact is returned as a stub, it must contain the 'vtlVersion' property.",
 			"type":"object",
 			"allOf":[
 				{
 					"$ref":"#/definitions/MaintainableType"
 				},
 				{
-					"required":[
-						"vtlVersion"
-					],
 					"properties":{
 						"isPartial":{
 							"type":"boolean",
@@ -4247,16 +4206,13 @@
 			]
 		},
 		"UserDefinedOperatorSchemeType":{
-			"description":"UserDefinedOperatorSchemeType defines a collection of user defined operators that are used in transformations.",
+			"description":"UserDefinedOperatorSchemeType defines a collection of user defined operators that are used in transformations. Unless the artefact is returned as a stub, it must contain the 'vtlVersion' property.",
 			"type":"object",
 			"allOf":[
 				{
 					"$ref":"#/definitions/MaintainableType"
 				},
 				{
-					"required":[
-						"vtlVersion"
-					],
 					"properties":{
 						"isPartial":{
 							"type":"boolean",
@@ -4537,7 +4493,7 @@
 			]
 		},
 		"MetadataflowType":{
-			"description":"MetadataflowType describes the structure of a metadata flow. A dataflow is defined as the structure of reference metadata that will be provided for different reference periods. If this type is not referenced externally, then a reference to a metadata structure definition must be provided.",
+			"description":"MetadataflowType describes the structure of a metadata flow. A dataflow is defined as the structure of reference metadata that will be provided for different reference periods. If this type is not referenced externally, then a reference to a metadata structure definition must be provided. Unless the artefact is returned as a stub, it must contain the 'targets' property.",
 			"type":"object",
 			"allOf":[
 				{
@@ -4558,15 +4514,12 @@
 								"description":"References identifiable structures to which the reference metadata described by the referenced metadata structure should be restricted to. These references may include wildcards for parts of the reference."
 							}
 						}
-					},
-					"required":[
-						"targets"
-					]
+					}
 				}
 			]
 		},
 		"OrganisationSchemeMapType":{
-			"description":"OrganisationSchemeMapType defines the structure of a map which identifies relationships between organisations in different organisation schemes.",
+			"description":"OrganisationSchemeMapType defines the structure of a map which identifies relationships between organisations in different organisation schemes. Unless the artefact is returned as a stub, it must contain the 'source' and 'target' properties.",
 			"type":"object",
 			"allOf":[
 				{
@@ -4589,11 +4542,7 @@
 							"$ref":"#/definitions/OrganisationSchemeReferenceType",
 							"description":"Urn reference to a concept scheme object."
 						}
-					},
-					"required":[
-						"source",
-						"target"
-					]
+					}
 				}
 			]
 		},
@@ -4764,7 +4713,7 @@
 			]
 		},
 		"ProvisionAgreementType":{
-			"description":"ProvisionAgreementType describes the structure of a provision agreement. A provision agreement defines an agreement for a data provider to report data against a dataflow. Attributes which describe how the registry must behave when data is registered against this provision agreement are supplied.",
+			"description":"ProvisionAgreementType describes the structure of a provision agreement. A provision agreement defines an agreement for a data provider to report data against a dataflow. Attributes which describe how the registry must behave when data is registered against this provision agreement are supplied. Unless the artefact is returned as a stub, it must contain the 'dataflow' and 'dataProvider' properties.",
 			"type":"object",
 			"allOf":[
 				{
@@ -4780,16 +4729,12 @@
 							"$ref":"#/definitions/DataProviderReferenceType",
 							"description":"DataProvider provides a reference to a pre-existing data provider in the registry via a URN."
 						}
-					},
-					"required":[
-						"dataflow",
-						"dataProvider"
-					]
+					}
 				}
 			]
 		},
 		"MetadataProvisionAgreementType":{
-			"description":"MetadataProvisionAgreementType describes the structure of a metadata provision agreement. A metadata provision agreement defines an agreement for a metadata provider to report reference metadata against a metadataflow. Attributes which describe how the registry must behave when metadata is registered against this metadata provision agreement are supplied.",
+			"description":"MetadataProvisionAgreementType describes the structure of a metadata provision agreement. A metadata provision agreement defines an agreement for a metadata provider to report reference metadata against a metadataflow. Attributes which describe how the registry must behave when metadata is registered against this metadata provision agreement are supplied. Unless the artefact is returned as a stub, it must contain the 'metadataflow' and 'dataProvider' properties.",
 			"type":"object",
 			"allOf":[
 				{
@@ -4814,11 +4759,7 @@
 							},
 							"description":"References identifiable structures to which the reference metadata described by the metadata structure used by the metadaflow should be restricted to. These references may include wildcards for parts of the reference."
 						}
-					},
-					"required":[
-						"metadataflow",
-						"dataProvider"
-					]
+					}
 				}
 			]
 		},
@@ -4909,7 +4850,7 @@
 			]
 		},
 		"ReportingTaxonomyMapType":{
-			"description":"ReportingTaxonomyMapType defines the structure of a map which identifies relationships between reporting categories in different reporting taxonomies.",
+			"description":"ReportingTaxonomyMapType defines the structure of a map which identifies relationships between reporting categories in different reporting taxonomies. Unless the artefact is returned as a stub, it must contain the 'source' and 'target' properties.",
 			"type":"object",
 			"allOf":[
 				{
@@ -4932,11 +4873,7 @@
 							"$ref":"#/definitions/ReportingTaxonomyReferenceType",
 							"description":"Urn reference to a concept scheme object."
 						}
-					},
-					"required":[
-						"source",
-						"target"
-					]
+					}
 				}
 			]
 		},
@@ -5065,7 +5002,7 @@
 			]
 		},
 		"RepresentationMapType":{
-			"description":"RepresentationMapType describes ...",
+			"description":"RepresentationMapType describes ...  Unless the artefact is returned as a stub, it must contain the 'source' and 'target' properties.",
 			"type":"object",
 			"allOf":[
 				{
@@ -5134,11 +5071,7 @@
 								"$ref":"#/definitions/ValueMappingType"
 							}
 						}
-					},
-					"required":[
-						"source",
-						"target"
-					]
+					}
 				}
 			]
 		},
@@ -5289,7 +5222,7 @@
 			]
 		},
 		"StructureMapType":{
-			"description":"StructureMapType defines the structure for mapping components of one structure to components of another structure. A structure may be referenced directly meaning the map applies wherever the structure is used, or it may be a reference via a structure usage meaning the map only applies within the context of that usage. Using the related structures, one can make extrapolations between maps. For example, if key families, A, B, and C, are all grouped in a related structures container, then a map from data structure A to C and a map from data structure B to C could be used to infer a relation between data structure A to C.",
+			"description":"StructureMapType defines the structure for mapping components of one structure to components of another structure. A structure may be referenced directly meaning the map applies wherever the structure is used, or it may be a reference via a structure usage meaning the map only applies within the context of that usage. Using the related structures, one can make extrapolations between maps. For example, if key families, A, B, and C, are all grouped in a related structures container, then a map from data structure A to C and a map from data structure B to C could be used to infer a relation between data structure A to C. Unless the artefact is returned as a stub, it must contain the 'source', 'target' and 'componentMaps' properties.",
 			"type":"object",
 			"allOf":[
 				{
@@ -5345,12 +5278,7 @@
 								"description":"FixedValueMap defines a fixed value for a source or target component in the mapping."
 							}
 						}
-					},
-					"required":[
-						"source",
-						"target",
-						"componentMaps"
-					]
+					}
 				}
 			]
 		},
