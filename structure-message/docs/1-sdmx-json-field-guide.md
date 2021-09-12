@@ -1506,7 +1506,6 @@ Example:
 constraintAttachment properties for DataConstraints:  
 
 * dataProvider - *String* *optional*. DataProvider is a URN reference to a data provider to which the constraint is attached. If this is used, then only the release calendar is relevant. 
-* dataSets - *Array* *optional*. A list of *[dataSet reference](#dataSetReference)* objects. DataSet reference is a urn reference to a data set to which the constraint is attached.
 * dataStructures - *Array* *optional* of *string*s. URN references to data structure definitions to which the constraint is attached. A constraint which is attached to more than one data structure must only express key sets and/or cube regions where the identifiers of the dimensions are common across all structures to which the constraint is attached. 
 * dataflows - *Array* *optional* of *string*s. Urn references to data flows to which the constraint is attached. A constraint can be attached to more than one dataflow, and the dataflows do not necessarily have to be usages of the same data structure. However, a constraint which is attached to more than one data structure must only express key sets and/or cube regions where the identifiers of the dimensions are common across all structures to which the constraint is attached. 
 * provisionAgreements - *Array* *optional* of *string*s. Urn references to provision agreements to which the constraint is attached. A constraint can be attached to more than one data provision agreement, and the data provision agreements do not necessarily have to be references structure usages based on the same structure. However, a constraint which is attached to more than one data provision agreement must only express key sets and/or cube/target regions where the identifier of the components are common across all structures to which the constraint is attached. 
@@ -1514,7 +1513,7 @@ constraintAttachment properties for DataConstraints:
 constraintAttachment properties for MetadataConstraints:  
 
 * metadataProvider - *String* *optional*. MetadataProvider is a URN reference to a metadata provider to which the constraint is attached. If this is used, then only the release calendar is relevant. 
-* metadataSets - *Array* *optional*. A list of of *[metadataSet reference](#dataSetReference)* objects. MetadataSets reference is a urn reference to a metadata set to which the constraint is attached.
+* metadataSets - *Array* *optional*. URN references to metadata sets to which the constraint is attached.
 * metadataStructures - *Array* *optional* of *string*s. URN references to metadata structure definitions to which the constraint is attached. A constraint which is attached to more than one metadata structure must only express key sets and/or target regions where the identifiers of the target objects are common across all structures to which the constraint is attached. 
 * metadataflows - *Array* *optional* of *string*s. Urn references to metadata flows to which the constraint is attached. A constraint can be attached to more than one metadataflow, and the metadataflows do not necessarily have to be usages of the same metadata structure. However, a constraint which is attached to more than one metadata structure must only express key sets and/or target regions where the identifiers of the target objects are common across all structures to which the constraint is attached. 
 * metadataProvisionAgreements - *Array* *optional* of *string*s. Urn references to metadata provision agreements to which the constraint is attached. A constraint can be attached to more than one metadata provision agreement, and the metadata provision agreements do not necessarily have to be references structure usages based on the same structure. However, a constraint which is attached to more than one metadata provision agreement must only express key sets and/or cube/target regions where the identifier of the components are common across all structures to which the constraint is attached. 
@@ -1528,14 +1527,6 @@ Examples:
 
 	{
 		"dataProvider": "urn:sdmx:org.sdmx.infomodel...."
-	}
-	
-	{
-		"dataSets": [
-			{
-				# dataSetReference object #
-			}
-		]
 	}
 	
 	{
@@ -1577,9 +1568,7 @@ Examples:
 	
 	{
 		"metadataSets": [
-			{
-				# dataSetReference object #
-			}
+			"urn:sdmx:org.sdmx.infomodel....", "urn:sdmx:org.sdmx.infomodel...."
 		]
 	}
 	
@@ -1620,20 +1609,6 @@ Examples:
 		"simpleDataSources": [
 			"/data/EXR/M..EUR.SP00.A"
 		]
-	}
-
-##### dataSetReference
-
-*Object*. DataSetReference defines the structure of a reference to a data/metadata set. A full reference to a data provider and the identifier for the data set must be provided. Note that this is not derived from the base reference structure since data/metadata sets are not technically identifiable.
-
-* dataProvider - *String*. DataProvider is a URN reference to a the provider of the data/metadata set. 
-* id - *String*. ID contains the identifier of the data/metadata set being referenced. 
-
-Example:
-
-	{
-		"dataProvider": "EXB",
-		"id": "DATASET1"
 	}
 
 ##### queryableDataSource
