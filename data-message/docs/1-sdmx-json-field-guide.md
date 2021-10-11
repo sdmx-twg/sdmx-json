@@ -779,7 +779,7 @@ Example:
 	*/
 
 	"dimensionGroupAttributes": {
-		"0::": { null, "ATTR3_VALUE_1" },
+		"0::": { null, 0 },
 		"0::0": { "ATTR2_VALUE_1" },
 		"0::1": { "ATTR2_VALUE_2" }
 	},
@@ -886,19 +886,9 @@ Example:
 				"id": "ATTR2_DIMGROUP",
 				"name": "Attribute 2",
 				"names": { "en": "Attribute 2" },
-				"default": "ATTR1_VALUE_2",
-				"values": [
-					{
-						"id": "ATTR2_VALUE_1",
-						"name": "Attribute 2 - Value 1 with index 0",
-						"names": { "en": "Attribute 2 - Value 1 with index 0" }
-					},
-					{
-						"id": "ATTR2_VALUE_2",
-						"name": "Attribute 2 - Value 2 with index 1",
-						"names": { "Attribute 2 - Value 2 with index 1" }
-					}
-				]
+				"format": {
+					"dataType": "String"
+				}
 			},
 			{
 				"id": "ATTR3_DIMGROUP",
@@ -918,13 +908,16 @@ Example:
 			{
 				"id": "ATTR1_OBS",
 				"name": "Attribute 1",
-				"names": { "en": "Attribute 1" }
+				"names": { "en": "Attribute 1" },
+				"format": {
+					"dataType": "String"
+				}
 			}
 		]
 	}
 	
 	Note:
-	For attribute "ATTR1_OBS", the values are omitted in the attribute definition and thus presented directly in the dataSets' observations (instead of indexes).
+	For attributes "ATTR2_DIMGROUP" and "ATTR1_OBS", the values are omitted in the attribute definitions and thus presented directly in the dataSets' `dimensionGroupAttributes` and `observations` (instead of indexes).
 
 ### series
 
@@ -1114,7 +1107,7 @@ Example:
 	]
 	
 	Note:
-	For attribute "ATTR2", the values are omitted in the attribute definition and thus presented directly in the dataSets' observations (instead of indexes).
+	For attribute "ATTR2", the values are omitted in the attribute definition and thus presented directly in the dataSets' `observations` (instead of indexes).
 
 ### observations
 
@@ -1273,7 +1266,7 @@ Example:
 	]
 	
 	Note:
-	For attribute "ATTR1", the values are omitted in the attribute definition and thus presented directly in the dataSets' observations (instead of indexes).
+	For attribute "ATTR1", the values are omitted in the attribute definition and thus presented directly in the dataSets' `observations` (instead of indexes).
 
 ## error
 
