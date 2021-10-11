@@ -451,6 +451,24 @@
 					],
 					"observation":[
 						{
+							"id":"EMBARGO_TIME",
+							"name":"Embargo time",
+							"names":{
+								"en":"Embargo time"
+							},
+							"roles":[
+								"EMBARGO_TIME"
+							],
+							"relationship":{
+								"observation":{}
+							},
+							"format":{
+								"dataType":"BasicTimePeriod",
+								"maxOccurs":1,
+								"isMultiLingual":false
+							}
+						},
+						{
 							"id":"OBS_STATUS",
 							"name":"Observation status",
 							"names":{
@@ -486,11 +504,12 @@
 				},
 				"annotations":[
 					{
-						"title":"AnnotationTitle provides a title for the annotation.",
-						"type":"AnnotationType is used to distinguish between annotations.",
-						"text":"AnnotationText contains the text of the annotation.",
+						"title":"A title for the annotation.",
+						"type":"Used to distinguish between annotations.",
+						"value":"A non-localised value text of the annotation.",
+						"text":"A human-readable (best-language-match) text of the annotation.",
 						"texts":{
-							"en":"AnnotationText contains the text of the annotation."
+							"en":"A human-readable localised text (English) of the annotation."
 						},
 						"id":"Non-standard identification of an annotation.",
 						"links":[
@@ -506,9 +525,7 @@
 					1,
 					2,
 					3,
-					4,
-					5,
-					6
+					4
 				]
 			}
 		],
@@ -558,10 +575,12 @@
 						"observations":{
 							"0":[
 								1.5931,
+								"2013-03-18T11:00:00",
 								0
 							],
 							"1":[
 								1.5925,
+								"2013-03-21T11:00:00",
 								0
 							]
 						}
@@ -576,10 +595,12 @@
 						"observations":{
 							"0":[
 								40.3426,
+								"2013-03-18T11:00:00",
 								0
 							],
 							"1":[
 								40.3,
+								"2013-03-21T11:00:00",
 								0
 							]
 						}
@@ -596,106 +617,42 @@
 					}
 				],
 				"action":"Information",
-				"comment for observations":"# 2nd alternative instead of series (only if no series level (dimensionAtObservation == allDimensions))",
+				"attributes":[
+					0,
+					[
+						"Description value 1",
+						"Description value 2"
+					]
+				],
+				"dimensionGroupAttributes":{
+					"0::0::0:":[
+						0
+					],
+					"0::0::1:":[
+						0
+					]
+				},
+				"comment for observations":"# 2nd alternative instead of series if no series level (dimensionAtObservation == allDimensions)",
 				"observations":{
 					"0:0":[
 						1.5931,
+						"2013-03-18T11:00:00",
 						0
 					],
 					"0:1":[
 						1.5925,
+						"2013-03-21T11:00:00",
 						0
 					],
 					"1:0":[
 						40.3426,
+						"2013-03-18T11:00:00",
 						0,
 						0
 					],
 					"1:1":[
 						40.3,
-						0,
-						0
-					]
-				}
-			},
-			{
-				"structure":0,
-				"links":[
-					{
-						"href":"https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_EXR1/1.0",
-						"urn":"urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_EXR1(1.0)",
-						"rel":"datastructure"
-					}
-				],
-				"action":"Information",
-				"comment for dataSet(s)":"# In case that the server does not group dimensions with single values at dataset level",
-				"comment for series":"# 1st alternative (only if series level (dimensionAtObservation <> allDimensions))",
-				"series":{
-					"0:0:0:0:0":{
-						"annotations":[
-							
-						],
-						"attributes":[
-							0
-						],
-						"observations":{
-							"0":[
-								1.5931,
-								0
-							],
-							"1":[
-								1.5925,
-								0
-							]
-						}
-					},
-					"0:0:0:0:1":{
-						"annotations":[
-							0
-						],
-						"attributes":[
-							1
-						],
-						"observations":{
-							"0":[
-								40.3426,
-								0
-							],
-							"1":[
-								40.3,
-								0
-							]
-						}
-					}
-				}
-			},
-			{
-				"structure":0,
-				"links":[
-					{
-						"href":"https://sdw-wsrest.ecb.europa.eu/service/datastructure/ECB/ECB_EXR1/1.0",
-						"urn":"urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_EXR1(1.0)",
-						"rel":"datastructure"
-					}
-				],
-				"action":"Information",
-				"comment for dataSet(s)":"# 2nd alternative (only if no series level (dimensionAtObservation == allDimensions))",
-				"observations":{
-					"0:0:0:0:0:0":[
-						1.5931,
-						0
-					],
-					"0:0:0:0:0:1":[
-						1.5925,
-						0
-					],
-					"0:0:0:0:1:0":[
-						40.3426,
-						0,
-						0
-					],
-					"0:0:0:0:1:1":[
-						40.3,
+						"2013-03-21T11:00:00",
 						0,
 						0
 					]
@@ -714,16 +671,12 @@
 				"comment for dataSet(s)":"# In case the client is using the detail parameter and the server supports it. # Detail parameter: serieskeysonly. No observation values, attributes or annotations.",
 				"observations":{
 					"0:0":[
-						
 					],
 					"0:1":[
-						
 					],
 					"1:0":[
-						
 					],
 					"1:1":[
-						
 					]
 				}
 			},
@@ -763,19 +716,38 @@
 					}
 				],
 				"action":"Information",
+				"attributes":[
+					0,
+					[
+						"Description value 1",
+						"Description value 2"
+					]
+				],
+				"dimensionGroupAttributes":{
+					"0::0::0:":[
+						0
+					],
+					"0::0::1:":[
+						0
+					]
+				},
 				"comment for dataSet(s)":"# Detail parameter: nodata. No observation values, just attributes and annotations.",
 				"observations":{
 					"0:0":[
+						"2013-03-18T11:00:00",
 						0
 					],
 					"0:1":[
+						"2013-03-21T11:00:00",
 						0
 					],
 					"1:0":[
+						"2013-03-18T11:00:00",
 						0,
 						0
 					],
 					"1:1":[
+						"2013-03-21T11:00:00",
 						0,
 						0
 					]
