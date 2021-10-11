@@ -2502,7 +2502,7 @@
 				{
 					"properties":{
 						"parent":{
-							"$ref":"#/definitions/SingleNCNameIDType",
+							"$ref":"#/definitions/idType",
 							"description":"Parent provides the ability to describe simple hierarchies within a single codelist, by referencing the id value of another code in the same codelist."
 						}
 					},
