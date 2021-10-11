@@ -37,9 +37,9 @@
 						"Ut sit ex officia ullamco"
 					],
 					"uris":[
-						"http://WAZzAgeptsVJOqXoCpooFtEEaGf.uknVjEKz-x1yob6Rkm9v8W1ivTGq-T2K9IVWDh8d4CYVdRZ04IU2MsM,LLkNd4rbjUgg0KX9y8Cpu",
+						"http://WAZzAgeptsVJOqXoCpooFtEEaGf.uknVjEKzx1yob6Rkm9v8W1ivTGq-T2K9IVWDh8d4CYVdRZ04IU2MsMLLkNd4rbjUgg0KX9y8Cpu",
 						"https://gniN.hlkSBEUbvupsGHbQC3x.cDXQApPifPashtgYuuT6Io3",
-						"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUf,pcN18UhP",
+						"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP",
 						"https://eGHsgpGgjOEJCpv.pggxwDLAl"
 					],
 					"x400s":[
@@ -85,9 +85,7 @@
 					"dolor_36c":true
 				}
 			],
-			"name":{
-				"description":"Name is a human-readable name of the party."
-			},
+			"name":"Name is a human-readable name of the party.",
 			"names":{
 				"rqjh-fotn-zd-c-d1-fu-8r-7qaz9-6-tu-3-k424mwm-3h9vn-63dc68b-poh-2q9-xl-v-ixnaf9-z5cz1-1q-lodo1re-s-fok54-0j1msga-p-7j4vjo90-r6cy-vymjsy-fc1ektj9-n1tayqim-77qfq-db-qxu-n-upgt4g-l1xefrdy-rfyj41-u0yyyg-lce-al-aavqv21":"esse ullamco nostrud in",
 				"x-t9d-34m":"dolor officia",
@@ -141,60 +139,31 @@
 									"x-glhm95-h1to-4gu-k":"veniam nisi in"
 								},
 								"id":"consequat veniam in adipisicing",
-								"value":{
-									"description":"AnnotationValue holds a string containing the non-localised value of the annotation."
-								},
+								"value":"AnnotationValue holds a string containing the non-localised value of the annotation.",
 								"type":"do",
 								"links":[
 									{
 										"rel":"minim nostrud ullamco",
-										"uri":{
-											"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-										}
+										"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=DeQtXDSA.diRs500U.A94n.fT7Iw34e.DdqytZP1.gk6jOK_.T:mqJW(770.488.0)",
+                                     	"uri":"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP"
 									},
 									{
+										"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=DeQtXDSA.diRs500U.A94n.fT7Iw34e.DdqytZP1.gk6jOK_.T:mqJW(770.488.0)",
 										"rel":"Lorem est"
 									},
 									{
-										"urn":{
-											"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details)."
-										},
+										"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=DeQtXDSA.diRs500U.A94n.fT7Iw34e.DdqytZP1.gk6jOK_.T:mqJW(770.488.0)",
 										"rel":"in anim officia magna",
 										"hreflang":"lsdqhte-ys-0pkn-6-3t8l11-o82",
 										"type":"eu dolor consectetur ipsum irure",
-										"uri":{
-											"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-										}
-									},
-									{
-										"urn":{
-											"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details)."
-										},
-										"rel":"qui enim",
-										"hreflang":"en-GB-oed",
-										"uri":{
-											"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-										},
-										"type":"mollit"
-									},
-									{
-										"urn":{
-											"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details)."
-										},
-										"rel":"in eiusmod occaecat",
-										"hreflang":"x-mge-zhukcs-f3pak4-6-u4apn-pr-j1h4j-mia7-1qt-w2c7dhy",
-										"uri":{
-											"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-										}
+                                     	"uri":"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP"
 									}
 								],
 								"text":"nostrud voluptate irure est in"
 							},
 							{
 								"title":"dolor deserunt Excepteur",
-								"value":{
-									"description":"AnnotationValue holds a string containing the non-localised value of the annotation."
-								},
+								"value":"AnnotationValue holds a string containing the non-localised value of the annotation.",
 								"url":"https://svBdMnhiFtp.sevotsS1SvR9JeW7BIvWRu5NSOUngtpUnpG1jw7oe2LjrcVv",
 								"id":"sit sint anim ex ut",
 								"texts":{
@@ -205,12 +174,11 @@
 								"type":"commodo aliquip voluptate",
 								"links":[
 									{
+										"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=DeQtXDSA.diRs500U.A94n.fT7Iw34e.DdqytZP1.gk6jOK_.T:mqJW(770.488.0)",
 										"rel":"in cupidatat do culpa occaecat",
 										"type":"anim qui in laboris magna",
 										"hreflang":"cel-gaulish",
-										"uri":{
-											"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-										}
+										"uri":"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP"
 									}
 								]
 							},
@@ -226,15 +194,15 @@
 									"x-3pigimt-6":"elit nostrud sint in"
 								},
 								"url":"http://bFpYAHoOglGSCsCrftElEDT.himkB1VNfHZY8LTzr,g",
-								"value":{
-									"description":"AnnotationValue holds a string containing the non-localised value of the annotation."
-								},
+								"value":"AnnotationValue holds a string containing the non-localised value of the annotation.",
 								"id":"id sint nostrud mollit dolor",
 								"links":[
 									{
-										"rel":"ut ullamco",
-										"hreflang":"x-ak05dnup-r49gi-lddfjs",
-										"type":"et ea culpa in"
+										"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=DeQtXDSA.diRs500U.A94n.fT7Iw34e.DdqytZP1.gk6jOK_.T:mqJW(770.488.0)",
+										"rel":"in cupidatat do culpa occaecat",
+										"type":"anim qui in laboris magna",
+										"hreflang":"cel-gaulish",
+										"uri":"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP"
 									}
 								],
 								"text":"ullamco adipisicing",
@@ -262,11 +230,10 @@
 									"elit_f96":"ad",
 									"doa63":-80332
 								},
+								"id":"iJ1zCkaZ",
 								"annotations":[
 									{
-										"text":{
-											"description":"AnnotationText holds a string containing a language-specific text of the annotation."
-										},
+										"text":"AnnotationText holds a string containing a language-specific text of the annotation.",
 										"sit221":74185801.47354543,
 										"Ut89":"ex officia nulla sit",
 										"laboris2":59206023
@@ -274,46 +241,16 @@
 									{
 										"links":[
 											{
-												"rel":"minim consectetur dolor do nisi",
-												"hreflang":"i-bnn",
-												"uri":{
-													"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-												},
-												"type":"esse ex incididunt"
-											},
-											{
-												"rel":"aliquip",
-												"uri":{
-													"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-												},
-												"hreflang":"x-o1mv-x3-4rxrj-vi7bs5m4-grz0cw-lb7ijj-3datd79-kq-sxjx-k-ppawh48",
-												"type":"ex enim"
-											},
-											{
-												"urn":{
-													"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details)."
-												},
-												"rel":"incididunt nisi pariatur Duis",
-												"type":"nisi",
-												"uri":{
-													"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-												},
-												"hreflang":"gw-oa"
-											},
-											{
-												"rel":"sed irure",
-												"uri":{
-													"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-												},
-												"type":"sunt consectetur Duis aliquip",
-												"hreflang":"wwcc-weuq-x-3p0o-4a-1o-mnt6si-s-rnct-a-z"
+												"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=DeQtXDSA.diRs500U.A94n.fT7Iw34e.DdqytZP1.gk6jOK_.T:mqJW(770.488.0)",
+												"rel":"in cupidatat do culpa occaecat",
+												"type":"anim qui in laboris magna",
+												"hreflang":"cel-gaulish",
+												"uri":"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP"
 											}
 										],
 										"id":"labore",
 										"title":"laboris in do",
-										"value":{
-											"description":"AnnotationValue holds a string containing the non-localised value of the annotation."
-										},
+										"value":"AnnotationValue holds a string containing the non-localised value of the annotation.",
 										"type":"velit",
 										"texts":{
 											"description":"AnnotationText holds a string containing the language-specific text of the annotation."
@@ -327,26 +264,15 @@
 											"description":"AnnotationText holds a string containing the language-specific text of the annotation."
 										},
 										"title":"magna",
-										"text":{
-											"description":"AnnotationText holds a string containing a language-specific text of the annotation."
-										},
-										"value":{
-											"description":"AnnotationValue holds a string containing the non-localised value of the annotation."
-										},
+										"text":"AnnotationText holds a string containing a language-specific text of the annotation.",
+										"value":"AnnotationValue holds a string containing the non-localised value of the annotation.",
 										"links":[
 											{
-												"rel":"next",
-												"type":"est dolor Excepteur ad",
-												"hreflang":"sgn-CH-DE",
-												"uri":{
-													"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-												}
-											},
-											{
-												"urn":{
-													"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details)."
-												},
-												"rel":"via"
+												"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=DeQtXDSA.diRs500U.A94n.fT7Iw34e.DdqytZP1.gk6jOK_.T:mqJW(770.488.0)",
+												"rel":"in cupidatat do culpa occaecat",
+												"type":"anim qui in laboris magna",
+												"hreflang":"cel-gaulish",
+												"uri":"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP"
 											}
 										],
 										"id":"officia in esse non"
@@ -362,30 +288,11 @@
 									{
 										"links":[
 											{
-												"rel":"section",
-												"type":"occaecat reprehenderit sed",
-												"uri":{
-													"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-												}
-											},
-											{
-												"rel":"ut pariatur",
-												"type":"dolore incididunt qui aute",
-												"hreflang":"oukn-yecd-7d4y8-oiq8g-0hqwp-3ko1-x-ta-lupa-1g4ytl"
-											},
-											{
-												"rel":"sint aliqua",
-												"uri":{
-													"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-												},
-												"hreflang":"x-xfe-gl-ccg6-72j-fwzfxpys"
-											},
-											{
-												"urn":{
-													"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details)."
-												},
-												"rel":"version-history",
-												"hreflang":"ebs-ulf-dpfe-qb-u-vi3z600b-6jevygg-wck-53k-eqh-n81naas-xj-8bk0dgd-mt-5cdt-4-knru-sa-cam3ep-iv-xll7fs-ov-h0gbcrs-rdjr-p-19yxwz0c-aos-ow-iv3rnbw-5xzspf5-r-1rdee-zhr-x-p1-0-v2h-ry8o9gr-mcwzue6v-b6-9zf-8jk1fk5a-sra1rus-14p7rtsg"
+												"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=DeQtXDSA.diRs500U.A94n.fT7Iw34e.DdqytZP1.gk6jOK_.T:mqJW(770.488.0)",
+												"rel":"in cupidatat do culpa occaecat",
+												"type":"anim qui in laboris magna",
+												"hreflang":"cel-gaulish",
+												"uri":"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP"
 											}
 										],
 										"ullamco_4":"irure officia nisi amet et",
@@ -394,31 +301,6 @@
 										"fugiat_bd":"ex id",
 										"sed_70":-52802993,
 										"proident_f73":-16820395
-									}
-								],
-								"attributes":[
-									{
-										"value":"ullamco"
-									},
-									{
-										"attributes":[
-											
-										]
-									},
-									{
-										"attributes":[
-											
-										]
-									}
-								]
-							},
-							{
-								"value":true,
-								"attributes":[
-									{
-										"attributes":[
-											
-										]
 									}
 								]
 							}
@@ -429,13 +311,6 @@
 							"dataType":"XHTML",
 							"minValue":-62589299.85150754
 						}
-					},
-					{
-						"attributes":[
-							{
-								"value":null
-							}
-						]
 					}
 				],
 				"names":{
@@ -450,46 +325,11 @@
 				"publicationPeriod":"#'A/P\\p<r4@2T",
 				"links":[
 					{
-						"rel":"edit",
-						"hreflang":"fmyq-ewmm-ly"
-					},
-					{
-						"urn":{
-							"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details)."
-						},
-						"rel":"categorisation",
-						"hreflang":"qizd-wynx-7-z3eer-rtsd-mqokvd-dcd4k1-fj-w04yd-f01pe-mor9a-px-n-z4rhbw-t641g-n-by92-834-k9y1ql69-k3l5rf6-9bq7-w-bpc5k-2cj337nk-etwqvrq3-oh5ue-bmf0-emmv-7jobm8-9e5465hv",
-						"uri":{
-							"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-						},
-						"type":"enim qui reprehenderit laborum ipsum"
-					},
-					{
-						"urn":{
-							"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details)."
-						},
-						"rel":"payment",
-						"hreflang":"fyoh-gxpj-698-glg217-9cta-sbves4d-0f2i-1j27-fqfl6p-5qexct3-hsyni-8n5k-63zo-4-y4syfom9-1-xbadp-4kgo-kxpjty-z9fxawp-3v2gv-qvt5l8jr-a4-x-e92yruvc-znjrtzbr-2p2fegq",
-						"uri":{
-							"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-						}
-					},
-					{
-						"urn":{
-							"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details)."
-						},
-						"rel":"velit in nulla",
-						"uri":{
-							"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-						},
-						"hreflang":"uqhh-ahzq-210-30zffwp-we9xcpy6-665q-rq8izyr-dcnnn8u-124j-x-7-k0uj3-mzd5jz",
-						"type":"ullamco"
-					},
-					{
-						"urn":{
-							"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details)."
-						},
-						"rel":"ex culpa in sed"
+						"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=DeQtXDSA:mqJW(770.488.0)",
+						"rel":"in cupidatat do culpa occaecat",
+						"type":"anim qui in laboris magna",
+						"hreflang":"cel-gaulish",
+						"uri":"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP"
 					}
 				],
 				"validFrom":"1978-04-19T22:00:00.0Z",
@@ -502,12 +342,8 @@
 						"ut107":"enim"
 					},
 					{
-						"text":{
-							"description":"AnnotationText holds a string containing a language-specific text of the annotation."
-						},
-						"url":{
-							"description":"AnnotationURL is a URI - typically a URL - which points to an external resource which may contain or supplement the annotation. If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly."
-						},
+						"text":"AnnotationText holds a string containing a language-specific text of the annotation.",
+						"url":"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP",
 						"id":"esse culpa nulla",
 						"occaecat__b8":false,
 						"in1ff":50956029,
@@ -516,17 +352,21 @@
 					},
 					{
 						"texts":{
-							"description":"AnnotationText holds a string containing the language-specific text of the annotation."
+							"en":"AnnotationText holds a string containing the language-specific text of the annotation."
 						},
-						"text":{
-							"description":"AnnotationText holds a string containing a language-specific text of the annotation."
-						},
+						"text":"AnnotationText holds a string containing a language-specific text of the annotation.",
 						"id":"ipsum in"
 					},
 					{
-						"links":{
-							"description":"Links field is an array of link objects. Also used to specify the Annotation URL which points to an external resource which may contain or supplement the annotation (using 'self' as relationship). If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly. If appropriate, a collection of links to additional external resources."
-						},
+						"links":[
+							{
+								"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=DeQtXDSA:mqJW(770.488.0)",
+								"rel":"in cupidatat do culpa occaecat",
+								"type":"anim qui in laboris magna",
+								"hreflang":"cel-gaulish",
+								"uri":"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP"
+							}
+						],
 						"id_c86":"Lorem et eu sed",
 						"veniam_8":true,
 						"officiabcb":-40856410.20916628,
@@ -538,9 +378,7 @@
 						"ina7":"ullamco occaecat Ut"
 					},
 					{
-						"value":{
-							"description":"AnnotationValue holds a string containing the non-localised value of the annotation."
-						},
+						"value":"AnnotationValue holds a string containing the non-localised value of the annotation.",
 						"title":"elit consectetur Excepteur",
 						"reprehenderit50":true,
 						"cupidatat701":"occaecat in mollit eiusmod ea",
@@ -555,20 +393,24 @@
 				],
 				"publicationYear":"0623Z",
 				"version":"0.0.376-0",
-				"action":"wjk",
+				"action":"Information",
 				"description":"aute consequat",
 				"isExternalReference":false,
 				"validTo":"1998-02-04T23:00:00.0Z"
 			},
 			{
+				"id":"rR6ZPy5nC",
 				"agencyID":"rR6ZPy5nC.emspV.EjI-D5Y4.Js.bCRoEjASYkr.CajY-ze-",
 				"name":"sunt adipisicing consequat",
 				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=DeQtXDSA.diRs500U.A94n.fT7Iw34e.DdqytZP1.gk6jOK_.T:mqJW(770.488.0)",
 				"targets":[
-					
+					"urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=DeQtXDSA.diRs500U.A94n.fT7Iw34e.DdqytZP1.gk6jOK_.T:mqJW(770.488.0)"
 				],
 				"attributes":[
-					
+					{
+						"id":"c$",
+						"value":-63489494.96628009
+					}
 				],
 				"descriptions":{
 					"anuk-yyoq-gh1uf99u-af35puy-g3a0d39-1yp6-80t3":"aliquip fugiat eiusmod laboris commodo",
@@ -579,34 +421,11 @@
 				"isExternalReference":false,
 				"links":[
 					{
-						"rel":"sit eu labore occaecat",
-						"hreflang":"art-lojban"
-					},
-					{
-						"urn":{
-							"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details)."
-						},
-						"rel":"next-archive",
-						"type":"sed id sit"
-					},
-					{
-						"urn":{
-							"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details)."
-						},
-						"rel":"enclosure",
-						"type":"cillum sit commodo esse Excepteur",
-						"hreflang":"tuy-asi-qwpg-856-35af-2udp-89h9-x-zd-1bwr-zy1-j8pwb4oa-bqhird86",
-						"uri":{
-							"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-						}
-					},
-					{
-						"rel":"alternate",
-						"type":"quis",
-						"uri":{
-							"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-						},
-						"hreflang":"x-69j4lhkr-qdhqd-ee-ji9o99-ezsurtyu-rrdrou-jvwim"
+						"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=DeQtXDSA:mqJW(770.488.0)",
+						"rel":"in cupidatat do culpa occaecat",
+						"type":"anim qui in laboris magna",
+						"hreflang":"cel-gaulish",
+						"uri":"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP"
 					}
 				],
 				"reportingBegin":"0233",
@@ -614,90 +433,43 @@
 					"zh-hakka":"in id elit",
 					"i-lux":"fugiat"
 				},
-				"action":"jK03ZT",
+				"action":"Replace",
 				"validTo":"2020-04-13T22:00:00.0Z",
 				"version":"840221802.0.7585937",
 				"annotations":[
 					{
 						"type":"sed fugiat deserunt occaecat esse",
 						"url":"http://syjB.rciKH7fae86XIzyy9i2XWZI+xaArD8wEFPx8Nz8PeOLJ",
-						"value":{
-							"description":"AnnotationValue holds a string containing the non-localised value of the annotation."
-						},
+						"value":"AnnotationValue holds a string containing the non-localised value of the annotation.",
 						"texts":{
-							"description":"AnnotationText holds a string containing the language-specific text of the annotation."
+							"en":"AnnotationText holds a string containing the language-specific text of the annotation."
 						},
-						"text":{
-							"description":"AnnotationText holds a string containing a language-specific text of the annotation."
-						},
+						"text":"AnnotationText holds a string containing a language-specific text of the annotation.",
 						"links":[
 							{
-								"urn":{
-									"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details)."
-								},
-								"rel":"hub",
-								"hreflang":"sgn-BE-NL",
-								"uri":{
-									"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-								}
-							},
-							{
-								"urn":{
-									"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details)."
-								},
-								"rel":"irure sint",
-								"hreflang":"zh-min-nan",
-								"type":"aliquip in deserunt commodo"
-							},
-							{
-								"urn":{
-									"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details)."
-								},
-								"rel":"tempor",
-								"uri":{
-									"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-								},
-								"type":"occaecat non commodo nostrud deserunt",
-								"hreflang":"i-lux"
+								"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=DeQtXDSA:mqJW(770.488.0)",
+								"rel":"in cupidatat do culpa occaecat",
+								"type":"anim qui in laboris magna",
+								"hreflang":"cel-gaulish",
+								"uri":"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP"
 							}
 						],
 						"dolore_2":"ut",
 						"mollitae":"id"
 					},
 					{
-						"value":{
-							"description":"AnnotationValue holds a string containing the non-localised value of the annotation."
-						},
+						"value":"AnnotationValue holds a string containing the non-localised value of the annotation.",
 						"links":[
 							{
-								"urn":{
-									"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details)."
-								},
-								"rel":"start",
-								"type":"dolore nisi ea dolore velit"
-							},
-							{
-								"urn":{
-									"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details)."
-								},
-								"rel":"mollit in",
-								"type":"dolor dolore et cillum consequat",
-								"hreflang":"x-x0cv4i-dgn-75v-vtfp",
-								"uri":{
-									"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-								}
-							},
-							{
-								"rel":"replies",
-								"type":"tempor voluptate",
-								"uri":{
-									"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource."
-								},
-								"hreflang":"cpf-mzu-ewp-x-j4at7-h4so613n-6wsw-rydx-dtdpush-88-1xlchbrs-y399f1c8"
+								"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=DeQtXDSA:mqJW(770.488.0)",
+								"rel":"in cupidatat do culpa occaecat",
+								"type":"anim qui in laboris magna",
+								"hreflang":"cel-gaulish",
+								"uri":"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP"
 							}
 						],
 						"texts":{
-							"description":"AnnotationText holds a string containing the language-specific text of the annotation."
+							"en":"AnnotationText holds a string containing the language-specific text of the annotation."
 						},
 						"url":"http://plONsTL.nmksJK9LjWaWLnlsoAnI,ZYQ3V.rtXq+JIN3ctGjB2xOK36,h.JFQV,",
 						"title":"laboris irure",
@@ -727,45 +499,45 @@
 	"errors":[
 		{
 			"code":96529995.76208287,
-			"title":{
-				"description":"Title contains the title of the message, in best-match language value. A short, human-readable localised summary of the status that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization."
-			},
+			"title":"Title contains the title of the message, in best-match language value. A short, human-readable localised summary of the status that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization.",
 			"details":{
-				"description":"Detail contains the detailed text of the message, in parallel language values. A list of human-readable localised explanations specific to this occurrence of the status. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status."
+				"fr":"Detail contains the detailed text of the message, in parallel language values. A list of human-readable localised explanations specific to this occurrence of the status. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status."
 			},
-			"links":{
-				"description":"Links field is an array of link objects. If appropriate, a collection of links to additional external resources for the status."
-			},
+			"links":[
+				{
+					"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=DeQtXDSA:mJW(770.488.0)",
+					"rel":"in cupidatat do culpa occaecat",
+					"type":"anim qui in laboris magna",
+					"hreflang":"cel-gaulish",
+					"uri":"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP"
+				}
+			],
 			"titles":{
-				"description":"Title contains the title of the message, in parallel language values. A list of short, human-readable localised summary of the status that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization."
+				"de":"Title contains the title of the message, in parallel language values. A list of short, human-readable localised summary of the status that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization."
 			},
-			"detail":{
-				"description":"Detail contains the detailed text of the message, in best-match language value. A human-readable localised explanation specific to this occurrence of the status. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status."
-			}
+			"detail":"Detail contains the detailed text of the message, in best-match language value. A human-readable localised explanation specific to this occurrence of the status. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status."
 		},
 		{
 			"code":67157557.70123723,
-			"detail":{
-				"description":"Detail contains the detailed text of the message, in best-match language value. A human-readable localised explanation specific to this occurrence of the status. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status."
-			},
+			"detail":"Detail contains the detailed text of the message, in best-match language value. A human-readable localised explanation specific to this occurrence of the status. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status.",
 			"details":{
-				"description":"Detail contains the detailed text of the message, in parallel language values. A list of human-readable localised explanations specific to this occurrence of the status. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status."
+				"en":"Detail contains the detailed text of the message, in parallel language values. A list of human-readable localised explanations specific to this occurrence of the status. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status."
 			},
-			"title":{
-				"description":"Title contains the title of the message, in best-match language value. A short, human-readable localised summary of the status that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization."
-			}
+			"title":"Title contains the title of the message, in best-match language value. A short, human-readable localised summary of the status that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization."
 		},
 		{
 			"code":-13299148.194488943,
-			"title":{
-				"description":"Title contains the title of the message, in best-match language value. A short, human-readable localised summary of the status that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization."
-			},
-			"links":{
-				"description":"Links field is an array of link objects. If appropriate, a collection of links to additional external resources for the status."
-			},
-			"detail":{
-				"description":"Detail contains the detailed text of the message, in best-match language value. A human-readable localised explanation specific to this occurrence of the status. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status."
-			}
+			"title":"Title contains the title of the message, in best-match language value. A short, human-readable localised summary of the status that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization.",
+			"links":[
+				{
+					"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=DeQtXDSA:mJW(770.488.0)",
+					"rel":"in cupidatat do culpa occaecat",
+					"type":"anim qui in laboris magna",
+					"hreflang":"cel-gaulish",
+					"uri":"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP"
+				}
+			],
+			"detail":"Detail contains the detailed text of the message, in best-match language value. A human-readable localised explanation specific to this occurrence of the status. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status."
 		}
 	]
 }
