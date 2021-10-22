@@ -753,11 +753,23 @@ The `dimensionGroupAttributes` object contains a JSON *name/value pair* for each
 The *name* in the JSON *name/value pair* represents the unique (partial) dimension value combination to which the dimensionGroup attribute values are attached. "Partial" combination means that DimensionGroup attributes are not attached to all dimensions but only to a subset. This combination is the concatenation of the indexes of the corresponding `values` of the `dimensions`, separated by a colon character (":"), e.g. "::4:0:". Note that dimension values to which the attribute value is attached take the indexes from the `values` array of the respective *component* objects within the `structure.dimensions` object, whereas the other dimensions (which are not part of the partial key) have no value (are left empty). All dimensions have therefore their well-defined position in the *name* combination independently from the level at which dimensions are presentated elsewhere in the message.  
 In the example "::4:0:", the data has altogether 5 dimensions (including the time dimension), and the related attribute values are attached only to the 3rd and 4th dimensions, for which the dimension value indexes are 4 and 0. The dimension 1, 2 and 5 have no related value and their positions in the combination are left empty.
 
-The *value* in the JSON *name/value pair* is an array containing the values or value indexes of **all** dimensionGroup *attributes*. If some of the attributes do not have values for a specific included (partial) dimension value combinations then *null* is used instead of a value. Beginning from the end of the array, `DimensionGroup`-level `attributes` can be omitted if the `attribute` has no value for this combination or if the `attribute` value for this combination corresponds to the default value. However, the *name/value pair* is only present if there is at least one corresponding `DimensionGroup`-level `attribute` value.
+The *value* in the JSON *name/value pair* is an array containing for the given `dimensionGroup` combination:  
+- first: the corresponding values of **all** *attributes* presented in the `structure.attributes.dimensionGroup` array or the indexes of these values, depending on the presence of the `values` array in the component definition,
+- and last: the indexes of the values of all corresponding `annotations`.
 
-The data type for the array `attribute` elements must be *integer*, *number*, *string*, *object of localised strings* (see: *[here](#names)*), arrays of these 4 types or *null*. Indexes for `attribute` values are of type *integer* and correspond to the indexes in the `values` array of the respective `component` object within the `structure.attributes.dimensionGroup` array.
+Elements for `annotations` are only included if there are corresponding `annotations`. **If `annotations` are present, then all corresponding `attributes` must be included.** Otherwise, if there are no corresponding `annotations`, then beginning from the end of the array, the corresponding `attributes` can be omitted if: 
+- the `attribute` has no value (e.g. for optional attributes) or
+- the `attribute` value corresponds to the default value.
 
-For information on how to handle the indexes for `dimensions` and `attributes` see the section dedicated to [handling indexes](#handling-indexes).
+If an attribute that has to be listed in the array does not have (a) value(s) then *null* is used instead of a value. 
+
+The *name/value pair* is only present if there is at least one corresponding `attribute` or `annotation` value.
+
+The data type for the array `attribute` elements must be *integer*, *number*, *string*, *object of localised strings* (see: *[here](#names)*), arrays of these 4 types or *null*. Indexes for `attribute` values are of type *integer* and correspond to the indexes in the `values` array of the respective `component` object within the `structure.attributes.dimensionGroup` array.  
+The data type for the array `annotation` elements is *integer*.   
+Indexes for `annotation` values correspond to the indexes in the array of `annotations` in the `structure` element.
+
+For information on how to handle the indexes for `dimensions`, `attributes` and `annotations` see the section dedicated to [handling indexes](#handling-indexes).
 
 Example:
 
@@ -1118,11 +1130,9 @@ The `dimension` specified in the "dimensionAtObservation" parameter of the SDMX 
 With "dimensionAtObservation=allDimensions", when the data are represented as a flat view of observations, all dimensions with more than 1 value will be presented at observation level. Here, there can be several concatenated indexes in the observation identifier, e.g. "0:0:4:10:2".
 
 The *value* in the JSON *name/value pair* is an array containing:
-
-* first: the values of **all** *measures* or the indexes of these values, depending on the presence of the `values` array in the component definition,
-* followed by: the values of **all** *attributes* presented at `observation` level or the indexes of these values, depending on the presence of the `values` array in the 
-component definition,
-* and last: the indexes of the values of all `annotations` of that observation.
+- first: the corresponding values of **all** *measures* (as presented in the `structure.measures.observation` array) or the indexes of these values, depending on the presence of the `values` array in the component definition,
+- followed by: the corresponding values of **all** *attributes* presented in the `structure.attributes.observation` array or the indexes of these values, depending on the presence of the `values` array in the component definition,
+- and last: the indexes of the values of all `annotations` of that observation.
 
 Therefore, the array elements after the `measures` are for the `observation` level `attributes` and for `annotations` of that observation. Elements for `annotations` are only 
 included if there are `annotations` for that observation. **If `annotations` are present for an observation, then all `attributes` defined at `observation` level must be included.** Otherwise, if the observation has no `annotations`, then beginning from the end of the array, `observation` level `attributes` can be omitted if: 
