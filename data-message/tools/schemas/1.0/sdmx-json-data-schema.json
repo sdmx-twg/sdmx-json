@@ -633,7 +633,7 @@
                                 "type": "object",
                                 "patternProperties": {"^[0-9]+(:[0-9]+)*$": {
                                     "type": "array",
-                                    "items": {"type": ["number", "string", "null"]}
+                                    "items": {"type": ["integer", "number", "boolean", "string", "null"]}
                                 }},
                                 "additionalProperties": false
                             }
