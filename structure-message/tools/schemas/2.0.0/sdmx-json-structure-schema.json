@@ -4982,22 +4982,22 @@
 							"items":{
 								"type":"object",
 								"properties":{
-									"codelists":{
+									"codelist":{
 										"$ref":"#/definitions/AnyCodelistReferenceType"
 									},
-									"dataTypes":{
+									"dataType":{
 										"$ref":"#/definitions/DataType"
 									}
 								},
 								"oneOf":[
 									{
 										"required":[
-											"codelists"
+											"codelist"
 										]
 									},
 									{
 										"required":[
-											"dataTypes"
+											"dataType"
 										]
 									}
 								]
@@ -5009,22 +5009,22 @@
 							"items":{
 								"type":"object",
 								"properties":{
-									"codelists":{
+									"codelist":{
 										"$ref":"#/definitions/AnyCodelistReferenceType"
 									},
-									"dataTypes":{
+									"dataType":{
 										"$ref":"#/definitions/DataType"
 									}
 								},
 								"oneOf":[
 									{
 										"required":[
-											"codelists"
+											"codelist"
 										]
 									},
 									{
 										"required":[
-											"dataTypes"
+											"dataType"
 										]
 									}
 								]
