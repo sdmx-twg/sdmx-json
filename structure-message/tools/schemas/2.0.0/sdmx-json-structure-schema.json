@@ -2793,7 +2793,7 @@
 		"CodeSelectionType":{
 			"description":"CodeSelectionType defines the structure for code selection to be used as inclusive or exclusive extensions.",
 			"type":"object",
-			"oneOf":[
+			"anyOf":[
 				{
 					"required":[
 						"wildcardedMemberValues"
@@ -2819,6 +2819,7 @@
 				},
 				"memberValues":{
 					"type":"array",
+					"uniqueItems":true,
 					"minItems":1,
 					"items":{
 						"$ref":"#/definitions/MemberValueType",
@@ -2828,22 +2829,28 @@
 			}
 		},
 		"MemberValueType":{
-			"type":"object",
-			"allOf":[
+			"anyOf":[
 				{
 					"$ref":"#/definitions/idType"
 				},
 				{
+					"type":"object",
 					"properties":{
+						"value":{
+							"$ref":"#/definitions/idType"
+						},
 						"cascadeValues":{
 							"$ref":"#/definitions/CascadeSelectionType"
 						}
-					}
+					},
+					"required":[
+						"value"
+					]
 				}
 			]
 		},
 		"CascadeSelectionType":{
-			"oneOf":[
+			"anyOf":[
 				{
 					"type":"boolean"
 				},
@@ -3738,7 +3745,7 @@
 							"description":"Identifies the VTL scalar type that is to be converted to an resulting output data type."
 						},
 						"dataType":{
-							"oneOf":[
+							"anyOf":[
 								{
 									"type":"string",
 									"description":"String value for other data types"
