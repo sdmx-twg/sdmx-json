@@ -8,19 +8,19 @@ Before we start, let's clarify a few more things about this guide:
 
 - New fields may be introduced in later versions. Therefore consuming applications should tolerate the addition of new fields with ease.
 - The ordering of properties in objects is undefined. The properties may appear in any order and consuming applications should not rely on any specific ordering. It is safe to consider a nulled property and the absence of a property as the same thing.
-- Not all properties appear in all contexts. For example response with error messages may not contain a data property.
+- Not all properties appear in all contexts. For example response with error status messages may not contain a data property.
 
-# Field Guide to SDMX-JSON Metadata Message Objects
+# Field Guide to SDMX-JSON 2.0 Metadata Message Objects (aligned with SDMX 3.0.0)
 
 ## message
 
-Message is the top level object and it contains the requested information (referential metadata) as well as the meta-information decribing the (technical) context of the message and, possibly, error information.
+Message is the top level object and it contains the requested information (referential metadata) as well as the meta-information decribing the (technical) context of the message and, possibly, status information.
 
 * meta - *Object* *optional*. A *[meta](#meta)* object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.
 * data - *Object* *optional*. *[Data](#data)* contains the message's “primary data”.
-* errors - *Array* *optional*. *Errors* field is an array of *[error](#error)* objects. When appropriate provides a list of error messages in addition to RESTful web services HTTP error status codes.
+* errors - *Array* *optional*. *Errors* field is an array of *[statusMessage](#statusMessage)* objects. When appropriate provides a list of status messages in addition to RESTful web services HTTP error status codes.
 
-The members data and errors MUST NOT coexist in the same message.
+The members data and status CAN coexist in the same message.
 
 Example:
 
@@ -33,7 +33,7 @@ Example:
 		},
 		"errors": [
 			{
-				# error object #
+				# statusMessage object #
 			}
 		]
 	}
@@ -203,29 +203,31 @@ Example:
 
 *Object*. Contains a collection of reported metadata against a set of values for a given full or partial target identifier, as described in a metadata structure definition. The metadata set may contain reported metadata for multiple report structures defined in a metadata structure definition.
 
-The `metadataSet` properties are:
-
-* action - *String* *optional*. Action provides a list of actions, describing the intention of the data transmission from the sender's side.
-
-	- `Append` - this is an incremental update for an existing `dataSet` or the provision of new data or documentation (attribute values) formerly absent. If any of the supplied data or metadata is already present, it will not replace these data.
-	- `Replace` - data are to be replaced, and may also include additional data to be appended.
-	- `Delete` - data are to be deleted.
-	- `Information` (default) - data are being exchanged for informational purposes only, and not meant to update a system.
-
+* action - *String* *optional*. Action provides a list of actions, describing the intention of the data transmission from the sender's side.  
+  - `Append` - this is an incremental update for an existing `dataSet` or the provision of new data or documentation (attribute values) formerly absent. If any of the supplied data or metadata is already present, it will not replace these data.
+  - `Replace` - data are to be replaced, and may also include additional data to be appended.
+  - `Delete` - data are to be deleted.
+  - `Information` (default) - data are being exchanged for informational purposes only, and not meant to update a system.  
 * publicationPeriod - *String* *optional*. The publicationPeriod specifies the period of publication of the data in terms of whatever provisioning agreements might be in force (i.e., "2005-Q1" if that is the time of publication for a `metadataSet` published on a quarterly basis).
 * publicationYear - *String* *optional*. The publicationYear holds the ISO 8601 four-digit year.
 * reportingBegin - *String* *optional*. The start of the time period covered by the message.
 * reportingEnd - *String* *optional*. The end of the time period covered by the message.
-* id - *String* *optional*. Identifier for the metadata set.
-* structureRef - *String*. URN reference to the metadata structure definition (required).
+* id - *String*. Identifier for the metadata set.
+* agencyID - *String*. ID of the agency maintaining this metadata set.
+* version - *String* *optional*. Version of this metadata set according to semantic versioning. If not specified then the metadata set is non-versioned.
+* isExternalReference - *Boolean* *optional*. If set to “true” it indicates that the content of the metadata set is held externally.
+* metadataflow - *String*. URN reference to the metadataflow definition (either *metadataflow* or *metadataProvisionAgreement* is required).
+* metadataProvisionAgreement - *String*. URN reference to the metadata provision definition (either *metadataflow* or *metadataProvisionAgreement* is required).
 * validFrom - *String* *optional*. The validFrom indicates the inclusive start time indicating the validity of the information in the data.
 * validTo - *String* *optional*. The validTo indicates the inclusive end time indicating the validity of the information in the data.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the metadata set.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the metadata set.
-* name - *String* *optional*. Human-readable (best-language-match) name of the metadata set.
+* name - *String*. Human-readable (best-language-match) name of the metadata set.
 * names - *Object* *optional*. Human-readable localised *[names](#names)* of the metadata set.
-* dataProvider - *String* *optional*. DataProvider provides a references to an organisation with the role of data provider that is providing this metadata set. DataProvider is a URN reference to a data provider to which the constraint is attached. If this is used, then only the release calendar is relevant. 
-* report - Non-empty *array* of *[report](#report)* objects. Report contains the details of a the reported metadata, including the identification of the target and the report attributes.
+* description - *String* *optional*. Human-readable (best-language-match) description of the metadata set.
+* descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) of the metadata set.
+* targets - Non-empty *array* of *String*. Each *target* holds a valid SDMX Registry URN (see SDMX Registry Specification for details) of the object to which the reported metadata apply. The same metadata set can be linked to multiple targets.
+* attributes - Non-empty *array* of recursive *[attribute](#attribute)* objects. Contains the reported metadata attribute values for the reported metadata and recursively their child metadata attributes.
 
 See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
@@ -238,7 +240,11 @@ Example:
 		"reportingBegin": "1960",
 		"reportingEnd": "2020",
 		"id": "METADATASET",
-		"structureRef": "urn:sdmx:org.sdmx.infomodel.metadatastructure.MetadataStructure=IMF:IMFSTAT(1.0)",
+		"agencyID": "ECB.DISS",
+		"version": "1.0",
+		"isExternalReference": false,
+		"metadataflow": "urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=ECB.DISS:MDF(1.0)",
+		# "metadataProvisionAgreement": "urn:sdmx:org.sdmx.infomodel.registry.MetadataProvisionAgreement=ECB.DISS:MDPA(1.0.0)",
 		"validFrom": "2018-04-01",
 		"validTo": "2018-07-01",
 		"annotations": [
@@ -256,12 +262,121 @@ Example:
 			"en": "Metadata set",
 			"fr": "Set de métadonnées"
 		},
-		"dataProvider": "urn:sdmx:org.sdmx.infomodel.dataproviderscheme.DataproviderScheme=IMF:IMF(1.0).IMF_DISS",
-		"reports": [
+		"description": "This is the description of the metadata set",
+		"descriptions": {
+			"en": "This is the description of the metadata set",
+			"fr": "Ceci est la description de l'ensemble des métadonnées"
+		},
+		"targets": ["urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_EXR1(1.0)"],
+		"attributes": [
 			{
-				# report object #
+				# attribute object #
 			}
 		]
+	}
+
+#### attribute
+
+*Object*. Defines the structure for a reported metadata attribute. A value for the attribute can be supplied as either a single value, or multi-lingual text values (either structured or unstructured). An optional set of child metadata attributes is also available if the metadata attribute definition defines nested metadata attributes.
+
+* id - *String*. ID for the reported metadata attribute.
+* annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the reported metadata attribute.
+* format - *Object* *optional*. *[Format](#format)* describes the allowed metadata attribute representation. It is only used when the metadata attributes are not defined by an enumerated list of identifiable items (codelist).
+* value - *String*, *Number*, *Integer*, *Boolean* or localised *String* (see *[names](#names)*) *object*, *optional*. Value for the reported metadata attribute. Also HTML strings are supported.
+* attributes - Non-empty *array* of recursive *[attribute](#attribute)* objects. Contains the reported metadata attribute values for the reported metadata and recursively their child metadata attributes.
+
+One of the properties is required: value, values, text or structuredText.
+
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
+
+Example:
+
+	{
+		"id": "REPORT_ATTRIBUTE1",
+		"format": {
+			# format object #
+		},
+		"value": "CODED_TEXT",
+		"annotations": [
+			{
+				# annotation object #
+			}
+		],
+		"attributes": [
+			{
+				# attribute object #
+			}
+		]
+	}
+
+		"value": "<p>An XHTML text</p>"
+		
+		"value": {
+			"en": "<p>An XHTML text</p>"
+		}
+
+##### format
+
+*Object*. The format object defines the representation for a component. It describes the possible content for component values, which could be text (including XHTML and multi-lingual values).
+
+* dataType - *String* *optional*. Describes the type of data format allowed for the representation of the component. Only the following dataTypes are supported: "String",
+ "Alpha", "AlphaNumeric", "Numeric", "BigInteger", "Integer", "Long", "Short", "Decimal", "Float", "Double", "Boolean", "URI", "Count", "InclusiveValueRange", "ExclusiveValueRange", "Incremental", "ObservationalTimePeriod", "StandardTimePeriod", "BasicTimePeriod", "GregorianTimePeriod", "GregorianYear", "GregorianYearMonth", "GregorianDay", "ReportingTimePeriod", "ReportingYear", "ReportingSemester", "ReportingTrimester", "ReportingQuarter", "ReportingMonth", "ReportingWeek", "ReportingDay", "DateTime", "TimeRange", "Month", "MonthDay", "Day", "Time", "Duration", "GeospatialInformation" and "XHTML". The default data type is "String". 
+* isSequence - *Boolean* *optional*. Indicates whether the values are intended to be ordered, and it may work in combination with the interval, startValue, and endValue attributes or the timeInterval, startTime, and endTime, attributes. If this attribute holds a value of 'true', a start value or time and a numeric or time interval must supplied. If an end value is not given, then the sequence continues indefinitely.
+* interval - *Integer* *optional*. Specifies the permitted interval (increment) in a sequence. In order for this to be used, the isSequence attribute must have a value of 'true'.
+* startValue - *Number* *optional*. Is used in conjunction with the isSequence and interval attributes (which must be set in order to use this attribute). This attribute is used for a numeric sequence, and indicates the starting point of the sequence. This value is mandatory for a numeric sequence to be expressed.
+* endValue - *Number* *optional*. Is used in conjunction with the isSequence and interval attributes (which must be set in order to use this attribute). This attribute is used for a numeric sequence, and indicates that ending point (if any) of the sequence.
+* timeInterval - *String* *optional*. Indicates the permitted duration in a time sequence. It complies with the time duration specification of the ISO 8601 standard. In order for this to be used, the isSequence attribute must have a value of 'true'.
+* startTime - *String* *optional*. Is used in conjunction with the isSequence and timeInterval attributes (which must be set in order to use this attribute). This attribute is used for a time sequence, and indicates the start time of the sequence. This value is mandatory for a time sequence to be expressed. It must be a valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
+* endTime - *String* *optional*. Is used in conjunction with the isSequence and timeInterval attributes (which must be set in order to use this attribute). This attribute is used for a time sequence, and indicates that ending point (if any) of the sequence. It must be a valid standard time period (gYear, gYearMonth, date, dateTime and SDMX time periods).
+* minLength - *Positive integer* *optional*. Specifies the minimum length of the value in characters.
+* maxLength - *Positive integer* *optional*. Specifies the maximum length of the value in characters.
+* minValue - *Number* *optional*. Is used for inclusive and exclusive ranges, indicating what the lower bound of the range is. If this is used with an inclusive range, a valid value will be greater than or equal to the value specified here. By default, the minValue is assumed to be inclusive. 
+* maxValue - *Number* *optional*. Is used for inclusive and exclusive ranges, indicating what the upper bound of the range is. If this is used with an inclusive range, a valid value will be less than or equal to the value specified here. By default, the maxValue is assumed to be inclusive. 
+* decimals - *Positive integer* *optional*. Indicates the number of characters allowed after the decimal separator.
+* pattern - *String* *optional*. Holds any standard regular expression.
+* isMultiLingual - *Boolean* *optional*. This indicates for a text format of type "String" or "XHTML", whether the uncoded component value should allow for multiple values in different languages. The default is `false`.
+* sentinelValues - *Array* of *Object*s *optional*. When present, the sentinelValues array indicates that sentinel values are defined for the data format. Each *[sentinelValue](#sentinelvalue)* object indicates a reserved value in an otherwise open value domain that holds a specific meaning. For example, a value of -1 can be defined to indicate a non-applicable value. 
+
+Example:
+
+	{ 
+		"dataType": "String",
+		"minLength": 4, 
+		"maxLength": 4, 
+		"pattern": "^[A-Za-z][A-Za-z0-9_-]*$",
+		"isMultilingual": true
+	}
+
+	{ 
+		"dataType": "Double",
+		"isMultilingual": false,
+		"sentinelValues": [
+			{
+				# sentinel value object #
+			}
+		]
+	}
+	
+###### sentinelValue
+
+*Object*. It defines a reserved value (within the value domain of the data format) along with its meaning.
+
+* value - *Number* or *String* *optional*. The sentinel value (within the value domain of the data format) being described.
+* name - *String* *optional*. Human-readable (best-language-match) name (or meaning) of the sentinel value.
+* names - *Object* *optional*. Human-readable localised *[names](#names)* (or meanings) of the sentinel value.
+* description - *String* *optional*. Human-readable (best-language-match) description for the sentinel value.
+* descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) for the sentinel value.
+
+Example:
+
+	{
+		"value": "-1",
+		"name": "Non-response",
+		"names": { "en": "Non-response", 
+			   "fr": "Non-réponse" },
+		"description": "Description for non-response.",
+		"descriptions": { "en": "Description for non-response.",
+				  "fr": "Description de non-réponse." }
 	}
 
 #### annotation
@@ -271,6 +386,7 @@ Example:
 * id - *String* *optional*. ID provides a non-standard identification of an annotation. It can be used to disambiguate annotations.
 * title - *String* *optional*. Provides a non-localised title for the annotation.
 * type - *String* *optional*. Type is used to distinguish between annotations designed to support various uses. The types are not enumerated, and these can be freely specified by the creator of the annotations. The definitions and use of annotation types should be documented by their creator.
+* value - *String* *optional*. Provides a non-localised value text for the annotation.
 * text - *String* *optional*. A human-readable (best-language-match) text of the annotation.
 * texts - *Object* *optional*. A list of human-readable localised texts (see *[names](#names)*) of the annotation.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a link to an additional external resource which may contain or supplement the annotation.
@@ -283,6 +399,7 @@ Example:
 		"id": "74747",
 		"title": "Sample annotation",
 		"type": "reference",
+		"value": "123456",
 		"text": "Sample annotation text",
 		"texts": {
 			"en": "Sample annotation text",
@@ -301,188 +418,16 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 Providing links allowing accessing the underlying SDMX Data Structure Definition, Dataflow
 and/or Provision Agreements is recommended.
 
-#### report
+## statusMessage
 
-*Object*. Contains a set of report attributes and identifies a target objects] to which they apply.
- 
-* id - *String*. ID provides an ID for the report.
-* annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the report.
-* attributeSet - *Object*. *[AttributeSet](#attributeSet)* contains the reported metadata attribute values for the reported metadata.
-* target - *Object*. Target contains a set of target reference values which when taken together, identify the object or objects to which the reported metadata apply.
+*Object* *optional*. Used to provide status messages in addition to RESTful web services HTTP error status codes. The following pieces of information should be provided:
 
-Example:
-
-	{
-		"id": "REPORT1",
-		"annotations": [
-			{
-				# annotation object #
-			}
-		],
-		"attributeSet": {
-			# attributeSet object #
-		},
-		"target": {
-			# target object #
-		}
-	}
-
-##### attributeSet
-
-*Object*. Contains a set of report attributes and identifies a target objects] to which they apply.
- 
-* reportedAttributes - Non-empty *Array* of *[reportedAttribute](#reportedAttribute)* objects which provide the details of a reported attribute, including a value and/or child reported attributes.
-
-Example:
-
-	{
-		"reportedAttributes": [
-			{
-				# reportedAttribute object #
-			}
-		]
-	}
-
-##### reportedAttribute
-
-*Object*. Defines the structure for a reported metadata attribute. A value for the attribute can be supplied as either a single value, or multi-lingual text values (either structured or unstructured). An optional set of child metadata attributes is also available if the metadata attribute definition defines nested metadata attributes.
-
-* id - *String*. ID for the reported metadata attribute.
-* value - *String* *optional*. Value for the reported metadata attribute.
-* annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the reported metadata attribute.
-* structuredText - *String* *optional*. A human-readable (best-language-match) structured text allowing for mixed content of text and XHTML tags. When using this type, one will have to provide a reference to the XHTML schema, since the processing of the tags within this type is strict, meaning that they are validated against the XHTML schema provided.
-* structuredTexts - *Object* *optional*. A list of human-readable localised structured text (see *[names](#names)*), see above.
-* text - *String* *optional*. A human-readable (best-language-match) unstructured text (without XHTML tags).
-* texts - *Object* *optional*. A list of human-readable localised unstructured text (see *[names](#names)*), see above.
-* attributeSet - *Object* *optional*. Recursive *[attributeSet](#attributeSet)* that contains the reported metadata attribute values for the child metadata attributes.
-
-See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
-
-Example:
-
-	{
-		"id": "REPORT_ATTRIBUTE1",
-		"value": "CODED_TEXT",
-		"annotations": [
-			{
-				# annotation object #
-			}
-		],
-		"structuredText": "<p>An XHTML text</p>",
-		"structuredTexts": {
-			"en": "<p>An XHTML text</p>"
-		},
-		"text": "A text",
-		"texts": {
-			"en": "A text"
-		},
-		"attributeSet": {
-			# attributeSet object #
-		}
-	}
-
-##### target
-
-*Object*. Defines the structure of a target. It contains a set of target reference values which when taken together, identify the object or objects to which the reported metadata apply.
- 
-* id - *String*. ID for the target.
-* referenceValues - Non-empty *Array* of *[referenceValue](#referenceValue)* objects which contain a value for a target reference object reference. When this is taken with its sibling elements, they identify the object or objects to which the reported metadata apply. The content of this will either be a reference to an identifiable object, a data key, a reference to a data set, or a report period.
- 
-Example:
-
-	{
-		"id": "TARGET1",
-		"referenceValues": [
-			{
-				# referenceValue object #
-			}
-		]
-	}
-
-###### referenceValue
-
-*Object*. Defines the structure of a target object reference value. A target reference value will either be a reference to an identifiable object, a data key, a reference to a data set, or a report period.
- 
-* id - *String*. ID for the reference value.
-* constraintContent - *String* *optional*. ConstraintContent provides a URN reference to an attachment constraint for the purpose of reporting metadata against the data identified in the key sets and/or cube regions identified by the constraint. A constraint target will utilize this option as the representation of the target reference value.
-* dataKey - *Object* *optional*. *[DataKey](#dataKey)* object. DataKey provides a set of dimension references and values for those dimension for the purpose of reporting metadata against a set of data. A key descriptor values target will utilize this option as the representation of the target reference value.
-* dataSet - *Object* *optional*. *[dataSet reference](#dataSetReference)* object. DataSet provides a URN reference to a data set for the purpose of reporting metadata against the data. A data set target will utilize this option as the representation of the target reference value.
-* object - *String* *optional*. Provides a URN reference to an identifiable object in the SDMX information model. An identifiable object target will utilize this option as the representation of the target reference value.
-* reportPeriod - *String* *optional*. ReportPeriod provides a report period for the purpose of qualifying the target reporting period of reported metadata. A report period target will utilize this option as the representation of the target reference value.
-
-Example:
-
-	{
-		"id": "$",
-		"constraintContent": "urn:sdmx:org.sdmx.infomodel.constraint.=ECB:ECB_EXR1(1.0)",
-		"dataKey": {
-   		    # dataKey object #
-		},
-		"dataSet": {
-   		    # dataSet object #
-		},
-		"object": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_EXR1(1.0)",
-		"reportPeriod": "2018"
-	}
-
-####### dataKey
-
-*Object*. DataKey is a region which defines a distinct full or partial data key. The key consists of a set of values, each referencing a dimension and providing a single value for that dimension. The purpose of the key is to define a subset of a data set (i.e. the observed value and data attribute) which have the dimension values provided in this definition. Any dimension not stated explicitly in this key is assumed to be wild carded, thus allowing for the definition of partial data keys.
-
-* include - *Boolean* *optional*.
-* keyValues - Non-empty *array* of *[dataKeyValue](#dataKeyValue)* objects.
-
-Example:
-
-	{
-        "include": true,
-		"keyValues": [
-			{
-				# dataKeyValue object #
-			}
-		]
-	}
-
-######## dataKeyValue
-
-*Object*. DataKeyValue provides a dimension value for the purpose of defining a distinct data key. Only a single value can be provided for the dimension.
-
-* id - *String*. 
-* include - *Boolean* *optional*.
-* value - *String*. 
-
-Example:
-
-	{
-		"id": "EXR_TYPE",
-		"include": true,
-		"value": "NRP0"
-	}
-
-####### dataSetReference
-
-*Object*. DataSetReference defines the structure of a reference to a data/metadata set. A full reference to a data provider and the identifier for the data set must be provided. Note that this is not derived from the base reference structure since data/metadata sets are not technically identifiable.
-
-* dataProvider - *String*. DataProvider is a URN reference to a the provider of the data/metadata set. 
-* id - *String*. ID contains the identifier of the data/metadata set being referenced. 
-
-Example:
-
-	{
-		"dataProvider": "EXB",
-		"id": "DATASET1"
-	}
-
-## error
-
-*Object* *optional*. Used to provide an error message in addition to RESTful web services HTTP error status codes. The following pieces of information are to be provided:
-
-* code - *Number*. Provides a code number for the error message. Code numbers are defined in the SDMX 2.1 Web Services Guidelines.
-* title - *String* *optional*. A short, human-readable (best-language-match) summary of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
-* titles - *Object* *optional*. A list of short, human-readable localised summaries (see *[names](#names)*) of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
-* detail - *String* *optional*. A human-readable (best-language-match) explanation specific to this occurrence of the problem. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.
-* details - *Object* *optional*. A list of human-readable localised explanations (see *[names](#names)*) specific to this occurrence of the problem. Like titles, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.
-* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the error.
+* code - *Number*. Provides a code number for the status message if appropriate. Standard code numbers are defined in the SDMX 2.1 Web Services Guidelines.
+* title - *String* *optional*. A short, human-readable (best-language-match) summary of the situation that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization.
+* titles - *Object* *optional*. A list of short, human-readable localised summaries (see *[names](#names)*) of the status that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization.
+* detail - *String* *optional*. A human-readable (best-language-match) explanation specific to this occurrence of the status. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status.
+* details - *Object* *optional*. A list of human-readable localised explanations (see *[names](#names)*) specific to this occurrence of the status. Like titles, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status.
+* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the status message.
 
 See the section on [localised strings](#localised-strings) on how the message deals with languages.
 
@@ -492,7 +437,7 @@ Example:
 		"code": 150,
 		"title": "Invalid parameter",
 		"titles": {
-			"en": "Invalid parameter"
+			"en": "Invalid parameter",
 			"fr": "Paramètre invalide"
 		}
 	}
@@ -574,8 +519,10 @@ This language matching type is called "Filtering", see <https://tools.ietf.org/h
 
 Example:
 
-	"names": { "en": "Frequency", 
-			   "fr": "Fréquence" },
+	"names": {
+		"en": "Frequency", 
+		"fr": "Fréquence"
+	},
 
 
 The localised text object needs to be present whenever the related localised best-language-match text strings is present, and especially whenever a localised text is mandatory in the SDMX Information model. Note that localised text (and the knowledge about the locale) is mandatory in structure messages when artefacts are being submitted for storage to a registry or to other databases. The localised text object is important for use cases where multiple languages are required or where the information on the language used is required.
@@ -608,9 +555,9 @@ The snippet below shows an example of an `error` object, extended with a `wsCust
 			"code": 150,
 			"title": "Invalid parameter",
 			"titles": {
-				"en": "Invalid parameter"
+				"en": "Invalid parameter",
 				"fr": "Paramètre invalide"
-			}
+			},
 			"wsCustomErrorCode": 39272
 		}
 	]

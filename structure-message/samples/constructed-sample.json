@@ -1,9 +1,9 @@
 {
 	"meta": {
-		"schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/develop/structure-message/tools/schemas/1.0/sdmx-json-structure-schema.json",
+		"schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/structure-message/tools/schemas/2.0.0/sdmx-json-structure-schema.json",
 		"id": "IDREF401067",
 		"test": false,
-		"prepared": "2018-03-17T20:00:51",
+		"prepared": "2021-09-01T20:00:51Z",
 		"contentLanguages": [
 			"en"
 		],
@@ -79,7 +79,7 @@
 									"urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).TIME_FORMAT"
 								],
 								"localRepresentation": {
-									"textFormat": {
+									"format": {
 										"maxLength": 3,
 										"minLength": 3,
 										"textType": "String"
@@ -97,7 +97,7 @@
 								],
 								"assignmentStatus": "Conditional",
 								"attributeRelationship": {
-									"primaryMeasure": "OBS_VALUE"
+									"observation": {}
 								},
 								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).OBS_CONF",
 								"localRepresentation": {
@@ -214,7 +214,7 @@
 								"type": "Dimension",
 								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).TIME_PERIOD",
 								"localRepresentation": {
-									"textFormat": {
+									"format": {
 										"textType": "ObservationalTimePeriod"
 									}
 								}
@@ -925,7 +925,7 @@
 							{
 								"href": "https://sdw-wsrest.ecb.europa.eu/service/agencyscheme/SDMX/AGENCIES/1.0/ECB",
 								"rel": "self",
-								"urn": "urn:sdmx:org.sdmx.infomodel.base.Agency=SDMX",
+								"urn": "urn:sdmx:org.sdmx.infomodel.base.Agency=SDMX:AGENCIES(1.0).ECB",
 								"type": "agency",
 								"hreflang": "en"
 							}

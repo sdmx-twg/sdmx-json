@@ -10,7 +10,8 @@ interchange — Representation of dates and times*, ISO, 2004
 October 2013
 
 [sdmxim21] *Section 2: Information Model: UML Conceptual Design*, SDMX Standards 2.1,
-SDMX, April 2011
+SDMX, July 2011
 
 [sdmxws21] *Section 7: Guidelines for the Use of Web Services*, SDMX Standards 2.1,
-SDMX, April 2011
+SDMX, March 2013
+The latest release can be consulted here: https://github.com/sdmx-twg/sdmx-rest/
