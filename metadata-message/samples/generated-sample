@@ -1,0 +1,284 @@
+{
+	"meta": {
+		"schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/develop/metadata-message/tools/schemas/1.0/sdmx-json-metadata-schema.json",
+		"id": "$",
+		"test": true,
+		"prepared": "2018-03-27T00:00:00Z",
+		"contentLanguages": [
+			"en-GB-oed"
+		],
+		"name": "a",
+		"names": {
+			"en-GB-oed": "a"
+		},
+		"sender": {
+			"id": "$",
+			"name": "a",
+			"names": {
+				"en-GB-oed": "a"
+			},
+			"contact": [
+				{
+					"id": "$",
+					"name": "a",
+					"names": {
+						"en-GB-oed": "a"
+					},
+					"department": "a",
+					"departments": {
+						"en-GB-oed": "a"
+					},
+					"role": "a",
+					"roles": {
+						"en-GB-oed": "a"
+					},
+					"email": "a",
+					"fax": "a",
+					"telephone": "a",
+					"uri": "a",
+					"x400": "a"
+				}
+			]
+		},
+		"receiver": [
+			{
+				"id": "$",
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"contact": [
+					{
+						"id": "$",
+						"name": "a",
+						"names": {
+							"en-GB-oed": "a"
+						},
+						"department": "a",
+						"departments": {
+							"en-GB-oed": "a"
+						},
+						"role": "a",
+						"roles": {
+							"en-GB-oed": "a"
+						},
+						"email": "a",
+						"fax": "a",
+						"telephone": "a",
+						"uri": "a",
+						"x400": "a"
+					}
+				]
+			}
+		],
+		"links": [
+			{
+				"href": "http://example.com",
+				"rel": "a",
+				"urn": "a",
+				"uri": "http://example.com",
+				"title": "a",
+				"titles": {
+					"en-GB-oed": "a"
+				},
+				"type": "a",
+				"hreflang": "en-GB-oed"
+			}
+		]
+	},
+	"data": {
+		"metadataSets": [
+			{
+				"action": "Append",
+				"publicationPeriod": "1000Z",
+				"publicationYear": "1000Z",
+				"reportingBegin": "1000Z",
+				"reportingEnd": "1000Z",
+				"validFrom": "2018-01-27T00:00:00Z",
+				"validTo": "2018-03-27T00:00:00Z",
+				"annotations": [
+					{
+						"id": "a",
+						"text": "a",
+						"texts": {
+							"en-GB-oed": "a"
+						},
+						"title": "a",
+						"type": "a",
+						"url": "http://example.com"
+					}
+				],
+				"links": [
+					{
+						"href": "http://example.com",
+						"rel": "a",
+						"urn": "a",
+						"uri": "http://example.com",
+						"title": "a",
+						"titles": {
+							"en-GB-oed": "a"
+						},
+						"type": "a",
+						"hreflang": "en-GB-oed"
+					}
+				],
+				"name": "a",
+				"names": {
+					"en-GB-oed": "a"
+				},
+				"dataProvider": "a",
+				"reports": [
+					{
+						"id": "$",
+						"annotations": [
+							{
+								"id": "a",
+								"text": "a",
+								"texts": {
+									"en-GB-oed": "a"
+								},
+								"title": "a",
+								"type": "a",
+								"url": "http://example.com"
+							}
+						],
+						"attributeSet": {
+							"reportedAttributes": [
+								{
+									"id": "$",
+									"value": "a",
+									"annotations": [
+										{
+											"id": "a",
+											"text": "a",
+											"texts": {
+												"en-GB-oed": "a"
+											},
+											"title": "a",
+											"type": "a",
+											"url": "http://example.com"
+										}
+									],
+									"structuredText": "a",
+									"structuredTexts": {
+										"en-GB-oed": "a"
+									},
+									"text": "a",
+									"texts": {
+										"en-GB-oed": "a"
+									},
+									"attributeSet": {
+										"reportedAttributes": [
+											{
+												"id": "$",
+												"value": "a",
+												"annotations": [
+													{
+														"id": "a",
+														"text": "a",
+														"texts": {
+															"en-GB-oed": "a"
+														},
+														"title": "a",
+														"type": "a",
+														"url": "http://example.com"
+													}
+												],
+												"structuredText": "a",
+												"structuredTexts": {
+													"en-GB-oed": "a"
+												},
+												"text": "a",
+												"texts": {
+													"en-GB-oed": "a"
+												},
+												"attributeSet": {
+													"reportedAttributes": [
+														{
+															"id": "$",
+															"value": "a",
+															"annotations": [
+																{
+																	"id": "a",
+																	"text": "a",
+																	"texts": {
+																		"en-GB-oed": "a"
+																	},
+																	"title": "a",
+																	"type": "a",
+																	"url": "http://example.com"
+																}
+															],
+															"structuredText": "a",
+															"structuredTexts": {
+																"en-GB-oed": "a"
+															},
+															"text": "a",
+															"texts": {
+																"en-GB-oed": "a"
+															}
+														}
+													]
+												}
+											}
+										]
+									}
+								}
+							]
+						},
+						"target": {
+							"id": "$",
+							"referenceValues": [
+								{
+									"id": "$",
+									"constraintContent": "urn",
+									"dataKey": {
+										"include": true,
+										"keyValues": [{
+											"id": "A",
+											"include": true,
+											"value": "a"
+										}]
+									},
+									"dataSet": {
+										"dataProvider": "urn",
+										"id": "$"
+									},
+									"object": "urn",
+									"reportPeriod": "1000Z"
+								}
+							]
+						}
+					}
+				]
+			}
+		]
+	},
+	"errors": [
+		{
+			"code": 1.1,
+			"title": "a",
+			"titles": {
+				"en-GB-oed": "a"
+			},
+			"detail": "a",
+			"details": {
+				"en-GB-oed": "a"
+			},
+			"links": [
+				{
+					"href": "http://example.com",
+					"rel": "a",
+					"urn": "a",
+					"uri": "http://example.com",
+					"title": "a",
+					"titles": {
+						"en-GB-oed": "a"
+					},
+					"type": "a",
+					"hreflang": "en-GB-oed"
+				}
+			]
+		}
+	]
+}
