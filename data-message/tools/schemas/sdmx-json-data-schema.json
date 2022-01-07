@@ -809,7 +809,7 @@
 				},
 				"dimensionGroupAttributes": {
 					"type": "object",
-					"patternProperties": {"^([0-9]+(:[0-9]*)*)|((:[0-9]*)*(:[0-9]+)+(:[0-9]*)*)$": {
+					"patternProperties": {"^(([0-9]*)?(:[0-9]*)*)$": {
 						"type": "array",
 						"items": {
 							"anyOf": [
