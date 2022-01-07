@@ -437,8 +437,7 @@
 			"type": "object",
 			"required": [
 				"id",
-				"keyPosition",
-				"values"
+				"keyPosition"
 			],
 			"properties": {
 				"id": {
