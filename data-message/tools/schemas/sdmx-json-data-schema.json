@@ -654,7 +654,7 @@
 						"pattern": "^[A-Za-z0-9_@$-]+$"
 					},
 					"value": {
-						"oneOf": [
+						"anyOf": [
 							{"type": "integer"},
 							{"type": "number"},
 							{"type": "boolean"},
@@ -715,7 +715,7 @@
 								"pattern": "^[A-Za-z0-9_@$-]+$"
 							},
 							"value": {
-								"oneOf": [
+								"anyOf": [
 									{"type": "integer"},
 									{"type": "number"},
 									{"type": "boolean"},
