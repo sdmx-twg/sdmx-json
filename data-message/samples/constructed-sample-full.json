@@ -91,7 +91,7 @@
 	},
 	"errors":[
 		{
-			"code":123,
+			"code":400,
 			"title":"Invalid number of dimensions in parameter key",
 			"titles":{
 				"en":"Invalid number of dimensions in parameter key"
