@@ -2159,7 +2159,7 @@ The snippet below shows an example of an `error` object, extended with a `wsCust
 	```
 	"errors": [
 		{
-			"code": 150,
+			"code": 400,
 			"title": "Invalid number of items in the item parameter",
 			"titles": {
 				"en": "Invalid number of items in the item parameter",
