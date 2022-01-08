@@ -1,173 +1,191 @@
 {
-	"id": "https://github.com/sdmx-twg/sdmx-json/tree/v2.0.1/data-message/tools/schemas/sdmx-json-data-schema.json",
-	"$schema": "http://json-schema.org/schema#",
-	"description": "SDMX-JSON 2.0.1 Schema for SDMX 3.0.0 data messages",
-	"type": "object",
-	"properties": {
-		"meta": {
-			"description": "A meta object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.",
-			"$ref": "#/definitions/meta"
+	"id":"https://raw.githubusercontent.com/sdmx-twg/sdmx-json/v2.0.1/data-message/tools/schemas/sdmx-json-data-schema.json",
+	"$schema":"http://json-schema.org/schema#",
+	"description":"SDMX-JSON 2.0.1 Schema for SDMX 3.0.0 data messages",
+	"type":"object",
+	"properties":{
+		"meta":{
+			"description":"A meta object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.",
+			"$ref":"#/definitions/meta"
 		},
-		"data": {
-			"description": "Data contains the message's \u201cprimary data\u201d.",
-			"type": "object",
-			"properties": {
-				"structures": {
-					"type": "array",
-					"items": {"$ref": "#/definitions/structure"}
+		"data":{
+			"description":"Data contains the message's \u201cprimary data\u201d.",
+			"type":"object",
+			"properties":{
+				"structures":{
+					"type":"array",
+					"items":{
+						"$ref":"#/definitions/structure"
+					}
 				},
-				"dataSets": {
-					"type": "array",
-					"items": {"$ref": "#/definitions/dataSet"}
+				"dataSets":{
+					"type":"array",
+					"items":{
+						"$ref":"#/definitions/dataSet"
+					}
 				}
 			}
 		},
-		"errors": {
-			"description": "Errors field is an array of status message objects. When appropriate provides a list of status messages in addition to RESTful web services HTTP error status codes.",
-			"type": "array",
-			"items": {"$ref": "#/definitions/statusMessage"}
+		"errors":{
+			"description":"Array of statusInformation objects providing - when appropriate - more detail to the HTTP status codes in the RESTful SDMX web service responses.",
+			"type":"array",
+			"items":{
+				"$ref":"#/definitions/statusInformation"
+			}
 		}
 	},
-	"definitions": {
-		"meta": {
-			"description": "A meta object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.",
-			"type": "object",
-			"required": [
+	"additionalProperties":true,
+	"required":[
+		"meta"
+	],
+	"definitions":{
+		"meta":{
+			"description":"A meta object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.",
+			"type":"object",
+			"required":[
 				"id",
 				"prepared",
 				"sender"
 			],
-			"properties": {
-				"schema": {
-					"description": "Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. Providing the link to the SDMX-JSON schema is recommended.",
-					"type": "string",
-					"format": "uri"
+			"properties":{
+				"schema":{
+					"description":"Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. Providing the link to the SDMX-JSON schema is recommended.",
+					"type":"string",
+					"format":"uri"
 				},
-				"id": {
-					"description": "Unique string assigned by the sender that identifies the message for further references.",
-					"type": "string",
-					"pattern": "^[A-Za-z0-9_@$-]+$"
+				"id":{
+					"description":"Unique string assigned by the sender that identifies the message for further references.",
+					"type":"string",
+					"pattern":"^[A-Za-z0-9_@$-]+$"
 				},
-				"test": {
-					"description": "Test indicates whether the message is for test purposes or not. False for normal messages.",
-					"type": "boolean"
+				"test":{
+					"description":"Test indicates whether the message is for test purposes or not. False for normal messages.",
+					"type":"boolean"
 				},
-				"prepared": {
-					"description": "A timestamp indicating when the message was prepared. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.",
-					"type": "string",
-					"format": "date-time"
+				"prepared":{
+					"description":"A timestamp indicating when the message was prepared. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.",
+					"type":"string",
+					"format":"date-time"
 				},
-				"contentLanguages": {
-					"description": "Array of strings containing the identifyer of all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, representaing in an array format the same information than the http Content-Language response header, e.g. \"en, fr-fr\". See IETF Language Tags: https://tools.ietf.org/html/rfc5646#section-2.1. The array's first element indicates the main language used in the message for localized elements. The usage of this property is recommended.",
-					"type": "array",
-					"items": {
-						"type": "string",
-						"pattern": "^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$"
+				"contentLanguages":{
+					"description":"Array of strings containing the identifyer of all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, representaing in an array format the same information than the http Content-Language response header, e.g. \"en, fr-fr\". See IETF Language Tags: https://tools.ietf.org/html/rfc5646#section-2.1. The array's first element indicates the main language used in the message for localized elements. The usage of this property is recommended.",
+					"type":"array",
+					"items":{
+						"type":"string",
+						"pattern":"^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$"
 					}
 				},
-				"name": {
-					"description": "Name provides a name for the transmission. Multiple instances allow for parallel language values.",
-					"$ref": "#/definitions/localisedBestMatchText"
+				"name":{
+					"description":"Name provides a name for the transmission. Multiple instances allow for parallel language values.",
+					"$ref":"#/definitions/localisedBestMatchText"
 				},
-				"names": {
-					"description": "Name provides a name for the transmission. Multiple instances allow for parallel language values.",
-					"$ref": "#/definitions/localisedText"
+				"names":{
+					"description":"Name provides a name for the transmission. Multiple instances allow for parallel language values.",
+					"$ref":"#/definitions/localisedText"
 				},
-				"sender": {
-					"description": "Name provides a name for the transmission. Multiple instances allow for parallel language values.",
-					"$ref": "#/definitions/party"
+				"sender":{
+					"description":"Name provides a name for the transmission. Multiple instances allow for parallel language values.",
+					"$ref":"#/definitions/party"
 				},
-				"receivers": {
-					"description": "Receiver is information about the part(y/ies) that is/are the intended recipient(s) of the message. This can be useful if the WS requires authentication.",
-					"type": "array",
-					"items": {"$ref": "#/definitions/party"}
+				"receivers":{
+					"description":"Receiver is information about the part(y/ies) that is/are the intended recipient(s) of the message. This can be useful if the WS requires authentication.",
+					"type":"array",
+					"items":{
+						"$ref":"#/definitions/party"
+					}
 				},
-				"links": {"$ref": "#/definitions/links"}
+				"links":{
+					"$ref":"#/definitions/links"
+				}
 			}
 		},
-		"party": {
-			"type": "object",
-			"required": ["id"],
-			"properties": {
-				"id": {
-					"description": "The id holds the identification of the party.",
-					"type": "string",
-					"pattern": "^[A-Za-z0-9_@$-]+$"
+		"party":{
+			"type":"object",
+			"required":[
+				"id"
+			],
+			"properties":{
+				"id":{
+					"description":"The id holds the identification of the party.",
+					"type":"string",
+					"pattern":"^[A-Za-z0-9_@$-]+$"
 				},
-				"name": {
-					"description": "Name is a human-readable name of the party.",
-					"$ref": "#/definitions/localisedBestMatchText"
+				"name":{
+					"description":"Name is a human-readable name of the party.",
+					"$ref":"#/definitions/localisedBestMatchText"
 				},
-				"names": {
-					"description": "List of localised human-readable name of the party.",
-					"$ref": "#/definitions/localisedText"
+				"names":{
+					"description":"List of localised human-readable name of the party.",
+					"$ref":"#/definitions/localisedText"
 				},
-				"contact": {
-					"description": "Contact provides contact information for the party in regard to the transmission of the message.",
-					"type": "array",
-					"items": {
-						"type": "object",
-						"required": ["name"],
-						"properties": {
-							"name": {
-								"description": "Name contains a humain-readable name for the contact.",
-								"$ref": "#/definitions/localisedBestMatchText"
+				"contact":{
+					"description":"Contact provides contact information for the party in regard to the transmission of the message.",
+					"type":"array",
+					"items":{
+						"type":"object",
+						"required":[
+							"name"
+						],
+						"properties":{
+							"name":{
+								"description":"Name contains a humain-readable name for the contact.",
+								"$ref":"#/definitions/localisedBestMatchText"
 							},
-							"names": {
-								"description": "Name contains a humain-readable name for the contact.",
-								"$ref": "#/definitions/localisedText"
+							"names":{
+								"description":"Name contains a humain-readable name for the contact.",
+								"$ref":"#/definitions/localisedText"
 							},
-							"department": {
-								"description": "Department is a humain-readable designation of the organisational structure by a linguistic expression, within which the contact person works.",
-								"$ref": "#/definitions/localisedBestMatchText"
+							"department":{
+								"description":"Department is a humain-readable designation of the organisational structure by a linguistic expression, within which the contact person works.",
+								"$ref":"#/definitions/localisedBestMatchText"
 							},
-							"departments": {
-								"description": "Department is a humain-readable designation of the organisational structure by a linguistic expression, within which the contact person works.",
-								"$ref": "#/definitions/localisedText"
+							"departments":{
+								"description":"Department is a humain-readable designation of the organisational structure by a linguistic expression, within which the contact person works.",
+								"$ref":"#/definitions/localisedText"
 							},
-							"role": {
-								"description": "Role is the responsibility of the contact person with respect to the object for which this person is the contact.",
-								"$ref": "#/definitions/localisedBestMatchText"
+							"role":{
+								"description":"Role is the responsibility of the contact person with respect to the object for which this person is the contact.",
+								"$ref":"#/definitions/localisedBestMatchText"
 							},
-							"roles": {
-								"description": "Role is the responsibility of the contact person with respect to the object for which this person is the contact.",
-								"$ref": "#/definitions/localisedText"
+							"roles":{
+								"description":"Role is the responsibility of the contact person with respect to the object for which this person is the contact.",
+								"$ref":"#/definitions/localisedText"
 							},
-							"telephones": {
-								"type": "array",
-								"items": {
-									"description": "Telephone holds the telephone number for the contact person.",
-									"type": "string"
+							"telephones":{
+								"type":"array",
+								"items":{
+									"description":"Telephone holds the telephone number for the contact person.",
+									"type":"string"
 								}
 							},
-							"faxes": {
-								"type": "array",
-								"items": {
-									"description": "Fax holds the fax number for the contact person.",
-									"type": "string"
+							"faxes":{
+								"type":"array",
+								"items":{
+									"description":"Fax holds the fax number for the contact person.",
+									"type":"string"
 								}
 							},
-							"x400s": {
-								"type": "array",
-								"items": {
-									"description": "X400 holds the X.400 address for the contact person.",
-									"type": "string"
+							"x400s":{
+								"type":"array",
+								"items":{
+									"description":"X400 holds the X.400 address for the contact person.",
+									"type":"string"
 								}
 							},
-							"uris": {
-								"type": "array",
-								"items": {
-									"description": "URI holds an information URL for the contact person.",
-									"type": "string",
-									"format": "uri"
+							"uris":{
+								"type":"array",
+								"items":{
+									"description":"URI holds an information URL for the contact person.",
+									"type":"string",
+									"format":"uri"
 								}
 							},
-							"emails": {
-								"type": "array",
-								"items": {
-									"description": "Email holds the email address for the contact person.",
-									"type": "string",
-									"format": "email"
+							"emails":{
+								"type":"array",
+								"items":{
+									"description":"Email holds the email address for the contact person.",
+									"type":"string",
+									"format":"email"
 								}
 							}
 						}
@@ -175,61 +193,71 @@
 				}
 			}
 		},
-		"localisedBestMatchText": {
-			"type": "string",
-			"description": "localisedBestMatchText is a reusable element, used for providing a human-readable best-language-match texts."
+		"localisedBestMatchText":{
+			"type":"string",
+			"description":"localisedBestMatchText is a reusable element, used for providing a human-readable best-language-match texts."
 		},
-		"localisedText": {
-			"description": "localisedText provides for a set of language-specific alternates to be provided for any human-readable constructs in the instance. ",
-			"type": "object",
-			"patternProperties": {"^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$": {"type": "string"}}
-		},
-		"statusMessage": {
-			"description": "statusMessage describes the structure of an error or warning message.",
-			"type": "object",
-			"required": ["code"],
-			"properties": {
-				"code": {
-					"description": "Provides a code number for the status message. Standard code numbers are defined in the SDMX 2.1 Web Services Guidelines.",
-					"type": "number"
-				},
-				"title": {
-					"description": "Title contains the title of the message, in best-match language value. A short, human-readable localised summary of the status that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization.",
-					"$ref": "#/definitions/localisedBestMatchText"
-				},
-				"titles": {
-					"description": "Title contains the title of the message, in parallel language values. A list of short, human-readable localised summary of the status that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization.",
-					"$ref": "#/definitions/localisedText"
-				},
-				"detail": {
-					"description": "Detail contains the detailed text of the message, in best-match language value. A human-readable localised explanation specific to this occurrence of the status. Like title, this field\u2019s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status.",
-					"$ref": "#/definitions/localisedBestMatchText"
-				},
-				"details": {
-					"description": "Detail contains the detailed text of the message, in parallel language values. A list of human-readable localised explanations specific to this occurrence of the status. Like title, this field\u2019s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status.",
-					"$ref": "#/definitions/localisedText"
-				},
-				"links": {
-					"description": "Links field is an array of link objects. If appropriate, a collection of links to additional external resources for the status.",
-					"$ref": "#/definitions/links"
+		"localisedText":{
+			"description":"localisedText provides for a set of language-specific alternates to be provided for any human-readable constructs in the instance. ",
+			"type":"object",
+			"patternProperties":{
+				"^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$":{
+					"type":"string"
 				}
 			}
 		},
-		"links": {
-			"description": "Links field is an array of link objects. If appropriate, a collection of links to additional external resources for the header.",
-			"type": "array",
-			"items": {
-				"type": "object",
-				"properties": {
-					"href": {"$ref": "#/definitions/uri"},
-					"rel": {
-						"description": "Relationship of the object to the external resource. See semantics below. Use 'self' to indicate the urn to the parent object.",
-						"anyOf": [
-							{"type": "string"},
+		"statusInformation":{
+			"description":"Used to provide status information with more detail to the HTTP status codes in the RESTful SDMX web service responses.",
+			"type":"object",
+			"required":[
+				"code"
+			],
+			"properties":{
+				"code":{
+					"description":"Provides an HTTP status code number for the status information if appropriate. See RESTful SDMX web service error handling and status information (https://github.com/sdmx-twg/sdmx-rest/blob/master/doc/status.md).",
+					"type":"number"
+				},
+				"title":{
+					"$ref":"#/definitions/localisedBestMatchText",
+					"description":"A short, human-readable (best-language-match) summary of the situation that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization."
+				},
+				"titles":{
+					"$ref":"#/definitions/localisedText",
+					"description":"A list of short, human-readable localised summaries (see *[names](#names)*) of the status that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization."
+				},
+				"detail":{
+					"$ref":"#/definitions/localisedBestMatchText",
+					"description":"A human-readable (best-language-match) explanation specific to this occurrence of the status. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status."
+				},
+				"details":{
+					"$ref":"#/definitions/localisedText",
+					"description":"A list of human-readable localised explanations (see *[names](#names)*) specific to this occurrence of the status. Like titles, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status."
+				},
+				"links":{
+					"$ref":"#/definitions/links",
+					"description":"If appropriate, a collection of links to additional external resources for the status information."
+				}
+			}
+		},
+		"links":{
+			"description":"Links field is an array of link objects. If appropriate, a collection of links to additional external resources for the header.",
+			"type":"array",
+			"items":{
+				"type":"object",
+				"properties":{
+					"href":{
+						"$ref":"#/definitions/uri"
+					},
+					"rel":{
+						"description":"Relationship of the object to the external resource. See semantics below. Use 'self' to indicate the urn to the parent object.",
+						"anyOf":[
 							{
-								"description": "structure: provides a reference to the data structure or metadata structure definition depending on the context. Other SDMX artefact types can be specified, e.g. dataflow, provisionagreement, etc. For the others please see: https://tools.ietf.org/rfc/rfc5988.txt",
-								"type": "string",
-								"enum": [
+								"type":"string"
+							},
+							{
+								"description":"structure: provides a reference to the data structure or metadata structure definition depending on the context. Other SDMX artefact types can be specified, e.g. dataflow, provisionagreement, etc. For the others please see: https://tools.ietf.org/rfc/rfc5988.txt",
+								"type":"string",
+								"enum":[
 									"agencyscheme",
 									"alternate",
 									"appendix",
@@ -291,270 +319,374 @@
 							}
 						]
 					},
-					"urn": {
-						"description": "The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details).",
-						"$ref": "#/definitions/urn"
+					"urn":{
+						"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details).",
+						"$ref":"#/definitions/urn"
 					},
-					"uri": {
-						"description": "The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource.",
-						"$ref": "#/definitions/uri"
+					"uri":{
+						"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource.",
+						"$ref":"#/definitions/uri"
 					},
-					"title": {"$ref": "#/definitions/localisedBestMatchText"},
-					"titles": {"$ref": "#/definitions/localisedText"},
-					"type": {
-						"description": "A hint about the type of representation returned by the link.",
-						"type": "string"
+					"title":{
+						"$ref":"#/definitions/localisedBestMatchText"
 					},
-					"hreflang": {
-						"description": "The natural language of the external link, the same as used in the HTTP Accept-Language request header.",
-						"type": "string",
-						"pattern": "^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$"
+					"titles":{
+						"$ref":"#/definitions/localisedText"
+					},
+					"type":{
+						"description":"A hint about the type of representation returned by the link.",
+						"type":"string"
+					},
+					"hreflang":{
+						"description":"The natural language of the external link, the same as used in the HTTP Accept-Language request header.",
+						"type":"string",
+						"pattern":"^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$"
 					}
 				},
-				"anyOf": [
-					{"required": [
-						"href",
-						"rel"
-					]},
-					{"required": [
-						"urn",
-						"rel"
-					]}
+				"anyOf":[
+					{
+						"required":[
+							"href",
+							"rel"
+						]
+					},
+					{
+						"required":[
+							"urn",
+							"rel"
+						]
+					}
 				]
 			}
 		},
-		"structure": {
-			"type": "object",
-			"required": ["dimensions"],
-			"properties": {
-				"dataSets": {
-					"type": "array",
-					"items": {"type": "integer"},
-					"minItems": 1
-				},
-				"links": {"$ref": "#/definitions/links"},
-				"name": {"$ref": "#/definitions/localisedBestMatchText"},
-				"names": {"$ref": "#/definitions/localisedText"},
-				"description": {"$ref": "#/definitions/localisedBestMatchText"},
-				"descriptions": {"$ref": "#/definitions/localisedText"},
-				"dimensions": {
-					"type": "object",
-					"properties": {
-						"dataSet": {
-							"type": "array",
-							"items": {"$ref": "#/definitions/dimension"},
-							"uniqueItems": true
-						},
-						"series": {
-							"type": "array",
-							"items": {"$ref": "#/definitions/dimension"},
-							"uniqueItems": true
-						},
-						"observation": {
-							"type": "array",
-							"items": {"$ref": "#/definitions/dimension"},
-							"uniqueItems": true
-						}
+		"structure":{
+			"type":"object",
+			"required":[
+				"dimensions"
+			],
+			"properties":{
+				"dataSets":{
+					"type":"array",
+					"items":{
+						"type":"integer"
 					},
-					"additionalProperties": false
+					"minItems":1
 				},
-				"measures": {
-					"type": "object",
-					"properties": {
-						"observation": {
-							"type": "array",
-							"items": {"$ref": "#/definitions/measure"},
-							"uniqueItems": true
-						}
-					},
-					"additionalProperties": false
+				"links":{
+					"$ref":"#/definitions/links"
 				},
-				"attributes": {
-					"type": "object",
-					"properties": {
-						"dataSet": {
-							"type": "array",
-							"items": {"$ref": "#/definitions/attribute"},
-							"uniqueItems": true
-						},
-						"dimensionGroup": {
-							"type": "array",
-							"items": {"$ref": "#/definitions/attribute"},
-							"uniqueItems": true
-						},
-						"series": {
-							"type": "array",
-							"items": {"$ref": "#/definitions/attribute"},
-							"uniqueItems": true
-						},
-						"observation": {
-							"type": "array",
-							"items": {"$ref": "#/definitions/attribute"},
-							"uniqueItems": true
-						}
-					},
-					"additionalProperties": false
+				"name":{
+					"$ref":"#/definitions/localisedBestMatchText"
 				},
-				"annotations": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"id": {
-								"description": "Non-standard identification of an annotation.",
-								"type": "string"
+				"names":{
+					"$ref":"#/definitions/localisedText"
+				},
+				"description":{
+					"$ref":"#/definitions/localisedBestMatchText"
+				},
+				"descriptions":{
+					"$ref":"#/definitions/localisedText"
+				},
+				"dimensions":{
+					"type":"object",
+					"properties":{
+						"dataSet":{
+							"type":"array",
+							"items":{
+								"$ref":"#/definitions/dimension"
 							},
-							"title": {
-								"description": "AnnotationTitle provides a title for the annotation.",
-								"type": "string"
+							"uniqueItems":true
+						},
+						"series":{
+							"type":"array",
+							"items":{
+								"$ref":"#/definitions/dimension"
 							},
-							"type": {
-								"description": "AnnotationType is used to distinguish between annotations designed to support various uses. The types are not enumerated, as these can be specified by the user or creator of the annotations. The definitions and use of annotation types should be documented by their creator.",
-								"type": "string"
+							"uniqueItems":true
+						},
+						"observation":{
+							"type":"array",
+							"items":{
+								"$ref":"#/definitions/dimension"
+							},
+							"uniqueItems":true
+						}
+					},
+					"additionalProperties":false
+				},
+				"measures":{
+					"type":"object",
+					"properties":{
+						"observation":{
+							"type":"array",
+							"items":{
+								"$ref":"#/definitions/measure"
+							},
+							"uniqueItems":true
+						}
+					},
+					"additionalProperties":false
+				},
+				"attributes":{
+					"type":"object",
+					"properties":{
+						"dataSet":{
+							"type":"array",
+							"items":{
+								"$ref":"#/definitions/attribute"
+							},
+							"uniqueItems":true
+						},
+						"dimensionGroup":{
+							"type":"array",
+							"items":{
+								"$ref":"#/definitions/attribute"
+							},
+							"uniqueItems":true
+						},
+						"series":{
+							"type":"array",
+							"items":{
+								"$ref":"#/definitions/attribute"
+							},
+							"uniqueItems":true
+						},
+						"observation":{
+							"type":"array",
+							"items":{
+								"$ref":"#/definitions/attribute"
+							},
+							"uniqueItems":true
+						}
+					},
+					"additionalProperties":false
+				},
+				"annotations":{
+					"type":"array",
+					"items":{
+						"type":"object",
+						"properties":{
+							"id":{
+								"description":"Non-standard identification of an annotation.",
+								"type":"string"
+							},
+							"title":{
+								"description":"AnnotationTitle provides a title for the annotation.",
+								"type":"string"
+							},
+							"type":{
+								"description":"AnnotationType is used to distinguish between annotations designed to support various uses. The types are not enumerated, as these can be specified by the user or creator of the annotations. The definitions and use of annotation types should be documented by their creator.",
+								"type":"string"
 							},
 							"value":{
 								"description":"AnnotationValue holds a string containing the non-localised value text of the annotation.",
 								"type":"string"
 							},
-							"text": {
-								"description": "AnnotationText holds a best language match string containing the text of the annotation.",
-								"$ref": "#/definitions/localisedBestMatchText"
+							"text":{
+								"description":"AnnotationText holds a best language match string containing the text of the annotation.",
+								"$ref":"#/definitions/localisedBestMatchText"
 							},
-							"texts": {
-								"description": "AnnotationText holds language-specific strings containing the texts of the annotation.",
-								"$ref": "#/definitions/localisedText"
+							"texts":{
+								"description":"AnnotationText holds language-specific strings containing the texts of the annotation.",
+								"$ref":"#/definitions/localisedText"
 							},
-							"links": {
-								"description": "Links field is an array of link objects. Also used to specify the Annotation URL which points to an external resource which may contain or supplement the annotation (using 'self' as relationship). If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly. If appropriate, a collection of links to additional external resources.",
-								"$ref": "#/definitions/links"
+							"links":{
+								"description":"Links field is an array of link objects. Also used to specify the Annotation URL which points to an external resource which may contain or supplement the annotation (using 'self' as relationship). If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly. If appropriate, a collection of links to additional external resources.",
+								"$ref":"#/definitions/links"
 							}
 						}
 					}
 				}
 			}
 		},
-		"dimension": {
-			"type": "object",
-			"required": [
+		"dimension":{
+			"type":"object",
+			"required":[
 				"id",
 				"keyPosition"
 			],
-			"properties": {
-				"id": {
-					"type": "string",
-					"pattern": "^[A-Za-z][A-Za-z0-9_-]*$"
+			"properties":{
+				"id":{
+					"type":"string",
+					"pattern":"^[A-Za-z][A-Za-z0-9_-]*$"
 				},
-				"name": {"$ref": "#/definitions/localisedBestMatchText"},
-				"names": {"$ref": "#/definitions/localisedText"},
-				"description": {"$ref": "#/definitions/localisedBestMatchText"},
-				"descriptions": {"$ref": "#/definitions/localisedText"},
-				"keyPosition": {
-					"type": "integer",
-					"minimum": 0
+				"name":{
+					"$ref":"#/definitions/localisedBestMatchText"
 				},
-				"roles": {
-					"type": "array",
-					"items": {
-						"type": "string",
-						"pattern": "^[A-Za-z][A-Za-z0-9_-]*$"
+				"names":{
+					"$ref":"#/definitions/localisedText"
+				},
+				"description":{
+					"$ref":"#/definitions/localisedBestMatchText"
+				},
+				"descriptions":{
+					"$ref":"#/definitions/localisedText"
+				},
+				"keyPosition":{
+					"type":"integer",
+					"minimum":0
+				},
+				"roles":{
+					"type":"array",
+					"items":{
+						"type":"string",
+						"pattern":"^[A-Za-z][A-Za-z0-9_-]*$"
 					}
 				},
-				"format": {"$ref": "#/definitions/dimFormat"},
-				"links": {"$ref": "#/definitions/links"},
-				"annotations": {
-					"type": "array",
-					"items": {
-						"type": "integer",
-						"minimum": 0
+				"format":{
+					"$ref":"#/definitions/dimFormat"
+				},
+				"links":{
+					"$ref":"#/definitions/links"
+				},
+				"annotations":{
+					"type":"array",
+					"items":{
+						"type":"integer",
+						"minimum":0
 					}
 				},
-				"values": {"$ref": "#/definitions/dimValues"}
+				"values":{
+					"$ref":"#/definitions/dimValues"
+				}
 			}
 		},
-		"measure": {
-			"type": "object",
-			"required": [
+		"measure":{
+			"type":"object",
+			"required":[
 				"id"
 			],
-			"properties": {
-				"id": {
-					"type": "string",
-					"pattern": "^[A-Za-z][A-Za-z0-9_-]*$"
+			"properties":{
+				"id":{
+					"type":"string",
+					"pattern":"^[A-Za-z][A-Za-z0-9_-]*$"
 				},
-				"name": {"$ref": "#/definitions/localisedBestMatchText"},
-				"names": {"$ref": "#/definitions/localisedText"},
-				"description": {"$ref": "#/definitions/localisedBestMatchText"},
-				"descriptions": {"$ref": "#/definitions/localisedText"},
-				"roles": {
-					"type": "array",
-					"items": {
-						"type": "string",
-						"pattern": "^[A-Za-z][A-Za-z0-9_-]*$"
+				"name":{
+					"$ref":"#/definitions/localisedBestMatchText"
+				},
+				"names":{
+					"$ref":"#/definitions/localisedText"
+				},
+				"description":{
+					"$ref":"#/definitions/localisedBestMatchText"
+				},
+				"descriptions":{
+					"$ref":"#/definitions/localisedText"
+				},
+				"roles":{
+					"type":"array",
+					"items":{
+						"type":"string",
+						"pattern":"^[A-Za-z][A-Za-z0-9_-]*$"
 					}
 				},
-				"isMandatory": {"type": "boolean"},
-				"format": {"$ref": "#/definitions/format"},
-				"links": {"$ref": "#/definitions/links"},
-				"annotations": {
-					"type": "array",
-					"items": {
-						"type": ["integer"],
-						"minimum": 0
+				"isMandatory":{
+					"type":"boolean"
+				},
+				"format":{
+					"$ref":"#/definitions/format"
+				},
+				"links":{
+					"$ref":"#/definitions/links"
+				},
+				"annotations":{
+					"type":"array",
+					"items":{
+						"type":[
+							"integer"
+						],
+						"minimum":0
 					}
 				},
-				"values": {"$ref": "#/definitions/compValues"}
+				"values":{
+					"$ref":"#/definitions/compValues"
+				}
 			}
 		},
-		"attribute": {
-			"type": "object",
-			"required": [
+		"attribute":{
+			"type":"object",
+			"required":[
 				"id"
 			],
-			"properties": {
-				"id": {
-					"type": "string",
-					"pattern": "^[A-Za-z][A-Za-z0-9_-]*$"
+			"properties":{
+				"id":{
+					"type":"string",
+					"pattern":"^[A-Za-z][A-Za-z0-9_-]*$"
 				},
-				"name": {"$ref": "#/definitions/localisedBestMatchText"},
-				"names": {"$ref": "#/definitions/localisedText"},
-				"description": {"$ref": "#/definitions/localisedBestMatchText"},
-				"descriptions": {"$ref": "#/definitions/localisedText"},
-				"roles": {
-					"type": "array",
-					"items": {
-						"type": "string",
-						"pattern": "^[A-Za-z][A-Za-z0-9_-]*$"
+				"name":{
+					"$ref":"#/definitions/localisedBestMatchText"
+				},
+				"names":{
+					"$ref":"#/definitions/localisedText"
+				},
+				"description":{
+					"$ref":"#/definitions/localisedBestMatchText"
+				},
+				"descriptions":{
+					"$ref":"#/definitions/localisedText"
+				},
+				"roles":{
+					"type":"array",
+					"items":{
+						"type":"string",
+						"pattern":"^[A-Za-z][A-Za-z0-9_-]*$"
 					}
 				},
-				"isMandatory": {"type": "boolean"},
-				"relationship": {
-					"$ref": "#/definitions/AttributeRelationshipType",
-					"description": "AttributeRelationship describes how the value of this attribute varies with the values of other components. These relationships expresses the attachment level of the attribute."
+				"isMandatory":{
+					"type":"boolean"
 				},
-				"format": {"$ref": "#/definitions/format"},
-				"default": {"type": "string"},
-				"links": {"$ref": "#/definitions/links"},
-				"annotations": {
-					"type": "array",
-					"items": {
-						"type": "integer",
-						"minimum": 0
+				"relationship":{
+					"$ref":"#/definitions/AttributeRelationshipType",
+					"description":"AttributeRelationship describes how the value of this attribute varies with the values of other components. These relationships expresses the attachment level of the attribute."
+				},
+				"format":{
+					"$ref":"#/definitions/format"
+				},
+				"default":{
+					"type":"string"
+				},
+				"links":{
+					"$ref":"#/definitions/links"
+				},
+				"annotations":{
+					"type":"array",
+					"items":{
+						"type":"integer",
+						"minimum":0
 					}
 				},
-				"values": {"$ref": "#/definitions/compValues"}
+				"values":{
+					"$ref":"#/definitions/compValues"
+				}
 			}
 		},
-		"dimFormat": {
-			"type": "object",
-			"properties": {
-				"dataType": {"$ref": "#/definitions/dimensionDataType"},
-				"isSequence":{"type":"boolean"},
-				"interval":{"type":"number"},
-				"startValue":{"type":"number"},
-				"endValue":{"type":"number"},
-				"timeInterval":{"$ref":"#/definitions/duration"},
-				"startTime":{"$ref":"#/definitions/StandardTimePeriodType"},
-				"endTime":{"$ref":"#/definitions/StandardTimePeriodType"},
+		"dimFormat":{
+			"type":"object",
+			"properties":{
+				"dataType":{
+					"$ref":"#/definitions/dimensionDataType"
+				},
+				"isSequence":{
+					"type":"boolean"
+				},
+				"interval":{
+					"type":"number"
+				},
+				"startValue":{
+					"type":"number"
+				},
+				"endValue":{
+					"type":"number"
+				},
+				"timeInterval":{
+					"$ref":"#/definitions/duration"
+				},
+				"startTime":{
+					"$ref":"#/definitions/StandardTimePeriodType"
+				},
+				"endTime":{
+					"$ref":"#/definitions/StandardTimePeriodType"
+				},
 				"minLength":{
 					"type":"integer",
 					"minimum":1
@@ -563,27 +695,51 @@
 					"type":"integer",
 					"minimum":1
 				},
-				"minValue":{"type":"number"},
-				"maxValue":{"type":"number"},
+				"minValue":{
+					"type":"number"
+				},
+				"maxValue":{
+					"type":"number"
+				},
 				"decimals":{
 					"type":"integer",
 					"minimum":1
 				},
-				"pattern":{"type":"string"},
-				"sentinelValues": {"$ref": "#/definitions/sentinelValues"}
+				"pattern":{
+					"type":"string"
+				},
+				"sentinelValues":{
+					"$ref":"#/definitions/sentinelValues"
+				}
 			}
 		},
-		"format": {
-			"type": "object",
-			"properties": {
-				"dataType": {"$ref": "#/definitions/nonDimensionDataType"},
-				"isSequence":{"type":"boolean"},
-				"interval":{"type":"number"},
-				"startValue":{"type":"number"},
-				"endValue":{"type":"number"},
-				"timeInterval":{"$ref":"#/definitions/duration"},
-				"startTime":{"$ref":"#/definitions/StandardTimePeriodType"},
-				"endTime":{"$ref":"#/definitions/StandardTimePeriodType"},
+		"format":{
+			"type":"object",
+			"properties":{
+				"dataType":{
+					"$ref":"#/definitions/nonDimensionDataType"
+				},
+				"isSequence":{
+					"type":"boolean"
+				},
+				"interval":{
+					"type":"number"
+				},
+				"startValue":{
+					"type":"number"
+				},
+				"endValue":{
+					"type":"number"
+				},
+				"timeInterval":{
+					"$ref":"#/definitions/duration"
+				},
+				"startTime":{
+					"$ref":"#/definitions/StandardTimePeriodType"
+				},
+				"endTime":{
+					"$ref":"#/definitions/StandardTimePeriodType"
+				},
 				"minLength":{
 					"type":"integer",
 					"minimum":1
@@ -592,15 +748,25 @@
 					"type":"integer",
 					"minimum":1
 				},
-				"minValue":{"type":"number"},
-				"maxValue":{"type":"number"},
+				"minValue":{
+					"type":"number"
+				},
+				"maxValue":{
+					"type":"number"
+				},
 				"decimals":{
 					"type":"integer",
 					"minimum":1
 				},
-				"pattern":{"type":"string"},
-				"isMultiLingual":{"type":"boolean"},
-				"sentinelValues": {"$ref": "#/definitions/sentinelValues"},
+				"pattern":{
+					"type":"string"
+				},
+				"isMultiLingual":{
+					"type":"boolean"
+				},
+				"sentinelValues":{
+					"$ref":"#/definitions/sentinelValues"
+				},
 				"maxOccurs":{
 					"$ref":"#/definitions/OccurenceType",
 					"default":1
@@ -612,397 +778,641 @@
 				}
 			}
 		},
-		"sentinelValues": {
-			"type": "array",
-			"items": {
-				"type": "object",
-				"anyOf": [
-					{"required": ["value", "name"]},
-					{"required": ["value", "name", "names"]}
-				],
-				"properties": {
-					"value": {
-						"anyOf": [
-							{"type": "number"},
-							{"type": "integer"},
-							{"type": "string"}
+		"sentinelValues":{
+			"type":"array",
+			"items":{
+				"type":"object",
+				"anyOf":[
+					{
+						"required":[
+							"value",
+							"name"
 						]
 					},
-					"name": {"$ref": "#/definitions/localisedBestMatchText"},
-					"names": {"$ref": "#/definitions/localisedText"},
-					"description": {"$ref": "#/definitions/localisedBestMatchText"},
-					"descriptions": {"$ref": "#/definitions/localisedText"}
+					{
+						"required":[
+							"value",
+							"name",
+							"names"
+						]
+					}
+				],
+				"properties":{
+					"value":{
+						"anyOf":[
+							{
+								"type":"number"
+							},
+							{
+								"type":"integer"
+							},
+							{
+								"type":"string"
+							}
+						]
+					},
+					"name":{
+						"$ref":"#/definitions/localisedBestMatchText"
+					},
+					"names":{
+						"$ref":"#/definitions/localisedText"
+					},
+					"description":{
+						"$ref":"#/definitions/localisedBestMatchText"
+					},
+					"descriptions":{
+						"$ref":"#/definitions/localisedText"
+					}
 				}
 			},
-			"minItems": 1,
-			"uniqueItems": true
+			"minItems":1,
+			"uniqueItems":true
 		},
-		"dimValues": {
-			"type": "array",
-			"items": {
-				"type": "object",
-				"oneOf": [
-					{"anyOf": [
-						{"required": ["id", "name"]},
-						{"required": ["id", "name", "names"]}
-					]},
-					{"required": ["value"]}
-				],
-				"properties": {
-					"id": {
-						"type": "string",
-						"pattern": "^[A-Za-z0-9_@$-]+$"
-					},
-					"value": {
-						"anyOf": [
-							{"type": "integer"},
-							{"type": "number"},
-							{"type": "boolean"},
-							{"type": "string"}
+		"dimValues":{
+			"type":"array",
+			"items":{
+				"type":"object",
+				"oneOf":[
+					{
+						"anyOf":[
+							{
+								"required":[
+									"id",
+									"name"
+								]
+							},
+							{
+								"required":[
+									"id",
+									"name",
+									"names"
+								]
+							}
 						]
 					},
-					"name": {"$ref": "#/definitions/localisedBestMatchText"},
-					"names": {"$ref": "#/definitions/localisedText"},
-					"description": {"$ref": "#/definitions/localisedBestMatchText"},
-					"descriptions": {"$ref": "#/definitions/localisedText"},
-					"start": {
-						"type": "string",
-						"format": "date-time"
+					{
+						"required":[
+							"value"
+						]
+					}
+				],
+				"properties":{
+					"id":{
+						"type":"string",
+						"pattern":"^[A-Za-z0-9_@$-]+$"
 					},
-					"end": {
-						"type": "string",
-						"format": "date-time"
+					"value":{
+						"anyOf":[
+							{
+								"type":"integer"
+							},
+							{
+								"type":"number"
+							},
+							{
+								"type":"boolean"
+							},
+							{
+								"type":"string"
+							}
+						]
 					},
-					"parent": {
-						"type": "string",
-						"pattern": "^[A-Za-z0-9_@$-]+$"
+					"name":{
+						"$ref":"#/definitions/localisedBestMatchText"
 					},
-					"order": {
-						"type": "integer",
-						"minimum": 0
+					"names":{
+						"$ref":"#/definitions/localisedText"
 					},
-					"links": {"$ref": "#/definitions/links"},
-					"annotations": {
-						"type": "array",
-						"items": {
-							"type": "integer",
-							"minimum": 0
+					"description":{
+						"$ref":"#/definitions/localisedBestMatchText"
+					},
+					"descriptions":{
+						"$ref":"#/definitions/localisedText"
+					},
+					"start":{
+						"type":"string",
+						"format":"date-time"
+					},
+					"end":{
+						"type":"string",
+						"format":"date-time"
+					},
+					"parent":{
+						"type":"string",
+						"pattern":"^[A-Za-z0-9_@$-]+$"
+					},
+					"order":{
+						"type":"integer",
+						"minimum":0
+					},
+					"links":{
+						"$ref":"#/definitions/links"
+					},
+					"annotations":{
+						"type":"array",
+						"items":{
+							"type":"integer",
+							"minimum":0
 						}
 					}
 				}
 			},
-			"minItems": 1,
-			"uniqueItems": true
+			"minItems":1,
+			"uniqueItems":true
 		},
-		"compValues": {
-			"type": "array",
-			"items": {
-				"anyOf": [
-					{"type": "null"},
+		"compValues":{
+			"type":"array",
+			"items":{
+				"anyOf":[
 					{
-						"type": "object",
-						"oneOf": [
-							{"anyOf": [
-								{"required": ["id", "name"]},
-								{"required": ["id", "name", "names"]}
-							]},
-							{"required": ["value"]},
-							{"required": ["values"]}
+						"type":"null"
+					},
+					{
+						"type":"object",
+						"oneOf":[
+							{
+								"anyOf":[
+									{
+										"required":[
+											"id",
+											"name"
+										]
+									},
+									{
+										"required":[
+											"id",
+											"name",
+											"names"
+										]
+									}
+								]
+							},
+							{
+								"required":[
+									"value"
+								]
+							},
+							{
+								"required":[
+									"values"
+								]
+							}
 						],
-						"properties": {
-							"id": {
-								"type": "string",
-								"pattern": "^[A-Za-z0-9_@$-]+$"
+						"properties":{
+							"id":{
+								"type":"string",
+								"pattern":"^[A-Za-z0-9_@$-]+$"
 							},
-							"value": {
-								"anyOf": [
-									{"type": "integer"},
-									{"type": "number"},
-									{"type": "boolean"},
-									{"type": "string"},
-									{"$ref": "#/definitions/localisedText"}
-									]
+							"value":{
+								"anyOf":[
+									{
+										"type":"integer"
+									},
+									{
+										"type":"number"
+									},
+									{
+										"type":"boolean"
+									},
+									{
+										"type":"string"
+									},
+									{
+										"$ref":"#/definitions/localisedText"
+									}
+								]
 							},
-							"values": {"$ref": "#/definitions/valueArray"},
-							"name": {"$ref": "#/definitions/localisedBestMatchText"},
-							"names": {"$ref": "#/definitions/localisedText"},
-							"description": {"$ref": "#/definitions/localisedBestMatchText"},
-							"descriptions": {"$ref": "#/definitions/localisedText"},
-							"start": {
-								"type": "string",
-								"format": "date-time"
+							"values":{
+								"$ref":"#/definitions/valueArray"
 							},
-							"end": {
-								"type": "string",
-								"format": "date-time"
+							"name":{
+								"$ref":"#/definitions/localisedBestMatchText"
 							},
-							"parent": {
-								"type": "string",
-								"pattern": "^[A-Za-z0-9_@$-]+$"
+							"names":{
+								"$ref":"#/definitions/localisedText"
 							},
-							"order": {
-								"type": "integer",
-								"minimum": 0
+							"description":{
+								"$ref":"#/definitions/localisedBestMatchText"
 							},
-							"links": {"$ref": "#/definitions/links"},
-							"annotations": {
-								"type": "array",
-								"items": {
-									"type": "integer",
-									"minimum": 0
+							"descriptions":{
+								"$ref":"#/definitions/localisedText"
+							},
+							"start":{
+								"type":"string",
+								"format":"date-time"
+							},
+							"end":{
+								"type":"string",
+								"format":"date-time"
+							},
+							"parent":{
+								"type":"string",
+								"pattern":"^[A-Za-z0-9_@$-]+$"
+							},
+							"order":{
+								"type":"integer",
+								"minimum":0
+							},
+							"links":{
+								"$ref":"#/definitions/links"
+							},
+							"annotations":{
+								"type":"array",
+								"items":{
+									"type":"integer",
+									"minimum":0
 								}
 							}
 						}
 					}
 				]
 			},
-			"minItems": 1,
-			"uniqueItems": true
+			"minItems":1,
+			"uniqueItems":true
 		},
-		"dataSet": {
-			"type": "object",
-			"properties": {
-				"structure": {"type": "integer"},
-				"action": {
-					"type": "string",
-					"enum": [
+		"dataSet":{
+			"type":"object",
+			"properties":{
+				"structure":{
+					"type":"integer"
+				},
+				"action":{
+					"type":"string",
+					"enum":[
 						"Information",
 						"Append",
 						"Replace",
 						"Delete"
 					]
 				},
-				"reportingBegin": {"type": "string"},
-				"reportingEnd": {"type": "string"},
-				"validFrom": {
-					"type": "string",
-					"format": "date-time"
+				"reportingBegin":{
+					"type":"string"
 				},
-				"validTo": {
-					"type": "string",
-					"format": "date-time"
+				"reportingEnd":{
+					"type":"string"
 				},
-				"publicationYear": {"type": "string"},
-				"publicationPeriod": {"type": "string"},
-				"annotations": {
-					"type": "array",
-					"items": {
-						"type": "integer",
-						"minimum": 0
+				"validFrom":{
+					"type":"string",
+					"format":"date-time"
+				},
+				"validTo":{
+					"type":"string",
+					"format":"date-time"
+				},
+				"publicationYear":{
+					"type":"string"
+				},
+				"publicationPeriod":{
+					"type":"string"
+				},
+				"annotations":{
+					"type":"array",
+					"items":{
+						"type":"integer",
+						"minimum":0
 					}
 				},
-				"attributes": {
-					"type": "array",
-					"items": {
-						"anyOf": [
-							{"type": "integer"},
-							{"type": "number"},
-							{"type": "boolean"},
-							{"type": "string"},
-							{"$ref": "#/definitions/localisedText"},
-							{"$ref": "#/definitions/valueArray"},
-							{"type": "null"}
-						],
-						"minimum": 0
-					}
-				},
-				"dimensionGroupAttributes": {
-					"type": "object",
-					"patternProperties": {"^(([0-9]*)?(:[0-9]*)*)$": {
-						"type": "array",
-						"items": {
-							"anyOf": [
-								{"type": "integer"},
-								{"type": "number"},
-								{"type": "boolean"},
-								{"type": "string"},
-								{"$ref": "#/definitions/localisedText"},
-								{"$ref": "#/definitions/valueArray"},
-								{"type": "null"}
-							],
-							"minimum": 0
-						}
-					}},
-					"additionalProperties": false
-				},
-				"observations": {
-					"type": "object",
-					"patternProperties": {"^[0-9]+(:[0-9]+)*$": {
-						"type": "array",
-						"items": {
-							"anyOf": [
-								{"type": "integer"},
-								{"type": "number"},
-								{"type": "boolean"},
-								{"type": "string"},
-								{"$ref": "#/definitions/localisedText"},
-								{"$ref": "#/definitions/valueArray"},
-								{"type": "null"}
-							]
-						}
-					}},
-					"additionalProperties": false
-				},
-				"series": {
-					"type": "object",
-					"patternProperties": {"^[0-9]+(:[0-9]+)*$": {
-						"type": "object",
-						"properties": {
-							"annotations": {
-								"type": "array",
-								"items": {
-									"type": "integer",
-									"minimum": 0
-								}
+				"attributes":{
+					"type":"array",
+					"items":{
+						"anyOf":[
+							{
+								"type":"integer"
 							},
-							"attributes": {
-								"type": "array",
-								"items": {
-									"anyOf": [
-										{"type": "integer"},
-										{"type": "number"},
-										{"type": "boolean"},
-										{"type": "string"},
-										{"$ref": "#/definitions/localisedText"},
-										{"$ref": "#/definitions/valueArray"},
-										{"type": "null"}
-									],
-									"minimum": 0
-								}
+							{
+								"type":"number"
 							},
-							"observations": {
-								"type": "object",
-								"patternProperties": {"^[0-9]+(:[0-9]+)*$": {
-									"type": "array",
-									"items": {
-										"anyOf": [
-											{"type": "integer"},
-											{"type": "number"},
-											{"type": "boolean"},
-											{"type": "string"},
-											{"$ref": "#/definitions/localisedText"},
-											{"$ref": "#/definitions/valueArray"},
-											{"type": "null"}
-										]
-									}
-								}},
-								"additionalProperties": false
+							{
+								"type":"boolean"
+							},
+							{
+								"type":"string"
+							},
+							{
+								"$ref":"#/definitions/localisedText"
+							},
+							{
+								"$ref":"#/definitions/valueArray"
+							},
+							{
+								"type":"null"
 							}
-						},
-						"additionalProperties": false
-					}},
-					"additionalProperties": false
+						],
+						"minimum":0
+					}
 				},
-				"links": {"$ref": "#/definitions/links"}
-			},
-			"required": ["links"]
-		},
-		"valueArray": {
-			"oneOf": [{
-				"type": "array",
-				"items": {
-					"anyOf": [
-						{"type": "integer"},
-						{"type": "null"}
-					]
-				},
-				"minItems": 1
-			},{
-				"type": "array",
-				"items": {
-					"anyOf": [
-						{"type": "number"},
-						{"type": "null"}
-					]
-				},
-				"minItems": 1
-			},{
-				"type": "array",
-				"items": {
-					"anyOf": [
-						{"type": "boolean"},
-						{"type": "null"}
-					]
-				},
-				"minItems": 1
-			},{
-				"type": "array",
-				"items": {
-					"anyOf": [
-						{"type": "string"},
-						{"type": "null"}
-					]
-				},
-				"minItems": 1
-			},{
-				"type": "array",
-				"items": {
-					"anyOf": [
-						{"$ref": "#/definitions/localisedText"},
-						{"type": "null"}
-					]
-				},
-				"minItems": 1
-			},{
-				"type": "array",
-				"items": {
-					"anyOf": [
-						{"$ref": "#/definitions/valueArray"},
-						{"type": "null"}
-					]
-				},
-				"minItems": 1
-			}]
-		},
-		"AttributeRelationshipType": {
-			"description": "AttributeRelationshipType defines the structure for stating the relationship between an attribute and other data structure definition components.",
-			"type": "object",
-			"properties": {
-				"dataflow": {
-					"type": "object",
-					"description": "This is an empty object and means that the value of the attribute varies per dataflow. It is the data modeller's responsibility to design or use non-overlapping dataflows that do not have observations in common, otherwise the integrity of dataflow-specific attribute values is not assured by the model, e.g. when querying those data through its DSD.",
-					"maxProperties": 0
-				},
-				"dimensions": {
-					"type": "array",
-					"items": {
-						"type": "string",
-						"pattern": "^[A-Za-z][A-Za-z0-9_-]*$",
-						"description": "ID of a local dimension. This is used to reference a subset of dimensions in the data structure definition on which the value of this attribute depends. An attribute using this relationship can be either a group or series attribute. However, the level at which the values of the attribute will be presented in the data message (dataset, group, series or observation) is determined by the data format, the data query and which dimensions are referenced."
+				"dimensionGroupAttributes":{
+					"type":"object",
+					"patternProperties":{
+						"^(([0-9]*)?(:[0-9]*)*)$":{
+							"type":"array",
+							"items":{
+								"anyOf":[
+									{
+										"type":"integer"
+									},
+									{
+										"type":"number"
+									},
+									{
+										"type":"boolean"
+									},
+									{
+										"type":"string"
+									},
+									{
+										"$ref":"#/definitions/localisedText"
+									},
+									{
+										"$ref":"#/definitions/valueArray"
+									},
+									{
+										"type":"null"
+									}
+								],
+								"minimum":0
+							}
+						}
 					},
-					"minItems": 1
+					"additionalProperties":false
 				},
-				"observation": {
-					"type": "object",
-					"description": "This is an empty object and means that value of the attribute can vary with each observation.",
-					"maxProperties": 0
-				},
-				"primaryMeasure": {
-					"type": "string",
-					"pattern": "^[A-Za-z][A-Za-z0-9_-]*$",
-					"description": "Deprecated and replaced by the relationship `observation`. For backward-compatibility only. The content is ignored and the presence of this relationship means that value of the attribute can vary with each observation."
-				},
-				"measures": {
-					"type": "array",
-					"items": {
-						"type": "string",
-						"pattern": "^[A-Za-z][A-Za-z0-9_-]*$",
-						"description": "ID of a local measure. This is used to reference a subset of measures in the data structure definition to which the values of this attribute apply. This is only for informational and presentational purposes. If the `measures` relationship is not present then the attribute values apply to whole observations."
+				"observations":{
+					"type":"object",
+					"patternProperties":{
+						"^[0-9]+(:[0-9]+)*$":{
+							"type":"array",
+							"items":{
+								"anyOf":[
+									{
+										"type":"integer"
+									},
+									{
+										"type":"number"
+									},
+									{
+										"type":"boolean"
+									},
+									{
+										"type":"string"
+									},
+									{
+										"$ref":"#/definitions/localisedText"
+									},
+									{
+										"$ref":"#/definitions/valueArray"
+									},
+									{
+										"type":"null"
+									}
+								]
+							}
+						}
 					},
-					"minItems": 1
+					"additionalProperties":false
+				},
+				"series":{
+					"type":"object",
+					"patternProperties":{
+						"^[0-9]+(:[0-9]+)*$":{
+							"type":"object",
+							"properties":{
+								"annotations":{
+									"type":"array",
+									"items":{
+										"type":"integer",
+										"minimum":0
+									}
+								},
+								"attributes":{
+									"type":"array",
+									"items":{
+										"anyOf":[
+											{
+												"type":"integer"
+											},
+											{
+												"type":"number"
+											},
+											{
+												"type":"boolean"
+											},
+											{
+												"type":"string"
+											},
+											{
+												"$ref":"#/definitions/localisedText"
+											},
+											{
+												"$ref":"#/definitions/valueArray"
+											},
+											{
+												"type":"null"
+											}
+										],
+										"minimum":0
+									}
+								},
+								"observations":{
+									"type":"object",
+									"patternProperties":{
+										"^[0-9]+(:[0-9]+)*$":{
+											"type":"array",
+											"items":{
+												"anyOf":[
+													{
+														"type":"integer"
+													},
+													{
+														"type":"number"
+													},
+													{
+														"type":"boolean"
+													},
+													{
+														"type":"string"
+													},
+													{
+														"$ref":"#/definitions/localisedText"
+													},
+													{
+														"$ref":"#/definitions/valueArray"
+													},
+													{
+														"type":"null"
+													}
+												]
+											}
+										}
+									},
+									"additionalProperties":false
+								}
+							},
+							"additionalProperties":false
+						}
+					},
+					"additionalProperties":false
+				},
+				"links":{
+					"$ref":"#/definitions/links"
 				}
 			},
-			"oneOf": [
-				{"required": ["dimensions"]},
-				{"required": ["dataflow"]},
-				{"required": ["observation"]},
-				{"required": ["primaryMeasure"]}
+			"required":[
+				"links"
 			]
 		},
-		"dimensionDataType": {
-			"description": "dimensionDataType provides an enumerated list of the types of data formats allowed as the for the representation of dimensions, since SDMX 3.0.0 also including GeospatialInformation. However, time dimensions only allow for 'ObservationalTimePeriod', 'StandardTimePeriod', 'BasicTimePeriod', 'GregorianTimePeriod', 'GregorianYear', 'GregorianYearMonth', 'GregorianDay', 'ReportingTimePeriod', 'ReportingYear', 'ReportingSemester', 'ReportingTrimester', 'ReportingQuarter', 'ReportingMonth', 'ReportingWeek', 'ReportingDay', 'DateTime' and 'TimeRange'.",
-			"type": "string",
-			"enum": [
+		"valueArray":{
+			"oneOf":[
+				{
+					"type":"array",
+					"items":{
+						"anyOf":[
+							{
+								"type":"integer"
+							},
+							{
+								"type":"null"
+							}
+						]
+					},
+					"minItems":1
+				},
+				{
+					"type":"array",
+					"items":{
+						"anyOf":[
+							{
+								"type":"number"
+							},
+							{
+								"type":"null"
+							}
+						]
+					},
+					"minItems":1
+				},
+				{
+					"type":"array",
+					"items":{
+						"anyOf":[
+							{
+								"type":"boolean"
+							},
+							{
+								"type":"null"
+							}
+						]
+					},
+					"minItems":1
+				},
+				{
+					"type":"array",
+					"items":{
+						"anyOf":[
+							{
+								"type":"string"
+							},
+							{
+								"type":"null"
+							}
+						]
+					},
+					"minItems":1
+				},
+				{
+					"type":"array",
+					"items":{
+						"anyOf":[
+							{
+								"$ref":"#/definitions/localisedText"
+							},
+							{
+								"type":"null"
+							}
+						]
+					},
+					"minItems":1
+				},
+				{
+					"type":"array",
+					"items":{
+						"anyOf":[
+							{
+								"$ref":"#/definitions/valueArray"
+							},
+							{
+								"type":"null"
+							}
+						]
+					},
+					"minItems":1
+				}
+			]
+		},
+		"AttributeRelationshipType":{
+			"description":"AttributeRelationshipType defines the structure for stating the relationship between an attribute and other data structure definition components.",
+			"type":"object",
+			"properties":{
+				"dataflow":{
+					"type":"object",
+					"description":"This is an empty object and means that the value of the attribute varies per dataflow. It is the data modeller's responsibility to design or use non-overlapping dataflows that do not have observations in common, otherwise the integrity of dataflow-specific attribute values is not assured by the model, e.g. when querying those data through its DSD.",
+					"maxProperties":0
+				},
+				"dimensions":{
+					"type":"array",
+					"items":{
+						"type":"string",
+						"pattern":"^[A-Za-z][A-Za-z0-9_-]*$",
+						"description":"ID of a local dimension. This is used to reference a subset of dimensions in the data structure definition on which the value of this attribute depends. An attribute using this relationship can be either a group or series attribute. However, the level at which the values of the attribute will be presented in the data message (dataset, group, series or observation) is determined by the data format, the data query and which dimensions are referenced."
+					},
+					"minItems":1
+				},
+				"observation":{
+					"type":"object",
+					"description":"This is an empty object and means that value of the attribute can vary with each observation.",
+					"maxProperties":0
+				},
+				"primaryMeasure":{
+					"type":"string",
+					"pattern":"^[A-Za-z][A-Za-z0-9_-]*$",
+					"description":"Deprecated and replaced by the relationship `observation`. For backward-compatibility only. The content is ignored and the presence of this relationship means that value of the attribute can vary with each observation."
+				},
+				"measures":{
+					"type":"array",
+					"items":{
+						"type":"string",
+						"pattern":"^[A-Za-z][A-Za-z0-9_-]*$",
+						"description":"ID of a local measure. This is used to reference a subset of measures in the data structure definition to which the values of this attribute apply. This is only for informational and presentational purposes. If the `measures` relationship is not present then the attribute values apply to whole observations."
+					},
+					"minItems":1
+				}
+			},
+			"oneOf":[
+				{
+					"required":[
+						"dimensions"
+					]
+				},
+				{
+					"required":[
+						"dataflow"
+					]
+				},
+				{
+					"required":[
+						"observation"
+					]
+				},
+				{
+					"required":[
+						"primaryMeasure"
+					]
+				}
+			]
+		},
+		"dimensionDataType":{
+			"description":"dimensionDataType provides an enumerated list of the types of data formats allowed as the for the representation of dimensions, since SDMX 3.0.0 also including GeospatialInformation. However, time dimensions only allow for 'ObservationalTimePeriod', 'StandardTimePeriod', 'BasicTimePeriod', 'GregorianTimePeriod', 'GregorianYear', 'GregorianYearMonth', 'GregorianDay', 'ReportingTimePeriod', 'ReportingYear', 'ReportingSemester', 'ReportingTrimester', 'ReportingQuarter', 'ReportingMonth', 'ReportingWeek', 'ReportingDay', 'DateTime' and 'TimeRange'.",
+			"type":"string",
+			"enum":[
 				"String",
 				"Alpha",
 				"AlphaNumeric",
@@ -1045,12 +1455,12 @@
 				"GeospatialInformation"
 			]
 		},
-		"nonDimensionDataType": {
-			"description": "nonDimensionDataType provides an enumerated list of the types of data formats allowed as the for the representation of measures and attributes, since SDMX 3.0.0 also including XHTML and GeospatialInformation.",
-			"oneOf": [
+		"nonDimensionDataType":{
+			"description":"nonDimensionDataType provides an enumerated list of the types of data formats allowed as the for the representation of measures and attributes, since SDMX 3.0.0 also including XHTML and GeospatialInformation.",
+			"oneOf":[
 				{
-					"type": "string",
-					"enum": [
+					"type":"string",
+					"enum":[
 						"XHTML"
 					]
 				},
@@ -1087,14 +1497,14 @@
 				}
 			]
 		},
-		"uri": {
-			"description": "Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. Providing the link to the SDMX-JSON schema is recommended.",
-			"type": "string",
-			"format": "uri"
+		"uri":{
+			"description":"Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. Providing the link to the SDMX-JSON schema is recommended.",
+			"type":"string",
+			"format":"uri"
 		},
-		"urn": {
-			"type": "string",
-			"format": "uri"
+		"urn":{
+			"type":"string",
+			"format":"uri"
 		},
 		"duration":{
 			"type":"string",
