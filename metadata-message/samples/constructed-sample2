@@ -1,255 +1,178 @@
 {
-	"meta": {
-		"schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/develop/metadata-message/tools/schemas/1.0/sdmx-json-metadata-schema.json",
-		"id": "IFS_Metadata",
-		"test": true,
-		"prepared": "2018-03-18T09:30:47-05:00",
-		"contentLanguages": [
+	"meta":{
+		"schema":"https://github.com/sdmx-twg/sdmx-json/tree/v2.0.1/metadata-message/tools/schemas/sdmx-json-metadata-schema.json",
+		"id":"IFS_Metadata",
+		"test":true,
+		"prepared":"2021-09-18T09:30:47-05:00",
+		"contentLanguages":[
 			"en"
 		],
-		"name": "IFS_Metadata",
-		"names": {
-			"en": "IFS_Metadata"
+		"name":"IFS_Metadata",
+		"names":{
+			"en":"IFS_Metadata"
 		},
-		"sender": {
-			"id": "IMF",
-			"name": "International Monetary Fund",
-			"names": {
-				"en": "International Monetary Fund"
+		"sender":{
+			"id":"IMF",
+			"name":"International Monetary Fund",
+			"names":{
+				"en":"International Monetary Fund"
 			},
-			"contacts": [
+			"contacts":[
 				{
-					"name": "StatisticQuery",
-					"names": {
-						"en": "StatisticQuery"
+					"name":"StatisticQuery",
+					"names":{
+						"en":"StatisticQuery"
 					},
-					"telephones": [
+					"telephones":[
 						"+202.623.7000"
 					]
 				}
 			]
 		},
-		"receivers": [
+		"receivers":[
 			{
-				"id": "IMF",
-				"name": "International Monetary Fund",
-				"names": {
-					"en": "International Monetary Fund"
+				"id":"IMF",
+				"name":"International Monetary Fund",
+				"names":{
+					"en":"International Monetary Fund"
 				}
-			}
-		],
-		"links": [
-			{
-				"href": "http://sdmx.webservice.org/root/metadata/dataflow/IMF/IFS/1.0",
-				"rel": "self",
-				"type": "metadata",
-				"hreflang": "en"
-			},
-			{
-				"href": "http://sdmx.webservice.org/root/metadatastructure/IMF/IMFSTAT/1.0",
-				"urn": "urn:sdmx:org.sdmx.infomodel.metadatastructure.MetadataStructure=IMF:IMFSTAT(1.0)",
-				"rel": "metadatastructure",
-				"type": "metadatastructure",
-				"hreflang": "en"
 			}
 		]
 	},
-	"data": {
-		"metadataSets": [
+	"data":{
+		"metadataSets":[
 			{
-				"id": "METADATASET1",
-				"links": [
+				"id":"METADATASET1",
+				"agencyID":"IMF",
+				"version":"1.0.0",
+				"name":"Metadata set 1",
+				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IMF_MDF(1.0)",
+				"links":[
 					{
-						"href": "http://sdmx.webservice.org/root/metadata",
-						"rel": "self",
-						"type": "metadata",
-						"hreflang": "en"
+						"href":"http://sdmx.webservice.org/metadata/metadataset/IMF/METADATASET1/1.0.0",
+						"rel":"self",
+						"type":"application/vnd.sdmx.metadata",
+						"hreflang":"en"
 					},
 					{
-						"href": "http://sdmx.webservice.org/root/metadatastructure/IMF/IMFSTAT/1.0",
-						"urn": "urn:sdmx:org.sdmx.infomodel.metadatastructure.MetadataStructure=IMF:IMFSTAT(1.0)",
-						"rel": "metadatastructure",
-						"type": "metadatastructure",
-						"hreflang": "en"
+						"href":"http://sdmx.webservice.org/structure/metadatastructure/IMF/IMF_MSD/1.0",
+						"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.MetadataStructure=IMF:IMF_MSD(1.0)",
+						"rel":"metadatastructure",
+						"type":"application/vnd.sdmx.structure",
+						"hreflang":"en"
+					},
+					{
+						"href":"http://sdmx.webservice.org/structure/metadataflow/IMF/IMF_MDF/1.0",
+						"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IMF_MDF(1.0)",
+						"rel":"metadataflow",
+						"type":"application/vnd.sdmx.structure",
+						"hreflang":"en"
 					}
 				],
-				"reports": [
+				"targets":[
+					"urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=IMF:IFS_DSD(1.0)"
+				],
+				"attributes":[
 					{
-						"id": "DATA_KEY_REPORT",
-						"attributeSet": {
-							"reportedAttributes": [
-								{
-									"id": "SOURCE",
-									"attributeSet": {
-										"reportedAttributes": [
-											{
-												"id": "COLLECTION_SOURCE_NAME",
-												"value": "These series are typically the monthly average of market rates or official rates of the reporting country. If those are not available, they are the monthly average rates in New York. Or if the latter are not available, they are estimates based on simple averages of the end-of-month market rates quoted in the reporting country."
-											}
-										]
-									}
-								},
-								{
-									"id": "MANIPULATION_DISSEMINATION",
-									"attributeSet": {
-										"reportedAttributes": [
-											{
-												"id": "ADJUST_OTHER",
-												"value": "Calculated as an arithmetic average. This series is not the reciprocal of series on period average of the US dollars per national currency also calculated as an arithmetic average."
-											}
-										]
-									}
-								}
-							]
-						},
-						"target": {
-							"id": "TARGET1",
-							"referenceValues": [
-								{
-									"id": "DSD",
-									"object": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=IMF:IFS_DSD(1.0)"
-								},
-								{
-									"id": "DATA_KEY",
-									"dataKey": {
-										"keyValues": [
-											{
-												"id": "ECONOMICCONCEPT",
-												"value": "ENDA"
-											},
-											{
-												"id": "DATASOURCE",
-												"value": "IFS"
-											}
-										]
-									}
-								}
-							]
-						}
+						"id":"SOURCE",
+						"attributes":[
+							{
+								"id":"COLLECTION_SOURCE_NAME",
+								"value":"These series are typically the monthly average of market rates or official rates of the reporting country. If those are not available, they are the monthly average rates in New York. Or if the latter are not available, they are estimates based on simple averages of the end-of-month market rates quoted in the reporting country."
+							}
+						]
 					},
 					{
-						"id": "DATA_KEY_REPORT",
-						"attributeSet": {
-							"reportedAttributes": [
-								{
-									"id": "SOURCE",
-									"attributeSet": {
-										"reportedAttributes": [
-											{
-												"id": "CONTACT",
-												"value": "For data/content questions: Statistics Query Mailbox."
-											}
-										]
-									}
-								},
-								{
-									"id": "COVERAGE",
-									"attributeSet": {
-										"reportedAttributes": [
-											{
-												"id": "COVERAGE_SECTOR",
-												"value": "International Financial Statistics (IFS) is a standard source of statistics on all aspects of international and domestic finance. IFS includes data on Balance of Payments; Banking; Exchange Rates; External Debt and Debt Service; External Trade; Fund Accounts; Financial Indicators; Government and Public Sector Finance; Indicators of Economic Activity; International Investment Position; Investment; Labor Markets; Monetary Authorities; Money and Banking; National Accounts; Prices ; Social and Demographic Indicators."
-											},
-											{
-												"id": "COVERAGE_OTHER",
-												"value": "Most annual data begin in 1948; quarterly and monthly data generally begin in 1957; most balance of payments data begin in 1970."
-											}
-										]
-									}
-								}
-							]
-						},
-						"target": {
-							"id": "TARGET2",
-							"referenceValues": [
-								{
-									"id": "DSD",
-									"object": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=IMF:IFS_DSD(1.0)"
-								},
-								{
-									"id": "DSD",
-									"dataKey": {
-										"keyValues": [
-											{
-												"id": "ECONOMICCONCEPT",
-												"value": "ENDA"
-											},
-											{
-												"id": "DATASOURCE",
-												"value": "IFS"
-											},
-											{
-												"id": "TIME",
-												"value": "2008-Q1"
-											}
-										]
-									}
-								}
-							]
-						}
+						"id":"MANIPULATION_DISSEMINATION",
+						"attributes":[
+							{
+								"id":"ADJUST_OTHER",
+								"value":"Calculated as an arithmetic average. This series is not the reciprocal of series on period average of the US dollars per national currency also calculated as an arithmetic average."
+							}
+						]
+					}
+				]
+			},
+			{
+				"id":"METADATASET2",
+				"agencyID":"IMF",
+				"version":"1.0.0",
+				"name":"Metadata set 2",
+				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IMF_MDF(1.0)",
+				"targets":[
+					"urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=IMF:IFS_DSD(1.0)"
+				],
+				"attributes":[
+					{
+						"id":"SOURCE",
+						"attributes":[
+							{
+								"id":"CONTACT",
+								"value":"For data/content questions: Statistics Query Mailbox."
+							}
+						]
 					},
 					{
-						"id": "DATASET_REPORT",
-						"attributeSet": {
-							"reportedAttributes": [
-								{
-									"id": "CLASS_SYSTEM",
-									"value": "Here is some metadata about the classification systems used attached at the level of the DATASET"
-								}
-							]
-						},
-						"target": {
-							"id": "TARGET3",
-							"referenceValues": [
-								{
-									"id": "DATASET",
-									"dataSet": {
-										"id": "DATASET1",
-										"dataProvider": "urn:sdmx:org.sdmx.infomodel.dataproviderscheme.DataProvider=IMF:DPS(1.0).DATAPROVIDER1"
-									}
-								}
-							]
-						}
-					},
+						"id":"COVERAGE",
+						"attributes":[
+							{
+								"id":"COVERAGE_SECTOR",
+								"value":"International Financial Statistics (IFS) is a standard source of statistics on all aspects of international and domestic finance. IFS includes data on Balance of Payments; Banking; Exchange Rates; External Debt and Debt Service; External Trade; Fund Accounts; Financial Indicators; Government and Public Sector Finance; Indicators of Economic Activity; International Investment Position; Investment; Labor Markets; Monetary Authorities; Money and Banking; National Accounts; Prices ; Social and Demographic Indicators."
+							},
+							{
+								"id":"COVERAGE_OTHER",
+								"value":"Most annual data begin in 1948; quarterly and monthly data generally begin in 1957; most balance of payments data begin in 1970."
+							}
+						]
+					}
+				]
+			},
+			{
+				"id":"DATAFLOW_REPORT",
+				"agencyID":"IMF",
+				"version":"1.0.0",
+				"name":"Dataflow report",
+				"metadataProvisionAgreement":"urn:sdmx:org.sdmx.infomodel.registry.MetadataProvisionAgreement=IMF:MDPA(1.0)",
+				"targets":[
+					"urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=IMF:IFS_DF(1.0)"
+				],
+				"attributes":[
 					{
-						"id": "STRUCTURE_REPORT",
-						"attributeSet": {
-							"reportedAttributes": [
-								{
-									"id": "COVERAGE",
-									"value": "Here is some metadata for the SOURCE Dimension"
-								}
-							]
-						},
-						"target": {
-							"id": "TARGET4",
-							"referenceValues": [
-								{
-									"id": "STRUCTURE_COMPONENT",
-									"object": "urn:sdmx:org.sdmx.infomodel.datastructure.Dimension=IMF:IFS(1.0).SOURCE"
-								}
-							]
-						}
-					},
+						"id":"CLASS_SYSTEM",
+						"value":"Here is some metadata about the classification systems used attached at the level of the DATAFLOW"
+					}
+				]
+			},
+			{
+				"id":"STRUCTURE_DIMENSION_REPORT",
+				"agencyID":"IMF",
+				"version":"1.0.0",
+				"name":"Data structure dimension report",
+				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IMF_MDF(1.0)",
+				"targets":[
+					"urn:sdmx:org.sdmx.infomodel.datastructure.Dimension=IMF:IFS_DSD(1.0).SOURCE"
+				],
+				"attributes":[
 					{
-						"id": "STRUCTURE_REPORT",
-						"attributeSet": {
-							"reportedAttributes": [
-								{
-									"id": "COVERAGE",
-									"value": "Here is some metadata for the NAC code in the CL_SOURCE code list"
-								}
-							]
-						},
-						"target": {
-							"id": "TARGET5",
-							"referenceValues": [
-								{
-									"id": "STRUCTURE_COMPONENT",
-									"object": "urn:sdmx:org.sdmx.infomodel.codelist.Code=IMF:CL_SOURCE(1.0).NAC"
-								}
-							]
-						}
+						"id":"COVERAGE",
+						"value":"Here is some metadata for the SOURCE Dimension"
+					}
+				]
+			},
+			{
+				"id":"CODE_REPORT",
+				"agencyID":"IMF",
+				"version":"1.0.0",
+				"name":"Code report",
+				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IMF_MDF(1.0)",
+				"targets":[
+					"urn:sdmx:org.sdmx.infomodel.codelist.Code=IMF:CL_SOURCE(1.0).ABC",
+					"urn:sdmx:org.sdmx.infomodel.codelist.Code=IMF:CL_SOURCE(1.0).XYZ"
+				],
+				"attributes":[
+					{
+						"id":"COVERAGE",
+						"value":"Here is some metadata for the ABC and XYZ codes in the CL_SOURCE code list"
 					}
 				]
 			}
