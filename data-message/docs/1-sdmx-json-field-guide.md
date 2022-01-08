@@ -1,4 +1,4 @@
-# Introduction to SDMX-JSON Data Message 2.0.0
+# Introduction to SDMX-JSON Data Message 2.0.1
 
 Let's first start with a brief introduction of the SDMX information model.
 
@@ -42,7 +42,7 @@ nulled field and the absence of a field as the same thing.
 - Not all fields appear in all contexts. For example response with error status messages
 may not contain fields for data, dimensions and attributes.
 
-# Field Guide to SDMX-JSON Data Message 2.0.0 Objects (aligned with SDMX 3.0.0)
+# Field Guide to SDMX-JSON Data Message 2.0.1 Objects (aligned with SDMX 3.0.0)
 
 ## message
 
@@ -1719,7 +1719,7 @@ The snippet below shows an example of an `error` object, extended with a `wsCust
 ```json
 	"errors": [
 		{
-			"code": 150,
+			"code": 400,
 			"title": "Invalid number of dimensions in the key parameter",
 			"titles": { "en": "Invalid number of dimensions in the key parameter" },
 			"wsCustomErrorCode": 39272
