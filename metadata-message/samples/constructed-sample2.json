@@ -1,9 +1,9 @@
 {
 	"meta":{
-		"schema":"https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/metadata-message/tools/schemas/2.0.0/sdmx-json-metadata-schema.json",
+		"schema":"https://raw.githubusercontent.com/sdmx-twg/sdmx-json/v2.0.1/metadata-message/tools/schemas/sdmx-json-metadata-schema.json",
 		"id":"IFS_Metadata",
 		"test":true,
-		"prepared":"2018-03-18T09:30:47-05:00",
+		"prepared":"2021-09-18T09:30:47-05:00",
 		"contentLanguages":[
 			"en"
 		],
@@ -37,21 +37,6 @@
 					"en":"International Monetary Fund"
 				}
 			}
-		],
-		"links":[
-			{
-				"href":"http://sdmx.webservice.org/root/metadata/dataflow/IMF/IFS/1.0",
-				"rel":"self",
-				"type":"metadata",
-				"hreflang":"en"
-			},
-			{
-				"href":"http://sdmx.webservice.org/root/metadatastructure/IMF/IMFSTAT/1.0",
-				"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.MetadataStructure=IMF:IMFSTAT(1.0)",
-				"rel":"metadatastructure",
-				"type":"metadatastructure",
-				"hreflang":"en"
-			}
 		]
 	},
 	"data":{
@@ -59,22 +44,33 @@
 			{
 				"id":"METADATASET1",
 				"agencyID":"IMF",
-				"name":"METADATASET1",
-				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IFS(1.0)",
+				"version":"1.0.0",
+				"name":"Metadata set 1",
+				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IMF_MDF(1.0)",
 				"links":[
 					{
-						"href":"http://sdmx.webservice.org/root/metadata",
+						"href":"http://sdmx.webservice.org/metadata/metadataset/IMF/METADATASET1/1.0.0",
 						"rel":"self",
-						"type":"metadata",
+						"type":"application/vnd.sdmx.metadata",
 						"hreflang":"en"
 					},
 					{
-						"href":"http://sdmx.webservice.org/root/metadatastructure/IMF/IMFSTAT/1.0",
-						"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.MetadataStructure=IMF:IMFSTAT(1.0)",
+						"href":"http://sdmx.webservice.org/structure/metadatastructure/IMF/IMF_MSD/1.0",
+						"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.MetadataStructure=IMF:IMF_MSD(1.0)",
 						"rel":"metadatastructure",
-						"type":"metadatastructure",
+						"type":"application/vnd.sdmx.structure",
+						"hreflang":"en"
+					},
+					{
+						"href":"http://sdmx.webservice.org/structure/metadataflow/IMF/IMF_MDF/1.0",
+						"urn":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IMF_MDF(1.0)",
+						"rel":"metadataflow",
+						"type":"application/vnd.sdmx.structure",
 						"hreflang":"en"
 					}
+				],
+				"targets":[
+					"urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=IMF:IFS_DSD(1.0)"
 				],
 				"attributes":[
 					{
@@ -95,16 +91,17 @@
 							}
 						]
 					}
-				],
-				"targets":[
-					"urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=IMF:IFS_DSD(1.0)"
 				]
 			},
 			{
-				"id":"DATA_KEY_REPORT",
+				"id":"METADATASET2",
 				"agencyID":"IMF",
-				"name":"METADATASET1",
-				"metadataProvisionAgreement":"urn:sdmx:org.sdmx.infomodel.registry.MetadataProvisionAgreement=IMF:MDPA_IFS(1.0)",
+				"version":"1.0.0",
+				"name":"Metadata set 2",
+				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IMF_MDF(1.0)",
+				"targets":[
+					"urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=IMF:IFS_DSD(1.0)"
+				],
 				"attributes":[
 					{
 						"id":"SOURCE",
@@ -128,54 +125,55 @@
 							}
 						]
 					}
-				],
-				"targets":[
-					"urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=IMF:IFS_DSD(1.0)"
 				]
 			},
 			{
-				"id":"DATASET_REPORT",
+				"id":"DATAFLOW_REPORT",
 				"agencyID":"IMF",
-				"name":"METADATASET1",
-				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IFS(1.0)",
+				"version":"1.0.0",
+				"name":"Dataflow report",
+				"metadataProvisionAgreement":"urn:sdmx:org.sdmx.infomodel.registry.MetadataProvisionAgreement=IMF:MDPA(1.0)",
+				"targets":[
+					"urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=IMF:IFS_DF(1.0)"
+				],
 				"attributes":[
 					{
 						"id":"CLASS_SYSTEM",
-						"value":"Here is some metadata about the classification systems used attached at the level of the DATASET"
+						"value":"Here is some metadata about the classification systems used attached at the level of the DATAFLOW"
 					}
-				],
-				"targets":[
-					"urn:sdmx:org.sdmx.infomodel.base.DataProvider=IMF:DPS(1.0).DATAPROVIDER1"
 				]
 			},
 			{
-				"id":"STRUCTURE_REPORT",
+				"id":"STRUCTURE_DIMENSION_REPORT",
 				"agencyID":"IMF",
-				"name":"METADATASET1",
-				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IFS(1.0)",
+				"version":"1.0.0",
+				"name":"Data structure dimension report",
+				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IMF_MDF(1.0)",
+				"targets":[
+					"urn:sdmx:org.sdmx.infomodel.datastructure.Dimension=IMF:IFS_DSD(1.0).SOURCE"
+				],
 				"attributes":[
 					{
 						"id":"COVERAGE",
 						"value":"Here is some metadata for the SOURCE Dimension"
 					}
-				],
-				"targets":[
-					"urn:sdmx:org.sdmx.infomodel.datastructure.Dimension=IMF:IFS(1.0).SOURCE"
 				]
 			},
 			{
-				"id":"STRUCTURE_REPORT",
+				"id":"CODE_REPORT",
 				"agencyID":"IMF",
-				"name":"METADATASET1",
-				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IFS(1.0)",
+				"version":"1.0.0",
+				"name":"Code report",
+				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IMF_MDF(1.0)",
+				"targets":[
+					"urn:sdmx:org.sdmx.infomodel.codelist.Code=IMF:CL_SOURCE(1.0).ABC",
+					"urn:sdmx:org.sdmx.infomodel.codelist.Code=IMF:CL_SOURCE(1.0).XYZ"
+				],
 				"attributes":[
 					{
 						"id":"COVERAGE",
-						"value":"Here is some metadata for the NAC code in the CL_SOURCE code list"
+						"value":"Here is some metadata for the ABC and XYZ codes in the CL_SOURCE code list"
 					}
-				],
-				"targets":[
-					"urn:sdmx:org.sdmx.infomodel.codelist.Code=IMF:CL_SOURCE(1.0).NAC"
 				]
 			}
 		]

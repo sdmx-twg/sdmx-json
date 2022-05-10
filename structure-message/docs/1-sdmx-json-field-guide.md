@@ -1,4 +1,4 @@
-# Introduction to SDMX-JSON Structure Message 2.0.0
+# Introduction to SDMX-JSON Structure Message 2.0.1
 
 See the SDMX-JSON Data Message docs for a brief introduction of the SDMX information model. For additional information on the SDMX information model, please refer to the [SDMX documentation](http://sdmx.org/?page_id=10).
 
@@ -10,7 +10,7 @@ Before we start, let's clarify a few more things about this guide:
 - The ordering of properties in objects is undefined. The properties may appear in any order and consuming applications should not rely on any specific ordering. It is safe to consider a nulled property and the absence of a property as the same thing.
 - Not all properties appear in all contexts. For example response with error messages may not contain a data property.
 
-# Field Guide to SDMX-JSON Structure Message 2.0.0 Objects (aligned with SDMX 3.0.0)
+# Field Guide to SDMX-JSON Structure Message 2.0.1 Objects (aligned with SDMX 3.0.0)
 
 ## message
 
@@ -18,9 +18,9 @@ Message is the top level object and it contains the requested information ("data
 
 * meta - *Object* *optional*. A *[meta](#meta)* object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.
 * data - *Object* *optional*. *[Data](#data)* contains the message's “primary data”.
-* errors - *Array* *optional*. *Errors* field is an array of *[error](#error)* objects. When appropriate provides a list of error messages in addition to RESTful web services HTTP error status codes.
+* errors - *Array* *optional* of *[statusInformation](#statusinformation)* objects providing - when appropriate - more detail to the HTTP status codes in the RESTful SDMX web service responses.
 
-The members data and errors MUST NOT coexist in the same message.
+The properties data and errors CAN coexist in the same message.
 
 Example:
 
@@ -33,7 +33,7 @@ Example:
 		},
 		"errors": [
 			{
-				# error object #
+				# statusInformation object #
 			}
 		]
 	}
@@ -2023,23 +2023,23 @@ See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
 See the schema file for more information.
 
-## error
+## statusInformation
 
-*Object* *optional*. Used to provide a error message in addition to RESTful web services HTTP error status codes. The following pieces of information are to be provided:
+*Object* *optional*. Used to provide status information with more detail to the HTTP status codes in the RESTful SDMX web service responses. The following pieces of information should be provided:
 
-* code - *Number*. Provides a code number for the error message. Code numbers are defined in the SDMX 2.1 Web Services Guidelines.
-* title - *String* *optional*. A short, human-readable (best-language-match) summary of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
-* titles - *Object* *optional*. A list of short, human-readable localised summaries (see *[names](#names)*) of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization.
-* detail - *String* *optional*. A human-readable (best-language-match) explanation specific to this occurrence of the problem. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.
-* details - *Object* *optional*. A list of human-readable localised explanations (see *[names](#names)*) specific to this occurrence of the problem. Like titles, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the error.
-* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the error.
+* code - *Number*. Provides an HTTP status code number for the status information if appropriate. See [RESTful SDMX web service error handling and status information](https://github.com/sdmx-twg/sdmx-rest/blob/master/doc/status.md).
+* title - *String* *optional*. A short, human-readable (best-language-match) summary of the situation that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization.
+* titles - *Object* *optional*. A list of short, human-readable localised summaries (see *[names](#names)*) of the status that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization.
+* detail - *String* *optional*. A human-readable (best-language-match) explanation specific to this occurrence of the status. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status.
+* details - *Object* *optional*. A list of human-readable localised explanations (see *[names](#names)*) specific to this occurrence of the status. Like titles, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status.
+* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the status information.
 
 See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
 Example:
 
 	{
-		"code": 150,
+		"code": 400,
 		"title": "Invalid number of items in the item parameter",
 		"titles": {
 			"en": "Invalid number of items in the item parameter",
@@ -2159,7 +2159,7 @@ The snippet below shows an example of an `error` object, extended with a `wsCust
 	```
 	"errors": [
 		{
-			"code": 150,
+			"code": 400,
 			"title": "Invalid number of items in the item parameter",
 			"titles": {
 				"en": "Invalid number of items in the item parameter",
