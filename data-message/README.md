@@ -14,8 +14,8 @@ parsing. The format may be used in a wide variety of programming languages
 and application programs. Testing and development of the format has focused 
 on JavaScript applications running in web browsers. 
 
-The current SDMX-JSON Data Message format 2.0.0 supports the SDMX 3.0 Information Model 
-and works together with the SDMX 3.0 RESTful Web Services API for data queries. 
+The current SDMX-JSON Data Message format 2.1.0 supports the SDMX 3.1 Information Model 
+and works together with the SDMX RESTful Web Services API 2.1 for data queries. 
 
 The SDMX-JSON format is streamable from a supporting web service in order to 
 limit the amount of server resources. 

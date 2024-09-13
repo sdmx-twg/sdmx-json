@@ -1,6 +1,6 @@
 {
 	"meta":{
-		"schema":"https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/structure-message/tools/schemas/2.0.0/sdmx-json-structure-schema.json",
+		"schema":"https://raw.githubusercontent.com/sdmx-twg/sdmx-json/v2.1.0/structure-message/tools/schemas/sdmx-json-structure-schema.json",
 		"id":"$",
 		"test":true,
 		"prepared":"2021-09-16T11:04:00Z",
@@ -504,22 +504,6 @@
 										"startValue":1,
 										"dataType":"String",
 										"timeInterval":"PT76433M"
-									},
-									"textFormat":{
-										"decimals":1,
-										"endTime":"1000Z",
-										"endValue":1.1,
-										"interval":1.1,
-										"isSequence":true,
-										"maxLength":1,
-										"maxValue":1.1,
-										"minLength":1,
-										"minValue":1.1,
-										"pattern":"a",
-										"startTime":"1000Z",
-										"startValue":1.1,
-										"dataType":"String",
-										"timeInterval":"PT76433M"
 									}
 								}
 							}
@@ -716,27 +700,11 @@
 									"urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ABC:ABC(1.0).ABC"
 								],
 								"localRepresentation":{
-									"enumeration":"urn:sdmx:org.sdmx.infomodel.codelist.Codelist=ABC:ABC(1.0)",
-									"enumerationFormat":{
-										"endTime":"1000Z",
-										"endValue":1,
-										"interval":1,
-										"isSequence":true,
-										"maxLength":1,
-										"maxValue":1,
-										"minLength":1,
-										"minValue":1,
-										"pattern":"a",
-										"startTime":"1000Z",
-										"startValue":1,
-										"dataType":"String",
-										"timeInterval":"PT76433M"
-									},
-									"textFormat":{
+									"format":{
 										"decimals":1,
 										"endTime":"1000Z",
 										"endValue":1.1,
-										"interval":1.1,
+										"interval":1,
 										"isSequence":true,
 										"maxLength":1,
 										"maxValue":1.1,
@@ -746,6 +714,30 @@
 										"startTime":"1000Z",
 										"startValue":1.1,
 										"dataType":"String",
+										"sentinelValues":[
+											{
+												"value":"nostrud enim occaecat",
+												"name":"occaecat amet proident nisi",
+												"names":{
+													"hdnonmo":"veniam dolor amet Excepteur",
+													"dnnv-cq-6dem-aew4snom-rj6xuav-0mmj-4oe2-x-e-y62-9ae41ifn-lctit4s1-m011p-d8-f":"occaecat nulla ea reprehenderit laborum",
+													"wpmf-nmfv-am":"consectetur in",
+													"i-klingon":"in irure",
+													"i-navajo":"ullamco labore nulla"
+												}
+											},
+											{
+												"value":16306864,
+												"name":"occaecat amet proident nisi",
+												"names":{
+													"hdnonmo":"veniam dolor amet Excepteur",
+													"dnnv-cq-6dem-aew4snom-rj6xuav-0mmj-4oe2-x-e-y62-9ae41ifn-lctit4s1-m011p-d8-f":"occaecat nulla ea reprehenderit laborum",
+													"wpmf-nmfv-am":"consectetur in",
+													"i-klingon":"in irure",
+													"i-navajo":"ullamco labore nulla"
+												}
+											}
+										],
 										"timeInterval":"PT76433M"
 									},
 									"minOccurs":30305345,
@@ -894,23 +886,6 @@
 										"startValue":1,
 										"dataType":"String",
 										"timeInterval":"PT76433M"
-									},
-									"textFormat":{
-										"decimals":1,
-										"endTime":"1000Z",
-										"endValue":1.1,
-										"interval":1.1,
-										"isMultiLingual":true,
-										"isSequence":true,
-										"maxLength":1,
-										"maxValue":1.1,
-										"minLength":1,
-										"minValue":1.1,
-										"pattern":"a",
-										"startTime":"1000Z",
-										"startValue":1.1,
-										"dataType":"String",
-										"timeInterval":"PT76433M"
 									}
 								},
 								"metadataAttributes":[
@@ -961,28 +936,11 @@
 										"minOccurs":0,
 										"conceptIdentity":"urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ABC:ABC(1.0).ABC",
 										"localRepresentation":{
-											"enumeration":"urn:sdmx:org.sdmx.infomodel.codelist.Codelist=ABC:ABC(1.0)",
-											"enumerationFormat":{
-												"endTime":"1000Z",
-												"endValue":1,
-												"interval":1,
-												"isSequence":true,
-												"maxLength":1,
-												"maxValue":1,
-												"minLength":1,
-												"minValue":1,
-												"pattern":"a",
-												"startTime":"1000Z",
-												"startValue":1,
-												"dataType":"String",
-												"timeInterval":"PT76433M"
-											},
-											"textFormat":{
+											"format":{
 												"decimals":1,
 												"endTime":"1000Z",
 												"endValue":1.1,
-												"interval":1.1,
-												"isMultiLingual":true,
+												"interval":1,
 												"isSequence":true,
 												"maxLength":1,
 												"maxValue":1.1,
@@ -992,6 +950,30 @@
 												"startTime":"1000Z",
 												"startValue":1.1,
 												"dataType":"String",
+												"sentinelValues":[
+													{
+														"value":"nostrud enim occaecat",
+														"name":"occaecat amet proident nisi",
+														"names":{
+															"hdnonmo":"veniam dolor amet Excepteur",
+															"dnnv-cq-6dem-aew4snom-rj6xuav-0mmj-4oe2-x-e-y62-9ae41ifn-lctit4s1-m011p-d8-f":"occaecat nulla ea reprehenderit laborum",
+															"wpmf-nmfv-am":"consectetur in",
+															"i-klingon":"in irure",
+															"i-navajo":"ullamco labore nulla"
+														}
+													},
+													{
+														"value":16306864,
+														"name":"occaecat amet proident nisi",
+														"names":{
+															"hdnonmo":"veniam dolor amet Excepteur",
+															"dnnv-cq-6dem-aew4snom-rj6xuav-0mmj-4oe2-x-e-y62-9ae41ifn-lctit4s1-m011p-d8-f":"occaecat nulla ea reprehenderit laborum",
+															"wpmf-nmfv-am":"consectetur in",
+															"i-klingon":"in irure",
+															"i-navajo":"ullamco labore nulla"
+														}
+													}
+												],
 												"timeInterval":"PT76433M"
 											}
 										}
@@ -1295,23 +1277,6 @@
 								"pattern":"a",
 								"startTime":"1000Z",
 								"startValue":1,
-								"dataType":"String",
-								"timeInterval":"PT76433M"
-							},
-							"textFormat":{
-								"decimals":1,
-								"endTime":"1000Z",
-								"endValue":1.1,
-								"interval":1.1,
-								"isMultiLingual":true,
-								"isSequence":true,
-								"maxLength":1,
-								"maxValue":1.1,
-								"minLength":1,
-								"minValue":1.1,
-								"pattern":"a",
-								"startTime":"1000Z",
-								"startValue":1.1,
 								"dataType":"String",
 								"timeInterval":"PT76433M"
 							}

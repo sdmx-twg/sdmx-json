@@ -1,4 +1,4 @@
-# Introduction to SDMX-JSON Data Message 2.0.0
+# Introduction to SDMX-JSON Data Message 2.1.0
 
 Let's first start with a brief introduction of the SDMX information model.
 
@@ -42,7 +42,7 @@ nulled field and the absence of a field as the same thing.
 - Not all fields appear in all contexts. For example response with error status messages
 may not contain fields for data, dimensions and attributes.
 
-# Field Guide to SDMX-JSON Data Message 2.0.0 Objects (aligned with SDMX 3.0.0)
+# Field Guide to SDMX-JSON Data Message 2.1.0 Objects (aligned with SDMX 3.1.0)
 
 ## message
 
@@ -50,9 +50,9 @@ Message is the top level object and it contains the data as well as the structur
 
 * meta - *Object* *optional*. A *[meta](#meta)* object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.
 * data - *Object* *optional*. *[Data](#data)* contains the message's “primary data”.
-* errors - *Array* *optional*. *Errors* field is an array of *[error](#error)* objects. When appropriate provides a list of error messages in addition to RESTful web services HTTP error status codes.
+* errors - *Array* *optional* of *[statusInformation](#statusinformation)* objects providing - when appropriate - more detail to the HTTP status codes in the RESTful SDMX web service responses.
 
-The members data and errors MUST NOT coexist in the same message.
+The properties data and errors CAN coexist in the same message.
 
 Example:
 
@@ -65,7 +65,7 @@ Example:
 		},
 		"errors": [
 			{
-				# error object #
+				# statusInformation object #
 			}
 		]
 	}
@@ -342,12 +342,12 @@ Each of the components may contain the following fields:
 * keyPosition - *Number*. **This field is mandatory for `dimensions` but not to be supplied for `measures` or `attributes`.** Indicates the position of the `dimension` in the Data Structure Definition, starting at 0. It needs to be provided also for the special `dimensions` such as Time or Measure dimensions. The information in this field is consistent with the order of `dimensions` in the "key" parameter string (i.e. D.USD.EUR.SP00.A) for data queries in the SDMX API. 
 * roles - *Array* of *String*s *optional*. Defines the component role(s), if any. Roles are represented by the id of a concept defined as [SDMX cross-domain concept](https://sdmx.org/wp-content/uploads/01_sdmx_cog_annex_1_cdc_2009.pdf). Several of the concepts defined as SDMX cross-domain concepts are useful for data visualisation, such as for example, the series title ("TITLE"), the unit of measure ("UNIT_MEASURE"), the number of decimals to be displayed ("DECIMALS"), the  country or geographic reference area ("REF_AREA", e.g. when using maps), the period of time to which the measured observation refers ("REF_PERIOD"), the time interval at which observations occur over a given time period ("FREQ"), etc. It is strongly recommended to identify any component that can be useful for data visualisation purposes by using the appropriate SDMX cross-domain concept as role.
 * isMandatory - *Boolean* *optional*. **Only for `measures` and `attributes`.** If `true` then that `measure` or `attribute` is mandatory in the exchange of complete datasets. The default is `false`.
-* relationship - *Object*.  **This field is mandatory for `attributes` but not to be supplied for `measures` or `dimensions`.** *[Attribute relationship](#attribute-relationship)* describes how the value of this attribute varies with the values of other components. This relationship expresses the attachment level of the attribute as defined in the data structure definition. Depending on the message context (especially the data query) an attribute value can however be attached physically in the message at a different level.
+* relationship - *Object* *optional*. **This field is mandatory for data `attributes` but optional for referential metadata `attributes` and not to be supplied for `measures` or `dimensions`.** *[Attribute relationship](#attribute-relationship)* describes how the value of this attribute varies with the values of other components. This relationship expresses the attachment level of the attribute as defined in the data structure definition. Depending on the message context (especially the data query) an attribute value can however be attached physically in the message at a different level.
 * format - *Object* *optional*. *[Format](#format)* describes the allowed components representation (permitted type and cardinality of the values). It contains essential information to determine the location of the component values and the related necessity of using indexes for referencing. It is only used when the component values are not defined by an enumerated list of identifiable items (codelist).
 * default - *String* or *Number* *optional*. Defines a default `value` for the component (**valid for `attributes` only!**). If no value is provided in the data part of the message then this value applies.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the component.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the component. Indices refer back to the array of *annotations* in the structure field.
-* values - *Array* *optional*. *Values* field is an array of *[component value](#component-value)* objects. Note that `dimensions` and `attributes` presented at `dataSet` level can only have one single component value. ***Values* are mandatory for `dimensions`**, but *optional* for `measures` and `attributes`. Whenever the *values* field is provided, the component values in the dataSets will always contain the corresponding array indexes, otherwise they will contain the values themselves.  
+* values - *Array* *optional*. *Values* field is an array of *[component value](#component-value)* objects. Note that `dimensions` and `attributes` presented at `dataSet` level can only have one single component value. ***Values* are *optional* for `measures` and `attributes`, but generally *required* for `dimensions` unless used only for attributes at `dimensionGroup` level**. Whenever the *values* field is provided, the component values in the dataSets will always contain the corresponding array indexes, otherwise they will contain the values themselves.  
 
 See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
@@ -1278,23 +1278,23 @@ Example:
 	Note:
 	For attribute "ATTR1", the values are omitted in the attribute definition and thus presented directly in the dataSets' `observations` (instead of indexes).
 
-## error
+## statusInformation
 
-*Object* *optional*. Used to provide status messages in addition to RESTful web services HTTP error status codes. The following pieces of information should be provided:
+*Object* *optional*. Used to provide status information with more detail to the HTTP status codes in the RESTful SDMX web service responses. The following pieces of information should be provided:
 
-* code - *Number*. Provides a code number for the status message if appropriate. Standard code numbers are defined in the SDMX 2.1 Web Services Guidelines.
+* code - *Number*. Provides an HTTP status code number for the status information if appropriate. See [RESTful SDMX web service error handling and status information](https://github.com/sdmx-twg/sdmx-rest/blob/master/doc/status.md).
 * title - *String* *optional*. A short, human-readable (best-language-match) summary of the situation that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization.
 * titles - *Object* *optional*. A list of short, human-readable localised summaries (see *[names](#names)*) of the status that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization.
 * detail - *String* *optional*. A human-readable (best-language-match) explanation specific to this occurrence of the status. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status.
 * details - *Object* *optional*. A list of human-readable localised explanations (see *[names](#names)*) specific to this occurrence of the status. Like titles, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status.
-* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the status message.
+* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the status information.
 
 See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
 Example:
 
 	{
-		"code": 150,
+		"code": 400,
 		"title": "Invalid number of dimensions in the key parameter",
 		"titles": { "en": "Invalid number of dimensions in the key parameter"
 			    "fr": "Nombre invalide de dimensions dans le paramètre 'key'" }
@@ -1719,7 +1719,7 @@ The snippet below shows an example of an `error` object, extended with a `wsCust
 ```json
 	"errors": [
 		{
-			"code": 150,
+			"code": 400,
 			"title": "Invalid number of dimensions in the key parameter",
 			"titles": { "en": "Invalid number of dimensions in the key parameter" },
 			"wsCustomErrorCode": 39272
