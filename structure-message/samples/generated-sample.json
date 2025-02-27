@@ -3797,25 +3797,10 @@
 						"hreflang":"en-GB-oed"
 					}
 				],
-				"role":"Allowed",
 				"constraintAttachment":{
 					"dataflows":[
 						"urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ABC:ABC(1.0)"
-					],
-					"queryableDataSources":[
-						{
-							"isRESTDatasource":true,
-							"isWebServiceDatasource":true,
-							"dataURL":"http://www.example.org/data.json",
-							"wadlURL":"http://www.example.org/data.json",
-							"wsdlURL":"http://www.example.org/data.json"
-						}
 					]
-				},
-				"releaseCalendar":{
-					"offset":"occaecat dolor",
-					"periodicity":"reprehenderit id est voluptate officia",
-					"tolerance":"pariatur esse magna consectetur consequat"
 				},
 				"cubeRegions":[
 					{
@@ -3939,7 +3924,7 @@
 								"keyValues":[
 									{
 										"id":"A",
-										"value":"a"
+										"values":["a"]
 									}
 								],
 								"components":[
@@ -4039,25 +4024,10 @@
 						"hreflang":"en-GB-oed"
 					}
 				],
-				"role":"Allowed",
 				"constraintAttachment":{
 					"metadataflows":[
 						"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=ABC:ABC(1.0)"
-					],
-					"queryableDataSources":[
-						{
-							"isRESTDatasource":true,
-							"isWebServiceDatasource":true,
-							"dataURL":"http://www.example.org/data.json",
-							"wadlURL":"http://www.example.org/data.json",
-							"wsdlURL":"http://www.example.org/data.json"
-						}
 					]
-				},
-				"releaseCalendar":{
-					"offset":"occaecat dolor",
-					"periodicity":"reprehenderit id est voluptate officia",
-					"tolerance":"pariatur esse magna consectetur consequat"
 				},
 				"metadataTargetRegions":[
 					{
