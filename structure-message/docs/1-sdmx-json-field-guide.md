@@ -10,11 +10,11 @@ Before we start, let's clarify a few more things about this guide:
 - The ordering of properties in objects is undefined. The properties may appear in any order and consuming applications should not rely on any specific ordering. It is safe to consider a nulled property and the absence of a property as the same thing.
 - Not all properties appear in all contexts. For example response with error messages may not contain a data property.
 
-# Field Guide to SDMX-JSON Structure Message 2.1.0 Objects (aligned with SDMX 3.1.0)
+# Field Guide to SDMX-JSON Structure Message 2.1.0 Objects (aligned with SDMX 3.1)
 
 ## message
 
-Message is the top level object and it contains the requested information ("data") as well as the meta-information decribing the (technical) context of the message and, possibly, error information.
+Message is the top level object and it contains the requested information ("data") as well as the meta-information describing the (technical) context of the message and, possibly, error information.
 
 * meta - *Object* *optional*. A *[meta](#meta)* object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.
 * data - *Object* *optional*. *[Data](#data)* contains the message's “primary data”.
@@ -47,7 +47,7 @@ Any members MAY be specified within `meta` objects.
 * id - *String*. Unique string that identifies the message for further references.
 * test - *Boolean* *optional*. Indicates whether the message is for test purposes or not. False for normal messages.
 * prepared - *String*. A timestamp indicating when the message was prepared. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
-* contentLanguages - *Array* *optional*. Array of strings containing the identifyer of all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, representaing in an array format the same information than the http Content-Language response header, e.g. "en, fr-fr". See IETF Language Tags: https://tools.ietf.org/html/rfc5646#section-2.1. The array's first element indicates the main language used in the message for localized elements. **The usage of this property is recommended.**
+* contentLanguages - *Array* *optional*. Array of strings containing the identifier of all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, representing in an array format the same information than the http Content-Language response header, e.g. "en, fr-fr". See IETF Language Tags: https://tools.ietf.org/html/rfc5646#section-2.1. The array's first element indicates the main language used in the message for localized elements. **The usage of this property is recommended.**
 * name - *String* *optional*. Human-readable (best-language-match) name for the transmission.
 * names - *Object* *optional*. Human-readable localised *[names](#names)* for the transmission.
 * sender - *Object*. *[Sender](#sender)* contains information about the party that is transmitting the message.
@@ -397,7 +397,7 @@ See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
 * dataStructureComponents - *Object* *optional*. The *[dataStructureComponents](#dataStructureComponents)* object defines the grouping of the sets of structural metadata concepts that have a defined structural role in the data structure definition, like dimensions and time dimension, measures, attributes and relationships with external metadata attributes. Note that for any component or group defined in a data structure definition, its id must be unique. This applies to the identifiers explicitly defined by the components as well as those inherited from the concept identity of a component. For example, if two dimensions take their identity from concepts with same identity (regardless of whether the concepts exist in different schemes) one of the dimensions must be provided a different explicit identifier. Although there are XML schema constraints to help enforce this, these only apply to explicitly assigned identifiers. Identifiers inherited from a concept from which a component takes its identity cannot be validated against this constraint. Therefore, systems processing data structure definitions will have to perform this check outside of the XML validation. There are also three reserved identifiers in a data structure definition: TIME_PERIOD, REPORTING_PERIOD_START_DAY and REPORTING_PERIOD_END_DAY. These identifiers may not be used outside of their respective defintions (TimeDimension and Attribute). This applies to both the explicit identifier that can be assigned to the components or groups as well as an identifier inherited by a component from its concept identity. For example, if an ordinary dimension (i.e. not the time dimension) takes its concept identity from a concept with the identifier TIME_PERIOD, that dimension must provide a different explicit identifier.
 * metadata - *String* *optional*. The URN of a a metadata structure definition. A data structure definition may be related to a metadata structure definition in order to use its metadata attributes as part of the data. Note that the referenced metadata set cannot contain nested metadata attributes, as these are not supported in the data. By default all metadata attributes can be associated at any level of the data. However, a metadata attribute usage can be used to provide a specific attribute relationshp for a given metadata attribute.
-
+* evolvingStructure  - *boolean* *optional*.  An evolving data structure indicates that new Dimensions may be added under a minor version update e.g. 1.0.0 to 1.1.0.  Evolving Data Structures can only be used by Dataflows if they include a DimensionConstraint to fix the Dimensions to the subset required by the Dataflow.
 
 Example:
 
@@ -408,6 +408,7 @@ Example:
 		"dataStructureComponents": {
 			# dataStructureComponents object #
 		},
+		"evolvingStructure" false,
 		"metadata": "urn:sdmx:org.sdmx.infomodel.metadatastructuredefinition.MetadataStructureDefinition=OECD:METADATA(1.0.0)"
 	}
 
@@ -1252,6 +1253,8 @@ See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 In addition, `dataflow` has the following property:
 
 * structure - *String* *optional*. Urn reference to the data structure definition which defines the structure of all data for this flow.
+* dimensionConstraint -  *Array* *optional* of *string*s. ID references to Dimensions in the data structure definition which are used by this Dataflow. This is a required property if the Data Structure Definition defines itself as an evolving structure.
+
 
 Example:
 
@@ -1272,7 +1275,8 @@ Example:
 				"urn": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:EXR(1.0)",
 			}
 		],
-		"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_EXR1(1.0)"
+		"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_EXR1(1.0)",
+		"dimensionConstraint" : ["FREQ", "CUR", "CURR_DEMOM"]
 	}
 
 ### metadataflow
@@ -1407,16 +1411,13 @@ See the schema file for more information.
 
 In addition, `dataConstraint` has the following properties:
 
-* role - *String*. The type attribute indicates whether this constraint states what data is actually present for the constraint attachment ("Actual"), or if it defines what content is allowed ("Allowed"). Actual data constraints cannot be managed (retrieved or uploaded) through standard structure queries since they are to be generated dynamically through data availability queries according to the real current data availability. Actual data constraints should thus not be (semantically) versioned.
 * constraintAttachment - *Object* *optional*. The *[constraintAttachment](#constraintAttachment)* object describes the collection of constrainable artefacts that the constraint is attached to.
 * cubeRegions - *Array* *optional*. A list of of *[cubeRegion](#cubeRegion)* objects. CubeRegion describes a set of dimension values which define a region and attributes which relate to the region for the purpose of describing a constraint.
 * dataKeySets - *Array* *optional*. A list of of *[dataKeySet](#dataKeySet)* objects. DataKeySet defines a collection of full or partial data keys.
-* releaseCalendar - *Object* *optional*. The *[releaseCalendar](#releaseCalendar)* defines dates on which the constrained data is to be made available.
 
 Example: 
 
 	{
-		"role": "Allowed",
 		"id": "EXR_CONSTRAINTS",
 		"version": "1.0.0",
 		"agencyID": "ECB",
@@ -1445,10 +1446,7 @@ Example:
 			{
 				# dataKeySet object #
 			}
-		],
-		"releaseCalendar": {
-			# releaseCalendar object #
-		}
+		]
 	}
 
 ### metadataConstraint
@@ -1493,10 +1491,7 @@ Example:
 			{
 				# metadataTargetRegion object #
 			}
-		],
-		"releaseCalendar": {
-			# releaseCalendar object #
-		}
+		]
 	}
 
 #### constraintAttachment
@@ -1513,15 +1508,9 @@ constraintAttachment properties for DataConstraints:
 constraintAttachment properties for MetadataConstraints:  
 
 * metadataProvider - *String* *optional*. MetadataProvider is a URN reference to a metadata provider to which the constraint is attached. If this is used, then only the release calendar is relevant. 
-* metadataSets - *Array* *optional*. URN references to metadata sets to which the constraint is attached.
 * metadataStructures - *Array* *optional* of *string*s. URN references to metadata structure definitions to which the constraint is attached. A constraint which is attached to more than one metadata structure must only express key sets and/or target regions where the identifiers of the target objects are common across all structures to which the constraint is attached. 
 * metadataflows - *Array* *optional* of *string*s. Urn references to metadata flows to which the constraint is attached. A constraint can be attached to more than one metadataflow, and the metadataflows do not necessarily have to be usages of the same metadata structure. However, a constraint which is attached to more than one metadata structure must only express key sets and/or target regions where the identifiers of the target objects are common across all structures to which the constraint is attached. 
 * metadataProvisionAgreements - *Array* *optional* of *string*s. Urn references to metadata provision agreements to which the constraint is attached. A constraint can be attached to more than one metadata provision agreement, and the metadata provision agreements do not necessarily have to be references structure usages based on the same structure. However, a constraint which is attached to more than one metadata provision agreement must only express key sets and/or cube/target regions where the identifier of the components are common across all structures to which the constraint is attached. 
-
-constraintAttachment properties for any contraint:
-
-* simpleDataSources - *Array* *optional* of *string*s. URLs of SDMX-ML data or metadata messages.
-* queryableDataSources - *Object* *optional*. The *[queryableDataSource](#queryableDataSource)* object describes a queryable data source to which the constraint is attached. Used only with one of the dataStructures, dataflows, dataProvisionAgreements, metadataStructures, metadataflows and metadataProvisionAgreements properties.
 
 Examples:
 
@@ -1532,33 +1521,18 @@ Examples:
 	{
 		"dataStructures": [
 			"urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_EXR1(1.0)"
-		],
-		"queryableDataSources": [
-			{
-				# queryableDataSource object #
-			}
 		]
 	}
 	
 	{
 		"dataflows": [
 			"urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:EXR(1.0)"
-		],
-		"queryableDataSources": [
-			{
-				# queryableDataSource object #
-			}
 		]
 	}
 	
 	{
 		"provisionAgreements": [
 			"urn:sdmx:org.sdmx.infomodel...."
-		],
-		"queryableDataSources": [
-			{
-				# queryableDataSource object #
-			}
 		]
 	}
 
@@ -1566,68 +1540,25 @@ Examples:
 		"metadataProvider": "urn:sdmx:org.sdmx.infomodel...."
 	}
 	
-	{
-		"metadataSets": [
-			"urn:sdmx:org.sdmx.infomodel....", "urn:sdmx:org.sdmx.infomodel...."
-		]
-	}
 	
 	{
 		"metadataStructures": [
 			"urn:sdmx:org.sdmx.infomodel.metadatastructure.MetadataStructure=ECB:ECB_EXR1_M(1.0)"
-		],
-		"queryableDataSources": [
-			{
-				# queryableDataSource object #
-			}
 		]
 	}
 	
 	{
 		"metadataflows": [
 			"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=ECB:EXR_M(1.0)"
-		],
-		"queryableDataSources": [
-			{
-				# queryableDataSource object #
-			}
 		]
 	}
 	
 	{
 		"metadataProvisionAgreements": [
 			"urn:sdmx:org.sdmx.infomodel...."
-		],
-		"queryableDataSources": [
-			{
-				# queryableDataSource object #
-			}
 		]
 	}
 
-	{
-		"simpleDataSources": [
-			"/data/EXR/M..EUR.SP00.A"
-		]
-	}
-
-##### queryableDataSource
-
-*Object*. QueryableDataSource describes a data source which accepts an standard SDMX Query message and responds appropriately.
-
-* isRESTDatasource - *Boolean*.  
-* isWebServiceDatasource - *Boolean*. 
-* dataURL - *String*. DataURL contains the URL of the data source. 
-* wadlURL - *String* *optional*. WADLURL provides the location of a WADL instance on the internet which describes the REST protocol of the queryable data source.
-* wsdlURL - *String* *optional*. WSDLURL provides the location of a WSDL instance on the internet which describes the queryable data source.
-
-Example:
-
-	{
-		"isRESTDatasource": true,
-		"isWebServiceDatasource": true,
-		"dataURL": "/data/EXR/M..EUR.SP00.A"
-	}
 
 #### cubeRegion
 
@@ -1662,6 +1593,8 @@ Example:
 * id - *String*. 
 * include - *Boolean* *optional*. The include attribute indicates whether the values provided for the referenced component are to be included are excluded from the region in which they are defined.
 * removePrefix - *Boolean* *optional*. The removePrefix attribute indicates whether codes should keep or not the prefix, as defined in the extension of codelist.
+* validFrom - *String* *optional*. A timestamp from which the set of values is valid. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
+* validTo - *String* *optional*.  A timestamp from which the set of values is superceded. Values must follow the ISO 8601 syntax for combined dates and times,
 * timeRange - *Object* *optional*. A *[TimeRangeValue](#TimeRangeValue)* object.
 * values - Non-empty *array* *optional* of *String*s and *[SimpleComponentValue](#SimpleComponentValue)* objects.
 Only one of timeRange or values properties is allowed.
@@ -1837,12 +1770,12 @@ Example:
 
 ###### dataKeyValue
 
-*Object*. DataKeyValue provides a dimension value for the purpose of defining a distinct data key. Only a single value can be provided for the dimension.
+*Object*. DataKeyValue provides dimension value(s) for the purpose of defining one or more data keys. 
 
 * id - *String*. 
 * include - *Boolean* *optional*. The include attribute indicates whether the values provided for the referenced component are to be included are excluded from the region in which they are defined.
 * removePrefix - *Boolean* *optional*. The removePrefix attribute indicates whether codes should keep or not the prefix, as defined in the extension of codelist.
-* value - *String*.
+* values - Non-empty *array* of *String*s .
 
 Example:
 
@@ -1850,7 +1783,7 @@ Example:
 		"id": "EXR_TYPE",
 		"include": true,
 		"removePrefix": false,
-		"value": "NRP0"
+		"values": ["NRP0"]
 	}
 
 
