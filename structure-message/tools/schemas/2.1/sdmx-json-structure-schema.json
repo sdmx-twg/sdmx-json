@@ -1,6 +1,6 @@
 {
 	"$id":"https://raw.githubusercontent.com/sdmx-twg/sdmx-json/v2.1.0/structure-message/tools/schemas/sdmx-json-structure-schema.json",
-	"$schema":"http://json-schema.org/schema#",
+	"$schema":"https://json-schema.org/schema#",
 	"description":"SDMX-JSON 2.1.0 Schema for SDMX 3.1.0 structure messages",
 	"type":"object",
 	"properties":{
@@ -754,17 +754,6 @@
 			"description":"IDType provides a type which is used for restricting the characters in codes and IDs throughout all SDMX-ML messages. Valid characters include A-Z, a-z, @, 0-9, _, -, $. Regex: [A-Za-z0-9_@$-]+",
 			"type":"string",
 			"pattern":"^[A-Za-z0-9_@$-]+$"
-		},
-		"WildcardIDType":{
-			"description":"WildcardIDTypeType combines the IDType and WildcardType to allow a reference to either a specific identifier, or to wildcard the identifier in the reference by specifying the '*' value.",
-			"anyOf":[
-				{
-					"$ref":"#/definitions/idType"
-				},
-				{
-					"$ref":"#/definitions/WildcardType"
-				}
-			]
 		},
 		"AnnotationType":{
 			"description":"AnnotationType provides for non-documentation notes and annotations to be embedded in data and structure messages. It provides optional fields for providing a title, a type description, a URI, and the text of the annotation.",
@@ -1564,32 +1553,6 @@
 			"type":"string",
 			"pattern":"^[A-Za-z0-9_@$-]+(\\.[A-Za-z0-9_@$-]+)*$"
 		},
-		"WildcardType":{
-			"description":"WildcardType is a single value code list, used to include the '*' character - indicating that the identification component is wildcarded and that any value of the identifier component is allowed.",
-			"const":"*"
-		},
-		"WildcardNestedIDType":{
-			"description":"WildcardNestedIDType combines the NestedIDType and WildcardType to allow a reference to either a specific nested identifier, or to wildcard the identifier in the reference by specifying the '*' value.",
-			"anyOf":[
-				{
-					"$ref":"#/definitions/NestedIDType"
-				},
-				{
-					"$ref":"#/definitions/WildcardType"
-				}
-			]
-		},
-		"WildcardVersionType":{
-			"description":"WildcardVersionType combines the VersionType and WildcardType to allow a reference to either a specific version of an object, or to wildcard the version in the reference by specifying the '*' value.",
-			"anyOf":[
-				{
-					"$ref":"#/definitions/VersionReferenceType"
-				},
-				{
-					"$ref":"#/definitions/WildcardType"
-				}
-			]
-		},
 		"NCNameIDType":{
 			"description":"NCNameIDType restricts the IDType, so that the id may be used to generate valid XML components. IDs created from this type conform to the W3C XML Schema NCNAME type, and therefore can be used as element or attribute names.",
 			"type":"string",
@@ -1633,53 +1596,6 @@
 					"description":"UnboundedCodeType provides single textual value of \"unbounded\", for use in OccurentType.",
 					"const":"unbounded"
 				}
-			]
-		},
-		"QueryableDataSourceType":{
-			"description":"QueryableDataSourceType describes a data source which accepts an standard SDMX Query message and responds appropriately.",
-			"type":"object",
-			"properties":{
-				"isRESTDatasource":{
-					"type":"boolean"
-				},
-				"isWebServiceDatasource":{
-					"type":"boolean"
-				},
-				"dataURL":{
-					"description":"DataURL contains the URL of the data source.",
-					"$ref":"#/definitions/uri"
-				},
-				"wadlURL":{
-					"description":"WADLURL provides the location of a WADL instance on the internet which describes the REST protocol of the queryable data source.",
-					"$ref":"#/definitions/uri"
-				},
-				"wsdlURL":{
-					"description":"WSDLURL provides the location of a WSDL instance on the internet which describes the queryable data source.",
-					"$ref":"#/definitions/uri"
-				}
-			},
-			"required":[
-				"isRESTDatasource",
-				"isWebServiceDatasource",
-				"dataURL"
-			]
-		},
-		"ReferencePeriodType":{
-			"description":"Specifies the inclusive start and end times for the reference period.",
-			"type":"object",
-			"properties":{
-				"endTime":{
-					"type":"string",
-					"format":"date-time"
-				},
-				"startTime":{
-					"type":"string",
-					"format":"date-time"
-				}
-			},
-			"required":[
-				"endTime",
-				"startTime"
 			]
 		},
 		"ReportingTimePeriodType":{
@@ -1865,35 +1781,6 @@
 					"description":"Semantic version format: is a simple type for validating semantic version in the format major.minor.patch[-extension]."
 				}
 			]
-		},
-		"VersionReferenceType":{
-			"description":"VersionReferenceType defines the structure of version number in a reference. When semantic versioning is used, the major, minor, or patch version parts can be wildcarded using '+' as an extension. For example, 2+.3.1 means the currently latest available version >= 2.3.1 (even if not backwards compatible). Note that wildcarded semantic version references cannot be combined with version extended reference (e.g. 2.3+.1-draft is not permissable). Version-extended (e.g. 1.3.1-draft) and legacy version numbers (e.g. 1 or 1.0) are also supported.",
-			"type":"string",
-			"anyOf":[
-				{
-					"pattern":"^(0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?$",
-					"description":"Legacy version format: describes the version number format previously supported in SDMX. The format is restricted to allow for simple incrementing and sorting of version number. The version consists of an unlimited set of numeric components, separated by the '.' character. When processing version, each numeric component (the number preceding and following any '.' character) should be parsed as an integer. Thus, a version of 1.3 and 1.03 would be equivalent, as both the '3' component and the '03' component would parse to an integer value of 3."
-				},
-				{
-					"pattern":"^(0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?$",
-					"description":"Semantic version format: is a simple type for validating semantic version in the format major.minor.patch[-extension]."
-				},
-				{
-					"pattern":"(^(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$)|(^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)$)|(^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+$)",
-					"description":"Semantic version reference is a simple type for referencing semantic version numbers. It allows for the wildcarding of one of the major, minor, or patch version parts using '+'."
-				}
-			]
-		},
-		"ExplicitVersionType":{
-			"allOf":[
-				{
-					"$ref":"#/definitions/VersionReferenceType"
-				},
-				{
-					"pattern":"^[^\\*]*$"
-				}
-			],
-			"description":"A restriction of WildcardVersionType the does not allow wildcarding. It reduces again to the VersionReferenceType. This allows proper retrictions to be placed on explicit references."
 		},
 		"AgencySchemeType":{
 			"description":"AgencySchemeType defines a specific type of organisation scheme which contains only maintenance agencies. The agency scheme maintained by a particular maintenance agency is always provided a fixed identifier and is never versioned. Therefore, agencies can be added or removed without have to version the scheme. Agencies schemes have no hierarchy, meaning that no agency may define a relationship with another agency in the scheme. In fact, the actual parent agency for an agency in a scheme is the agency which defines the scheme.",
@@ -4725,29 +4612,6 @@
 				}
 			]
 		},
-		"ReleaseCalendarType":{
-			"description":"ReleaseCalendarType describes information about the timing of releases of the constrained data. All of these values use the standard \"P7D\" - style format.",
-			"type":"object",
-			"properties":{
-				"offset":{
-					"description":"Offset is the interval between January first and the first release of data within the year.",
-					"type":"string"
-				},
-				"periodicity":{
-					"description":"Periodicity is the period between releases of the data set.",
-					"type":"string"
-				},
-				"tolerance":{
-					"description":"Tolerance is the period after which the release of data may be deemed late.",
-					"type":"string"
-				}
-			},
-			"required":[
-				"offset",
-				"periodicity",
-				"tolerance"
-			]
-		},
 		"ReportingCategoryType":{
 			"description":"ReportingCategoryType describes the structure of a reporting category, which groups structure usages into useful sub-packages. Sub ordinate reporting categories can be nested within the category definition.",
 			"type":"object",
@@ -5756,16 +5620,6 @@
 			"type":"string",
 			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.registry\\.MetadataProvisionAgreement=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
 		},
-		"MetadataSetReferenceType":{
-			"description":"MetadataSetReferenceType is a type for referencing a metadata set. It consists of a URN.",
-			"type":"string",
-			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.metadatastructure\\.MetadataSet=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
-		},
-		"MetadataAttributeReferenceType":{
-			"description":"MetadataAttributeReferenceType is a type for referencing a metadata attribute object in a metadata structur. It consists of a URN.",
-			"type":"string",
-			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.metadatastructure\\.MetadataAttribute=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)(\\.[A-Za-z0-9_@$-]+(\\.[A-Za-z0-9_@$-]+)*)$"
-		},
 		"StructureUsageReferenceType":{
 			"description":"StructureUsageReferenceType is a specific type of MaintainableReference that is used for referencing any structure usages. It consists of a URN.",
 			"type":"string",
@@ -5816,11 +5670,6 @@
 			"type":"string",
 			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.codelist\\.Code=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)(\\.[A-Za-z0-9_@$-]+)$"
 		},
-		"EnumerationReferenceType":{
-			"description":"EnumerationReferenceType is a specific type of MaintainableReference that is used for referencing item schemes or a value list. It consists of a URN.",
-			"type":"string",
-			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.((base\\.((OrganisationUnitScheme)|(AgencyScheme)|(DataProviderScheme)|(MetadataProviderScheme)|(DataConsumerScheme)))|(codelist\\.((Codelist)|(Valuelist)|(Hierarchy)))|(conceptscheme\\.((ConceptScheme)))|(categoryscheme\\.((CategoryScheme)|(ReportingTaxonomy))))=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
-		},
 		"HierarchyReferenceType":{
 			"description":"HierarchyReferenceType is a type for referencing a hierarchy object. It consists of a URN.",
 			"type":"string",
@@ -5835,11 +5684,6 @@
 			"description":"ReportingTaxonomyReferenceType is a type for referencing a reporting taxonomy object. It consists of a URN.",
 			"type":"string",
 			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.categoryscheme\\.ReportingTaxonomy=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
-		},
-		"FrequencyFormatMappingReferenceType":{
-			"description":"FrequencyFormatMappingReferenceType is a type for referencing a frequency format mapping object. It consists of a URN.",
-			"type":"string",
-			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.structuremapping\\.FrequencyFormatMapping=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)(\\.[A-Za-z0-9_@$-]+)$"
 		},
 		"RepresentationMapReferenceType":{
 			"description":"RepresentationMapReferenceType is a type for referencing a representation map object. It consists of a URN.",
