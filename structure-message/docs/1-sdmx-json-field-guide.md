@@ -212,6 +212,7 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
     * *[processes](#process)*
     * *[categorisations](#categorisation)*
     * *[dataConstraints](#dataconstraint)*
+    * *[availabilityConstraints](#availabilityconstraint)*
     * *[metadataConstraints](#metadataconstraint)*
     * *[customTypeSchemes](#customtypescheme)*
     * *[vtlMappingSchemes](#vtlmappingscheme)*
@@ -1253,8 +1254,7 @@ See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 In addition, `dataflow` has the following property:
 
 * structure - *String* *optional*. Urn reference to the data structure definition which defines the structure of all data for this flow.
-* dimensionConstraint -  *Array* *optional* of *string*s. ID references to Dimensions in the data structure definition which are used by this Dataflow. This is a required property if the Data Structure Definition defines itself as an evolving structure.
-
+* dimensionConstraint -  *Array* *optional* of *string*s. ID references to a fixed list of `dimensions` (by ID) to which a `dataflow` may be constrained. This is a required property if the `dataStructure` defines itself as an evolving structure, indicating that it can change dimensionality under a minor version change, and if the `dataflow` references that `dataStructure` using a wildcarded minor version number. New minor DSD version can so still be used by this `dataflow` even if that DSD version defines new additional `dimensions`. `Dimensions` not listed should not be used in `datasets` for this `dataflow`. The `timeDimension` is not to be listed, as it is always to be used when defined in the DSD, and it cannot be added to a DSD without increasing its major version.
 
 Example:
 
@@ -1276,7 +1276,7 @@ Example:
 			}
 		],
 		"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_EXR1(1.0)",
-		"dimensionConstraint" : ["FREQ", "CUR", "CURR_DEMOM"]
+		"dimensionConstraint": ["FREQ", "CUR", "CURR_DEMOM"]
 	}
 
 ### metadataflow
@@ -1403,7 +1403,7 @@ Example:
 
 ### dataConstraint
 
-*Object*. DataConstraint specifies a sub set of the definition of the allowable or available content of a data set in terms of the content or in terms of the set of key combinations. The inclusion of a key or region in a constraint is determined by first processing the included key sets, and then removing those keys defined in the excluded key sets. If no included key sets are defined, then it is assumed that all possible keys or regions are included, and any excluded key or regions are removed from this complete set.
+*Object*. A data constraint contains the allowed values for the referencing artefact. These values are expressed either as sets of keys (DataKeySets) or sets of component values (CubeRegion) constructed from a data structure definition. Data constraints can be used, e.g., for validation or for defining a partial code list.
 
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
@@ -1422,16 +1422,16 @@ Example:
 		"version": "1.0.0",
 		"agencyID": "ECB",
 		"isExternalReference": false,
-		"name": "Constraints for the EXR dataflow",
+		"name": "Data constraints for the EXR dataflow",
 		"names": {
-			"en": "Constraints for the EXR dataflow",
-			"fr": "Constraintes pour le dataflow EXR"
+			"en": "Data constraints for the EXR dataflow",
+			"fr": "Constraintes de données pour le dataflow EXR"
 		},
 		"links": [
 			{
 				"href": "/constraint/ECB/EXR_CONSTRAINTS/1.0",
 				"rel": "self",
-				"urn": "urn:sdmx:org.sdmx.infomodel.registry.ContentConstraint=ECB:EXR_CONSTRAINTS(1.0)"
+				"urn": "urn:sdmx:org.sdmx.infomodel.registry.DataConstraint=ECB:EXR_CONSTRAINTS(1.0)"
 			}
 		],
 		"constraintAttachment": {
@@ -1449,6 +1449,48 @@ Example:
 		]
 	}
 
+### availabilityConstraint
+
+*Object*. This type of constraint contains the actual data currently present for the referenced object and is used to express data availability by listing a set of component values (CubeRegion) constructed from a data structure definition. Availability constraints should not be (semantically) versioned.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+See the schema file for more information.
+
+In addition, `availabilityConstraint` has the following properties:
+
+* constraintAttachment - *Object* *optional*. The *[constraintAttachment](#constraintAttachment)* object describes the collection of constrainable artefacts that the constraint is attached to.
+* cubeRegions - *Array* *optional*. A list of of *[cubeRegion](#cubeRegion)* objects. CubeRegion describes a set of dimension values which define a region and attributes which relate to the region for the purpose of describing a constraint.
+
+Example: 
+
+	{
+		"id": "EXR_CONSTRAINTS",
+		"version": "1.0.0",
+		"agencyID": "ECB",
+		"isExternalReference": false,
+		"name": "Availability constraints for the EXR dataflow",
+		"names": {
+			"en": "Availability constraints for the EXR dataflow",
+			"fr": "Constraintes de disponibilité pour le dataflow EXR"
+		},
+		"links": [
+			{
+				"href": "/constraint/ECB/EXR_CONSTRAINTS/1.0",
+				"rel": "self",
+				"urn": "urn:sdmx:org.sdmx.infomodel.registry.AvailabilityConstraint=ECB:EXR_CONSTRAINTS(1.0)"
+			}
+		],
+		"constraintAttachment": {
+			# constraintAttachment object #
+		},
+		"cubeRegions": [
+			{
+				# cubeRegion object #
+			}
+		]
+	}
+
 ### metadataConstraint
 
 *Object*. MetadataConstraint specifies a sub set of the definition of the allowable content of a metadata set.
@@ -1459,15 +1501,12 @@ See the schema file for more information.
 
 In addition, `metadataConstraint` has the following properties:
 
-* role - *String*. The role attribute is fixed to "Allowed" and indicates that this constraint defines what content is allowed.
 * constraintAttachment - *Object* *optional*. The *[constraintAttachment](#constraintAttachment)* object describes the collection of constrainable artefacts that the constraint is attached to.
 * metadataTargetRegions - *Array* *optional*. A list of of *[metadataTargetRegion](#metadataTargetRegion)* objects which describes the values allowed for metadata attributes.
-* releaseCalendar - *Object* *optional*. The *[releaseCalendar](#releaseCalendar)* defines dates on which the constrained data is to be made available.
 
 Example: 
 
 	{
-		"role": "Allowed",
 		"id": "EXR_CONSTRAINTS",
 		"version": "1.0.0",
 		"agencyID": "ECB",
@@ -1500,17 +1539,17 @@ Example:
 
 constraintAttachment properties for DataConstraints:  
 
-* dataProvider - *String* *optional*. DataProvider is a URN reference to a data provider to which the constraint is attached. If this is used, then only the release calendar is relevant. 
+* dataProvider - *String* *optional*. DataProvider is a URN reference to a data provider to which the constraint is attached.
 * dataStructures - *Array* *optional* of *string*s. URN references to data structure definitions to which the constraint is attached. A constraint which is attached to more than one data structure must only express key sets and/or cube regions where the identifiers of the dimensions are common across all structures to which the constraint is attached. 
-* dataflows - *Array* *optional* of *string*s. Urn references to data flows to which the constraint is attached. A constraint can be attached to more than one dataflow, and the dataflows do not necessarily have to be usages of the same data structure. However, a constraint which is attached to more than one data structure must only express key sets and/or cube regions where the identifiers of the dimensions are common across all structures to which the constraint is attached. 
-* provisionAgreements - *Array* *optional* of *string*s. Urn references to provision agreements to which the constraint is attached. A constraint can be attached to more than one data provision agreement, and the data provision agreements do not necessarily have to be references structure usages based on the same structure. However, a constraint which is attached to more than one data provision agreement must only express key sets and/or cube/target regions where the identifier of the components are common across all structures to which the constraint is attached. 
+* dataflows - *Array* *optional* of *string*s. URN references to data flows to which the constraint is attached. A constraint can be attached to more than one dataflow, and the dataflows do not necessarily have to be usages of the same data structure. However, a constraint which is attached to more than one data structure must only express key sets and/or cube regions where the identifiers of the dimensions are common across all structures to which the constraint is attached. 
+* provisionAgreements - *Array* *optional* of *string*s. URN references to provision agreements to which the constraint is attached. A constraint can be attached to more than one data provision agreement, and the data provision agreements do not necessarily have to be references structure usages based on the same structure. However, a constraint which is attached to more than one data provision agreement must only express key sets and/or cube/target regions where the identifier of the components are common across all structures to which the constraint is attached. 
 
 constraintAttachment properties for MetadataConstraints:  
 
-* metadataProvider - *String* *optional*. MetadataProvider is a URN reference to a metadata provider to which the constraint is attached. If this is used, then only the release calendar is relevant. 
+* metadataProvider - *String* *optional*. MetadataProvider is a URN reference to a metadata provider to which the constraint is attached.
 * metadataStructures - *Array* *optional* of *string*s. URN references to metadata structure definitions to which the constraint is attached. A constraint which is attached to more than one metadata structure must only express key sets and/or target regions where the identifiers of the target objects are common across all structures to which the constraint is attached. 
-* metadataflows - *Array* *optional* of *string*s. Urn references to metadata flows to which the constraint is attached. A constraint can be attached to more than one metadataflow, and the metadataflows do not necessarily have to be usages of the same metadata structure. However, a constraint which is attached to more than one metadata structure must only express key sets and/or target regions where the identifiers of the target objects are common across all structures to which the constraint is attached. 
-* metadataProvisionAgreements - *Array* *optional* of *string*s. Urn references to metadata provision agreements to which the constraint is attached. A constraint can be attached to more than one metadata provision agreement, and the metadata provision agreements do not necessarily have to be references structure usages based on the same structure. However, a constraint which is attached to more than one metadata provision agreement must only express key sets and/or cube/target regions where the identifier of the components are common across all structures to which the constraint is attached. 
+* metadataflows - *Array* *optional* of *string*s. URN references to metadata flows to which the constraint is attached. A constraint can be attached to more than one metadataflow, and the metadataflows do not necessarily have to be usages of the same metadata structure. However, a constraint which is attached to more than one metadata structure must only express key sets and/or target regions where the identifiers of the target objects are common across all structures to which the constraint is attached. 
+* metadataProvisionAgreements - *Array* *optional* of *string*s. URN references to metadata provision agreements to which the constraint is attached. A constraint can be attached to more than one metadata provision agreement, and the metadata provision agreements do not necessarily have to be references structure usages based on the same structure. However, a constraint which is attached to more than one metadata provision agreement must only express key sets and/or cube/target regions where the identifier of the components are common across all structures to which the constraint is attached. 
 
 Examples:
 
@@ -1593,8 +1632,6 @@ Example:
 * id - *String*. 
 * include - *Boolean* *optional*. The include attribute indicates whether the values provided for the referenced component are to be included are excluded from the region in which they are defined.
 * removePrefix - *Boolean* *optional*. The removePrefix attribute indicates whether codes should keep or not the prefix, as defined in the extension of codelist.
-* validFrom - *String* *optional*. A timestamp from which the set of values is valid. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
-* validTo - *String* *optional*.  A timestamp from which the set of values is superceded. Values must follow the ISO 8601 syntax for combined dates and times,
 * timeRange - *Object* *optional*. A *[TimeRangeValue](#TimeRangeValue)* object.
 * values - Non-empty *array* *optional* of *String*s and *[SimpleComponentValue](#SimpleComponentValue)* objects.
 Only one of timeRange or values properties is allowed.
@@ -1606,10 +1643,10 @@ Example:
 		"id": "EXR_TYPE",
 		"include": true,
 		"removePrefix": false,
-		"values": {
-			"NRP0", "NN00", "NRD0", "NRU1"
+		"values": [
+			"NRP0", "NN00", "NRD0", "NRU1", 
 			# SimpleComponentValue object #
-		}
+		]
 	}
 	
 	{
@@ -1691,7 +1728,7 @@ Example:
 * validFrom - *String* *optional*. A timestamp from which the set of values is valid. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
 * validTo - *String* *optional*.  A timestamp from which the set of values is superceded. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
 * timeRange - *Object* *optional*. A *[TimeRangeValue](#TimeRangeValue)* object.
-* values - Non-empty *array* *optional* of *String*s and *[SimpleComponentValue](#SimpleComponentValue)* objects.
+* values - Non-empty *array* *optional* of *String*s and *[SimpleComponentValue](#SimpleComponentValue)* objects (but not allowing for a language-specification).
 Only one of timeRange or values properties is allowed.
 
 
@@ -1703,10 +1740,10 @@ Example:
 		"removePrefix": false,
 		"validFrom": "2021-09-01",
 		"validTo":"2021-09-30",
-		"values": {
-			"NRP0", "NN00", "NRD0", "NRU1"
+		"values": [
+			"NRP0", "NN00", "NRD0", "NRU1",
 			# SimpleComponentValue object #
-		}
+		]
 	}
 	
 	{
@@ -1744,7 +1781,7 @@ Example:
 
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
-* include - *Boolean*.
+* include - *Boolean*. Fixed to `true`.
 * validFrom - *String* *optional*. A timestamp from which the region is valid. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
 * validTo - *String* *optional*.  A timestamp from which the region is superceded. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
 * keyValues - Non-empty *array* of *[dataKeyValue](#dataKeyValue)* objects.
@@ -1773,11 +1810,18 @@ Example:
 *Object*. DataKeyValue provides dimension value(s) for the purpose of defining one or more data keys. 
 
 * id - *String*. 
-* include - *Boolean* *optional*. The include attribute indicates whether the values provided for the referenced component are to be included are excluded from the region in which they are defined.
+* include - *Boolean* *optional*. Fixed to `true`.
 * removePrefix - *Boolean* *optional*. The removePrefix attribute indicates whether codes should keep or not the prefix, as defined in the extension of codelist.
-* values - Non-empty *array* of *String*s .
+* value - *String*. Deprecated. For backward-compatibility, used when only one dimension value is specified.
+* values - Non-empty *array* of *String*s for dimension values.
 
-Example:
+Examples:
+
+	{
+		"id": "EXR_TYPE",
+		"include": true,
+		"value": "NRP0"
+	}
 
 	{
 		"id": "EXR_TYPE",
@@ -1804,10 +1848,10 @@ Example:
 		"id": "EXR_TYPE",
 		"include": true,
 		"removePrefix": false,
-		"values": {
-			"DIM"
+		"values": [
+			"DIM",
 			# DataComponentValue object #
-		}
+		]
 	}
 	
 	{
@@ -1877,10 +1921,10 @@ Example:
 		"id": "EXR_TYPE",
 		"include": true,
 		"removePrefix": false,
-		"values": {
-			"NRP0", "NN00", "NRD0", "NRU1"
+		"values": [
+			"NRP0", "NN00", "NRD0", "NRU1", 
 			# SimpleComponentValue object #
-		}
+		]
 	}
 	
 	{
@@ -1890,22 +1934,6 @@ Example:
 		"timeRange": {
 			# TimeRangeValue object #
 		}
-	}
-
-#### releaseCalendar
-
-*Object*. The ReleaseCalendar describes information about the timing of releases of the constrained data. All of these values use the standard "P7D" - style format.
-
-* offset - *String*. Offset is the interval between January first and the first release of data within the year.
-* periodicity - *String*. Periodicity is the period between releases of the data set.
-* tolerance - *String*. Tolerance is the period after which the release of data may be deemed late.
-
-Example:
-
-	{
-		"offset": "30",
-		"periodicity": "12",
-		"tolerance": "2019"
 	}
 
 ### customTypeScheme

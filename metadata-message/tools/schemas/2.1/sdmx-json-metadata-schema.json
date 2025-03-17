@@ -1,6 +1,6 @@
 {
 	"id":"https://raw.githubusercontent.com/sdmx-twg/sdmx-json/v2.1.0/metadata-message/tools/schemas/sdmx-json-metadata-schema.json",
-	"$schema":"http://json-schema.org/schema#",
+	"$schema":"https://json-schema.org/draft/2019-09/schema",
 	"description":"SDMX-JSON 2.1.0 Schema for SDMX 3.1.0 referential metadata messages",
 	"type":"object",
 	"properties":{

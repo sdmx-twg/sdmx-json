@@ -1,5 +1,5 @@
 {
-    "$id": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/1.0/sdmx-json-data-schema.json",
+    "id": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/1.0/sdmx-json-data-schema.json",
     "$schema": "https://json-schema.org/schema#",
     "description": "Schema for SDMX-JSON data message",
     "type": "object",
