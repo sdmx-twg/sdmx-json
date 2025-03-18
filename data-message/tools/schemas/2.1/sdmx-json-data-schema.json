@@ -362,6 +362,7 @@
 		"structure":{
 			"type":"object",
 			"required":[
+				"links",
 				"dimensions"
 			],
 			"properties":{
@@ -1255,10 +1256,7 @@
 				"links":{
 					"$ref":"#/definitions/links"
 				}
-			},
-			"required":[
-				"links"
-			]
+			}
 		},
 		"valueArray":{
 			"oneOf":[
