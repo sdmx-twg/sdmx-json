@@ -1306,10 +1306,10 @@ Example:
 
 *Object* *optional*. A link to an external resource.
 
-* href - *String* or . Absolute or relative URL of the external resource.
+* href - *String* *optional* only if `urn` is present. Absolute or relative URL of the external resource.
 * rel - *String*. Relationship of the object to the external resource. See semantics below.
-* urn - *String* *optional*. The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details).
-* uri - *String* *optional*. The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource.
+* urn - *String* *optional* only if `href` is present. The `urn` holds a valid SDMX Registry URN (see SDMX Registry Specification for details).
+* uri - *String* *optional*. The `uri` attribute holds a URI that contains a link to additional information about the resource, such as a web page. This `uri` is not an SDMX resource.
 * title - *String* *optional*. A human-readable (best-language-match) description of the target link.
 * titles - *Object* *optional*. A list of human-readable localised descriptions (see *[names](#names)*) of the target link.
 * type - *String* *optional*. A hint about the type of representation returned by the link.
