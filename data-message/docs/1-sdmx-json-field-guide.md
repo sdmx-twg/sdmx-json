@@ -562,19 +562,17 @@ Example:
 
 See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
-Example:
+Examples:
 
 	{
-		"id": "2010",
-		"name": "2010",
-		"names": { "en": "2010", 
-			   "fr": "2010" },
-		"description": "Description for 2010.",
-		"descriptions": { "en": "Description for 2010.",
-				  "fr": "Déscription pour 2010." },
-		"start": "2010-01-01T00:00Z",
-		"end": "2010-12-31T23:59:59Z",
-		"parent": "T",
+		"id": "AUS",
+		"name": "Australia",
+		"names": { "en": "Australia", 
+				   "fr": "Australie" },
+		"description": "Description for Australia.",
+		"descriptions": { "en": "Description for Australia.",
+						  "fr": "Déscription pour l'Australie." },
+		"parent": "OECD",
 		"order": 56,
 		"links": [
 			{
@@ -582,6 +580,15 @@ Example:
 			}
 		],
 		"annotations": [ 5, 49 ]
+	}
+
+	{
+		"value": "2010",
+		"description": "Description for 2010.",
+		"descriptions": { "en": "Description for 2010.",
+				  "fr": "Déscription pour 2010." },
+		"start": "2010-01-01T00:00Z",
+		"end": "2010-12-31T23:59:59Z"
 	}
 
 	{
@@ -1048,14 +1055,10 @@ Example:
 				"names": { "en": "Time Period" },
 				"values": [
 					{
-						"id": "2016",
-						"name": "2016",
-						"names": { "en": "2016" }
+						"value": "2016"
 					},
 					{
-						"id": "2017",
-						"name": "2017",
-						"names": { "en": "2017" }
+						"value": "2017"
 					}
 				]
 			}
@@ -1476,13 +1479,10 @@ Let's say that the following data content of a message needs to be processed:
 							"names": { "en": "Time period or range" },
 							"values": [
 								{
-									"id": "2013-01-18",
-									"name": "2013-01-18",
-									"names": { "en": "2013-01-18" }
-								}, {
-									"id": "2013-01-21",
-									"name": "2013-01-21",
-									"names": { "en": "2013-01-21" }
+									"value": "2013-01-18"
+								},
+								{
+									"value": "2013-01-21"
 								}
 							]
 						}
@@ -1645,13 +1645,10 @@ From the `structure.dimensions.observation` information, we know that TIME_PERIO
 			"names": { "en": "Time period or range" },
 			"values": [
 				{
-					"id": "2013-01-18",
-					"name": "2013-01-18",
-					"names": { "en": "2013-01-18" }
-				}, {
-					"id": "2013-01-21",
-					"name": "2013-01-21",
-					"names": { "en": "2013-01-21" }
+					"value": "2013-01-18"
+				},
+				{
+					"value": "2013-01-21"
 				}
 			]
 		}
