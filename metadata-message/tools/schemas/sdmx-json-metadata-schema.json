@@ -38,8 +38,10 @@
 			"type":"object",
 			"properties":{
 				"schema":{
-					"description":"Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. Providing the link to the SDMX-JSON schema is recommended.",
-					"$ref":"#/definitions/uri"
+					"description":"Contains the URL to the JSON schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. Providing the link to the SDMX-JSON schema is recommended.",
+					"type":"string",
+					"format":"uri",
+					"pattern": "\\.json$|\\.schema\\.json$"
 				},
 				"id":{
 					"description":"Unique string assigned by the sender that identifies the message for further references.",
@@ -161,7 +163,8 @@
 				"type":"object",
 				"properties":{
 					"href":{
-						"$ref":"#/definitions/uri"
+						"type":"string",
+						"format":"uri-reference"
 					},
 					"rel":{
 						"description":"Relationship of the object to the external resource. See semantics below. Use 'self' to indicate the urn to the parent object.",
@@ -241,7 +244,8 @@
 					},
 					"uri":{
 						"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource.",
-						"$ref":"#/definitions/uri"
+						"type":"string",
+						"format":"uri"
 					},
 					"title":{
 						"$ref":"#/definitions/localisedBestMatchText"
@@ -315,41 +319,47 @@
 					"description":"Role is the humain-readable responsibility of the contact person with respect to the object for which this person is the contact.",
 					"$ref":"#/definitions/localisedText"
 				},
-				"emails":{
-					"description":"Email holds the email address for the contact person.",
+				"telephones":{
+					"type":"array",
+					"minItems":1,
 					"items":{
-						"type":"string",
-						"format":"email"
-					},
-					"type":"array"
+						"description":"Telephone holds the telephone number for the contact person.",
+						"type":"string"
+					}
 				},
 				"faxes":{
-					"description":"Fax holds the fax number for the contact person.",
+					"type":"array",
+					"minItems":1,
 					"items":{
+						"description":"Fax holds the fax number for the contact person.",
 						"type":"string"
-					},
-					"type":"array"
-				},
-				"telephones":{
-					"description":"Telephone holds the telephone number for the contact person.",
-					"items":{
-						"type":"string"
-					},
-					"type":"array"
-				},
-				"uris":{
-					"description":"URI holds an information URL for the contact person.",
-					"items":{
-						"$ref":"#/definitions/uri"
-					},
-					"type":"array"
+					}
 				},
 				"x400s":{
-					"description":"X400 holds the X.400 address for the contact person.",
+					"type":"array",
+					"minItems":1,
 					"items":{
+						"description":"X400 holds the X.400 address for the contact person.",
 						"type":"string"
-					},
-					"type":"array"
+					}
+				},
+				"uris":{
+					"type":"array",
+					"minItems":1,
+					"items":{
+						"description":"URI holds an information URL for the contact person.",
+						"type":"string",
+						"format":"uri"
+					}
+				},
+				"emails":{
+					"type":"array",
+					"minItems":1,
+					"items":{
+						"description":"Email holds the email address for the contact person.",
+						"type":"string",
+						"format":"email"
+					}
 				}
 			},
 			"type":"object"
@@ -887,15 +897,10 @@
 				}
 			]
 		},
-		"uri":{
-			"description":"Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. Providing the link to the SDMX-JSON schema is recommended.",
-			"type":"string",
-			"format":"uri"
-		},
 		"urn":{
 			"description":"Universal Resource Name (URN) is constructed according to the generic structure 'urn:sdmx:org.SDMX-IM-package-name.class-name=agencyid:maintainedobject-id(maintainedobject-version).containerobject-id.object-id*'. For more information see: Unique identification of SDMX objects, in: SDMX STANDARDS: SECTION 5 SDMX REGISTRY SPECIFICATION",
 			"type":"string",
-			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.((base\\.((Agency)|(OrganisationUnitScheme)|(AgencyScheme)|(DataProviderScheme)|(MetadataProviderScheme)|(DataConsumerScheme)|(OrganisationUnit)|(DataProvider)|(MetadataProvider)|(DataConsumer)))|(codelist\\.((Codelist)|(Valuelist)|(Hierarchy)|(HierarchyAssociation)|(Code)|(HierarchicalCode)|(Level)))|(conceptscheme\\.((ConceptScheme)|(Concept)))|(datastructure\\.((DataStructure)|(AttributeDescriptor)|(DataAttribute)|(ReportingYearStartDay)|(GroupDimensionDescriptor)|(DimensionDescriptor)|(Dimension)|(TimeDimension)|(MeasureDescriptor)|(Measure)|(Dataflow)))|(categoryscheme\\.((CategoryScheme)|(Category)|(Categorisation)|(ReportingTaxonomy)|(ReportingCategory)))|(registry\\.((ProvisionAgreement)|(MetadataProvisionAgreement)|(DataConstraint)|(MetadataConstraint)|(Subscription)))|(metadatastructure\\.((MetadataAttributeDescriptor)|(MetadataAttribute)|(MetadataStructure)|(Metadataflow)))|(process\\.((Process)|(ProcessStep)|(Transition)))|(structuremapping\\.((StructureMap)|(ComponentMap)|(EpochMap)|(DatePatternMap)|(ConceptSchemeMap)|(OrganisationSchemeMap)|(CategorySchemeMap)|(ReportingTaxonomyMap)|(RepresentationMap)|(FrequencyFormatMapping)))|(transformation\\.((TransformationScheme)|(Transformation)|(CustomTypeScheme)|(CustomType)|(NamePersonalisationScheme)|(NamePersonalisation)|(VtlMappingScheme)|(VtlCodelistMapping)|(VtlConceptMapping)|(VtlDataflowMapping)|(RulesetScheme)|(Ruleset)|(UserDefinedOperatorScheme)|(UserDefinedOperator))))=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)(\\.[A-Za-z0-9_@$-]+(\\.[A-Za-z0-9_@$-]+)*)?$"
+			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.((base\\.((Agency)|(OrganisationUnitScheme)|(AgencyScheme)|(DataProviderScheme)|(MetadataProviderScheme)|(DataConsumerScheme)|(OrganisationUnit)|(DataProvider)|(MetadataProvider)|(DataConsumer)))|(codelist\\.((Codelist)|(Valuelist)|(Hierarchy)|(HierarchyAssociation)|(Code)|(HierarchicalCode)|(Level)))|(conceptscheme\\.((ConceptScheme)|(Concept)))|(datastructure\\.((DataStructure)|(AttributeDescriptor)|(DataAttribute)|(GroupDimensionDescriptor)|(DimensionDescriptor)|(Dimension)|(TimeDimension)|(MeasureDescriptor)|(Measure)|(Dataflow)))|(categoryscheme\\.((CategoryScheme)|(Category)|(Categorisation)|(ReportingTaxonomy)|(ReportingCategory)))|(registry\\.((ProvisionAgreement)|(MetadataProvisionAgreement)|(DataConstraint)|(AvailabilityConstraint)|(MetadataConstraint)|(Subscription)))|(metadatastructure\\.((MetadataAttributeDescriptor)|(MetadataAttribute)|(MetadataStructure)|(Metadataflow)))|(process\\.((Process)|(ProcessStep)|(Transition)))|(structuremapping\\.((StructureMap)|(ComponentMap)|(EpochMap)|(DatePatternMap)|(ConceptSchemeMap)|(OrganisationSchemeMap)|(CategorySchemeMap)|(ReportingTaxonomyMap)|(RepresentationMap)|(FrequencyFormatMapping)))|(transformation\\.((TransformationScheme)|(Transformation)|(CustomTypeScheme)|(CustomType)|(NamePersonalisationScheme)|(NamePersonalisation)|(VtlMappingScheme)|(VtlCodelistMapping)|(VtlConceptMapping)|(VtlDataflowMapping)|(RulesetScheme)|(Ruleset)|(UserDefinedOperatorScheme)|(UserDefinedOperator))))=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)(\\.[A-Za-z0-9_@$-]+(\\.[A-Za-z0-9_@$-]+)*)?$"
 		},
 		"duration":{
 			"type":"string",
