@@ -243,7 +243,7 @@ All SDMX artefact types share the following common object properties:
 * id - *String*. Identifier for the resource.
 * agencyID - *String* *optional*. ID of the agency maintaining this resource.
 * version - *String* *optional*. Version of this resource. Can be a legacy version with two version parts (e.g. '1.0') for fully mutable artefacts, or a semantic version according to SDMX versioning rules with 3 parts (e.g. '1.0.0') for immutable artefacts or with 4 parts (e.g. '1.0.0-draft') for artefacts allowed to change within a certain scope.
-* name - *String* *optional*. Human-readable (best-language-match) name of the resource.
+* name - *String*. Human-readable (best-language-match) name of the resource.
 * names - *Object* *optional*. Human-readable localised *[names](#names)* of the resource.
 * description - *String* *optional*. Human-readable (best-language-match) description of the resource.
 * descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) of the resource.
@@ -346,7 +346,7 @@ Example:
 *Object* *optional*. Abtract generic item within the ItemScheme (if the resource is a CategoryScheme, ConceptScheme, Codelist, GeographicCodelist, GeoGridCodelist, AgencyScheme, DataProviderScheme, MetadataProviderSchemes, DataConsumerScheme, OrganisationUnitScheme, ReportingTaxonomy, CustomTypeScheme, VtlMappingScheme, NamePersonalisationScheme, RulesetScheme or UserDefinedOperatorScheme). 
 
 * id - *String*. Identifier for the item.
-* name - *String* *optional*. Human-readable (best-language-match) name of the item.
+* name - *String*. Human-readable (best-language-match) name of the item.
 * names - *Object* *optional*. Human-readable localised *[names](#names)* of the item.
 * description - *String* *optional*. Human-readable (best-language-match) description of the item. The description is typically longer than the text provided for the name field.
 * descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) of the item. A descriptions is typically longer than the text provided for the name field.
@@ -2072,7 +2072,7 @@ The *URL* captured in the `href` attribute can be *absolute* or *relative*. **It
 
 **Localised best-language-match text strings (static properties matched through "Lookup"):**
 
-The first best language match according to the user’s preferred language choices expressed through the HTTP content negotiation (Accept-Language header parameter) is to be provided for each localised text element. The message does however not indicate the returned language per localised text element.
+The first best language match according to the user’s preferred language choices expressed through the HTTP content negotiation (Accept-Language header parameter) or the system-default language, if there is no preferred language or no language match, is to be provided for each localised text element. In any case, the message does not indicate the returned language per localised text element.
 
 This language matching type is called "Lookup", see <https://tools.ietf.org/html/rfc4647#section-3.4>.
 
@@ -2082,7 +2082,7 @@ Example:
 
 **Localised text objects (variable properties matched through "Filtering"):**
 
-All available language matches according to the user’s preferred language choices expressed through the HTTP content negotiation (Accept-Language header parameter) is to be provided for each localised text element. 
+Optionally, all available language matches according to the user’s preferred language choices expressed through the HTTP content negotiation (Accept-Language header parameter) can be provided for each localised text element. 
 
 This language matching type is called "Filtering", see <https://tools.ietf.org/html/rfc4647#section-3.3>.
 
@@ -2093,13 +2093,11 @@ Example:
 		"fr": "Fréquence"
 	}
 
-The localised text object needs to be present whenever the related localised best-language-match text strings is present, and especially whenever a localised text is mandatory in the SDMX Information model. Note that localised text (and the knowledge about the locale) is mandatory in structure messages when artefacts are being submitted for storage to a registry or to other databases. The localised text object is important for use cases where multiple languages are required or where the information on the language used is required.
-
-
 In case that there is no language match for a particular localisable element, it is optional to:
-
 - return the element in a system-default language or alternatively to not return the element
 - indicate available alternative languages for the element's maintainable artefact through links to underlying localised resources
+
+The localised text object must be present and complete whenever the user’s preferred language choice is `*` (wildcard for any language). This mechanism allows transmitting of structures with their complete content (all localised elements and the knowledge about the locale) to a registry or to other databases, thus in contexts where all language versions are required or where the information on the language used is required.
 
 **It is recommended to indicate all languages used anywhere in the message for localised elements through http Content-Language response header (languages of the intended audience) and/or through a “contentLanguages” property in the meta tag.** The main language used can be indicated through the “lang” property in the meta tag.
 

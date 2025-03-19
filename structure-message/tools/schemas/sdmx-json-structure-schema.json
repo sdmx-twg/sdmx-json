@@ -396,11 +396,11 @@
 				},
 				"name":{
 					"$ref":"#/definitions/localisedBestMatchText",
-					"description":"Name provides a name for the transmission. Multiple instances allow for parallel language values."
+					"description":"Name for the transmission."
 				},
 				"names":{
 					"$ref":"#/definitions/localisedText",
-					"description":"Name provides a name for the transmission. Multiple instances allow for parallel language values."
+					"description":"Localised names for the transmission."
 				},
 				"sender":{
 					"$ref":"#/definitions/party",
@@ -434,11 +434,11 @@
 					"pattern":"^[A-Za-z0-9_@$-]+$"
 				},
 				"name":{
-					"description":"Name is a human-readable name of the party.",
+					"description":"Human-readable name of the party.",
 					"$ref":"#/definitions/localisedBestMatchText"
 				},
 				"names":{
-					"description":"Name is a human-readable name of the party.",
+					"description":"Human-readable localised names of the party.",
 					"$ref":"#/definitions/localisedText"
 				},
 				"contacts":{
@@ -689,11 +689,11 @@
 					"$ref":"#/definitions/idType"
 				},
 				"name":{
-					"description":"Name contains a humain-readable name for the contact.",
+					"description":"Humain-readable name for the contact.",
 					"$ref":"#/definitions/localisedBestMatchText"
 				},
 				"names":{
-					"description":"Name contains a humain-readable name for the contact.",
+					"description":"Humain-readable localised names for the contact.",
 					"$ref":"#/definitions/localisedText"
 				},
 				"department":{

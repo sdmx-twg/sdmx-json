@@ -371,7 +371,8 @@
 			"type":"object",
 			"required":[
 				"links",
-				"dimensions"
+				"dimensions",
+				"name"
 			],
 			"properties":{
 				"dataSets":{
@@ -512,7 +513,8 @@
 			"type":"object",
 			"required":[
 				"id",
-				"keyPosition"
+				"keyPosition",
+				"name"
 			],
 			"properties":{
 				"id":{
@@ -563,7 +565,8 @@
 		"measure":{
 			"type":"object",
 			"required":[
-				"id"
+				"id",
+				"name"
 			],
 			"properties":{
 				"id":{
@@ -615,7 +618,8 @@
 		"attribute":{
 			"type":"object",
 			"required":[
-				"id"
+				"id",
+				"name"
 			],
 			"properties":{
 				"id":{
