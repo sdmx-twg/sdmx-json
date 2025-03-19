@@ -996,35 +996,44 @@ In addition, `conceptScheme`'s *[item](#item)* artefacts share the following com
 
 * coreRepresentation - *Object* *optional*. The *[coreRepresentation](#coreRepresentation)* object defines the core representation that are allowed for a concept. The text format allowed for a concept is that which is allowed for any non-target object component.
 * isoConceptReference - *Object* *optional*. The *[isoConceptReference](#isoConceptReference)* object provides a reference to an ISO 11179 concept.
-* parent - *String* *optional*. Urn reference to a local concept. Parent captures the semantic relationships between concepts which occur within a single concept scheme. This identifies the concept of which the current concept is a qualification (in the ISO 11179 sense) or subclass.
+* parent - *String* *optional*. ID of a local concept. Parent captures the semantic relationships between concepts which occur within a single concept scheme. This identifies the concept of which the current concept is a qualification (in the ISO 11179 sense) or subclass.
 The start and end properties are not used.
 
 Example:
 
 	{
-		"id": "CS_BOP",
-		"name": "Balance of Payments Concept Scheme",
+		"id": "CS_EXAMPLE",
+		"name": "Concept scheme example",
 		"names": {
-			"en": "Balance of Payments Concept Scheme",
-			"fr": "Schéma des concepts de Balance des paiements"},
-		"agencyId": "IMF",
+			"en": "Concept scheme example",
+			"fr": "Exemple de concept scheme"},
+		"agencyId": "ABC",
 		"version": "1.9.0",
 		"concepts": [
 			{
-				"id": "FREQ",
-				"name": "Frequency",
+				"id": "A",
+				"name": "Concept A",
 				"names": {
-					"en": "Frequency",
-					"fr": "Fréquence"
+					"en": "Concept A",
+					"fr": "Concept A"
 				},
 				"coreRepresentation": {
 					# coreRepresentation object #
 				},
 				"isoConceptReference": {
 					# isoConceptReference object #
+				}
+			},
+			{
+				"id": "A1",
+				"name": "Concept A1",
+				"names": {
+					"en": "Concept A1",
+					"fr": "Concept A1"
 				},
-				"parent": "COMMON_CONCEPTS"
+				"parent": "A"
 			}
+
 		]
 	}
 
