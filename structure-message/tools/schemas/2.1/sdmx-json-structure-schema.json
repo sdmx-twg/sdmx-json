@@ -365,8 +365,10 @@
 			"type":"object",
 			"properties":{
 				"schema":{
-					"$ref":"#/definitions/uri",
-					"description":"Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. Providing the link to the SDMX-JSON schema is recommended."
+					"description":"Contains the URL to the JSON schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. Providing the link to the SDMX-JSON schema is recommended.",
+					"type":"string",
+					"format":"uri",
+					"pattern": "\\.json$|\\.schema\\.json$"
 				},
 				"id":{
 					"description":"Unique string assigned by the sender that identifies the message for further references.",
@@ -492,7 +494,8 @@
 				"type":"object",
 				"properties":{
 					"href":{
-						"$ref":"#/definitions/uri"
+						"type":"string",
+						"format":"uri-reference"
 					},
 					"rel":{
 						"description":"Relationship of the object to the resource. See semantics below. Use 'self' to indicate the urn to the parent object.",
@@ -630,7 +633,8 @@
 					},
 					"uri":{
 						"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource.",
-						"$ref":"#/definitions/uri"
+						"type":"string",
+						"format":"uri"
 					},
 					"title":{
 						"$ref":"#/definitions/localisedBestMatchText"
@@ -737,7 +741,8 @@
 					"minItems":1,
 					"items":{
 						"description":"URI holds an information URL for the contact person.",
-						"$ref":"#/definitions/uri"
+						"type":"string",
+						"format":"uri"
 					}
 				},
 				"emails":{
@@ -1363,7 +1368,7 @@
                             "type":"array",
                             "minItems":1,
                             "items":{
-                                "type":"#/definitions/SimpleKeyValueType"
+                                "$ref":"#/definitions/SimpleKeyValueType"
                             }
                         }
                     },
@@ -5616,11 +5621,6 @@
 					"type":"integer"
 				}
 			}
-		},
-		"uri":{
-			"description":"Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. Providing the link to the SDMX-JSON schema is recommended.",
-			"type":"string",
-			"format":"uri"
 		},
 		"urn":{
 			"description":"Universal Resource Name (URN) is constructed according to the generic structure 'urn:sdmx:org.SDMX-IM-package-name.class-name=agencyid:maintainedobject-id(maintainedobject-version).containerobject-id.object-id*'. For more information see: Unique identification of SDMX objects, in: SDMX STANDARDS: SECTION 5 SDMX REGISTRY SPECIFICATION",

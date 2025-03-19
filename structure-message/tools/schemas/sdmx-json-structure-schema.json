@@ -1368,7 +1368,7 @@
                             "type":"array",
                             "minItems":1,
                             "items":{
-                                "type":"#/definitions/SimpleKeyValueType"
+                                "$ref":"#/definitions/SimpleKeyValueType"
                             }
                         }
                     },
