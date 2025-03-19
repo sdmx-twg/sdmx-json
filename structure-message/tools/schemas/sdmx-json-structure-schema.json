@@ -4,6 +4,12 @@
 	"description":"SDMX-JSON 2.1.0 Schema for SDMX 3.1.0 structure messages",
 	"type":"object",
 	"properties":{
+		"$schema":{
+			"description":"Contains the URL to the JSON schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. Providing the link to the SDMX-JSON schema is recommended.",
+			"type":"string",
+			"format":"uri",
+			"pattern": "\\.json$|\\.schema\\.json$"
+		},
 		"meta":{
 			"description":"A meta object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.",
 			"$ref":"#/definitions/meta"
@@ -365,10 +371,9 @@
 			"type":"object",
 			"properties":{
 				"schema":{
-					"description":"Contains the URL to the JSON schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. Providing the link to the SDMX-JSON schema is recommended.",
+					"description":"Deprecated and replaced by the $schema property at the root level, which allows for automated validations.",
 					"type":"string",
-					"format":"uri",
-					"pattern": "\\.json$|\\.schema\\.json$"
+					"format":"uri"
 				},
 				"id":{
 					"description":"Unique string assigned by the sender that identifies the message for further references.",

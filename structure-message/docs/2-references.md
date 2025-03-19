@@ -9,9 +9,10 @@ interchange — Representation of dates and times*, ISO, 2004
 [json] *The JSON Data Interchange Format*, Standard ECMA-404, ECMA International,
 October 2013
 
-[sdmxim21] *Section 2: Information Model: UML Conceptual Design*, SDMX Standards 2.1,
-SDMX, July 2011
+[sdmx-im] *SDMX Information Model v3.1.0*, https://github.com/sdmx-twg/sdmx-im,
+SDMX, December 2024
 
-[sdmxws21] *Section 7: Guidelines for the Use of Web Services*, SDMX Standards 2.1,
-SDMX, March 2013
-The latest release can be consulted here: https://github.com/sdmx-twg/sdmx-rest/
+[sdmx-rest] *SDMX RESTful Web Services Specification v2.1.0*, https://github.com/sdmx-twg/sdmx-rest,
+SDMX, April 2024
+
+[json api 1.0] *A specification for building APIs in Json*, http://jsonapi.org/, 2015

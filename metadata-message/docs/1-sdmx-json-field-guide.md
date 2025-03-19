@@ -16,6 +16,7 @@ Before we start, let's clarify a few more things about this guide:
 
 Message is the top level object and it contains the requested information (referential metadata) as well as the meta-information decribing the (technical) context of the message and, possibly, status information.
 
+* $schema - *String* *optional*. Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. **Providing the link to the SDMX-JSON schema is recommended.**
 * meta - *Object* *optional*. A *[meta](#meta)* object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.
 * data - *Object* *optional*. *[Data](#data)* contains the message's “primary data”.
 * errors - *Array* *optional* of *[statusInformation](#statusinformation)* objects providing - when appropriate - more detail to the HTTP status codes in the RESTful SDMX web service responses.
@@ -25,6 +26,7 @@ The properties data and errors CAN coexist in the same message.
 Example:
 
 	{
+		"$schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/metadata-message/tools/schemas/sdmx-json-metadata-schema.json",
 		"meta": {
 			# meta object #
 		},
@@ -43,7 +45,7 @@ Example:
 *Object* *optional*. Used to include non-standard meta-information and basic technical information 
 about the message, such as when it was prepared and who has sent it.
 Any members MAY be specified within `meta` objects.
-* schema - *String* *optional*. Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. **Providing the link to the SDMX-JSON schema is recommended.**
+* schema - *String* *optional*. Deprecated and replaced by the `$schema` property at the root level, which allows for automated validations.
 * id - *String*. Unique string that identifies the message for further references.
 * test - *Boolean* *optional*. Indicates whether the message is for test purposes or not. False for normal messages.
 * prepared - *String*. A timestamp indicating when the message was prepared. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
@@ -59,7 +61,6 @@ See the section on [localised text elements](#localised-text-elements) on how th
 Example:
 
 	"meta": {
-		"schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/metadata-message/tools/schemas/sdmx-json-metadata-schema.json",
 		"copyright": "Copyright 2017 Statistics hotline",
 		"id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
 		"prepared": "2018-01-03T12:54:12",
