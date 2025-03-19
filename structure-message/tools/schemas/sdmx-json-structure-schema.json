@@ -2188,11 +2188,13 @@
 							"description":"Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
 						},
 						"conceptRoles":{
+							"description":"ConceptRoles references concepts which define roles which this attribute serves.",
 							"type":"array",
 							"minItems":1,
+							"uniqueItems":true,
 							"items":{
 								"$ref":"#/definitions/ConceptReferenceType",
-								"description":"ConceptRole references concepts which define roles which this attribute serves. If the concept from which the attribute takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here."
+								"description":"Urn reference to a concept."
 							}
 						},
 						"localRepresentation":{
@@ -3500,13 +3502,13 @@
 							"description":"Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
 						},
 						"conceptRoles":{
-							"description":"ConceptRoles references concepts which define roles which this dimension serves. If the concept from which the attribute takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here.",
+							"description":"ConceptRoles references concepts which define roles which this dimension serves.",
 							"type":"array",
 							"minItems":1,
 							"uniqueItems":true,
 							"items":{
 								"$ref":"#/definitions/ConceptReferenceType",
-								"description":"Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
+								"description":"Urn reference to a concept."
 							}
 						},
 						"localRepresentation":{
@@ -4530,13 +4532,13 @@
 							"description":"Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
 						},
 						"conceptRoles":{
-							"description":"ConceptRole references concepts which define roles which this measure serves. If the concept from which the attribute takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here.",
+							"description":"ConceptRoles references concepts which define roles which this measure serves.",
 							"type":"array",
 							"minItems":1,
 							"uniqueItems":true,
 							"items":{
 								"$ref":"#/definitions/ConceptReferenceType",
-								"description":"Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
+								"description":"Urn reference to a concept."
 							}
 						},
 						"localRepresentation":{
@@ -4870,12 +4872,13 @@
 							"description":"Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
 						},
 						"conceptRoles":{
+							"description":"ConceptRoles references concepts which define roles which this attribute serves.",
 							"type":"array",
 							"minItems":1,
 							"uniqueItems":true,
 							"items":{
 								"$ref":"#/definitions/ConceptReferenceType",
-								"description":"ConceptRole references concepts which define roles which this attribute serves. If the concept from which the attribute takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here."
+								"description":"Urn reference to a concept."
 							}
 						},
 						"localRepresentation":{

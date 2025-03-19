@@ -479,7 +479,7 @@ Example:
 * attributeRelationship - *Object*. The *[attributeRelationship](#attributeRelationship)* object describes how the value of this attribute varies with the values of other components. These relationships will be used to determine the attachment level of the attribute in the various data formats. 				
 * measureRelationship - Non-empty *Array* of *String*s *optional*. This means that the value of the attribute **applies** only to some of the measure components, of which the array contains the ID(s). This is only for informational and presentational purposes. If the `measureRelationship` is not present then the attribute values apply to all measures.
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context. The reporting year start and end day attributes take their semantics from their respective concept identity (usually the REPORTING_YEAR_START_DAY and REPORTING_YEAR_END_DAY concepts), yet always have a fixed identifier (REPORTING_YEAR_START_DAY and REPORTING_YEAR_END_DAY).  
-* conceptRoles - *Array* of *String*s *optional*. ConceptRole references (through URNs) the concepts which define roles which this attribute serves. If the concept from which the attribute takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here.
+* conceptRoles - *Array* of *String*s *optional*. ConceptRole references (through URNs) the concepts which define roles which this attribute serves.
 * localRepresentation - *Object* *optional*. The *[localRepresentation](#localRepresentation)* object defines the representation for the attribute. The representation for the reporting year start or end day attribute that has the conceptRole with concept ID "REPORTING_PERIOD_START_DAY"/"REPORTING_PERIOD_END_DAY" and states the month and day at which the reporting year begins or ends, does not allow for enumerated values and its text format is fixed to be a day and month in the ISO 8601 format of '--MM-DD'.
 
 Example:
@@ -728,7 +728,7 @@ Example:
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
 * position - *Integer* *optional*. Positive integer (minimum: 0). The order of the dimensions in the key descriptor (DimensionList element) defines the order of the dimensions in the data structure, starting at 0. This position attribute explicitly specifies the position of the dimension in the data structure. It is optional and if specified must be consistent with the position of the dimension in the key descriptor.
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
-* conceptRoles - *Array* of *String*s *optional*. ConceptRole references concepts (through URNs) which define roles which this dimension serves. If the concept from which the dimension takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here.
+* conceptRoles - *Array* of *String*s *optional*. ConceptRole references concepts (through URNs) which define roles which this dimension serves.
 * localRepresentation - *Object* *optional*. The *[localRepresentation](#localRepresentation)* object defines the representation for the dimension. Note that for dimensions the maxOccurs property must be 1, thus cannot be changed. Also the isMultiLingual format property cannot be set to true for dimensions.
 
 Example:
@@ -834,7 +834,7 @@ Example:
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
-* conceptRoles - *Array* of *String*s *optional*. ConceptRole references (through URNs) the concepts which define roles which this measure serves. If the concept from which the measure takes its identity also defines a role the concept serves, then the isConceptRole indicator can be set to true on the concept identity rather than repeating the reference here.
+* conceptRoles - *Array* of *String*s *optional*. ConceptRole references (through URNs) the concepts which define roles which this measure serves.
 * localRepresentation - *Object* *optional*. The *[localRepresentation](#localRepresentation)* object defines the representation for the measure.
 * usage - Constant *String* `mandatory` or `optional` *optional*. Indication whether reporting a given measure is mandatory or optional. Default: `optional`. 
 
