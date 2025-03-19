@@ -2098,7 +2098,7 @@
 					"properties":{
 						"dataflow":{
 							"$ref":"#/definitions/EmptyType",
-							"description":"This means that the value of the attribute varies per dataflow. It is the data modeller's responsibility to design or use non-overlapping dataflows that do not have observations in common, otherwise the integrity of dataflow-specific attribute values is not assured by the model, e.g. when querying those data through its DSD. The level at which the unique attribute value will be presented in data messages depends on the data format."
+							"description":"This is an empty object. This means that the value of the attribute does not depend on any dimension component, and therefore that the value of the attribute can vary only per dataflow. It is the data modeller's responsibility to design or use non-overlapping dataflows that do not have observations in common, otherwise the integrity of dataflow-specific attribute values is not assured by the model, e.g. when querying those data through its DSD. The level at which the unique attribute value will be presented in data messages depends on the data format and which dimensions are referenced."
 						}
 					}
 				},
@@ -2108,17 +2108,17 @@
 					],
 					"properties":{
 						"dimensions":{
-							"description":"This is used to reference dimensions in the data structure definition on which the value of this attribute depends. An attribute using this relationship can be either a group, series (or section), or observation level attribute. The attachment level of the attribute will be determined by the data format and which dimensions are referenced.",
+							"description":"This means that the value of the attribute depends on only some of the dimension components, of which the array contains the ID(s), and therefore that the value of the attribute can vary only with each partial key combination of those dimensions (e.g., a group, a time series or a section). The level at which the attribute values will be presented in data messages depends on the data format and which dimensions are referenced.",
 							"type":"array",
 							"uniqueItems":true,
 							"minItems":1,
 							"items":{
 								"$ref":"#/definitions/NCNameIDType",
-								"description":"One or more identifiers of (a) local dimension(s)."
+								"description":"ID of a local dimension."
 							}
 						},
 						"areDimensionsOptional":{
-							"description":"This is used to indicate those dimensions to which the attributes might optionally not be attached. The array structure must follow that for the dimensions.",
+							"description":"This is used to indicate those dimensions to which the attributes might optionally not be attached. The array structure must follow that for `dimensions`.",
 							"type":"array",
 							"minItems":1,
 							"items":{
@@ -2145,7 +2145,7 @@
 					"properties":{
 						"observation":{
 							"$ref":"#/definitions/EmptyType",
-							"description":"This is used to specify that the value of the attribute may vary with any of the local dimensions and thus is dependent upon the observed value. An attribute with this relationship will its values always have presented at observation level."
+							"description":"This is an empty object. This means that the value of the attribute depends on all of the dimension components, and therefore that the value of the attribute can vary with each observation. An attribute with this relationship will its values always have presented at observation level."
 						}
 					}
 				}
@@ -2178,9 +2178,10 @@
 							"uniqueItems":true,
 							"minItems":1,
 							"items":{
-								"$ref":"#/definitions/NCNameIDType"
+								"$ref":"#/definitions/NCNameIDType",
+								"description":"ID of a local measure."
 							},
-							"description":"The measureRelationship array identifies the measures that the attribute applies to. If this is not used, the attribute is assumed to apply to all measures. If used, it contains one or more identifiers of (a) local measure(s)."
+							"description":"This means that the value of the attribute applies only to some of the measure components, of which the array contains the ID(s). This is only for informational and presentational purposes. If the `measures` relationship is not present then the attribute values apply to all measures."
 						},
 						"conceptIdentity":{
 							"$ref":"#/definitions/ConceptReferenceType",

@@ -1360,34 +1360,36 @@
 			"properties":{
 				"dataflow":{
 					"type":"object",
-					"description":"This is an empty object and means that the value of the attribute varies per dataflow. It is the data modeller's responsibility to design or use non-overlapping dataflows that do not have observations in common, otherwise the integrity of dataflow-specific attribute values is not assured by the model, e.g. when querying those data through its DSD.",
+					"description":"This is an empty object. This means that the value of the attribute does not depend on any dimension component, and therefore that the value of the attribute can vary only per dataflow. It is the data modeller's responsibility to design or use non-overlapping dataflows that do not have observations in common, otherwise the integrity of dataflow-specific attribute values is not assured by the model, e.g. when querying those data through its DSD.",
 					"maxProperties":0
 				},
 				"dimensions":{
 					"type":"array",
+					"description":"This means that the value of the attribute depends on only some of the dimension components, of which the array contains the ID(s), and therefore that the value of the attribute can vary only with each partial key combination of those dimensions (e.g., a group, a time series or a section).",
 					"items":{
 						"type":"string",
 						"pattern":"^[A-Za-z][A-Za-z0-9_-]*$",
-						"description":"ID of a local dimension. This is used to reference a subset of dimensions in the data structure definition on which the value of this attribute depends. An attribute using this relationship can be either a group or series attribute. However, the level at which the values of the attribute will be presented in the data message (dataset, group, series or observation) is determined by the data format, the data query and which dimensions are referenced."
+						"description":"ID of a local dimension."
 					},
 					"minItems":1
 				},
 				"observation":{
 					"type":"object",
-					"description":"This is an empty object and means that value of the attribute can vary with each observation.",
+					"description":"This is an empty object. This means that the value of the attribute depends on all of the dimension components, and therefore that the value of the attribute can vary with each observation.",
 					"maxProperties":0
 				},
 				"primaryMeasure":{
 					"type":"string",
 					"pattern":"^[A-Za-z][A-Za-z0-9_-]*$",
-					"description":"Deprecated and replaced by the relationship `observation`. For backward-compatibility only. The content is ignored and the presence of this relationship means that value of the attribute can vary with each observation."
+					"description":"Deprecated and replaced by the relationship `observation`, which has the same meaning. For backward-compatibility only."
 				},
 				"measures":{
 					"type":"array",
+					"description":"This means that the value of the attribute applies only to some of the measure components, of which the array contains the ID(s). This is only for informational and presentational purposes. If the `measures` relationship is not present then the attribute values apply to all measures.",
 					"items":{
 						"type":"string",
 						"pattern":"^[A-Za-z][A-Za-z0-9_-]*$",
-						"description":"ID of a local measure. This is used to reference a subset of measures in the data structure definition to which the values of this attribute apply. This is only for informational and presentational purposes. If the `measures` relationship is not present then the attribute values apply to whole observations."
+						"description":"ID of a local measure."
 					},
 					"minItems":1
 				}
