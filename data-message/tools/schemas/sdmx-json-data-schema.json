@@ -1284,20 +1284,6 @@
 					"items":{
 						"anyOf":[
 							{
-								"type":"integer"
-							},
-							{
-								"type":"null"
-							}
-						]
-					},
-					"minItems":1
-				},
-				{
-					"type":"array",
-					"items":{
-						"anyOf":[
-							{
 								"type":"number"
 							},
 							{
