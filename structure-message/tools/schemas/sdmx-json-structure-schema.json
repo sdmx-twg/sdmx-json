@@ -3541,7 +3541,7 @@
 							"uniqueItems":true,
 							"items":{
 								"$ref":"#/$defs/NCNameIDType",
-								"description":"Array of id's of dimensions defined in the key descriptor (DimensionList). Although it is conventional to declare dimensions in the same order as they are declared in the ordered key, there is no requirement to do so - the ordering of the values of the key are taken from the order in which the dimensions are declared. Note that the id of a dimension may be inherited from its underlying concept - therefore this reference value may actually be the id of the concept."
+								"description":"Array of id's of dimensions defined in the key descriptor (DimensionList). Although it is conventional to declare dimensions in the same order as they are declared in the ordered key, there is no requirement to do so - the ordering of the values of the key are taken from the order in which the dimensions are declared."
 							}
 						}
 					}
