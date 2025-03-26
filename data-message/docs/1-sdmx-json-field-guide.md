@@ -439,7 +439,7 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 * measures - *Array* of *String*s *optional*. This means that the value of the attribute **applies** only to some of the measure components, of which the array contains the ID(s). This is only for informational and presentational purposes. If the `measures` relationship is not present then the attribute values apply to all measures.
 
 Exactly one of `dataflow`, `dimensions` and (`observation` or `primaryMeasure`) is required.
-Note that relationships defined in data structure definitions through `attachmentGroups` or a `group` are to be resolved by the server conveniently for the client into above `dimensions`.
+Note that relationships defined in data structure definitions through a `group` are to be resolved by the server conveniently for the client into above `dimensions`.
 
 Examples:
 
