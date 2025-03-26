@@ -754,7 +754,7 @@ Example:
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).lowing dimension to occur in any order.
 * conceptIdentity - *String*. Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context.
-* localRepresentation - *Object*. The *localRepresentation* object has only one required property *format* of type *[timeDimensionFormat](#timedimensionformat)* which defines the representation for the time dimension.
+* localRepresentation - *Object* *optional*. The *localRepresentation* object has only one property *format* of type *[timeDimensionFormat](#timedimensionformat)*, which is required and which defines the representation for the time dimension. If omitted then the `localRepresentation` is of text format type `ObservationalTimePeriod`.
 
 Example:
 
@@ -774,7 +774,7 @@ Example:
 
 * endTime - *String* *optional*. End time for the time dimension.
 * startTime - *String* *optional*. Start time for the time dimension.
-* dataType - *String* *optional*. Any of the following values: ObservationalTimePeriod, StandardTimePeriod, BasicTimePeriod, GregorianTimePeriod, GregorianYear, GregorianYearMonth, GregorianDay, ReportingTimePeriod, ReportingYear, ReportingSemester, ReportingTrimester, ReportingQuarter, ReportingMonth, ReportingWeek, ReportingDay, DateTime, TimeRange.
+* dataType - *String*. Any of the following values: ObservationalTimePeriod, StandardTimePeriod, BasicTimePeriod, GregorianTimePeriod, GregorianYear, GregorianYearMonth, GregorianDay, ReportingTimePeriod, ReportingYear, ReportingSemester, ReportingTrimester, ReportingQuarter, ReportingMonth, ReportingWeek, ReportingDay, DateTime, TimeRange.
 * sentinelValues - *Array* *optional*. When present, the sentinelValues array indicates that sentinel values are defined for the text format. Each *[sentinelValue](#sentinelvalue)* object indicates a reserved value in an otherwise open value domain that holds a specific meaning.
 
 Example:

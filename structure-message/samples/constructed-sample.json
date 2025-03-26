@@ -215,7 +215,7 @@
 								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).TIME_PERIOD",
 								"localRepresentation": {
 									"format": {
-										"textType": "ObservationalTimePeriod"
+										"dataType": "ObservationalTimePeriod"
 									}
 								}
 							}

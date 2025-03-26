@@ -5413,7 +5413,7 @@
 			]
 		},
 		"TimeDimensionRepresentationType":{
-			"description":"TimeDimensionRepresentationType defines the representation for the time dimension. Enumerated values are not allowed.",
+			"description":"TimeDimensionRepresentationType defines the representation for the time dimension. It has only one property format, which is required and which defines the representation for the time dimension. Enumerated values are not allowed.",
 			"type":"object",
 			"properties":{
 				"format":{
@@ -5428,8 +5428,7 @@
 			"description":"TimeDimensionType describes the structure of a time dimension. The time dimension takes its semantic from its concept identity (usually the TIME_PERIOD concept), yet is always has a fixed identifier (TIME_PERIOD). The time dimension always has a fixed text format, which specifies that its format is always the in the value set of the observational time period (see common:ObservationalTimePeriodType). It is possible that the format may be a sub-set of the observational time period value set. For example, it is possible to state that the representation might always be a calendar year. See the enumerations of the dataType attribute in the LocalRepresentation/format for more details of the possible sub-sets. It is also possible to facet this representation with start and end dates. The purpose of such facts is to restrict the value of the time dimension to occur within the specified range. If the time dimension is expected to allow for the standard reporting periods (see common:ReportingTimePeriodType) to be used, then it is strongly recommended that the reporting year start day attribute also be included in the data structure definition. When the reporting year start day attribute is used, any standard reporting period values will be assumed to be based on the start day contained in this attribute. If the reporting year start day attribute is not included and standard reporting periods are used, these values will be assumed to be based on a reporting year which begins January 1.",
 			"type":"object",
 			"required":[
-				"conceptIdentity",
-				"localRepresentation"
+				"conceptIdentity"
 			],
 			"allOf":[
 				{
@@ -5453,7 +5452,8 @@
 							"description":"Urn reference to a concept where the identification of the concept scheme which defines it is contained in another context."
 						},
 						"localRepresentation":{
-							"$ref":"#/definitions/TimeDimensionRepresentationType"
+							"$ref":"#/definitions/TimeDimensionRepresentationType",
+							"description":"If omitted then the localRepresentation is of text format type ObservationalTimePeriod."
 						}
 					}
 				}
@@ -5462,6 +5462,9 @@
 		"TimeTextFormatType":{
 			"description":"TimeTextFormat is a restricted version of the SimpleComponentTextFormatType that only allows time based format and specifies a default ObservationalTimePeriod representation and facets of a start and end time.",
 			"type":"object",
+			"required":[
+				"dataType"
+			],
 			"properties":{
 				"endTime":{
 					"$ref":"#/definitions/StandardTimePeriodType"
