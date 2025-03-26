@@ -1676,6 +1676,8 @@ Example:
 * beforePeriod - *Object* *optional*. A *[TimePeriodRange](#TimePeriodRange)* object. BeforePeriod is the period before which the period is meant to cover. This date may be inclusive or exclusive in the range.
 * endPeriod - *Object* *optional*. A *[TimePeriodRange](#TimePeriodRange)* object. EndPeriod is the end period of the range. This date may be inclusive or exclusive in the range.
 * startPeriod - *Object* *optional*. A *[TimePeriodRange](#TimePeriodRange)* object. StartPeriod is the start date or the range that the queried date must occur within. This date may be inclusive or exclusive in the range.
+* validFrom - *String* *optional*. A timestamp from which the time range is valid. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
+* validTo - *String* *optional*.  A timestamp from which the time range is superceded. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
 
 Example:
 
@@ -1691,7 +1693,9 @@ Example:
 		},
 		"startPeriod": {
 			# TimePeriodRange object #
-		}
+		},
+		"validFrom": "2021-09-01",
+		"validTo":"2021-09-30"
 	}
 
 ###### TimePeriodRange
