@@ -795,7 +795,7 @@ Example:
 * id - *String*. Identifier for the group.
 * annotations - *Array* *optional*. Provides a list of annotation objects. See the section [annotation](#annotation).
 * links - *Array* *optional*. A collection of links to additional resources. See the section [link](#link).
-* groupDimensions - *Array* *optional*. Contains local references (by ID) to dimensions in the key descriptor (DimensionList). Although it is conventional to declare dimensions in the same order as they are declared in the ordered key, there is no requirement to do so - the ordering of the values of the key are taken from the order in which the dimensions are declared. Note that the id of a dimension may be inherited from its underlying concept - therefore this reference value may actually be the id of the concept.
+* groupDimensions - *Array* *optional*. Contains local references (by ID) to dimensions in the key descriptor (DimensionList). Although it is conventional to declare dimensions in the same order as they are declared in the ordered key, there is no requirement to do so - the ordering of the values of the key are taken from the order in which the dimensions are declared.
 
 Examples:
 
