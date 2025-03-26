@@ -12,7 +12,7 @@
 		},
 		"meta":{
 			"description":"A meta object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.",
-			"$ref":"#/definitions/meta"
+			"$ref":"#/$defs/meta"
 		},
 		"data":{
 			"description":"Data contains the message's “primary data”.",
@@ -21,7 +21,7 @@
 				"metadataSets":{
 					"type":"array",
 					"items":{
-						"$ref":"#/definitions/MetadataSetType"
+						"$ref":"#/$defs/MetadataSetType"
 					}
 				}
 			}
@@ -30,7 +30,7 @@
 			"description":"Array of statusInformation objects providing - when appropriate - more detail to the HTTP status codes in the RESTful SDMX web service responses.",
 			"type":"array",
 			"items":{
-				"$ref":"#/definitions/statusInformation"
+				"$ref":"#/$defs/statusInformation"
 			}
 		}
 	},
@@ -38,7 +38,7 @@
 	"required":[
 		"meta"
 	],
-	"definitions":{
+	"$defs":{
 		"meta":{
 			"description":"A meta object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.",
 			"type":"object",
@@ -74,25 +74,25 @@
 				},
 				"name":{
 					"description":"Name provides a name for the transmission. Multiple instances allow for parallel language values.",
-					"$ref":"#/definitions/localisedBestMatchText"
+					"$ref":"#/$defs/localisedBestMatchText"
 				},
 				"names":{
 					"description":"Name provides a name for the transmission. Multiple instances allow for parallel language values.",
-					"$ref":"#/definitions/localisedText"
+					"$ref":"#/$defs/localisedText"
 				},
 				"sender":{
 					"description":"Sender is information about the party that is transmitting the message.",
-					"$ref":"#/definitions/party"
+					"$ref":"#/$defs/party"
 				},
 				"receivers":{
 					"description":"Receiver is information about the part(y/ies) that is/are the intended recipient(s) of the message. This can be useful if the WS requires authentication.",
 					"type":"array",
 					"items":{
-						"$ref":"#/definitions/party"
+						"$ref":"#/$defs/party"
 					}
 				},
 				"links":{
-					"$ref":"#/definitions/links"
+					"$ref":"#/$defs/links"
 				}
 			},
 			"required":[
@@ -112,17 +112,17 @@
 				},
 				"name":{
 					"description":"Name is a human-readable name of the party.",
-					"$ref":"#/definitions/localisedBestMatchText"
+					"$ref":"#/$defs/localisedBestMatchText"
 				},
 				"names":{
 					"description":"Name is a human-readable name of the party.",
-					"$ref":"#/definitions/localisedText"
+					"$ref":"#/$defs/localisedText"
 				},
 				"contacts":{
 					"description":"Contact provides contact information for the party in regard to the transmission of the message.",
 					"type":"array",
 					"items":{
-						"$ref":"#/definitions/contactType"
+						"$ref":"#/$defs/contactType"
 					}
 				}
 			},
@@ -142,23 +142,23 @@
 					"type":"number"
 				},
 				"title":{
-					"$ref":"#/definitions/localisedBestMatchText",
+					"$ref":"#/$defs/localisedBestMatchText",
 					"description":"A short, human-readable (best-language-match) summary of the situation that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization."
 				},
 				"titles":{
-					"$ref":"#/definitions/localisedText",
+					"$ref":"#/$defs/localisedText",
 					"description":"A list of short, human-readable localised summaries (see *[names](#names)*) of the status that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization."
 				},
 				"detail":{
-					"$ref":"#/definitions/localisedBestMatchText",
+					"$ref":"#/$defs/localisedBestMatchText",
 					"description":"A human-readable (best-language-match) explanation specific to this occurrence of the status. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status."
 				},
 				"details":{
-					"$ref":"#/definitions/localisedText",
+					"$ref":"#/$defs/localisedText",
 					"description":"A list of human-readable localised explanations (see *[names](#names)*) specific to this occurrence of the status. Like titles, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status."
 				},
 				"links":{
-					"$ref":"#/definitions/links",
+					"$ref":"#/$defs/links",
 					"description":"If appropriate, a collection of links to additional external resources for the status information."
 				}
 			}
@@ -247,7 +247,7 @@
 					},
 					"urn":{
 						"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details).",
-						"$ref":"#/definitions/urn"
+						"$ref":"#/$defs/urn"
 					},
 					"uri":{
 						"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource.",
@@ -255,10 +255,10 @@
 						"format":"uri"
 					},
 					"title":{
-						"$ref":"#/definitions/localisedBestMatchText"
+						"$ref":"#/$defs/localisedBestMatchText"
 					},
 					"titles":{
-						"$ref":"#/definitions/localisedText"
+						"$ref":"#/$defs/localisedText"
 					},
 					"type":{
 						"description":"A hint about the type of representation returned by the link.",
@@ -304,27 +304,27 @@
 			"properties":{
 				"name":{
 					"description":"Name contains a humain-readable name for the contact.",
-					"$ref":"#/definitions/localisedBestMatchText"
+					"$ref":"#/$defs/localisedBestMatchText"
 				},
 				"names":{
 					"description":"Name contains a humain-readable name for the contact.",
-					"$ref":"#/definitions/localisedText"
+					"$ref":"#/$defs/localisedText"
 				},
 				"department":{
 					"description":"Department is a humain-readable designation of the organisational structure by a linguistic expression, within which the contact person works.",
-					"$ref":"#/definitions/localisedBestMatchText"
+					"$ref":"#/$defs/localisedBestMatchText"
 				},
 				"departments":{
 					"description":"Department is a humain-readable designation of the organisational structure by a linguistic expression, within which the contact person works.",
-					"$ref":"#/definitions/localisedText"
+					"$ref":"#/$defs/localisedText"
 				},
 				"role":{
 					"description":"Role is the humain-readable responsibility of the contact person with respect to the object for which this person is the contact.",
-					"$ref":"#/definitions/localisedBestMatchText"
+					"$ref":"#/$defs/localisedBestMatchText"
 				},
 				"roles":{
 					"description":"Role is the humain-readable responsibility of the contact person with respect to the object for which this person is the contact.",
-					"$ref":"#/definitions/localisedText"
+					"$ref":"#/$defs/localisedText"
 				},
 				"telephones":{
 					"type":"array",
@@ -380,7 +380,7 @@
 			"description":"Annotations is a reusable element the provides for a collection of annotations. It has been made global so that restrictions of types that extend AnnotatableType my reference it.",
 			"type":"array",
 			"items":{
-				"$ref":"#/definitions/AnnotationType"
+				"$ref":"#/$defs/AnnotationType"
 			},
 			"minItems":1
 		},
@@ -405,15 +405,15 @@
 				},
 				"text":{
 					"description":"AnnotationText holds a string containing a language-specific text of the annotation.",
-					"$ref":"#/definitions/localisedBestMatchText"
+					"$ref":"#/$defs/localisedBestMatchText"
 				},
 				"texts":{
 					"description":"AnnotationText holds a string containing the language-specific text of the annotation.",
-					"$ref":"#/definitions/localisedText"
+					"$ref":"#/$defs/localisedText"
 				},
 				"links":{
 					"description":"Links field is an array of link objects. Also used to specify the Annotation URL which points to an external resource which may contain or supplement the annotation (using 'self' as relationship). If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly. If appropriate, a collection of links to additional external resources.",
-					"$ref":"#/definitions/links"
+					"$ref":"#/$defs/links"
 				}
 			},
 			"type":"object"
@@ -458,10 +458,10 @@
 			"description":"ObservationalTimePeriodType specifies a distinct time period or point in time in SDMX. The time period can either be a Gregorian calendar period, a standard reporting period, a distinct point in time, or a time range with a specific date and duration.",
 			"anyOf":[
 				{
-					"$ref":"#/definitions/BasicTimePeriodType"
+					"$ref":"#/$defs/BasicTimePeriodType"
 				},
 				{
-					"$ref":"#/definitions/ReportingTimePeriodType"
+					"$ref":"#/$defs/ReportingTimePeriodType"
 				},
 				{
 					"description":"TimeRangeType 1",
@@ -479,25 +479,25 @@
 			"description":"ReportingTimePeriodType defines standard reporting periods in SDMX, which are all in relation to the start day (day-month) of a reporting year which is specified in the specialized reporting year start day attribute. If the reporting year start day is not defined, a day of January 1 is assumed. The reporting year must be epxressed as the year at the beginning of the period. Therfore, if the reproting year runs from April to March, any given reporting year is expressed as the year for April. The general format of a report period can be described as  [year]-[period][time zone]?, where the type of period is designated with a single character followed by a number representing the period. Note that all periods allow for an optional time zone offset. See the details of each member type for the specifics of its format.",
 			"anyOf":[
 				{
-					"$ref":"#/definitions/ReportingYearType"
+					"$ref":"#/$defs/ReportingYearType"
 				},
 				{
-					"$ref":"#/definitions/ReportingSemesterType"
+					"$ref":"#/$defs/ReportingSemesterType"
 				},
 				{
-					"$ref":"#/definitions/ReportingTrimesterType"
+					"$ref":"#/$defs/ReportingTrimesterType"
 				},
 				{
-					"$ref":"#/definitions/ReportingQuarterType"
+					"$ref":"#/$defs/ReportingQuarterType"
 				},
 				{
-					"$ref":"#/definitions/ReportingMonthType"
+					"$ref":"#/$defs/ReportingMonthType"
 				},
 				{
-					"$ref":"#/definitions/ReportingWeekType"
+					"$ref":"#/$defs/ReportingWeekType"
 				},
 				{
-					"$ref":"#/definitions/ReportingDayType"
+					"$ref":"#/$defs/ReportingDayType"
 				}
 			]
 		},
@@ -547,39 +547,39 @@
 			"additionalProperties":false,
 			"properties":{
 				"action":{
-					"$ref":"#/definitions/ActionType"
+					"$ref":"#/$defs/ActionType"
 				},
 				"publicationPeriod":{
-					"$ref":"#/definitions/ObservationalTimePeriodType"
+					"$ref":"#/$defs/ObservationalTimePeriodType"
 				},
 				"publicationYear":{
-					"$ref":"#/definitions/gYear"
+					"$ref":"#/$defs/gYear"
 				},
 				"reportingBegin":{
-					"$ref":"#/definitions/BasicTimePeriodType"
+					"$ref":"#/$defs/BasicTimePeriodType"
 				},
 				"reportingEnd":{
-					"$ref":"#/definitions/BasicTimePeriodType"
+					"$ref":"#/$defs/BasicTimePeriodType"
 				},
 				"id":{
-					"$ref":"#/definitions/idType"
+					"$ref":"#/$defs/idType"
 				},
 				"version":{
-					"$ref":"#/definitions/VersionType"
+					"$ref":"#/$defs/VersionType"
 				},
 				"agencyID":{
-					"$ref":"#/definitions/NestedNCNameIDType"
+					"$ref":"#/$defs/NestedNCNameIDType"
 				},
 				"isExternalReference":{
 					"type":"boolean"
 				},
 				"metadataflow":{
 					"description":"URN reference to the metadataflow definition the metadata set is being reported against (either metadataflowRef or metadataProvisionRef is required).",
-					"$ref":"#/definitions/MetadataflowReferenceType"
+					"$ref":"#/$defs/MetadataflowReferenceType"
 				},
 				"metadataProvisionAgreement":{
 					"description":"URN reference to the metadata provision agreement definition the metadata set is being reported against (either metadataflowRef or metadataProvisionRef is required).",
-					"$ref":"#/definitions/MetadataProvisionAgreementReferenceType"
+					"$ref":"#/$defs/MetadataProvisionAgreementReferenceType"
 				},
 				"validFrom":{
 					"type":"string",
@@ -590,27 +590,27 @@
 					"format":"date-time"
 				},
 				"annotations":{
-					"$ref":"#/definitions/AnnotationsType"
+					"$ref":"#/$defs/AnnotationsType"
 				},
 				"name":{
-					"$ref":"#/definitions/localisedBestMatchText"
+					"$ref":"#/$defs/localisedBestMatchText"
 				},
 				"names":{
-					"$ref":"#/definitions/localisedText"
+					"$ref":"#/$defs/localisedText"
 				},
 				"description":{
-					"$ref":"#/definitions/localisedBestMatchText"
+					"$ref":"#/$defs/localisedBestMatchText"
 				},
 				"descriptions":{
-					"$ref":"#/definitions/localisedText"
+					"$ref":"#/$defs/localisedText"
 				},
 				"links":{
-					"$ref":"#/definitions/links"
+					"$ref":"#/$defs/links"
 				},
 				"targets":{
 					"description":"Target holds a valid SDMX Registry URN (see SDMX Registry Specification for details) of the object to which the reported metadata apply.",
 					"items":{
-						"$ref":"#/definitions/urn"
+						"$ref":"#/$defs/urn"
 					},
 					"minItems":1,
 					"type":"array"
@@ -618,7 +618,7 @@
 				"attributes":{
 					"description":"Report contains the details of a the reported metadata, including the identification of the target and the report attributes.",
 					"items":{
-						"$ref":"#/definitions/attributeType"
+						"$ref":"#/$defs/attributeType"
 					},
 					"minItems":1,
 					"type":"array"
@@ -653,13 +653,13 @@
 			"additionalProperties":false,
 			"properties":{
 				"id":{
-					"$ref":"#/definitions/idType"
+					"$ref":"#/$defs/idType"
 				},
 				"annotations":{
-					"$ref":"#/definitions/AnnotationsType"
+					"$ref":"#/$defs/AnnotationsType"
 				},
 				"format":{
-					"$ref":"#/definitions/format"
+					"$ref":"#/$defs/format"
 				},
 				"value":{
 					"anyOf":[
@@ -676,7 +676,7 @@
 							"type":"string"
 						},
 						{
-							"$ref":"#/definitions/localisedText"
+							"$ref":"#/$defs/localisedText"
 						},
 						{
 							"type":"null"
@@ -686,7 +686,7 @@
 				"attributes":{
 					"description":"Non-empty array of recursive attribute objects. Contains the reported metadata attribute values for the reported metadata and recursively their child metadata attributes.",
 					"items":{
-						"$ref":"#/definitions/attributeType"
+						"$ref":"#/$defs/attributeType"
 					},
 					"minItems":1,
 					"type":"array"
@@ -711,7 +711,7 @@
 			"type":"object",
 			"properties":{
 				"dataType":{
-					"$ref":"#/definitions/nonDimensionDataType"
+					"$ref":"#/$defs/nonDimensionDataType"
 				},
 				"isSequence":{
 					"type":"boolean"
@@ -726,13 +726,13 @@
 					"type":"number"
 				},
 				"timeInterval":{
-					"$ref":"#/definitions/duration"
+					"$ref":"#/$defs/duration"
 				},
 				"startTime":{
-					"$ref":"#/definitions/StandardTimePeriodType"
+					"$ref":"#/$defs/StandardTimePeriodType"
 				},
 				"endTime":{
-					"$ref":"#/definitions/StandardTimePeriodType"
+					"$ref":"#/$defs/StandardTimePeriodType"
 				},
 				"minLength":{
 					"type":"integer",
@@ -759,7 +759,7 @@
 					"type":"boolean"
 				},
 				"sentinelValues":{
-					"$ref":"#/definitions/sentinelValues"
+					"$ref":"#/$defs/sentinelValues"
 				}
 			}
 		},
@@ -800,16 +800,16 @@
 						]
 					},
 					"name":{
-						"$ref":"#/definitions/localisedBestMatchText"
+						"$ref":"#/$defs/localisedBestMatchText"
 					},
 					"names":{
-						"$ref":"#/definitions/localisedText"
+						"$ref":"#/$defs/localisedText"
 					},
 					"description":{
-						"$ref":"#/definitions/localisedBestMatchText"
+						"$ref":"#/$defs/localisedBestMatchText"
 					},
 					"descriptions":{
-						"$ref":"#/definitions/localisedText"
+						"$ref":"#/$defs/localisedText"
 					}
 				}
 			},
@@ -826,7 +826,7 @@
 					]
 				},
 				{
-					"$ref":"#/definitions/dimensionDataType"
+					"$ref":"#/$defs/dimensionDataType"
 				}
 			]
 		},
