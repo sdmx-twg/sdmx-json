@@ -59,7 +59,7 @@ See the section on [localised text elements](#localised-text-elements) on how th
 Example:
 
 	"meta": {
-		"schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/sdmx-json-data-schema.json",
+		"schema": "https://json.sdmx.org/2.1/sdmx-json-structure-schema.json",
 		"copyright": "Copyright 2017 Statistics hotline",
 		"id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
 		"prepared": "2018-01-03T12:54:12",

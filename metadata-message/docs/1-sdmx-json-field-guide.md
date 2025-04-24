@@ -10,7 +10,7 @@ Before we start, let's clarify a few more things about this guide:
 - The ordering of properties in objects is undefined. The properties may appear in any order and consuming applications should not rely on any specific ordering. It is safe to consider a nulled property and the absence of a property as the same thing.
 - Not all properties appear in all contexts. For example response with error status messages may not contain a data property.
 
-# Field Guide to SDMX-JSON Metadata Message 2.1.0 Objects (aligned with SDMX 3.1.0)
+# Field Guide to SDMX-JSON Metadata Message 2.1.0 Objects (aligned with SDMX 3.1)
 
 ## message
 
@@ -59,7 +59,7 @@ See the section on [localised text elements](#localised-text-elements) on how th
 Example:
 
 	"meta": {
-		"schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/metadata-message/tools/schemas/sdmx-json-metadata-schema.json",
+		"schema": "https://json.sdmx.org/2.1/sdmx-json-metadata-schema.json",
 		"copyright": "Copyright 2017 Statistics hotline",
 		"id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
 		"prepared": "2018-01-03T12:54:12",

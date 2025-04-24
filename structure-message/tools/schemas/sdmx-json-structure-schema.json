@@ -1,7 +1,7 @@
 {
-	"$id":"https://raw.githubusercontent.com/sdmx-twg/sdmx-json/v2.1.0/structure-message/tools/schemas/sdmx-json-structure-schema.json",
+	"$id":"https://json.sdmx.org/2.1/sdmx-json-structure-schema.json",
 	"$schema":"http://json-schema.org/schema#",
-	"description":"SDMX-JSON 2.1.0 Schema for SDMX 3.1.0 structure messages",
+	"description":"SDMX-JSON 2.1.0 Schema for SDMX 3.1 structure messages",
 	"type":"object",
 	"properties":{
 		"meta":{

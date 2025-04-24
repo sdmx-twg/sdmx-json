@@ -1,6 +1,6 @@
 {
 	"meta": {
-		"schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/develop/metadata-message/tools/schemas/1.0/sdmx-json-metadata-schema.json",
+		"schema": "https://json.sdmx.org/2.1/sdmx-json-metadata-schema.json",
 		"id": "IFS_Metadata",
 		"test": true,
 		"prepared": "2018-03-18T09:30:47-05:00",
