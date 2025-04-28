@@ -613,6 +613,15 @@
 				"format":{
 					"$ref":"#/$defs/format"
 				},
+				"maxOccurs":{
+					"$ref":"#/$defs/OccurenceType",
+					"default":1
+				},
+				"minOccurs":{
+					"type":"integer",
+					"minimum":0,
+					"default":1
+				},
 				"links":{
 					"$ref":"#/$defs/links"
 				},
@@ -672,6 +681,15 @@
 				},
 				"default":{
 					"type":"string"
+				},
+				"maxOccurs":{
+					"$ref":"#/$defs/OccurenceType",
+					"default":1
+				},
+				"minOccurs":{
+					"type":"integer",
+					"minimum":0,
+					"default":1
 				},
 				"links":{
 					"$ref":"#/$defs/links"
@@ -796,13 +814,12 @@
 					"$ref":"#/$defs/sentinelValues"
 				},
 				"maxOccurs":{
-					"$ref":"#/$defs/OccurenceType",
-					"default":1
+					"description":"Deprecated since SDMX 3.1. Instead, use the corresponding attribute or measure property.",
+					"$ref":"#/$defs/OccurenceType"
 				},
 				"minOccurs":{
-					"type":"integer",
-					"minimum":0,
-					"default":1
+					"description":"Deprecated since SDMX 3.1. Instead, use the corresponding attribute or measure property.",
+					"type":"integer"
 				}
 			}
 		},

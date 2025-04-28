@@ -349,11 +349,17 @@ Each of the components may contain the following fields:
 * roles - *Array* of *String*s *optional*. Defines the component role(s), if any. Roles are represented by the id of a concept defined as [SDMX cross-domain concept](https://sdmx.org/wp-content/uploads/01_sdmx_cog_annex_1_cdc_2009.pdf). Several of the concepts defined as SDMX cross-domain concepts are useful for data visualisation, such as for example, the series title ("TITLE"), the unit of measure ("UNIT_MEASURE"), the number of decimals to be displayed ("DECIMALS"), the  country or geographic reference area ("REF_AREA", e.g. when using maps), the period of time to which the measured observation refers ("REF_PERIOD"), the time interval at which observations occur over a given time period ("FREQ"), etc. It is strongly recommended to identify any component that can be useful for data visualisation purposes by using the appropriate SDMX cross-domain concept as role.
 * isMandatory - *Boolean* *optional*. **Only for `measures` and `attributes`.** If `true` then that `measure` or `attribute` is mandatory in the exchange of complete datasets. The default is `false`.
 * relationship - *Object* *optional*. **This field is mandatory for data `attributes` but optional for reference metadata `attributes` and not to be supplied for `measures` or `dimensions`.** *[Attribute relationship](#attribute-relationship)* describes how the value of this attribute varies with the values of other components. This relationship expresses the attachment level of the attribute as defined in the data structure definition. Depending on the message context (especially the data query) an attribute value can however be attached physically in the message at a lower level.
-* format - *Object* *optional*. *[Format](#format)* describes the allowed components representation (permitted type and cardinality of the values). It contains essential information to determine the location of the component values and the related necessity of using indexes for referencing. It is only used when the component values are not defined by an enumerated list of identifiable items (codelist).
+* format - *Object* *optional*. *[Format](#format)* describes the allowed components representation (permitted type and cardinality of the values). It contains essential information to determine the location of the component values and the related necessity of using indexes for referencing. `format` is only used when the component values are not defined by an enumerated list of identifiable items (codelist), in which case instead of `id` and `name`, the component values will use:  
+  - if `maxOccurs` is greater than 1: the `values` property,
+  - otherwise: the `value` property. 
 * default - *String* or *Number* *optional*. Defines a default `value` for the component (**valid for `attributes` only!**). If no value is provided in the data part of the message then this value applies.
+* minOccurs - *Non-negative integer* *optional* **Only for `measures` and `attributes`.** Indicates the minimum number of value that must be reported for the component. If missing than there is no lower limit on its occurrences. The default is 1. 
+* maxOccurs - *Positive integer*/*String* *optional* **Only for `measures` and `attributes`.** Indicates the maximum number of values that can be reported for the component. If set to the string "unbounded" than there is no upper limit on its occurrences. For non-enumerated components, if > 1 then the component values will use the `values` property of the component value instead of `value`. The default is 1. `maxOccurs` must not be smaller than `minOccurs`.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the component.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the component. Indices refer back to the array of *annotations* in the structure field.
 * values - *Array* *optional*. *Values* field is an array of *[component value](#component-value)* objects. Note that `dimensions` and `attributes` presented at `dataSet` level can only have one single component value. ***Values* are *optional* for `measures` and `attributes`, but generally *required* for `dimensions` unless used only for attributes at `dimensionGroup` level**. Whenever the *values* field is provided, the component values in the dataSets will always contain the corresponding array indexes, otherwise they will contain the values themselves.  
+
+If `format` is not used (thus the component values are enumerated) then the component values will be flat-listed using their `id` and `name`, independently from the value of `maxOccurs`. For attributes and measures, if multiple enumerated values are allowed then the indexes of the corresponding component values are to listed in arrays in the related `dataSet`. 
 
 See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
@@ -369,9 +375,6 @@ Example:
 				  "fr": "L'intervalle de temps avec lequel les observations sont faites sur une période donnée." },
 		"keyPosition": 0,
 		"role": [ "FREQ" ],
-		"format": {
-			# format object #
-		},
 		"links": [
 			{
 				# link object #
@@ -411,6 +414,8 @@ Example:
 			# format object #
 		},
 		"default": "MAFF_Agricultural Statistics",
+		"minOccurs": 0,
+		"maxOccurs": 3,
 		"links": [
 			{
 				# link object #
@@ -471,15 +476,10 @@ Examples:
 
 ##### format
 
-*Object*. The format object defines the representation for a component. It describes the possible content for component values, which could be text (including XHTML and multi-lingual values), a simple value or multiple values.
+*Object*. The format object defines the representation for a component. It describes the possible text formats for component values (including XHTML and multi-lingual values) when the component is not enumerated (not using a codelist or valuelist).
 
-* minOccurs - *Non-negative integer* *optional* **Only for `measures` and `attributes`.** Indicates the minimum number of value that must be reported for the component. If missing than there is no lower limit on its occurrences. If > 1 then the component values will use the `values` property of the component value instead of `id` and `name` or `value`. The default is 1. 
-* maxOccurs - *Positive integer*/*String* *optional* **Only for `measures` and `attributes`.** Indicates the maximum number of values that can be reported for the component. If set to the string "unbounded" than there is no upper limit on its occurrences. If > 1 then the component values will use the `values` property of the component value instead of `id` and `name` or `value`. The default is 1. 
 * dataType - *String* *optional*. Describes the type of data format allowed for the representation of the component. Only the following dataTypes are supported: "String",
  "Alpha", "AlphaNumeric", "Numeric", "BigInteger", "Integer", "Long", "Short", "Decimal", "Float", "Double", "Boolean", "URI", "Count", "InclusiveValueRange", "ExclusiveValueRange", "Incremental", "ObservationalTimePeriod", "StandardTimePeriod", "BasicTimePeriod", "GregorianTimePeriod", "GregorianYear", "GregorianYearMonth", "GregorianDay", "ReportingTimePeriod", "ReportingYear", "ReportingSemester", "ReportingTrimester", "ReportingQuarter", "ReportingMonth", "ReportingWeek", "ReportingDay", "DateTime", "TimeRange", "Month", "MonthDay", "Day", "Time", "Duration", "GeospatialInformation" and "XHTML". `Dimensions` do not support the type "XHTML". Time `dimensions` (having the id and role "TIME_PERIOD") only support the types "ObservationalTimePeriod", "StandardTimePeriod", "BasicTimePeriod", "GregorianTimePeriod", "GregorianYear", "GregorianYearMonth", "GregorianDay", "ReportingTimePeriod", "ReportingYear", "ReportingSemester", "ReportingTrimester", "ReportingQuarter", "ReportingMonth", "ReportingWeek", "ReportingDay", "DateTime", "TimeRange". The default data type is "String" except for time `dimensions`, which takes "ObservationalTimePeriod" as default.  
-   If `format` is used (thus the component values are not defined by an enumerated list of identifiable items (codelist)) then, instead of `id` and `name`, the component values will use:  
-   - if `minOccurs` and `maxOccurs` are equal to 1: the `value` property,
-   - otherwise: the `values` property.
 * isSequence - *Boolean* *optional*. Indicates whether the values are intended to be ordered, and it may work in combination with the interval, startValue, and endValue attributes or the timeInterval, startTime, and endTime, attributes. If this attribute holds a value of 'true', a start value or time and a numeric or time interval must supplied. If an end value is not given, then the sequence continues indefinitely.
 * interval - *Integer* *optional*. Specifies the permitted interval (increment) in a sequence. In order for this to be used, the isSequence attribute must have a value of 'true'.
 * startValue - *Number* *optional*. Is used in conjunction with the isSequence and interval attributes (which must be set in order to use this attribute). This attribute is used for a numeric sequence, and indicates the starting point of the sequence. This value is mandatory for a numeric sequence to be expressed.
@@ -501,8 +501,6 @@ Examples:
 Example:
 
 	{ 
-		"minOccurs": 2,
-		"maxOccurs": 3,
 		"dataType": "String",
 		"minLength": 4, 
 		"maxLength": 4, 
@@ -511,8 +509,6 @@ Example:
 	}
 
 	{ 
-		"minOccurs": 2,
-		"maxOccurs": 2,
 		"dataType": "Double",
 		"isMultilingual": false,
 		"sentinelValues": [
