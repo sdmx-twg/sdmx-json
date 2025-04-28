@@ -26,7 +26,7 @@ The properties data and errors CAN coexist in the same message.
 Example:
 
 	{
-		"schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/sdmx-json-data-schema.json",
+		"schema": "https://json.sdmx.org/2.1/sdmx-json-data-schema.json",
 		"meta": {
 			# meta object #
 		},
