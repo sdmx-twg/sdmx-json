@@ -12,7 +12,7 @@ October 2013
 [sdmx-im] *SDMX Information Model v3.1*, https://github.com/sdmx-twg/sdmx-im,
 SDMX, April 2025
 
-[sdmx-rest] *SDMX RESTful Web Services Specification v2.1.0*, https://github.com/sdmx-twg/sdmx-rest,
+[sdmx-rest] *SDMX RESTful Web Services Specification v2.2.0*, https://github.com/sdmx-twg/sdmx-rest,
 SDMX, February 2025
 
 [json api 1.0] *A specification for building APIs in Json*, http://jsonapi.org/, 2015
