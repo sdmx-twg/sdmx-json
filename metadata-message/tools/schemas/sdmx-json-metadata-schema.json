@@ -58,9 +58,17 @@
 					"type":"boolean"
 				},
 				"prepared":{
-					"description":"A timestamp indicating when the message was prepared. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.",
-					"type":"string",
-					"format":"date-time"
+					"description":"A date or date-time indicating when the message was prepared. Values must follow the ISO 8601 syntax for dates or combined dates and times, including time zone.",
+					"oneOf": [
+						{
+							"type":"string",
+							"format":"date-time"
+						},
+						{
+							"type":"string",
+							"format":"date"
+						}
+					]
 				},
 				"contentLanguages":{
 					"description":"Array of strings containing the identifyer of all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, representing in an array format the same information than the http Content-Language response header, e.g. \"en, fr-fr\". See IETF Language Tags: https://tools.ietf.org/html/rfc5646#section-2.1. The array's first element indicates the main language used in the message for localized elements. The usage of this property is recommended.",
