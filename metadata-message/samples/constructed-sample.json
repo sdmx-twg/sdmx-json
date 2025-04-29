@@ -1,6 +1,6 @@
 {
+	"$schema":"https://json.sdmx.org/2.1/sdmx-json-metadata-schema.json",
 	"meta":{
-		"schema":"https://json.sdmx.org/2.1/sdmx-json-metadata-schema.json",
 		"id":"GEN",
 		"test":true,
 		"prepared":"2021-08-20T08:00:00-05:00",

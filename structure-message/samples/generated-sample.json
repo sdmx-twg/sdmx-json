@@ -1,6 +1,6 @@
 {
+	"$schema":"https://json.sdmx.org/2.1/sdmx-json-structure-schema.json",
 	"meta":{
-		"schema":"https://json.sdmx.org/2.1/sdmx-json-structure-schema.json",
 		"id":"$",
 		"test":true,
 		"prepared":"2021-09-16T11:04:00Z",
@@ -5118,7 +5118,7 @@
 							{
 								"href":"http://www.example.org/data.json",
 								"rel":"a",
-								"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Valuelist=ABC:ABC(1.0)",
+								"urn":"urn:sdmx:org.sdmx.infomodel.codelist.ValueList=ABC:ABC(1.0)",
 								"uri":"http://www.example.org/data.json",
 								"title":"a",
 								"titles":{
@@ -5134,7 +5134,7 @@
 					{
 						"href":"http://www.example.org/data.json",
 						"rel":"a",
-						"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Valuelist=ABC:ABC(1.0)",
+						"urn":"urn:sdmx:org.sdmx.infomodel.codelist.ValueList=ABC:ABC(1.0)",
 						"uri":"http://www.example.org/data.json",
 						"title":"a",
 						"titles":{

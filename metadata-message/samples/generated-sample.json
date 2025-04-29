@@ -1,4 +1,5 @@
 {
+	"$schema":"https://json.sdmx.org/2.1/sdmx-json-metadata-schema.json",
 	"meta":{
 		"id":"vLqrDQjsgl",
 		"prepared":"1987-01-23T23:00:00.0Z",
@@ -96,8 +97,7 @@
 		"contentLanguages":[
 			"hozyrk-ha-v-1gocg8js-q72t-76y8o0m-b04-rze4-851vsj0-h4-2iv2o-f-jp-zm-1scnn-vf2lxmz-tp-f-5cgfgi-lvtt6fo-mlic-enzsv851-v-kzch-6dk3-a2c-a07q-kijvxs-irflw-53m1-v9r-v6leyiu-zi5w9j1z-m-7c-ihe1n-ca966eis-yy-6e4iqt-2-3p9gsvan-rgt-2i-lgqs8bu-6pnad-xjjrpbln-zf-lgw-150sn-1-j45i1rm-60-bwjv-yqhd895g-vu-0wjwgw-ec3k77-blgz6-1nitf-y5-uor5q-x-bl-noksz8-da-mpgz1d16-sfu-3y-i373bn2q-3xw-m8mrq-2",
 			"zh-min-nan"
-		],
-		"schema":"https://QTzuhRStUw.coqUKK9UkjXX-JSAxMV.J"
+		]
 	},
 	"data":{
 		"metadataSets":[

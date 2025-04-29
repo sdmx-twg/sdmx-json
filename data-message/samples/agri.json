@@ -1,8 +1,8 @@
 {
+	"$schema":"https://json.sdmx.org/2.1/sdmx-json-data-schema.json",
 	"meta":{
-		"schema":"https://json.sdmx.org/2.1/sdmx-json-data-schema.json",
 		"id":"IT1001",
-		"prepared":"2018-03-11T14:30:47",
+		"prepared":"2018-03-11T14:30:47Z",
 		"test":true,
 		"contentLanguages":[
 			"en"
@@ -202,7 +202,7 @@
 									"links":[
 										{
 											"href":"http://ws-root/codelist/MA_545/FREQ/1.0/A",
-											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Codelist=MA_545:FREQ(1.0).A",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=MA_545:FREQ(1.0).A",
 											"rel":"self"
 										}
 									]
@@ -243,7 +243,7 @@
 									"links":[
 										{
 											"href":"http://ws-root/codelist/MA_545/CL_PROVINCES/1.0/ASIKHM001",
-											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Codelist=MA_545:CL_PROVINCES(1.0)ASIKHM001",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=MA_545:CL_PROVINCES(1.0).ASIKHM001",
 											"rel":"self"
 										}
 									],
@@ -262,7 +262,7 @@
 									"links":[
 										{
 											"href":"http://ws-root/codelist/MA_545/CL_PROVINCES/1.0/ASIKHM002",
-											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Codelist=MA_545:CL_PROVINCES(1.0).ASIKHM",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=MA_545:CL_PROVINCES(1.0).ASIKHM",
 											"rel":"self"
 										}
 									],
@@ -280,7 +280,7 @@
 									"links":[
 										{
 											"href":"http://ws-root/codelist/MA_545/CL_PROVINCES/1.0/ASIKHM",
-											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Codelist=MA_545:CL_PROVINCES(1.0).ASIKHM",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=MA_545:CL_PROVINCES(1.0).ASIKHM",
 											"rel":"self"
 										}
 									]

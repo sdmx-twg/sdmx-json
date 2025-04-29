@@ -1,6 +1,6 @@
 {
+	"$schema":"https://json.sdmx.org/2.1/sdmx-json-metadata-schema.json",
 	"meta":{
-		"schema":"https://json.sdmx.org/2.1/sdmx-json-metadata-schema.json",
 		"id":"IFS_Metadata",
 		"test":true,
 		"prepared":"2021-09-18T09:30:47-05:00",

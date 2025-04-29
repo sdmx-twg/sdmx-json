@@ -1,6 +1,6 @@
 {
+	"$schema":"https://json.sdmx.org/2.1/sdmx-json-data-schema.json",
 	"meta":{
-		"schema":"https://json.sdmx.org/2.1/sdmx-json-data-schema.json",
 		"id":"62b5f19d-f1c9-495d-8446-a3661ed24753",
 		"prepared":"2021-03-17T22:57:33Z",
 		"test":false,
@@ -122,7 +122,7 @@
 					},
 					{
 						"href":"https://sdw-wsrest.ecb.europa.eu/service/provisionagreement/ECB/PA_EXR",
-						"urn":"urn:sdmx:org.sdmx.infomodel.provisionagreement.ProvisionAgreement=ECB:PA_EXR(1.0)",
+						"urn":"urn:sdmx:org.sdmx.infomodel.registry.ProvisionAgreement=ECB:PA_EXR(1.0)",
 						"rel":"provisionagreement",
 						"title":"resolvable uri to provision agreement",
 						"titles":{

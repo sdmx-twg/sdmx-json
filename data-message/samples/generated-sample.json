@@ -1,4 +1,5 @@
 {
+	"$schema":"https://json.sdmx.org/2.1/sdmx-json-metadata-schema.json",
 	"errors":[
 		{
 			"code":90483457.7170785,
@@ -49,7 +50,7 @@
 			"title":"ad reprehenderit veniam",
 			"links":[
 				{
-					"urn":"https://oQOiQaOGSOrSfT.bjgszV",
+					"urn":"urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ABC:DEF(1.0)",
 					"rel":"dataflow",
 					"titles":{
 						"swxdrk-wphs":"ipsum dolore reprehenderit proident"
@@ -99,7 +100,7 @@
 						"type":"pariatur magna sit Ut"
 					},
 					{
-						"urn":"https://WYAMBRdnIjcAnMQGgog.xaNB",
+						"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 						"rel":"last",
 						"type":"eiusmod",
 						"uri":"http://nEevwlHFlPgODmMo.ajdmk",
@@ -181,7 +182,7 @@
 				"structure":0,
 				"links":[
 					{
-						"urn":"https://FjyyfJgaZIctxKERLZGEieuLzKeJpAQZk.vcYj",
+						"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 						"rel":"structureset",
 						"hreflang":"x-85ybs0l",
 						"type":"Excepteur irure nostrud nisi qui",
@@ -332,7 +333,7 @@
 									],
 									"links":[
 										{
-											"urn":"https://xcixDhMBG.avosN",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"in consequat dolore Duis",
 											"title":"in",
 											"type":"laborum",
@@ -410,7 +411,7 @@
 									}
 								},
 								{
-									"urn":"https://JRxkxkX.iiQB9",
+									"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 									"rel":"chapter",
 									"type":"irure in",
 									"title":"Excepteur aliquip",
@@ -445,7 +446,7 @@
 									"order":67567960,
 									"links":[
 										{
-											"urn":"https://ptXvIslfGCiYRujytmpOtZpDsFKlRud.zgnabyU",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"successor-version",
 											"hreflang":"nfebd-k-62xte-c5p-x-q5gmc-sh8qsdx",
 											"title":"qui in Lorem reprehenderit",
@@ -517,7 +518,7 @@
 							],
 							"links":[
 								{
-									"urn":"http://J.ouvJL8",
+									"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 									"rel":"ullamco ut qui sit",
 									"titles":{
 										"en-GB-oed":"eu reprehenderit eiusmod",
@@ -529,7 +530,7 @@
 									"hreflang":"i-tay"
 								},
 								{
-									"urn":"https://SiF.lelgDB",
+									"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 									"rel":"cupidatat",
 									"hreflang":"zh-guoyu",
 									"type":"irure Lorem",
@@ -640,7 +641,7 @@
 											"type":"do id dolore proident eu"
 										},
 										{
-											"urn":"https://NYVRhMfBEsN.muwsQ",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"occaecat nisi consequat mollit",
 											"title":"consectetur Excepteur enim amet",
 											"type":"exercitation minim velit",
@@ -677,7 +678,7 @@
 							"description":"qui proident nostrud ut et",
 							"links":[
 								{
-									"urn":"http://cedmY.djaegW",
+									"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 									"rel":"consequat",
 									"titles":{
 										"sgn-CH-DE":"aliqua mollit",
@@ -689,7 +690,7 @@
 									"type":"ut laboris"
 								},
 								{
-									"urn":"https://DmBuNwSwQixYwzvQNYddsLakisXglzl.rnyts",
+									"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 									"rel":"stylesheet",
 									"uri":"https://yMnZKVQRmNUGH.tdjuu",
 									"hreflang":"x-tvhdvv",
@@ -768,7 +769,7 @@
 											"hreflang":"x-08klh2"
 										},
 										{
-											"urn":"https://IjNKLDgsuJXXOTlpsC.ueteNugk",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"ipsum dolore ut reprehenderit",
 											"title":"enim deserunt veniam",
 											"type":"sunt esse tempor deserunt",
@@ -899,7 +900,7 @@
 									],
 									"links":[
 										{
-											"urn":"http://WKqOeAbAmhheISIJlnpceZsca.ollol",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"consequat laboris tempor irure in",
 											"uri":"http://VwgCwGicxtP.zajsA",
 											"title":"officia culpa",
@@ -1024,7 +1025,7 @@
 									"hreflang":"x-2bdgydi-o"
 								},
 								{
-									"urn":"http://tCqMOClhvMLtomgwwiYkyZYBDpJvahkWE.qrsw",
+									"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 									"rel":"consequat irure tempor in ut",
 									"title":"enim dolore officia ex",
 									"hreflang":"i-navajo",
@@ -1065,7 +1066,7 @@
 									"order":98476527,
 									"links":[
 										{
-											"urn":"https://Ea.pgpJiR",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"incididunt eiusmod do ipsum",
 											"titles":{
 												"wcf-qfz-ohg-ezl-ioya-ze-p2fouqf-x-kzrywa":"consectetur"
@@ -1076,7 +1077,7 @@
 											"hreflang":"x-szv4"
 										},
 										{
-											"urn":"http://MgCPhnwzJuHXtPKYbLlJodWp.mirT",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"previous",
 											"type":"nulla laboris ut dolor",
 											"uri":"https://jXlRKKpDIoExpdOZP.nrbtTK",
@@ -1101,7 +1102,7 @@
 									"parent":"Y",
 									"links":[
 										{
-											"urn":"http://oGcSCtihGntodoBdaEGknklLHYRc.ihH",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"structureset",
 											"titles":{
 												"i-navajo":"non Lorem et laborum"
@@ -1138,7 +1139,7 @@
 							},
 							"links":[
 								{
-									"urn":"http://pwxNcpnCLpIGdVHSyQ.jbash",
+									"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 									"rel":"enclosure",
 									"titles":{
 										"wrft-hijv-321-on776p9":"elit amet nostrud occaecat pariatur"
@@ -1149,7 +1150,7 @@
 									"title":"nulla"
 								},
 								{
-									"urn":"https://ectzdgqUJhJOsrQGmsumKhBeKn.minKx",
+									"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 									"rel":"reportingtaxonomy",
 									"uri":"http://HuogxSTPcKtAIBrtLkBmCFbjvYIWySc.ghG5",
 									"titles":{
@@ -1235,7 +1236,7 @@
 								"title":"nostrud"
 							},
 							{
-								"urn":"http://PhusTdeBrDJUTBcSyVEsDrQgmlz.pgve",
+								"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 								"rel":"nostrud",
 								"hreflang":"rkpgu-482-x-z2ndgx0",
 								"uri":"https://LjamKlcDqETVTfSS.unuyYC",
@@ -1278,7 +1279,7 @@
 								"hreflang":"zh-min"
 							},
 							{
-								"urn":"https://pnclhWzEfijwEUCrQjvHBRLdbn.bxndfv",
+								"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 								"rel":"ad ea ullamco",
 								"titles":{
 									"i-tao":"proident"
@@ -1385,7 +1386,7 @@
 									"hreflang":"tsrq-eo-x-8vtt2"
 								},
 								{
-									"urn":"https://Y.taYLU",
+									"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 									"rel":"dataproviderscheme",
 									"uri":"https://DmtouNwmbXIxbCrZnjMosoKdWUqTjF.jverkpV",
 									"type":"quis nostrud",
@@ -1420,7 +1421,7 @@
 							},
 							"links":[
 								{
-									"urn":"https://xkfNj.aeUI",
+									"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 									"rel":"conceptscheme",
 									"hreflang":"tb-rpp-tdw-tcmg-x-udq3u",
 									"uri":"http://ZET.ijjsUQ",
@@ -1453,7 +1454,7 @@
 								{
 									"links":[
 										{
-											"urn":"https://hhpGLzXjipMDOWOUUY.uxir",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"ea minim mollit veniam",
 											"titles":{
 												"x-sar5g313":"irure Excepteur officia voluptate",
@@ -1466,7 +1467,7 @@
 											"title":"non enim"
 										},
 										{
-											"urn":"https://yJLyHSxeMmWGqvSxAcQtpPVzsgO.qfgME",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"eu qui in Lorem dolore",
 											"title":"dolor Excepteur pariatur",
 											"titles":{
@@ -1574,7 +1575,7 @@
 											"type":"ut est dolor"
 										},
 										{
-											"urn":"http://NHZNuDihvqJFIl.ieLKa",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"culpa irure dolore sunt officia",
 											"titles":{
 												"i-enochian":"commodo dolor cupidatat ullamco culpa",
@@ -1611,7 +1612,7 @@
 									"start":"1944-12-05T19:21:12.69Z",
 									"links":[
 										{
-											"urn":"https://nmHEkuTMBAUcEaln.eoayon",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"metadataflow",
 											"type":"culpa",
 											"hreflang":"wngk-an",
@@ -1626,7 +1627,7 @@
 											"title":"nulla"
 										},
 										{
-											"urn":"http://JzhRvrx.wamgJ",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"previous",
 											"hreflang":"aaadcf-tzhv-053",
 											"titles":{
@@ -1660,7 +1661,7 @@
 							},
 							"links":[
 								{
-									"urn":"http://aTNIXKOIuQ.agprzzh",
+									"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 									"rel":"structure",
 									"type":"Duis mollit dolore aliquip sit",
 									"titles":{
@@ -1739,7 +1740,7 @@
 									],
 									"links":[
 										{
-											"urn":"http://XYlnK.jktfT",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"categorisation",
 											"titles":{
 												"i-default":"labore occaecat officia do dolore",
@@ -1751,7 +1752,7 @@
 											"uri":"http://AHETyZIonelhaAqsXytOnrUauiVlBzF.doqWWF"
 										},
 										{
-											"urn":"http://UznbDVOwMivwbWVvUkJtteHl.bbttUxF",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"minim Ut commodo ea culpa",
 											"titles":{
 												"x-l9ss-2cd2in4a":"aliquip",
@@ -1794,7 +1795,7 @@
 									"type":"aute non culpa"
 								},
 								{
-									"urn":"https://BexkBxbjXbsmAurqxKcIzWyChZgppXIn.fjdbd",
+									"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 									"rel":"dataproviderscheme",
 									"title":"aliquip qui Excepteur culpa",
 									"hreflang":"zh-min",
@@ -1838,7 +1839,7 @@
 							],
 							"links":[
 								{
-									"urn":"https://F.hsfrM",
+									"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 									"rel":"chapter",
 									"hreflang":"i-navajo",
 									"titles":{
@@ -1854,7 +1855,7 @@
 									"title":"velit ea elit reprehenderit sunt"
 								},
 								{
-									"urn":"https://obi.bdqgBO",
+									"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 									"rel":"voluptate in eu esse ipsum",
 									"type":"pariatur ad dolor",
 									"hreflang":"vy-j-w1c8zr-nkise",
@@ -1973,7 +1974,7 @@
 									},
 									"links":[
 										{
-											"urn":"https://UcCu.drOW",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"payment",
 											"hreflang":"fqn-rtx-ffg-wqd-brwt-w9m0t-x-q",
 											"titles":{
@@ -1987,7 +1988,7 @@
 											"title":"consectetur ullamco commodo do"
 										},
 										{
-											"urn":"https://SCHjhyCeCyzaWlMJEHNNvkRGCOzPKT.kixgEE7",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"prev-archive",
 											"uri":"http://ZfWsVokxmkEwnqJDMjlOWPIjXiwZYZrOr.umvjZP",
 											"type":"occaecat deserunt culpa ipsum officia",
@@ -2039,7 +2040,7 @@
 							],
 							"links":[
 								{
-									"urn":"https://CnmhAfdZzcSkZZZrLFcBM.tdjb",
+									"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 									"rel":"current",
 									"titles":{
 										"zdvkw-azht-t-6e":"adipisicing",
@@ -2122,7 +2123,7 @@
 									"start":"1998-08-25T02:58:40.163Z",
 									"links":[
 										{
-											"urn":"https://chLtGk.hjLmC-",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"hub",
 											"hreflang":"nuwqg-rtbq-sl-3i43-s-otwww-x-1-pqo",
 											"type":"nisi Lorem Ut incididunt ut",
@@ -2136,7 +2137,7 @@
 											}
 										},
 										{
-											"urn":"http://GMJNDHPEBNoaOoHjqEpcEiwxqGkBEjvK.kbiqcR",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"last",
 											"hreflang":"zh-xiang",
 											"uri":"http://SGCwnctBLxHFBCXJGJjJlUejvdjYDewo.dxpgaQhW",
@@ -2183,7 +2184,7 @@
 											"uri":"http://shzVXYRJXubxyjFUBqaHYzarM.osz"
 										},
 										{
-											"urn":"http://PAmtgaZNRU.dgfzqVEh",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"dataflow",
 											"hreflang":"ed-ehm-nfj-bbh-hsmg-zmwz2is",
 											"uri":"https://JfkfVybEOBXFoDrHjUT.bbce",
@@ -2217,7 +2218,7 @@
 									"title":"qui"
 								},
 								{
-									"urn":"http://ZzncSkTNEtLyaGuzw.vgp",
+									"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 									"rel":"describedby",
 									"titles":{
 										"sgn-BE-NL":"aliqua nulla laboris et"
@@ -2252,7 +2253,7 @@
 									"description":"nostrud",
 									"links":[
 										{
-											"urn":"http://HXzcfHKQnKzys.gnab",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"contents",
 											"titles":{
 												"gbrvzsr-39gu":"fugiat"
@@ -2293,7 +2294,7 @@
 							"name":"sed cillum",
 							"links":[
 								{
-									"urn":"https://bTYqvxpkdZCWWBTwN.wljtx",
+									"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 									"rel":"quis",
 									"uri":"https://pFXqc.ggrdI",
 									"hreflang":"zh-hakka",
@@ -2390,7 +2391,7 @@
 									"description":"non ut anim",
 									"links":[
 										{
-											"urn":"https://FdVBYNLhuMNpCsXQ.dcnmI",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"incididunt tempor elit",
 											"type":"ea fugiat incididunt amet pariatur",
 											"uri":"http://WHSFXIxNNCbAutErtrknwJpwwF.hgZ",
@@ -2438,7 +2439,7 @@
 									"hreflang":"sgn-BE-NL"
 								},
 								{
-									"urn":"http://MJszWcxwWLGfLbBxCck.vnmN",
+									"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 									"rel":"reprehenderit officia",
 									"uri":"https://yHySDmfDNbVlkAALnxHQLsUpXWBmNEDv.mxJ",
 									"type":"eiusmod quis",
@@ -2514,7 +2515,7 @@
 											}
 										},
 										{
-											"urn":"http://KEUcCGIFsmVBhCtBonSbkeshNn.vvlujTL",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"labore aute nostrud id consequat",
 											"uri":"http://zTGWpSXkRnUgjnchJR.ugnaHe0",
 											"hreflang":"czudvqd-plod-uu-e-d9xva49",
@@ -2552,7 +2553,7 @@
 									],
 									"links":[
 										{
-											"urn":"http://Rsj.hrV",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"sed incididunt",
 											"uri":"http://MZvbbskZhbQdZbQddCuvPZlsvYEWteZX.iwogiDu",
 											"title":"in nostrud occaecat",
@@ -2564,7 +2565,7 @@
 											}
 										},
 										{
-											"urn":"http://zPtswiEfBzJXGcBpLOCPiZDVDc.rxrYt",
+											"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 											"rel":"predecessor-version",
 											"uri":"http://cHMoDBqWseZkdkkHCO.hvs0",
 											"title":"Excepteur dolor sint",
@@ -2598,7 +2599,7 @@
 									"hreflang":"i-tay"
 								},
 								{
-									"urn":"http://yWcyOmljjGnGnSvEZLXsQuskQMjBnnuzm.amfqHf",
+									"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
 									"rel":"process",
 									"type":"nulla dolore aute in ut",
 									"title":"occaecat",
@@ -2912,7 +2913,6 @@
 				}
 			}
 		],
-		"schema":"https://SUrtI.ygbG",
 		"name":"tempor est sed aliqua nisi",
 		"links":[
 			{
