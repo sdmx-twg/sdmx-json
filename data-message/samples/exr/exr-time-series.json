@@ -1,6 +1,6 @@
 {
 	"meta":{
-		"schema":"https://raw.githubusercontent.com/sdmx-twg/sdmx-json/v2.1.0/data-message/tools/schemas/sdmx-json-data-schema.json",
+		"schema":"https://json.sdmx.org/2.1/sdmx-json-data-schema.json",
 		"id":"IT1001",
 		"prepared":"2018-03-11T14:30:47",
 		"test":true,

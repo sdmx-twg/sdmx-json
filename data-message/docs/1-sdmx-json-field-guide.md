@@ -43,7 +43,7 @@ nulled field and the absence of a field as the same thing.
 - Not all fields appear in all contexts. For example response with error status messages
 may not contain fields for data, dimensions and attributes.
 
-# Field Guide to SDMX-JSON Data Message 2.1.0 Objects (aligned with SDMX 3.1.0)
+# Field Guide to SDMX-JSON Data Message 2.1.0 Objects (aligned with SDMX 3.1)
 
 ## message
 
@@ -59,7 +59,7 @@ The properties data and errors CAN coexist in the same message.
 Example:
 
 	{
-		"$schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/sdmx-json-data-schema.json",
+		"$schema": "https://https://json.sdmx.org/2.1/sdmx-json-data-schema.json",
 		"meta": {
 			# meta object #
 		},
