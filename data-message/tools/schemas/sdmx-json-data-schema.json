@@ -30,7 +30,9 @@
 						"$ref":"#/$defs/dataSet"
 					}
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"errors":{
 			"description":"Array of statusInformation objects providing - when appropriate - more detail to the HTTP status codes in the RESTful SDMX web service responses.",
@@ -40,10 +42,11 @@
 			}
 		}
 	},
-	"additionalProperties":true,
 	"required":[
 		"meta"
 	],
+	"$ref":"#/$defs/specificationExtensions",
+	"unevaluatedProperties":false,
 	"$defs":{
 		"meta":{
 			"description":"A meta object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.",
@@ -113,7 +116,9 @@
 				"links":{
 					"$ref":"#/$defs/links"
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"party":{
 			"type":"object",
@@ -134,8 +139,8 @@
 					"description":"List of localised human-readable name of the party.",
 					"$ref":"#/$defs/localisedText"
 				},
-				"contact":{
-					"description":"Contact provides contact information for the party in regard to the transmission of the message.",
+				"contacts":{
+					"description":"Contacts provides contact information for the party in regard to the transmission of the message.",
 					"type":"array",
 					"items":{
 						"type":"object",
@@ -209,10 +214,14 @@
 									"format":"email"
 								}
 							}
-						}
+						},
+						"$ref":"#/$defs/specificationExtensions",
+						"unevaluatedProperties":false
 					}
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"localisedBestMatchText":{
 			"type":"string",
@@ -225,7 +234,8 @@
 				"^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$":{
 					"type":"string"
 				}
-			}
+			},
+			"unevaluatedProperties":false
 		},
 		"statusInformation":{
 			"description":"Used to provide status information with more detail to the HTTP status codes in the RESTful SDMX web service responses.",
@@ -258,7 +268,9 @@
 					"$ref":"#/$defs/links",
 					"description":"If appropriate, a collection of links to additional external resources for the status information."
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"links":{
 			"description":"Links field is an array of link objects. If appropriate, a collection of links to additional external resources for the header.",
@@ -379,7 +391,9 @@
 							"rel"
 						]
 					}
-				]
+				],
+				"$ref":"#/$defs/specificationExtensions",
+				"unevaluatedProperties":false
 			}
 		},
 		"structure":{
@@ -437,7 +451,8 @@
 							"uniqueItems":true
 						}
 					},
-					"additionalProperties":false
+					"$ref":"#/$defs/specificationExtensions",
+					"unevaluatedProperties":false
 				},
 				"measures":{
 					"type":"object",
@@ -450,7 +465,8 @@
 							"uniqueItems":true
 						}
 					},
-					"additionalProperties":false
+					"$ref":"#/$defs/specificationExtensions",
+					"unevaluatedProperties":false
 				},
 				"attributes":{
 					"type":"object",
@@ -484,7 +500,8 @@
 							"uniqueItems":true
 						}
 					},
-					"additionalProperties":false
+					"$ref":"#/$defs/specificationExtensions",
+					"unevaluatedProperties":false
 				},
 				"annotations":{
 					"type":"array",
@@ -519,10 +536,14 @@
 								"description":"Links field is an array of link objects. Also used to specify the Annotation URL which points to an external resource which may contain or supplement the annotation (using 'self' as relationship). If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly. If appropriate, a collection of links to additional external resources.",
 								"$ref":"#/$defs/links"
 							}
-						}
+						},
+						"$ref":"#/$defs/specificationExtensions",
+						"unevaluatedProperties":false
 					}
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"dimension":{
 			"type":"object",
@@ -575,7 +596,9 @@
 				"values":{
 					"$ref":"#/$defs/dimValues"
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"measure":{
 			"type":"object",
@@ -637,7 +660,9 @@
 				"values":{
 					"$ref":"#/$defs/compValues"
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"attribute":{
 			"type":"object",
@@ -704,7 +729,9 @@
 				"values":{
 					"$ref":"#/$defs/compValues"
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"dimFormat":{
 			"type":"object",
@@ -757,7 +784,9 @@
 				"sentinelValues":{
 					"$ref":"#/$defs/sentinelValues"
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"format":{
 			"type":"object",
@@ -821,7 +850,9 @@
 					"description":"Deprecated since SDMX 3.1. Instead, use the corresponding attribute or measure property.",
 					"type":"integer"
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"sentinelValues":{
 			"type":"array",
@@ -868,7 +899,9 @@
 					"descriptions":{
 						"$ref":"#/$defs/localisedText"
 					}
-				}
+				},
+				"$ref":"#/$defs/specificationExtensions",
+				"unevaluatedProperties":false
 			},
 			"minItems":1,
 			"uniqueItems":true
@@ -960,7 +993,9 @@
 							"minimum":0
 						}
 					}
-				}
+				},
+				"$ref":"#/$defs/specificationExtensions",
+				"unevaluatedProperties":false
 			},
 			"minItems":1,
 			"uniqueItems":true
@@ -1068,7 +1103,9 @@
 									"minimum":0
 								}
 							}
-						}
+						},
+						"$ref":"#/$defs/specificationExtensions",
+						"unevaluatedProperties":false
 					}
 				]
 			},
@@ -1300,7 +1337,9 @@
 				"links":{
 					"$ref":"#/$defs/links"
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"valueArray":{
 			"oneOf":[
@@ -1437,7 +1476,9 @@
 						"primaryMeasure"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"dimensionDataType":{
 			"description":"dimensionDataType provides an enumerated list of the types of data formats allowed as the for the representation of dimensions, since SDMX 3.0.0 also including GeospatialInformation. However, time dimensions only allow for 'ObservationalTimePeriod', 'StandardTimePeriod', 'BasicTimePeriod', 'GregorianTimePeriod', 'GregorianYear', 'GregorianYearMonth', 'GregorianDay', 'ReportingTimePeriod', 'ReportingYear', 'ReportingSemester', 'ReportingTrimester', 'ReportingQuarter', 'ReportingMonth', 'ReportingWeek', 'ReportingDay', 'DateTime' and 'TimeRange'.",
@@ -1549,6 +1590,12 @@
 					"const":"unbounded"
 				}
 			]
+		},
+		"specificationExtensions":{
+			"$comment":"While the SDMX-JSON Specification tries to accommodate most use cases, additional data can be added to extend the specification at certain points. The extensions properties are implemented as patterned fields that are always prefixed by x-. Extensions are one of the best ways to prove the viability of proposed additions to the specification. It is therefore RECOMMENDED that implementations be designed for extensibility to support community experimentation. Support for any one extension is OPTIONAL, and support for one extension does not imply support for others.",
+			"patternProperties":{
+				"^x-":true
+			}
 		}
 	}
 }

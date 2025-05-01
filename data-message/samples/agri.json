@@ -14,13 +14,13 @@
 				"en":"National Institute of Statistics of Cambodia"
 			}
 		},
-		"receiver":{
+		"receivers":[{
 			"id":"IMF",
 			"name":"International Monetary Fund",
 			"names":{
 				"en":"International Monetary Fund"
 			}
-		},
+		}],
 		"links":[
 			{
 				"href":"http://ws-root/data/MA_545,MILLED_RICE,1.0/ASIKHM002+ASIKHM001../?dimensionAtObservation=AllDimensions&startPeriod=2013&endPeriod=2018",
@@ -191,7 +191,9 @@
 								"en":"Frequency"
 							},
 							"keyPosition":2,
-							"role":"FREQ",
+							"roles":[
+								"FREQ"
+							],
 							"values":[
 								{
 									"id":"A",
@@ -228,7 +230,7 @@
 								"en":"Reference area"
 							},
 							"keyPosition":0,
-							"role":[
+							"roles":[
 								"REF_AREA"
 							],
 							"values":[
@@ -301,7 +303,7 @@
 								"en":"Time Period"
 							},
 							"keyPosition":3,
-							"role":[
+							"roles":[
 								"TIME_PERIOD"
 							],
 							"values":[
@@ -357,7 +359,6 @@
 							"descriptions":{
 								"en":"Description for the measure"
 							},
-							"role":"PRIMARY",
 							"isMandatory":true,
 							"format":{
 								"dataType":"Double",
@@ -376,7 +377,7 @@
 							"names":{
 								"en":"Unit of measure"
 							},
-							"role":[
+							"roles":[
 								"UNIT_MEASURE"
 							],
 							"relationship":{
@@ -400,7 +401,7 @@
 							"names":{
 								"en":"Unit multiplier"
 							},
-							"role":[
+							"roles":[
 								"UNIT_MULT"
 							],
 							"relationship":{
@@ -424,7 +425,7 @@
 							"names":{
 								"en":"Base Period"
 							},
-							"role":[
+							"roles":[
 								"BASE_PER"
 							],
 							"relationship":{
@@ -448,7 +449,7 @@
 							"names":{
 								"en":"Preferred scale"
 							},
-							"role":[
+							"roles":[
 								"PREF_SCALE"
 							],
 							"relationship":{
@@ -472,7 +473,7 @@
 							"names":{
 								"en":"Decimals"
 							},
-							"role":[
+							"roles":[
 								"DECIMALS"
 							],
 							"default":"1",

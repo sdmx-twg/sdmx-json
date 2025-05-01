@@ -1,5 +1,5 @@
 {
-	"$schema":"https://json.sdmx.org/2.1/sdmx-json-metadata-schema.json",
+	"$schema":"https://json.sdmx.org/2.1/sdmx-json-data-schema.json",
 	"errors":[
 		{
 			"code":90483457.7170785,
@@ -2658,7 +2658,7 @@
 				"zh-min":"exercitation irure"
 			},
 			"name":"ea Ut mollit",
-			"contact":[
+			"contacts":[
 				{
 					"name":"ut",
 					"departments":{
@@ -2746,7 +2746,7 @@
 			{
 				"id":"o",
 				"name":"consectetur reprehenderit laboris quis",
-				"contact":[
+				"contacts":[
 					{
 						"name":"esse mollit ad",
 						"role":"dolore",
@@ -2830,7 +2830,7 @@
 			},
 			{
 				"id":"91",
-				"contact":[
+				"contacts":[
 					{
 						"name":"officia ex dolor aliquip",
 						"uris":[

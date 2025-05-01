@@ -1,6 +1,7 @@
 {
 	"$schema":"https://json.sdmx.org/2.1/sdmx-json-metadata-schema.json",
 	"meta":{
+		"x-id":"vLqrDQjsgl",
 		"id":"vLqrDQjsgl",
 		"prepared":"1987-01-23T23:00:00.0Z",
 		"sender":{
@@ -53,7 +54,7 @@
 						"i-navajo":"et"
 					},
 					"department":"sed elit magna",
-					"commodo3f1":true
+					"x-commodo3f1":true
 				},
 				{
 					"names":{
@@ -76,14 +77,14 @@
 						"dEeSrd01NNkk7@WTDVLQzjhzrzz.un"
 					],
 					"departments":{
-						"description":"Department is a humain-readable designation of the organisational structure by a linguistic expression, within which the contact person works."
+						"en":"Department is a humain-readable designation of the organisational structure by a linguistic expression, within which the contact person works."
 					},
-					"nostrud_e39":51481831,
-					"ametb":"ipsum magna laboris dolor ad",
-					"nisi_f2f":false,
-					"commodo1c":-87628480.2731219,
-					"ea_eb":"commodo anim ut",
-					"dolor_36c":true
+					"x-nostrud_e39":51481831,
+					"x-ametb":"ipsum magna laboris dolor ad",
+					"x-nisi_f2f":false,
+					"x-commodo1c":-87628480.2731219,
+					"x-ea_eb":"commodo anim ut",
+					"x-dolor_36c":true
 				}
 			],
 			"name":"Name is a human-readable name of the party.",
@@ -102,6 +103,7 @@
 	"data":{
 		"metadataSets":[
 			{
+				"x-id":"R9Xv9mJ",
 				"id":"R9Xv9mJ",
 				"agencyID":"L9GLGv6Zd.znZWK_kQy",
 				"name":"ex laboris ea ut",
@@ -115,6 +117,7 @@
 				],
 				"attributes":[
 					{
+						"x-id":"R9Xv9mJ",
 						"id":"c$",
 						"value":-63489494.96628009
 					},
@@ -130,7 +133,7 @@
 						"value":null,
 						"annotations":[
 							{
-								"url":"https://IBIeqmcUgwLWzQ.icoefs4FCdKaLKsunIWfsbhEuNOuuxV+,hltC8uWO-jfxneYyd",
+								"x-url":"https://IBIeqmcUgwLWzQ.icoefs4FCdKaLKsunIWfsbhEuNOuuxV+,hltC8uWO-jfxneYyd",
 								"texts":{
 									"atu-nvc-mowl-255-5e8lsxd-sov2ii-uh5gxyi2-x-1aed-lzcsl8-4nqea-q6crovpf-5-6memcz6-02-5edoi2x-lp10iv3d-t2-i6b":"amet",
 									"no-bok":"sint",
@@ -164,7 +167,7 @@
 							{
 								"title":"dolor deserunt Excepteur",
 								"value":"AnnotationValue holds a string containing the non-localised value of the annotation.",
-								"url":"https://svBdMnhiFtp.sevotsS1SvR9JeW7BIvWRu5NSOUngtpUnpG1jw7oe2LjrcVv",
+								"x-url":"https://svBdMnhiFtp.sevotsS1SvR9JeW7BIvWRu5NSOUngtpUnpG1jw7oe2LjrcVv",
 								"id":"sit sint anim ex ut",
 								"texts":{
 									"byo-uocn-fw57o-ub88pn-58g7":"ex reprehenderit dolor ullamco",
@@ -193,7 +196,7 @@
 									"hshue-500":"non consectetur",
 									"x-3pigimt-6":"elit nostrud sint in"
 								},
-								"url":"http://bFpYAHoOglGSCsCrftElEDT.himkB1VNfHZY8LTzr,g",
+								"x-url":"http://bFpYAHoOglGSCsCrftElEDT.himkB1VNfHZY8LTzr,g",
 								"value":"AnnotationValue holds a string containing the non-localised value of the annotation.",
 								"id":"id sint nostrud mollit dolor",
 								"links":[
@@ -206,12 +209,13 @@
 									}
 								],
 								"text":"ullamco adipisicing",
-								"fugiat349":true,
-								"ipsum_d":86989890.13537076
+								"x-fugiat349":true,
+								"x-ipsum_d":86989890.13537076
 							}
 						],
 						"attributes":[
 							{
+								"x-id":"iJ1zCkaZ",
 								"format":{
 									"interval":-96836005.30440177,
 									"minLength":76911443,
@@ -221,22 +225,22 @@
 									"timeInterval":"P8705522M",
 									"maxLength":7448054,
 									"startTime":"1950-02-17T23:00:00.0Z",
-									"sunt_6":32025156,
-									"aliquip_e":true,
-									"sit_f01":"ex culpa",
-									"sit_2":-80939295,
-									"velit48d":35108271,
-									"incididuntb7":"laborum",
-									"elit_f96":"ad",
-									"doa63":-80332
+									"x-sunt_6":32025156,
+									"x-aliquip_e":true,
+									"x-sit_f01":"ex culpa",
+									"x-sit_2":-80939295,
+									"x-velit48d":35108271,
+									"x-incididuntb7":"laborum",
+									"x-elit_f96":"ad",
+									"x-doa63":-80332
 								},
 								"id":"iJ1zCkaZ",
 								"annotations":[
 									{
 										"text":"AnnotationText holds a string containing a language-specific text of the annotation.",
-										"sit221":74185801.47354543,
-										"Ut89":"ex officia nulla sit",
-										"laboris2":59206023
+										"x-sit221":74185801.47354543,
+										"x-Ut89":"ex officia nulla sit",
+										"x-laboris2":59206023
 									},
 									{
 										"links":[
@@ -253,15 +257,15 @@
 										"value":"AnnotationValue holds a string containing the non-localised value of the annotation.",
 										"type":"velit",
 										"texts":{
-											"description":"AnnotationText holds a string containing the language-specific text of the annotation."
+											"en":"AnnotationText holds a string containing the language-specific text of the annotation."
 										},
-										"url":"http://H.rafgeRwgbqxcXCNlEanEK0LGQmJ+tH6aBozc9SN4l0P4"
+										"x-url":"http://H.rafgeRwgbqxcXCNlEanEK0LGQmJ+tH6aBozc9SN4l0P4"
 									},
 									{
 										"type":"minim eu",
-										"url":"http://UyHfCJSvzSElFafSyw.owltleewZTsPWuQB1kgi5QJ-Z3dCKn",
+										"x-url":"http://UyHfCJSvzSElFafSyw.owltleewZTsPWuQB1kgi5QJ-Z3dCKn",
 										"texts":{
-											"description":"AnnotationText holds a string containing the language-specific text of the annotation."
+											"en":"AnnotationText holds a string containing the language-specific text of the annotation."
 										},
 										"title":"magna",
 										"text":"AnnotationText holds a string containing a language-specific text of the annotation.",
@@ -278,12 +282,12 @@
 										"id":"officia in esse non"
 									},
 									{
-										"ut36":-60534740,
-										"veniamb83":"culpa est in adipisicing nisi",
-										"pariaturaa":-1054913,
-										"pariatur_c3d":"aliqua sed laborum enim",
-										"ad_c46":-33977717,
-										"nulla7":21737303.685464233
+										"x-ut36":-60534740,
+										"x-veniamb83":"culpa est in adipisicing nisi",
+										"x-pariaturaa":-1054913,
+										"x-pariatur_c3d":"aliqua sed laborum enim",
+										"x-ad_c46":-33977717,
+										"x-nulla7":21737303.685464233
 									},
 									{
 										"links":[
@@ -295,12 +299,12 @@
 												"uri":"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP"
 											}
 										],
-										"ullamco_4":"irure officia nisi amet et",
-										"culpa6f":-8360692,
-										"do_":true,
-										"fugiat_bd":"ex id",
-										"sed_70":-52802993,
-										"proident_f73":-16820395
+										"x-ullamco_4":"irure officia nisi amet et",
+										"x-culpa6f":-8360692,
+										"x-do_":true,
+										"x-fugiat_bd":"ex id",
+										"x-sed_70":-52802993,
+										"x-proident_f73":-16820395
 									}
 								]
 							}
@@ -315,7 +319,7 @@
 				],
 				"names":{
 					"x-s2abq-b-a1os6j85-lusxq":"proident",
-					"jfq-csn-odc-azj-x-ntekx7q-k926m-0o-cboi-6m-2kerpom6-xifp":"elit ut Excepteur fugiat nisi",
+					"x-jfq-csn-odc-azj-x-ntekx7q-k926m-0o-cboi-6m-2kerpom6-xifp":"elit ut Excepteur fugiat nisi",
 					"art-lojban":"amet Duis",
 					"x-vybcja3t-0q":"aliquip ullamco do adipisicing consectetur",
 					"x-3x0-ug7v":"mollit exercitation esse aute elit",
@@ -335,20 +339,20 @@
 				"validFrom":"1978-04-19T22:00:00.0Z",
 				"annotations":[
 					{
-						"voluptate8a":"cillum Lorem",
-						"magna435":94402112,
-						"reprehenderit8c2":-25049738.77469623,
-						"ullamco24":true,
-						"ut107":"enim"
+						"x-voluptate8a":"cillum Lorem",
+						"x-magna435":94402112,
+						"x-reprehenderit8c2":-25049738.77469623,
+						"x-ullamco24":true,
+						"x-ut107":"enim"
 					},
 					{
 						"text":"AnnotationText holds a string containing a language-specific text of the annotation.",
-						"url":"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP",
+						"x-url":"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP",
 						"id":"esse culpa nulla",
-						"occaecat__b8":false,
-						"in1ff":50956029,
-						"qui769":-13023449.11207202,
-						"in_9dc":76320591
+						"x-occaecat__b8":false,
+						"x-in1ff":50956029,
+						"x-qui769":-13023449.11207202,
+						"x-in_9dc":76320591
 					},
 					{
 						"texts":{
@@ -367,28 +371,28 @@
 								"uri":"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP"
 							}
 						],
-						"id_c86":"Lorem et eu sed",
-						"veniam_8":true,
-						"officiabcb":-40856410.20916628,
-						"in_8":"et",
-						"amet_":-68730083,
-						"in4b_":50989549.93598598,
-						"laborum38":false,
-						"ipsumc2a":-59064383.35590405,
-						"ina7":"ullamco occaecat Ut"
+						"x-id_c86":"Lorem et eu sed",
+						"x-veniam_8":true,
+						"x-officiabcb":-40856410.20916628,
+						"x-in_8":"et",
+						"x-amet_":-68730083,
+						"x-in4b_":50989549.93598598,
+						"x-laborum38":false,
+						"x-ipsumc2a":-59064383.35590405,
+						"x-ina7":"ullamco occaecat Ut"
 					},
 					{
 						"value":"AnnotationValue holds a string containing the non-localised value of the annotation.",
 						"title":"elit consectetur Excepteur",
-						"reprehenderit50":true,
-						"cupidatat701":"occaecat in mollit eiusmod ea",
-						"adipisicing72":59472691.3244544,
-						"sit2a9":1795588,
-						"reprehenderit4":-12828450,
-						"non_e3":30340807.72048208,
-						"fugiat0":"ut cupidatat id sunt",
-						"dolore_06":"sunt veniam eiusmod voluptate dolor",
-						"commodo7":false
+						"x-reprehenderit50":true,
+						"x-cupidatat701":"occaecat in mollit eiusmod ea",
+						"x-adipisicing72":59472691.3244544,
+						"x-sit2a9":1795588,
+						"x-reprehenderit4":-12828450,
+						"x-non_e3":30340807.72048208,
+						"x-fugiat0":"ut cupidatat id sunt",
+						"x-dolore_06":"sunt veniam eiusmod voluptate dolor",
+						"x-commodo7":false
 					}
 				],
 				"publicationYear":"0623Z",
@@ -399,6 +403,7 @@
 				"validTo":"1998-02-04T23:00:00.0Z"
 			},
 			{
+				"x-id":"rR6ZPy5nC",
 				"id":"rR6ZPy5nC",
 				"agencyID":"rR6ZPy5nC.emspV.EjI-D5Y4.Js.bCRoEjASYkr.CajY-ze-",
 				"name":"sunt adipisicing consequat",
@@ -413,7 +418,7 @@
 					}
 				],
 				"descriptions":{
-					"anuk-yyoq-gh1uf99u-af35puy-g3a0d39-1yp6-80t3":"aliquip fugiat eiusmod laboris commodo",
+					"x-anuk-yyoq-gh1uf99u-af35puy-g3a0d39-1yp6-80t3":"aliquip fugiat eiusmod laboris commodo",
 					"en-GB-oed":"ex aliqua"
 				},
 				"validFrom":"1947-01-23T23:00:00.0Z",
@@ -439,7 +444,7 @@
 				"annotations":[
 					{
 						"type":"sed fugiat deserunt occaecat esse",
-						"url":"http://syjB.rciKH7fae86XIzyy9i2XWZI+xaArD8wEFPx8Nz8PeOLJ",
+						"x-url":"http://syjB.rciKH7fae86XIzyy9i2XWZI+xaArD8wEFPx8Nz8PeOLJ",
 						"value":"AnnotationValue holds a string containing the non-localised value of the annotation.",
 						"texts":{
 							"en":"AnnotationText holds a string containing the language-specific text of the annotation."
@@ -454,8 +459,8 @@
 								"uri":"http://QPcbmFRfuzhbS.jggq5DbpxGrPr1Tmlgr99v8zWC4qTUfpcN18UhP"
 							}
 						],
-						"dolore_2":"ut",
-						"mollitae":"id"
+						"x-dolore_2":"ut",
+						"x-mollitae":"id"
 					},
 					{
 						"value":"AnnotationValue holds a string containing the non-localised value of the annotation.",
@@ -471,22 +476,22 @@
 						"texts":{
 							"en":"AnnotationText holds a string containing the language-specific text of the annotation."
 						},
-						"url":"http://plONsTL.nmksJK9LjWaWLnlsoAnI,ZYQ3V.rtXq+JIN3ctGjB2xOK36,h.JFQV,",
+						"x-url":"http://plONsTL.nmksJK9LjWaWLnlsoAnI,ZYQ3V.rtXq+JIN3ctGjB2xOK36,h.JFQV,",
 						"title":"laboris irure",
 						"type":"aliquip"
 					},
 					{
 						"title":"eu adipisicing id",
-						"url":"http://ziJWffLCpxwAuMEHzxfsdNQeQhZ.mmqqX+FlE5xV+TQYPLydTfayPeXfx1IuY,Mih84Lsh3wZd-DGY0",
+						"x-url":"http://ziJWffLCpxwAuMEHzxfsdNQeQhZ.mmqqX+FlE5xV+TQYPLydTfayPeXfx1IuY,Mih84Lsh3wZd-DGY0",
 						"texts":{
-							"description":"AnnotationText holds a string containing the language-specific text of the annotation."
+							"en":"AnnotationText holds a string containing the language-specific text of the annotation."
 						},
-						"dolore_a":16762241.454447761,
-						"id3":true,
-						"dolor_5eb":52732717.554404736,
-						"ex54":67820530,
-						"tempor83":-23871523,
-						"enim1":-76044580.64130814
+						"x-dolore_a":16762241.454447761,
+						"x-id3":true,
+						"x-dolor_5eb":52732717.554404736,
+						"x-ex54":67820530,
+						"x-tempor83":-23871523,
+						"x-enim1":-76044580.64130814
 					}
 				],
 				"reportingEnd":"-0349-12+14:00",
@@ -494,10 +499,11 @@
 				"description":"ullamco nisi ut in"
 			}
 		],
-		"adipisicing7a":true
+		"x-adipisicing7a":true
 	},
 	"errors":[
 		{
+			"x-code":96529995.76208287,
 			"code":96529995.76208287,
 			"title":"Title contains the title of the message, in best-match language value. A short, human-readable localised summary of the status that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization.",
 			"details":{

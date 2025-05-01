@@ -60,7 +60,7 @@
 								"en":"Frequency"
 							},
 							"keyPosition":0,
-							"role":"FREQ",
+							"roles":["FREQ"],
 							"values":[
 								{
 									"id":"D",
@@ -157,7 +157,7 @@
 							"names":{
 								"en":"Time period or range"
 							},
-							"role":"TIME_PERIOD",
+							"roles":["TIME_PERIOD"],
 							"keyPosition":5,
 							"values":[
 								{
@@ -199,7 +199,7 @@
 									
 								}
 							},
-							"role":"TIME_FORMAT",
+							"roles":["TIME_FORMAT"],
 							"default":"P1D",
 							"values":[
 								{
@@ -231,7 +231,7 @@
 									"EXR_SUFFIX"
 								]
 							},
-							"role":"TITLE",
+							"roles":["TITLE"],
 							"values":[
 								{
 									"value":"New Zealand dollar (NZD)"
@@ -250,7 +250,7 @@
 							"relationship":{
 								"primaryMeasure":"OBS_VALUE"
 							},
-							"role":"OBS_STATUS",
+							"roles":["OBS_STATUS"],
 							"values":[
 								{
 									"id":"A",

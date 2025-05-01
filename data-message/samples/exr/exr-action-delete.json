@@ -60,7 +60,7 @@
 							"names":{
 								"en":"Frequency"
 							},
-							"role":"FREQ",
+							"roles":["FREQ"],
 							"keyPosition":0,
 							"values":[
 								{
@@ -131,7 +131,7 @@
 							"names":{
 								"en":"Time period or range"
 							},
-							"role":"TIME_PERIOD",
+							"roles":["TIME_PERIOD"],
 							"keyPosition":5,
 							"values":[
 								{
@@ -198,7 +198,7 @@
 								"dataflow":{
 								}
 							},
-							"role":"TIME_FORMAT",
+							"roles":["TIME_FORMAT"],
 							"default":"P1D",
 							"values":[
 								{
@@ -230,7 +230,7 @@
 									"EXR_SUFFIX"
 								]
 							},
-							"role":"TITLE",
+							"roles":["TITLE"],
 							"values":[
 								{
 									"value":"New Zealand dollar (NZD)"

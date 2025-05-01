@@ -351,7 +351,9 @@
 						"description":"userDefinedOperatorScheme ..."
 					}
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"errors":{
 			"description":"Array of statusInformation objects providing - when appropriate - more detail to the HTTP status codes in the RESTful SDMX web service responses.",
@@ -361,10 +363,11 @@
 			}
 		}
 	},
-	"additionalProperties":true,
 	"required":[
 		"meta"
 	],
+	"$ref":"#/$defs/specificationExtensions",
+	"unevaluatedProperties":false,
 	"$defs":{
 		"meta":{
 			"description":"A meta object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it. Additional properties such as for 'copyright' information can be added.",
@@ -435,7 +438,9 @@
 				"id",
 				"prepared",
 				"sender"
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"party":{
 			"description":"Sender contains information about the party that is transmitting the message.",
@@ -455,7 +460,7 @@
 					"$ref":"#/$defs/localisedText"
 				},
 				"contacts":{
-					"description":"Contact provides contact information for the party in regard to the transmission of the message.",
+					"description":"Contacts provides contact information for the party in regard to the transmission of the message.",
 					"type":"array",
 					"minItems":1,
 					"items":{
@@ -465,7 +470,9 @@
 			},
 			"required":[
 				"id"
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"statusInformation":{
 			"description":"Used to provide status information with more detail to the HTTP status codes in the RESTful SDMX web service responses.",
@@ -498,7 +505,9 @@
 					"$ref":"#/$defs/links",
 					"description":"If appropriate, a collection of links to additional external resources for the status information."
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"links":{
 			"description":"Links field is an array of link objects. If appropriate, a collection of links to additional resources, including external resources.",
@@ -678,7 +687,9 @@
 							"rel"
 						]
 					}
-				]
+				],
+				"$ref":"#/$defs/specificationExtensions",
+				"unevaluatedProperties":false
 			}
 		},
 		"localisedBestMatchText":{
@@ -692,7 +703,8 @@
 				"^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$":{
 					"type":"string"
 				}
-			}
+			},
+			"unevaluatedProperties":false
 		},
 		"contactType":{
 			"description":"ContactType describes the structure of a contact's details.",
@@ -767,7 +779,9 @@
 						"format":"email"
 					}
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"idType":{
 			"description":"IDType provides a type which is used for restricting the characters in codes and IDs throughout all SDMX-ML messages. Valid characters include A-Z, a-z, @, 0-9, _, -, $. Regex: [A-Za-z0-9_@$-]+",
@@ -806,7 +820,9 @@
 					"description":"Links field is an array of link objects. Also used to specify the Annotation URL which points to an external resource which may contain or supplement the annotation (using 'self' as relationship). If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly. If appropriate, a collection of links to additional external resources.",
 					"$ref":"#/$defs/links"
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"AnnotationsType":{
 			"description":"AnnotationsType is a reusable element the provides for a collection of annotations. It has been made global so that restrictions of types that extend AnnotableType my reference it.",
@@ -1095,7 +1111,9 @@
 					"timeRange",
 					"values"
 				]
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"DataComponentValueSetType":{
 			"description":"DataComponentValueSetType defines the structure for providing values for a data attributes, measures, or metadata attributes. If no values are provided, the component is implied to include/excluded from the region in which it is defined, with no regard to the value of the component. Note that for metadata attributes which occur within other metadata attributes, a nested identifier can be provided. For example, a value of CONTACT.ADDRESS.STREET refers to the metadata attribute with the identifier STREET which exists in the ADDRESS metadata attribute in the CONTACT metadata attribute, which is defined at the root of the report structure.",
@@ -1146,7 +1164,9 @@
 					"timeRange",
 					"values"
 				]
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"BasicComponentDataType":{
 			"description":"BasicComponentDataType provides an enumerated list of the types of characters allowed in the dataType attribute for all non-target object components.",
@@ -1270,7 +1290,9 @@
 					"timeRange",
 					"values"
 				]
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"CubeRegionType":{
 			"description":"CubeRegionType defines the structure of a data cube region. This is based on the abstract RegionType and simply refines the key and attribute values to conform with what is applicable for dimensions and attributes, respectively. See the documentation of the base type for more details on how a region is defined.",
@@ -1304,7 +1326,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"DataKeyType":{
 			"description":"DataKeyType is a region which defines a distinct full or partial data key. The key consists of a set of values, each referencing a dimension and providing a single value for that dimension. The purpose of the key is to define a subset of a data set (i.e. the observed value and data attribute) which have the dimension values provided in this definition. Any dimension not stated explicitly in this key is assumed to be wild carded, thus allowing for the definition of partial data keys.",
@@ -1337,7 +1361,9 @@
 				"validTo":{
 					"$ref":"#/$defs/StandardTimePeriodType"
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"DataKeyValueType":{
 			"description":"DataKeyValueType is a type for providing a dimension value for the purpose of defining a distinct data key. Only a single value can be provided for the dimension.",
@@ -1390,7 +1416,9 @@
                         "values"
                     ]
                 }
-            ]
+            ],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"DataType":{
 			"description":"DataTypeType provides an enumerated list of the types of data formats allowed as the for the representation of an object.",
@@ -1496,7 +1524,9 @@
 					"timeRange",
 					"values"
 				]
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"SimpleComponentValueType":{
 			"description":"SimpleComponentValueType contains a simple value for a component, and if that value is from a code list, the ability to indicate that child codes in a simple hierarchy are part of the value set of the component for the region.",
@@ -1527,7 +1557,9 @@
 						"validTo":{
 							"$ref":"#/$defs/StandardTimePeriodType"
 						}
-					}
+					},
+					"$ref":"#/$defs/specificationExtensions",
+					"unevaluatedProperties":false
 				}
 			]
 		},
@@ -1556,7 +1588,9 @@
 						"validTo":{
 							"$ref":"#/$defs/StandardTimePeriodType"
 						}
-					}
+					},
+					"$ref":"#/$defs/specificationExtensions",
+					"unevaluatedProperties":false
 				}
 			]
 		},
@@ -1583,7 +1617,9 @@
 							"type":"string",
 							"pattern":"^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$"
 						}
-					}
+					},
+					"$ref":"#/$defs/specificationExtensions",
+					"unevaluatedProperties":false
 				}
 			]
 		},
@@ -1616,7 +1652,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"NestedIDType":{
 			"description":"NestedIDType is the least restrictive form of an identifier used throughout all SDMX-ML messages. It allows for a hierarchical identifier, with each portion separated by the '.' character. For the identifier portions, valid characters include A-Z, a-z, @, 0-9, _, -, $.",
@@ -1792,7 +1830,9 @@
 			},
 			"required":[
 				"period"
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"TimeRangeValueType":{
 			"description":"TimeRangeValueType allows a time period value to be expressed as a range. It can be expressed as the period before a period, after a period, or between two periods. Each of these properties can specify their inclusion in regards to the range.",
@@ -1844,7 +1884,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"VersionType":{
 			"description":"VersionType is used to communicate version information. The format is restricted to allow for simple incrementing and sorting of version number. The version consists of an unlimited set of numeric components, separated by the '.' character. When processing version, each numeric component (the number preceding and following any '.' character) should be parsed as an integer. Thus, a version of 1.3 and 1.03 would be equivalent, as both the '3' component and the '03' component would parse to an integer value of 3.",
@@ -1886,7 +1928,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"AgencyType":{
 			"description":"AgencyType defines the structure of an agency description. The contacts defined for the organisation are specific to the agency role the organisation is serving.",
@@ -1909,7 +1953,9 @@
 						"id"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"MetadataConstraintAttachmentType":{
 			"description":"MetadataConstraintAttachmentType restricts the base ConstraintAttachmentType to only allow artefacts related to metadata.",
@@ -1974,7 +2020,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"MetadataConstraintType":{
 			"description":"MetadataConstraintType defines the structure of a metadata constraint, which specifies a sub set of the definition of the allowable content of a metadata set. A metadata constraint can specify allowed attribute values for metadata described by the constrained artefact. The constraint attachment is restricted to constrainable artefacts related to metadata, and the only possible role is 'Allowed'. Unless the artefact is returned as a stub, it must contain the 'role' property.",
@@ -2000,7 +2048,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"AttributeListType":{
 			"description":"AttributeListType describes the attribute descriptor for the data structure definition.",
@@ -2045,7 +2095,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"MetadataAttributeListType":{
 			"description":"MetadataAttributeListType describes the structure of a meta data attribute list. It comprises a set of metadata attributes that can be defined as a hierarchy.",
@@ -2077,7 +2129,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"MetadataAttributeUsageType":{
 			"description":"MetadataAttributeUsageType defines the structure of how a metadata attribute is used in a data structure. This is a local reference to a metadata attribute from the metadata structure referenced by the data structure. An attribute relationship can be defined in order to describe the relationship of the metadata attribute to the data structure components.",
@@ -2106,7 +2160,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"AttributeRelationshipType":{
 			"description":"AttributeRelationship defines the structure for stating the relationship between an attribute and other data structure definition components.",
@@ -2170,7 +2226,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"AttributeType":{
 			"description":"AttributeType describes the structure of a data attribute, which is defined as a characteristic of an object or entity. The attribute takes its semantic, and in some cases it representation, from its concept identity. An attribute can be coded by referencing a code list from its coded local representation. It can also specify its text format, which is used as the representation of the attribute if a coded representation is not defined. Neither the coded or uncoded representation are necessary, since the attribute may take these from the referenced concept. An attribute specifies its relationship with other data structure components and is given an assignment status. These two properties dictate where in a data message the attribute will be attached, and whether or not the attribute will be required to be given a value. A set of roles defined in concept scheme can be assigned to the attribute.",
@@ -2223,7 +2281,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"BasicComponentTextFormatType":{
 			"description":"BasicComponentTextFormatType is a restricted version of the TextFormatType that restricts the text type to the representations allowed for all components except for target objects.",
@@ -2285,7 +2345,9 @@
 						"description":"SentinelValue defines a value that has a special meaning within the text format representation of a component."
 					}
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"CategorisationType":{
 			"description":"CategorisationType defines the structure for a categorisation. A source object is referenced via an object reference and the target category is referenced via the target category.",
@@ -2306,7 +2368,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"CategorySchemeMapType":{
 			"description":"CategorySchemeMapType defines the structure of a map which identifies relationships between categories in different category schemes. Unless the artefact is returned as a stub, it must contain the 'source' and 'target' properties.",
@@ -2334,7 +2398,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"CategorySchemeType":{
 			"description":"CategorySchemeType describes the structure of a category scheme. A category scheme is the descriptive information for an arrangement or division of categories into groups based on characteristics, which the objects have in common. This provides for a simple, leveled hierarchy or categories.",
@@ -2359,7 +2425,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"CategoryType":{
 			"description":"CategoryType describes the details of a category. A category is defined as an item at any level in a classification. The Category element represents a set of nested categories which are child categories.",
@@ -2382,7 +2450,9 @@
 						"id"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"CodeDataType":{
 			"description":"CodeDataType is a restriction of the basic data types that are applicable to codes. Although some of the higher level time period formats are perimitted, it should be noted that any value which contains time (which includes a time zone offset) is not allowable as a code identifier.",
@@ -2425,6 +2495,28 @@
 		},
 		"CodeType":{
 			"description":"CodeType describes the structure of a code. A code is defined as a language independent set of letters, numbers or symbols that represent a concept whose meaning is described in a natural language. Presentational information not present may be added through the use of annotations.",
+			"type":"object",
+			"allOf":[
+				{
+					"$ref":"#/$defs/NameableType"
+				},
+				{
+					"properties":{
+						"parent":{
+							"$ref":"#/$defs/idType",
+							"description":"Parent provides the ability to describe simple hierarchies within a single codelist, by referencing the id value of another code in the same codelist."
+						}
+					},
+					"required":[
+						"id"
+					]
+				}
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
+		},
+		"CodeTypeWithoutExtensions":{
+			"description":"This special type does not restrict additional properties because it is inherited by other objects that should allow extensions preceeded by 'x-'. CodeType describes the structure of a code. A code is defined as a language independent set of letters, numbers or symbols that represent a concept whose meaning is described in a natural language. Presentational information not present may be added through the use of annotations.",
 			"type":"object",
 			"allOf":[
 				{
@@ -2489,7 +2581,8 @@
 					"type":"string"
 				}
 			},
-			"additionalProperties":false
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"CodelistType":{
 			"description":"CodelistType defines the structure of a codelist. A codelist is defined as a list from which some statistical concepts (coded concepts) take their values.",
@@ -2522,7 +2615,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"GeographicCodelistType":{
 			"description":"GeographicCodelistType defines the sturcture of a geographic codelist. It comprises a set of GeoFeatureSetCodes, by adding a value in the Code that follows a pattern to represent a geo feature set. Unless the artefact is returned as a stub, it must contain the 'geoType' property.",
@@ -2546,7 +2641,7 @@
 							"items":{
 								"allOf":[
 									{
-										"$ref":"#/$defs/CodeType"
+										"$ref":"#/$defs/CodeTypeWithoutExtensions"
 									},
 									{
 										"required":[
@@ -2558,7 +2653,9 @@
 											}
 										}
 									}
-								]
+								],
+								"$ref":"#/$defs/specificationExtensions",
+								"unevaluatedProperties":false
 							}
 						},
 						"codelistExtensions":{
@@ -2571,7 +2668,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"GeoGridCodelistType":{
 			"description":"GeoGridCodelistType defines the structure of a geographic grid code list. These define a geographical grid composed of cells representing regular squared portions of the Earth. Unless the artefact is returned as a stub, it must contain the 'geoType' and 'gridDefinition' properties.",
@@ -2600,7 +2699,7 @@
 								"description":"GeoGridCode is a code that represents a geographic grid cell that belongs to a specific grid definition.",
 								"allOf":[
 									{
-										"$ref":"#/$defs/CodeType"
+										"$ref":"#/$defs/CodeTypeWithoutExtensions"
 									},
 									{
 										"required":[
@@ -2613,7 +2712,9 @@
 											}
 										}
 									}
-								]
+								],
+								"$ref":"#/$defs/specificationExtensions",
+								"unevaluatedProperties":false
 							}
 						},
 						"codelistExtensions":{
@@ -2626,7 +2727,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"ValueListType":{
 			"description":"ValueListType defines the structure of value list. These represent a closed set of values the can occur for a dimension, measure, or attribute. These may be values, or values with names and descriptions (similar to a codelist).",
@@ -2668,12 +2771,16 @@
 											}
 										}
 									}
-								]
+								],
+								"$ref":"#/$defs/specificationExtensions",
+								"unevaluatedProperties":false
 							}
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"CodelistExtensionType":{
 			"description":"CodelistExtensionType defines the structure of a codelist to be extended by the codelist defining the extension. It provides a reference to the extended codelist and selection criteria to indicate the codes to be included in the extending codelist.",
@@ -2719,7 +2826,9 @@
 					"inclusiveCodeSelection",
 					"exclusiveCodeSelection"
 				]
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"CodeSelectionType":{
 			"description":"CodeSelectionType defines the structure for code selection to be used as inclusive or exclusive extensions.",
@@ -2757,7 +2866,9 @@
 						"description":"An explicit selection of a code from the codelist selected for inclusion/exclusion. If the extended list is hierarchical, this can indicate whether child codes are to be included."
 					}
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"MemberValueType":{
 			"anyOf":[
@@ -2778,7 +2889,9 @@
 						"value"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"CascadeSelectionType":{
 			"anyOf":[
@@ -2830,7 +2943,9 @@
 				"pattern":{
 					"type":"string"
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"ComputationType":{
 			"description":"ComputationType describes a computation in a process.",
@@ -2860,7 +2975,9 @@
 			},
 			"required":[
 				"description"
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"ConceptRepresentationType":{
 			"description":"ConceptRepresentationType defines the core representation that are allowed for a concept. The text format allowed for a concept is that which is allowed for any non-target object component.",
@@ -2912,7 +3029,9 @@
 						"format"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"ConceptSchemeMapType":{
 			"description":"ConceptSchemeMapType defines the structure of a map which identifies relationships between concepts in different concept schemes. Unless the artefact is returned as a stub, it must contain the 'source' and 'target' properties.",
@@ -2940,7 +3059,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"SingleValueMappingType":{
 			"description":"SingleValueMappingType defines a mapping with a single source and optional target.",
@@ -2972,7 +3093,9 @@
 			],
 			"required":[
 				"sourceValue"
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"ConceptSchemeType":{
 			"description":"ConceptSchemeType describes the structure of a concept scheme. A concept scheme is the descriptive information for an arrangement or division of concepts into groups based on characteristics, which the objects have in common. It contains a collection of concept definitions, that may be arranged in simple hierarchies.",
@@ -2997,7 +3120,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"ConceptType":{
 			"description":"ConceptType describes the details of a concept. A concept is defined as a unit of knowledge created by a unique combination of characteristics. If a concept does not specify a TextFormat or a core representation, then the representation of the concept is assumed to be represented by any set of valid characters (corresponding to the string datatype).",
@@ -3029,7 +3154,9 @@
 								"conceptSchemeID",
 								"conceptID"
 							],
-							"description":"Provides a reference to an ISO 11179 concept."
+							"description":"Provides a reference to an ISO 11179 concept.",
+							"$ref":"#/$defs/specificationExtensions",
+							"unevaluatedProperties":false
 						},
 						"parent":{
 							"$ref":"#/$defs/SingleNCNameIDType",
@@ -3040,7 +3167,9 @@
 						"id"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"DataConstraintAttachmentType":{
 			"description":"DataConstraintAttachmentType describes a collection of references to constrainable artefacts related to data.",
@@ -3105,7 +3234,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"AvailabilityConstraintAttachmentType":{
 			"description":"AvailabilityConstraintAttachmentType describes a collection of references to data-related artefacts, for which availability is provided.",
@@ -3144,7 +3275,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		}, 
 		"DataConstraintType":{
 			"description":"DataConstraintType defines the structure of a data constraint. A data constraint can specify either the available set of keys (DataKeySet) or set of component values (CubeRegion) in a data source, or the allowable keys that can be constructed from a data structure definition. Multiple such constraints may be present for a constrained artefact. For instance, there may be a constraing that specifies the values allowed for the data source (role is 'Allowed') which can be used for validation or for constructing a partial code list, whilst another constraing can specify the actual content of a data source (role is 'Actual'). Unless the artefact is returned as a stub, it must contain the 'role' property.",
@@ -3178,7 +3311,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"AvailabilityConstraintType":{
 			"description":"AvailabilityConstraintType specifies a subset of the definition of the vailable content of a data set in terms of the Component Values",
@@ -3209,7 +3344,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"DataConsumerSchemeType":{
 			"description":"DataConsumerSchemeType defines a type of organisation scheme which contains only data consumers. The data consumer scheme maintained by a particular maintenance agency is always provided a fixed identifier and version, and is never final. Therefore, consumers can be added or removed without have to version the scheme. This scheme has no hierarchy, meaning that no organisation may define a relationship with another organisation in the scheme.",
@@ -3237,7 +3374,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"DataConsumerType":{
 			"description":"DataConsumerType defines the structure of a data consumer description. The contacts defined for the organisation are specific to the data consumer role the organisation is serving.",
@@ -3260,7 +3399,9 @@
 						"id"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"DataKeySetType":{
 			"description":"DataKeySetType defines a collection of full or partial data keys (dimension values).",
@@ -3282,7 +3423,9 @@
 			"required":[
 				"isIncluded",
 				"keys"
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"DataProviderSchemeType":{
 			"description":"DataProviderSchemeType defines a type of organisation scheme which contains only data providers. The data provider scheme maintained by a particular maintenance agency is always provided a fixed identifier and version, and is never final. Therefore, providers can be added or removed without have to version the scheme. This scheme has no hierarchy, meaning that no organisation may define a relationship with another organisation in the scheme.",
@@ -3310,7 +3453,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"MetadataProviderSchemeType":{
 			"description":"MetadataProviderSchemeType defines a type of organisation scheme which contains only metadata providers. The metadata provider scheme maintained by a particular maintenance agency is always provided a fixed identifier and is never versioned. Therefore, providers can be added or removed without have to version the scheme. This scheme has no hierarchy, meaning that no organisation may define a relationship with another organisation in the scheme.",
@@ -3338,7 +3483,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"DataProviderType":{
 			"description":"DataProviderType defines the structure of a data provider description. The contacts defined for the organisation are specific to the data provider role the organisation is serving.",
@@ -3361,7 +3508,9 @@
 						"id"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"MetadataProviderType":{
 			"description":"MetadataProviderType defines the structure of a metadata provider description. The contacts defined for the organisation are specific to the metadata provider role the organisation is serving.",
@@ -3384,7 +3533,9 @@
 						"id"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"DataStructureComponentsType":{
 			"description":"DataStructureComponentsType describes the structure of the grouping to the sets of components that have a defined structural role in the data structure definition. At a minimum at least one dimension must be defined.",
@@ -3413,7 +3564,9 @@
 			},
 			"required":[
 				"dimensionList"
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"DataStructureType":{
 			"description":"DataStructureType defines the structure for a data structure definition. A data structure definition is defined as a collection of metadata concepts, their structure and usage when used to collect or disseminate data.",
@@ -3438,7 +3591,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"DataflowType":{
 			"description":"DataflowType describes the structure of a data flow. A data flow is defined as the structure of data that will provided for different reference periods. If this type is not referenced externally, then a reference to a data structure definition must be provided.",
@@ -3463,7 +3618,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"DimensionListType":{
 			"description":"DimensionListType describes the key descriptor for a data structure definition. The order of the declaration of child dimensions is significant: it is used to describe the order in which they will appear in data formats for which key values are supplied in an ordered fashion (exclusive of the time dimension, which is not represented as a member of the ordered key). Any data structure definition which uses the time dimension should also declare a frequency dimension, conventionally the first dimension in the key (the set of ordered non-time dimensions). If is not necessary to assign a time dimension, as data can be organised in any fashion required.",
@@ -3499,7 +3656,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"DimensionType":{
 			"description":"DimensionType describes the structure of an ordinary dimension, which is defined as a statistical concept used (most probably together with other statistical concepts) to identify a statistical series, such as a time series, e.g. a statistical concept indicating certain economic activity or a geographical reference area. The dimension takes its semantic, and in some cases it representation, from its concept identity. A dimension can be coded by referencing a code list from its coded local representation. It can also specify its text format, which is used as the representation of the dimension if a coded representation is not defined. Neither the coded or uncoded representation are necessary, since the dimension may take these from the referenced concept.",
@@ -3537,7 +3696,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"GroupType":{
 			"description":"GroupType describes the structure of a group descriptor in a data structure definition. A group may consist of a of partial key, or collection of distinct cube regions or key sets to which attributes may be attached. The purpose of a group is to specify attributes values which have the same value based on some common dimensionality. All groups declared in the data structure must be unique - that is, you may not have duplicate partial keys. All groups must be given unique identifiers.",
@@ -3562,7 +3723,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"HierarchicalCodeType":{
 			"description":"HierarchicalCodeType describes the structure of a hierarchical code. A hierarchical code provides for a reference to a code that is referenced within the hierarchical code list via either a complete reference to a code through either a URN or full set of reference fields. Codes are arranged in a hierarchy by this reference. Note that it is possible to reference a single code such that it has multiple parents within the hierarchy. Further, the hierarchy may or may not be a leveled one.",
@@ -3604,7 +3767,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"HierarchyType":{
 			"description":"The Hierarchy is an abstract type that provides for a classification structure of referenced codes arranged in levels of detail from the broadest to the most detailed level. The levels in which the code exist can be formal or informal. Unless the artefact is returned as a stub, it must contain the 'hierarchicalCodes' and 'hasFormalLevels' properties.",
@@ -3633,7 +3798,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"HierarchyAssociationType":{
 			"description":"HierarchyAssociationType defines the structure of a hiearchy association, which links a hierarchy with and identifiable object in the context of another object (e.g. a dimension within the context of a dataflow). Unless the artefact is returned as a stub, it must contain the 'linkedHierarchy' and 'linkedObject' properties.",
@@ -3658,7 +3825,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"CustomTypeSchemeType":{
 			"description":"CustomTypeSchemeType defines a collection of custom types that are used in transformations. Unless the artefact is returned as a stub, it must contain the 'vtlVersion' property.",
@@ -3686,7 +3855,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"CustomTypeType":{
 			"description":"CustomTypeType defines the structure of a custom type. A custom type specifies a custom conversion for a VTL scalar type to a resulting data type. This conversion overrides the default conversion.",
@@ -3733,7 +3904,9 @@
 						"dataType"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"VtlMappingSchemeType":{
 			"description":"VtlMappingSchemeType defines a set of mappings between SDMX and VTL.",
@@ -3758,7 +3931,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"VtlMappingType":{
 			"description":"VtlMappingType defines the structure of a single mapping between the reference to a SDMX artefact made from VTL transformations, rulesets, user defined operators and the corresponding SDMX structure identifier. These are used to assign an alternative names to SDMX Dataflows, Codelists, Concept Schemes, or Concepts. Although are distinct sub-classes in the Information Model, this structure serves to express them all. The references SDMX artefact serves to distinguish which type of sub-class (VtlDatflowMapping or VtlCodelistMapping, or VtlConceptMapping) is being described. When this is used to assign an alias for a SDMX Dataflow, this can also be used to indicate the methods used to convert the data structure from SDMX to VTL and vice-versa. Finally, this can be used to override the deault Basic mapping methods used for Dataflows by utilizing the GenericDataflow element in place of a reference to a specific Dataflow.",
@@ -3841,7 +4016,9 @@
 						"alias"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"ToVtlMappingType":{
 			"description":"ToVtlMappingType defines the mapping method and filter used when mapping from SDMX to VTL.",
@@ -3876,7 +4053,9 @@
 					],
 					"description":"The mapping method used when mapping from SDMX to VTL. This is typically a StandardToVtlMappingMethodType, but can be any other value to allow for non-standard methods. The implied default is Basic."
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"SpaceKeyType":{
 			"description":"SpaceKey defines the structure of a super- or sub- space for a SDMX Dataflow. It is a collection of references to the dimensions that make up the space.",
@@ -3891,7 +4070,9 @@
 						"description":"A reference to a dimension by its identifier."
 					}
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"FromVtlMappingType":{
 			"description":"FromVtlMappingType defines the mapping method and filter used when mapping from VTL to SDMX.",
@@ -3922,7 +4103,9 @@
 					],
 					"description":"The mapping method used when mapping from VTL to SDMX. This is typically a StandardFromVtlMappingMethodType, but can be any other value to allow for non-standard methods. The implied default is Basic for single-measure VTL data structures and Unpivot for multi-meausre VTL data structures."
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"NamePersonalisationSchemeType":{
 			"description":"NamePersonalisationSchemeType defines a set of personalisations of VTL standard names that are used in a set of transformations. Unless the artefact is returned as a stub, it must contain the 'vtlVersion' property.",
@@ -3950,7 +4133,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"NamePersonalisationType":{
 			"description":"NamePersonalisationType defines the structure of a name personalisation. A name personalisation is is used in place of a standard VTL name in some VTL operations.",
@@ -3981,7 +4166,9 @@
 						"vtlArtefact"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"RulesetSchemeType":{
 			"description":"RulesetSchemeType defines a collection of rulesets that are used in transformations. Unless the artefact is returned as a stub, it must contain the 'vtlVersion' property.",
@@ -4013,7 +4200,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"RulesetType":{
 			"description":"RulesetType defines the structure of a ruleset. A ruleset is a persistent set of rules which can be invoked by using appropriate VTL operators.",
@@ -4044,7 +4233,9 @@
 						"rulesetScope"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"TransformationSchemeType":{
 			"description":"TransformationSchemeType describes the structure of a transformation scheme. A transformation scheme contains a set of transformations to be executed together (in the same run). It can contain any number of transformations that produce any number of results. Unless the artefact is returned as a stub, it must contain the 'vtlVersion' property.",
@@ -4102,7 +4293,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"TransformationType":{
 			"description":"TransformationType defines the structure of a transformation. A transformation is an assignment of a VTL expression to a specific result.",
@@ -4133,7 +4326,9 @@
 						"isPersistent"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"UserDefinedOperatorSchemeType":{
 			"description":"UserDefinedOperatorSchemeType defines a collection of user defined operators that are used in transformations. Unless the artefact is returned as a stub, it must contain the 'vtlVersion' property.",
@@ -4174,7 +4369,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"UserDefinedOperatorType":{
 			"description":"UserDefinedOperatorType defines the structure of a user defined operator. A user defined operator is a custom VTL operator (not existing in the standard library) that extends the VTL standard library for specific purposes. In addition to its identification and name, and definition of the operator must be provided.",
@@ -4195,7 +4392,9 @@
 						"operatorDefinition"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"InputOutputType":{
 			"description":"InputOutputType describes the structure of an input or output to a process step. It provides a reference to the object that is the input or output.",
@@ -4214,7 +4413,9 @@
 			},
 			"required":[
 				"objectReference"
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"LevelType":{
 			"description":"LevelType describes a level in a hierarchical codelist. Where level is defined as a group where codes can be characterised by homogeneous coding, and where the parent of each code in the group is at the same higher level of the hierarchy.",
@@ -4238,7 +4439,9 @@
 						"id"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"MeasureRepresentationType":{
 			"description":"MeasureRepresentationType defines the representation for a measure. A measure can be text (including XHTML and multi-lingual values), a simple value, or an enumerated value.",
@@ -4286,7 +4489,9 @@
 						"format"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"MeasureListType":{
 			"description":"MeasureListType describes the structure of the measure descriptor for a data structure definition.",
@@ -4318,7 +4523,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"MetadataAttributeRepresentationType":{
 			"description":"MetadataAttributeRepresentationType defines the possible local representations of a metadata attribute.",
@@ -4348,7 +4555,9 @@
 						"format"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"MetadataAttributeType":{
 			"description":"MetadataAttributeType describes the structure of a metadata attribute. The metadata attribute takes its semantic, and in some cases it representation, from its concept identity. A metadata attribute may be coded (via the local representation), uncoded (via the text format), or take no value. In addition to this value, the metadata attribute may also specify subordinate metadata attributes. If a metadata attribute only serves the purpose of containing subordinate metadata attributes, then the isPresentational attribute should be used. Otherwise, it is assumed to also take a value. If the metadata attribute does take a value, and a representation is not defined, it will be inherited from the concept it takes its semantic from. The optional id on the metadata attribute uniquely identifies it within the metadata structured definition. If this id is not supplied, its value is assumed to be that of the concept referenced from the concept identity. Note that a metadata attribute (as identified by the id attribute) definition  must be unique across the entire metadata structure definition (including target identifier, identifier component, and report structure ids). A metadata attribute may be used in multiple report structures and at different levels, but the content (value and/or child metadata attributes and their cardinality) of the metadata attribute cannot change.",
@@ -4393,7 +4602,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"MetadataStructureComponentsType":{
 			"description":"MetadataStructureComponentsType describes the structure of one set of components, the metadata attribute list, that make up the metadata structure definition. At a minimum, at least one metadata attribute must be defined.",
@@ -4403,7 +4614,9 @@
 					"$ref":"#/$defs/MetadataAttributeListType",
 					"description":"MetadataAttributeList defines the set of metadata attributes that can be defined as a hierarchy, for reporting reference metadata about a target object. The identification of metadata attributes must be unique at any given level of the metadata structure. Although there are XML schema constraints to help enforce this, these only apply to explicitly assigned identifiers. Identifiers inherited from a concept from which a metadata attribute takes its identity cannot be validated against this constraint. Therefore, systems processing metadata structure definitions will have to perform this check outside of the XML validation."
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"MetadataStructureType":{
 			"description":"MetadataStructureType is used to describe a metadata structure definition, which is defined as a collection of metadata concepts, their structure and usage when used to collect or disseminate reference metadata.",
@@ -4420,7 +4633,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"MetadataflowType":{
 			"description":"MetadataflowType describes the structure of a metadata flow. A dataflow is defined as the structure of reference metadata that will be provided for different reference periods. If this type is not referenced externally, then a reference to a metadata structure definition must be provided. Unless the artefact is returned as a stub, it must contain the 'targets' property.",
@@ -4446,7 +4661,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"OrganisationSchemeMapType":{
 			"description":"OrganisationSchemeMapType defines the structure of a map which identifies relationships between organisations in different organisation schemes. Unless the artefact is returned as a stub, it must contain the 'source' and 'target' properties.",
@@ -4474,7 +4691,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"OrganisationUnitSchemeType":{
 			"description":"OrganisationUnitSchemeType defines a type of organisation scheme which simply defines organisations and there parent child relationships. Organisations in this scheme are assigned no particular role, and may in fact exist within the other type of organisation schemes as well.",
@@ -4502,7 +4721,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"OrganisationUnitType":{
 			"description":"OrganisationUnitType defines the structure of an organisation unit description. In addition to general identification and contact information, an organisation unit can specify a relationship with another organisation unit from the same scheme which is its parent organisation.",
@@ -4529,7 +4750,9 @@
 						"id"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"MeasureType":{
 			"description":"MeasureType defines the structure of a measure descriptor. In addition to the identifying concept and representation, a mandatory usage and max occurs can be defined.",
@@ -4567,7 +4790,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"ProcessStepType":{
 			"description":"ProcessStepType describes the structure of a process step. A nested process step is automatically sub-ordinate, and followed as the next step. If the following step is conditional, it should be referenced in a transition.",
@@ -4619,7 +4844,9 @@
 						"id"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"ProcessType":{
 			"description":"ProcessType describes the structure of a process, which is a scheme which defines or documents the operations performed on data in order to validate data or to derive new information according to a given set of rules. Processes occur in order, and will continue in order unless a transition dictates another step should occur.",
@@ -4640,7 +4867,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"ProvisionAgreementType":{
 			"description":"ProvisionAgreementType describes the structure of a provision agreement. A provision agreement defines an agreement for a data provider to report data against a dataflow. Attributes which describe how the registry must behave when data is registered against this provision agreement are supplied. Unless the artefact is returned as a stub, it must contain the 'dataflow' and 'dataProvider' properties.",
@@ -4661,7 +4890,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"MetadataProvisionAgreementType":{
 			"description":"MetadataProvisionAgreementType describes the structure of a metadata provision agreement. A metadata provision agreement defines an agreement for a metadata provider to report reference metadata against a metadataflow. Attributes which describe how the registry must behave when metadata is registered against this metadata provision agreement are supplied. Unless the artefact is returned as a stub, it must contain the 'metadataflow' and 'dataProvider' properties.",
@@ -4691,7 +4922,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"ReportingCategoryType":{
 			"description":"ReportingCategoryType describes the structure of a reporting category, which groups structure usages into useful sub-packages. Sub ordinate reporting categories can be nested within the category definition.",
@@ -4754,7 +4987,9 @@
 						]
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"ReportingTaxonomyMapType":{
 			"description":"ReportingTaxonomyMapType defines the structure of a map which identifies relationships between reporting categories in different reporting taxonomies. Unless the artefact is returned as a stub, it must contain the 'source' and 'target' properties.",
@@ -4782,7 +5017,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"ReportingTaxonomyType":{
 			"description":"ReportingTaxonomyType describes the structure of a reporting taxonomy, which is a scheme which defines the composition structure of a data report where each component can be described by an independent structure or structure usage description.",
@@ -4807,7 +5044,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"ReportingYearStartOrEndDayRepresentationType":{
 			"description":"ReportingYearStartOrEndDayRepresentationType defines the representation for the reporting year start/end day attribute. Enumerated values are not allowed and the text format is fixed to be a day and month in the ISO 8601 format of '--MM-DD'.",
@@ -4829,7 +5068,9 @@
 			"required":[
 				"format",
 				"maxOccurs"
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"ReportingYearStartOrEndDayTextFormatType":{
 			"description":"ReportingYearStartOrEndDayTextFormatType is a restricted version of the NonFacetedTextFormatType that fixes the value of the text type to be MonthDay. This type exists solely for the purpose of fixing the representation of the reporting year start/end day attribute.",
@@ -4842,7 +5083,8 @@
 			"required":[
 				"dataType"
 			],
-			"additionalProperties":false
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"ReportingYearStartOrEndDayType":{
 			"description":"ReportingYearStartOrEndDayType defines the structure of the reporting year start or end day attribute. The reporting year start/end day attribute takes its semantic from its concept identity (usually the REPORTING_YEAR_START_DAY or REPORTING_YEAR_END_DAY concepts), yet always has a fixed identifier (REPORTING_YEAR_START_DAY, REPORTING_YEAR_END_DAY). The reporting year start/end day attribute always has a fixed text format, which specifies that the format of its value is always a day and month in the ISO 8601 format of '--MM-DD'. As with any other attribute, an attribute relationship must be specified. This relationship should be carefully selected as it will determine what type of data the data structure definition will allow. For example, if an attribute relationship of `dataflow` is specified, this will mean the data sets for this dataflow can only contain data with standard reporting periods where the all reporting periods have the same start/end day. In this case, data reported as standard reporting periods from two entities with different fiscal year start/end days could not be contained in the same data set.",
@@ -4907,7 +5149,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"RepresentationMapType":{
 			"description":"RepresentationMapType describes ...  Unless the artefact is returned as a stub, it must contain the 'source' and 'target' properties.",
@@ -4942,7 +5186,9 @@
 											"dataType"
 										]
 									}
-								]
+								],
+								"$ref":"#/$defs/specificationExtensions",
+								"unevaluatedProperties":false
 							}
 						},
 						"target":{
@@ -4969,7 +5215,9 @@
 											"dataType"
 										]
 									}
-								]
+								],
+								"$ref":"#/$defs/specificationExtensions",
+								"unevaluatedProperties":false
 							}
 						},
 						"representationMappings":{
@@ -4981,7 +5229,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"SimpleCodeDataType":{
 			"description":"SimpleCodeDataType restricts SimpleDataType to specify the allowable data types for a simple code. The possible values are simply Alpha, AlphaNumeric, or Numeric.",
@@ -5049,7 +5299,9 @@
 						"description":"SentinelValue defines a value that has a special meaning within the text format representation of a component."
 					}
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"AttributeRepresentationType":{
 			"description":"AttributeRepresentationType defines the representation for a data attribute. A data attribute can be text (including XHTML and multi-lingual values), a simple value, or an enumerated value",
@@ -5097,7 +5349,9 @@
 						"format"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"SimpleDataStructureRepresentationType":{
 			"description":"SimpleDataStructureRepresentationType defines the representation for any non-time dimension data structure definition component.",
@@ -5127,7 +5381,9 @@
 						"format"
 					]
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"StructureMapType":{
 			"description":"StructureMapType defines the structure for mapping components of one structure to components of another structure. A structure may be referenced directly meaning the map applies wherever the structure is used, or it may be a reference via a structure usage meaning the map only applies within the context of that usage. Using the related structures, one can make extrapolations between maps. For example, if key families, A, B, and C, are all grouped in a related structures container, then a map from data structure A to C and a map from data structure B to C could be used to infer a relation between data structure A to C. Unless the artefact is returned as a stub, it must contain the 'source', 'target' and 'componentMaps' properties.",
@@ -5188,7 +5444,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"EpochMapType":{
 			"description":"...",
@@ -5219,7 +5477,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"DatePatternMapType":{
 			"description":"...",
@@ -5244,7 +5504,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"DateMapType":{
 			"type":"object",
@@ -5275,7 +5537,9 @@
 										"$ref":"#/$defs/NestedIDType",
 										"description":"(Nested) ID of a local target component."
 									}
-								}
+								},
+								"$ref":"#/$defs/specificationExtensions",
+								"unevaluatedProperties":false
 							}
 						},
 						"resolvePeriod":{
@@ -5344,7 +5608,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"ComponentMapType":{
 			"description":"ComponentMapType defines the structure for relating a component in a source structure to a component in a target structure.",
@@ -5381,7 +5647,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"FixedValueMapType":{
 			"description":"FixedValueMapType defines the structure for providing a fixed value for a source or target component.",
@@ -5426,7 +5694,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"TimeDimensionRepresentationType":{
 			"description":"TimeDimensionRepresentationType defines the representation for the time dimension. It has only one property format, which is required and which defines the representation for the time dimension. Enumerated values are not allowed.",
@@ -5438,7 +5708,9 @@
 			},
 			"required":[
 				"format"
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"TimeDimensionType":{
 			"description":"TimeDimensionType describes the structure of a time dimension. The time dimension takes its semantic from its concept identity (usually the TIME_PERIOD concept), yet is always has a fixed identifier (TIME_PERIOD). The time dimension always has a fixed text format, which specifies that its format is always the in the value set of the observational time period (see common:ObservationalTimePeriodType). It is possible that the format may be a sub-set of the observational time period value set. For example, it is possible to state that the representation might always be a calendar year. See the enumerations of the dataType attribute in the LocalRepresentation/format for more details of the possible sub-sets. It is also possible to facet this representation with start and end dates. The purpose of such facts is to restrict the value of the time dimension to occur within the specified range. If the time dimension is expected to allow for the standard reporting periods (see common:ReportingTimePeriodType) to be used, then it is strongly recommended that the reporting year start day attribute also be included in the data structure definition. When the reporting year start day attribute is used, any standard reporting period values will be assumed to be based on the start day contained in this attribute. If the reporting year start day attribute is not included and standard reporting periods are used, these values will be assumed to be based on a reporting year which begins January 1.",
@@ -5473,7 +5745,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"TimeTextFormatType":{
 			"description":"TimeTextFormat is a restricted version of the SimpleComponentTextFormatType that only allows time based format and specifies a default ObservationalTimePeriod representation and facets of a start and end time.",
@@ -5499,7 +5773,9 @@
 						"description":"SentinelValue defines a value that has a special meaning within the text format representation of a component."
 					}
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"sentinelValueType":{
 			"description":"SentinelValueType defines the structure of a sentinel value. A sentinel is a value that has a special meaning within the text format representation of a component. The value is associated with a multi-lingual name and description.",
@@ -5548,7 +5824,9 @@
 				"descriptions":{
 					"$ref":"#/$defs/localisedText"
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"TransitionType":{
 			"description":"TransitionType describes the details of a transition, which is an expression in a textual or formalised way of the transformation of data between two specific operations performed on the data.",
@@ -5580,7 +5858,9 @@
 						}
 					}
 				}
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"UsageType":{
 			"description":"An enumeration of optional | mandatory to indicate the usage of an attribute or measure.",
@@ -5628,7 +5908,9 @@
 			],
 			"required":[
 				"sourceValues"
-			]
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"MappedValueType":{
 			"type":"object",
@@ -5648,7 +5930,9 @@
 				"endIndex":{
 					"type":"integer"
 				}
-			}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
 		},
 		"urn":{
 			"description":"Universal Resource Name (URN) is constructed according to the generic structure 'urn:sdmx:org.SDMX-IM-package-name.class-name=agencyid:maintainedobject-id(maintainedobject-version).containerobject-id.object-id*'. For more information see: Unique identification of SDMX objects, in: SDMX STANDARDS: SECTION 5 SDMX REGISTRY SPECIFICATION",
@@ -5823,6 +6107,12 @@
 		"duration":{
 			"type":"string",
 			"pattern":"^P((([0-9]+Y([0-9]+M)?([0-9]+D)?|([0-9]+M)([0-9]+D)?|([0-9]+D))(T(([0-9]+H)([0-9]+M)?([0-9]+(\\.[0-9]+)?S)?|([0-9]+M)([0-9]+(\\.[0-9]+)?S)?|([0-9]+(\\.[0-9]+)?S)))?)|(T(([0-9]+H)([0-9]+M)?([0-9]+(\\.[0-9]+)?S)?|([0-9]+M)([0-9]+(\\.[0-9]+)?S)?|([0-9]+(\\.[0-9]+)?S))))$"
+		},
+		"specificationExtensions":{
+			"$comment":"While the SDMX-JSON Specification tries to accommodate most use cases, additional data can be added to extend the specification at certain points. The extensions properties are implemented as patterned fields that are always prefixed by x-. Extensions are one of the best ways to prove the viability of proposed additions to the specification. It is therefore RECOMMENDED that implementations be designed for extensibility to support community experimentation. Support for any one extension is OPTIONAL, and support for one extension does not imply support for others.",
+			"patternProperties":{
+				"^x-":true
+			}
 		}
 	}
 }
