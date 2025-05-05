@@ -458,6 +458,10 @@ Multi-valued values use a JSON array of the corresponding above JSON type.
 Localised values use a specific JSON object based on "string"s.  
 Whenever the component has no value, the JSON type `null` can be used.  
 
+For **intentionally missing** reference metadata values, the following special values are to be used:
+- For JSON "number" data type: `"NaN"` (string)
+- For all other data types: `"#N/A"` (string)
+
 # Linking mechanism
 
 ## link
