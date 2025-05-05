@@ -2139,7 +2139,7 @@ The snippet below shows an example of an `error` object, extended with a `x-Cust
 			"titles": {
 				"en": "Invalid number of items in the item parameter",
 				"fr": "Nombre invalide d'items dans le paramètre 'item'"
-			}
+			},
 			"x-CustomErrorCode": 39272
 		}
 	]
