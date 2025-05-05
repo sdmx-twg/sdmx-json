@@ -1325,6 +1325,15 @@ For **intentionally missing** observation and attribute values, even if mandator
 - For "number" data type: `"NaN"` (string)
 - For all other data types: `"#N/A"` (string)
 
+Example:
+
+```json
+	"observations": {
+		"0:0": [105.6, "ATTR1_VALUE"],
+		"0:1": ["NaN", "#N/A"]
+	}
+```
+
 # Linking mechanism
 
 ## link

@@ -462,6 +462,14 @@ For **intentionally missing** reference metadata values, the following special v
 - For JSON "number" data type: `"NaN"` (string)
 - For all other data types: `"#N/A"` (string)
 
+Examples:
+
+```json
+		"value": "NaN"
+		
+		"value": "#N/A"
+```
+
 # Linking mechanism
 
 ## link
