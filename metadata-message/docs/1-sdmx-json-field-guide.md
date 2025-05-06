@@ -557,6 +557,7 @@ The localised text object must be present and complete whenever the user’s pre
 
 **It is recommended to indicate all languages used anywhere in the message for localised elements through http Content-Language response header (languages of the intended audience) and/or through a “contentLanguages” property in the meta tag.** The main language used can be indicated through the “lang” property in the meta tag.
 
+**In case one or more specific languages were requested through the HTTP header “Accept-Language" in a GET query and the response message might not contain the complete set of all available languages, then in the response message the metadataSet property `isPartialLanguage` is to be set to `true`.**
 
 # Security Considerations
 
