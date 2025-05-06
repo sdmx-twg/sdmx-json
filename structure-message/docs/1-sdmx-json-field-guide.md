@@ -250,6 +250,7 @@ All SDMX artefact types share the following common object properties:
 * descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) of the resource.
 * validFrom - *String* *optional*. A timestamp from which the version is valid. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
 * validTo - *String* *optional*.  A timestamp from which the version is superceded. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
+* isPartialLanguage - *Boolean* *optional*. Default: `false`. Set to `true` if the structure doesn't contain the complete set of all available languages, e.g., when obtained as a reponse to a GET query that requested specific languages through the HTTP header “Accept-Language”. 
 * isExternalReference - *Boolean* *optional*. If set to “true” it indicates that the content of the resource is held externally.
 * annotations - *Array* *optional*. Provides a list of annotation objects.
 * links - *Array* *optional*. A collection of links to additional resources for the resource. See the section *[link](#link)*. **It is recommended to systematically include as the first link a self-referencing hyperlink (link with "rel"="self") to indicate the URL address of the resource, and its URN.**
@@ -274,6 +275,7 @@ Example:
 		},
 		"validFrom": "2012-05-04",
 		"validTo": "2015-05-04",
+		"isPartialLanguage": true,
 		"isExternalReference": false,
 		"annotations":[
 			{

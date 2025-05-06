@@ -443,14 +443,13 @@
 			"unevaluatedProperties":false
 		},
 		"ActionType":{
-			"description":"ActionType provides a list of actions, describing the intention of the data transmission from the sender's side. Each action provided at the data or metadata set level applies to the entire data set for which it is given. Note that the actions indicated in the Message Header are optional, and used to summarize specific actions indicated with this data type for all registry interactions. The \"Informational\" value is used when the message contains information in response to a query, rather than being used to invoke a maintenance activity.",
+			"description":"Deprecated",
 			"enum":[
 				"Append",
 				"Replace",
 				"Delete",
 				"Information"
 			],
-			"pattern":"^[-._:A-Za-z0-9]+$",
 			"type":"string"
 		},
 		"NestedNCNameIDType":{
@@ -572,6 +571,10 @@
 			"properties":{
 				"action":{
 					"$ref":"#/$defs/ActionType"
+				},
+				"isPartialLanguage":{
+					"description":"Set to `true` if the metadata set doesn't contain the complete set of all available languages, e.g., when obtained as a reponse to a GET query that requested specific languages through the HTTP header “Accept-Language”. Default: `false`.",
+					"type":"boolean"
 				},
 				"publicationPeriod":{
 					"$ref":"#/$defs/ObservationalTimePeriodType"

@@ -284,7 +284,7 @@
 						"rel":"dataflow"
 					}
 				],
-				"action":"Information",
+				"action":"Merge",
 				"series":{
 					"0":{
 						"annotations":[

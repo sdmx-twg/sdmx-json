@@ -1121,10 +1121,11 @@
 				"action":{
 					"type":"string",
 					"enum":[
-						"Information",
-						"Append",
+						"Merge",
 						"Replace",
-						"Delete"
+						"Delete",
+						"Append",
+						"Information"
 					]
 				},
 				"reportingBegin":{

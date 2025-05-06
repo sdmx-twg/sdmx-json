@@ -204,11 +204,8 @@ Example:
 
 *Object*. Contains a collection of reported metadata against a set of values for a given full or partial target identifier, as described in a metadata structure definition. The metadata set may contain reported metadata for multiple report structures defined in a metadata structure definition.
 
-* action - *String* *optional*. Action provides a list of actions, describing the intention of the data transmission from the sender's side.  
-  - `Append` - this is an incremental update for an existing `dataSet` or the provision of new data or documentation (attribute values) formerly absent. If any of the supplied data or metadata is already present, it will not replace these data.
-  - `Replace` - data are to be replaced, and may also include additional data to be appended.
-  - `Delete` - data are to be deleted.
-  - `Information` (default) - data are being exchanged for informational purposes only, and not meant to update a system.  
+* action - *String* *optional*. Deprecated. Instead, actions are defined by the HTTP action verb used.
+* isPartialLanguage - *Boolean* *optional*. Default: `false`. Set to `true` if the metadata set doesn't contain the complete set of all available languages, e.g., when obtained as a reponse to a GET query that requested specific languages through the HTTP header “Accept-Language”. 
 * publicationPeriod - *String* *optional*. The publicationPeriod specifies the period of publication of the data in terms of whatever provisioning agreements might be in force (i.e., "2005-Q1" if that is the time of publication for a `metadataSet` published on a quarterly basis).
 * publicationYear - *String* *optional*. The publicationYear holds the ISO 8601 four-digit year.
 * reportingBegin - *String* *optional*. The start of the time period covered by the message.
@@ -235,7 +232,7 @@ See the section on [localised text elements](#localised-text-elements) on how th
 Example:
 
 	{
-		"action": "Information",
+		"isPartialLanguage": true,
 		"publicationPeriod": "2018-Q1",
 		"publicationYear": "2018",
 		"reportingBegin": "1960",

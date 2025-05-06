@@ -286,7 +286,7 @@
 						"rel":"dataflow"
 					}
 				],
-				"action":"Information",
+				"action":"Merge",
 				"observations":{
 					"0:0":[
 						1.5931,

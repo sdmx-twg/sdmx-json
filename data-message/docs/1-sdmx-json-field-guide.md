@@ -212,7 +212,7 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 *Object* *optional*. Header contains the message's “primary data”.
 
 * structures - *Array* *optional*. *Structures* field is an array of *[Structure](#structure)* objects that contain the information needed to interpret the data available in the message, such as the list of concepts used. Since SDMX 3.0.0, SDMX restful web service requests can query data for several structures. Each returned structure is presented separately. Also the underlying data are presented in separate data sets. 
-* dataSets - *Array* *optional*. *DataSets* field is an array of *[dataSet](#dataset)* objects. That's where the data (i.e.: the observations) will be.
+* dataSets - *Array* *optional*. *DataSets* field is an array of *[dataSet](#dataset)* objects. That's where the data (i.e.: the observations) will be. The dataset order matters because a data message with its datasets represents one ACID transaction when used to update an SDMX storage system. Indeed, the datasets are to be processed in the order of their presence in the message.
 
 Example:
 
@@ -681,11 +681,13 @@ or series of another dimension, the `observations` will be found under the `seri
 The `dataSet` properties are:
 
 * structure - *Integer* *optional*. *Structure* contains the index of the *structure* in the *structures* array of the *data* object, which describe the data in this *dataSet*. If omitted, then the data in this *dataSet* are assumed to be described by the first *structure* (default: 0). 
-* action - *String* *optional*. Action provides a list of actions, describing the intention of the data transmission from the sender's side.
-  - `Append` - this is an incremental update for an existing `dataSet` or the provision of new data or documentation (attribute values) formerly absent. If any of the supplied data or metadata is already present, it will not replace these data.
-  - `Replace` - data are to be replaced, and may also include additional data to be appended.
-  - `Delete` - data are to be deleted.
-  - `Information` (default) - data are being exchanged for informational purposes only. When used to update a system, the `Append` action is assumed.
+* action - *String* *optional*. Action provides a list of actions, describing the intention of the data transmission from the sender's side. When absent (not recommended), `Merge` is assumed.
+  - `Merge` - Data or data-related reference metadata is to be merged, through either update or insertion depending on already existing information. This operation does not allow deleting any component values. Updating individual values in multi-valued measure, attribute or data-related reference metadata values is not supported either. The complete multi-valued value is to be provided. Only non-dimensional components (measure, attribute or data-related reference metadata values) can be **omitted** (`null` or absent) as long as at least one of those components is present. Bulk merges are thus not supported. Only the provided values are merged. Dimension values for higher-level (data-related reference metadata) attributes can be **switched-off** (using `~`) when those are not attached to these dimensions. All observations as well as the sets of data-related reference metadata attributes at specific dimension combinations impacted by the `Merge` action change their time stamp when used to update an SDMX storage system.
+  - `Replace` - Data or data-related reference metadata is to be replaced, through either update, insert or delete depending on already existing information. A full replacement is hereby assumed to take place at specific “replacement levels”: either for entire observations or for any specific dimension combination for data-related reference metadata attributes. Within these “replacement levels” the provided values are inserted or updated, and omitted values are deleted. Values provided for the other attributes (those above the observation level) are merged (see `Merge` action). Only non-dimensional components (measure, attribute or data-related reference metadata values) can be **omitted** (`null` or absent). Bulk replacing is thus not supported. Dimension values for higher-level (data-related reference metadata) attributes can be **switched-off** (using `~`) when those are not attached to these dimensions. Replacing non-existing elements is not resulting in an error. All observations as well as the sets of data-related reference metadata attributes at specific dimension combinations impacted by the replace action change their time stamp when used to update an SDMX storage system. Because the `Replace` action always takes place at specific levels, it cannot be used to replace a whole dataset or a whole time series. But a “replace all” effect can be achieved by combining an empty `Delete` dataset with a `Merge` or `Replace` dataset within the same data message. Similarly, to replace a whole time series, a message can combine a `Delete` dataset containing only the partial key of the time series (where not used dimension values are omitted) with a `Merge` or `Replace` dataset for that time series.
+  - `Delete` - Data or data-related reference metadata is to be deleted. Deletion is hereby assumed to take place at the lowest level of detail provided in the message.
+Any component (including dimensions) can be **omitted** (dimensions: empty, others: `null` or absent). Omitting dimension values allows for bulk deletions. Partially omitting non-dimension component values allows restricting the deletion of measure, attribute or data-related reference metadata values to the ones being present. Instead of real values for non-dimensional components, it is sufficient to use any valid value. With this, whole datasets, any slices of observations for dimension groups such as time series, observations or individual measure, attribute and data-related reference metadata attributes values can be deleted. Dimension values for higher-level (data-related reference metadata) attributes can be **switched-off**  (using `~`) when those are not attached to these dimensions. Deleting non-existing elements or values is not resulting in an error. All observations as well as the sets of attributes and data-related reference metadata at higher partial keys impacted by the `Delete` action change their time stamp when used to update an SDMX storage system.
+  - `Append` - Deprecated. When used to update an SDMX storage system, the `Merge` action is assumed.
+  - `Information` - Deprecated. When used to update an SDMX storage system, the `Merge` action is assumed.
 * reportingBegin - *String* *optional*. The start of the time period covered by the message.
 * reportingEnd - *String* *optional*. The end of the time period covered by the message.
 * validFrom - *String* *optional*. The validFrom indicates the inclusive start time indicating the validity of the information in the data.
@@ -705,7 +707,7 @@ Examples:
 
 	{
 		"structure": 0,
-		"action": "Information",
+		"action": "Merge",
 		"reportingBegin": "2012-05-04",
 		"reportingEnd": "2012-06-01",
 		"validFrom": "2012-01-01T10:00:00Z",
@@ -727,7 +729,7 @@ Examples:
 
 	{
 		"structure": 0,
-		"action": "Information",
+		"action": "Replace",
 		"reportingBegin": "2012-05-04",
 		"reportingEnd": "2012-06-01",
 		"validFrom": "2012-01-01T10:00:00Z",
@@ -1553,7 +1555,7 @@ Let's say that the following data content of a message needs to be processed:
 		"dataSets": [
 			{
 				"structure": 0,
-				"action": "Information",
+				"action": "Merge",
 				"series": {
 					"0": {					// 0 is the index of the first value of (series-level) CURRENCY dimension: "NZD"
 						"annotations": [0],		// 0 is the index of the first value of annotations: "ABC123456"

@@ -534,7 +534,7 @@
 						"rel":"datastructure"
 					}
 				],
-				"action":"Information",
+				"action":"Merge",
 				"reportingBegin":"2012-05-04",
 				"reportingEnd":"2012-06-01",
 				"validFrom":"2012-01-01T10:00:00Z",
@@ -611,7 +611,7 @@
 						"rel":"datastructure"
 					}
 				],
-				"action":"Information",
+				"action":"Merge",
 				"attributes":[
 					0,
 					[
@@ -662,7 +662,7 @@
 						"rel":"datastructure"
 					}
 				],
-				"action":"Information",
+				"action":"Merge",
 				"x-comment-for-dataSet(s)":"# In case the client is using the detail parameter and the server supports it. # Detail parameter: serieskeysonly. No observation values, attributes or annotations.",
 				"observations":{
 					"0:0":[
@@ -684,7 +684,7 @@
 						"rel":"datastructure"
 					}
 				],
-				"action":"Information",
+				"action":"Merge",
 				"x-comment-for-dataSet(s)":"# Detail parameter: dataonly. No attributes or annotations.",
 				"observations":{
 					"0:0":[
@@ -710,7 +710,7 @@
 						"rel":"datastructure"
 					}
 				],
-				"action":"Information",
+				"action":"Merge",
 				"attributes":[
 					0,
 					[

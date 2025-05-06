@@ -397,7 +397,7 @@
 				],
 				"publicationYear":"0623Z",
 				"version":"0.0.376-0",
-				"action":"Information",
+				"isPartialLanguage":true,
 				"description":"aute consequat",
 				"isExternalReference":false,
 				"validTo":"1998-02-04T23:00:00.0Z"
@@ -438,7 +438,7 @@
 					"zh-hakka":"in id elit",
 					"i-lux":"fugiat"
 				},
-				"action":"Replace",
+				"isPartialLanguage":false,
 				"validTo":"2020-04-13T22:00:00.0Z",
 				"version":"840221802.0.7585937",
 				"annotations":[

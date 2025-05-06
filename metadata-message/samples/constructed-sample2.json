@@ -46,6 +46,7 @@
 				"agencyID":"IMF",
 				"version":"1.0.0",
 				"name":"Metadata set 1",
+				"isPartialLanguage":false,
 				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IMF_MDF(1.0)",
 				"links":[
 					{
@@ -98,6 +99,7 @@
 				"agencyID":"IMF",
 				"version":"1.0.0",
 				"name":"Metadata set 2",
+				"isPartialLanguage":false,
 				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IMF_MDF(1.0)",
 				"targets":[
 					"urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=IMF:IFS_DSD(1.0)"
@@ -132,6 +134,7 @@
 				"agencyID":"IMF",
 				"version":"1.0.0",
 				"name":"Dataflow report",
+				"isPartialLanguage":false,
 				"metadataProvisionAgreement":"urn:sdmx:org.sdmx.infomodel.registry.MetadataProvisionAgreement=IMF:MDPA(1.0)",
 				"targets":[
 					"urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=IMF:IFS_DF(1.0)"
@@ -148,6 +151,7 @@
 				"agencyID":"IMF",
 				"version":"1.0.0",
 				"name":"Data structure dimension report",
+				"isPartialLanguage":false,
 				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IMF_MDF(1.0)",
 				"targets":[
 					"urn:sdmx:org.sdmx.infomodel.datastructure.Dimension=IMF:IFS_DSD(1.0).SOURCE"
@@ -164,6 +168,7 @@
 				"agencyID":"IMF",
 				"version":"1.0.0",
 				"name":"Code report",
+				"isPartialLanguage":false,
 				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=IMF:IMF_MDF(1.0)",
 				"targets":[
 					"urn:sdmx:org.sdmx.infomodel.codelist.Code=IMF:CL_SOURCE(1.0).ABC",

@@ -36,6 +36,7 @@
 				"id":"METADATASET1",
 				"agencyID":"ESTAT",
 				"name":"METADATASET1",
+				"isPartialLanguage":false,
 				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=ESTAT:ESMS(1.0)",
 				"targets":[
 					"urn:sdmx:org.sdmx.infomodel.categoryscheme.Category=ESTAT:DATAFLOWS_SCHEME(1.0).PSC.DEM.TOT"
@@ -94,6 +95,7 @@
 				"id":"META_UPDATE",
 				"agencyID":"ESTAT",
 				"name":"METADATASET1",
+				"isPartialLanguage":false,
 				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=ESTAT:ESMS(1.0)",
 				"targets":[
 					"urn:sdmx:org.sdmx.infomodel.categoryscheme.Category=ESTAT:DATAFLOWS_SCHEME(1.0).PSC.DEM.TOT"
@@ -123,6 +125,7 @@
 				"id":"STAT_PRES",
 				"agencyID":"ESTAT",
 				"name":"METADATASET1",
+				"isPartialLanguage":false,
 				"metadataflow":"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=ESTAT:ESMS(1.0)",
 				"targets":[
 					"urn:sdmx:org.sdmx.infomodel.categoryscheme.Category=ESTAT:DATAFLOWS_SCHEME(1.0).PSC.DEM.TOT"
