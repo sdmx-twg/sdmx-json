@@ -703,6 +703,22 @@ Any component (including dimensions) can be **omitted** (dimensions: empty, othe
 
 For information on how to handle the indexes for `dimensions`, `measures`, `attributes` and `annotations` see the section dedicated to [handling indexes](#handling-indexes).
 
+Important notes about the `action` types: 
+
+The terms “delete”, “merge” and “replace” do not imply a physical replacement or deletion of values in the underlying database. To minimize the physical resource requirements, SDMX web service implementations that do not support the `includeHistory` URL parameter might physically replace the existing values in the database. SDMX web services that neither support the `updatedAfter` URL parameter might also implement physical deletions. However, SDMX web services that support these parameters (or other time-machine features), would not overwrite or delete the physical values.  
+SDMX web services that support the `includeHistory` URL parameter should never allow deleting their historic data content because this would interfere with the interests of data consumers, such as data aggregators. Therefore, a specific feature to physically delete previous (outdated) content is intentionally not added to the SDMX standard syntax. If such a feature is required by an organisation, then it needs to be implemented as a custom feature outside the SDMX standard.  
+Likewise, all SDMX-compliant systems that do (or are configured to) support the `updatedAfter` URL parameter need to systematically retain the information about deleted data (or metadata).   
+All datasets – even with varying actions – within a single data message have always to be treated as **ACID transaction** to guarantee “transactional safety” (full data consistency and validity despite errors, power failures, and other mishaps). These datasets are to be processed in the order of appearance in the message. The advantage of such data messages is thus the ability to bundle separate `Delete` and `Replace` or `Merge` actions into one transactional data message.
+
+Recommended dataset actions in SDMX web service responses to GET data queries:  
+
+1) Without the `updatedAfter`, `includeHistory`, `detail`, `attributes` or `measures` URL parameters: The response message should contain the retrieved data in a replace dataset (instead of the previous information dataset). 
+2) Without the `updatedAfter` and `includeHistory`, but with `detail`, `attributes` or `measures` URL parameters: The response message should contain the retrieved data in a merge dataset (instead of the previous information dataset). 
+3) With the `updatedAfter` URL parameter: The response must include the information of all previously updated, inserted and deleted data/metadata, even if bulk deletions have been used, because the DB synchronization use case requires that the generated response must always allow achieving to replicate the exact same punctual data content as currently stored in the queried data source. One of the two approaches are possible:
+   - a `Delete` dataset for entirely deleted observations and for entirely deleted sets of (reference metadata) attribute values attached to specific dimension combinations and a `Replace` dataset for all other changed observations and changed attribute and reference metadata values attached to specific dimension combinations, or
+   - a `Delete` dataset for entirely deleted observations, for entirely deleted sets of (reference metadata) attribute values attached to specific dimension combinations and for individually deleted mesure, attribute and reference metadata values and a `Merge` dataset for all other updated or inserted observation, attribute and reference metadata values.  
+4) With the `includeHistory` URL parameter: Using a number of datasets with `Delete`, `Replace` or `Merge` actions and limited in their validity time span that allow achieving to replicate the exact same punctual data contents as previously stored in the queried data source.
+
 Examples:
 
 	{
