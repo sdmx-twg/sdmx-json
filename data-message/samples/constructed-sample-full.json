@@ -1,6 +1,6 @@
 {
+	"$schema":"https://json.sdmx.org/2.1/sdmx-json-data-schema.json",
 	"meta":{
-		"schema":"https://raw.githubusercontent.com/sdmx-twg/sdmx-json/v2.1.0/data-message/tools/schemas/sdmx-json-data-schema.json",
 		"id":"62b5f19d-f1c9-495d-8446-a3661ed24753",
 		"prepared":"2021-03-17T22:57:33Z",
 		"test":false,
@@ -13,7 +13,7 @@
 			"names":{
 				"en":"European Central Bank"
 			},
-			"contact":[
+			"contacts":[
 				{
 					"name":"Statistics hotline",
 					"names":{
@@ -27,28 +27,28 @@
 					"roles":{
 						"en":"helpdesk"
 					},
-					"telephone":[
+					"telephones":[
 						"+00-00-99999"
 					],
-					"fax":[
+					"faxes":[
 						"+00-00-88888"
 					],
-					"uri":[
+					"uris":[
 						"http://www.xyz.org"
 					],
-					"email":[
+					"emails":[
 						"statistics@xyz.org"
 					]
 				}
 			]
 		},
-		"receiver":{
+		"receivers":[{
 			"id":"SDMX",
 			"name":"SDMX",
 			"names":{
 				"en":"SDMX"
 			},
-			"contact":[
+			"contacts":[
 				{
 					"name":"name",
 					"names":{
@@ -62,21 +62,21 @@
 					"roles":{
 						"en":"role"
 					},
-					"telephone":[
+					"telephones":[
 						"telephone"
 					],
-					"fax":[
+					"faxes":[
 						"fax"
 					],
-					"uri":[
-						"uri"
+					"uris":[
+						"https://uri"
 					],
-					"email":[
+					"emails":[
 						"sdmx@xyz.org"
 					]
 				}
 			]
-		},
+		}],
 		"links":[
 			{
 				"href":"http://www.myorg.org/ws/data/ECB_ICP1/M.PT.N.071100.4.INX",
@@ -122,7 +122,7 @@
 					},
 					{
 						"href":"https://sdw-wsrest.ecb.europa.eu/service/provisionagreement/ECB/PA_EXR",
-						"urn":"urn:sdmx:org.sdmx.infomodel.provisionagreement.ProvisionAgreement=ECB:PA_EXR(1.0)",
+						"urn":"urn:sdmx:org.sdmx.infomodel.registry.ProvisionAgreement=ECB:PA_EXR(1.0)",
 						"rel":"provisionagreement",
 						"title":"resolvable uri to provision agreement",
 						"titles":{
@@ -150,10 +150,10 @@
 							"descriptions":{
 								"en":"Description for the dimension"
 							},
-							"comment for keyPosition":"# 0-based position of dimension in key in user request url",
+							"x-comment-for-keyPosition":"# 0-based position of dimension in key in user request url",
 							"keyPosition":0,
-							"comment for role":"# restricted list of dimension and attribute roles (time, frequency, geo, unit, scalefactor, referenceperiod, ...)",
-							"role":"frequency",
+							"x-comment-for-role":"# restricted list of dimension and attribute roles (time, frequency, geo, unit, scalefactor, referenceperiod, ...)",
+							"roles":["FREQ"],
 							"values":[
 								{
 									"id":"D",
@@ -240,7 +240,7 @@
 								"en":"Description for the dimension"
 							},
 							"keyPosition":1,
-							"role":"unit",
+							"roles":["UNIT"],
 							"values":[
 								{
 									"id":"NZD",
@@ -271,7 +271,7 @@
 								"en":"Description for the dimension"
 							},
 							"keyPosition":5,
-							"role":"time",
+							"roles":["TIME_PERIOD"],
 							"values":[
 								{
 									"id":"2013-01-18",
@@ -307,12 +307,7 @@
 							"descriptions":{
 								"en":"Description for the measure"
 							},
-							"relationship":{
-								"observation":{
-									
-								}
-							},
-							"role":"PRIMARY",
+							"roles":["PRIMARY"],
 							"isMandatory":true,
 							"format":{
 								"dataType":"Double",
@@ -340,7 +335,7 @@
 									
 								}
 							},
-							"role":"TIME_FORMAT",
+							"roles":["TIME_FORMAT"],
 							"default":"P1D",
 							"values":[
 								{
@@ -395,7 +390,7 @@
 									"CURRENCY"
 								]
 							},
-							"role":"UNIT_MEAS",
+							"roles":["UNIT_MEAS"],
 							"values":[
 								{
 									"id":"NC",
@@ -427,12 +422,12 @@
 									"EXR_SUFFIX"
 								]
 							},
-							"role":null,
+							"roles":[],
 							"default":"ID1",
-							"comment for values":"# inclusion of attachment level and its format to be decided, e.g. \"attachment\": [ true, true, true, true, true, true, false ],",
+							"x-comment-for-values":"# inclusion of attachment level and its format to be decided, e.g. \"attachment\": [ true, true, true, true, true, true, false ],",
 							"values":[
 								{
-									"comment for id":"# id property is optional to allow for uncoded attributes",
+									"x-comment-for-id":"# id property is optional to allow for uncoded attributes",
 									"id":"ID1",
 									"name":"New Zealand dollar (NZD)",
 									"names":{
@@ -481,10 +476,10 @@
 							"relationship":{
 								"primaryMeasure":"OBS_VALUE"
 							},
-							"role":null,
-							"comment for default":"# optional",
+							"roles":[],
+							"x-comment-for-default":"# optional",
 							"default":"A",
-							"comment for values":"# a null attribute can be used to shorten the message by using O index later in message",
+							"x-comment-for-values":"# a null attribute can be used to shorten the message by using O index later in message",
 							"values":[
 								null,
 								{
@@ -539,7 +534,7 @@
 						"rel":"datastructure"
 					}
 				],
-				"action":"Information",
+				"action":"Merge",
 				"reportingBegin":"2012-05-04",
 				"reportingEnd":"2012-06-01",
 				"validFrom":"2012-01-01T10:00:00Z",
@@ -616,7 +611,7 @@
 						"rel":"datastructure"
 					}
 				],
-				"action":"Information",
+				"action":"Merge",
 				"attributes":[
 					0,
 					[
@@ -632,7 +627,7 @@
 						0
 					]
 				},
-				"comment for observations":"# 2nd alternative instead of series if no series level (dimensionAtObservation == allDimensions)",
+				"x-comment-for-observations":"# 2nd alternative instead of series if no series level (dimensionAtObservation == allDimensions)",
 				"observations":{
 					"0:0":[
 						1.5931,
@@ -667,8 +662,8 @@
 						"rel":"datastructure"
 					}
 				],
-				"action":"Information",
-				"comment for dataSet(s)":"# In case the client is using the detail parameter and the server supports it. # Detail parameter: serieskeysonly. No observation values, attributes or annotations.",
+				"action":"Merge",
+				"x-comment-for-dataSet(s)":"# In case the client is using the detail parameter and the server supports it. # Detail parameter: serieskeysonly. No observation values, attributes or annotations.",
 				"observations":{
 					"0:0":[
 					],
@@ -689,8 +684,8 @@
 						"rel":"datastructure"
 					}
 				],
-				"action":"Information",
-				"comment for dataSet(s)":"# Detail parameter: dataonly. No attributes or annotations.",
+				"action":"Merge",
+				"x-comment-for-dataSet(s)":"# Detail parameter: dataonly. No attributes or annotations.",
 				"observations":{
 					"0:0":[
 						1.5931
@@ -715,7 +710,7 @@
 						"rel":"datastructure"
 					}
 				],
-				"action":"Information",
+				"action":"Merge",
 				"attributes":[
 					0,
 					[
@@ -731,7 +726,7 @@
 						0
 					]
 				},
-				"comment for dataSet(s)":"# Detail parameter: nodata. No observation values, just attributes and annotations.",
+				"x-comment-for-dataSet(s)":"# Detail parameter: nodata. No observation values, just attributes and annotations.",
 				"observations":{
 					"0:0":[
 						"2013-03-18T11:00:00",

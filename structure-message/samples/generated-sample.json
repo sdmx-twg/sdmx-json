@@ -1,6 +1,6 @@
 {
+	"$schema":"https://json.sdmx.org/2.1/sdmx-json-structure-schema.json",
 	"meta":{
-		"schema":"https://raw.githubusercontent.com/sdmx-twg/sdmx-json/v2.1.0/structure-message/tools/schemas/sdmx-json-structure-schema.json",
 		"id":"$",
 		"test":true,
 		"prepared":"2021-09-16T11:04:00Z",
@@ -112,8 +112,8 @@
 				"id":"$",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -754,8 +754,8 @@
 				"id":"ABC",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -990,8 +990,8 @@
 				"id":"A",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -1156,8 +1156,8 @@
 				"id":"A",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -1262,9 +1262,6 @@
 						],
 						"coreRepresentation":{
 							"enumeration":"urn:sdmx:org.sdmx.infomodel.codelist.Codelist=ABC:ABC(1.0)",
-							"id":"A",
-							"version":"0.0",
-							"agencyID":"A.A",
 							"enumerationFormat":{
 								"endTime":"1000Z",
 								"endValue":1,
@@ -1296,8 +1293,8 @@
 				"id":"A",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -1428,8 +1425,8 @@
 				"id":"$",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -1526,10 +1523,13 @@
 						],
 						"validFrom":"2017-11-16T11:04:00Z",
 						"validTo":"2017-11-16T11:04:00Z",
-						"version":"0.0",
 						"code":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC",
-						"codeID":"$",
-						"codelistAliasRef":"$",
+						"hierarchicalCodes":[
+							{
+								"id":"$",
+								"code":"urn:sdmx:org.sdmx.infomodel.codelist.Code=ABC:ABC(1.0).ABC"
+							}
+						],
 						"level":"ABC"
 					}
 				],
@@ -1603,8 +1603,8 @@
 				"id":"AGENCIES",
 				"version":"1.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -1748,8 +1748,8 @@
 				"id":"DATA_PROVIDERS",
 				"version":"1.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -1893,8 +1893,8 @@
 				"id":"DATA_CONSUMERS",
 				"version":"1.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -2038,8 +2038,8 @@
 				"id":"$",
 				"version":"1.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -2184,8 +2184,8 @@
 				"id":"$",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -2244,8 +2244,8 @@
 				"id":"$",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -2307,8 +2307,8 @@
 				"id":"$",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -2479,8 +2479,8 @@
 				"id":"$",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -2540,8 +2540,8 @@
 				"id":"$",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -2640,8 +2640,8 @@
 				"id":"$",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -2753,8 +2753,8 @@
 				"id":"$",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -2853,8 +2853,8 @@
 				"id":"$",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -2953,8 +2953,8 @@
 				"id":"$",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -3053,8 +3053,8 @@
 				"id":"$",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -3268,8 +3268,8 @@
 				"id":"$",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -3684,8 +3684,8 @@
 				"id":"$",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -3745,8 +3745,8 @@
 				"id":"$",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -3797,25 +3797,10 @@
 						"hreflang":"en-GB-oed"
 					}
 				],
-				"role":"Allowed",
 				"constraintAttachment":{
 					"dataflows":[
 						"urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ABC:ABC(1.0)"
-					],
-					"queryableDataSources":[
-						{
-							"isRESTDatasource":true,
-							"isWebServiceDatasource":true,
-							"dataURL":"http://www.example.org/data.json",
-							"wadlURL":"http://www.example.org/data.json",
-							"wsdlURL":"http://www.example.org/data.json"
-						}
 					]
-				},
-				"releaseCalendar":{
-					"offset":"occaecat dolor",
-					"periodicity":"reprehenderit id est voluptate officia",
-					"tolerance":"pariatur esse magna consectetur consequat"
 				},
 				"cubeRegions":[
 					{
@@ -3870,9 +3855,6 @@
 								"validFrom":"2017-11-16T11:04:00Z",
 								"validTo":"2017-11-16T11:04:00Z",
 								"values":[
-									"a"
-								],
-								"cascadeValues":[
 									"a"
 								]
 							},
@@ -3939,7 +3921,7 @@
 								"keyValues":[
 									{
 										"id":"A",
-										"value":"a"
+										"values":["a"]
 									}
 								],
 								"components":[
@@ -3953,9 +3935,7 @@
 												"cascadeValues":"excluderoot",
 												"lang":"en"
 											}
-										],
-										"validFrom":"2017-11-16T11:04:00Z",
-										"validTo":"2017-11-16T11:04:00Z"
+										]
 									},
 									{
 										"id":"ABC",
@@ -3987,8 +3967,8 @@
 				"id":"$",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -4039,25 +4019,10 @@
 						"hreflang":"en-GB-oed"
 					}
 				],
-				"role":"Allowed",
 				"constraintAttachment":{
 					"metadataflows":[
 						"urn:sdmx:org.sdmx.infomodel.metadatastructure.Metadataflow=ABC:ABC(1.0)"
-					],
-					"queryableDataSources":[
-						{
-							"isRESTDatasource":true,
-							"isWebServiceDatasource":true,
-							"dataURL":"http://www.example.org/data.json",
-							"wadlURL":"http://www.example.org/data.json",
-							"wsdlURL":"http://www.example.org/data.json"
-						}
 					]
-				},
-				"releaseCalendar":{
-					"offset":"occaecat dolor",
-					"periodicity":"reprehenderit id est voluptate officia",
-					"tolerance":"pariatur esse magna consectetur consequat"
 				},
 				"metadataTargetRegions":[
 					{
@@ -4130,8 +4095,8 @@
 				"id":"$",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -4247,8 +4212,8 @@
 				"id":"$",
 				"version":"0.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -4365,8 +4330,8 @@
 				"id":"METADATA_PROVIDERS",
 				"version":"1.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -4510,8 +4475,8 @@
 				"id":"$",
 				"version":"1.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -4572,8 +4537,8 @@
 				"id":"$",
 				"version":"1.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -4698,8 +4663,8 @@
 				"id":"$",
 				"version":"1.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -4813,8 +4778,8 @@
 				"id":"a",
 				"version":"1.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -4936,8 +4901,8 @@
 				"id":"a",
 				"version":"1.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -5000,8 +4965,8 @@
 				"id":"a",
 				"version":"1.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -5122,8 +5087,8 @@
 				"id":"a",
 				"version":"1.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -5148,7 +5113,7 @@
 							{
 								"href":"http://www.example.org/data.json",
 								"rel":"a",
-								"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Valuelist=ABC:ABC(1.0)",
+								"urn":"urn:sdmx:org.sdmx.infomodel.codelist.ValueList=ABC:ABC(1.0)",
 								"uri":"http://www.example.org/data.json",
 								"title":"a",
 								"titles":{
@@ -5164,7 +5129,7 @@
 					{
 						"href":"http://www.example.org/data.json",
 						"rel":"a",
-						"urn":"urn:sdmx:org.sdmx.infomodel.codelist.Valuelist=ABC:ABC(1.0)",
+						"urn":"urn:sdmx:org.sdmx.infomodel.codelist.ValueList=ABC:ABC(1.0)",
 						"uri":"http://www.example.org/data.json",
 						"title":"a",
 						"titles":{
@@ -5220,8 +5185,8 @@
 				"id":"a",
 				"version":"1.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",
@@ -5339,8 +5304,8 @@
 				"id":"a",
 				"version":"1.0",
 				"agencyID":"A.A",
+				"isPartialLanguage":true,
 				"isExternalReference":true,
-				"isFinal":true,
 				"validFrom":"2017-11-16T11:04:00Z",
 				"validTo":"2017-11-16T11:04:00Z",
 				"name":"a",

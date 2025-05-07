@@ -11,4 +11,4 @@ different editors.
 
 ----
 
-© SDMX 2014-2021 http://www.sdmx.org/
+© SDMX 2025 http://www.sdmx.org/
