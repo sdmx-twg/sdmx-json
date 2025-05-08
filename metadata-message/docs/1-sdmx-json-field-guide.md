@@ -1,4 +1,4 @@
-# Introduction to SDMX-JSON Metadata Message
+# Introduction to SDMX-JSON Metadata Message 2.1.0
 
 See the SDMX-JSON Data Message docs for a brief introduction of the SDMX information model. For additional information on the SDMX information model, please refer to the [SDMX documentation](http://sdmx.org/?page_id=10).
 
@@ -10,21 +10,23 @@ Before we start, let's clarify a few more things about this guide:
 - The ordering of properties in objects is undefined. The properties may appear in any order and consuming applications should not rely on any specific ordering. It is safe to consider a nulled property and the absence of a property as the same thing.
 - Not all properties appear in all contexts. For example response with error status messages may not contain a data property.
 
-# Field Guide to SDMX-JSON 2.0 Metadata Message Objects (aligned with SDMX 3.0.0)
+# Field Guide to SDMX-JSON Metadata Message 2.1.0 Objects (aligned with SDMX 3.1)
 
 ## message
 
 Message is the top level object and it contains the requested information (referential metadata) as well as the meta-information decribing the (technical) context of the message and, possibly, status information.
 
+* $schema - *String* *optional*. Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. **Providing the link to the SDMX-JSON schema is recommended.**
 * meta - *Object* *optional*. A *[meta](#meta)* object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.
 * data - *Object* *optional*. *[Data](#data)* contains the message's “primary data”.
-* errors - *Array* *optional*. *Errors* field is an array of *[statusMessage](#statusMessage)* objects. When appropriate provides a list of status messages in addition to RESTful web services HTTP error status codes.
+* errors - *Array* *optional* of *[statusInformation](#statusinformation)* objects providing - when appropriate - more detail to the HTTP status codes in the RESTful SDMX web service responses.
 
-The members data and status CAN coexist in the same message.
+The properties data and errors CAN coexist in the same message.
 
 Example:
 
 	{
+		"$schema": "https://json.sdmx.org/2.1/sdmx-json-metadata-schema.json",
 		"meta": {
 			# meta object #
 		},
@@ -33,7 +35,7 @@ Example:
 		},
 		"errors": [
 			{
-				# statusMessage object #
+				# statusInformation object #
 			}
 		]
 	}
@@ -43,10 +45,10 @@ Example:
 *Object* *optional*. Used to include non-standard meta-information and basic technical information 
 about the message, such as when it was prepared and who has sent it.
 Any members MAY be specified within `meta` objects.
-* schema - *String* *optional*. Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. **Providing the link to the SDMX-JSON schema is recommended.**
+* schema - *String* *optional*. Deprecated and replaced by the `$schema` property at the root level, which allows for automated validations.
 * id - *String*. Unique string that identifies the message for further references.
 * test - *Boolean* *optional*. Indicates whether the message is for test purposes or not. False for normal messages.
-* prepared - *String*. A timestamp indicating when the message was prepared. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
+* prepared - *String*. A date or date-time indicating when the message was prepared. Values must follow the ISO 8601 syntax for dates or combined dates and times, including time zone.
 * contentLanguages - *Array* *optional*. Array of strings containing the identifyer of all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, representaing in an array format the same information than the http Content-Language response header, e.g. "en, fr-fr". See IETF Language Tags: https://tools.ietf.org/html/rfc5646#section-2.1. The array's first element indicates the main language used in the message for localized elements. **The usage of this property is recommended.**
 * name - *String* *optional*. Human-readable (best-language-match) name for the transmission.
 * names - *Object* *optional*. Human-readable localised *[names](#names)* for the transmission.
@@ -59,7 +61,6 @@ See the section on [localised text elements](#localised-text-elements) on how th
 Example:
 
 	"meta": {
-		"schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/metadata-message/tools/schemas/sdmx-json-metadata-schema.json",
 		"copyright": "Copyright 2017 Statistics hotline",
 		"id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
 		"prepared": "2018-01-03T12:54:12",
@@ -203,11 +204,8 @@ Example:
 
 *Object*. Contains a collection of reported metadata against a set of values for a given full or partial target identifier, as described in a metadata structure definition. The metadata set may contain reported metadata for multiple report structures defined in a metadata structure definition.
 
-* action - *String* *optional*. Action provides a list of actions, describing the intention of the data transmission from the sender's side.  
-  - `Append` - this is an incremental update for an existing `dataSet` or the provision of new data or documentation (attribute values) formerly absent. If any of the supplied data or metadata is already present, it will not replace these data.
-  - `Replace` - data are to be replaced, and may also include additional data to be appended.
-  - `Delete` - data are to be deleted.
-  - `Information` (default) - data are being exchanged for informational purposes only, and not meant to update a system.  
+* action - *String* *optional*. Deprecated. Instead, actions are defined by the HTTP action verb used.
+* isPartialLanguage - *Boolean* *optional*. Default: `false`. Set to `true` if the metadata set doesn't contain the complete set of all available languages, e.g., when obtained as a reponse to a GET query that requested specific languages through the HTTP header “Accept-Language”. 
 * publicationPeriod - *String* *optional*. The publicationPeriod specifies the period of publication of the data in terms of whatever provisioning agreements might be in force (i.e., "2005-Q1" if that is the time of publication for a `metadataSet` published on a quarterly basis).
 * publicationYear - *String* *optional*. The publicationYear holds the ISO 8601 four-digit year.
 * reportingBegin - *String* *optional*. The start of the time period covered by the message.
@@ -234,7 +232,7 @@ See the section on [localised text elements](#localised-text-elements) on how th
 Example:
 
 	{
-		"action": "Information",
+		"isPartialLanguage": true,
 		"publicationPeriod": "2018-Q1",
 		"publicationYear": "2018",
 		"reportingBegin": "1960",
@@ -418,23 +416,23 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 Providing links allowing accessing the underlying SDMX Data Structure Definition, Dataflow
 and/or Provision Agreements is recommended.
 
-## statusMessage
+## statusInformation
 
-*Object* *optional*. Used to provide status messages in addition to RESTful web services HTTP error status codes. The following pieces of information should be provided:
+*Object* *optional*. Used to provide status information with more detail to the HTTP status codes in the RESTful SDMX web service responses. The following pieces of information should be provided:
 
-* code - *Number*. Provides a code number for the status message if appropriate. Standard code numbers are defined in the SDMX 2.1 Web Services Guidelines.
+* code - *Number*. Provides an HTTP status code number for the status information if appropriate. See [RESTful SDMX web service error handling and status information](https://github.com/sdmx-twg/sdmx-rest/blob/master/doc/status.md).
 * title - *String* *optional*. A short, human-readable (best-language-match) summary of the situation that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization.
 * titles - *Object* *optional*. A list of short, human-readable localised summaries (see *[names](#names)*) of the status that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization.
 * detail - *String* *optional*. A human-readable (best-language-match) explanation specific to this occurrence of the status. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status.
 * details - *Object* *optional*. A list of human-readable localised explanations (see *[names](#names)*) specific to this occurrence of the status. Like titles, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status.
-* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the status message.
+* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the status information.
 
-See the section on [localised strings](#localised-strings) on how the message deals with languages.
+See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
 Example:
 
 	{
-		"code": 150,
+		"code": 400,
 		"title": "Invalid parameter",
 		"titles": {
 			"en": "Invalid parameter",
@@ -442,16 +440,43 @@ Example:
 		}
 	}
 
+# Data type conversions between SDMX and JSON
+
+For the different non-localised data types of components, the following JSON types can be used for the instances of their values:
+
+| SDMX data types | JSON data type |
+| --------------- | ---------------|
+| "Numeric", "Long", "Short", "Float", "Double" | "number" |
+| "Integer", "Count" | "integer"   |
+| "Boolean"       | "boolean"      | 
+| all other SDMX data types | "string" | 
+
+Multi-valued values use a JSON array of the corresponding above JSON type.  
+Localised values use a specific JSON object based on "string"s.  
+Whenever the component has no value, the JSON type `null` can be used.  
+
+For **intentionally missing** reference metadata values, the following special values are to be used:
+- For JSON "number" data type: `"NaN"` (string)
+- For all other data types: `"#N/A"` (string)
+
+Examples:
+
+```json
+		"value": "NaN"
+		
+		"value": "#N/A"
+```
+
 # Linking mechanism
 
 ## link
 
 *Object* *optional*. A link to an external resource.
 
-* href - *String*. Absolute or relative URL of the external resource.
+* href - *String* *optional* only if `urn` is present. Absolute or relative URL of the external resource.
 * rel - *String*. Relationship of the object to the external resource. See semantics below.
-* urn - *String* *optional*. The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details).
-* uri - *String* *optional*. The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource.
+* urn - *String* *optional* only if `href` is present. The `urn` holds a valid SDMX Registry URN (see SDMX Registry Specification for details).
+* uri - *String* *optional*. The `uri` attribute holds a URI that contains a link to additional information about the resource, such as a web page. This `uri` is not an SDMX resource.
 * title - *String* *optional*. A human-readable (best-language-match) description of the target link.
 * titles - *Object* *optional*. A list of human-readable localised descriptions (see *[names](#names)*) of the target link.
 * type - *String* *optional*. A hint about the type of representation returned by the link.
@@ -503,7 +528,7 @@ The *URL* captured in the `href` attribute can be *absolute* or *relative*. **It
 
 **Localised best-language-match text strings (static properties matched through "Lookup"):**
 
-The first best language match according to the user’s preferred language choices expressed through the HTTP content negotiation (Accept-Language header parameter) is to be provided for each localised text element. The message does however not indicate the returned language per localised text element.
+The first best language match according to the user’s preferred language choices expressed through the HTTP content negotiation (Accept-Language header parameter) or the system-default language, if there is no preferred language or no language match, is to be provided for each localised text element. In any case, the message does not indicate the returned language per localised text element.
 
 This language matching type is called "Lookup", see <https://tools.ietf.org/html/rfc4647#section-3.4>.
 
@@ -513,7 +538,7 @@ Example:
 
 **Localised text objects (variable properties matched through "Filtering"):**
 
-All available language matches according to the user’s preferred language choices expressed through the HTTP content negotiation (Accept-Language header parameter) is to be provided for each localised text element. 
+Optionally, all available language matches according to the user’s preferred language choices expressed through the HTTP content negotiation (Accept-Language header parameter) can be provided for each localised text element. 
 
 This language matching type is called "Filtering", see <https://tools.ietf.org/html/rfc4647#section-3.3>.
 
@@ -524,17 +549,15 @@ Example:
 		"fr": "Fréquence"
 	},
 
-
-The localised text object needs to be present whenever the related localised best-language-match text strings is present, and especially whenever a localised text is mandatory in the SDMX Information model. Note that localised text (and the knowledge about the locale) is mandatory in structure messages when artefacts are being submitted for storage to a registry or to other databases. The localised text object is important for use cases where multiple languages are required or where the information on the language used is required.
-
-
 In case that there is no language match for a particular localisable element, it is optional to:
-
 - return the element in a system-default language or alternatively to not return the element
 - indicate available alternative languages for the element's maintainable artefact through links to underlying localised resources
 
+The localised text object must be present and complete whenever the user’s preferred language choice is `*` (wildcard for any language). This mechanism allows transmitting of structures with their complete content (all localised elements and the knowledge about the locale) in contexts where all language versions are required or where the information on the language used is required.
+
 **It is recommended to indicate all languages used anywhere in the message for localised elements through http Content-Language response header (languages of the intended audience) and/or through a “contentLanguages” property in the meta tag.** The main language used can be indicated through the “lang” property in the meta tag.
 
+**In case one or more specific languages were requested through the HTTP header “Accept-Language" in a GET query and the response message might not contain the complete set of all available languages, then in the response message the metadataSet property `isPartialLanguage` is to be set to `true`.**
 
 # Security Considerations
 
@@ -545,20 +568,22 @@ includes the security considerations associated with its usage.
 
 # Extending SDMX-JSON
 
-The objects defined in SDMX-JSON are "open", i.e. they can be extended with properties not defined in this specification. Providers of SDMX-JSON messages are therefore welcome to add support for features not covered in this specification. Whenever appropriate, providers who opt to do so are invited to inform us, so that future versions of SDMX-JSON may integrate these extensions, thereby improving interoperability.
+The objects defined in SDMX-JSON are "open", i.e. they can be extended with properties not defined in this specification. Providers of SDMX-JSON messages are therefore welcome to add support for features not (yet) covered in this specification. Whenever appropriate, providers who opt to do so are invited to inform us, so that future versions of SDMX-JSON may integrate these extensions, thereby improving interoperability.
 
-The snippet below shows an example of an `error` object, extended with a `wsCustomErrorCode`:
+However, in order to allow JSON validators to properly check for and recognize syntax errors instead of interpreting them as extensions, all extension keywords must be prefixed with "x-". Any keyword that is neither a standard keyword nor begins with "x-" is in violation of the specification and should cause validation of the SDMX-JSON document to fail.
 
-	```
+The snippet below shows an example of an `error` object, extended with a `x-CustomErrorCode`:
+
+```json
 	"errors": [
 		{
-			"code": 150,
+			"code": 400,
 			"title": "Invalid parameter",
 			"titles": {
 				"en": "Invalid parameter",
 				"fr": "Paramètre invalide"
 			},
-			"wsCustomErrorCode": 39272
+			"x-CustomErrorCode": 39272
 		}
 	]
-	```
+```

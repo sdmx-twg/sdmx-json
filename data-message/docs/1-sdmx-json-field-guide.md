@@ -1,4 +1,4 @@
-# Introduction to SDMX-JSON Data Message 2.0.0
+# Introduction to SDMX-JSON Data Message 2.1.0
 
 Let's first start with a brief introduction of the SDMX information model.
 
@@ -10,7 +10,8 @@ but if we know that this is an exchange rate for the US dollar against the euro 
 There are two types of concepts: dimensions and attributes. Dimensions, when combined,
 allow to uniquely identifying statistical data. Attributes on the other hand do not help
 identifying statistical data, but they add useful information (like the unit of measure
-or the number of decimals). Dimensions and attributes are known as "components".
+or the number of decimals). Dimensions and attributes are known as "components".  
+Since SDMX 3.0, attributes in SDMX-JSON 2.X.X also include reference metadata attributes. 
 
 The measurement of some phenomenon (e.g. the figure 1.2953 mentioned above) is known as an
 "observation" in SDMX. Sometimes, observations can also have several measures, e.g. an 
@@ -42,21 +43,23 @@ nulled field and the absence of a field as the same thing.
 - Not all fields appear in all contexts. For example response with error status messages
 may not contain fields for data, dimensions and attributes.
 
-# Field Guide to SDMX-JSON Data Message 2.0.0 Objects (aligned with SDMX 3.0.0)
+# Field Guide to SDMX-JSON Data Message 2.1.0 Objects (aligned with SDMX 3.1)
 
 ## message
 
 Message is the top level object and it contains the data as well as the structural metadata needed to interpret those data.
 
-* meta - *Object* *optional*. A *[meta](#meta)* object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.
+* $schema - *String* *optional*. Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. **Providing the link to the SDMX-JSON schema is recommended.**
+* meta - *Object*. A *[meta](#meta)* object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.
 * data - *Object* *optional*. *[Data](#data)* contains the message's “primary data”.
-* errors - *Array* *optional*. *Errors* field is an array of *[error](#error)* objects. When appropriate provides a list of error messages in addition to RESTful web services HTTP error status codes.
+* errors - *Array* *optional* of *[statusInformation](#statusinformation)* objects providing - when appropriate - more detail to the HTTP status codes in the RESTful SDMX web service responses.
 
-The members data and errors MUST NOT coexist in the same message.
+The properties data and errors CAN coexist in the same message.
 
 Example:
 
 	{
+		"$schema": "https://https://json.sdmx.org/2.1/sdmx-json-data-schema.json",
 		"meta": {
 			# meta object #
 		},
@@ -65,20 +68,20 @@ Example:
 		},
 		"errors": [
 			{
-				# error object #
+				# statusInformation object #
 			}
 		]
 	}
 
 ## meta
 
-*Object* *optional*. Used to include non-standard meta-information and basic technical information 
+*Object*. Used to include non-standard meta-information and basic technical information 
 about the message, such as when it was prepared and who has sent it.
 Any members MAY be specified within `meta` objects.
-* schema - *String* *optional*. Contains the URL to the schema allowing to validate the message. This also allows identifying the version of SDMX-JSON format used in this message. **Providing the link to the SDMX-JSON schema is recommended.**
+* schema - *String* *optional*. Deprecated and replaced by the `$schema` property at the root level, which allows for automated validations.
 * id - *String*. Unique string that identifies the message for further references.
 * test - *Boolean* *optional*. Indicates whether the message is for test purposes or not. False for normal messages.
-* prepared - *String*. A timestamp indicating when the message was prepared. Values must follow the ISO 8601 syntax for combined dates and times, including time zone.
+* prepared - *String*. A date or date-time indicating when the message was prepared. Values must follow the ISO 8601 syntax for dates or combined dates and times, including time zone.
 * contentLanguages - *Array* *optional*. Array of strings containing the identifier of all languages used anywhere in the message for localized elements, and thus the languages of the intended audience, representaing in an array format the same information than the http Content-Language response header, e.g. "en, fr-fr". See IETF Language Tags: https://tools.ietf.org/html/rfc5646#section-2.1. The array's first element indicates the main language used in the message for localized elements. **The usage of this property is recommended.**
 * name - *String* *optional*. Human-readable (best-language-match) name for the transmission.
 * names - *Object* *optional*. Human-readable localised *[names](#names)* for the transmission.
@@ -91,7 +94,6 @@ See the section on [localised text elements](#localised-text-elements) on how th
 Example:
 
 	"meta": {
-		"schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/sdmx-json-data-schema.json",
 		"copyright": "Copyright 2017 Statistics hotline",
 		"id": "b1804c51-1ee3-45a9-bb75-795cd4e06489",
 		"prepared": "2018-01-03T12:54:12",
@@ -210,7 +212,7 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 *Object* *optional*. Header contains the message's “primary data”.
 
 * structures - *Array* *optional*. *Structures* field is an array of *[Structure](#structure)* objects that contain the information needed to interpret the data available in the message, such as the list of concepts used. Since SDMX 3.0.0, SDMX restful web service requests can query data for several structures. Each returned structure is presented separately. Also the underlying data are presented in separate data sets. 
-* dataSets - *Array* *optional*. *DataSets* field is an array of *[dataSet](#dataset)* objects. That's where the data (i.e.: the observations) will be.
+* dataSets - *Array* *optional*. *DataSets* field is an array of *[dataSet](#dataset)* objects. That's where the data (i.e.: the observations) will be. The dataset order matters because a data message with its datasets represents one ACID transaction when used to update an SDMX storage system. Indeed, the datasets are to be processed in the order of their presence in the message.
 
 Example:
 
@@ -231,10 +233,14 @@ Example:
 
 *Object* *optional*. Provides the structural metadata necessary to interpret the data contained in the message. It tells you which are the components (`dimensions`, `measures` and `attributes`) used in the message and also describes to which level in the hierarchy (`dataSet`, `dimensionGroup`, `series`, `observations`) these components are attached.
 
-* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. A collection of links to structural metadata or to additional information regarding the structure. **At least the link to the Data Structure Definition, Dataflow or Data Provision Agreement to which the data relates is required.**
+* links - *Array*. *Links* field is an array of *[link](#link)* objects. A collection of links to structural metadata or to additional information regarding the structure. **If data was requested for a dataflow, then the dataflow identification is to be provided. If data was requested for a DSD, then the DSD identification is to be provided. If data was requested for a data provision agreement, then the data provision agreement identification is to be provided. This identification is to be listed as the first link and must include the URN.** Therefor, other identificication properties are not needed.
+* name - *String*. Human-readable (best-language-match) name of the related structure.
+* names - *Object* *optional*. Human-readable localised *[names](#names)* of the related structure.
+* description - *String* *optional*. Human-readable (best-language-match) description of the related structure. The description is typically longer than the text provided for the name field.
+* descriptions - *Object* *optional*. Human-readable localised descriptions (see *[names](#names)*) of the related structure. A descriptions is typically longer than the text provided for the name field.
 * dimensions - *Object*. Describes the *[dimensions](#dimensions-measures-attributes)* used in the message as well as the levels (`dataSet`, `series`, `observations`) at which these `dimensions` are presented.
 * measures - *Object* *optional*. Describes the *[measures](#dimensions-measures-attributes)* used in the message. *Measures* are always presented at the `observations` level. For backward-compatibility, the `measures` object can be omitted if there is only one measure with the ID "OBS_VALUE". In this case, the measure values (of an indeterministic type) are written directly into the dataSet. SDMX 3+.0.0 implementations should always use the `measures` object. In case an SDMX 3+.0.0 data structure definition has no measures, the `measures` object must be present but empty. 
-* attributes - *Object*. Describes the *[attributes](#dimensions-measures-attributes)* used in the message as well as the levels (`dataSet`, `dimensionGroup`, `series`, `observations`) at which these *attributes* are presented.
+* attributes - *Object* *optional*. Describes the *[attributes](#dimensions-measures-attributes)* used in the message as well as the levels (`dataSet`, `dimensionGroup`, `series`, `observations`) at which these *attributes* are presented. Reference metadata attributes are also included here as needed.
 * annotations - *Array* *optional*. *Annotations* field is an array of *[annotation](#annotation)* objects. If appropriate, provides a list of `annotations` that can be referenced by `structure`, `component`, `component value`, `dataSets`, `series` and `observations`.
 * dataSets - *Array* *optional*. *dataSets* field is an array of integers. It contains the indexes of the *dataSet* objects in the *dataSets* array of the *data* object, which contain the data for this *structure*. If omitted, then all data included in the message are assumed to be described by the *structure*.
 
@@ -342,12 +348,18 @@ Each of the components may contain the following fields:
 * keyPosition - *Number*. **This field is mandatory for `dimensions` but not to be supplied for `measures` or `attributes`.** Indicates the position of the `dimension` in the Data Structure Definition, starting at 0. It needs to be provided also for the special `dimensions` such as Time or Measure dimensions. The information in this field is consistent with the order of `dimensions` in the "key" parameter string (i.e. D.USD.EUR.SP00.A) for data queries in the SDMX API. 
 * roles - *Array* of *String*s *optional*. Defines the component role(s), if any. Roles are represented by the id of a concept defined as [SDMX cross-domain concept](https://sdmx.org/wp-content/uploads/01_sdmx_cog_annex_1_cdc_2009.pdf). Several of the concepts defined as SDMX cross-domain concepts are useful for data visualisation, such as for example, the series title ("TITLE"), the unit of measure ("UNIT_MEASURE"), the number of decimals to be displayed ("DECIMALS"), the  country or geographic reference area ("REF_AREA", e.g. when using maps), the period of time to which the measured observation refers ("REF_PERIOD"), the time interval at which observations occur over a given time period ("FREQ"), etc. It is strongly recommended to identify any component that can be useful for data visualisation purposes by using the appropriate SDMX cross-domain concept as role.
 * isMandatory - *Boolean* *optional*. **Only for `measures` and `attributes`.** If `true` then that `measure` or `attribute` is mandatory in the exchange of complete datasets. The default is `false`.
-* relationship - *Object*.  **This field is mandatory for `attributes` but not to be supplied for `measures` or `dimensions`.** *[Attribute relationship](#attribute-relationship)* describes how the value of this attribute varies with the values of other components. This relationship expresses the attachment level of the attribute as defined in the data structure definition. Depending on the message context (especially the data query) an attribute value can however be attached physically in the message at a different level.
-* format - *Object* *optional*. *[Format](#format)* describes the allowed components representation (permitted type and cardinality of the values). It contains essential information to determine the location of the component values and the related necessity of using indexes for referencing. It is only used when the component values are not defined by an enumerated list of identifiable items (codelist).
+* relationship - *Object* *optional*. **This field is mandatory for data `attributes` but optional for reference metadata `attributes` and not to be supplied for `measures` or `dimensions`.** *[Attribute relationship](#attribute-relationship)* describes how the value of this attribute varies with the values of other components. This relationship expresses the attachment level of the attribute as defined in the data structure definition. Depending on the message context (especially the data query) an attribute value can however be attached physically in the message at a lower level.
+* format - *Object* *optional*. *[Format](#format)* describes the allowed components representation (permitted type and cardinality of the values). It contains essential information to determine the location of the component values and the related necessity of using indexes for referencing. `format` is only used when the component values are not defined by an enumerated list of identifiable items (codelist), in which case instead of `id` and `name`, the component values will use:  
+  - if `maxOccurs` is greater than 1: the `values` property,
+  - otherwise: the `value` property. 
 * default - *String* or *Number* *optional*. Defines a default `value` for the component (**valid for `attributes` only!**). If no value is provided in the data part of the message then this value applies.
+* minOccurs - *Non-negative integer* *optional* **Only for `measures` and `attributes`.** Indicates the minimum number of value that must be reported for the component. If missing than there is no lower limit on its occurrences. The default is 1. 
+* maxOccurs - *Positive integer*/*String* *optional* **Only for `measures` and `attributes`.** Indicates the maximum number of values that can be reported for the component. If set to the string "unbounded" than there is no upper limit on its occurrences. For non-enumerated components, if > 1 then the component values will use the `values` property of the component value instead of `value`. The default is 1. `maxOccurs` must not be smaller than `minOccurs`.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional information regarding the component.
 * annotations - *Array* *optional*. *[Annotations](#annotation)* is a collection of indices of the corresponding *annotations* for the component. Indices refer back to the array of *annotations* in the structure field.
-* values - *Array* *optional*. *Values* field is an array of *[component value](#component-value)* objects. Note that `dimensions` and `attributes` presented at `dataSet` level can only have one single component value. ***Values* are mandatory for `dimensions`**, but *optional* for `measures` and `attributes`. Whenever the *values* field is provided, the component values in the dataSets will always contain the corresponding array indexes, otherwise they will contain the values themselves.  
+* values - *Array* *optional*. *Values* field is an array of *[component value](#component-value)* objects. Note that `dimensions` and `attributes` presented at `dataSet` level can only have one single component value. ***Values* are *optional* for `measures` and `attributes`, but generally *required* for `dimensions` unless used only for attributes at `dimensionGroup` level**. Whenever the *values* field is provided, the component values in the dataSets will always contain the corresponding array indexes, otherwise they will contain the values themselves.  
+
+If `format` is not used (thus the component values are enumerated) then the component values will be flat-listed using their `id` and `name`, independently from the value of `maxOccurs`. For attributes and measures, if multiple enumerated values are allowed then the indexes of the corresponding component values are to listed in arrays in the related `dataSet`. 
 
 See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
@@ -363,9 +375,6 @@ Example:
 				  "fr": "L'intervalle de temps avec lequel les observations sont faites sur une période donnée." },
 		"keyPosition": 0,
 		"role": [ "FREQ" ],
-		"format": {
-			# format object #
-		},
 		"links": [
 			{
 				# link object #
@@ -405,6 +414,8 @@ Example:
 			# format object #
 		},
 		"default": "MAFF_Agricultural Statistics",
+		"minOccurs": 0,
+		"maxOccurs": 3,
 		"links": [
 			{
 				# link object #
@@ -424,16 +435,16 @@ See the section on [linking mechanism](#linking-mechanism) for all information o
 
 ##### attribute relationship
 
-*Object*. The attribute's relationship defines the relationship between an attribute and other data structure definition components as defined in the data structure definition. It provides the original "attachment level", but depending on the message context (especially the data query) an attribute value can however be presented physically in the message at a different level. The attribute relationship serves also to define the scope, meaning to which measures an attribute applies.
+*Object*. The attribute's relationship defines the relationship between an attribute and other data structure definition components as defined in the data structure definition. It provides the original "attachment level", but depending on the message context (especially the data query) an attribute value can however be presented physically in the message at a lower level. The attribute relationship serves also to define the scope, meaning to which measures an attribute applies.
 
-* dataflow - Empty *Object* *optional*. This means that the value of the attribute **varies** per dataflow. It is the data modeller's responsibility to design or use non-overlapping dataflows that do not have observations in common, otherwise the integrity of dataflow-specific attribute values is not assured by the model, e.g. when querying those data through its DSD.
-* dimensions - *Array* of *String*s *optional*. One or more ID(s) of (a) local dimension(s) in the data structure definition on which the value of this attribute **depends**. 
-* observation - Empty *Object* *optional*. This means that value of the attribute can **vary** with each observation.
+* dataflow - Empty *Object* *optional*. This means that the value of the attribute does **not depend** on any dimension component, and therefore that the value of the attribute can **vary** only per dataflow. It is the data modeller's responsibility to design or use non-overlapping dataflows that do not have observations in common, otherwise the integrity of dataflow-specific attribute values is not assured by the model, e.g. when querying those data through its DSD.
+* dimensions - *Array* of *String*s *optional*. This means that the value of the attribute **depends** on only **some** of the dimension components, of which the array contains the ID(s), and therefore that the value of the attribute can **vary** only with each partial key combination of those dimensions (e.g., a group, a time series or a section). 
+* observation - Empty *Object* *optional*. This means that the value of the attribute **depends** on **all** of the dimension components, and therefore that the value of the attribute can **vary** with each observation.
 * primaryMeasure - *String* *optional*. Deprecated value having the same meaning than the relationship `observation`. For backward-compatibility only.
-* measures - *Array* of *String*s *optional*. One or more ID(s) of (a) local measure(s) in the data structure definition to which the values of this attribute **apply**. This is only for informational and presentational purposes. If the `measures` relationship is not present then the attribute values apply to whole observations.
+* measures - *Array* of *String*s *optional*. This means that the value of the attribute **applies** only to some of the measure components, of which the array contains the ID(s). This is only for informational and presentational purposes. If the `measures` relationship is not present then the attribute values apply to all measures.
 
 Exactly one of `dataflow`, `dimensions` and (`observation` or `primaryMeasure`) is required.
-Note that relationships defined in data structure definitions through `attachmentGroups` or a `group` are to be resolved by the server conveniently for the client into above `dimensions`.
+Note that relationships defined in data structure definitions through a `group` are to be resolved by the server conveniently for the client into above `dimensions`.
 
 Examples:
 
@@ -465,14 +476,10 @@ Examples:
 
 ##### format
 
-*Object*. The format object defines the representation for a component. It describes the possible content for component values, which could be text (including XHTML and multi-lingual values), a simple value or multiple values.
+*Object*. The format object defines the representation for a component. It describes the possible text formats for component values (including XHTML and multi-lingual values) when the component is not enumerated (not using a codelist or valuelist).
 
-* minOccurs - *Non-negative integer* *optional* **Only for `measures` and `attributes`.** Indicates the minimum number of value that must be reported for the component. If missing than there is no lower limit on its occurrences. If > 1 then the component values will use the `values` property of the component value instead of `id` and `name` or `value`. The default is 1. 
-* maxOccurs - *Positive integer*/*String* *optional* **Only for `measures` and `attributes`.** Indicates the maximum number of values that can be reported for the component. If set to the string "unbounded" than there is no upper limit on its occurrences. If > 1 then the component values will use the `values` property of the component value instead of `id` and `name` or `value`. The default is 1. 
 * dataType - *String* *optional*. Describes the type of data format allowed for the representation of the component. Only the following dataTypes are supported: "String",
- "Alpha", "AlphaNumeric", "Numeric", "BigInteger", "Integer", "Long", "Short", "Decimal", "Float", "Double", "Boolean", "URI", "Count", "InclusiveValueRange", "ExclusiveValueRange", "Incremental", "ObservationalTimePeriod", "StandardTimePeriod", "BasicTimePeriod", "GregorianTimePeriod", "GregorianYear", "GregorianYearMonth", "GregorianDay", "ReportingTimePeriod", "ReportingYear", "ReportingSemester", "ReportingTrimester", "ReportingQuarter", "ReportingMonth", "ReportingWeek", "ReportingDay", "DateTime", "TimeRange", "Month", "MonthDay", "Day", "Time", "Duration", "GeospatialInformation" and "XHTML". `Dimensions` do not support the type "XHTML". Time `dimensions` (having the id and role "TIME_PERIOD") only support the types "ObservationalTimePeriod", "StandardTimePeriod", "BasicTimePeriod", "GregorianTimePeriod", "GregorianYear", "GregorianYearMonth", "GregorianDay", "ReportingTimePeriod", "ReportingYear", "ReportingSemester", "ReportingTrimester", "ReportingQuarter", "ReportingMonth", "ReportingWeek", "ReportingDay", "DateTime", "TimeRange". The default data type is "String" except for time `dimensions`, which takes "ObservationalTimePeriod" as default. If used then the component values will use instead of `id` and `name`:
-  - if `minOccurs` and `maxOccurs` are equal to 1: the `value` property,
-  - otherwise: the `values` property.
+ "Alpha", "AlphaNumeric", "Numeric", "BigInteger", "Integer", "Long", "Short", "Decimal", "Float", "Double", "Boolean", "URI", "Count", "InclusiveValueRange", "ExclusiveValueRange", "Incremental", "ObservationalTimePeriod", "StandardTimePeriod", "BasicTimePeriod", "GregorianTimePeriod", "GregorianYear", "GregorianYearMonth", "GregorianDay", "ReportingTimePeriod", "ReportingYear", "ReportingSemester", "ReportingTrimester", "ReportingQuarter", "ReportingMonth", "ReportingWeek", "ReportingDay", "DateTime", "TimeRange", "Month", "MonthDay", "Day", "Time", "Duration", "GeospatialInformation" and "XHTML". `Dimensions` do not support the type "XHTML". Time `dimensions` (having the id and role "TIME_PERIOD") only support the types "ObservationalTimePeriod", "StandardTimePeriod", "BasicTimePeriod", "GregorianTimePeriod", "GregorianYear", "GregorianYearMonth", "GregorianDay", "ReportingTimePeriod", "ReportingYear", "ReportingSemester", "ReportingTrimester", "ReportingQuarter", "ReportingMonth", "ReportingWeek", "ReportingDay", "DateTime", "TimeRange". The default data type is "String" except for time `dimensions`, which takes "ObservationalTimePeriod" as default.  
 * isSequence - *Boolean* *optional*. Indicates whether the values are intended to be ordered, and it may work in combination with the interval, startValue, and endValue attributes or the timeInterval, startTime, and endTime, attributes. If this attribute holds a value of 'true', a start value or time and a numeric or time interval must supplied. If an end value is not given, then the sequence continues indefinitely.
 * interval - *Integer* *optional*. Specifies the permitted interval (increment) in a sequence. In order for this to be used, the isSequence attribute must have a value of 'true'.
 * startValue - *Number* *optional*. Is used in conjunction with the isSequence and interval attributes (which must be set in order to use this attribute). This attribute is used for a numeric sequence, and indicates the starting point of the sequence. This value is mandatory for a numeric sequence to be expressed.
@@ -494,8 +501,6 @@ Examples:
 Example:
 
 	{ 
-		"minOccurs": 2,
-		"maxOccurs": 3,
 		"dataType": "String",
 		"minLength": 4, 
 		"maxLength": 4, 
@@ -504,8 +509,6 @@ Example:
 	}
 
 	{ 
-		"minOccurs": 2,
-		"maxOccurs": 2,
 		"dataType": "Double",
 		"isMultilingual": false,
 		"sentinelValues": [
@@ -556,19 +559,17 @@ Example:
 
 See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
-Example:
+Examples:
 
 	{
-		"id": "2010",
-		"name": "2010",
-		"names": { "en": "2010", 
-			   "fr": "2010" },
-		"description": "Description for 2010.",
-		"descriptions": { "en": "Description for 2010.",
-				  "fr": "Déscription pour 2010." },
-		"start": "2010-01-01T00:00Z",
-		"end": "2010-12-31T23:59:59Z",
-		"parent": "T",
+		"id": "AUS",
+		"name": "Australia",
+		"names": { "en": "Australia", 
+				   "fr": "Australie" },
+		"description": "Description for Australia.",
+		"descriptions": { "en": "Description for Australia.",
+						  "fr": "Déscription pour l'Australie." },
+		"parent": "OECD",
 		"order": 56,
 		"links": [
 			{
@@ -576,6 +577,15 @@ Example:
 			}
 		],
 		"annotations": [ 5, 49 ]
+	}
+
+	{
+		"value": "2010",
+		"description": "Description for 2010.",
+		"descriptions": { "en": "Description for 2010.",
+				  "fr": "Déscription pour 2010." },
+		"start": "2010-01-01T00:00Z",
+		"end": "2010-12-31T23:59:59Z"
 	}
 
 	{
@@ -663,7 +673,7 @@ Several levels may appear in a `dataSet` object, depending on the way data is or
 A `dataSet` may contain a flat list of `observations`. In this scenario, we have 2 main levels in the data part of the message: the `dataSet` level and the `observation` level.
 A `dataSet` may also organize observations in logical groups called `series`. These groups can represent time series or series by other dimensions (also called cross-sections). In this scenario, we have 3 main levels in the data part of the message: the `dataSet` level, the `series` level and the `observation` level.
 
-`Dimensions` and `attributes` may be presented at any of these main levels. However, attributes attached to only specific dimensions maybe presented also at an intermediate `dimensionGroup` level inbetween the `dataSet` level and the `series` level.
+`Dimensions` and `attributes` may be presented at any of these main levels. However, attributes attached to only specific dimensions maybe presented also at an intermediate `dimensionGroup` level inbetween the `dataSet` level and the `series` level. `attributes` may also include reference metadata attributes.  
 `Measures` are always presented at the `observation` level.
 In case the `dataSet` is a flat list of `observations`, `observations` will be found directly under a `dataSet` object. In case the `dataSet` represents series of time
 or series of another dimension, the `observations` will be found under the `series` elements.
@@ -671,11 +681,13 @@ or series of another dimension, the `observations` will be found under the `seri
 The `dataSet` properties are:
 
 * structure - *Integer* *optional*. *Structure* contains the index of the *structure* in the *structures* array of the *data* object, which describe the data in this *dataSet*. If omitted, then the data in this *dataSet* are assumed to be described by the first *structure* (default: 0). 
-* action - *String* *optional*. Action provides a list of actions, describing the intention of the data transmission from the sender's side.
-  - `Append` - this is an incremental update for an existing `dataSet` or the provision of new data or documentation (attribute values) formerly absent. If any of the supplied data or metadata is already present, it will not replace these data.
-  - `Replace` - data are to be replaced, and may also include additional data to be appended.
-  - `Delete` - data are to be deleted.
-  - `Information` (default) - data are being exchanged for informational purposes only. When used to update a system, the `Append` action is assumed.
+* action - *String* *optional*. Action provides a list of actions, describing the intention of the data transmission from the sender's side. When absent (not recommended), `Merge` is assumed.
+  - `Merge` - Data or data-related reference metadata is to be merged, through either update or insertion depending on already existing information. This operation does not allow deleting any component values. Updating individual values in multi-valued measure, attribute or data-related reference metadata values is not supported either. The complete multi-valued value is to be provided. Only non-dimensional components (measure, attribute or data-related reference metadata values) can be **omitted** (`null` or absent) as long as at least one of those components is present. Bulk merges are thus not supported. Only the provided values are merged. Dimension values for higher-level (data-related reference metadata) attributes can be **switched-off** (using `~`) when those are not attached to these dimensions. All observations as well as the sets of data-related reference metadata attributes at specific dimension combinations impacted by the `Merge` action change their time stamp when used to update an SDMX storage system.
+  - `Replace` - Data or data-related reference metadata is to be replaced, through either update, insert or delete depending on already existing information. A full replacement is hereby assumed to take place at specific “replacement levels”: for entire observations and for any specific dimension combination for data-related reference metadata attributes. Within these “replacement levels” the provided values are inserted or updated, and omitted values are deleted. Values provided for the other attributes (those above the observation level) are merged (see `Merge` action). Only non-dimensional components (measure, attribute or data-related reference metadata values) can be **omitted** (`null` or absent). Bulk replacing is thus not supported. Dimension values for higher-level (data-related reference metadata) attributes can be **switched-off** (using `~`) when those are not attached to these dimensions. Replacing non-existing elements is not resulting in an error. All observations as well as the sets of data-related reference metadata attributes at specific dimension combinations impacted by the replace action change their time stamp when used to update an SDMX storage system. Because the `Replace` action always takes place at specific levels, it cannot be used to replace a whole dataset or a whole series. However, a “replace all” effect can be achieved by combining a `Delete` dataset containing a completely wildcarded key (where all dimension values are omitted) with a `Merge` or `Replace` dataset within the same data message. Similarly, to replace a whole series, a message can combine a `Delete` dataset containing only the partial key of the series (where the not used dimension values are omitted) with a `Merge` or `Replace` dataset for that series.
+  - `Delete` - Data or data-related reference metadata is to be deleted. Deletion is hereby assumed to take place at the lowest level of detail provided in the message.
+Any component (including dimensions) can be **omitted** (dimensions: empty, others: `null` or absent). Omitting dimension values allows for bulk deletions. Partially omitting non-dimension component values allows restricting the deletion of measure, attribute or data-related reference metadata values to the ones being present. Instead of real values for non-dimensional components, it is sufficient to use any valid value. With this, whole datasets, any slices of observations for dimension groups such as time series, observations or individual measure, attribute and data-related reference metadata attributes values can be deleted. Dimension values for higher-level (data-related reference metadata) attributes can be **switched-off** (using `~`) when those are not attached to these dimensions. Deleting non-existing elements or values is not resulting in an error. All observations as well as the sets of attributes and data-related reference metadata at higher partial keys impacted by the `Delete` action change their time stamp when used to update an SDMX storage system.
+  - `Append` - Deprecated. When used to update an SDMX storage system, the `Merge` action is assumed.
+  - `Information` - Deprecated. When used to update an SDMX storage system, the `Merge` action is assumed.
 * reportingBegin - *String* *optional*. The start of the time period covered by the message.
 * reportingEnd - *String* *optional*. The end of the time period covered by the message.
 * validFrom - *String* *optional*. The validFrom indicates the inclusive start time indicating the validity of the information in the data.
@@ -691,11 +703,28 @@ The `dataSet` properties are:
 
 For information on how to handle the indexes for `dimensions`, `measures`, `attributes` and `annotations` see the section dedicated to [handling indexes](#handling-indexes).
 
+Important notes about the `action` types: 
+
+The terms “delete”, “merge” and “replace” do not imply a physical replacement or deletion of values in the underlying database. To minimize the physical resource requirements, SDMX web service implementations that do not support the `includeHistory` and `asOf` URL parameters might physically replace the existing values in the database. SDMX web services that neither support the `updatedAfter` URL parameter might also implement physical deletions. However, SDMX web services that support these parameters (or other time-machine features), would not overwrite or delete the physical values.  
+SDMX web services that support the `includeHistory` or `asOf` URL parameters should never allow deleting their historic data content because this would interfere with the interests of data consumers, such as data aggregators. Therefore, a specific feature to physically delete previous (outdated) content is intentionally not added to the SDMX standard syntax. If such a feature is required by an organisation, then it needs to be implemented as a custom feature outside the SDMX standard.  
+Likewise, all SDMX-compliant systems that do (or are configured to) support the `updatedAfter` URL parameter need to systematically retain the information about deleted data (or data-related reference metadata).   
+All datasets – even with varying actions – within a single data message have always to be treated as **ACID transaction** to guarantee “transactional safety” (full data consistency and validity despite errors, power failures, and other mishaps). These datasets are to be processed in the order of appearance in the message. The advantage of such data messages is thus the ability to bundle separate `Delete` and `Replace` or `Merge` actions into one transactional data message.
+
+Recommended dataset actions in SDMX web service responses to GET data queries:  
+
+1) Without the `updatedAfter`, `includeHistory`, `detail`, `attributes` or `measures` URL parameters: The response message should contain the retrieved data in a replace dataset (instead of the previous information dataset). 
+2) Without the `updatedAfter` and `includeHistory`, but with `detail`, `attributes` or `measures` URL parameters: The response message should contain the retrieved data in a merge dataset (instead of the previous information dataset). 
+3) With the `updatedAfter` URL parameter: The response must include the information of all previously updated, inserted and deleted data or data-related reference metadata, even if bulk deletions have been used, because the DB synchronization use case requires that the generated response must always allow achieving to replicate the exact same punctual data content as currently stored in the queried data source. One of the two approaches are possible:
+   - a `Delete` dataset for entirely deleted observations and for entirely deleted sets of (data-related reference metadata) attribute values attached to specific dimension combinations and a `Replace` dataset for all other changed observations and changed attribute and data-related reference metadata values attached to specific dimension combinations, or
+   - a `Delete` dataset for entirely deleted observations, for entirely deleted sets of (data-related reference metadata) attribute values attached to specific dimension combinations and for individually deleted mesure, attribute and data-related reference metadata values and a `Merge` dataset for all other updated or inserted observation, attribute and data-related reference metadata values.  
+4) With the `includeHistory` URL parameter: Using a number of datasets with `Delete`, `Replace` or `Merge` actions and limited in their validity time span that allow achieving to replicate the exact same punctual data contents as previously stored in the queried data source.
+5) With the `asOf` URL parameter: The recommendations of 1 and 2 apply depending on other parameters. In addition, the returned dataset should have its validity time span limited to the point in time requested in the `asOf` parameter.
+
 Examples:
 
 	{
 		"structure": 0,
-		"action": "Information",
+		"action": "Merge",
 		"reportingBegin": "2012-05-04",
 		"reportingEnd": "2012-06-01",
 		"validFrom": "2012-01-01T10:00:00Z",
@@ -717,7 +746,7 @@ Examples:
 
 	{
 		"structure": 0,
-		"action": "Information",
+		"action": "Replace",
 		"reportingBegin": "2012-05-04",
 		"reportingEnd": "2012-06-01",
 		"validFrom": "2012-01-01T10:00:00Z",
@@ -1042,14 +1071,10 @@ Example:
 				"names": { "en": "Time Period" },
 				"values": [
 					{
-						"id": "2016",
-						"name": "2016",
-						"names": { "en": "2016" }
+						"value": "2016"
 					},
 					{
-						"id": "2017",
-						"name": "2017",
-						"names": { "en": "2017" }
+						"value": "2017"
 					}
 				]
 			}
@@ -1278,27 +1303,55 @@ Example:
 	Note:
 	For attribute "ATTR1", the values are omitted in the attribute definition and thus presented directly in the dataSets' `observations` (instead of indexes).
 
-## error
+## statusInformation
 
-*Object* *optional*. Used to provide status messages in addition to RESTful web services HTTP error status codes. The following pieces of information should be provided:
+*Object* *optional*. Used to provide status information with more detail to the HTTP status codes in the RESTful SDMX web service responses. The following pieces of information should be provided:
 
-* code - *Number*. Provides a code number for the status message if appropriate. Standard code numbers are defined in the SDMX 2.1 Web Services Guidelines.
+* code - *Number*. Provides an HTTP status code number for the status information if appropriate. See [RESTful SDMX web service error handling and status information](https://github.com/sdmx-twg/sdmx-rest/blob/master/doc/status.md).
 * title - *String* *optional*. A short, human-readable (best-language-match) summary of the situation that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization.
 * titles - *Object* *optional*. A list of short, human-readable localised summaries (see *[names](#names)*) of the status that SHOULD NOT change from occurrence to occurrence of the status, except for purposes of localization.
 * detail - *String* *optional*. A human-readable (best-language-match) explanation specific to this occurrence of the status. Like title, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status.
 * details - *Object* *optional*. A list of human-readable localised explanations (see *[names](#names)*) specific to this occurrence of the status. Like titles, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status.
-* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the status message.
+* links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the status information.
 
 See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
 Example:
 
 	{
-		"code": 150,
+		"code": 400,
 		"title": "Invalid number of dimensions in the key parameter",
 		"titles": { "en": "Invalid number of dimensions in the key parameter"
 			    "fr": "Nombre invalide de dimensions dans le paramètre 'key'" }
 	}
+
+# Data type conversions between SDMX and JSON
+
+For the different non-localised data types of components, the following JSON types can be used for the instances of their values:
+
+| SDMX data types | JSON data type |
+| --------------- | ---------------|
+| "Numeric", "Long", "Short", "Float", "Double" | "number" |
+| "Integer", "Count" | "integer"   |
+| "Boolean"       | "boolean"      | 
+| all other SDMX data types | "string" | 
+
+Multi-valued values use a JSON array of the corresponding above JSON type.  
+Localised values use a specific JSON object based on "string"s.  
+Whenever the component has no value, the JSON type `null` can be used.  
+
+For **intentionally missing** observation and attribute values, even if mandatory, the following special values can be used:
+- For "number" data type: `"NaN"` (string)
+- For all other data types: `"#N/A"` (string)
+
+Example:
+
+```json
+	"observations": {
+		"0:0": [105.6, "ATTR1_VALUE"],
+		"0:1": ["NaN", "#N/A"]
+	}
+```
 
 # Linking mechanism
 
@@ -1306,10 +1359,10 @@ Example:
 
 *Object* *optional*. A link to an external resource.
 
-* href - *String* or . Absolute or relative URL of the external resource.
+* href - *String* *optional* only if `urn` is present. Absolute or relative URL of the external resource.
 * rel - *String*. Relationship of the object to the external resource. See semantics below.
-* urn - *String* *optional*. The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details).
-* uri - *String* *optional*. The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource.
+* urn - *String* *optional* only if `href` is present. The `urn` holds a valid SDMX Registry URN (see SDMX Registry Specification for details).
+* uri - *String* *optional*. The `uri` attribute holds a URI that contains a link to additional information about the resource, such as a web page. This `uri` is not an SDMX resource.
 * title - *String* *optional*. A human-readable (best-language-match) description of the target link.
 * titles - *Object* *optional*. A list of human-readable localised descriptions (see *[names](#names)*) of the target link.
 * type - *String* *optional*. A hint about the type of representation returned by the link.
@@ -1455,13 +1508,10 @@ Let's say that the following data content of a message needs to be processed:
 							"names": { "en": "Time period or range" },
 							"values": [
 								{
-									"id": "2013-01-18",
-									"name": "2013-01-18",
-									"names": { "en": "2013-01-18" }
-								}, {
-									"id": "2013-01-21",
-									"name": "2013-01-21",
-									"names": { "en": "2013-01-21" }
+									"value": "2013-01-18"
+								},
+								{
+									"value": "2013-01-21"
 								}
 							]
 						}
@@ -1522,7 +1572,7 @@ Let's say that the following data content of a message needs to be processed:
 		"dataSets": [
 			{
 				"structure": 0,
-				"action": "Information",
+				"action": "Merge",
 				"series": {
 					"0": {					// 0 is the index of the first value of (series-level) CURRENCY dimension: "NZD"
 						"annotations": [0],		// 0 is the index of the first value of annotations: "ABC123456"
@@ -1624,13 +1674,10 @@ From the `structure.dimensions.observation` information, we know that TIME_PERIO
 			"names": { "en": "Time period or range" },
 			"values": [
 				{
-					"id": "2013-01-18",
-					"name": "2013-01-18",
-					"names": { "en": "2013-01-18" }
-				}, {
-					"id": "2013-01-21",
-					"name": "2013-01-21",
-					"names": { "en": "2013-01-21" }
+					"value": "2013-01-18"
+				},
+				{
+					"value": "2013-01-21"
 				}
 			]
 		}
@@ -1670,7 +1717,7 @@ The same logic applies for mapping the other observations, its attributes and an
 
 **Localised best-language-match text strings (static properties matched through "Lookup"):**
 
-The first best language match according to the user’s preferred language choices expressed through the HTTP content negotiation (Accept-Language header parameter) is to be provided for each localised text element. The message does however not indicate the returned language per localised text element.
+The first best language match according to the user’s preferred language choices expressed through the HTTP content negotiation (Accept-Language header parameter) or the system-default language, if there is no preferred language or no language match, is to be provided for each localised text element. In any case, the message does not indicate the returned language per localised text element.
 
 This language matching type is called "Lookup", see <https://tools.ietf.org/html/rfc4647#section-3.4>.
 
@@ -1682,7 +1729,7 @@ Example:
 
 **Localised text objects (variable properties matched through "Filtering"):**
 
-All available language matches according to the user’s preferred language choices expressed through the HTTP content negotiation (Accept-Language header parameter) is to be provided for each localised text element. 
+Optionally, all available language matches according to the user’s preferred language choices expressed through the HTTP content negotiation (Accept-Language header parameter) can be provided for each localised text element. 
 
 This language matching type is called "Filtering", see <https://tools.ietf.org/html/rfc4647#section-3.3>.
 
@@ -1693,14 +1740,11 @@ Example:
 		   "fr": "Fréquence" },
 ```
 
-
-The localised text object needs to be present whenever the related localised best-language-match text strings is present, and especially whenever a localised text is mandatory in the SDMX Information model. Note that localised text (and the knowledge about the locale) is mandatory in structure messages when artefacts are being submitted for storage to a registry or to other databases. The localised text object is important for use cases where multiple languages are required or where the information on the language used is required.
-
-
 In case that there is no language match for a particular localisable element, it is optional to:
-
 - return the element in a system-default language or alternatively to not return the element
 - indicate available alternative languages for the element's maintainable artefact through links to underlying localised resources
+
+The localised text object must be present and complete whenever the user’s preferred language choice is `*` (wildcard for any language). This mechanism allows transmitting of structures with their complete content (all localised elements and the knowledge about the locale) in contexts where all language versions are required or where the information on the language used is required.
 
 **It is recommended to indicate all languages used anywhere in the message for localised elements through http Content-Language response header (languages of the intended audience) and/or through a “contentLanguages” property in the meta tag.** The main language used can be indicated through the “lang” property in the meta tag.
 
@@ -1712,17 +1756,19 @@ This document defines a response format for SDMX RESTful Web Services in JSON an
 
 # Extending SDMX-JSON
 
-The objects defined in SDMX-JSON are "open", i.e. they can be extended by implementers with properties not defined in this specification. Providers of SDMX-JSON messages are therefore welcome to add support for features not covered in this specification. Whenever appropriate, providers who opt to do so are invited to inform us, so that future versions of SDMX-JSON may integrate these extensions, thereby improving interoperability.
+The objects defined in SDMX-JSON are "open", i.e. they can be extended by implementers with properties not defined in this specification. Providers of SDMX-JSON messages are therefore welcome to add support for features not (yet) covered in this specification. Whenever appropriate, providers who opt to do so are invited to inform us, so that future versions of SDMX-JSON may integrate these extensions, thereby improving interoperability.
 
-The snippet below shows an example of an `error` object, extended with a `wsCustomErrorCode`:
+However, in order to allow JSON validators to properly check for and recognize syntax errors instead of interpreting them as extensions, all extension keywords must be prefixed with "x-". Any keyword that is neither a standard keyword nor begins with "x-" is in violation of the specification and should cause validation of the SDMX-JSON document to fail.
+
+The snippet below shows an example of an `error` object, extended with a `x-CustomErrorCode`:
 
 ```json
 	"errors": [
 		{
-			"code": 150,
+			"code": 400,
 			"title": "Invalid number of dimensions in the key parameter",
 			"titles": { "en": "Invalid number of dimensions in the key parameter" },
-			"wsCustomErrorCode": 39272
+			"x-CustomErrorCode": 39272
 		}
 	]
 ```
