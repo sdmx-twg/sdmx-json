@@ -204,7 +204,7 @@ Example:
 
 *Object*. Contains a collection of reported metadata against a set of values for a given full or partial target identifier, as described in a metadata structure definition. The metadata set may contain reported metadata for multiple report structures defined in a metadata structure definition.
 
-* action - *String* *optional*. Deprecated. Instead, actions are defined by the HTTP action verb used.
+* action - *String* *optional*. Deprecated. Instead, actions are defined by the HTTP action verb used. See below for more details.
 * isPartialLanguage - *Boolean* *optional*. Default: `false`. Set to `true` if the metadata set doesn't contain the complete set of all available languages, e.g., when obtained as a reponse to a GET query that requested specific languages through the HTTP header “Accept-Language”. 
 * publicationPeriod - *String* *optional*. The publicationPeriod specifies the period of publication of the data in terms of whatever provisioning agreements might be in force (i.e., "2005-Q1" if that is the time of publication for a `metadataSet` published on a quarterly basis).
 * publicationYear - *String* *optional*. The publicationYear holds the ISO 8601 four-digit year.
@@ -228,6 +228,11 @@ Example:
 * attributes - Non-empty *array* of recursive *[attribute](#attribute)* objects. Contains the reported metadata attribute values for the reported metadata and recursively their child metadata attributes.
 
 See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
+
+Details for handling of actions:
+
+Reference metadatasets are maintainable and thus for actions behave like structural metadata (artefacts): When interacting with SDMX Rest web services, the HTTP action verbs GET, PUT and POST are used to indicate the intended action per web request. Consequently, different actions cannot be bundled and executed with "transactional ACIDity". Note that metadatasets retrieved using the HTTP header `Accept-Language` may contain only partial languages, and thus should be marked with its `isPartialLanguage` property set to `true`. Submitting such a partial metadataset to update an SDMX storage system will only add or update the included languages but not change other languages.  
+The former message header or metadataset property `DataSetAction` is deprecated. To avoid conflicts, it is now ignored if still present.
 
 Example:
 

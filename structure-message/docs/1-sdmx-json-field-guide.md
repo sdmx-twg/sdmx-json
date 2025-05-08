@@ -257,6 +257,10 @@ All SDMX artefact types share the following common object properties:
 
 See the section on [localised text elements](#localised-text-elements) on how the message deals with languages.
 
+Note about handling actions:
+
+Structural metadata (artefacts) are maintainable. Thus, when interacting with SDMX Rest web services, the HTTP action verbs GET, PUT and POST are used to indicate the intended action per web request. Consequently, different actions cannot be bundled and executed with "transactional ACIDity". 
+
 Example:
 
 	{
@@ -2117,7 +2121,7 @@ The localised text object must be present and complete whenever the user’s pre
 
 **It is recommended to indicate all languages used anywhere in the message for localised elements through http Content-Language response header (languages of the intended audience) and/or through a “contentLanguages” property in the meta tag.** The main language used can be indicated through the “lang” property in the meta tag.
 
-**In case one or more specific languages were requested through the HTTP header “Accept-Language" in a GET query and the response message might not contain the complete set of all available languages, then in the response message the SDMX artefact's property `isPartialLanguage` is to be set to `true`.**
+**In case one or more specific languages were requested through the HTTP header “Accept-Language" in a GET query and the response message might not contain the complete set of all available languages, then in the response message the SDMX artefact's property `isPartialLanguage` is to be set to `true`.** Submitting such a partial metadataset to update an SDMX storage system will only add or update the included languages but not change other languages. 
 
 # Security Considerations
 
