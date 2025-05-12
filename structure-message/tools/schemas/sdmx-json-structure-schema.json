@@ -953,7 +953,7 @@
 							"$ref":"#/$defs/NestedNCNameIDType"
 						},
 						"isPartialLanguage":{
-							"description":"Set to `true` if the structure doesn't contain the complete set of all available languages, e.g., when obtained as a reponse to a GET query that requested specific languages through the HTTP header “Accept-Language”. Default: `false`.",
+							"description":"Set to `true` if the structure doesn't contain the complete set of all available languages, e.g., when obtained as a response to a GET query that requested specific languages through the HTTP header “Accept-Language”. Default: `false`.",
 							"type":"boolean"
 						},
 						"isExternalReference":{
@@ -1004,7 +1004,7 @@
 							"$ref":"#/$defs/localisedText"
 						},
 						"isPartialLanguage":{
-							"description":"Set to `true` if the structure doesn't contain the complete set of all available languages, e.g., when obtained as a reponse to a GET query that requested specific languages through the HTTP header “Accept-Language”. Default: `false`.",
+							"description":"Set to `true` if the structure doesn't contain the complete set of all available languages, e.g., when obtained as a response to a GET query that requested specific languages through the HTTP header “Accept-Language”. Default: `false`.",
 							"type":"boolean"
 						},
 						"isExternalReference":{
@@ -1051,7 +1051,7 @@
 				{
 					"properties":{
 						"isPartialLanguage":{
-							"description":"Set to `true` if the structure doesn't contain the complete set of all available languages, e.g., when obtained as a reponse to a GET query that requested specific languages through the HTTP header “Accept-Language”. Default: `false`.",
+							"description":"Set to `true` if the structure doesn't contain the complete set of all available languages, e.g., when obtained as a response to a GET query that requested specific languages through the HTTP header “Accept-Language”. Default: `false`.",
 							"type":"boolean"
 						},
 						"isExternalReference":{
