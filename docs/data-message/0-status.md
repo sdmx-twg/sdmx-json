@@ -1,4 +1,4 @@
-**Status of this Document**
+# Status of this Document
 
 *This section describes the status of this document at the time of its publication.
 Other documents may supersede this document.*

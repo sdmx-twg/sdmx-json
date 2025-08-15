@@ -1,4 +1,6 @@
-# Introduction to SDMX-JSON Data Message 2.0.0
+# SDMX-JSON Data Message 2.0.0
+
+## Introduction to SDMX-JSON Data Message 2.0.0
 
 Let's first start with a brief introduction of the SDMX information model.
 
@@ -42,9 +44,9 @@ nulled field and the absence of a field as the same thing.
 - Not all fields appear in all contexts. For example response with error status messages
 may not contain fields for data, dimensions and attributes.
 
-# Field Guide to SDMX-JSON Data Message 2.0.0 Objects (aligned with SDMX 3.0.0)
+## Field Guide to SDMX-JSON Data Message 2.0.0 Objects (aligned with SDMX 3.0.0)
 
-## message
+### message
 
 Message is the top level object and it contains the data as well as the structural metadata needed to interpret those data.
 
@@ -70,7 +72,7 @@ Example:
 		]
 	}
 
-## meta
+### meta
 
 *Object* *optional*. Used to include non-standard meta-information and basic technical information 
 about the message, such as when it was prepared and who has sent it.
@@ -116,7 +118,7 @@ Example:
 		]
 	}
 
-### sender
+#### sender
 
 *Object*. Information about the party that is transmitting the message. 
 Sender contains the following fields:
@@ -142,7 +144,7 @@ Example:
 		]
 	}
 
-#### names
+##### names
 
 *Object* containing all appropriate localised names, one per object property:
 
@@ -158,7 +160,7 @@ Example:
 		"fr": "C'est un nom français"
 	}
 
-#### contact
+##### contact
 
 *Object*. A collection of contact details. Each object in the collection may contain the following field:
 
@@ -196,16 +198,16 @@ Example:
 		"emails": [ "statistics@xyz.org" ]
 	}
 
-### receiver
+#### receiver
 
 *Object* *optional*. Information about the party that is receiving the message. 
 This can be useful if the WS requires authentication. Receiver contains the same fields as [sender](#sender).
 
-### link
+#### link
 
 See the section on [linking mechanism](#linking-mechanism) for all information on links.
 
-## data
+### data
 
 *Object* *optional*. Header contains the message's “primary data”.
 
@@ -227,7 +229,7 @@ Example:
 		]
 	}
 
-## structure
+### structure
 
 *Object* *optional*. Provides the structural metadata necessary to interpret the data contained in the message. It tells you which are the components (`dimensions`, `measures` and `attributes`) used in the message and also describes to which level in the hierarchy (`dataSet`, `dimensionGroup`, `series`, `observations`) these components are attached.
 
@@ -263,11 +265,11 @@ Example:
 		"dataSets": [0]
 	}
 
-### link
+#### link
 
 See the section on [linking mechanism](#linking-mechanism) for all information on links.
 
-### dimensions, measures, attributes
+#### dimensions, measures, attributes
 
 *Object*. Describes the dimensions/measures/attributes used in the message as well as the levels (`dataSet`, `dimensionGroup`, `series`, `observations`) at which these dimensions/measures/attributes are presented. 
 
@@ -325,7 +327,7 @@ Example:
 		]
 	}
 
-#### component
+##### component
 
 *Object* *optional*. A component represents a `dimension`, a `measure` or an `attribute` used in the message. 
 It contains basic information about the component (such as its `name` and `id`) as well as the list of `values` used in the message for this particular component.
@@ -418,11 +420,11 @@ Example:
 		]
 	}
 
-##### link
+###### link
 
 See the section on [linking mechanism](#linking-mechanism) for all information on links.
 
-##### attribute relationship
+###### attribute relationship
 
 *Object*. The attribute's relationship defines the relationship between an attribute and other data structure definition components as defined in the data structure definition. It provides the original "attachment level", but depending on the message context (especially the data query) an attribute value can however be presented physically in the message at a different level. The attribute relationship serves also to define the scope, meaning to which measures an attribute applies.
 
@@ -463,7 +465,7 @@ Examples:
 	}
 
 
-##### format
+###### format
 
 *Object*. The format object defines the representation for a component. It describes the possible content for component values, which could be text (including XHTML and multi-lingual values), a simple value or multiple values.
 
@@ -515,7 +517,7 @@ Example:
 		]
 	}
 	
-###### sentinelValue
+####### sentinelValue
 
 *Object*. It defines a reserved value (within the value domain of the data format) along with its meaning.
 
@@ -537,7 +539,7 @@ Example:
 				  "fr": "Description de non-réponse." }
 	}
 
-##### component value
+###### component value
 
 *Object* *optional*. A particular value for a component in a message. 
 
@@ -612,11 +614,11 @@ Example:
 		]
 	}
 
-###### link
+####### link
 
 See the section on [linking mechanism](#linking-mechanism) for all information on links.
 
-### annotation
+#### annotation
 
 *Object* *optional*. An `annotation` object can be referenced through its `annotations` array index by `structure`, `component`, `component value`, `dataSets`, `series` and `observations`. It contains the following optional information:
 
@@ -649,11 +651,11 @@ Example:
 		]
 	}
 
-#### link
+##### link
 
 See the section on [linking mechanism](#linking-mechanism) for all information on links.
 
-## dataSet
+### dataSet
 
 *Object*. That's where the data (i.e.: the `observations`) will be.
 
@@ -737,12 +739,12 @@ Examples:
 		}
 	}
 
-### link
+#### link
 
 See the section on [linking mechanism](#linking-mechanism) for all information on links.
 
 
-### dimensionGroupAttributes
+#### dimensionGroupAttributes
 
 *Object* *optional*. Collection of *values or value indexes* of all attributes presented at the `dimensionGroup` level, in form of JSON *name/value pairs*.   
 Values are presented if the attribute definition doesn't contain the `values` array.  
@@ -931,7 +933,7 @@ Example:
 	Note:
 	For attributes "ATTR2_DIMGROUP" and "ATTR1_OBS", the values are omitted in the attribute definitions and thus presented directly in the dataSets' `dimensionGroupAttributes` and `observations` (instead of indexes).
 
-### series
+#### series
 
 *Object* *optional*. Collection of series in form of JSON *name/value* pairs, when the `observations` contained in the `dataSet` are used into logical groups (time series or cross-sections). Each underlying series is represented as a JSON *name/value pair* ("name": "value") in the `series` object.
 
@@ -1121,7 +1123,7 @@ Example:
 	Note:
 	For attribute "ATTR2", the values are omitted in the attribute definition and thus presented directly in the dataSets' `observations` (instead of indexes).
 
-### observations
+#### observations
 
 *Object* *optional*. Collection of observations in form of JSON *name/value pairs*. Each underlying observation is represented as a JSON *name/value pair* in the `observations` object.
 
@@ -1278,7 +1280,7 @@ Example:
 	Note:
 	For attribute "ATTR1", the values are omitted in the attribute definition and thus presented directly in the dataSets' `observations` (instead of indexes).
 
-## error
+### error
 
 *Object* *optional*. Used to provide status messages in addition to RESTful web services HTTP error status codes. The following pieces of information should be provided:
 
@@ -1300,9 +1302,9 @@ Example:
 			    "fr": "Nombre invalide de dimensions dans le paramètre 'key'" }
 	}
 
-# Linking mechanism
+## Linking mechanism
 
-## link
+### link
 
 *Object* *optional*. A link to an external resource.
 
@@ -1357,7 +1359,7 @@ SDMX-JSON offers a list of predefined semantics, but implementers are free to ex
 
 The *URL* captured in the `href` attribute can be *absolute* or *relative*. **It is recommended to use absolute URLs in case the SDMX-JSON message is archived.**
 
-# Handling indexes
+## Handling indexes
 
 The purpose of using indexes is to avoid the repetition of space-consuming values of measures, attributes, dimensions and annotations. For the first 2 types, whenever their values are provided directly in the `values` array of the component definition itself, then the datasets must only use the corresponding element indexes in those arrays instead of the real values. Dimensions and annotations will always use the indexes.
 
@@ -1666,7 +1668,7 @@ The value 0 identified previously is the index of the item in the collection of 
 
 The same logic applies for mapping the other observations, its attributes and annotations.
 
-# Localised text elements
+## Localised text elements
 
 **Localised best-language-match text strings (static properties matched through "Lookup"):**
 
@@ -1705,12 +1707,12 @@ In case that there is no language match for a particular localisable element, it
 **It is recommended to indicate all languages used anywhere in the message for localised elements through http Content-Language response header (languages of the intended audience) and/or through a “contentLanguages” property in the meta tag.** The main language used can be indicated through the “lang” property in the meta tag.
 
 
-# Security Considerations
+## Security Considerations
 
 This document defines a response format for SDMX RESTful Web Services in JSON and it raises no new security considerations. SDMX Web Services Guidelines includes the security considerations associated with its usage.
 
 
-# Extending SDMX-JSON
+## Extending SDMX-JSON
 
 The objects defined in SDMX-JSON are "open", i.e. they can be extended by implementers with properties not defined in this specification. Providers of SDMX-JSON messages are therefore welcome to add support for features not covered in this specification. Whenever appropriate, providers who opt to do so are invited to inform us, so that future versions of SDMX-JSON may integrate these extensions, thereby improving interoperability.
 

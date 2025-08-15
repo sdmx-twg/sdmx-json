@@ -4,6 +4,15 @@ nav:
 - SDMX-JSON:
   - index.md
   - Structure Message:
-
+      - structure-message/index.md
+      - Status of this Section: structure-message/0-status.md
+      - Field Guide: structure-message/1-field-guide.md
+      - References: structure-message/2-references.md
   - Data Message:
+      - data-message/index.md
+      - Status of this Section: data-message/0-status.md
+      - Field Guide: data-message/1-field-guide.md
+      - References: data-message/2-references.md
   - Metadata Message:
+      - metadata-message/index.md
+      - Field Guide: metadata-message/1-field-guide.md
