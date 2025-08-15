@@ -1,0 +1,9 @@
+site_name: SDMX-JSON
+
+nav:
+- SDMX-JSON:
+  - index.md
+  - Structure Message:
+
+  - Data Message:
+  - Metadata Message:
