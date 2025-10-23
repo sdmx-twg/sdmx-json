@@ -18,7 +18,7 @@ Message is the top level object and it contains the requested information (refer
 
 * meta - *Object* *optional*. A *[meta](#meta)* object that contains non-standard meta-information and basic technical information about the message, such as when it was prepared and who has sent it.
 * data - *Object* *optional*. *[Data](#data)* contains the message's “primary data”.
-* errors - *Array* *optional*. *Errors* field is an array of *[statusMessage](#statusMessage)* objects. When appropriate provides a list of status messages in addition to RESTful web services HTTP error status codes.
+* errors - *Array* *optional*. *Errors* field is an array of *[statusMessage](#statusmessage)* objects. When appropriate provides a list of status messages in addition to RESTful web services HTTP error status codes.
 
 The members data and status CAN coexist in the same message.
 
@@ -146,7 +146,7 @@ may contain the following field:
 * emails - *Array* *optional*. An array of email addresses for the contact person.
 * x400s - *Array* *optional*. An array of X.400 addresses for the contact person.
 
-See the section on [localised strings](#localised-strings) on how the message deals with languages.
+See the section on [localised strings](#localised-text-elements) on how the message deals with languages.
 
 Example:
 
@@ -187,7 +187,7 @@ See the section on *[linking mechanism](#linking-mechanism)* for all information
 
 *Object* *optional*. Header contains the message's “primary data”.
 
-* metadataSets - *Array* *optional*. This field is an array of *[metadataSet](#metadataSet)* objects. A metadata set contains a collection of reported metadata against a set of values for a given full or partial target identifier, as described in a metadata structure definition. The metadata set may contain reported metadata for multiple report structures defined in a metadata structure definition.
+* metadataSets - *Array* *optional*. This field is an array of *[metadataSet](#metadataset)* objects. A metadata set contains a collection of reported metadata against a set of values for a given full or partial target identifier, as described in a metadata structure definition. The metadata set may contain reported metadata for multiple report structures defined in a metadata structure definition.
 
 Example:
 
@@ -429,7 +429,7 @@ and/or Provision Agreements is recommended.
 * details - *Object* *optional*. A list of human-readable localised explanations (see *[names](#names)*) specific to this occurrence of the status. Like titles, this field’s value can be localized. It is fully customizable by the service providers and should provide enough detail to ease understanding the reasons of the status.
 * links - *Array* *optional*. *Links* field is an array of *[link](#link)* objects. If appropriate, a collection of links to additional external resources for the status message.
 
-See the section on [localised strings](#localised-strings) on how the message deals with languages.
+See the section on [localised strings](#localised-text-elements) on how the message deals with languages.
 
 Example:
 
