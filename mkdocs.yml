@@ -10,9 +10,14 @@ nav:
       - References: structure-message/2-references.md
   - Data Message:
       - data-message/index.md
-      - Status of this Section: data-message/0-status.md
-      - Field Guide: data-message/1-field-guide.md
-      - References: data-message/2-references.md
+      - Introduction: data-message/0_Introduction.md
+      - Field Guide: data-message/1_field_guide.md
+      - Linking Mechanism: data-message/2_linking_mechanism.md
+      - Handling Indexes: data-message/3_handling_indexes.md
+      - Localised Text Elements: data-message/4_localised_text_elements.md
+      - Security Considerations: data-message/5_security_considerations.md
+      - Extending Sdmx Json: data-message/6_extending_sdmx_json.md
+      - References: data-message/7_references.md
   - Metadata Message:
       - metadata-message/index.md
       - Field Guide: metadata-message/1-field-guide.md
