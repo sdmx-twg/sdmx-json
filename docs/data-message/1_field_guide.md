@@ -1664,7 +1664,7 @@ For information on how to handle the indexes for `dimensions`, `measures`,
 `attributes` and `annotations` see the section dedicated to [handling
 indexes](./3_handling_indexes.md).
 
-!!! example
+??? example
     For this example, to ease understanding, let's consider data in a flat CSV
     format (with header row):
 
@@ -1830,7 +1830,7 @@ provided:
 See the section on [localised text elements](./4_localised_text_elements.md) on
 how the message deals with languages.
 
-Example:
+??? example
 
     ```json
     {
