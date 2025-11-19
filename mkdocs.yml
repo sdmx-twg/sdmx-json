@@ -1,32 +1,31 @@
 site_name: SDMX-JSON
 
 nav:
-- SDMX-JSON:
-  - index.md
-  - Structure Message:
-      - structure-message/index.md
-      - Introduction: structure-message/0_Introduction.md
-      - Field Guide: structure-message/1_field_guide.md
-      - Linking Mechanism: structure-message/2_linking_mechanism.md
-      - Localised Text Elements: structure-message/4_localised_text_elements.md
-      - Security Considerations: structure-message/5_security_considerations.md
-      - Extending SDMX-JSON: structure-message/6_extending_sdmx_json.md
-      - References: structure-message/7_references.md
-  - Data Message:
-      - data-message/index.md
-      - Introduction: data-message/0_Introduction.md
-      - Field Guide: data-message/1_field_guide.md
-      - Linking Mechanism: data-message/2_linking_mechanism.md
-      - Handling Indexes: data-message/3_handling_indexes.md
-      - Localised Text Elements: data-message/4_localised_text_elements.md
-      - Security Considerations: data-message/5_security_considerations.md
-      - Extending SDMX-JSON: data-message/6_extending_sdmx_json.md
-      - References: data-message/7_references.md
-  - Metadata Message:
-      - metadata-message/index.md
-      - Introduction: metadata-message/0_Introduction.md
-      - Field Guide: metadata-message/1_field_guide.md
-      - Linking Mechanism: metadata-message/2_linking_mechanism.md
-      - Localised Text Elements: metadata-message/4_localised_text_elements.md
-      - Security Considerations: metadata-message/5_security_considerations.md
-      - Extending SDMX-JSON: metadata-message/6_extending_sdmx_json.md
+- index.md
+- Structure Message:
+    - structure-message/index.md
+    - Introduction: structure-message/0_Introduction.md
+    - Field Guide: structure-message/1_field_guide.md
+    - Linking Mechanism: structure-message/2_linking_mechanism.md
+    - Localised Text Elements: structure-message/4_localised_text_elements.md
+    - Security Considerations: structure-message/5_security_considerations.md
+    - Extending SDMX-JSON: structure-message/6_extending_sdmx_json.md
+    - References: structure-message/7_references.md
+- Data Message:
+    - data-message/index.md
+    - Introduction: data-message/0_Introduction.md
+    - Field Guide: data-message/1_field_guide.md
+    - Linking Mechanism: data-message/2_linking_mechanism.md
+    - Handling Indexes: data-message/3_handling_indexes.md
+    - Localised Text Elements: data-message/4_localised_text_elements.md
+    - Security Considerations: data-message/5_security_considerations.md
+    - Extending SDMX-JSON: data-message/6_extending_sdmx_json.md
+    - References: data-message/7_references.md
+- Metadata Message:
+    - metadata-message/index.md
+    - Introduction: metadata-message/0_Introduction.md
+    - Field Guide: metadata-message/1_field_guide.md
+    - Linking Mechanism: metadata-message/2_linking_mechanism.md
+    - Localised Text Elements: metadata-message/4_localised_text_elements.md
+    - Security Considerations: metadata-message/5_security_considerations.md
+    - Extending SDMX-JSON: metadata-message/6_extending_sdmx_json.md

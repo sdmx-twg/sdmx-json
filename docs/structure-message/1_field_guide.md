@@ -2544,6 +2544,7 @@ the documentation of the base type for more details on how a region is defined.
   the region. Note that any given key component must only be referenced once in
   the region.
 
+
 ??? example
 
     ```json
