@@ -2526,6 +2526,7 @@ the documentation of the base type for more details on how a region is defined.
   Only components which are explicitly stated to be present or absent from the
   region will be know. All unstated components for the set cannot be assumed to
   absent or present.
+  
 - keyValues - _Array_ _optional_ of _[CubeRegionKey](#cuberegionkey)_ objects
   containing a reference to a component which disambiguates the data (i.e. a
   dimension) and providing a collection of values for the component. The
@@ -2543,7 +2544,6 @@ the documentation of the base type for more details on how a region is defined.
   then the values of 2 and 3 for dimension X are included in the definition of
   the region. Note that any given key component must only be referenced once in
   the region.
-
 
 ??? example
 
