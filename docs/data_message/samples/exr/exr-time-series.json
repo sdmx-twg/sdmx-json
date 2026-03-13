@@ -1,8 +1,8 @@
 {
+	"$schema":"https://json.sdmx.org/2.1/sdmx-json-data-schema.json",
 	"meta":{
-		"schema":"https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/data-message/tools/schemas/2.0.0/sdmx-json-data-schema.json",
 		"id":"IT1001",
-		"prepared":"2018-03-11T14:30:47",
+		"prepared":"2018-03-11T14:30:47Z",
 		"test":true,
 		"contentLanguages":[
 			"en"
@@ -18,6 +18,7 @@
 	"data":{
 		"structures":[
 			{
+				"name":"Exchange rate dataflow",
 				"dataSets":[
 					0
 				],
@@ -42,7 +43,7 @@
 					},
 					{
 						"href":"https://sdw-wsrest.ecb.europa.eu/service/provisionagreement/ECB/PA_EXR",
-						"urn":"urn:sdmx:org.sdmx.infomodel.provisionagreement.ProvisionAgreement=ECB:PA_EXR(1.0)",
+						"urn":"urn:sdmx:org.sdmx.infomodel.registry.ProvisionAgreement=ECB:PA_EXR(1.0)",
 						"rel":"provisionagreement",
 						"title":"resolvable uri to provision agreement",
 						"titles":{
@@ -58,7 +59,7 @@
 							"names":{
 								"en":"Frequency"
 							},
-							"role":"FREQ",
+							"roles":["FREQ"],
 							"keyPosition":0,
 							"values":[
 								{
@@ -156,7 +157,7 @@
 								"en":"Time period or range"
 							},
 							"keyPosition":5,
-							"role":"TIME_PERIOD",
+							"roles":["TIME_PERIOD"],
 							"values":[
 								{
 									"id":"2013-01-18",
@@ -197,7 +198,7 @@
 									
 								}
 							},
-							"role":"TIME_FORMAT",
+							"roles":["TIME_FORMAT"],
 							"default":"P1D",
 							"values":[
 								{
@@ -226,7 +227,7 @@
 									"EXR_SUFFIX"
 								]
 							},
-							"role":"TITLE",
+							"roles":["TITLE"],
 							"values":[
 								{
 									"value":"New Zealand dollar (NZD)"
@@ -247,7 +248,7 @@
 							"relationship":{
 								"primaryMeasure":"OBS_VALUE"
 							},
-							"role":"OBS_STATUS",
+							"roles":["OBS_STATUS"],
 							"values":[
 								{
 									"id":"A",
@@ -292,7 +293,7 @@
 						"rel":"dataflow"
 					}
 				],
-				"action":"Information",
+				"action":"Merge",
 				"series":{
 					"0":{
 						"annotations":[

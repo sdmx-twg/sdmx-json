@@ -2,23 +2,24 @@
 
 ## link
 
-_Object_ _optional_. A link to an external resource.
+*Object* *optional*. A link to an external resource.
 
-- href - _String_. Absolute or relative URL of the external resource.
-- rel - _String_. Relationship of the object to the external resource. See
+- href - *String* *optional* only if `urn` is present. Absolute or relative URL 
+  of the external resource.
+- rel - *String*. Relationship of the object to the external resource. See
   semantics below.
-- urn - _String_ _optional_. The urn holds a valid SDMX Registry URN (see SDMX
-  Registry Specification for details).
-- uri - _String_ _optional_. The uri attribute holds a URI that contains a link
-  to additional information about the resource, such as a web page. This uri is
-  not an SDMX resource.
-- title - _String_ _optional_. A human-readable (best-language-match)
+- urn - *String* *optional* only if `href` is present. The `urn` holds a valid
+  SDMX Registry URN (see SDMX Registry Specification for details).
+- uri - *String* *optional*. The `uri` attribute holds a URI that contains a
+  link to additional information about the resource, such as a web page. This
+  `uri` is not an SDMX resource.
+- title - *String* *optional*. A human-readable (best-language-match)
   description of the target link.
-- titles - _Object_ _optional_. A list of human-readable localised descriptions
-  (see _[names](./1_field_guide.md#names)_) of the target link.
-- type - _String_ _optional_. A hint about the type of representation returned
+- titles - *Object* *optional*. A list of human-readable localised descriptions
+  (see *[names](./1_field_guide.md#names)*) of the target link.
+- type - *String* *optional*. A hint about the type of representation returned
   by the link.
-- hreflang - _String_ _optional_. The natural language of the external link, the
+- hreflang - *String* *optional*. The natural language of the external link, the
   same as used in the HTTP Accept-Language request header.
 
 See the section on [localised text elements](./4_localised_text_elements.md) on how
@@ -57,10 +58,10 @@ the message deals with languages.
 Collections of links can be attached to various elements in SDMX-JSON.
 
 Similarly with standards such as HTML5 and Atom, link elements in SDMX-JSON
-_must_ define a _URL_ (the `href` attribute) and a _semantic_ (the `rel`
+*must* define a *URL* (the `href` attribute) and a *semantic* (the `rel`
 attribute). This allows clients to follow the links they care about and ignore
 the ones whose semantic they are not interested in. In addition, links in
-SDMX-JSON _may_ define a `title` (a human-friendly description of the target
+SDMX-JSON *may* define a `title` (a human-friendly description of the target
 link) and a `type` (a hint about the type of representation returned by the
 link). Please refer to the
 [list of Media Types and Subtypes](http://www.iana.org/assignments/media-types/media-types.xhtml)
@@ -86,5 +87,5 @@ are:
   about the source of data), request (the SDMX RESTful query that triggered the
   SDMX-JSON response).
 
-The _URL_ captured in the `href` attribute can be _absolute_ or _relative_. **It
+The *URL* captured in the `href` attribute can be *absolute* or *relative*. **It
 is recommended to use absolute URLs in case the SDMX-JSON message is archived.**

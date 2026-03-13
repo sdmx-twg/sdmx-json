@@ -1,6 +1,7 @@
 {
+	"$schema": "https://json.sdmx.org/2.1/sdmx-json-structure-schema.json",
 	"meta": {
-		"schema": "https://raw.githubusercontent.com/sdmx-twg/sdmx-json/master/structure-message/tools/schemas/2.0.0/sdmx-json-structure-schema.json",
+		"x-extension": "scheme extension",
 		"id": "IDREF401067",
 		"test": false,
 		"prepared": "2021-09-01T20:00:51Z",
@@ -12,11 +13,13 @@
 		},
 		"receivers": [
 			{
+				"x-extension": "scheme extension",
 				"id": "not_supplied"
 			}
 		],
 		"links": [
 			{
+				"x-extension": "scheme extension",
 				"href": "https://sdw-wsrest.ecb.europa.eu/service/dataflow/ECB/EXR/1.0?references=all",
 				"rel": "self",
 				"hreflang": "en"
@@ -26,11 +29,12 @@
 	"data": {
 		"dataStructures": [
 			{
+				"x-extension": "scheme extension",
 				"id": "ECB_EXR1",
 				"version": "1.0",
 				"agencyID": "ECB",
+				"isPartialLanguage":false,
 				"isExternalReference": false,
-				"isFinal": false,
 				"name": "Exchange Rates",
 				"names": {
 					"en": "Exchange Rates"
@@ -56,6 +60,7 @@
 						],
 						"attributes": [
 							{
+								"x-extension": "scheme extension",
 								"id": "TIME_FORMAT",
 								"links": [
 									{
@@ -64,7 +69,7 @@
 										"hreflang": "en"
 									}
 								],
-								"assignmentStatus": "Mandatory",
+								"usage": "mandatory",
 								"attributeRelationship": {
 									"dimensions": [
 										"FREQ",
@@ -79,10 +84,11 @@
 									"urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).TIME_FORMAT"
 								],
 								"localRepresentation": {
+									"x-extension": "scheme extension",
 									"format": {
 										"maxLength": 3,
 										"minLength": 3,
-										"textType": "String"
+										"dataType": "String"
 									}
 								}
 							},
@@ -95,7 +101,7 @@
 										"hreflang": "en"
 									}
 								],
-								"assignmentStatus": "Conditional",
+								"usage": "optional",
 								"attributeRelationship": {
 									"observation": {}
 								},
@@ -117,6 +123,7 @@
 						],
 						"dimensions": [
 							{
+								"x-extension": "scheme extension",
 								"id": "FREQ",
 								"links": [
 									{
@@ -126,7 +133,6 @@
 									}
 								],
 								"position": 1,
-								"type": "Dimension",
 								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).FREQ",
 								"conceptRoles": [
 									"urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).FREQ"
@@ -145,7 +151,6 @@
 									}
 								],
 								"position": 2,
-								"type": "Dimension",
 								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).CURRENCY",
 								"localRepresentation": {
 									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=ECB:CL_CURRENCY(1.0)"
@@ -161,7 +166,6 @@
 									}
 								],
 								"position": 3,
-								"type": "Dimension",
 								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).CURRENCY_DENOM",
 								"localRepresentation": {
 									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=ECB:CL_CURRENCY(1.0)"
@@ -177,7 +181,6 @@
 									}
 								],
 								"position": 4,
-								"type": "Dimension",
 								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).EXR_TYPE",
 								"localRepresentation": {
 									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=ECB:CL_EXR_TYPE(1.0)"
@@ -193,36 +196,33 @@
 									}
 								],
 								"position": 5,
-								"type": "Dimension",
 								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).EXR_SUFFIX",
 								"localRepresentation": {
 									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=ECB:CL_EXR_SUFFIX(1.0)"
 								}
 							}
 						],
-						"timeDimensions": [
-							{
-								"id": "TIME_PERIOD",
-								"links": [
-									{
-										"rel": "self",
-										"urn": "urn:sdmx:org.sdmx.infomodel.datastructure.TimeDimension=ECB:ECB_EXR1(1.0).TIME_PERIOD",
-										"hreflang": "en"
-									}
-								],
-								"position": 6,
-								"type": "Dimension",
-								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).TIME_PERIOD",
-								"localRepresentation": {
-									"format": {
-										"textType": "ObservationalTimePeriod"
-									}
+						"timeDimension": {
+							"x-extension": "scheme extension",
+							"id": "TIME_PERIOD",
+							"links": [
+								{
+									"rel": "self",
+									"urn": "urn:sdmx:org.sdmx.infomodel.datastructure.TimeDimension=ECB:ECB_EXR1(1.0).TIME_PERIOD",
+									"hreflang": "en"
+								}
+							],
+							"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCPTS(1.0).TIME_PERIOD",
+							"localRepresentation": {
+								"format": {
+									"dataType": "ObservationalTimePeriod"
 								}
 							}
-						]
+						}
 					},
 					"groups": [
 						{
+							"x-extension": "scheme extension",
 							"id": "Group",
 							"links": [
 								{
@@ -240,6 +240,7 @@
 						}
 					],
 					"measureList": {
+						"x-extension": "scheme extension",
 						"id": "MeasureDescriptor",
 						"links": [
 							{
@@ -248,28 +249,30 @@
 								"hreflang": "en"
 							}
 						],
-						"primaryMeasure": {
+						"measures": [{
+							"x-extension": "scheme extension",
 							"id": "OBS_VALUE",
 							"links": [
 								{
 									"rel": "self",
-									"urn": "urn:sdmx:org.sdmx.infomodel.datastructure.PrimaryMeasure=ECB:ECB_EXR1(1.0).OBS_VALUE",
+									"urn": "urn:sdmx:org.sdmx.infomodel.datastructure.Measure=ECB:ECB_EXR1(1.0).OBS_VALUE",
 									"hreflang": "en"
 								}
 							],
 							"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=ECB:ECB_CONCEPTS(1.0).OBS_VALUE"
-						}
+						}]
 					}
 				}
 			}
 		],
 		"categorySchemes": [
 			{
+				"x-extension": "scheme extension",
 				"id": "MOBILE_NAVI",
 				"version": "1.0",
 				"agencyID": "ECB",
+				"isPartialLanguage":false,
 				"isExternalReference": true,
-				"isFinal": false,
 				"name": "Economic concepts",
 				"names": {
 					"en": "Economic concepts"
@@ -290,6 +293,7 @@
 				"isPartial": true,
 				"categories": [
 					{
+						"x-extension": "scheme extension",
 						"id": "00",
 						"name": "Parent category",
 						"names": {
@@ -310,6 +314,7 @@
 						],
 						"categories": [
 							{
+								"x-extension": "scheme extension",
 								"id": "07",
 								"name": "Exchange rates",
 								"names": {
@@ -336,11 +341,12 @@
 		],
 		"conceptSchemes": [
 			{
+				"x-extension": "scheme extension",
 				"id": "ECB_CONCEPTS",
 				"version": "1.0",
 				"agencyID": "ECB",
+				"isPartialLanguage":false,
 				"isExternalReference": false,
-				"isFinal": false,
 				"name": "ECB concepts",
 				"names": {
 					"en": "ECB concepts"
@@ -357,6 +363,7 @@
 				"isPartial": true,
 				"concepts": [
 					{
+						"x-extension": "scheme extension",
 						"id": "CURRENCY",
 						"name": "Currency",
 						"names": {
@@ -489,11 +496,12 @@
 		],
 		"codelists": [
 			{
+				"x-extension": "scheme extension",
 				"id": "CL_FREQ",
 				"version": "1.0",
 				"agencyID": "ECB",
+				"isPartialLanguage":false,
 				"isExternalReference": false,
-				"isFinal": false,
 				"name": "Frequency code list",
 				"names": {
 					"en": "Frequency code list"
@@ -510,6 +518,7 @@
 				"isPartial": true,
 				"codes": [
 					{
+						"x-extension": "scheme extension",
 						"id": "A",
 						"name": "Annual",
 						"names": {
@@ -563,8 +572,8 @@
 				"id": "CL_CURRENCY",
 				"version": "1.0",
 				"agencyID": "ECB",
+				"isPartialLanguage":false,
 				"isExternalReference": false,
-				"isFinal": false,
 				"name": "Currency code list",
 				"names": {
 					"en": "Currency code list"
@@ -619,8 +628,8 @@
 				"id": "CL_OBS_CONF",
 				"version": "1.0",
 				"agencyID": "ECB",
+				"isPartialLanguage":false,
 				"isExternalReference": false,
-				"isFinal": false,
 				"name": "Currency code list",
 				"names": {
 					"en": "Currency code list"
@@ -658,8 +667,8 @@
 				"id": "CL_EXR_SUFFIX",
 				"version": "1.0",
 				"agencyID": "ECB",
+				"isPartialLanguage":false,
 				"isExternalReference": false,
-				"isFinal": false,
 				"name": "Exch. rate series variation code list",
 				"names": {
 					"en": "Exch. rate series variation code list"
@@ -777,8 +786,8 @@
 				"id": "CL_EXR_TYPE",
 				"version": "1.0",
 				"agencyID": "ECB",
+				"isPartialLanguage":false,
 				"isExternalReference": false,
-				"isFinal": false,
 				"name": "Exch. rate series variation code list",
 				"names": {
 					"en": "Exch. rate series variation code list"
@@ -895,11 +904,12 @@
 		],
 		"agencySchemes": [
 			{
+				"x-extension": "scheme extension",
 				"id": "AGENCIES",
 				"version": "1.0",
 				"agencyID": "SDMX",
+				"isPartialLanguage":false,
 				"isExternalReference": false,
-				"isFinal": false,
 				"name": "SDMX Agency Scheme",
 				"names": {
 					"en": "SDMX Agency Scheme"
@@ -916,6 +926,7 @@
 				"isPartial": true,
 				"agencies": [
 					{
+						"x-extension": "scheme extension",
 						"id": "ECB",
 						"name": "European Central Bank",
 						"names": {
@@ -936,11 +947,12 @@
 		],
 		"dataflows": [
 			{
+				"x-extension": "scheme extension",
 				"id": "EXR",
 				"version": "1.0",
 				"agencyID": "ECB",
+				"isPartialLanguage":false,
 				"isExternalReference": false,
-				"isFinal": false,
 				"name": "Exchange Rates",
 				"names": {
 					"en": "Exchange Rates"
@@ -966,11 +978,12 @@
 		],
 		"categorisations": [
 			{
+				"x-extension": "scheme extension",
 				"id": "53A341E8-D48B-767E-D5FF-E2E3E0E2BB19",
 				"version": "1.0",
 				"agencyID": "ECB",
+				"isPartialLanguage":false,
 				"isExternalReference": false,
-				"isFinal": false,
 				"name": "Categorise: DATAFLOWECB:EXR(1.0)",
 				"names": {
 					"en": "Categorise: DATAFLOWECB:EXR(1.0)"
@@ -988,14 +1001,14 @@
 				"target": "urn:sdmx:org.sdmx.infomodel.categoryscheme.Category=ECB:MOBILE_NAVI(1.0).07"
 			}
 		],
-		"contentConstraints": [
+		"dataConstraints": [
 			{
-				"type": "Allowed",
+				"x-extension": "scheme extension",
 				"id": "EXR_CONSTRAINTS",
 				"version": "1.0",
 				"agencyID": "ECB",
+				"isPartialLanguage":false,
 				"isExternalReference": false,
-				"isFinal": false,
 				"name": "Constraints for the EXR dataflow.",
 				"names": {
 					"en": "Constraints for the EXR dataflow."
@@ -1004,21 +1017,24 @@
 					{
 						"href": "https://sdw-wsrest.ecb.europa.eu/service/contentconstraint/ECB/EXR_CONSTRAINTS/1.0",
 						"rel": "self",
-						"urn": "urn:sdmx:org.sdmx.infomodel.registry.ContentConstraint=ECB:EXR_CONSTRAINTS(1.0)",
+						"urn": "urn:sdmx:org.sdmx.infomodel.registry.DataConstraint=ECB:EXR_CONSTRAINTS(1.0)",
 						"type": "constraint",
 						"hreflang": "en"
 					}
 				],
 				"constraintAttachment": {
+					"x-extension": "scheme extension",
 					"dataflows": [
 						"urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:EXR(1.0)"
 					]
 				},
 				"cubeRegions": [
 					{
-						"isIncluded": true,
+						"x-extension": "scheme extension",
+						"include": true,
 						"keyValues": [
 							{
+								"x-extension": "scheme extension",
 								"id": "EXR_TYPE",
 								"values": [
 									"NRP0", "ERU1", "ERC0", "SP00"

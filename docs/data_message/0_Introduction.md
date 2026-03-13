@@ -1,4 +1,4 @@
-# Introduction to SDMX-JSON Data Message 2.0.0
+# Introduction to SDMX-JSON Data Message 2.1.0
 
 Let's first start with a brief introduction of the SDMX information model.
 
@@ -11,6 +11,7 @@ There are two types of concepts: dimensions and attributes. Dimensions, when com
 allow to uniquely identifying statistical data. Attributes on the other hand do not help
 identifying statistical data, but they add useful information (like the unit of measure
 or the number of decimals). Dimensions and attributes are known as "components".
+Since SDMX 3.0, attributes in SDMX-JSON 2.X.X also include reference metadata attributes.
 
 The measurement of some phenomenon (e.g. the figure 1.2953 mentioned above) is known as an
 "observation" in SDMX. Sometimes, observations can also have several measures, e.g. an 

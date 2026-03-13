@@ -102,14 +102,10 @@ Let's say that the following data content of a message needs to be processed:
             "names": { "en": "Time period or range" },
             "values": [
               {
-                "id": "2013-01-18",
-                "name": "2013-01-18",
-                "names": { "en": "2013-01-18" }
+                "value": "2013-01-18"
               },
               {
-                "id": "2013-01-21",
-                "name": "2013-01-21",
-                "names": { "en": "2013-01-21" }
+                "value": "2013-01-21"
               }
             ]
           }
@@ -171,7 +167,7 @@ Let's say that the following data content of a message needs to be processed:
   "dataSets": [
     {
       "structure": 0,
-      "action": "Information",
+      "action": "Merge",
       "series": {
         "0": {
           // 0 is the index of the first value of (series-level) CURRENCY dimension: "NZD"
@@ -281,13 +277,10 @@ TIME_PERIOD is the (only) dimension at `observation` level.
   "names": { "en": "Time period or range" },
   "values": [
    {
-    "id": "2013-01-18",
-    "name": "2013-01-18",
-    "names": { "en": "2013-01-18" }
-   }, {
-    "id": "2013-01-21",
-    "name": "2013-01-21",
-    "names": { "en": "2013-01-21" }
+      "value": "2013-01-18"
+    },
+    {
+      "value": "2013-01-21"
    }
   ]
  }
