@@ -266,7 +266,7 @@ data contained in the message. It tells you which are the components
 describes to which level in the hierarchy (`dataSet`, `dimensionGroup`,
 `series`, `observations`) these components are attached.
 
-- links - *Array*. *Links* field is an array of *[link](#link)* objects. A
+- links - *Array*. *Links* field is an array of *[structure link](#structure-link)* objects. A
   collection of links to structural metadata or to additional information
   regarding the structure. **If data was requested for a dataflow, then the**
   **dataflow identification is to be provided. If data was requested for a DSD,**
@@ -1983,7 +1983,7 @@ pieces of information should be provided:
     status. Like titles, this field's value can be localized. It is fully
     customizable by the service providers and should provide enough detail to
     ease understanding the reasons of the status.
-- links - *Array* *optional*. *Links* field is an array of *[link](#link)*
+- links - *Array* *optional*. *Links* field is an array of *[structure link](#structure-link)*
     objects. If appropriate, a collection of links to additional external
     resources for the status information.
 

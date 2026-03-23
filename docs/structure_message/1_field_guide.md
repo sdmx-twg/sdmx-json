@@ -2291,9 +2291,9 @@ See the schema file for more information.
 In addition, `availabilityConstraint` has the following properties:
 
 - constraintAttachment - *Object* *optional*. The
-  *[constraintAttachment](#constraintAttachment)* object describes the
+  *[constraintAttachment](#constraintattachment)* object describes the
   collection of constrainable artefacts that the constraint is attached to.
-- cubeRegions - *Array* *optional*. A list of of *[cubeRegion](#cubeRegion)*
+- cubeRegions - *Array* *optional*. A list of of *[cubeRegion](#cuberegion)*
   objects. CubeRegion describes a set of dimension values which define a region
   and attributes which relate to the region for the purpose of describing a
   constraint.
