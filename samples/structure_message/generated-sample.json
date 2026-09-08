@@ -1,5 +1,5 @@
 {
-	"$schema":"https://json.sdmx.org/2.1/sdmx-json-structure-schema.json",
+	"$schema":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json",
 	"meta":{
 		"id":"$",
 		"test":true,

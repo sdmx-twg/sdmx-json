@@ -6,7 +6,7 @@ data-interchange format. SDMX-JSON Structure Message focuses on data discovery,
 works together with the SDMX RESTful Web Services API and it supports all
 features of that API for structure queries.
 
-The current SDMX-JSON Structure Message format 2.1.0 supports the SDMX 3.1
+The current SDMX-JSON Structure Message format 2.2.0 supports the SDMX 3.2
 Information Model and works together with the SDMX 2.1 RESTful Web Services API
 for structure queries for various types of visualisations. It adheres to the
 HATEOAS principles. Queries can ask for specific structural SDMX artefacts, and

@@ -1,4 +1,4 @@
-# Introduction to SDMX-JSON Metadata Message 2.1.0
+# Introduction to SDMX-JSON Metadata Message 2.2.0
 
 See the SDMX-JSON Data Message docs for a brief introduction of the SDMX
 information model. For additional information on the SDMX information model,

@@ -1,5 +1,5 @@
 {
-	"$schema":"https://json.sdmx.org/2.1/sdmx-json-data-schema.json",
+	"$schema":"https://json.sdmx.org/2.2/sdmx-json-data-schema.json",
 	"errors":[
 		{
 			"code":90483457.7170785,

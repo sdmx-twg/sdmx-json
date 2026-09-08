@@ -1,4 +1,4 @@
-# Introduction to SDMX-JSON Data Message 2.1.0
+# Introduction to SDMX-JSON Data Message 2.2.0
 
 Let's first start with a brief introduction of the SDMX information model.
 

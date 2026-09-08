@@ -1,4 +1,4 @@
-# Field Guide to SDMX-JSON 2.1 Metadata Message Objects (aligned with SDMX 3.1.0)
+# Field Guide to SDMX-JSON 2.2 Metadata Message Objects (aligned with SDMX 3.2.0)
 
 ## message
 
@@ -25,7 +25,7 @@ The properties data and errors CAN coexist in the same message.
 
     ```json
     {
-      "$schema": "https://json.sdmx.org/2.1/sdmx-json-metadata-schema.json",
+      "$schema": "https://json.sdmx.org/2.2/sdmx-json-metadata-schema.json",
       "meta": {
         # meta object #
       },
