@@ -1,0 +1,79 @@
+{
+	"$id":"https://json.sdmx.org/2.2/samples/custom_structure_definition/glossary_1.0.0-schema.json",
+	"$schema":"https://json-schema.org/draft/2019-09/schema",
+	"description":"Dynamically generated schema for urn:sdmx:org.sdmx.infomodel.csd.CustomStructureDefinition=IMF:GLOSSARY(1.0.0) (see custom_item_scheme_csd.json), following the CSD schema generation rules. It validates one instance object of the custom structure definition, that is one member of the 'customStructures' array of a structure message. Values are reported in their lexical form, as strings, or, for a multilingual property, as localised values; a property whose maxOccurs is 1 reports its value directly, any other property reports its values in an array.",
+	"$ref":"#/$defs/GlossaryType",
+	"$defs":{
+		"GlossaryType":{
+			"description":"An instance of the IMF GLOSSARY(1.0.0) custom structure definition (base 'ItemScheme'). It extends CustomStructureInstanceType with the 'items' property (fixed name, typed by the item custom type) and the other declared properties, and closes the object so that no undeclared property may be reported. The 'isPartial' property is inherited from the item scheme behaviour.",
+			"type":"object",
+			"allOf":[
+				{
+					"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/CustomStructureInstanceType"
+				},
+				{
+					"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/specificationExtensions"
+				},
+				{
+					"properties":{
+						"customStructureDefinition":{
+							"const":"urn:sdmx:org.sdmx.infomodel.csd.CustomStructureDefinition=IMF:GLOSSARY(1.0.0)",
+							"description":"Mandatory reference to the custom structure definition to which this instance conforms. The fixed value guarantees the reference matches the definition from which this schema was generated."
+						},
+						"items":{
+							"type":"array",
+							"minItems":1,
+							"items":{
+								"$ref":"#/$defs/TermType"
+							}
+						},
+						"subjectArea":{
+							"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/ConceptReferenceType",
+							"description":"reference ['Concept'], maxOccurs 1 and optional: the URN of the referenced concept."
+						}
+					}
+				}
+			],
+			"unevaluatedProperties":false
+		},
+		"TermType":{
+			"description":"Generated from custom type TermType (extends Nameable, sdmxClassName GlossaryTerm), which plays the Item role of the scheme. Restricts NameableType to require the id, which is used for the automatic generation of the object URN (e.g. urn:sdmx:org.sdmx.infomodel.csd.imf.GlossaryTerm=ECB:STAT_GLOSSARY(1.0.0).GDP.GDP_PC, where the id path is the chain of identifiable ancestors); the URN is derived and is not reported.",
+			"type":"object",
+			"allOf":[
+				{
+					"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/NameableType"
+				},
+				{
+					"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/specificationExtensions"
+				},
+				{
+					"properties":{
+						"definition":{
+							"description":"format dataType 'String' isMultiLingual true, unbounded: the values of the property, one per language.",
+							"type":"array",
+							"minItems":1,
+							"items":{
+								"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/LocalisedValueType"
+							}
+						},
+						"children":{
+							"description":"Explicitly modelled item hierarchy: a custom type referencing itself.",
+							"type":"array",
+							"minItems":1,
+							"items":{
+								"$ref":"#/$defs/TermType"
+							}
+						}
+					},
+					"required":[
+						"definition"
+					]
+				}
+			],
+			"required":[
+				"id"
+			],
+			"unevaluatedProperties":false
+		}
+	}
+}
