@@ -73,21 +73,24 @@ separate step, covered in the next section.
 ```
 
 **$id**  - a stable *$id* property is required so it can be referenced by the wrapper schema. 
-A URL resolving to the published location of the schema can be used. If the schema it not 
-published, the URN of the CSD that the schema is genereated for should be used.
+A URL resolving to the published location of the schema can be used. If the schema is not
+published, the URN of the CSD that the schema is generated for should be used.
 
 **$schema** - fixed value `https://json-schema.org/draft/2019-09/schema`
 
 **description** - optional description
 
-**$ref** - the SdmxClassName defined in the CSD
+**$ref** - `#/$defs/<SdmxClassName>`, using the `sdmxClassName` defined in the CSD
 
-**$defs** - one entry per Custom type defined in the CSD, 
-and one additional entry for the SdmxClassName defined in the CSD.
+**$defs** - one entry per Custom Type defined in the CSD, one additional entry for
+the SdmxClassName defined in the CSD, and one `Abstract` entry for each Custom Type
+which is extended by another (see section 4).
 
 `AbstractRowColType` is the one name in that list which does not come from the CSD. 
-It is generated beacuse SliceType extends RowColType, an `Abstract[custom type]` is required
-to provide the base properties which both SliceType and RowColType share.
+It is generated because SliceType extends RowColType, an `Abstract[custom type]` is required
+to provide the base properties which both SliceType and RowColType share. Derive the
+name predictably — `Abstract` prefixed to the Custom Type's `id` — and check it does not
+collide with a Custom Type `id` in the CSD, since those are the names a modeller controls.
 
 ## 2. The Root Type
 
@@ -118,7 +121,7 @@ The root type is the SdmxClassName of the CSD, with the following properties:
 
 **type** - fixed value `object`
 
-**allOf** - array of three entires
+**allOf** - array of three entries
 
 1. `{"$ref": "<structure-schema>#/$defs/CustomStructureInstanceType"}` — brings in
    `id`, `agencyID`, `version`, `name`/`names`, `description`/`descriptions`,
@@ -153,62 +156,33 @@ A custom type has the following properties:
 
 **type** - fixed value `object`
 
-**allOf** - array with the following entires
+**allOf** - array with the following entries
 
 1. `{"$ref": "<base-ref>"}` — bring in properties from the base type, see the `base-ref` table for the valid replacement options.
 2. `{"$ref": "<structure-schema>#/$defs/specificationExtensions"}` — allows `x-` extension fields.
-3. An optional `Abstract` type if the Custom Type is extended by another, see the rules in section 4.   
-4. A branch declaring the Custom Type's own properties, following the rules in section 5.
+3. `{"$ref": "#/$defs/Abstract<CustomType>"}` for each Custom Type this one extends, see the rules in section 4.
+4. The Custom Type's own properties, following the rules in section 5. These go in an
+   `{"$ref": "#/$defs/Abstract<ThisCustomType>"}` when another Custom Type extends this
+   one, and in an inline branch otherwise.
+
+Entry 3 is absent unless the Custom Type extends another, and entry 4 is a `$ref`
+rather than an inline branch when the Custom Type is itself extended, so the array
+usually holds three entries rather than four. `RowColType` above is base +
+extensions + `AbstractRowColType`, because `SliceType` extends it and so it keeps
+its own properties in the abstract type; `SliceType` in section 4 is base +
+extensions + `AbstractRowColType` + an inline branch for `position`; and `TermType`
+below, which neither extends nor is extended, is base + extensions + an inline
+branch.
 
 **unevaluatedProperties**  fixed value `false`
 
-Replace `<base-ref>` in with a `$ref` value from the table below, based on the Custom Type's `extends` type.
+Replace `<base-ref>` with a `$ref` value from the table below, based on the Custom Type's `extends` type.
 
    | `extends` | `$ref` | Also add |
    | --- | --- | --- |
    | `Annotatable` (or absent, with no `sdmxClassName`) | `<structure-schema>#/$defs/AnnotableType` | — |
    | `Identifiable` (or absent, with an `sdmxClassName`) | `<structure-schema>#/$defs/IdentifiableType` | `"required": ["id"]` |
    | `Nameable` | `<structure-schema>#/$defs/NameableType` | `"required": ["id"]` |
-
-
-## 4. Abstract base types
-
-```json
-"AbstractRowColType": {
-    "type": "object",
-    "properties": {
-        "level":       { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" },
-        "dimension":   { "$ref": "<structure-schema>#/$defs/idType" },
-        "headingText": { "type": "string" },
-        "headingCode": { "$ref": "<structure-schema>#/$defs/CodeReferenceType" }
-    },
-    "not": { "required": ["headingText", "headingCode"] },
-    "required": ["dimension"]
-}
-```
-
-
-```json
-"SliceType": {
-    "type": "object",
-    "allOf": [
-        { "$ref": "<structure-schema>#/$defs/NameableType" },
-        { "$ref": "<structure-schema>#/$defs/specificationExtensions" },
-        { "$ref": "#/$defs/RowColProperties" },
-        { "properties": { "position": { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" } } }
-    ],
-    "required": ["id"],
-    "unevaluatedProperties": false
-}
-```
-
-When a custom type has an `extendsType` to extend a sibling, both types share the same base properties 
-(those defined in the extended type).  These shared properties are captured in a shared  `Abstract[CustomType]`.
-Both the Custom Type and extending Custom Type references this object as a `$ref` in the `allOf` array.
-
-Note that `SliceType` repeats the base (`NameableType`) rather than referencing
-`RowColType`. Do **not** `$ref` the parent *type* from the subtype: the parent
-closes itself with `unevaluatedProperties: false` and would reject `position`.
 
 
 ### Recursion
@@ -238,6 +212,45 @@ representation is `TermType`, which becomes:
     "unevaluatedProperties": false
 }
 ```
+
+## 4. Abstract base types
+
+```json
+"AbstractRowColType": {
+    "type": "object",
+    "properties": {
+        "level":       { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" },
+        "dimension":   { "$ref": "<structure-schema>#/$defs/idType" },
+        "headingText": { "type": "string" },
+        "headingCode": { "$ref": "<structure-schema>#/$defs/CodeReferenceType" }
+    },
+    "not": { "required": ["headingText", "headingCode"] },
+    "required": ["dimension"]
+}
+```
+
+
+```json
+"SliceType": {
+    "type": "object",
+    "allOf": [
+        { "$ref": "<structure-schema>#/$defs/NameableType" },
+        { "$ref": "<structure-schema>#/$defs/specificationExtensions" },
+        { "$ref": "#/$defs/AbstractRowColType" },
+        { "properties": { "position": { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" } } }
+    ],
+    "required": ["id"],
+    "unevaluatedProperties": false
+}
+```
+
+When a custom type has an `extendsType` to extend a sibling, both types share the same base properties 
+(those defined in the extended type).  These shared properties are captured in a shared  `Abstract[CustomType]`.
+Both the Custom Type and extending Custom Type references this object as a `$ref` in the `allOf` array.
+
+Note that `SliceType` repeats the base (`NameableType`) rather than referencing
+`RowColType`. Do **not** `$ref` the parent *type* from the subtype: the parent
+closes itself with `unevaluatedProperties: false` and would reject `position`.
 
 ## 5. Properties
 
@@ -401,7 +414,7 @@ Whether that identifier actually resolves against the artefact named by `context
 — here, whether `AGE` really is a dimension of the dataflow in the instance's
 `dataflow` field — cannot be expressed in JSON Schema. Leave it to the system.
 
-### 4c. Mutually exclusive sets
+### 5c. Mutually exclusive sets
 
 Each set becomes one `not`/`required` clause on the containing object:
 
@@ -431,10 +444,10 @@ members you need one clause per pair, since `required` means *all of*. A set of
   and the generated schema declares nothing for it. A row in an instance is just:
 
   ```json
-  { "id": "AGE_ROW", "name": "Sex", "dimension": "AGE" }
+  { "id": "AGE_COL", "name": "Age", "dimension": "AGE" }
   ```
 
-  and not `"urn": "urn:sdmx:org.sdmx.infomodel.csd.imf.PivotTableRow=OECD:POP_SEX_AGE(1.0.0).AGE_ROW"`,
+  and not `"urn": "urn:sdmx:org.sdmx.infomodel.csd.imf.PivotTableRow=OECD:POP_SEX_AGE(1.0.0).AGE_COL"`,
   even though that is the URN the object has. The instance itself, being
   maintainable, may still carry its own URN in `links` in the usual way.
 - **Ordering.** JSON object members are unordered, and property order in a CSD
@@ -479,7 +492,7 @@ It has two parts, combined with `allOf` so that both apply to the same message:
 }
 ```
 
-Four points are worth understanding before you write your own:
+Five points are worth understanding before you write your own:
 
 - **The conditionals are combined with `allOf`, not `oneOf`.** Each is evaluated
   independently, and an `if` that does not match simply contributes nothing.

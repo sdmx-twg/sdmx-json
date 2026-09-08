@@ -64,7 +64,7 @@
 					"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/specificationExtensions"
 				},
 				{
-					"$ref":"#/$defs/RowColProperties"
+					"$ref":"#/$defs/AbstractRowColType"
 				}
 			],
 			"required":[
@@ -72,7 +72,7 @@
 			],
 			"unevaluatedProperties":false
 		},
-		"RowColProperties":{
+		"AbstractRowColType":{
 			"description":"The properties declared by the custom type RowColType, factored out so that they can be reused by the types which extend it.",
 			"type":"object",
 			"properties":{
@@ -114,7 +114,7 @@
 					"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/specificationExtensions"
 				},
 				{
-					"$ref":"#/$defs/RowColProperties"
+					"$ref":"#/$defs/AbstractRowColType"
 				},
 				{
 					"properties":{
