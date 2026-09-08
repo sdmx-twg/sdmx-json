@@ -21,7 +21,7 @@ the message and, possibly, error information.
 
 The properties data and errors CAN coexist in the same message.
 
-??? example
+**Example**
 
     ```json
     {
@@ -79,7 +79,7 @@ has sent it. Any members MAY be specified within `meta` objects.
 See the section on [localised text elements](./4_localised_text_elements.md) on how
 the message deals with languages.
 
-??? example
+**Example**
 
     ```json
     "meta": {
@@ -123,7 +123,7 @@ contains the following fields:
 See the section on [localised text elements](./4_localised_text_elements.md) on how
 the message deals with languages.
 
-??? example
+**Example**
 
     ```json
     "sender": {
@@ -151,7 +151,7 @@ the message deals with languages.
 See the section on [localised text elements](./4_localised_text_elements.md) on how
 the message deals with languages.
 
-??? example
+**Example**
 
     ```json
     {
@@ -192,7 +192,7 @@ contain the following field:
 See the section on [localised text elements](./4_localised_text_elements.md) on how
 the message deals with languages.
 
-??? example
+**Example**
 
     ```json
     {
@@ -244,7 +244,8 @@ on links.
   *metadataProvisionAgreement*, *structureMap*, *representationMap*,
   *conceptSchemeMap*, *categorySchemeMap*, *organisationSchemeMap*,
   *reportingTaxonomyMap*, *process*, *categorisation*, *dataConstraint*,
-  *metadataConstraint*, *customTypeScheme*, *vtlMappingScheme*,
+  *metadataConstraint*, *customStructureDefinition*, *customStructure*,
+  *customTypeScheme*, *vtlMappingScheme*,
   *namePersonalisationScheme*, *rulesetScheme*, *transformationScheme* and
   *userDefinedOperatorScheme*. Each of the corresponding object properties is
   allowed at maximum one time. Contains the requested structural information
@@ -284,6 +285,8 @@ on links.
     - *[dataConstraints](#dataconstraint)*
     - *[availabilityConstraints](#availabilityconstraint)*
     - *[metadataConstraints](#metadataconstraint)*
+    - *[customStructureDefinitions](#customstructuredefinition)*
+    - *[customStructures](#customstructure)*
     - *[customTypeSchemes](#customtypescheme)*
     - *[vtlMappingSchemes](#vtlmappingscheme)*
     - *[namePersonalisationSchemes](#namepersonalisationscheme)*
@@ -291,7 +294,7 @@ on links.
     - *[transformationSchemes](#transformationscheme)*
     - *[userDefinedOperatorSchemes](#userdefinedoperatorscheme)*
 
-??? example
+**Example**
 
     ```json
     "data": {
@@ -355,7 +358,7 @@ SDMX Rest web services, the HTTP action verbs GET, PUT and POST are used to
 indicate the intended action per web request. Consequently, different actions
 cannot be bundled and executed with "transactional ACIDity".
 
-??? example
+**Example**
 
     ```json
     {
@@ -414,7 +417,7 @@ cannot be bundled and executed with "transactional ACIDity".
 See the section on [localised text elements](./4_localised_text_elements.md) on how
 the message deals with languages.
 
-??? example
+**Example**
 
     ```json
     {
@@ -441,7 +444,10 @@ All SDMX artefacts of base type "ItemScheme" (CategoryScheme, ConceptScheme,
 Codelist, GeographicCodelist, GeoGridCodelist, AgencyScheme, DataProviderScheme,
 MetadataProviderSchemes, DataConsumerScheme, OrganisationUnitScheme,
 ReportingTaxonomy, CustomTypeScheme, VtlMappingScheme,
-NamePersonalisationScheme, RulesetScheme, UserDefinedOperatorScheme) share the
+NamePersonalisationScheme, RulesetScheme, UserDefinedOperatorScheme, as well as
+every *[customStructure](#customstructure)* whose
+*[customStructureDefinition](#customstructuredefinition)* declares a `base` of
+`ItemScheme`) share the
 *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
 In addition, they share the following common object properties:
@@ -451,14 +457,14 @@ In addition, they share the following common object properties:
 - categories / concepts / codes / geoFeatureSetCodes / geoGridCodes / agencies /
   dataProviders / dataConsumers / metadataProviders / organisationUnits /
   reportingCategories / customTypes / vtlMappings / namePersonalisations /
-  rulesets / transformations / userDefinedOperators -
+  rulesets / transformations / userDefinedOperators / items -
   *Array* *optional*. Provides a list of *[items](#item)* if the resource
   inherits from the ItemScheme. **Note that the order of items is significant.
   In the use case of a submission of a partial list is is necessary to include
   preceding and succeeding items to allow determining the correct positioning
   of the submitted items.**
 
-??? example
+**Example**
 
     ```json
     {
@@ -511,7 +517,7 @@ UserDefinedOperatorScheme).
 See the section on [localised text elements](./4_localised_text_elements.md) on how
 the message deals with languages.
 
-??? example
+**Example**
 
     ```json
     {
@@ -592,7 +598,7 @@ See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
   a DimensionConstraint to fix the Dimensions to the subset required by the
   Dataflow.
 
-??? example
+**Example**
 
     ```json
     {
@@ -630,7 +636,7 @@ defined.
   a collection of structural concepts that define the measures of the data
   structure definition.
 
-??? example
+**Example**
 
     ```json
     {
@@ -681,7 +687,7 @@ structure definition.
   order restrict the reporting of a metadata attribute to a specific part of the
   data.
 
-??? example
+**Example**
 
     ```json
     {
@@ -751,7 +757,7 @@ attribute.
   enumerated values and its text format is fixed to be a day and month in the
   ISO 8601 format of '--MM-DD'.
 
-??? example
+**Example**
 
     ```json
     {
@@ -841,7 +847,7 @@ all reporting periods have the same start day. In this case, data reported as
 standard reporting periods from two entities with different fiscal year start
 days could not be contained in the same data set.
 
-??? example
+**Example**
 
     ```json
     {
@@ -900,7 +906,7 @@ enumerated values and its text format is fixed to be a day and month in the ISO
 fixing the representation of the reporting year start/end day attribute. Its
 maxOccurs property is a *Positive Integer* and is fixed to 1.
 
-??? example
+**Example**
 
     ```json
     {
@@ -998,7 +1004,7 @@ values.
   specified here. By default, the maxValue is assumed to be inclusive.
 - pattern - *String* *optional*. Holds any standard regular expression.
 
-??? example
+**Example**
 
     ```json
     {
@@ -1090,7 +1096,7 @@ for target objects.
   value in an otherwise open value domain that holds a specific meaning. For
   example, a value of -1 can be defined to indicate a non-applicable value.
 
-??? example
+**Example**
 
     ```json
     {
@@ -1119,7 +1125,7 @@ format) along with its meaning.
 - descriptions - *Object* *optional*. Human-readable localised descriptions (see
   *[names](#names)*) for the sentinel value.
 
-??? example
+**Example**
 
     ```json
     {
@@ -1155,7 +1161,7 @@ to the data structure components.
   relationship between the referenced metadata attribute and the components of
   the data structure.
 
-??? example
+**Example**
 
     ```json
     {
@@ -1194,7 +1200,7 @@ data can be organised in any fashion required.
   object describes a special dimension which designates the period in time in
   which the data identified by the full series key applies.
 
-??? example
+**Example**
 
     ```json
     {
@@ -1246,7 +1252,7 @@ necessary, since the dimension may take these from the referenced concept.
   property must be 1, thus cannot be changed. Also the isMultiLingual format
   property cannot be set to true for dimensions.
 
-??? example
+**Example**
 
     ```json
     {
@@ -1300,7 +1306,7 @@ a reporting year which begins January 1.
   defines the representation for the time dimension. If omitted then the
   `localRepresentation` is of text format type `ObservationalTimePeriod`.
 
-??? example
+**Example**
 
     ```json
     {
@@ -1333,7 +1339,7 @@ and end time.
   *[sentinelValue](#sentinelvalue)* object indicates a reserved value in an
   otherwise open value domain that holds a specific meaning.
 
-??? example
+**Example**
 
     ```json
     {
@@ -1366,7 +1372,7 @@ duplicate partial keys. All groups must be given unique identifiers.
   key, there is no requirement to do so - the ordering of the values of the key
   are taken from the order in which the dimensions are declared.
 
-??? example
+**Example**
 
     ```json
     {
@@ -1394,7 +1400,7 @@ descriptor for a data structure definition.
   measured in a data set. Although this may take its semantic from any concept,
   for a unique measure the common identifier "OBS_VALUE" is recommended.
 
-??? example
+**Example**
 
     ```json
     {
@@ -1436,7 +1442,7 @@ necessary, since the measure may take these from the referenced concept.
   whether reporting a given measure is mandatory or optional. Default:
   `optional`.
 
-??? example
+**Example**
 
     ```
     {
@@ -1469,7 +1475,7 @@ See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
   grouping of the sets of the components that make up the metadata structure
   definition.
 
-??? example
+**Example**
 
     ```json
     {
@@ -1499,7 +1505,7 @@ definition.
   constraint. Therefore, systems processing metadata structure definitions will
   have to perform this check outside of the XML validation.
 
-??? example
+**Example**
 
     ```json
     {
@@ -1526,7 +1532,7 @@ hierarchy.
   attribute, which is the value of an attribute, such as the instance of a coded
   or uncoded attribute in a metadata structure definition.
 
-??? example
+**Example**
 
     ```json
     {
@@ -1593,7 +1599,7 @@ their cardinality) of the metadata attribute cannot change.
   *[metadataAttribute](#metadataattribute)* object defines the a child metadata
   attribute.
 
-??? example
+**Example**
 
     ```json
     {
@@ -1625,7 +1631,7 @@ See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*. See
 There are no additional parameters. The start, end and parent properties are not
 used.
 
-??? example
+**Example**
 
     ```json
     {
@@ -1687,7 +1693,7 @@ common object properties:
   concept is a qualification (in the ISO 11179 sense) or subclass. The start and
   end properties are not used.
 
-??? example
+**Example**
 
     ```json
     {
@@ -1754,7 +1760,7 @@ the representation of this concept, or a text format.
   number of values that can be reported for the component. If set to the string
   "unbounded" than there is no upper limit on its occurrences. The default is 1.
 
-??? example
+**Example**
 
     ```json
     {
@@ -1805,7 +1811,7 @@ object properties:
   referencing the ID value of another code in the same codelist. The start and
   end properties are not used.
 
-??? example
+**Example**
 
     ```json
     {
@@ -1914,7 +1920,7 @@ include the following object properties:
 
 See the schema file for more information.
 
-??? example
+**Example**
 
     ```
     {
@@ -2040,7 +2046,7 @@ In addition, `dataflow` has the following property:
   defined in the DSD, and it cannot be added to a DSD without increasing its
   major version.
 
-??? example
+**Example**
 
     ```
     {
@@ -2189,7 +2195,7 @@ In addition, `categorisation` has the following properties:
 - target - *String* *optional*. Target is a urn reference to the category that
   the referenced object is to be mapped to.
 
-??? example
+**Example**
 
     ```json
     {
@@ -2238,7 +2244,7 @@ In addition, `dataConstraint` has the following properties:
 - dataKeySets - *Array* *optional*. A list of of *[dataKeySet](#datakeyset)*
   objects. DataKeySet defines a collection of full or partial data keys.
 
-??? example
+**Example**
 
     ```json
     {
@@ -2298,7 +2304,7 @@ In addition, `availabilityConstraint` has the following properties:
   and attributes which relate to the region for the purpose of describing a
   constraint.
 
-??? example
+**Example**
 
     ``` json
     {
@@ -2347,7 +2353,7 @@ In addition, `metadataConstraint` has the following properties:
   *[metadataTargetRegion](#metadatatargetregion)* objects which describes the
   values allowed for metadata attributes.
 
-??? example
+**Example**
 
     ```json
     {
@@ -2433,7 +2439,7 @@ constraintAttachment properties for MetadataConstraints:
   sets and/or cube/target regions where the identifier of the components are
   common across all structures to which the constraint is attached.
 
-??? example
+**Example**
 
     ```json
     {
@@ -2530,7 +2536,7 @@ the documentation of the base type for more details on how a region is defined.
   the region. Note that any given key component must only be referenced once in
   the region.
 
-??? example
+**Example**
 
     ```json
     {
@@ -2572,7 +2578,7 @@ root of the report structure.
   *[SimpleComponentValue](#simplecomponentvalue)* objects. Only one of timeRange
   or values properties is allowed.
 
-??? example
+**Example**
 
     ```json
     {
@@ -2621,7 +2627,7 @@ the range.
   superseded. Values must follow the ISO 8601 syntax for combined dates and
   times, including time zone.
 
-??? example
+**Example**
 
     ```json
     {
@@ -2653,7 +2659,7 @@ inclusive in a range.
   specific date and duration.
 - isInclusive - *Boolean* *optional*.
 
-??? example
+**Example**
 
     ```json
     {
@@ -2681,7 +2687,7 @@ simple hierarchy are part of the value set of the component for the region.
   Values must follow the ISO 8601 syntax for combined dates and times, including
   time zone.
 
-??? example
+**Example**
 
     ```json
     {
@@ -2719,7 +2725,7 @@ this dimension is represented as time, and time range can be specified.
   
 Only one of timeRange or values properties is allowed.
 
-??? example
+**Example**
 
     ```json
     {
@@ -2755,7 +2761,7 @@ Only one of timeRange or values properties is allowed.
 - keys - Non-empty *array* of *[dataKey](#datakey)* objects. Data Key contains a
   set of dimension values which identify a full set of data.
 
-??? example
+**Example**
 
     ```json
     {
@@ -2793,7 +2799,7 @@ definition of partial data keys.
 - components - Non-empty *array* of
   *[dataComponentValueSet](#datacomponentvalueset)* objects.
 
-??? example
+**Example**
 
     ```json
     {
@@ -2827,7 +2833,7 @@ one or more data keys.
   dimension value is specified.
 - values - Non-empty *array* of *String*s for dimension values.
 
-??? example
+**Example**
 
     ```json
     {
@@ -2869,7 +2875,7 @@ root of the report structure.
   *[datacomponentvalue](#datacomponentvalue)* objects. Only one of timeRange or
   values properties is allowed.
 
-??? example
+**Example**
 
     ```json
     {
@@ -2905,7 +2911,7 @@ simple hierarchy are part of the value set of the component for the region.
   specifying locals in HTTP - *String*. The localised name.
 - value - *String*.
 
-??? example
+**Example**
 
     ```json
     {
@@ -2954,7 +2960,7 @@ region is defined.
   superseded. Values must follow the ISO 8601 syntax for combined dates and
   times, including time zone.
 
-??? example
+**Example**
 
     ```json
     {
@@ -2993,7 +2999,7 @@ structure.
   *[SimpleComponentValue](#simplecomponentvalue)* objects. Only one of timeRange
   or values properties is allowed.
 
-??? example
+**Example**
 
     ```json
     {
@@ -3013,6 +3019,301 @@ structure.
         "timeRange": {
             # TimeRangeValue object #
         }
+    }
+    ```
+
+### customStructureDefinition
+
+*Object*. CustomStructureDefinition provides the details of a custom structure
+definition. A custom structure definition allows an agency to define the schema
+of a new maintainable structure type which does not exist in the SDMX
+Information Model. It declares the content model to which
+*[customStructures](#customstructure)* conforming to it must adhere: a
+collection of properties, the mutually exclusive constraints over those
+properties, and a collection of locally defined custom types.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+In addition, `customStructureDefinition` has the following properties:
+
+- sdmxClassName - *String*. The class name used in the URN of instances of this
+  custom structure definition (e.g. `PivotTable`). It is decoupled from the
+  identifier of the definition; the maintenance agency is responsible for
+  ensuring that the same class name is not used by two different custom
+  structure definitions which it maintains. Class names are in camel case,
+  starting with an upper case letter.
+- base - *String* *optional*. The SDMX base type which instances of this custom
+  structure definition extend, either `Maintainable` or `ItemScheme`. Instances
+  are always maintainable artefacts (`agencyID`, `id`, `version` and `name` as a
+  minimum), so the field is omitted when it holds its default of `Maintainable`.
+  If the base is `ItemScheme`, the definition must declare an `items` property
+  whose representation is a `customType` extending `Nameable`; that property
+  plays the item role and instances report their items in the `items` field.
+- properties - *Array* *optional* of *[property](#property)* objects. The
+  properties of instances of the custom structure definition.
+- mutuallyExclusive - *Array* *optional* of
+  *[mutuallyExclusive](#mutuallyexclusive)* sets. Sets of two or more of the
+  declared properties which are mutually exclusive.
+- customTypes - *Array* *optional* of *[customType](#customtype)* objects.
+  Reusable complex types which are local to this custom structure definition,
+  and which may be used as the representation of properties.
+
+**Example**
+
+    ```json
+    {
+        "id": "PIVOT_TABLE",
+        "version": "1.0.0",
+        "agencyID": "IMF",
+        "name": "Pivot Table",
+        "links": [
+            {
+                "rel": "self",
+                "urn": "urn:sdmx:org.sdmx.infomodel.csd.CustomStructureDefinition=IMF:PIVOT_TABLE(1.0.0)"
+            }
+        ],
+        "sdmxClassName": "PivotTable",
+        "properties": [
+            {
+                "id": "dataflow",
+                "maxOccurs": 1,
+                "reference": ["Dataflow"]
+            },
+            {
+                "id": "rows",
+                "minOccurs": 0,
+                "customType": "RowColType"
+            }
+        ],
+        "customTypes": [
+            {
+                "id": "RowColType",
+                "name": "Row or Column",
+                "extends": "Nameable",
+                "sdmxClassName": "PivotTableRow",
+                "properties": [
+                    {
+                        "id": "level",
+                        "minOccurs": 0,
+                        "maxOccurs": 1,
+                        "format": { "dataType": "Integer", "minValue": 0 }
+                    },
+                    {
+                        "id": "dimension",
+                        "maxOccurs": 1,
+                        "indirectReference": {
+                            "targetClass": "Dimension",
+                            "context": "dataflow"
+                        }
+                    }
+                ],
+                "mutuallyExclusive": [ ["headingCode", "headingText"] ]
+            }
+        ]
+    }
+    ```
+
+#### property
+
+*Object*. Describes a single property of instances of a
+*[customStructureDefinition](#customstructuredefinition)* or of a
+*[customType](#customtype)*. The property identifier becomes a field name in
+instances.
+
+- id - *String*. Identifier of the property. Because property identifiers are
+  used to create field names in instances, they must be compliant with the
+  NCName type. Property identifiers must be unique within their containing
+  custom structure definition or custom type. The identifiers `id`, `name`,
+  `names`, `description`, `descriptions` (the base fields supplied implicitly by
+  the extension base), `items` (the items property of item scheme based custom
+  structures) and `customStructureDefinition` (the mandatory reference of every
+  instance to its defining custom structure definition) are reserved.
+- description - *String* *optional*. A human-readable description documenting
+  the property. A property has no name; its identifier serves that role. Unlike
+  the descriptions of the SDMX artefacts, the description of a property is a
+  single, non-localised text, so there is no parallel `descriptions` field.
+- minOccurs - *Number* *optional*. The minimum number of values that must be
+  reported for the property. A minimum of `1` is the default and is omitted when
+  it applies; a minimum of `1` makes the property mandatory. A property which is
+  a member of a `mutuallyExclusive` set is, in effect, optional regardless of
+  this value, because at most one member of the set may be present.
+- maxOccurs - *Number* *optional*. The maximum number of values that can be
+  reported for the property. **Omitting the field indicates that the property is
+  unbounded**; a single valued property must therefore state `maxOccurs`
+  explicitly. Note that this differs from the convention used for the occurrence
+  of components, which defaults to `1`. In an instance, a property whose
+  `maxOccurs` is `1` reports its value directly, and a property which allows
+  several values reports them in an array.
+
+At most one representation may be supplied. A value property whose data type and
+facets are unrestricted carries no representation at all, and is then described
+by its identifier and cardinality alone:
+
+- format - *Object* *optional*. Describes a value property with a primitive or
+  higher level data type (e.g. `String`, `Boolean`, `Integer`,
+  `ObservationalTimePeriod`), optionally restricted with the standard SDMX
+  facets (see *[format](#format)*). A localisable text property is a `format` of
+  data type `String` with `isMultiLingual` set to `true`; in instances the values
+  of such a property are reported one per language, as localised values.
+- customType - *String* *optional*. The identifier of a
+  *[customType](#customtype)* defined in the same custom structure definition,
+  which is the representation of this property. A custom type may reference
+  itself or its containing type, allowing recursive structures (e.g. an explicit
+  hierarchy of items).
+- reference - *Array* *optional* of *string*s. Describes a reference property;
+  in instances the property holds the URN of the referenced artefact. The array
+  gives the permitted targets as the classes of SDMX artefact which may be
+  referenced (e.g. `["Dataflow"]`); when several are given the permitted set is
+  their union.
+- indirectReference - *Object* *optional*. Describes a string property which
+  holds the identifier of an object that is resolved against the context
+  established by another reference property of the instance (e.g. a dimension
+  identifier resolved against the dataflow referenced by a sibling property).
+  It has two properties:
+    - targetClass - *String*. The class of the object identified by the property
+      value (e.g. `Dimension`, `Code`).
+    - context - *String*. The identifier of the reference property which
+      establishes the resolution context. This may be a sibling property, or,
+      from within a custom type, a property defined at the root level of the
+      custom structure definition.
+
+#### mutuallyExclusive
+
+*Array* of *string*s. Declares a set of two or more mutually exclusive
+properties, by the identifiers of properties declared in the same containing
+*[customStructureDefinition](#customstructuredefinition)* or
+*[customType](#customtype)*. At most one member of the set may appear in an
+instance. Each property may be named at most once in a set, and a container may
+declare several such sets.
+
+**Example**
+
+    ```json
+    "mutuallyExclusive": [
+        [ "headingCode", "headingText" ]
+    ]
+    ```
+
+#### customType
+
+*Object*. Describes a complex type defined locally within a
+*[customStructureDefinition](#customstructuredefinition)*. A custom type extends
+one of the abstract SDMX bases or another custom type defined in the same custom
+structure definition. Extension is additive only: a subtype adds properties and
+must not redefine or restrict inherited ones, and extension chains must be
+acyclic.
+
+- id - *String*. Identifier of the custom type, which must be unique within the
+  custom structure definition.
+- name - *String* *optional*. A human-readable (best-language-match) name
+  documenting the custom type.
+- names - *Object* *optional*. A list of human-readable localised names (see
+  *[names](#names)*) documenting the custom type.
+- description - *String* *optional*. A longer human-readable
+  (best-language-match) description of the custom type.
+- descriptions - *Object* *optional*. A list of longer human-readable localised
+  descriptions (see *[names](#names)*) of the custom type.
+- extends - *String* *optional*. The abstract SDMX base type which this custom
+  type extends, one of `Annotatable` (the type carries only annotations in
+  addition to its declared properties), `Identifiable` (the type has an
+  identifier and a generated URN in addition to annotations) and `Nameable` (the
+  type has an identifier, a generated URN, a multilingual name, and an optional
+  multilingual description in addition to annotations). It must not be used
+  together with `extendsType`. `ItemScheme` is not a valid base for a custom
+  type; it is only available at the level of the custom structure definition
+  itself.
+- extendsType - *String* *optional*. References, by identifier, another custom
+  type defined in the same custom structure definition which this custom type
+  extends. It must not be used together with `extends`.
+- sdmxClassName - *String* *optional*. The class name used for the automatic
+  generation of URNs of objects of this type within an instance (e.g.
+  `PivotTableRow`). It is required when the custom type extends, directly or
+  transitively, `Identifiable` or `Nameable`, and must not be used for purely
+  annotatable types. Each type in an extension chain must declare its own, unique
+  class name so that generated URNs remain unique.
+- properties - *Array* *optional* of *[property](#property)* objects. The
+  properties of the custom type.
+- mutuallyExclusive - *Array* *optional* of
+  *[mutuallyExclusive](#mutuallyexclusive)* sets. Sets of mutually exclusive
+  properties of the custom type.
+
+### customStructure
+
+*Object*. An instance of a
+*[customStructureDefinition](#customstructuredefinition)*. An instance is always
+a maintainable artefact and carries a mandatory reference to the custom
+structure definition to which it conforms. Its remaining fields are the
+properties declared by that definition and are therefore not known to the
+SDMX-JSON structure schema: that schema validates the maintainable parts and the
+reference to the definition, while a validator equipped with the dynamically
+generated JSON schemas of the custom structure definitions it knows validates
+the instances in full. Instances of unknown custom structure definitions are
+therefore not rejected, and are caught by referential integrity checking
+instead.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+In addition, `customStructure` has the following properties:
+
+- customStructureDefinition - *String*. Urn reference to the custom structure
+  definition to which this instance conforms. Because the reference includes the
+  version of the definition, instances conforming to different versions of the
+  same definition may coexist in one message.
+- isPartial - *Boolean* *optional*. If `true`, indicates that only the relevant
+  portion of the custom structure is being communicated. It applies only where
+  the custom structure definition has a `base` of `ItemScheme`, in which case the
+  items are reported in the `items` field. See
+  *[Common properties of SDMX artefacts of base type "ItemScheme"](#common-properties-of-sdmx-artefacts-of-base-type-itemscheme)*.
+- *[Declared property]* - The properties declared by the custom structure
+  definition, each reported under its own identifier. A property whose
+  `maxOccurs` is `1` reports its value directly; any other property reports its
+  values in an array. A value is one of:
+    - a *String*, for a value property (its lexical form, so a numeric or boolean
+      value is reported as a string too), a reference property (the URN of the
+      referenced artefact) or an indirect reference property (the identifier of
+      the referenced object);
+    - an *Object* with `locale` and `value`, for one language-specific value of a
+      multilingual value property (a `format` with `isMultiLingual` set to
+      `true`);
+    - an *Object*, for a property whose representation is a `customType`. Such an
+      object reports its own declared properties and, when its custom type
+      extends `Identifiable` or `Nameable`, the base fields `id` and
+      `name`/`names` and `description`/`descriptions`. The URN of an identifiable
+      object within an instance is derived from the instance and the object's own
+      identifier and is not reported.
+
+**Example**
+
+    ```json
+    {
+        "id": "POP_SEX_AGE",
+        "version": "1.0.0",
+        "agencyID": "OECD",
+        "name": "Population by Sex and Age",
+        "links": [
+            {
+                "rel": "self",
+                "urn": "urn:sdmx:org.sdmx.infomodel.csd.imf.PivotTable=OECD:POP_SEX_AGE(1.0.0)"
+            }
+        ],
+        "customStructureDefinition": "urn:sdmx:org.sdmx.infomodel.csd.CustomStructureDefinition=IMF:PIVOT_TABLE(1.0.0)",
+        "dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=OECD:POP(2.6.0)",
+        "rows": [
+            {
+                "id": "SEX_ROW",
+                "name": "Sex",
+                "dimension": "SEX"
+            }
+        ],
+        "slice": [
+            {
+                "id": "TIME_SLICE",
+                "name": "Time",
+                "dimension": "TIME_PERIOD",
+                "headingText": "Reference period",
+                "position": "0"
+            }
+        ]
     }
     ```
 
@@ -3102,7 +3403,7 @@ pieces of information should be provided:
 See the section on [localised text elements](./4_localised_text_elements.md) on how
 the message deals with languages.
 
-??? example
+**Example**
 
     ```json
     {

@@ -1,0 +1,135 @@
+{
+	"$id":"urn:sdmx:org.sdmx.infomodel.csd.CustomStructureDefinition=IMF:PIVOT_TABLE(1.0.0)",
+	"$schema":"https://json-schema.org/draft/2019-09/schema",
+	"description":"Dynamically generated schema for urn:sdmx:org.sdmx.infomodel.csd.CustomStructureDefinition=IMF:PIVOT_TABLE(1.0.0) (see pivot_table_csd.json), following the CSD schema generation rules. Its $id is the URN of the custom structure definition it was generated from, which is also the target namespace of the equivalent generated XML schema; it is an identifier, not a location, and the schema is not retrievable over http. It validates one instance object of the custom structure definition, that is one member of the 'customStructures' array of a structure message. Values are reported in their lexical form, as strings; a property whose maxOccurs is 1 reports its value directly, any other property reports its values in an array.",
+	"$ref":"#/$defs/PivotTable",
+	"$defs":{
+		"PivotTable":{
+			"description":"An instance of the IMF PIVOT_TABLE(1.0.0) custom structure definition (base 'Maintainable'). It extends CustomStructureInstanceType with the properties declared by the definition, and closes the object so that no undeclared property may be reported.",
+			"type":"object",
+			"allOf":[
+				{
+					"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/CustomStructureInstanceType"
+				},
+				{
+					"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/specificationExtensions"
+				},
+				{
+					"properties":{
+						"customStructureDefinition":{
+							"const":"urn:sdmx:org.sdmx.infomodel.csd.CustomStructureDefinition=IMF:PIVOT_TABLE(1.0.0)",
+							"description":"Mandatory reference to the custom structure definition to which this instance conforms. The fixed value guarantees the reference matches the definition from which this schema was generated."
+						},
+						"dataflow":{
+							"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/DataflowReferenceType",
+							"description":"reference ['Dataflow'], maxOccurs 1 and mandatory: the URN of the referenced dataflow."
+						},
+						"rows":{
+							"type":"array",
+							"minItems":1,
+							"items":{
+								"$ref":"#/$defs/RowColType"
+							}
+						},
+						"cols":{
+							"type":"array",
+							"minItems":1,
+							"items":{
+								"$ref":"#/$defs/RowColType"
+							}
+						},
+						"slice":{
+							"type":"array",
+							"minItems":1,
+							"items":{
+								"$ref":"#/$defs/SliceType"
+							}
+						}
+					},
+					"required":[
+						"dataflow"
+					]
+				}
+			],
+			"unevaluatedProperties":false
+		},
+		"RowColType":{
+			"description":"Generated from custom type RowColType (extends Nameable, sdmxClassName PivotTableRow). Restricts NameableType to require the id, which is used for the automatic generation of the object URN (e.g. urn:sdmx:org.sdmx.infomodel.csd.imf.PivotTableRow=OECD:POP_SEX_AGE(1.0.0).SEX_ROW); the URN is derived from the instance and the object's own id and is not reported.",
+			"type":"object",
+			"allOf":[
+				{
+					"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/NameableType"
+				},
+				{
+					"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/specificationExtensions"
+				},
+				{
+					"$ref":"#/$defs/AbstractRowColType"
+				}
+			],
+			"required":[
+				"id"
+			],
+			"unevaluatedProperties":false
+		},
+		"AbstractRowColType":{
+			"description":"The properties declared by the custom type RowColType, factored out so that they can be reused by the types which extend it.",
+			"type":"object",
+			"properties":{
+				"level":{
+					"description":"format dataType 'Integer' minValue 0, maxOccurs 1: a non negative integer in its lexical form.",
+					"type":"string",
+					"pattern":"^(0|[1-9][0-9]*)$"
+				},
+				"dimension":{
+					"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/idType",
+					"description":"indirectReference targetClass 'Dimension' context 'dataflow', maxOccurs 1 and mandatory: the identifier of a dimension of the dataflow referenced by the 'dataflow' property of the pivot table. Resolution is validated by the system, not by this schema."
+				},
+				"headingText":{
+					"type":"string"
+				},
+				"headingCode":{
+					"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/CodeReferenceType"
+				}
+			},
+			"not":{
+				"description":"mutuallyExclusive: at most one of 'headingText' and 'headingCode' may be reported.",
+				"required":[
+					"headingText",
+					"headingCode"
+				]
+			},
+			"required":[
+				"dimension"
+			]
+		},
+		"SliceType":{
+			"description":"Generated from custom type SliceType (extendsType RowColType, sdmxClassName PivotTableSlice). Extends the generated type of RowColType, adding only the subtype's own properties.",
+			"type":"object",
+			"allOf":[
+				{
+					"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/NameableType"
+				},
+				{
+					"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/specificationExtensions"
+				},
+				{
+					"$ref":"#/$defs/AbstractRowColType"
+				},
+				{
+					"properties":{
+						"position":{
+							"description":"format dataType 'Integer' minValue 0, maxOccurs 1.",
+							"type":"string",
+							"pattern":"^(0|[1-9][0-9]*)$"
+						}
+					}
+				}
+			],
+			"required":[
+				"id"
+			],
+			"unevaluatedProperties":false
+		}
+	}
+}

@@ -1,0 +1,143 @@
+{
+	"$schema": "https://json.sdmx.org/2.2/sdmx-json-structure-schema.json",
+	"meta": {
+		"id": "IREF500001",
+		"test": false,
+		"prepared": "2026-06-11T10:00:00Z",
+		"contentLanguages": [
+			"en"
+		],
+		"sender": {
+			"id": "IMF"
+		},
+		"receivers": [
+			{
+				"id": "not_supplied"
+			}
+		]
+	},
+	"data": {
+		"customStructureDefinitions": [
+			{
+				"id": "PIVOT_TABLE",
+				"version": "1.0.0",
+				"agencyID": "IMF",
+				"name": "Pivot Table",
+				"names": {
+					"en": "Pivot Table"
+				},
+				"description": "Defines the layout of a pivot table over a dataflow. Instances of this definition have the URN class urn:sdmx:org.sdmx.infomodel.csd.imf.PivotTable.",
+				"descriptions": {
+					"en": "Defines the layout of a pivot table over a dataflow. Instances of this definition have the URN class urn:sdmx:org.sdmx.infomodel.csd.imf.PivotTable."
+				},
+				"sdmxClassName": "PivotTable",
+				"properties": [
+					{
+						"id": "dataflow",
+						"description": "The dataflow whose data the pivot table lays out. Mandatory (minOccurs defaults to 1).",
+						"maxOccurs": 1,
+						"reference": [
+							"Dataflow"
+						]
+					},
+					{
+						"id": "rows",
+						"minOccurs": 0,
+						"customType": "RowColType"
+					},
+					{
+						"id": "cols",
+						"minOccurs": 0,
+						"customType": "RowColType"
+					},
+					{
+						"id": "slice",
+						"minOccurs": 0,
+						"customType": "SliceType"
+					}
+				],
+				"customTypes": [
+					{
+						"id": "RowColType",
+						"name": "Row or Column",
+						"names": {
+							"en": "Row or Column"
+						},
+						"description": "A row or column of the pivot table, bound to a dimension of the dataflow. As a nameable type, instances of this type have an id, a name, and a generated URN using the PivotTableRow class.",
+						"descriptions": {
+							"en": "A row or column of the pivot table, bound to a dimension of the dataflow. As a nameable type, instances of this type have an id, a name, and a generated URN using the PivotTableRow class."
+						},
+						"extends": "Nameable",
+						"sdmxClassName": "PivotTableRow",
+						"properties": [
+							{
+								"id": "level",
+								"minOccurs": 0,
+								"maxOccurs": 1,
+								"format": {
+									"dataType": "Integer",
+									"minValue": 0
+								}
+							},
+							{
+								"id": "dimension",
+								"description": "The identifier of the dimension this row or column is bound to. An indirect reference: the identifier is resolved against the dataflow referenced by the 'dataflow' property of the pivot table.",
+								"maxOccurs": 1,
+								"indirectReference": {
+									"targetClass": "Dimension",
+									"context": "dataflow"
+								}
+							},
+							{
+								"id": "headingText",
+								"minOccurs": 0,
+								"maxOccurs": 1,
+								"format": {
+									"dataType": "String"
+								}
+							},
+							{
+								"id": "headingCode",
+								"minOccurs": 0,
+								"maxOccurs": 1,
+								"reference": [
+									"Code"
+								]
+							}
+						],
+						"mutuallyExclusive": [
+							[
+								"headingCode",
+								"headingText"
+							]
+						]
+					},
+					{
+						"id": "SliceType",
+						"name": "Slice",
+						"names": {
+							"en": "Slice"
+						},
+						"description": "A slice of the pivot table. Extends RowColType, inheriting its properties, and adds a fixed position. Declares its own class name so that generated URNs remain unique.",
+						"descriptions": {
+							"en": "A slice of the pivot table. Extends RowColType, inheriting its properties, and adds a fixed position. Declares its own class name so that generated URNs remain unique."
+						},
+						"extendsType": "RowColType",
+						"sdmxClassName": "PivotTableSlice",
+						"properties": [
+							{
+								"id": "position",
+								"minOccurs": 0,
+								"maxOccurs": 1,
+								"format": {
+									"dataType": "Integer",
+									"minValue": 0
+								}
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

@@ -297,6 +297,24 @@
 						"description":"metadataConstraint specifies a sub set of the definition of the allowable content of a metadata set."
 					}
 				},
+				"customStructureDefinitions":{
+					"description":"customStructureDefinitions contains a collection of custom structure definitions. The custom structure definitions may be detailed in full, or referenced from an external structure document or registry service.",
+					"type":"array",
+					"minItems":1,
+					"items":{
+						"$ref":"#/$defs/CustomStructureDefinitionType",
+						"description":"customStructureDefinition provides the details of a custom structure definition, which defines the schema (properties, mutually exclusive sets of properties, and custom types) to which instances of the custom structure must conform."
+					}
+				},
+				"customStructures":{
+					"description":"customStructures contains a collection of instances of custom structure definitions. Each instance carries a mandatory reference, by URN, to the custom structure definition to which it conforms. Instances are validated against dynamically generated schemas derived from their custom structure definitions, according to the schema generation rules. Because the reference includes the version of the definition, instances conforming to different versions of the same definition may coexist in one message.",
+					"type":"array",
+					"minItems":1,
+					"items":{
+						"$ref":"#/$defs/CustomStructureInstanceType",
+						"description":"customStructure provides the details of an instance of a custom structure definition."
+					}
+				},
 				"customTypeSchemes":{
 					"description":"customTypeSchemes contains one or more custom type schemes, which can be explicitly detailed or referenced from an external structure document or registry service.",
 					"type":"array",
@@ -551,6 +569,8 @@
 									"contents",
 									"copyright",
 									"current",
+									"customstructure",
+									"customstructuredefinition",
 									"customtype",
 									"customtypescheme",
 									"dataattribute",
@@ -3842,6 +3862,402 @@
 			"$ref":"#/$defs/specificationExtensions",
 			"unevaluatedProperties":false
 		},
+		"ClassNameType":{
+			"description":"ClassNameType restricts the format of a class name, as used for the class part of a URN and for the generation of component names. Class names are in camel case, starting with an upper case letter (e.g. PivotTable).",
+			"type":"string",
+			"pattern":"^[A-Z][A-Za-z0-9]*$"
+		},
+		"ObjectClassType":{
+			"description":"ObjectClassType provides a comprehensive enumeration of the classes of the SDMX Information Model, together with the abstract classes Component, Item and ItemScheme, and the open values Any, AnyIdentifiable and AnyMaintainable. It is used, for example, to restrict the classes of artefact which may be the target of a reference.",
+			"type":"string",
+			"enum":[
+				"Any",
+				"AnyIdentifiable",
+				"AnyMaintainable",
+				"Agency",
+				"AgencyScheme",
+				"AttributeDescriptor",
+				"Categorisation",
+				"Category",
+				"CategoryScheme",
+				"CategorySchemeMap",
+				"Code",
+				"Codelist",
+				"Component",
+				"Concept",
+				"ConceptScheme",
+				"ConceptSchemeMap",
+				"CustomStructureDefinition",
+				"CustomType",
+				"CustomTypeScheme",
+				"DataAttribute",
+				"DataConstraint",
+				"DataConsumer",
+				"DataConsumerScheme",
+				"Dataflow",
+				"DataProvider",
+				"DataProviderScheme",
+				"DataStructure",
+				"DatePatternMap",
+				"Dimension",
+				"DimensionDescriptor",
+				"EpochMap",
+				"FrequencyFormatMapping",
+				"GroupDimensionDescriptor",
+				"HierarchicalCode",
+				"Hierarchy",
+				"HierarchyAssociation",
+				"Item",
+				"ItemScheme",
+				"Level",
+				"Measure",
+				"MeasureDescriptor",
+				"MetadataAttribute",
+				"MetadataConstraint",
+				"Metadataflow",
+				"MetadataProvider",
+				"MetadataProviderScheme",
+				"MetadataProvisionAgreement",
+				"MetadataSet",
+				"MetadataStructure",
+				"NamePersonalisation",
+				"NamePersonalisationScheme",
+				"OrganisationSchemeMap",
+				"OrganisationUnit",
+				"OrganisationUnitScheme",
+				"Process",
+				"ProcessStep",
+				"ProvisionAgreement",
+				"ReportingCategory",
+				"ReportingTaxonomy",
+				"ReportingTaxonomyMap",
+				"RepresentationMap",
+				"Ruleset",
+				"RulesetScheme",
+				"StructureMap",
+				"TimeDimension",
+				"Transformation",
+				"TransformationScheme",
+				"Transition",
+				"UserDefinedOperator",
+				"UserDefinedOperatorScheme",
+				"ValueList",
+				"VtlCodelistMapping",
+				"VtlConceptMapping",
+				"VtlDataflowMapping",
+				"VtlMappingScheme"
+			]
+		},
+		"CustomStructureBaseType":{
+			"description":"CustomStructureBaseType provides an enumeration of the SDMX base types available to a custom structure definition. 'Maintainable' (the default, and omitted when it applies) indicates that instances are plain maintainable artefacts; 'ItemScheme' indicates that instances are item schemes, the 'items' property of the definition declaring the item type.",
+			"type":"string",
+			"enum":[
+				"Maintainable",
+				"ItemScheme"
+			]
+		},
+		"ExtensibleBaseType":{
+			"description":"ExtensibleBaseType provides an enumeration of the abstract SDMX base types which a custom type may extend. 'Annotatable': the type carries only annotations in addition to its declared properties. 'Identifiable': the type has an identifier and a generated URN in addition to annotations. 'Nameable': the type has an identifier, a generated URN, a multilingual name, and an optional multilingual description in addition to annotations.",
+			"type":"string",
+			"enum":[
+				"Annotatable",
+				"Identifiable",
+				"Nameable"
+			]
+		},
+		"CustomStructureDefinitionType":{
+			"description":"CustomStructureDefinitionType describes the structure of a custom structure definition. A custom structure definition allows an agency to define the schema of a new maintainable structure type which does not exist in the SDMX Information Model. It declares the content model to which instances of the custom structure must conform: a collection of properties, the mutually exclusive constraints over those properties, and a collection of locally defined custom types. Unless the artefact is returned as a stub, it must contain the 'sdmxClassName' property. When 'base' is 'ItemScheme', the definition must declare a property identified 'items' whose representation is a 'customType' extending 'Nameable'; that property plays the item role and may occur zero or more times.",
+			"type":"object",
+			"allOf":[
+				{
+					"$ref":"#/$defs/MaintainableType"
+				},
+				{
+					"properties":{
+						"sdmxClassName":{
+							"$ref":"#/$defs/ClassNameType",
+							"description":"The class name used in the URN of instances of this custom structure definition (e.g. PivotTable). It is decoupled from the identifier of the definition; the maintenance agency is responsible for ensuring that the same class name is not used by two different custom structure definitions which it maintains."
+						},
+						"base":{
+							"$ref":"#/$defs/CustomStructureBaseType",
+							"default":"Maintainable",
+							"description":"The SDMX base type which instances of this custom structure definition extend. Instances are always maintainable artefacts (agencyID, id, version and name as a minimum), so the field is omitted when it holds its default of 'Maintainable'. If the base is 'ItemScheme', the definition must declare an 'items' property whose representation is a 'customType' extending 'Nameable'."
+						},
+						"properties":{
+							"type":"array",
+							"minItems":1,
+							"items":{
+								"$ref":"#/$defs/PropertyType",
+								"description":"property defines a single property of instances of the custom structure definition."
+							}
+						},
+						"mutuallyExclusive":{
+							"type":"array",
+							"minItems":1,
+							"items":{
+								"$ref":"#/$defs/MutuallyExclusiveType",
+								"description":"Each member of the array is a set of two or more of the declared properties which are mutually exclusive."
+							}
+						},
+						"customTypes":{
+							"type":"array",
+							"minItems":1,
+							"items":{
+								"$ref":"#/$defs/LocalCustomTypeType",
+								"description":"customType defines a reusable complex type which is local to this custom structure definition, and which may be used as the representation of properties."
+							}
+						}
+					}
+				}
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
+		},
+		"PropertyType":{
+			"description":"PropertyType describes a single property of instances of a custom structure definition or of a custom type. The property identifier becomes a field name in instances and is therefore restricted to the NCNameIDType. Property identifiers must be unique within their containing custom structure definition or custom type. The identifiers 'id', 'name', 'names', 'description', 'descriptions' (the base fields supplied implicitly by the extension base), 'items' (the items property of item scheme based custom structures) and 'customStructureDefinition' (the mandatory reference of every instance to its defining custom structure definition) are reserved. At most one representation ('format', 'customType', 'reference' or 'indirectReference') may be supplied; a value property whose text type and facets are unrestricted has no representation at all.",
+			"type":"object",
+			"oneOf":[
+				{
+					"required":[
+						"format"
+					]
+				},
+				{
+					"required":[
+						"customType"
+					]
+				},
+				{
+					"required":[
+						"reference"
+					]
+				},
+				{
+					"required":[
+						"indirectReference"
+					]
+				},
+				{
+					"description":"A value property with no restriction on its text type or facets carries no representation.",
+					"allOf":[
+						{
+							"not":{
+								"required":[
+									"format"
+								]
+							}
+						},
+						{
+							"not":{
+								"required":[
+									"customType"
+								]
+							}
+						},
+						{
+							"not":{
+								"required":[
+									"reference"
+								]
+							}
+						},
+						{
+							"not":{
+								"required":[
+									"indirectReference"
+								]
+							}
+						}
+					]
+				}
+			],
+			"properties":{
+				"id":{
+					"$ref":"#/$defs/NCNameIDType",
+					"description":"Identifier of the property. Because property identifiers are used to create field names in instances, they must be compliant with the NCName type."
+				},
+				"description":{
+					"type":"string",
+					"description":"A human-readable description documenting the property. A property has no name; its identifier serves that role. Unlike the descriptions of the SDMX artefacts, the description of a property is a single, non-localised text."
+				},
+				"minOccurs":{
+					"type":"integer",
+					"minimum":0,
+					"default":1,
+					"description":"The minimum number of values that must be reported for the property. A minimum of 1 is the default and is omitted when it applies; a minimum of 1 makes the property mandatory. A property which is a member of a mutually exclusive set is, in effect, optional regardless of this value, because at most one member of the set may be present."
+				},
+				"maxOccurs":{
+					"type":"integer",
+					"minimum":1,
+					"description":"The maximum number of values that can be reported for the property. Omitting the field indicates that the property is unbounded; a single valued property must therefore state maxOccurs explicitly. Note that this differs from the convention used for the occurrence of components, which defaults to 1. In an instance, a property whose maxOccurs is 1 reports its value directly, and a property which allows several values reports them in an array."
+				},
+				"format":{
+					"$ref":"#/$defs/BasicComponentTextFormatType",
+					"description":"format describes a value property with a primitive or higher level data type (e.g. String, Boolean, Integer, ObservationalTimePeriod), optionally restricted with the standard SDMX facets (minValue, maxValue, minLength, maxLength, pattern, decimals, etc.). It is omitted when neither the data type nor any facet is restricted. A localisable text property is a format of data type String with isMultiLingual set to true; in instances the values of such a property are reported one per language, as localised values."
+				},
+				"customType":{
+					"$ref":"#/$defs/NCNameIDType",
+					"description":"customType describes a property whose representation is a custom type defined in this custom structure definition, referenced by its identifier. A custom type may reference itself or its containing type, allowing recursive structures (e.g. an explicit hierarchy of items)."
+				},
+				"reference":{
+					"type":"array",
+					"minItems":1,
+					"description":"reference describes a reference property; in instances the property holds the URN of the referenced artefact. The array gives the permitted targets as the classes of SDMX artefact which may be referenced; when several are given the permitted set is their union.",
+					"items":{
+						"$ref":"#/$defs/ObjectClassType",
+						"description":"The class of SDMX artefact which the property may reference."
+					}
+				},
+				"indirectReference":{
+					"$ref":"#/$defs/IndirectReferencePropertyType",
+					"description":"indirectReference describes a string property which holds the identifier of an object that is resolved against the context established by another reference property of the instance (e.g. a dimension identifier resolved against the dataflow referenced by a sibling property). This allows a system to validate that the referenced object exists and to support reference resolution and referential integrity."
+				}
+			},
+			"required":[
+				"id"
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
+		},
+		"MutuallyExclusiveType":{
+			"description":"MutuallyExclusiveType declares a set of two or more mutually exclusive properties, by the identifiers of properties declared in the same containing custom structure definition or custom type. Each property may be named at most once in a set. At most one member of the set may appear in an instance.",
+			"type":"array",
+			"minItems":2,
+			"uniqueItems":true,
+			"items":{
+				"$ref":"#/$defs/NCNameIDType",
+				"description":"The identifier of a property declared in the same container."
+			}
+		},
+		"IndirectReferencePropertyType":{
+			"description":"IndirectReferencePropertyType describes the representation of an indirect reference property. The property value is the identifier of an object of the target class, resolved against the context established by the reference property named by the 'context' field.",
+			"type":"object",
+			"properties":{
+				"targetClass":{
+					"$ref":"#/$defs/ObjectClassType",
+					"description":"The class of the object identified by the property value (e.g. Dimension, Code)."
+				},
+				"context":{
+					"$ref":"#/$defs/NCNameIDType",
+					"description":"The identifier of the reference property which establishes the resolution context. This may be a sibling property, or, from within a custom type, a property defined at the root level of the custom structure definition."
+				}
+			},
+			"required":[
+				"targetClass",
+				"context"
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
+		},
+		"LocalCustomTypeType":{
+			"description":"LocalCustomTypeType describes a complex type defined locally within a custom structure definition. A custom type extends one of the abstract SDMX bases (Annotatable, Identifiable, Nameable) or another custom type defined in the same custom structure definition. The 'extends' and 'extendsType' fields are mutually exclusive. Extension is additive only: a subtype adds properties and must not redefine or restrict inherited ones, and extension chains must be acyclic.",
+			"type":"object",
+			"not":{
+				"required":[
+					"extends",
+					"extendsType"
+				]
+			},
+			"properties":{
+				"id":{
+					"$ref":"#/$defs/NCNameIDType",
+					"description":"Identifier of the custom type, which must be unique within the custom structure definition."
+				},
+				"name":{
+					"$ref":"#/$defs/localisedBestMatchText",
+					"description":"A human-readable (best-language-match) name documenting the custom type."
+				},
+				"names":{
+					"$ref":"#/$defs/localisedText",
+					"description":"A list of human-readable localised names documenting the custom type."
+				},
+				"description":{
+					"$ref":"#/$defs/localisedBestMatchText",
+					"description":"A longer human-readable (best-language-match) description of the custom type."
+				},
+				"descriptions":{
+					"$ref":"#/$defs/localisedText",
+					"description":"A list of longer human-readable localised descriptions of the custom type."
+				},
+				"extends":{
+					"$ref":"#/$defs/ExtensibleBaseType",
+					"description":"The abstract SDMX base type which this custom type extends. It must not be used together with 'extendsType'. ItemScheme is not a valid base for a custom type; it is only available at the level of the custom structure definition itself."
+				},
+				"extendsType":{
+					"$ref":"#/$defs/NCNameIDType",
+					"description":"References, by identifier, another custom type defined in the same custom structure definition which this custom type extends. It must not be used together with 'extends'."
+				},
+				"sdmxClassName":{
+					"$ref":"#/$defs/ClassNameType",
+					"description":"The class name used for the automatic generation of URNs of objects of this type within an instance (e.g. PivotTableRow). It is required when the custom type extends, directly or transitively, Identifiable or Nameable, and must not be used for purely annotatable types. Each type in an extension chain must declare its own, unique class name so that generated URNs remain unique."
+				},
+				"properties":{
+					"type":"array",
+					"minItems":1,
+					"items":{
+						"$ref":"#/$defs/PropertyType",
+						"description":"property defines a single property of the custom type."
+					}
+				},
+				"mutuallyExclusive":{
+					"type":"array",
+					"minItems":1,
+					"items":{
+						"$ref":"#/$defs/MutuallyExclusiveType",
+						"description":"Each member of the array is a set of mutually exclusive properties of the custom type."
+					}
+				}
+			},
+			"required":[
+				"id"
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
+		},
+		"LocalisedValueType":{
+			"description":"LocalisedValueType carries one language specific value of a multilingual property of a custom structure instance, that is a property whose 'format' has isMultiLingual set to true. Unlike the localised text of the standard SDMX artefacts, which is an object keyed by language, the values of a multilingual custom property are reported one per language as objects carrying the language and the value, because such a property may itself be repeated.",
+			"type":"object",
+			"properties":{
+				"locale":{
+					"type":"string",
+					"description":"The IETF language tag of the language in which the value is given."
+				},
+				"value":{
+					"type":"string",
+					"description":"The value, in the language given by 'locale'."
+				}
+			},
+			"required":[
+				"locale",
+				"value"
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
+		},
+		"CustomStructureInstanceType":{
+			"description":"CustomStructureInstanceType describes the structure of an instance of a custom structure definition. An instance is always a maintainable artefact and carries a mandatory 'customStructureDefinition' field which references, by URN, the custom structure definition to which it conforms. The remaining fields of the instance are the properties declared by that definition, each reported under its own identifier, and are therefore not known to this schema: this schema validates the maintainable parts and the reference to the definition, while a validator equipped with the dynamically generated JSON schemas of the custom structure definitions it knows validates the instances in full. A property whose maxOccurs is 1 reports its value directly and any other property reports its values in an array; a value is a string (a reference property holding the URN of the referenced artefact, an indirect reference holding an identifier, and any other value its lexical representation), a localised value (see LocalisedValueType) or a nested object conforming to a custom type. Where the definition has a base of 'ItemScheme', the instance reports its items in the 'items' property. This type is deliberately left open and does not forbid unevaluated properties.",
+			"type":"object",
+			"allOf":[
+				{
+					"$ref":"#/$defs/MaintainableType"
+				},
+				{
+					"properties":{
+						"customStructureDefinition":{
+							"$ref":"#/$defs/CustomStructureDefinitionReferenceType",
+							"description":"Urn reference to the custom structure definition to which this instance conforms. Because the reference includes the version of the definition, instances conforming to different versions of the same definition may coexist in one message."
+						},
+						"isPartial":{
+							"type":"boolean",
+							"description":"isPartial, if true, indicates that only the relevant portion of the custom structure is being communicated. It applies only where the custom structure definition has a base of 'ItemScheme'."
+						}
+					}
+				}
+			],
+			"required":[
+				"customStructureDefinition"
+			]
+		},
 		"CustomTypeSchemeType":{
 			"description":"CustomTypeSchemeType defines a collection of custom types that are used in transformations. Unless the artefact is returned as a stub, it must contain the 'vtlVersion' property.",
 			"type":"object",
@@ -5950,12 +6366,12 @@
 		"urn":{
 			"description":"Universal Resource Name (URN) is constructed according to the generic structure 'urn:sdmx:org.SDMX-IM-package-name.class-name=agencyid:maintainedobject-id(maintainedobject-version).containerobject-id.object-id*'. For more information see: Unique identification of SDMX objects, in: SDMX STANDARDS: SECTION 5 SDMX REGISTRY SPECIFICATION",
 			"type":"string",
-			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.((base\\.((Agency)|(OrganisationUnitScheme)|(AgencyScheme)|(DataProviderScheme)|(MetadataProviderScheme)|(DataConsumerScheme)|(OrganisationUnit)|(DataProvider)|(MetadataProvider)|(DataConsumer)))|(codelist\\.((Codelist)|(ValueList)|(Hierarchy)|(HierarchyAssociation)|(Code)|(HierarchicalCode)|(Level)))|(conceptscheme\\.((ConceptScheme)|(Concept)))|(datastructure\\.((DataStructure)|(AttributeDescriptor)|(DataAttribute)|(GroupDimensionDescriptor)|(DimensionDescriptor)|(Dimension)|(TimeDimension)|(MeasureDescriptor)|(Measure)|(Dataflow)))|(categoryscheme\\.((CategoryScheme)|(Category)|(Categorisation)|(ReportingTaxonomy)|(ReportingCategory)))|(registry\\.((ProvisionAgreement)|(MetadataProvisionAgreement)|(DataConstraint)|(AvailabilityConstraint)|(MetadataConstraint)|(Subscription)))|(metadatastructure\\.((MetadataAttributeDescriptor)|(MetadataAttribute)|(MetadataStructure)|(Metadataflow)|(MetadataSet)))|(process\\.((Process)|(ProcessStep)|(Transition)))|(structuremapping\\.((StructureMap)|(ComponentMap)|(EpochMap)|(DatePatternMap)|(ConceptSchemeMap)|(OrganisationSchemeMap)|(CategorySchemeMap)|(ReportingTaxonomyMap)|(RepresentationMap)|(FrequencyFormatMapping)))|(transformation\\.((TransformationScheme)|(Transformation)|(CustomTypeScheme)|(CustomType)|(NamePersonalisationScheme)|(NamePersonalisation)|(VtlMappingScheme)|(VtlCodelistMapping)|(VtlConceptMapping)|(VtlDataflowMapping)|(RulesetScheme)|(Ruleset)|(UserDefinedOperatorScheme)|(UserDefinedOperator))))=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)(\\.[A-Za-z0-9_@$-]+(\\.[A-Za-z0-9_@$-]+)*)?$"
+			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.((csd\\.CustomStructureDefinition)|(csd(\\.[a-z][a-z0-9_\\-]*)+\\.[A-Z][A-Za-z0-9]*)|(base\\.((Agency)|(OrganisationUnitScheme)|(AgencyScheme)|(DataProviderScheme)|(MetadataProviderScheme)|(DataConsumerScheme)|(OrganisationUnit)|(DataProvider)|(MetadataProvider)|(DataConsumer)))|(codelist\\.((Codelist)|(ValueList)|(Hierarchy)|(HierarchyAssociation)|(Code)|(HierarchicalCode)|(Level)))|(conceptscheme\\.((ConceptScheme)|(Concept)))|(datastructure\\.((DataStructure)|(AttributeDescriptor)|(DataAttribute)|(GroupDimensionDescriptor)|(DimensionDescriptor)|(Dimension)|(TimeDimension)|(MeasureDescriptor)|(Measure)|(Dataflow)))|(categoryscheme\\.((CategoryScheme)|(Category)|(Categorisation)|(ReportingTaxonomy)|(ReportingCategory)))|(registry\\.((ProvisionAgreement)|(MetadataProvisionAgreement)|(DataConstraint)|(AvailabilityConstraint)|(MetadataConstraint)|(Subscription)))|(metadatastructure\\.((MetadataAttributeDescriptor)|(MetadataAttribute)|(MetadataStructure)|(Metadataflow)|(MetadataSet)))|(process\\.((Process)|(ProcessStep)|(Transition)))|(structuremapping\\.((StructureMap)|(ComponentMap)|(EpochMap)|(DatePatternMap)|(ConceptSchemeMap)|(OrganisationSchemeMap)|(CategorySchemeMap)|(ReportingTaxonomyMap)|(RepresentationMap)|(FrequencyFormatMapping)))|(transformation\\.((TransformationScheme)|(Transformation)|(CustomTypeScheme)|(CustomType)|(NamePersonalisationScheme)|(NamePersonalisation)|(VtlMappingScheme)|(VtlCodelistMapping)|(VtlConceptMapping)|(VtlDataflowMapping)|(RulesetScheme)|(Ruleset)|(UserDefinedOperatorScheme)|(UserDefinedOperator))))=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)(\\.[A-Za-z0-9_@$-]+(\\.[A-Za-z0-9_@$-]+)*)?$"
 		},
 		"WildcardObjectReferenceType":{
 			"description":"WildcardObjectReferenceType is a generic URN reference which allows for any object to be referenced with the ability to wildcard certain parts of the identifier. The type of object actually referenced can be determined from the URN.",
 			"type":"string",
-			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.((base\\.((Any)|(Agency)|(OrganisationUnitScheme)|(AgencyScheme)|(DataProviderScheme)|(MetadataProviderScheme)|(DataConsumerScheme)|(OrganisationUnit)|(DataProvider)|(MetadataProvider)|(DataConsumer)))|(codelist\\.((Any)|(Codelist)|(ValueList)|(Hierarchy)|(HierarchyAssociation)|(Code)|(HierarchicalCode)|(Level)))|(conceptscheme\\.((Any)|(ConceptScheme)|(Concept)))|(datastructure\\.((Any)|(DataStructure)|(AttributeDescriptor)|(DataAttribute)|(GroupDimensionDescriptor)|(DimensionDescriptor)|(Dimension)|(TimeDimension)|(MeasureDescriptor)|(Measure)|(Dataflow)))|(categoryscheme\\.((Any)|(CategoryScheme)|(Category)|(Categorisation)|(ReportingTaxonomy)|(ReportingCategory)))|(registry\\.((Any)|(ProvisionAgreement)|(MetadataProvisionAgreement)|(DataConstraint)|(AvailabilityConstraint)|(MetadataConstraint)|(Subscription)))|(metadatastructure\\.((Any)|(MetadataAttributeDescriptor)|(MetadataAttribute)|(MetadataStructure)|(Metadataflow)|(MetadataSet)))|(process\\.((Any)|(Process)|(ProcessStep)|(Transition)))|(structuremapping\\.((Any)|(StructureMap)|(ComponentMap)|(EpochMap)|(DatePatternMap)|(ConceptSchemeMap)|(OrganisationSchemeMap)|(CategorySchemeMap)|(ReportingTaxonomyMap)|(RepresentationMap)|(FrequencyFormatMapping)))|(transformation\\.((Any)|(TransformationScheme)|(Transformation)|(CustomTypeScheme)|(CustomType)|(NamePersonalisationScheme)|(NamePersonalisation)|(VtlMappingScheme)|(VtlCodelistMapping)|(VtlConceptMapping)|(VtlDataflowMapping)|(RulesetScheme)|(Ruleset)|(UserDefinedOperatorScheme)|(UserDefinedOperator))))=(([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*)|(\\*)):(([A-Za-z0-9_@$-]+)|(\\*))\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+))|(\\*))\\)((((\\.[A-Za-z0-9_@$-]+)*)|(\\.\\*))(((\\.[A-Za-z0-9_@$-]+)*)|(\\.\\*)))?$"
+			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.((csd\\.CustomStructureDefinition)|(csd(\\.[a-z][a-z0-9_\\-]*)+\\.[A-Z][A-Za-z0-9]*)|(base\\.((Any)|(Agency)|(OrganisationUnitScheme)|(AgencyScheme)|(DataProviderScheme)|(MetadataProviderScheme)|(DataConsumerScheme)|(OrganisationUnit)|(DataProvider)|(MetadataProvider)|(DataConsumer)))|(codelist\\.((Any)|(Codelist)|(ValueList)|(Hierarchy)|(HierarchyAssociation)|(Code)|(HierarchicalCode)|(Level)))|(conceptscheme\\.((Any)|(ConceptScheme)|(Concept)))|(datastructure\\.((Any)|(DataStructure)|(AttributeDescriptor)|(DataAttribute)|(GroupDimensionDescriptor)|(DimensionDescriptor)|(Dimension)|(TimeDimension)|(MeasureDescriptor)|(Measure)|(Dataflow)))|(categoryscheme\\.((Any)|(CategoryScheme)|(Category)|(Categorisation)|(ReportingTaxonomy)|(ReportingCategory)))|(registry\\.((Any)|(ProvisionAgreement)|(MetadataProvisionAgreement)|(DataConstraint)|(AvailabilityConstraint)|(MetadataConstraint)|(Subscription)))|(metadatastructure\\.((Any)|(MetadataAttributeDescriptor)|(MetadataAttribute)|(MetadataStructure)|(Metadataflow)|(MetadataSet)))|(process\\.((Any)|(Process)|(ProcessStep)|(Transition)))|(structuremapping\\.((Any)|(StructureMap)|(ComponentMap)|(EpochMap)|(DatePatternMap)|(ConceptSchemeMap)|(OrganisationSchemeMap)|(CategorySchemeMap)|(ReportingTaxonomyMap)|(RepresentationMap)|(FrequencyFormatMapping)))|(transformation\\.((Any)|(TransformationScheme)|(Transformation)|(CustomTypeScheme)|(CustomType)|(NamePersonalisationScheme)|(NamePersonalisation)|(VtlMappingScheme)|(VtlCodelistMapping)|(VtlConceptMapping)|(VtlDataflowMapping)|(RulesetScheme)|(Ruleset)|(UserDefinedOperatorScheme)|(UserDefinedOperator))))=(([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*)|(\\*)):(([A-Za-z0-9_@$-]+)|(\\*))\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+))|(\\*))\\)((((\\.[A-Za-z0-9_@$-]+)*)|(\\.\\*))(((\\.[A-Za-z0-9_@$-]+)*)|(\\.\\*)))?$"
 		},
 		"DataStructureReferenceType":{
 			"description":"DataStructureReferenceType is a type for referencing a data structure definition object. It consists of a URN.",
@@ -6101,6 +6517,16 @@
 			"description":"NamePersonalisationSchemeReferenceType is a type for referencing a name personalisation scheme object. It consists of a URN.",
 			"type":"string",
 			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.transformation\\.NamePersonalisationScheme=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
+		},
+		"CustomStructureDefinitionReferenceType":{
+			"description":"CustomStructureDefinitionReferenceType is a type for referencing a custom structure definition. It consists of a URN.",
+			"type":"string",
+			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.csd\\.CustomStructureDefinition=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
+		},
+		"CustomStructureInstanceReferenceType":{
+			"description":"CustomStructureInstanceReferenceType is a type for referencing an instance of a custom structure definition. It consists of a URN whose package is 'csd' followed by the period separated agency identifier(s) of the agency which maintains the custom structure definition, in lower case, and whose class is the class name of that definition (e.g. urn:sdmx:org.sdmx.infomodel.csd.imf.PivotTable=OECD:POP_SEX_AGE(1.0.0)). Dynamically generated schemas restrict this type to the class and agency of a specific custom structure definition.",
+			"type":"string",
+			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.csd(\\.[a-z][a-z0-9_\\-]*)+\\.[A-Z][A-Za-z0-9]*=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
 		},
 		"CustomTypeSchemeReferenceType":{
 			"description":"CustomTypeSchemeReferenceType is a type for referencing a custom type scheme object. It consists of a URN.",
