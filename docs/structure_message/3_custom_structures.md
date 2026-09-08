@@ -123,10 +123,10 @@ The root type is the SdmxClassName of the CSD, with the following properties:
 
 **allOf** - array of three entries
 
-1. `{"$ref": "<structure-schema>#/$defs/CustomStructureInstanceType"}` — brings in
+1. `{"$ref": "<structure-schema>#/$defs/CustomStructureInstanceType"}` - brings in
    `id`, `agencyID`, `version`, `name`/`names`, `description`/`descriptions`,
    `links`, `annotations`, `isPartial` and `customStructureDefinition`.
-2. `{"$ref": "<structure-schema>#/$defs/specificationExtensions"}` — allows `x-`
+2. `{"$ref": "<structure-schema>#/$defs/specificationExtensions"}` - allows `x-`
    extension fields.
 3. A branch declaring the CSD's own properties, following the rules in section 5.
 
