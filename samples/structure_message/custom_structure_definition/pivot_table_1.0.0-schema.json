@@ -1,10 +1,10 @@
 {
-	"$id":"https://json.sdmx.org/2.2/samples/custom_structure_definition/pivot_table_1.0.0-schema.json",
+	"$id":"urn:sdmx:org.sdmx.infomodel.csd.CustomStructureDefinition=IMF:PIVOT_TABLE(1.0.0)",
 	"$schema":"https://json-schema.org/draft/2019-09/schema",
-	"description":"Dynamically generated schema for urn:sdmx:org.sdmx.infomodel.csd.CustomStructureDefinition=IMF:PIVOT_TABLE(1.0.0) (see pivot_table_csd.json), following the CSD schema generation rules. It validates one instance object of the custom structure definition, that is one member of the 'customStructures' array of a structure message. Values are reported in their lexical form, as strings; a property whose maxOccurs is 1 reports its value directly, any other property reports its values in an array.",
-	"$ref":"#/$defs/PivotTableType",
+	"description":"Dynamically generated schema for urn:sdmx:org.sdmx.infomodel.csd.CustomStructureDefinition=IMF:PIVOT_TABLE(1.0.0) (see pivot_table_csd.json), following the CSD schema generation rules. Its $id is the URN of the custom structure definition it was generated from, which is also the target namespace of the equivalent generated XML schema; it is an identifier, not a location, and the schema is not retrievable over http. It validates one instance object of the custom structure definition, that is one member of the 'customStructures' array of a structure message. Values are reported in their lexical form, as strings; a property whose maxOccurs is 1 reports its value directly, any other property reports its values in an array.",
+	"$ref":"#/$defs/PivotTable",
 	"$defs":{
-		"PivotTableType":{
+		"PivotTable":{
 			"description":"An instance of the IMF PIVOT_TABLE(1.0.0) custom structure definition (base 'Maintainable'). It extends CustomStructureInstanceType with the properties declared by the definition, and closes the object so that no undeclared property may be reported.",
 			"type":"object",
 			"allOf":[
