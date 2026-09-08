@@ -44,7 +44,7 @@ implementations following them produce equivalent schemas.
 
 Throughout, `<structure-schema>` stands for
 `https://json.sdmx.org/2.2/sdmx-json-structure-schema.json`. Every example is
-taken from the files in this folder: the running example builds up
+taken from the files in the samples folder for custom structure definitions: the running example builds up
 `pivot_table_1.0.0-schema.json` from `pivot_table_csd.json`, piece by piece, and
 where the pivot table does not exercise a rule the glossary
 (`custom_item_scheme_csd.json` → `glossary_1.0.0-schema.json`) is used instead.
