@@ -1,0 +1,108 @@
+{
+	"$schema": "https://json.sdmx.org/2.2/sdmx-json-structure-schema.json",
+	"meta": {
+		"id": "IREF500005",
+		"test": false,
+		"prepared": "2026-06-11T10:00:00Z",
+		"contentLanguages": [
+			"en"
+		],
+		"sender": {
+			"id": "OECD"
+		},
+		"receivers": [
+			{
+				"id": "not_supplied"
+			}
+		]
+	},
+	"data": {
+		"customStructureDefinitions": [
+			{
+				"id": "DASHBOARD",
+				"version": "1.0.0",
+				"agencyID": "OECD",
+				"name": "Dashboard",
+				"names": {
+					"en": "Dashboard"
+				},
+				"description": "A dashboard assembled from pivot tables. Instances of this definition have the URN class urn:sdmx:org.sdmx.infomodel.custom.oecd.Dashboard. This definition references instances of two other custom structure definitions, both maintained by IMF: a panel points at a PivotTable instance (urn class custom.imf.PivotTable), and may name one of that table's rows (custom.imf.PivotTableRow) and one term of the dashboard's glossary (customscheme.imf.GlossaryTerm). A target class is always the class of the referenced object qualified by its URN package, so it carries the maintenance agency of the definition and, through the root package token, whether its instances are item schemes - the definition itself need not be resolved to read the target, and its version does not affect the target.",
+				"descriptions": {
+					"en": "A dashboard assembled from pivot tables. Instances of this definition have the URN class urn:sdmx:org.sdmx.infomodel.custom.oecd.Dashboard. This definition references instances of two other custom structure definitions, both maintained by IMF: a panel points at a PivotTable instance (urn class custom.imf.PivotTable), and may name one of that table's rows (custom.imf.PivotTableRow) and one term of the dashboard's glossary (customscheme.imf.GlossaryTerm). A target class is always the class of the referenced object qualified by its URN package, so it carries the maintenance agency of the definition and, through the root package token, whether its instances are item schemes - the definition itself need not be resolved to read the target, and its version does not affect the target."
+				},
+				"sdmxClassName": "Dashboard",
+				"properties": [
+					{
+						"id": "glossary",
+						"description": "The glossary which defines the terms used by the panels of this dashboard. A reference to an instance of another custom structure definition: the target class customscheme.imf.Glossary is the class of instances of the IMF GLOSSARY definition, whose root package token is 'customscheme' because that definition extends ItemScheme.",
+						"minOccurs": 0,
+						"maxOccurs": 1,
+						"reference": [
+							"customscheme.imf.Glossary"
+						]
+					},
+					{
+						"id": "panels",
+						"minOccurs": 0,
+						"customType": "PanelType"
+					}
+				],
+				"customTypes": [
+					{
+						"id": "PanelType",
+						"name": "Dashboard panel",
+						"names": {
+							"en": "Dashboard panel"
+						},
+						"description": "One panel of the dashboard, presenting a single pivot table.",
+						"descriptions": {
+							"en": "One panel of the dashboard, presenting a single pivot table."
+						},
+						"extends": "Nameable",
+						"sdmxClassName": "DashboardPanel",
+						"properties": [
+							{
+								"id": "table",
+								"description": "The pivot table presented by this panel. A reference to an instance of another custom structure definition: the target class custom.imf.PivotTable is the class of instances of the IMF PIVOT_TABLE definition, which has the default base of Maintainable.",
+								"maxOccurs": 1,
+								"reference": [
+									"custom.imf.PivotTable"
+								]
+							},
+							{
+								"id": "pinnedRow",
+								"description": "The identifier of the row of the referenced pivot table to pin at the top of the panel. An indirect reference whose target class names an object within instances of a custom structure definition: PivotTableRow is a custom type of the IMF PIVOT_TABLE definition, so the identifier is resolved against the pivot table referenced by the sibling 'table' property.",
+								"minOccurs": 0,
+								"maxOccurs": 1,
+								"indirectReference": {
+									"targetClass": "custom.imf.PivotTableRow",
+									"context": "table"
+								}
+							},
+							{
+								"id": "term",
+								"description": "The identifier of the glossary term which defines the subject of this panel. An indirect reference resolved against the 'glossary' property, which is declared at the root level of this definition rather than as a sibling of this property.",
+								"minOccurs": 0,
+								"maxOccurs": 1,
+								"indirectReference": {
+									"targetClass": "customscheme.imf.GlossaryTerm",
+									"context": "glossary"
+								}
+							},
+							{
+								"id": "position",
+								"description": "The position of the panel in the dashboard, counting from zero.",
+								"minOccurs": 0,
+								"maxOccurs": 1,
+								"format": {
+									"dataType": "Integer",
+									"minValue": 0
+								}
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

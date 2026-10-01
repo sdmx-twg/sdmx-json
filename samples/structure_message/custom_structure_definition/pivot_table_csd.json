@@ -26,9 +26,9 @@
 				"names": {
 					"en": "Pivot Table"
 				},
-				"description": "Defines the layout of a pivot table over a dataflow. Instances of this definition have the URN class urn:sdmx:org.sdmx.infomodel.csd.imf.PivotTable.",
+				"description": "Defines the layout of a pivot table over a dataflow. Instances of this definition have the URN class urn:sdmx:org.sdmx.infomodel.custom.imf.PivotTable.",
 				"descriptions": {
-					"en": "Defines the layout of a pivot table over a dataflow. Instances of this definition have the URN class urn:sdmx:org.sdmx.infomodel.csd.imf.PivotTable."
+					"en": "Defines the layout of a pivot table over a dataflow. Instances of this definition have the URN class urn:sdmx:org.sdmx.infomodel.custom.imf.PivotTable."
 				},
 				"sdmxClassName": "PivotTable",
 				"properties": [

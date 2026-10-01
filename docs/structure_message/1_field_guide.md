@@ -3162,16 +3162,27 @@ by its identifier and cardinality alone:
   hierarchy of items).
 - reference - *Array* *optional* of *string*s. Describes a reference property;
   in instances the property holds the URN of the referenced artefact. The array
-  gives the permitted targets as the classes of SDMX artefact which may be
-  referenced (e.g. `["Dataflow"]`); when several are given the permitted set is
-  their union.
+  gives the permitted targets as the classes which may be referenced; when
+  several are given the permitted set is their union. Each class is either a
+  class of the SDMX Information Model (e.g. `["Dataflow"]`), or the class of
+  instances of a custom structure definition qualified by the URN package of the
+  instances (e.g. `["custom.imf.PivotTable"]`, or
+  `["customscheme.oecd.Glossary"]` for a definition which extends `ItemScheme`).
+  A qualified class identifies the custom structure definition by its
+  maintenance agency and class name, independently of its version, and may be
+  this definition or one maintained by any agency.
 - indirectReference - *Object* *optional*. Describes a string property which
   holds the identifier of an object that is resolved against the context
   established by another reference property of the instance (e.g. a dimension
   identifier resolved against the dataflow referenced by a sibling property).
   It has two properties:
     - targetClass - *String*. The class of the object identified by the property
-      value (e.g. `Dimension`, `Code`).
+      value: a class of the SDMX Information Model (e.g. `Dimension`, `Code`), or
+      the class of an object within instances of a custom structure definition
+      qualified by the URN package of the instances (e.g.
+      `custom.imf.PivotTableRow`). A qualified class may be that of the instances
+      themselves or of an identifiable custom type within them; which of the two
+      is determined by the custom structure definition which declares it.
     - context - *String*. The identifier of the reference property which
       establishes the resolution context. This may be a sibling property, or,
       from within a custom type, a property defined at the root level of the
@@ -3293,7 +3304,7 @@ In addition, `customStructure` has the following properties:
         "links": [
             {
                 "rel": "self",
-                "urn": "urn:sdmx:org.sdmx.infomodel.csd.imf.PivotTable=OECD:POP_SEX_AGE(1.0.0)"
+                "urn": "urn:sdmx:org.sdmx.infomodel.custom.imf.PivotTable=OECD:POP_SEX_AGE(1.0.0)"
             }
         ],
         "customStructureDefinition": "urn:sdmx:org.sdmx.infomodel.csd.CustomStructureDefinition=IMF:PIVOT_TABLE(1.0.0)",

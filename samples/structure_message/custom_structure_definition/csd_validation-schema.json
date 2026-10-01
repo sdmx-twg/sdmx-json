@@ -42,6 +42,21 @@
 										"then":{
 											"$ref":"urn:sdmx:org.sdmx.infomodel.csd.CustomStructureDefinition=IMF:GLOSSARY(1.0.0)"
 										}
+									},
+									{
+										"if":{
+											"properties":{
+												"customStructureDefinition":{
+													"const":"urn:sdmx:org.sdmx.infomodel.csd.CustomStructureDefinition=OECD:DASHBOARD(1.0.0)"
+												}
+											},
+											"required":[
+												"customStructureDefinition"
+											]
+										},
+										"then":{
+											"$ref":"urn:sdmx:org.sdmx.infomodel.csd.CustomStructureDefinition=OECD:DASHBOARD(1.0.0)"
+										}
 									}
 								]
 							}

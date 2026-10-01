@@ -1,0 +1,104 @@
+{
+	"$id":"urn:sdmx:org.sdmx.infomodel.csd.CustomStructureDefinition=OECD:DASHBOARD(1.0.0)",
+	"$schema":"https://json-schema.org/draft/2019-09/schema",
+	"description":"Dynamically generated schema for urn:sdmx:org.sdmx.infomodel.csd.CustomStructureDefinition=OECD:DASHBOARD(1.0.0) (see dashboard_csd.json), following the CSD schema generation rules. Its $id is the URN of the custom structure definition it was generated from, which is also the target namespace of the equivalent generated XML schema; it is an identifier, not a location, and the schema is not retrievable over http. It validates one instance object of the custom structure definition, that is one member of the 'customStructures' array of a structure message. Values are reported in their lexical form, as strings; a property whose maxOccurs is 1 reports its value directly, any other property reports its values in an array.",
+	"$ref":"#/$defs/Dashboard",
+	"$defs":{
+		"Dashboard":{
+			"description":"An instance of the OECD DASHBOARD(1.0.0) custom structure definition (base 'Maintainable'). It extends CustomStructureInstanceType with the properties declared by the definition, and closes the object so that no undeclared property may be reported.",
+			"type":"object",
+			"allOf":[
+				{
+					"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/CustomStructureInstanceType"
+				},
+				{
+					"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/specificationExtensions"
+				},
+				{
+					"properties":{
+						"customStructureDefinition":{
+							"const":"urn:sdmx:org.sdmx.infomodel.csd.CustomStructureDefinition=OECD:DASHBOARD(1.0.0)",
+							"description":"Mandatory reference to the custom structure definition to which this instance conforms. The fixed value guarantees the reference matches the definition from which this schema was generated."
+						},
+						"glossary":{
+							"$ref":"#/$defs/GlossaryReferenceType",
+							"description":"reference ['customscheme.imf.Glossary'], maxOccurs 1 and optional: the URN of an instance of the IMF GLOSSARY custom structure definition."
+						},
+						"panels":{
+							"type":"array",
+							"minItems":1,
+							"items":{
+								"$ref":"#/$defs/PanelType"
+							}
+						}
+					}
+				}
+			],
+			"unevaluatedProperties":false
+		},
+		"GlossaryReferenceType":{
+			"description":"Generated from the target class customscheme.imf.Glossary of the 'glossary' property: a reference to an instance of another custom structure definition narrows CustomStructureInstanceReferenceType by a pattern to the target class. The class is all that is needed to write the pattern, so the referenced definition does not have to be resolved; its version does not take part.",
+			"allOf":[
+				{
+					"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/CustomStructureInstanceReferenceType"
+				},
+				{
+					"type":"string",
+					"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.customscheme\\.imf\\.Glossary="
+				}
+			]
+		},
+		"PivotTableReferenceType":{
+			"description":"Generated from the target class custom.imf.PivotTable of the 'table' property of PanelType.",
+			"allOf":[
+				{
+					"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/CustomStructureInstanceReferenceType"
+				},
+				{
+					"type":"string",
+					"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.custom\\.imf\\.PivotTable="
+				}
+			]
+		},
+		"PanelType":{
+			"description":"Generated from custom type PanelType (extends Nameable, sdmxClassName DashboardPanel). Restricts NameableType to require the id, which is used for the automatic generation of the object URN (e.g. urn:sdmx:org.sdmx.infomodel.custom.oecd.DashboardPanel=ECB:POP_DASHBOARD(1.0.0).SEX_PANEL); the URN is derived from the instance and the object's own id and is not reported.",
+			"type":"object",
+			"allOf":[
+				{
+					"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/NameableType"
+				},
+				{
+					"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/specificationExtensions"
+				},
+				{
+					"properties":{
+						"table":{
+							"$ref":"#/$defs/PivotTableReferenceType",
+							"description":"reference ['custom.imf.PivotTable'], maxOccurs 1 and mandatory: the URN of an instance of the IMF PIVOT_TABLE custom structure definition."
+						},
+						"pinnedRow":{
+							"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/idType",
+							"description":"indirectReference targetClass 'custom.imf.PivotTableRow' context 'table', maxOccurs 1: the identifier of a row of the pivot table referenced by the 'table' property. A custom target class generates the same type as an SDMX one, because the value is only an identifier; resolution is validated by the system, not by this schema."
+						},
+						"term":{
+							"$ref":"https://json.sdmx.org/2.2/sdmx-json-structure-schema.json#/$defs/idType",
+							"description":"indirectReference targetClass 'customscheme.imf.GlossaryTerm' context 'glossary', maxOccurs 1: the identifier of a term of the glossary referenced by the 'glossary' property of the dashboard. The context is a property of the definition itself, not of this custom type; this makes no difference to the generated schema."
+						},
+						"position":{
+							"description":"format dataType 'Integer' minValue 0, maxOccurs 1: a non negative integer in its lexical form.",
+							"type":"string",
+							"pattern":"^(0|[1-9][0-9]*)$"
+						}
+					},
+					"required":[
+						"table"
+					]
+				}
+			],
+			"required":[
+				"id"
+			],
+			"unevaluatedProperties":false
+		}
+	}
+}

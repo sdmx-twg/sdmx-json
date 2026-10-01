@@ -37,7 +37,7 @@
 			"unevaluatedProperties":false
 		},
 		"TermType":{
-			"description":"Generated from custom type TermType (extends Nameable, sdmxClassName GlossaryTerm), which plays the Item role of the scheme. Restricts NameableType to require the id, which is used for the automatic generation of the object URN (e.g. urn:sdmx:org.sdmx.infomodel.csd.imf.GlossaryTerm=ECB:STAT_GLOSSARY(1.0.0).GDP.GDP_PC, where the id path is the chain of identifiable ancestors); the URN is derived and is not reported.",
+			"description":"Generated from custom type TermType (extends Nameable, sdmxClassName GlossaryTerm), which plays the Item role of the scheme. Restricts NameableType to require the id, which is used for the automatic generation of the object URN (e.g. urn:sdmx:org.sdmx.infomodel.customscheme.imf.GlossaryTerm=ECB:STAT_GLOSSARY(1.0.0).GDP.GDP_PC, where the id path is the chain of identifiable ancestors); the URN is derived and is not reported.",
 			"type":"object",
 			"allOf":[
 				{

@@ -376,8 +376,9 @@ tightest type in the structure schema:
 
 | `reference` holds | Generate |
 | --- | --- |
-| one class with a matching reference type | that type, e.g. `<structure-schema>#/$defs/DataflowReferenceType` |
+| one SDMX class with a matching reference type | that type, e.g. `<structure-schema>#/$defs/DataflowReferenceType` |
 | several classes | `anyOf` of their reference types |
+| one package qualified custom class (e.g. `custom.imf.PivotTable`) | `<structure-schema>#/$defs/CustomStructureInstanceReferenceType`, narrowed by a `pattern` to that class |
 | a class with no dedicated reference type, or `Any` | `<structure-schema>#/$defs/urn` |
 
 ```json
@@ -401,7 +402,11 @@ and, for a property that may point at either of two classes:
 }
 ```
 
-**`indirectReference`** → the value is an identifier, not a URN:
+**`indirectReference`** → the value is an identifier, not a URN. The
+`targetClass` may be an SDMX class or a package qualified custom class (e.g.
+`custom.imf.PivotTableRow`, naming an object within instances of a custom
+structure definition); either way the generated type is the same, as the value is
+only an identifier:
 
 ```json
 { "id": "dimension", "maxOccurs": 1, "indirectReference": { "targetClass": "Dimension", "context": "dataflow" } }
@@ -447,7 +452,7 @@ members you need one clause per pair, since `required` means *all of*. A set of
   { "id": "AGE_COL", "name": "Age", "dimension": "AGE" }
   ```
 
-  and not `"urn": "urn:sdmx:org.sdmx.infomodel.csd.imf.PivotTableRow=OECD:POP_SEX_AGE(1.0.0).AGE_COL"`,
+  and not `"urn": "urn:sdmx:org.sdmx.infomodel.custom.imf.PivotTableRow=OECD:POP_SEX_AGE(1.0.0).AGE_COL"`,
   even though that is the URN the object has. The instance itself, being
   maintainable, may still carry its own URN in `links` in the usual way.
 - **Ordering.** JSON object members are unordered, and property order in a CSD
@@ -523,8 +528,9 @@ instance's *own* URN plays no part in this and need not be present.
 
 # Examples
 
-Two custom structure definitions, one of each `base`, with the derived schema and
-a conforming instance for each. They are the JSON equivalents of the samples in
+Three custom structure definitions — one of each `base`, and one which references
+the instances of the other two — with the derived schema and a conforming
+instance for each. They are the JSON equivalents of the samples in
 `Custom Structure Definition` in the [sdmx-ml](https://github.com/sdmx-twg/sdmx-ml)
 repository, so the two formats can be compared side by side.
 
@@ -536,11 +542,14 @@ repository, so the two formats can be compared side by side.
 | `custom_item_scheme_csd.json` | A CSD with `base: ItemScheme`, defining a glossary. Shows the reserved `items` property, a multilingual property, and a custom type that references itself to build a hierarchy. |
 | `glossary_1.0.0-schema.json` | The schema derived from it. |
 | `glossary_instance.json` | A glossary maintained by ECB, conforming to the IMF definition. |
-| `csd_validation-schema.json` | The wrapper described in the previous section, covering both definitions. |
+| `dashboard_csd.json` | A CSD maintained by OECD whose panels reference the instances of the two IMF definitions above: a `reference` to a `custom.imf.PivotTable` and to a `customscheme.imf.Glossary`, and `indirectReference`s to a `custom.imf.PivotTableRow` and a `customscheme.imf.GlossaryTerm` within them. Also shows an indirect reference whose context is a property of the definition rather than a sibling. |
+| `dashboard_1.0.0-schema.json` | The schema derived from it, showing how a custom target class becomes a pattern-narrowed `CustomStructureInstanceReferenceType`. |
+| `dashboard_instance.json` | A dashboard maintained by ECB, conforming to the OECD definition, over the pivot table and glossary instances above. |
+| `csd_validation-schema.json` | The wrapper described in the previous section, covering all three definitions. |
 
-To validate the two instances in full, run them against
+To validate the three instances in full, run them against
 `csd_validation-schema.json` with any JSON Schema draft 2019-09 validator. The
-two generated schemas are identified by URN, so register them with the validator
+generated schemas are identified by URN, so register them with the validator
 from these files rather than expecting it to fetch them; the
 `https://json.sdmx.org/2.2/...` references to the official structure schema
 resolve to `schemas/structure_message/` in this repository. Running them against
