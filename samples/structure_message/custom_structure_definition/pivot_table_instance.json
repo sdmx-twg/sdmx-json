@@ -1,0 +1,73 @@
+{
+	"$schema": "https://json.sdmx.org/2.2/sdmx-json-structure-schema.json",
+	"x-comment": "An instance of the IMF PIVOT_TABLE(1.0.0) custom structure definition, maintained by OECD. Validate against csd_validation-schema.json for full validation; validation against sdmx-json-structure-schema.json alone checks the maintainable parts and the reference to the definition only.",
+	"meta": {
+		"id": "IREF500003",
+		"test": false,
+		"prepared": "2026-06-11T10:00:00Z",
+		"contentLanguages": [
+			"en"
+		],
+		"sender": {
+			"id": "OECD"
+		},
+		"receivers": [
+			{
+				"id": "not_supplied"
+			}
+		]
+	},
+	"data": {
+		"customStructures": [
+			{
+				"id": "POP_SEX_AGE",
+				"version": "1.0.0",
+				"agencyID": "OECD",
+				"name": "Population by Sex and Age",
+				"names": {
+					"en": "Population by Sex and Age"
+				},
+				"description": "Pivot table layout for the OECD population dataflow: sex on rows, age on columns, time as a slice.",
+				"descriptions": {
+					"en": "Pivot table layout for the OECD population dataflow: sex on rows, age on columns, time as a slice."
+				},
+				"customStructureDefinition": "urn:sdmx:org.sdmx.infomodel.csd.CustomStructureDefinition=IMF:PIVOT_TABLE(1.0.0)",
+				"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=OECD:POP(2.6.0)",
+				"rows": [
+					{
+						"id": "SEX_ROW",
+						"name": "Sex",
+						"names": {
+							"en": "Sex"
+						},
+						"dimension": "SEX"
+					}
+				],
+				"cols": [
+					{
+						"id": "AGE_COL",
+						"name": "Age",
+						"names": {
+							"en": "Age"
+						},
+						"level": "0",
+						"dimension": "AGE",
+						"headingCode": "urn:sdmx:org.sdmx.infomodel.codelist.Code=OECD:CL_AGE(1.0.0).TOTAL"
+					}
+				],
+				"slice": [
+					{
+						"id": "TIME_SLICE",
+						"name": "Time",
+						"names": {
+							"en": "Time"
+						},
+						"dimension": "TIME_PERIOD",
+						"headingText": "Reference period",
+						"position": "0"
+					}
+				]
+			}
+		]
+	}
+}

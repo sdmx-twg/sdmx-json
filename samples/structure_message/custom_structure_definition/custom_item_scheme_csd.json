@@ -1,0 +1,86 @@
+{
+	"$schema": "https://json.sdmx.org/2.2/sdmx-json-structure-schema.json",
+	"meta": {
+		"id": "IREF500002",
+		"test": false,
+		"prepared": "2026-06-11T10:00:00Z",
+		"contentLanguages": [
+			"en"
+		],
+		"sender": {
+			"id": "IMF"
+		},
+		"receivers": [
+			{
+				"id": "not_supplied"
+			}
+		]
+	},
+	"data": {
+		"customStructureDefinitions": [
+			{
+				"id": "GLOSSARY",
+				"version": "1.0.0",
+				"agencyID": "IMF",
+				"name": "Glossary",
+				"names": {
+					"en": "Glossary"
+				},
+				"description": "An item scheme based custom structure whose items are glossary terms. The items property of instances is always named 'items' and holds zero or more terms; the isPartial behaviour of item schemes is inherited. The term hierarchy is modelled explicitly through the 'children' property.",
+				"descriptions": {
+					"en": "An item scheme based custom structure whose items are glossary terms. The items property of instances is always named 'items' and holds zero or more terms; the isPartial behaviour of item schemes is inherited. The term hierarchy is modelled explicitly through the 'children' property."
+				},
+				"sdmxClassName": "Glossary",
+				"base": "ItemScheme",
+				"properties": [
+					{
+						"id": "items",
+						"description": "The terms of the glossary. As the definition extends ItemScheme, the 'items' property plays the item role; its custom type must extend Nameable.",
+						"minOccurs": 0,
+						"customType": "TermType"
+					},
+					{
+						"id": "subjectArea",
+						"description": "A non-item property alongside the items: the statistical subject area covered by the glossary, taken from a concept.",
+						"minOccurs": 0,
+						"maxOccurs": 1,
+						"reference": [
+							"Concept"
+						]
+					}
+				],
+				"customTypes": [
+					{
+						"id": "TermType",
+						"name": "Glossary term",
+						"names": {
+							"en": "Glossary term"
+						},
+						"description": "A glossary term. Plays the Item role of the scheme and so must extend Nameable.",
+						"descriptions": {
+							"en": "A glossary term. Plays the Item role of the scheme and so must extend Nameable."
+						},
+						"extends": "Nameable",
+						"sdmxClassName": "GlossaryTerm",
+						"properties": [
+							{
+								"id": "definition",
+								"description": "The definition of the term, a localisable text reported once per language.",
+								"format": {
+									"dataType": "String",
+									"isMultiLingual": true
+								}
+							},
+							{
+								"id": "children",
+								"description": "Narrower terms of this term. A custom type may reference itself, allowing an explicit hierarchy of items.",
+								"minOccurs": 0,
+								"customType": "TermType"
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

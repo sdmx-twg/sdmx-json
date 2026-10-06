@@ -1,0 +1,63 @@
+{
+	"$schema": "https://json.sdmx.org/2.2/sdmx-json-structure-schema.json",
+	"x-comment": "An instance of the OECD DASHBOARD(1.0.0) custom structure definition, maintained by ECB, whose panels reference instances of two other custom structure definitions: the PivotTable instance OECD:POP_SEX_AGE(1.0.0) (see pivot_table_instance.json) and the Glossary instance ECB:STAT_GLOSSARY(1.0.0) (see glossary_instance.json). Validate against csd_validation-schema.json for full validation; validation against sdmx-json-structure-schema.json alone checks the maintainable parts and the reference to the definition only.",
+	"meta": {
+		"id": "IREF500006",
+		"test": false,
+		"prepared": "2026-06-11T10:00:00Z",
+		"contentLanguages": [
+			"en"
+		],
+		"sender": {
+			"id": "ECB"
+		},
+		"receivers": [
+			{
+				"id": "not_supplied"
+			}
+		]
+	},
+	"data": {
+		"customStructures": [
+			{
+				"id": "POP_DASHBOARD",
+				"version": "1.0.0",
+				"agencyID": "ECB",
+				"name": "Population Dashboard",
+				"names": {
+					"en": "Population Dashboard"
+				},
+				"description": "Two panels over the OECD population pivot table, each pinning a row of that table and naming the glossary term it illustrates.",
+				"descriptions": {
+					"en": "Two panels over the OECD population pivot table, each pinning a row of that table and naming the glossary term it illustrates."
+				},
+				"customStructureDefinition": "urn:sdmx:org.sdmx.infomodel.csd.CustomStructureDefinition=OECD:DASHBOARD(1.0.0)",
+				"glossary": "urn:sdmx:org.sdmx.infomodel.customscheme.imf.Glossary=ECB:STAT_GLOSSARY(1.0.0)",
+				"panels": [
+					{
+						"id": "SEX_PANEL",
+						"name": "Population by sex",
+						"names": {
+							"en": "Population by sex"
+						},
+						"table": "urn:sdmx:org.sdmx.infomodel.custom.imf.PivotTable=OECD:POP_SEX_AGE(1.0.0)",
+						"pinnedRow": "SEX_ROW",
+						"term": "GDP",
+						"position": "0"
+					},
+					{
+						"id": "AGE_PANEL",
+						"name": "Population by age",
+						"names": {
+							"en": "Population by age"
+						},
+						"table": "urn:sdmx:org.sdmx.infomodel.custom.imf.PivotTable=OECD:POP_SEX_AGE(1.0.0)",
+						"pinnedRow": "AGE_COL",
+						"term": "CPI",
+						"position": "1"
+					}
+				]
+			}
+		]
+	}
+}

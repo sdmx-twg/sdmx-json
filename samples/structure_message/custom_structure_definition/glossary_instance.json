@@ -1,0 +1,83 @@
+{
+	"$schema": "https://json.sdmx.org/2.2/sdmx-json-structure-schema.json",
+	"x-comment": "An instance of the IMF GLOSSARY(1.0.0) item scheme based custom structure definition, maintained by ECB. Validate against csd_validation-schema.json for full validation; validation against sdmx-json-structure-schema.json alone checks the maintainable parts and the reference to the definition only.",
+	"meta": {
+		"id": "IREF500004",
+		"test": false,
+		"prepared": "2026-06-11T10:00:00Z",
+		"contentLanguages": [
+			"en",
+			"fr"
+		],
+		"sender": {
+			"id": "ECB"
+		},
+		"receivers": [
+			{
+				"id": "not_supplied"
+			}
+		]
+	},
+	"data": {
+		"customStructures": [
+			{
+				"id": "STAT_GLOSSARY",
+				"version": "1.0.0",
+				"agencyID": "ECB",
+				"name": "Statistical Glossary",
+				"names": {
+					"en": "Statistical Glossary"
+				},
+				"customStructureDefinition": "urn:sdmx:org.sdmx.infomodel.csd.CustomStructureDefinition=IMF:GLOSSARY(1.0.0)",
+				"items": [
+					{
+						"id": "GDP",
+						"name": "Gross Domestic Product",
+						"names": {
+							"en": "Gross Domestic Product"
+						},
+						"definition": [
+							{
+								"locale": "en",
+								"value": "The total monetary value of all final goods and services produced within a country in a given period."
+							},
+							{
+								"locale": "fr",
+								"value": "La valeur monétaire totale de tous les biens et services finaux produits dans un pays sur une période donnée."
+							}
+						],
+						"children": [
+							{
+								"id": "GDP_PC",
+								"name": "GDP per capita",
+								"names": {
+									"en": "GDP per capita"
+								},
+								"definition": [
+									{
+										"locale": "en",
+										"value": "Gross domestic product divided by the population of the country."
+									}
+								]
+							}
+						]
+					},
+					{
+						"id": "CPI",
+						"name": "Consumer Price Index",
+						"names": {
+							"en": "Consumer Price Index"
+						},
+						"definition": [
+							{
+								"locale": "en",
+								"value": "A measure of the average change over time in the prices paid by consumers for a basket of goods and services."
+							}
+						]
+					}
+				],
+				"subjectArea": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CROSS_DOMAIN_CONCEPTS(2.0).ECON"
+			}
+		]
+	}
+}
