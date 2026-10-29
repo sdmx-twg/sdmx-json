@@ -1,0 +1,430 @@
+{
+	"$schema": "https://json.sdmx.org/2.1/sdmx-json-structure-schema.json",
+	"meta": {
+		"id": "VTL_SAMPLE4",
+		"test": false,
+		"prepared": "2026-10-29T00:00:00Z",
+		"contentLanguages": [
+			"en"
+		],
+		"sender": {
+			"id": "EXAMPLE"
+		},
+		"receivers": [
+			{
+				"id": "SDMX"
+			}
+		]
+	},
+	"data": {
+		"agencySchemes": [
+			{
+				"id": "AGENCIES",
+				"agencyID": "SDMX",
+				"name": "SDMX Agency Scheme",
+				"names": {
+					"en": "SDMX Agency Scheme"
+				},
+				"agencies": [
+					{
+						"id": "SDMX",
+						"name": "SDMX",
+						"names": {
+							"en": "SDMX"
+						},
+						"description": "SDMX is an initiative to foster standards for the exchange of statistical information. It is sponsored by the Bank for International Settlements (BIS), the European Central Bank (ECB), the Statistical Office of the European Union (Eurostat), the International Monetary Fund (IMF), the Organization for Economic Co-Operation and Development (OECD), the United Nations (UN) and the World Bank.",
+						"descriptions": {
+							"en": "SDMX is an initiative to foster standards for the exchange of statistical information. It is sponsored by the Bank for International Settlements (BIS), the European Central Bank (ECB), the Statistical Office of the European Union (Eurostat), the International Monetary Fund (IMF), the Organization for Economic Co-Operation and Development (OECD), the United Nations (UN) and the World Bank."
+						},
+						"contacts": [
+							{
+								"name": "SDMX Secretariat",
+								"names": {
+									"en": "SDMX Secretariat"
+								},
+								"department": "SDMX Secretariat",
+								"departments": {
+									"en": "SDMX Secretariat"
+								},
+								"role": "Single entry point for external inquiries",
+								"roles": {
+									"en": "Single entry point for external inquiries"
+								},
+								"uris": [
+									"http://sdmx.org"
+								],
+								"emails": [
+									"secretariat@sdmx.org"
+								]
+							}
+						]
+					},
+					{
+						"id": "EXAMPLE",
+						"name": "Example Agency",
+						"names": {
+							"en": "Example Agency"
+						}
+					}
+				]
+			}
+		],
+		"codelists": [
+			{
+				"id": "CL_FREQ",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Frequency",
+				"names": {
+					"en": "Frequency"
+				},
+				"codes": [
+					{
+						"id": "A",
+						"name": "Annual",
+						"names": {
+							"en": "Annual"
+						}
+					},
+					{
+						"id": "Q",
+						"name": "Quarterly",
+						"names": {
+							"en": "Quarterly"
+						}
+					},
+					{
+						"id": "M",
+						"name": "Monthly",
+						"names": {
+							"en": "Monthly"
+						}
+					}
+				]
+			},
+			{
+				"id": "CL_AREA",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Reference area",
+				"names": {
+					"en": "Reference area"
+				},
+				"codes": [
+					{
+						"id": "USA",
+						"name": "United States",
+						"names": {
+							"en": "United States"
+						}
+					},
+					{
+						"id": "CAN",
+						"name": "Canada",
+						"names": {
+							"en": "Canada"
+						}
+					},
+					{
+						"id": "MEX",
+						"name": "Mexico",
+						"names": {
+							"en": "Mexico"
+						}
+					}
+				]
+			},
+			{
+				"id": "CL_INDICATOR",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Indicator",
+				"names": {
+					"en": "Indicator"
+				},
+				"codes": [
+					{
+						"id": "EXP",
+						"name": "Exports of goods",
+						"names": {
+							"en": "Exports of goods"
+						}
+					},
+					{
+						"id": "IMP",
+						"name": "Imports of goods",
+						"names": {
+							"en": "Imports of goods"
+						}
+					}
+				]
+			}
+		],
+		"conceptSchemes": [
+			{
+				"id": "CONCEPTS",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Concepts",
+				"names": {
+					"en": "Concepts"
+				},
+				"concepts": [
+					{
+						"id": "FREQ",
+						"name": "Frequency",
+						"names": {
+							"en": "Frequency"
+						}
+					},
+					{
+						"id": "REF_AREA",
+						"name": "Reference area",
+						"names": {
+							"en": "Reference area"
+						}
+					},
+					{
+						"id": "INDICATOR",
+						"name": "Indicator",
+						"names": {
+							"en": "Indicator"
+						}
+					},
+					{
+						"id": "TIME_PERIOD",
+						"name": "Time period",
+						"names": {
+							"en": "Time period"
+						}
+					},
+					{
+						"id": "OBS_VALUE",
+						"name": "Observation value",
+						"names": {
+							"en": "Observation value"
+						}
+					}
+				]
+			}
+		],
+		"dataStructures": [
+			{
+				"id": "DSD_AB",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Trade in goods",
+				"names": {
+					"en": "Trade in goods"
+				},
+				"dataStructureComponents": {
+					"dimensionList": {
+						"id": "DimensionDescriptor",
+						"dimensions": [
+							{
+								"id": "FREQ",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).FREQ",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=EXAMPLE:CL_FREQ(1.0)"
+								}
+							},
+							{
+								"id": "REF_AREA",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).REF_AREA",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=EXAMPLE:CL_AREA(1.0)"
+								}
+							},
+							{
+								"id": "INDICATOR",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).INDICATOR",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=EXAMPLE:CL_INDICATOR(1.0)"
+								}
+							}
+						],
+						"timeDimension": {
+							"id": "TIME_PERIOD",
+							"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).TIME_PERIOD",
+							"localRepresentation": {
+								"format": {
+									"dataType": "ObservationalTimePeriod"
+								}
+							}
+						}
+					},
+					"measureList": {
+						"id": "MeasureDescriptor",
+						"measures": [
+							{
+								"id": "OBS_VALUE",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).OBS_VALUE",
+								"localRepresentation": {
+									"format": {
+										"dataType": "Double"
+									}
+								}
+							}
+						]
+					}
+				}
+			}
+		],
+		"dataflows": [
+			{
+				"id": "DF_A",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Trade in goods - source A",
+				"names": {
+					"en": "Trade in goods - source A"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=EXAMPLE:DSD_AB(1.0)"
+			},
+			{
+				"id": "DF_B",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Trade in goods - source B",
+				"names": {
+					"en": "Trade in goods - source B"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=EXAMPLE:DSD_AB(1.0)"
+			},
+			{
+				"id": "DF_DIFF",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Trade in goods - difference between source A and source B",
+				"names": {
+					"en": "Trade in goods - difference between source A and source B"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=EXAMPLE:DSD_AB(1.0)"
+			}
+		],
+		"vtlMappingSchemes": [
+			{
+				"id": "VTL_MAP",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "VTL mappings of TS_DIFF",
+				"names": {
+					"en": "VTL mappings of TS_DIFF"
+				},
+				"vtlDatasetMappings": [
+					{
+						"id": "DS_A",
+						"name": "Trade in goods - source A",
+						"names": {
+							"en": "Trade in goods - source A"
+						},
+						"vtlAlias": "ds_a",
+						"isInput": true,
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=EXAMPLE:DF_A(1.0)"
+					},
+					{
+						"id": "DS_B",
+						"name": "Trade in goods - source B",
+						"names": {
+							"en": "Trade in goods - source B"
+						},
+						"vtlAlias": "ds_b",
+						"isInput": true,
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=EXAMPLE:DF_B(1.0)"
+					},
+					{
+						"id": "DIFF",
+						"name": "Difference between source A and source B",
+						"names": {
+							"en": "Difference between source A and source B"
+						},
+						"vtlAlias": "ds_diff",
+						"isInput": false,
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=EXAMPLE:DF_DIFF(1.0)"
+					}
+				]
+			}
+		],
+		"transformationSchemes": [
+			{
+				"id": "TS_DIFF",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Difference between two sources",
+				"names": {
+					"en": "Difference between two sources"
+				},
+				"vtlVersion": "2.2",
+				"transformations": [
+					{
+						"id": "DIFF",
+						"name": "Difference between source A and source B",
+						"names": {
+							"en": "Difference between source A and source B"
+						},
+						"description": "Calculates the difference between the observations of ds_a and ds_b having the same values of the Identifiers. The result is persistent, as it is an output of the program (mapped with isInput equal to false), and has the data structure of DF_DIFF.",
+						"descriptions": {
+							"en": "Calculates the difference between the observations of ds_a and ds_b having the same values of the Identifiers. The result is persistent, as it is an output of the program (mapped with isInput equal to false), and has the data structure of DF_DIFF."
+						},
+						"isPersistent": true,
+						"expression": "ds_a - ds_b",
+						"result": "ds_diff"
+					}
+				],
+				"vtlMappingScheme": "urn:sdmx:org.sdmx.infomodel.transformation.VtlMappingScheme=EXAMPLE:VTL_MAP(1.0)"
+			}
+		],
+		"vtlExecutions": [
+			{
+				"id": "EXEC_DIFF",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Execution of TS_DIFF",
+				"names": {
+					"en": "Execution of TS_DIFF"
+				},
+				"transformationScheme": "urn:sdmx:org.sdmx.infomodel.transformation.TransformationScheme=EXAMPLE:TS_DIFF(1.0)",
+				"queryExtractions": [
+					{
+						"datasetMapping": "urn:sdmx:org.sdmx.infomodel.transformation.VtlDatasetMapping=EXAMPLE:VTL_MAP(1.0).DS_A",
+						"entryPoint": "https://sdmx.example.org/rest",
+						"sdmxApiVersion": "1.5",
+						"queryParameters": [
+							{
+								"name": "key",
+								"value": "A.USA.",
+								"isFixed": true
+							},
+							{
+								"name": "startPeriod",
+								"value": "2015",
+								"isFixed": false
+							},
+							{
+								"name": "endPeriod",
+								"isFixed": false
+							}
+						]
+					}
+				],
+				"urlExtractions": [
+					{
+						"datasetMapping": "urn:sdmx:org.sdmx.infomodel.transformation.VtlDatasetMapping=EXAMPLE:VTL_MAP(1.0).DS_B",
+						"urlTemplate": "https://sdmx.example.org/rest/data/EXAMPLE,DF_B,1.0/A.USA.?startPeriod={startPeriod}&endPeriod={endPeriod}",
+						"queryParameters": [
+							{
+								"name": "startPeriod",
+								"value": "2015",
+								"isFixed": false
+							},
+							{
+								"name": "endPeriod",
+								"isFixed": false
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

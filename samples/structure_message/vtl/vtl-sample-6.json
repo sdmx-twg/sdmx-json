@@ -1,0 +1,445 @@
+{
+	"$schema": "https://json.sdmx.org/2.1/sdmx-json-structure-schema.json",
+	"meta": {
+		"id": "VTL_SAMPLE6",
+		"test": false,
+		"prepared": "2026-10-29T00:00:00Z",
+		"contentLanguages": [
+			"en"
+		],
+		"sender": {
+			"id": "EXAMPLE"
+		},
+		"receivers": [
+			{
+				"id": "SDMX"
+			}
+		]
+	},
+	"data": {
+		"agencySchemes": [
+			{
+				"id": "AGENCIES",
+				"agencyID": "SDMX",
+				"name": "SDMX Agency Scheme",
+				"names": {
+					"en": "SDMX Agency Scheme"
+				},
+				"agencies": [
+					{
+						"id": "SDMX",
+						"name": "SDMX",
+						"names": {
+							"en": "SDMX"
+						},
+						"description": "SDMX is an initiative to foster standards for the exchange of statistical information. It is sponsored by the Bank for International Settlements (BIS), the European Central Bank (ECB), the Statistical Office of the European Union (Eurostat), the International Monetary Fund (IMF), the Organization for Economic Co-Operation and Development (OECD), the United Nations (UN) and the World Bank.",
+						"descriptions": {
+							"en": "SDMX is an initiative to foster standards for the exchange of statistical information. It is sponsored by the Bank for International Settlements (BIS), the European Central Bank (ECB), the Statistical Office of the European Union (Eurostat), the International Monetary Fund (IMF), the Organization for Economic Co-Operation and Development (OECD), the United Nations (UN) and the World Bank."
+						},
+						"contacts": [
+							{
+								"name": "SDMX Secretariat",
+								"names": {
+									"en": "SDMX Secretariat"
+								},
+								"department": "SDMX Secretariat",
+								"departments": {
+									"en": "SDMX Secretariat"
+								},
+								"role": "Single entry point for external inquiries",
+								"roles": {
+									"en": "Single entry point for external inquiries"
+								},
+								"uris": [
+									"http://sdmx.org"
+								],
+								"emails": [
+									"secretariat@sdmx.org"
+								]
+							}
+						]
+					},
+					{
+						"id": "EXAMPLE",
+						"name": "Example Agency",
+						"names": {
+							"en": "Example Agency"
+						}
+					}
+				]
+			}
+		],
+		"codelists": [
+			{
+				"id": "CL_AREA",
+				"version": "2.0",
+				"agencyID": "SDMX",
+				"name": "Reference area",
+				"names": {
+					"en": "Reference area"
+				},
+				"isPartial": true,
+				"codes": [
+					{
+						"id": "AT",
+						"name": "Austria",
+						"names": {
+							"en": "Austria"
+						}
+					},
+					{
+						"id": "BE",
+						"name": "Belgium",
+						"names": {
+							"en": "Belgium"
+						}
+					},
+					{
+						"id": "DE",
+						"name": "Germany",
+						"names": {
+							"en": "Germany"
+						}
+					},
+					{
+						"id": "ES",
+						"name": "Spain",
+						"names": {
+							"en": "Spain"
+						}
+					},
+					{
+						"id": "FR",
+						"name": "France",
+						"names": {
+							"en": "France"
+						}
+					},
+					{
+						"id": "IT",
+						"name": "Italy",
+						"names": {
+							"en": "Italy"
+						}
+					}
+				]
+			},
+			{
+				"id": "CL_OBS_STATUS",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Observation status",
+				"names": {
+					"en": "Observation status"
+				},
+				"codes": [
+					{
+						"id": "A",
+						"name": "Normal value",
+						"names": {
+							"en": "Normal value"
+						}
+					},
+					{
+						"id": "E",
+						"name": "Estimated value",
+						"names": {
+							"en": "Estimated value"
+						}
+					},
+					{
+						"id": "M",
+						"name": "Missing value",
+						"names": {
+							"en": "Missing value"
+						}
+					}
+				]
+			}
+		],
+		"conceptSchemes": [
+			{
+				"id": "CONCEPTS",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Concepts",
+				"names": {
+					"en": "Concepts"
+				},
+				"concepts": [
+					{
+						"id": "REF_AREA",
+						"name": "Reference area",
+						"names": {
+							"en": "Reference area"
+						}
+					},
+					{
+						"id": "TIME_PERIOD",
+						"name": "Time period",
+						"names": {
+							"en": "Time period"
+						}
+					},
+					{
+						"id": "OBS_VALUE",
+						"name": "Observation value",
+						"names": {
+							"en": "Observation value"
+						}
+					},
+					{
+						"id": "OBS_STATUS",
+						"name": "Observation status",
+						"names": {
+							"en": "Observation status"
+						}
+					}
+				]
+			}
+		],
+		"dataStructures": [
+			{
+				"id": "DSD_X",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Data collected by reference area",
+				"names": {
+					"en": "Data collected by reference area"
+				},
+				"dataStructureComponents": {
+					"dimensionList": {
+						"id": "DimensionDescriptor",
+						"dimensions": [
+							{
+								"id": "REF_AREA",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).REF_AREA",
+								"localRepresentation": {
+									"format": {
+										"dataType": "Alpha",
+										"minLength": 2,
+										"maxLength": 2
+									}
+								}
+							}
+						],
+						"timeDimension": {
+							"id": "TIME_PERIOD",
+							"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).TIME_PERIOD",
+							"localRepresentation": {
+								"format": {
+									"dataType": "ObservationalTimePeriod"
+								}
+							}
+						}
+					},
+					"attributeList": {
+						"id": "AttributeDescriptor",
+						"attributes": [
+							{
+								"id": "OBS_STATUS",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).OBS_STATUS",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=EXAMPLE:CL_OBS_STATUS(1.0)"
+								},
+								"attributeRelationship": {
+									"observation": {}
+								}
+							}
+						]
+					},
+					"measureList": {
+						"id": "MeasureDescriptor",
+						"measures": [
+							{
+								"id": "OBS_VALUE",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).OBS_VALUE",
+								"localRepresentation": {
+									"format": {
+										"dataType": "Double"
+									}
+								}
+							}
+						]
+					}
+				}
+			}
+		],
+		"dataflows": [
+			{
+				"id": "DF_X",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Data collected from source X",
+				"names": {
+					"en": "Data collected from source X"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=EXAMPLE:DSD_X(1.0)"
+			},
+			{
+				"id": "DF_Y",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Data collected from source Y",
+				"names": {
+					"en": "Data collected from source Y"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=EXAMPLE:DSD_X(1.0)"
+			},
+			{
+				"id": "DF_INVALID",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Data of source X with an invalid reference area",
+				"names": {
+					"en": "Data of source X with an invalid reference area"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=EXAMPLE:DSD_X(1.0)"
+			},
+			{
+				"id": "DF_TOTAL",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Total of sources X and Y",
+				"names": {
+					"en": "Total of sources X and Y"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=EXAMPLE:DSD_X(1.0)"
+			}
+		],
+		"vtlMappingSchemes": [
+			{
+				"id": "VTL_MAP_X",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "VTL mappings of TS_AREACHK",
+				"names": {
+					"en": "VTL mappings of TS_AREACHK"
+				},
+				"vtlDatasetMappings": [
+					{
+						"id": "DS_X",
+						"name": "Data collected from source X",
+						"names": {
+							"en": "Data collected from source X"
+						},
+						"vtlAlias": "ds_x",
+						"isInput": true,
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=EXAMPLE:DF_X(1.0)"
+					},
+					{
+						"id": "DS_Y",
+						"name": "Data collected from source Y",
+						"names": {
+							"en": "Data collected from source Y"
+						},
+						"vtlAlias": "ds_y",
+						"isInput": true,
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=EXAMPLE:DF_Y(1.0)"
+					},
+					{
+						"id": "DS_INVALID",
+						"name": "Data of source X with an invalid reference area",
+						"names": {
+							"en": "Data of source X with an invalid reference area"
+						},
+						"vtlAlias": "ds_invalid",
+						"isInput": false,
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=EXAMPLE:DF_INVALID(1.0)"
+					},
+					{
+						"id": "DS_TOTAL",
+						"name": "Total of sources X and Y",
+						"names": {
+							"en": "Total of sources X and Y"
+						},
+						"vtlAlias": "ds_total",
+						"isInput": false,
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=EXAMPLE:DF_TOTAL(1.0)"
+					}
+				],
+				"vtlCodelistMappings": [
+					{
+						"id": "CL_AREA",
+						"name": "Reference areas",
+						"names": {
+							"en": "Reference areas"
+						},
+						"vtlAlias": "cl_area",
+						"codelist": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_AREA(2.0)"
+					}
+				]
+			}
+		],
+		"rulesetSchemes": [
+			{
+				"id": "RS_X",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Viral propagations",
+				"names": {
+					"en": "Viral propagations"
+				},
+				"vtlVersion": "2.2",
+				"rulesets": [
+					{
+						"id": "OBS_STATUS_PROP",
+						"name": "Viral propagation of OBS_STATUS",
+						"names": {
+							"en": "Viral propagation of OBS_STATUS"
+						},
+						"rulesetType": "viral",
+						"rulesetScope": "variable",
+						"rulesetDefinition": "define viral propagation OBS_STATUS_PROP (variable OBS_STATUS) is\n  when \"M\" then \"M\";\n  when \"E\" then \"E\";\n  else \"A\"\nend viral propagation"
+					}
+				]
+			}
+		],
+		"transformationSchemes": [
+			{
+				"id": "TS_AREACHK",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Check of the reference areas and total of two sources",
+				"names": {
+					"en": "Check of the reference areas and total of two sources"
+				},
+				"vtlVersion": "2.2",
+				"transformations": [
+					{
+						"id": "INVALID",
+						"name": "Data points with an invalid reference area",
+						"names": {
+							"en": "Data points with an invalid reference area"
+						},
+						"description": "Selects the data points of ds_x whose REF_AREA is not a value of the VTL Value Domain cl_area, i.e. not a Code of SDMX:CL_AREA(2.0).",
+						"descriptions": {
+							"en": "Selects the data points of ds_x whose REF_AREA is not a value of the VTL Value Domain cl_area, i.e. not a Code of SDMX:CL_AREA(2.0)."
+						},
+						"isPersistent": true,
+						"expression": "ds_x [ filter not ( REF_AREA in cl_area ) ]",
+						"result": "ds_invalid"
+					},
+					{
+						"id": "TOTAL",
+						"name": "Total of sources X and Y",
+						"names": {
+							"en": "Total of sources X and Y"
+						},
+						"description": "Adds the observations of ds_x and ds_y. OBS_STATUS is a viral VTL Attribute, because the ruleset scheme RS_X referenced by this transformation scheme contains a viral propagation for it: the + operator keeps it in the result, combining the values of the inputs through OBS_STATUS_PROP, so that the result has the data structure of DF_TOTAL. Without the viral propagation, OBS_STATUS would be a non-viral VTL Attribute and the result would not have it.",
+						"descriptions": {
+							"en": "Adds the observations of ds_x and ds_y. OBS_STATUS is a viral VTL Attribute, because the ruleset scheme RS_X referenced by this transformation scheme contains a viral propagation for it: the + operator keeps it in the result, combining the values of the inputs through OBS_STATUS_PROP, so that the result has the data structure of DF_TOTAL. Without the viral propagation, OBS_STATUS would be a non-viral VTL Attribute and the result would not have it."
+						},
+						"isPersistent": true,
+						"expression": "ds_x + ds_y",
+						"result": "ds_total"
+					}
+				],
+				"vtlMappingScheme": "urn:sdmx:org.sdmx.infomodel.transformation.VtlMappingScheme=EXAMPLE:VTL_MAP_X(1.0)",
+				"rulesetSchemes": [
+					"urn:sdmx:org.sdmx.infomodel.transformation.RulesetScheme=EXAMPLE:RS_X(1.0)"
+				]
+			}
+		]
+	}
+}
