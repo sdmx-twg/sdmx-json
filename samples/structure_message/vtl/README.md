@@ -97,3 +97,60 @@ VTL Data Sets whose names are written between single quotes in the VTL statement
 - The aliases `power` and `diff` coincide with VTL keywords (the `power` and `diff` operators), so the transformation scheme `EXAMPLE:TS_ENERGY` writes them between single quotes (`'diff' <- 'power' - consumption`), while the `vtlAlias` of their VTL dataset mappings contains the name without the quotes (a `vtlAlias` cannot contain single quotes), also when the VTL statements need them.
 - `consumption` is a regular VTL name, which the statements can write with or without single quotes: one statement writes it without quotes and the other with quotes (`ratio <- 'power' / 'consumption' * 100`). Both forms denote the same VTL Data Set, and the VTL engines identify the mapped dataflow in both cases.
 - The amounts are Decimals with one decimal (VTL number), by GregorianYearMonth (VTL date).
+
+## Deprecated samples
+
+`deprecated-vtl-sample-1.json` to `deprecated-vtl-sample-3.json` are the JSON counterparts of `deprecated-VTL_Sample_1.xml` to `deprecated-VTL_Sample_3.xml`. They use constructs deprecated in SDMX 3.2, which remain valid: the old VTL mappings (`vtlMappings`), the name personalisation and custom type schemes, and the references from the ruleset schemes to the VTL mapping schemes. Their representation in SDMX 3.2 is described in the section "Conversion of definitions based on deprecated constructs" of the chapter on the Validation and Transformation Language of the SDMX Technical Notes.
+
+Unlike the samples 4 to 9, their content is that of the SDMX-ML files unchanged: the sender and the receiver are `SDMX`, `meta.prepared` is `2020-06-05T12:00:00.000Z`, there is no agency scheme, and the references that the SDMX-ML files leave unresolved stay unresolved (they are listed below).
+
+### deprecated-vtl-sample-1.json
+
+SDMX-ML source: `deprecated-VTL_Sample_1.xml`.
+
+Illustrates the use of VTL rulesets to validate an SDMX dataflow. The validation process adds additional identifiers and measures to the resulting VTL dataset indicating, on a row by row basis, the validation rule applied and the outcome in terms of valid or invalid. If invalid, details of the error found and its severity are added. A second transformation takes the resulting dataset, filtering out high-severity validation errors, and persists the result back to an SDMX dataflow using VTL mappings.
+
+Deprecated constructs it uses:
+
+- The old VTL mappings (`vtlMappings`), with their mapping methods (`toVtlMapping` and `fromVtlMapping`, here `Basic` and `M2A`) and their mappings of concepts (`concept`).
+- The name personalisation scheme (`namePersonalisationSchemes`), referenced by the `namePersonalisationScheme` property of the transformation scheme.
+- The reference from the ruleset scheme to the VTL mapping scheme (`vtlMappingScheme` of the ruleset scheme).
+
+Notes:
+
+- The codelists are smaller than they would be: `SDMX:CL_SECTOR(1.0)` has no codes and `SDMX:CL_AREA(1.0)` has only some countries (all the EU countries would be added to cater for the `EU` code).
+- Unresolved reference: the name personalisation scheme `SDMX:NPS1` has no `version`, while the transformation scheme references it as `SDMX:NPS1(1.0)`.
+
+### deprecated-vtl-sample-2.json
+
+SDMX-ML source: `deprecated-VTL_Sample_2.xml`.
+
+Illustrates aggregation of an SDMX dataflow using VTL hierarchical rulesets, filtering and user defined operators. After the initial aggregation, the unaggregated observations are removed from the result dataset. A user defined operator is subsequently applied to calculate a percentage measure, with the final persistent result mapped from VTL to an SDMX dataflow.
+
+Deprecated constructs it uses:
+
+- The old VTL mappings (`vtlMappings`), with their mapping methods (`Basic`, `M2A`, `Pivot` and `Unpivot`) and their mappings of concepts (`concept`).
+- The custom type scheme (`customTypeSchemes`), referenced by the `customTypeScheme` property of the transformation scheme.
+- The reference from the ruleset scheme to the VTL mapping scheme (`vtlMappingScheme` of the ruleset scheme).
+
+Notes:
+
+- The codelist `SDMX:CL_AREA(1.0)` is partial (`isPartial` true): all the EU countries would be added to cater for the `EU` code, but were removed to keep the sample smaller.
+- Unresolved references: the mapping scheme `SDMX:VTLMS1(1.0)` maps dataflows and concepts that the message does not contain (`SDMX:DF1R1(1.0)`, `SDMX:D11(1.0)` and the concepts of `SDMX:CONCEPTS(1.0)`); the mapping scheme `SDMX:VTLMS2(1.0)` maps `SDMX:D21(1.0)` and `SDMX:D2R1(1.0)`, while the dataflows of the message are `SDMX:DF21(1.0)` and `SDMX:DF2R1(1.0)`; and the enumeration of the dimension `MEASURE_DIMENSION` of `SDMX:DS2R1(1.0)` is a codelist URN, `SDMX:CS2R1(1.0)`, that names the concept scheme of the measures of the result.
+
+### deprecated-vtl-sample-3.json
+
+SDMX-ML source: `deprecated-VTL_Sample_3.xml`.
+
+Illustrates the calculation of a GDP per capita dataset from an input mapped SDMX dataflow containing GDP and population indicators on a country by country basis.
+
+Deprecated constructs it uses:
+
+- The old VTL mappings (`vtlMappings`) with the sub space and the super space of the mapped dataflows (`toVtlSubSpace` and `fromVtlSuperSpace`).
+- The references to the parts of the dataflows in the VTL statements (ordered concatenation notation, for example `'DF31/GDP.US'`).
+
+Notes:
+
+- The transformation scheme uses an SDMX specific naming convention that requires pre-processing before parsing the VTL expressions. As explained in the SDMX Technical Notes, the dataset identifiers of the sample are a shortcut of the VTL `sub` operator: `'DF31/GDP.US'` is equivalent to `DF31[sub INDICATOR=GDP, COUNTRY=US]`. This convention works combined with the mappings of the sample, which indicate the keys that are used for the dataflows. It is not safe to use outside an SDMX context, as the dataflows may have no meaning there.
+- The codelist `SDMX:CL_AREA(1.0)` is partial (`isPartial` true): all world countries, regions and areas should appear in it, but were removed to keep the sample smaller.
+- The references of this sample all resolve within the message.

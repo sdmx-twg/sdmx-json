@@ -1,0 +1,594 @@
+{
+	"$schema": "https://json.sdmx.org/2.1/sdmx-json-structure-schema.json",
+	"meta": {
+		"id": "VTL_SAMPLE2",
+		"test": false,
+		"prepared": "2020-06-05T12:00:00.000Z",
+		"contentLanguages": [
+			"en"
+		],
+		"sender": {
+			"id": "SDMX"
+		},
+		"receivers": [
+			{
+				"id": "SDMX"
+			}
+		]
+	},
+	"data": {
+		"dataflows": [
+			{
+				"id": "DF21",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Dataflow #2.1",
+				"names": {
+					"en": "Dataflow #2.1"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=SDMX:DS21(1.0)"
+			},
+			{
+				"id": "DF2R1",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Dataflow for Result #2.1",
+				"names": {
+					"en": "Dataflow for Result #2.1"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=SDMX:DS21(1.0)"
+			}
+		],
+		"codelists": [
+			{
+				"id": "CL_AREA",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Area codelist",
+				"names": {
+					"en": "Area codelist"
+				},
+				"isPartial": true,
+				"codes": [
+					{
+						"id": "EU",
+						"name": "European Union",
+						"names": {
+							"en": "European Union"
+						}
+					},
+					{
+						"id": "BENELUX",
+						"name": "The Benelux Union",
+						"names": {
+							"en": "The Benelux Union"
+						}
+					},
+					{
+						"id": "BE",
+						"name": "Belgium",
+						"names": {
+							"en": "Belgium"
+						}
+					},
+					{
+						"id": "LU",
+						"name": "Luxembourg",
+						"names": {
+							"en": "Luxembourg"
+						}
+					},
+					{
+						"id": "NE",
+						"name": "The Netherlands",
+						"names": {
+							"en": "The Netherlands"
+						}
+					},
+					{
+						"id": "AT",
+						"name": "Austria",
+						"names": {
+							"en": "Austria"
+						}
+					},
+					{
+						"id": "BG",
+						"name": "Bulgaria",
+						"names": {
+							"en": "Bulgaria"
+						}
+					},
+					{
+						"id": "SE",
+						"name": "Sweden",
+						"names": {
+							"en": "Sweden"
+						}
+					},
+					{
+						"id": "SI",
+						"name": "Slovenia",
+						"names": {
+							"en": "Slovenia"
+						}
+					},
+					{
+						"id": "SK",
+						"name": "Slovakia",
+						"names": {
+							"en": "Slovakia"
+						}
+					}
+				]
+			}
+		],
+		"conceptSchemes": [
+			{
+				"id": "CS21",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Concepts for Measures #2.1",
+				"names": {
+					"en": "Concepts for Measures #2.1"
+				},
+				"concepts": [
+					{
+						"id": "IMPORT",
+						"name": "Import",
+						"names": {
+							"en": "Import"
+						},
+						"coreRepresentation": {
+							"format": {
+								"dataType": "Numeric"
+							}
+						}
+					},
+					{
+						"id": "EXPORT",
+						"name": "Export",
+						"names": {
+							"en": "Export"
+						},
+						"coreRepresentation": {
+							"format": {
+								"dataType": "Numeric"
+							}
+						}
+					}
+				]
+			},
+			{
+				"id": "CS2R1",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Concepts for Measures in Results #2.1",
+				"names": {
+					"en": "Concepts for Measures in Results #2.1"
+				},
+				"concepts": [
+					{
+						"id": "PERC_EU_IMPORT",
+						"name": "Import for EU in percentage",
+						"names": {
+							"en": "Import for EU in percentage"
+						},
+						"coreRepresentation": {
+							"format": {
+								"dataType": "Numeric",
+								"minValue": 0,
+								"maxValue": 100
+							}
+						}
+					},
+					{
+						"id": "PERC_EU_EXPORT",
+						"name": "Export for EU in percentage",
+						"names": {
+							"en": "Export for EU in percentage"
+						},
+						"coreRepresentation": {
+							"format": {
+								"dataType": "Numeric",
+								"minValue": 0,
+								"maxValue": 100
+							}
+						}
+					}
+				]
+			},
+			{
+				"id": "CONCEPTS2",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Concepts for DSDs #2.1",
+				"names": {
+					"en": "Concepts for DSDs #2.1"
+				},
+				"concepts": [
+					{
+						"id": "GEO_AREA",
+						"name": "Geographical Area",
+						"names": {
+							"en": "Geographical Area"
+						}
+					},
+					{
+						"id": "TIME_PERIOD",
+						"name": "Time Period",
+						"names": {
+							"en": "Time Period"
+						}
+					},
+					{
+						"id": "MEASURE_DIMENSION",
+						"name": "Measure Dimension",
+						"names": {
+							"en": "Measure Dimension"
+						}
+					},
+					{
+						"id": "OBS_VALUE",
+						"name": "Observation Value",
+						"names": {
+							"en": "Observation Value"
+						}
+					}
+				]
+			}
+		],
+		"dataStructures": [
+			{
+				"id": "DS21",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Data Structure #2.1",
+				"names": {
+					"en": "Data Structure #2.1"
+				},
+				"dataStructureComponents": {
+					"dimensionList": {
+						"id": "DimensionDescriptor",
+						"dimensions": [
+							{
+								"id": "GEO_AREA",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS2(1.0).GEO_AREA",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_AREA(1.0)"
+								}
+							}
+						],
+						"timeDimension": {
+							"id": "TIME_PERIOD",
+							"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS2(1.0).TIME_PERIOD",
+							"localRepresentation": {
+								"format": {
+									"dataType": "ObservationalTimePeriod"
+								}
+							}
+						}
+					},
+					"measureList": {
+						"id": "MeasureDescriptor",
+						"measures": [
+							{
+								"id": "OBS_VALUE",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS2(1.0).OBS_VALUE"
+							}
+						]
+					}
+				}
+			},
+			{
+				"id": "DS2R1",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Data Structure for Results #2.1",
+				"names": {
+					"en": "Data Structure for Results #2.1"
+				},
+				"dataStructureComponents": {
+					"dimensionList": {
+						"id": "DimensionDescriptor",
+						"dimensions": [
+							{
+								"id": "GEO_AREA",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS2(1.0).GEO_AREA",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_AREA(1.0)"
+								}
+							},
+							{
+								"id": "MEASURE_DIMENSION",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS2(1.0).MEASURE_DIMENSION",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CS2R1(1.0)"
+								}
+							}
+						],
+						"timeDimension": {
+							"id": "TIME_PERIOD",
+							"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS2(1.0).TIME_PERIOD",
+							"localRepresentation": {
+								"format": {
+									"dataType": "ObservationalTimePeriod"
+								}
+							}
+						}
+					},
+					"measureList": {
+						"id": "MeasureDescriptor",
+						"measures": [
+							{
+								"id": "OBS_VALUE",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS2(1.0).OBS_VALUE"
+							}
+						]
+					}
+				}
+			}
+		],
+		"customTypeSchemes": [
+			{
+				"id": "CTS1",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Custom Type Scheme #1",
+				"names": {
+					"en": "Custom Type Scheme #1"
+				},
+				"vtlVersion": "2.0",
+				"customTypes": [
+					{
+						"id": "NUMERIC_WITH_ZEROS",
+						"name": "Custom Type sample for numbers",
+						"names": {
+							"en": "Custom Type sample for numbers"
+						},
+						"vtlScalarType": "number",
+						"dataType": "NUMERIC",
+						"nullValue": "0"
+					}
+				]
+			}
+		],
+		"vtlMappingSchemes": [
+			{
+				"id": "VTLMS1",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "VTL Mapping Scheme #1",
+				"names": {
+					"en": "VTL Mapping Scheme #1"
+				},
+				"vtlMappings": [
+					{
+						"id": "VTLM1",
+						"name": "VTL Mapping #1",
+						"names": {
+							"en": "VTL Mapping #1"
+						},
+						"alias": "DF1R1",
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=SDMX:DF1R1(1.0)",
+						"fromVtlMapping": {
+							"method": "M2A"
+						}
+					},
+					{
+						"id": "VTLM2",
+						"name": "VTL Mapping #2",
+						"names": {
+							"en": "VTL Mapping #2"
+						},
+						"alias": "DF11",
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=SDMX:D11(1.0)",
+						"toVtlMapping": {
+							"method": "Basic"
+						}
+					},
+					{
+						"id": "VTLM3",
+						"name": "Variable INDICATOR mapping",
+						"names": {
+							"en": "Variable INDICATOR mapping"
+						},
+						"alias": "INDICATOR",
+						"concept": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).MEASURE_DIMENSION"
+					},
+					{
+						"id": "VTLM4",
+						"name": "Variable VALUE mapping",
+						"names": {
+							"en": "Variable VALUE mapping"
+						},
+						"alias": "VALUE",
+						"concept": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).OBS_VALUE"
+					},
+					{
+						"id": "VTLM5",
+						"name": "Variable TIME mapping",
+						"names": {
+							"en": "Variable TIME mapping"
+						},
+						"alias": "TIME",
+						"concept": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).TIME_PERIOD"
+					},
+					{
+						"id": "VTLM6",
+						"name": "Variable GEO mapping",
+						"names": {
+							"en": "Variable GEO mapping"
+						},
+						"alias": "GEO",
+						"concept": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).COUNTRY"
+					}
+				]
+			},
+			{
+				"id": "VTLMS2",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "VTL Mapping Scheme #2",
+				"names": {
+					"en": "VTL Mapping Scheme #2"
+				},
+				"vtlMappings": [
+					{
+						"id": "VTLM1",
+						"name": "VTL Mapping #1",
+						"names": {
+							"en": "VTL Mapping #1"
+						},
+						"alias": "DF21",
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=SDMX:D21(1.0)",
+						"toVtlMapping": {
+							"method": "Pivot"
+						}
+					},
+					{
+						"id": "VTLM2",
+						"name": "VTL Mapping #2",
+						"names": {
+							"en": "VTL Mapping #2"
+						},
+						"alias": "DF2R1",
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=SDMX:D2R1(1.0)",
+						"fromVtlMapping": {
+							"method": "Unpivot"
+						}
+					}
+				]
+			}
+		],
+		"rulesetSchemes": [
+			{
+				"id": "RS1",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Ruleset Scheme #1",
+				"names": {
+					"en": "Ruleset Scheme #1"
+				},
+				"vtlVersion": "2.0",
+				"rulesets": [
+					{
+						"id": "DPR1",
+						"name": "DataPoint Ruleset #1",
+						"names": {
+							"en": "DataPoint Ruleset #1"
+						},
+						"rulesetType": "datapoint",
+						"rulesetScope": "valuedomain",
+						"rulesetDefinition": "define datapoint ruleset DPR1 ( variable INDICATOR as A, VALUE as B ) is\n  rule1: when A = \"CREDIT\" or A = \"DEBIT\" then B >= 0 errorcode \"Negative value\" errorlevel 10;\n  rule2: when A = \"CREDIT\" or A = \"DEBIT\" then B < 999999999999 errorcode \"Value too large\" errorlevel 8\nend datapoint ruleset"
+					},
+					{
+						"id": "HR1",
+						"name": "Hierarchical Ruleset #1",
+						"names": {
+							"en": "Hierarchical Ruleset #1"
+						},
+						"rulesetType": "hierarchical",
+						"rulesetScope": "valuedomain",
+						"rulesetDefinition": "define hierarchical ruleset HR1 (variable condition TIME as T rule GEO )\n  EU = AT [ T >= 1995-01-01 ]\n    + BE [ T >= 1958-01-01 ]\n    + BG [ T >= 2007-01-01 ]\n    + SE [ T >= 1995-01-01 ]\n    + SI [ T >= 2004-01-01 ]\n    + SK [ T >= 2004-01-01 ]; /* All EU countries would be added under the 'EU' code, but were not for keeping the samples smaller. */\n  BENELUX = BE [ T >= 1948-01-01 ]\n    + NE [ T >= 1948-01-01 ]\n    + LU [ T >= 1948-01-01 ]\nend hierarchical ruleset"
+					}
+				],
+				"vtlMappingScheme": "urn:sdmx:org.sdmx.infomodel.transformation.VtlMappingScheme=SDMX:VTLMS1(1.0)"
+			}
+		],
+		"transformationSchemes": [
+			{
+				"id": "TS2",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Transformation Scheme #2 – SDMX/VTL release sample",
+				"names": {
+					"en": "Transformation Scheme #2 – SDMX/VTL release sample"
+				},
+				"vtlVersion": "2.0",
+				"transformations": [
+					{
+						"id": "TS_A",
+						"name": "Transformation A",
+						"names": {
+							"en": "Transformation A"
+						},
+						"description": "Aggregates the dataflow DF21 according to the hierarchical ruleset HR1. DF21 is mapped from SDMX to VTL through the pivot mapping method, therefore the mapped VTL dataset has the components IMPORT and EXPORT instead of MEASURE_DIMENSION and OBS_VALUE. Following the application of the hierarchy operator, the observation relevant to EU and BENELUX are produced. The resulting VTL dataset TEMP1 is not persistent and it is assumed that it does not need a mapping towards SDMX.",
+						"descriptions": {
+							"en": "Aggregates the dataflow DF21 according to the hierarchical ruleset HR1. DF21 is mapped from SDMX to VTL through the pivot mapping method, therefore the mapped VTL dataset has the components IMPORT and EXPORT instead of MEASURE_DIMENSION and OBS_VALUE. Following the application of the hierarchy operator, the observation relevant to EU and BENELUX are produced. The resulting VTL dataset TEMP1 is not persistent and it is assumed that it does not need a mapping towards SDMX."
+						},
+						"isPersistent": false,
+						"expression": "hierarchy(DF21, HR1 computed)",
+						"result": "TEMP1"
+					},
+					{
+						"id": "TS_B",
+						"name": "Transformation B",
+						"names": {
+							"en": "Transformation B"
+						},
+						"description": "Extracts from TEMP1 the observations having GEO_AREA=\"EU\" and drops the GEO_AREA identifier. The result TEMP2 is not persistent and it is assumed that it does not need a mapping towards SDMX.",
+						"descriptions": {
+							"en": "Extracts from TEMP1 the observations having GEO_AREA=\"EU\" and drops the GEO_AREA identifier. The result TEMP2 is not persistent and it is assumed that it does not need a mapping towards SDMX."
+						},
+						"isPersistent": false,
+						"expression": "TEMP1 [sub GEO_AREA = \"EU\"]",
+						"result": "TEMP2"
+					},
+					{
+						"id": "TS_C",
+						"name": "Transformation C",
+						"names": {
+							"en": "Transformation C"
+						},
+						"description": "Applies the \"percentage\" user defined operator to TEMP1 and TEMP2 to calculate the percentage of each EU country in respect to the EU and renames IMPORT to PERC_EU_IMPORT and EXPORT to PERC_EU_EXPORT. According to the VTL behaviour, the result has the same identifiers as TEMP1 (GEO_AREA and TIME_PERIOD). The result DF2R1 is persistent and is mapped from VTL to SDMX through the unpivot method, therefore the SDMX structure has MEASURE_DIMENSION and OBS_VALUE in place of PERC_EU_IMPORT and PERC_EU_EXPORT, which become the possible values of the MEASURE DIMENSION (i.e., concepts of relevant concept scheme).",
+						"descriptions": {
+							"en": "Applies the \"percentage\" user defined operator to TEMP1 and TEMP2 to calculate the percentage of each EU country in respect to the EU and renames IMPORT to PERC_EU_IMPORT and EXPORT to PERC_EU_EXPORT. According to the VTL behaviour, the result has the same identifiers as TEMP1 (GEO_AREA and TIME_PERIOD). The result DF2R1 is persistent and is mapped from VTL to SDMX through the unpivot method, therefore the SDMX structure has MEASURE_DIMENSION and OBS_VALUE in place of PERC_EU_IMPORT and PERC_EU_EXPORT, which become the possible values of the MEASURE DIMENSION (i.e., concepts of relevant concept scheme)."
+						},
+						"isPersistent": true,
+						"expression": "percentage ( TEMP1,  TEMP2 ) [rename IMPORT to PERC_EU_IMPORT, EXPORT to PERC_EU_EXPORT]",
+						"result": "DF2R1"
+					}
+				],
+				"vtlMappingScheme": "urn:sdmx:org.sdmx.infomodel.transformation.VtlMappingScheme=SDMX:VTLMS2(1.0)",
+				"customTypeScheme": "urn:sdmx:org.sdmx.infomodel.transformation.CustomTypeScheme=SDMX:CTS1(1.0)",
+				"rulesetSchemes": [
+					"urn:sdmx:org.sdmx.infomodel.transformation.RulesetScheme=SDMX:RS1(1.0)"
+				],
+				"userDefinedOperatorSchemes": [
+					"urn:sdmx:org.sdmx.infomodel.transformation.UserDefinedOperatorScheme=SDMX:UDOS1(1.0)"
+				]
+			}
+		],
+		"userDefinedOperatorSchemes": [
+			{
+				"id": "UDOS1",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "User Defined Operators #1",
+				"names": {
+					"en": "User Defined Operators #1"
+				},
+				"vtlVersion": "2.0",
+				"userDefinedOperators": [
+					{
+						"id": "percentage",
+						"name": "Percentage",
+						"names": {
+							"en": "Percentage"
+						},
+						"operatorDefinition": "define operator percentage (  DS_A  dataset { measure<number> _+ } ,\n  DS_B dataset { measure<number> _+ }  )\n  returns dataset { measure<number> _+ } is\n  DS_A  /  DS_B  *  100\nend operator"
+					},
+					{
+						"id": "diffperc",
+						"name": "Difference Percentage",
+						"names": {
+							"en": "Difference Percentage"
+						},
+						"operatorDefinition": "define operator diffperc ( DS_A dataset { measure<number> _+ } ,\n  DS_B dataset { measure<number> _+ } )\n  returns dataset { measure<number> _+ } is\n  (DS_A  - DS_B) /  DS_B  *  100\nend operator"
+					}
+				]
+			}
+		]
+	}
+}
