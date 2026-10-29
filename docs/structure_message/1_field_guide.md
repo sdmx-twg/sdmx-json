@@ -244,12 +244,12 @@ on links.
   *metadataProvisionAgreement*, *structureMap*, *representationMap*,
   *conceptSchemeMap*, *categorySchemeMap*, *organisationSchemeMap*,
   *reportingTaxonomyMap*, *process*, *categorisation*, *dataConstraint*,
-  *metadataConstraint*, *customTypeScheme*, *vtlMappingScheme*,
-  *namePersonalisationScheme*, *rulesetScheme*, *transformationScheme* and
-  *userDefinedOperatorScheme*. Each of the corresponding object properties is
-  allowed at maximum one time. Contains the requested structural information
-  according to the definition of this artefact. For more information, please
-  see:
+  *metadataConstraint*, *customTypeScheme* (deprecated), *vtlMappingScheme*,
+  *namePersonalisationScheme* (deprecated), *rulesetScheme*,
+  *transformationScheme*, *userDefinedOperatorScheme* and *vtlExecution*. Each
+  of the corresponding object properties is allowed at maximum one time.
+  Contains the requested structural information according to the definition of
+  this artefact. For more information, please see:
     - *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*
     - *[Common properties of SDMX artefacts of base type "ItemScheme"](#common-properties-of-sdmx-artefacts-of-base-type-itemscheme)*
 
@@ -284,12 +284,13 @@ on links.
     - *[dataConstraints](#dataconstraint)*
     - *[availabilityConstraints](#availabilityconstraint)*
     - *[metadataConstraints](#metadataconstraint)*
-    - *[customTypeSchemes](#customtypescheme)*
+    - *[customTypeSchemes](#customtypescheme)* (deprecated)
     - *[vtlMappingSchemes](#vtlmappingscheme)*
-    - *[namePersonalisationSchemes](#namepersonalisationscheme)*
+    - *[namePersonalisationSchemes](#namepersonalisationscheme)* (deprecated)
     - *[rulesetSchemes](#rulesetscheme)*
     - *[transformationSchemes](#transformationscheme)*
     - *[userDefinedOperatorSchemes](#userdefinedoperatorscheme)*
+    - *[vtlExecutions](#vtlexecution)*
 
 ??? example
 
@@ -440,8 +441,9 @@ the message deals with languages.
 All SDMX artefacts of base type "ItemScheme" (CategoryScheme, ConceptScheme,
 Codelist, GeographicCodelist, GeoGridCodelist, AgencyScheme, DataProviderScheme,
 MetadataProviderSchemes, DataConsumerScheme, OrganisationUnitScheme,
-ReportingTaxonomy, CustomTypeScheme, VtlMappingScheme,
-NamePersonalisationScheme, RulesetScheme, UserDefinedOperatorScheme) share the
+ReportingTaxonomy, CustomTypeScheme (deprecated), VtlMappingScheme,
+NamePersonalisationScheme (deprecated), RulesetScheme,
+UserDefinedOperatorScheme) share the
 *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
 In addition, they share the following common object properties:
@@ -450,8 +452,10 @@ In addition, they share the following common object properties:
   resource contains only a sub-set of items.
 - categories / concepts / codes / geoFeatureSetCodes / geoGridCodes / agencies /
   dataProviders / dataConsumers / metadataProviders / organisationUnits /
-  reportingCategories / customTypes / vtlMappings / namePersonalisations /
-  rulesets / transformations / userDefinedOperators -
+  reportingCategories / customTypes (deprecated) / vtlDatasetMappings /
+  vtlCodelistMappings / vtlMappings (deprecated) /
+  namePersonalisations (deprecated) / rulesets / transformations /
+  userDefinedOperators -
   *Array* *optional*. Provides a list of *[items](#item)* if the resource
   inherits from the ItemScheme. **Note that the order of items is significant.
   In the use case of a submission of a partial list is is necessary to include
@@ -477,9 +481,9 @@ In addition, they share the following common object properties:
 *Object* *optional*. Abstract generic item within the ItemScheme (if the resource
 is a CategoryScheme, ConceptScheme, Codelist, GeographicCodelist,
 GeoGridCodelist, AgencyScheme, DataProviderScheme, MetadataProviderSchemes,
-DataConsumerScheme, OrganisationUnitScheme, ReportingTaxonomy, CustomTypeScheme,
-VtlMappingScheme, NamePersonalisationScheme, RulesetScheme or
-UserDefinedOperatorScheme).
+DataConsumerScheme, OrganisationUnitScheme, ReportingTaxonomy, CustomTypeScheme
+(deprecated), VtlMappingScheme, NamePersonalisationScheme (deprecated),
+RulesetScheme or UserDefinedOperatorScheme).
 
 - id - *String*. Identifier for the item.
 - name - *String*. Human-readable (best-language-match) name of the
@@ -501,8 +505,10 @@ UserDefinedOperatorScheme).
   the item. See the section [link](#link).
 - categories / concepts / codes / geoFeatureSetCodes / geoGridCodes / agencies /
   dataProviders / dataConsumers / metadataProviders / organisationUnits /
-  reportingCategories / customTypes / vtlMappings / namePersonalisations /
-  rulesets / transformations / userDefinedOperators -
+  reportingCategories / customTypes (deprecated) / vtlDatasetMappings /
+  vtlCodelistMappings / vtlMappings (deprecated) /
+  namePersonalisations (deprecated) / rulesets / transformations /
+  userDefinedOperators -
   *Array* *optional*. Provides a list of child items of the item. **Note that
   the order of items is significant. In the use case of a submission of a
   partial list is is necessary to include preceding and succeeding items to
@@ -3018,8 +3024,9 @@ structure.
 
 ### customTypeScheme
 
-*Object*. CustomTypeScheme provides the details of a custom type scheme, in
-which user defined operators are described.
+*Object*. Deprecated. The custom type schemes are deprecated in SDMX 3.2.
+CustomTypeScheme provides the details of a custom type scheme, in which custom
+types are described.
 
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
@@ -3028,7 +3035,41 @@ See the schema file for more information.
 ### vtlMappingScheme
 
 *Object*. VtlMappingScheme provides the details of a VTL mapping scheme, in
-which VTL mappings are described.
+which VTL mappings are described. The mappings define the VTL Data Sets and
+Value Domains used by the transformations, rulesets and user defined operators
+of a transformation scheme.
+
+The VTL dataset mappings (`vtlDatasetMappings`) map a VTL Data Set to an SDMX
+data structure definition, dataflow or provision agreement. A VTL dataset
+mapping has a `vtlAlias`, the alias used in the VTL program to refer to the VTL
+Data Set; the boolean `isInput`, true for an input of the VTL program, whose
+data are obtained from SDMX, and false for an output, whose data are converted
+into SDMX; and exactly one of `dataStructure`, `dataflow` and
+`provisionAgreement`, the reference to the SDMX artefact that defines the VTL
+Data Set.
+
+The VTL codelist mappings (`vtlCodelistMappings`) map a VTL Value Domain to an
+SDMX codelist, whose codes are the values of the Value Domain. A VTL codelist
+mapping has a `vtlAlias` and a `codelist`, the reference to the codelist; it
+applies only to inputs, as the VTL programs do not produce Value Domains.
+
+The `vtlAlias` is a VTL name given without the single quotes that can enclose
+it in the VTL statements (e.g. `diff`, a VTL keyword, written as 'diff' in the
+statements). It cannot contain whitespace or single quotes and is at most 128
+characters long. Within a VTL mapping scheme, the `id` of the mappings is unique
+across the `vtlDatasetMappings`, `vtlCodelistMappings` and `vtlMappings`
+arrays, and so is the alias (`vtlAlias`, or `alias` in the VTL mappings). The
+schema does not enforce this uniqueness.
+
+The VTL mappings (`vtlMappings`) are the deprecated encoding of the mappings
+used in SDMX 3.0 and 3.1. The `vtlMappings` array and the properties of its
+items are deprecated: `alias`, replaced by `vtlAlias`; `dataflow` and
+`codelist`, replaced by the VTL dataset mappings and the VTL codelist mappings;
+`concept`, as the VTL Variables correspond to the homonymous components of the
+VTL Data Sets and do not need any mapping; and `genericDataflow`,
+`toVtlMapping` (with `toVtlSubSpace` and `method`) and `fromVtlMapping` (with
+`fromVtlSuperSpace` and `method`), as the Basic mapping is the only mapping
+method.
 
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
@@ -3036,7 +3077,10 @@ See the schema file for more information.
 
 ### namePersonalisationScheme
 
-*Object*. NamePersonalisationScheme provides the details of a name
+*Object*. Deprecated. The name personalisation schemes are deprecated in
+SDMX 3.2: the names assigned by default by the VTL operators (e.g. bool_var,
+errorcode) can be changed in the VTL program, for example through the rename
+clause. NamePersonalisationScheme provides the details of a name
 personalisation scheme, in which name personalisations are described.
 
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
@@ -3046,7 +3090,10 @@ See the schema file for more information.
 ### rulesetScheme
 
 *Object*. RulesetScheme provides the details of a ruleset scheme, in which
-rulesets are described.
+rulesets are described, including, from VTL 2.2, the viral propagations.
+
+The `vtlMappingScheme` property is deprecated: the mappings used by the
+rulesets are provided by the VTL mapping scheme of the transformation scheme.
 
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
@@ -3057,6 +3104,11 @@ See the schema file for more information.
 *Object*. TransformationScheme provides the details of a transformation scheme,
 in which transformations are described.
 
+The `namePersonalisationScheme` and `customTypeScheme` properties are
+deprecated, together with the schemes they reference: see
+*[namePersonalisationScheme](#namepersonalisationscheme)* and
+*[customTypeScheme](#customtypescheme)*.
+
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
 See the schema file for more information.
@@ -3065,6 +3117,56 @@ See the schema file for more information.
 
 *Object*. UserDefinedOperatorScheme provides the details of a user defined
 operator scheme, in which user defined operators are described.
+
+The `vtlMappingScheme` and `rulesetSchemes` properties are deprecated: the
+mappings and the rulesets used by the user defined operators are provided by
+the VTL mapping scheme and the ruleset schemes of the transformation scheme.
+
+See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
+
+See the schema file for more information.
+
+### vtlExecution
+
+*Object*. VtlExecution describes the structure of a VTL execution, which
+specifies how the data of the input VTL Data Sets of a transformation scheme
+are retrieved, so that the transformation scheme can be executed on the basis
+of its SDMX definition. A VTL execution is maintained independently of the
+transformation scheme.
+
+The `transformationScheme` property, which references the transformation scheme
+to be executed, is mandatory, and so is at least one data extraction, in the
+`queryExtractions` or `urlExtractions` arrays. A VTL execution returned as a
+stub (`isExternalReference` true) still contains them.
+
+The query extractions (`queryExtractions`) retrieve the data of an input VTL
+Data Set through a query to a web service compliant with the SDMX REST API. They
+have the `entryPoint`, the URL of the entry point of the web service, and
+optionally the `context`, which references the dataflow or provision agreement
+whose data are queried instead of the SDMX artefact of the VTL dataset mapping,
+and the `sdmxApiVersion`, the version of the SDMX REST API implemented by the
+entry point, written as major.minor (e.g. 2.1).
+
+The URL extractions (`urlExtractions`) retrieve the data through a URL built
+from a template, for web services that are not fully compliant with the SDMX
+REST API. They have the `urlTemplate`, the complete URL of the query, whose
+tokens enclosed in curly braces (e.g. `{startPeriod}`) are replaced by the
+values of the query parameters having the same names.
+
+Every data extraction has a `datasetMapping`, which references the VTL dataset
+mapping of the input VTL Data Set whose data are retrieved (it must belong to
+the VTL mapping scheme of the transformation scheme and have `isInput` true),
+and optionally `queryParameters`, the name-value pairs used for building the
+query. A query parameter has a `name`, which cannot contain whitespace, an
+optional `value` and the boolean `isFixed`. A fixed parameter must have a value,
+which is always used as it is; a non-fixed parameter can have a value, a default
+that can be overridden at run time, and otherwise must be given one at run time.
+
+The VTL executions of a message must have distinct combinations of `agencyID`,
+`id` and `version`; a VTL execution has at most one data extraction for each
+`datasetMapping`, in both extraction arrays together; and the `name` of the
+query parameters is unique within a data extraction. The schema does not
+enforce these uniqueness rules.
 
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
