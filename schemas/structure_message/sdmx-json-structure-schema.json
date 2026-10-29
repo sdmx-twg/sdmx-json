@@ -298,7 +298,8 @@
 					}
 				},
 				"customTypeSchemes":{
-					"description":"customTypeSchemes contains one or more custom type schemes, which can be explicitly detailed or referenced from an external structure document or registry service.",
+					"description":"Deprecated. The custom type schemes are deprecated in SDMX 3.2. customTypeSchemes contains one or more custom type schemes, which can be explicitly detailed or referenced from an external structure document or registry service.",
+					"deprecated":true,
 					"type":"array",
 					"minItems":1,
 					"items":{
@@ -316,7 +317,8 @@
 					}
 				},
 				"namePersonalisationSchemes":{
-					"description":"namePersonalisationSchemes contains one or more name personalisation schemes, which can be explicitly detailed or referenced from an external structure document or registry service.",
+					"description":"Deprecated. The name personalisation schemes are deprecated in SDMX 3.2. namePersonalisationSchemes contains one or more name personalisation schemes, which can be explicitly detailed or referenced from an external structure document or registry service.",
+					"deprecated":true,
 					"type":"array",
 					"minItems":1,
 					"items":{
@@ -3854,7 +3856,8 @@
 			"unevaluatedProperties":false
 		},
 		"CustomTypeSchemeType":{
-			"description":"CustomTypeSchemeType defines a collection of custom types that are used in transformations. Unless the artefact is returned as a stub, it must contain the 'vtlVersion' property.",
+			"description":"Deprecated. The custom type schemes are deprecated in SDMX 3.2: the default conversions between VTL and SDMX data types apply, unless overridden by the representation defined in the data structure definition of the referenced SDMX artefact; the VTL NULLs become missing values in SDMX, the VTL literals are written in the default format, and explicit type conversions are expressed in the VTL program through the cast operator. CustomTypeSchemeType defines a collection of custom types that are used in transformations. Unless the artefact is returned as a stub, it must contain the 'vtlVersion' property.",
+			"deprecated":true,
 			"type":"object",
 			"allOf":[
 				{
@@ -3872,9 +3875,10 @@
 						"customTypes":{
 							"type":"array",
 							"minItems":1,
+							"deprecated":true,
 							"items":{
 								"$ref":"#/$defs/CustomTypeType",
-								"description":"CustomType details a custom type within a custom type scheme."
+								"description":"Deprecated. See CustomTypeSchemeType. CustomType details a custom type within a custom type scheme."
 							}
 						}
 					}
@@ -3884,7 +3888,8 @@
 			"unevaluatedProperties":false
 		},
 		"CustomTypeType":{
-			"description":"CustomTypeType defines the structure of a custom type. A custom type specifies a custom conversion for a VTL scalar type to a resulting data type. This conversion overrides the default conversion.",
+			"description":"Deprecated. See CustomTypeSchemeType. CustomTypeType defines the structure of a custom type. A custom type specifies a custom conversion for a VTL scalar type to a resulting data type. This conversion overrides the default conversion.",
+			"deprecated":true,
 			"type":"object",
 			"allOf":[
 				{
@@ -3964,9 +3969,10 @@
 						"vtlMappings":{
 							"type":"array",
 							"minItems":1,
+							"deprecated":true,
 							"items":{
 								"$ref":"#/$defs/VtlMappingType",
-								"description":"VtlMapping details a mapping between SDMX and VTL transformation."
+								"description":"Deprecated. Replaced by vtlDatasetMappings and vtlCodelistMappings. VtlMapping details a mapping between SDMX and VTL transformation."
 							}
 						}
 					}
@@ -3976,7 +3982,8 @@
 			"unevaluatedProperties":false
 		},
 		"VtlMappingType":{
-			"description":"VtlMappingType defines the structure of a single mapping between the reference to a SDMX artefact made from VTL transformations, rulesets, user defined operators and the corresponding SDMX structure identifier. These are used to assign an alternative names to SDMX Dataflows, Codelists, Concept Schemes, or Concepts. Although are distinct sub-classes in the Information Model, this structure serves to express them all. The references SDMX artefact serves to distinguish which type of sub-class (VtlDatflowMapping or VtlCodelistMapping, or VtlConceptMapping) is being described. When this is used to assign an alias for a SDMX Dataflow, this can also be used to indicate the methods used to convert the data structure from SDMX to VTL and vice-versa. Finally, this can be used to override the deault Basic mapping methods used for Dataflows by utilizing the GenericDataflow element in place of a reference to a specific Dataflow.",
+			"description":"Deprecated. Replaced by VtlDatasetMappingType and VtlCodelistMappingType, as the VtlDataflowMapping and the VtlConceptMapping are deprecated and the Basic mapping is the only mapping method (see the SDMX Technical Notes, \"Conversion of definitions based on deprecated constructs\"). VtlMappingType defines the structure of a single mapping between the reference to a SDMX artefact made from VTL transformations, rulesets, user defined operators and the corresponding SDMX structure identifier. These are used to assign an alternative names to SDMX Dataflows, Codelists, Concept Schemes, or Concepts. Although are distinct sub-classes in the Information Model, this structure serves to express them all. The references SDMX artefact serves to distinguish which type of sub-class (VtlDatflowMapping or VtlCodelistMapping, or VtlConceptMapping) is being described. When this is used to assign an alias for a SDMX Dataflow, this can also be used to indicate the methods used to convert the data structure from SDMX to VTL and vice-versa. Finally, this can be used to override the deault Basic mapping methods used for Dataflows by utilizing the GenericDataflow element in place of a reference to a specific Dataflow.",
+			"deprecated":true,
 			"type":"object",
 			"allOf":[
 				{
@@ -3993,7 +4000,8 @@
 									"properties":{
 										"dataflow":{
 											"$ref":"#/$defs/DataflowReferenceType",
-											"description":"A reference to the SDMX Dataflow that the mapping is defined for. This is used to create a VtlDataflowMapping. In this case, it is possible to specify the mapping details to and from VTL."
+											"description":"Deprecated. A VTL Data Set is mapped to a Dataflow through a VTL dataset mapping (vtlDatasetMappings). A reference to the SDMX Dataflow that the mapping is defined for. This is used to create a VtlDataflowMapping. In this case, it is possible to specify the mapping details to and from VTL.",
+											"deprecated":true
 										}
 									}
 								},
@@ -4004,7 +4012,8 @@
 									"properties":{
 										"genericDataflow":{
 											"$ref":"#/$defs/EmptyType",
-											"description":"Indicates that the ToVtlMapping and FromVtlMapping are the default mapping methods to be applied, overriding the Basic methods if necessary. The mapping methods in this case would be applied to any dataflows that are not explicitly defined in other VtlMappings."
+											"description":"Deprecated. The Basic mapping is the only mapping method, therefore no default mapping methods can be declared. Indicates that the ToVtlMapping and FromVtlMapping are the default mapping methods to be applied, overriding the Basic methods if necessary. The mapping methods in this case would be applied to any dataflows that are not explicitly defined in other VtlMappings.",
+											"deprecated":true
 										}
 									}
 								}
@@ -4012,11 +4021,13 @@
 							"properties":{
 								"toVtlMapping":{
 									"$ref":"#/$defs/ToVtlMappingType",
-									"description":"Describes the mapping from a SDMX dataflow to a VTL data structure."
+									"description":"Deprecated. The Basic mapping is the only mapping method between SDMX and VTL data structures; any restructuring of the data is performed in the VTL program through the VTL operators. Describes the mapping from a SDMX dataflow to a VTL data structure.",
+									"deprecated":true
 								},
 								"fromVtlMapping":{
 									"$ref":"#/$defs/FromVtlMappingType",
-									"description":"Describes the mapping to a SDMX dataflow from a VTL data structure."
+									"description":"Deprecated. The Basic mapping is the only mapping method between SDMX and VTL data structures; any restructuring of the data is performed in the VTL program through the VTL operators. Describes the mapping to a SDMX dataflow from a VTL data structure.",
+									"deprecated":true
 								}
 							}
 						},
@@ -4027,7 +4038,8 @@
 							"properties":{
 								"codelist":{
 									"$ref":"#/$defs/CodelistReferenceType",
-									"description":"A reference to the SDMX Codelist that the mapping is defined for. This is used to create a VtlCodelistMapping."
+									"description":"Deprecated. A VTL Value Domain is mapped to a Codelist through a VTL codelist mapping (vtlCodelistMappings). A reference to the SDMX Codelist that the mapping is defined for. This is used to create a VtlCodelistMapping.",
+									"deprecated":true
 								}
 							}
 						},
@@ -4038,7 +4050,8 @@
 							"properties":{
 								"concept":{
 									"$ref":"#/$defs/ConceptReferenceType",
-									"description":"A reference to the SDMX Concept that the mapping is defined for. This is used to create a VtlConceptMapping."
+									"description":"Deprecated. The VTL Variables correspond to the homonymous components of the VTL Data Sets and do not need any mapping. A reference to the SDMX Concept that the mapping is defined for. This is used to create a VtlConceptMapping.",
+									"deprecated":true
 								}
 							}
 						}
@@ -4048,7 +4061,8 @@
 					"properties":{
 						"alias":{
 							"type":"string",
-							"description":"The alias used to refer to the reference SDMX artefact in the transformations. This must be unique within the mapping scheme in which it is defined."
+							"description":"Deprecated. Replaced by the vtlAlias of the VTL dataset mapping (vtlDatasetMappings) and of the VTL codelist mapping (vtlCodelistMappings); it represents the deprecated dataflowAlias, codelistAlias and conceptAlias. The alias used to refer to the reference SDMX artefact in the transformations. This must be unique within the mapping scheme in which it is defined.",
+							"deprecated":true
 						}
 					},
 					"required":[
@@ -4152,12 +4166,14 @@
 			"maxLength":128
 		},
 		"ToVtlMappingType":{
-			"description":"ToVtlMappingType defines the mapping method and filter used when mapping from SDMX to VTL.",
+			"description":"Deprecated. The Basic mapping is the only mapping method from SDMX to VTL; parts of the data are retrieved through the query parameters of a data extraction of a VTL execution and selected in the VTL program through the sub clause. ToVtlMappingType defines the mapping method and filter used when mapping from SDMX to VTL.",
+			"deprecated":true,
 			"type":"object",
 			"properties":{
 				"toVtlSubSpace":{
 					"$ref":"#/$defs/SpaceKeyType",
-					"description":"Identfies a sub space of the mapped dataflow that the mapping applies to. This is a collection of references to the dimensions that make up the space."
+					"description":"Deprecated. The same SDMX artefact can be mapped to distinct input VTL Data Sets, each one fed with the desired part of the data through the query parameters of its data extraction, and the VTL program selects the parts through the sub clause. Identfies a sub space of the mapped dataflow that the mapping applies to. This is a collection of references to the dimensions that make up the space.",
+					"deprecated":true
 				},
 				"method":{
 					"anyOf":[
@@ -4182,14 +4198,16 @@
 							"description":"The pivot mapping method, using attributes to measures. See Section 6 SDMX Standards ('SDMX Technical Notes'), 10.3.3.3 ('From SDMX DataAttributes to VTL Measures')."
 						}
 					],
-					"description":"The mapping method used when mapping from SDMX to VTL. This is typically a StandardToVtlMappingMethodType, but can be any other value to allow for non-standard methods. The implied default is Basic."
+					"description":"Deprecated. The Basic mapping is the only mapping method. The mapping method used when mapping from SDMX to VTL. This is typically a StandardToVtlMappingMethodType, but can be any other value to allow for non-standard methods. The implied default is Basic.",
+					"deprecated":true
 				}
 			},
 			"$ref":"#/$defs/specificationExtensions",
 			"unevaluatedProperties":false
 		},
 		"SpaceKeyType":{
-			"description":"SpaceKey defines the structure of a super- or sub- space for a SDMX Dataflow. It is a collection of references to the dimensions that make up the space.",
+			"description":"Deprecated. Used only by the deprecated toVtlSubSpace and fromVtlSuperSpace. SpaceKey defines the structure of a super- or sub- space for a SDMX Dataflow. It is a collection of references to the dimensions that make up the space.",
+			"deprecated":true,
 			"type":"object",
 			"properties":{
 				"keys":{
@@ -4206,12 +4224,14 @@
 			"unevaluatedProperties":false
 		},
 		"FromVtlMappingType":{
-			"description":"FromVtlMappingType defines the mapping method and filter used when mapping from VTL to SDMX.",
+			"description":"Deprecated. The Basic mapping is the only mapping method from VTL to SDMX; the VTL program restructures the data (e.g. through the calc clause and the union operator) and its result is mapped through a VTL dataset mapping (vtlDatasetMappings) whose isInput is false. FromVtlMappingType defines the mapping method and filter used when mapping from VTL to SDMX.",
+			"deprecated":true,
 			"type":"object",
 			"properties":{
 				"fromVtlSuperSpace":{
 					"$ref":"#/$defs/SpaceKeyType",
-					"description":"Identfies a super space of the mapped dataflow that the mapping applies to. This is a collection of references to the dimensions that make up the space."
+					"description":"Deprecated. The VTL program adds the mapping dimensions through the calc clause and combines the VTL Data Sets through the union operator. Identfies a super space of the mapped dataflow that the mapping applies to. This is a collection of references to the dimensions that make up the space.",
+					"deprecated":true
 				},
 				"method":{
 					"anyOf":[
@@ -4232,14 +4252,16 @@
 							"description":"Mapping of multi-measure VTL where on measure is mapped to the SDMX primary measure and the remaining measures are mapped as data attributes. See Section 6 SDMX Standards ('SDMX Technical Notes'), 10.3.4.3 ('From VTL Measures to SDMX DataAttributes')."
 						}
 					],
-					"description":"The mapping method used when mapping from VTL to SDMX. This is typically a StandardFromVtlMappingMethodType, but can be any other value to allow for non-standard methods. The implied default is Basic for single-measure VTL data structures and Unpivot for multi-meausre VTL data structures."
+					"description":"Deprecated. The Basic mapping is the only mapping method. The mapping method used when mapping from VTL to SDMX. This is typically a StandardFromVtlMappingMethodType, but can be any other value to allow for non-standard methods. The implied default is Basic for single-measure VTL data structures and Unpivot for multi-meausre VTL data structures.",
+					"deprecated":true
 				}
 			},
 			"$ref":"#/$defs/specificationExtensions",
 			"unevaluatedProperties":false
 		},
 		"NamePersonalisationSchemeType":{
-			"description":"NamePersonalisationSchemeType defines a set of personalisations of VTL standard names that are used in a set of transformations. Unless the artefact is returned as a stub, it must contain the 'vtlVersion' property.",
+			"description":"Deprecated. The name personalisation schemes are deprecated in SDMX 3.2: the names assigned by default by the VTL operators (e.g. bool_var, errorcode) can be changed in the VTL program, for example through the rename clause. NamePersonalisationSchemeType defines a set of personalisations of VTL standard names that are used in a set of transformations. Unless the artefact is returned as a stub, it must contain the 'vtlVersion' property.",
+			"deprecated":true,
 			"type":"object",
 			"allOf":[
 				{
@@ -4257,9 +4279,10 @@
 						"namePersonalisations":{
 							"type":"array",
 							"minItems":1,
+							"deprecated":true,
 							"items":{
 								"$ref":"#/$defs/NamePersonalisationType",
-								"description":"NamePersonalisation details a name personalisation that is used in a transformation."
+								"description":"Deprecated. See NamePersonalisationSchemeType. NamePersonalisation details a name personalisation that is used in a transformation."
 							}
 						}
 					}
@@ -4269,7 +4292,8 @@
 			"unevaluatedProperties":false
 		},
 		"NamePersonalisationType":{
-			"description":"NamePersonalisationType defines the structure of a name personalisation. A name personalisation is is used in place of a standard VTL name in some VTL operations.",
+			"description":"Deprecated. See NamePersonalisationSchemeType. NamePersonalisationType defines the structure of a name personalisation. A name personalisation is is used in place of a standard VTL name in some VTL operations.",
+			"deprecated":true,
 			"type":"object",
 			"allOf":[
 				{
@@ -4302,7 +4326,7 @@
 			"unevaluatedProperties":false
 		},
 		"RulesetSchemeType":{
-			"description":"RulesetSchemeType defines a collection of rulesets that are used in transformations. Unless the artefact is returned as a stub, it must contain the 'vtlVersion' property.",
+			"description":"RulesetSchemeType defines a collection of rulesets that are used in transformations, including, from VTL 2.2, the viral propagations. Unless the artefact is returned as a stub, it must contain the 'vtlVersion' property.",
 			"type":"object",
 			"allOf":[
 				{
@@ -4315,6 +4339,7 @@
 							"description":"isPartial, if true, indicates that only the relevant portion of the ruleset scheme is being communicated."
 						},
 						"vtlVersion":{
+							"description":"Identifies the VTL version to which the items in the defined scheme comply (e.g. 2.2), which determines the syntax used in their definitions. It is mandatory, unless the artefact is returned as a stub. Note that definition schemes can only reference definition schemes using the same VTL version.",
 							"type":"string"
 						},
 						"rulesets":{
@@ -4327,7 +4352,8 @@
 						},
 						"vtlMappingScheme":{
 							"$ref":"#/$defs/VtlMappingSchemeReferenceType",
-							"description":"References a VTL mapping scheme which defines aliases for given SDMX artefacts that are used in the rulesets. Rulesets defined on value domains reference Codelists or Concept Schemes (the latter in VTL are considered as the Value Domains of the variables corresponding to the SDMX Measure Dimensions). The rulesets defined on variables reference Concepts (for which a definite representation is assumed). Therefore, a ruleset should only refer to Codelists, Concept Schemes, and Concepts."
+							"description":"Deprecated. The mappings used by the rulesets are provided by the VTL mapping scheme of the transformation scheme. References a VTL mapping scheme which defines aliases for given SDMX artefacts that are used in the rulesets. Rulesets defined on value domains reference Codelists or Concept Schemes (the latter in VTL are considered as the Value Domains of the variables corresponding to the SDMX Measure Dimensions). The rulesets defined on variables reference Concepts (for which a definite representation is assumed). Therefore, a ruleset should only refer to Codelists, Concept Schemes, and Concepts.",
+							"deprecated":true
 						}
 					}
 				}
@@ -4336,7 +4362,7 @@
 			"unevaluatedProperties":false
 		},
 		"RulesetType":{
-			"description":"RulesetType defines the structure of a ruleset. A ruleset is a persistent set of rules which can be invoked by using appropriate VTL operators.",
+			"description":"RulesetType defines the structure of a ruleset. A ruleset is a persistent set of rules which can be invoked by using appropriate VTL operators. From VTL 2.2, a ruleset can also define a viral propagation, i.e. the algorithm for combining the values of a viral attribute, which is not invoked by the operators but applied by all the operators that propagate the viral attributes. An SDMX data attribute is mapped to a viral VTL attribute when a ruleset scheme referenced by the transformation scheme contains a viral propagation for it, defined on its variable (named after its id) or on its value domain (the codelist of its representation).",
 			"type":"object",
 			"allOf":[
 				{
@@ -4346,11 +4372,11 @@
 					"properties":{
 						"rulesetDefinition":{
 							"type":"string",
-							"description":"A VTL statement for the definition of a ruleset. This must conform to the syntax of the VTL definition language."
+							"description":"A VTL statement for the definition of a ruleset (e.g. define datapoint ruleset, define hierarchical ruleset or, from VTL 2.2, define viral propagation). This must conform to the syntax of the VTL definition language."
 						},
 						"rulesetType":{
 							"type":"string",
-							"description":"The VTL type of the ruleset. In VTL 2.0, this is datapoint or hierarchical."
+							"description":"The VTL type of the ruleset. In VTL 2.0, this is datapoint or hierarchical; VTL 2.2 adds viral, for the viral propagations."
 						},
 						"rulesetScope":{
 							"type":"string",
@@ -4369,7 +4395,7 @@
 			"unevaluatedProperties":false
 		},
 		"TransformationSchemeType":{
-			"description":"TransformationSchemeType describes the structure of a transformation scheme. A transformation scheme contains a set of transformations to be executed together (in the same run). It can contain any number of transformations that produce any number of results. Unless the artefact is returned as a stub, it must contain the 'vtlVersion' property.",
+			"description":"TransformationSchemeType describes the structure of a transformation scheme. A transformation scheme contains a set of transformations to be executed together (in the same run). It can contain any number of transformations that produce any number of results. It references all the other schemes used by the VTL program (the VTL mapping scheme, the ruleset schemes and the user defined operator schemes); the semantic analysis and the execution of the program detect any missing definition. Unless the artefact is returned as a stub, it must contain the 'vtlVersion' property.",
 			"type":"object",
 			"allOf":[
 				{
@@ -4382,6 +4408,7 @@
 							"description":"isPartial, if true, indicates that only the relevant portion of the transformation scheme is being communicated."
 						},
 						"vtlVersion":{
+							"description":"Identifies the VTL version to which the items in the defined scheme comply (e.g. 2.2), which determines the syntax used in their definitions. It is mandatory, unless the artefact is returned as a stub. Note that definition schemes can only reference definition schemes using the same VTL version.",
 							"type":"string"
 						},
 						"transformations":{
@@ -4393,15 +4420,17 @@
 							}
 						},
 						"vtlMappingScheme":{
-							"description":"References a VTL mapping scheme (through a URN), which defines aliases for given SDMX artefacts that are used in the transformations as well as the mapping methods used when converting between SDMX and VTL data structures. All aliases must be defined in the referenced scheme. This also must be used if the basic mapping methods are not used.",
+							"description":"References the VTL mapping scheme which defines the aliases of the SDMX artefacts used in the transformations, rulesets and user defined operators of the transformation scheme. As the VTL is strongly typed and has no declarations of variables, its mappings provide the definitions of the VTL Data Sets and Value Domains used by the VTL program; therefore, a transformation scheme that references SDMX artefacts is complete only together with its VTL mapping scheme.",
 							"$ref":"#/$defs/VtlMappingSchemeReferenceType"
 						},
 						"namePersonalisationScheme":{
-							"description":"References a name personalisation scheme (through a URN), which defines the overriding of some standard VTL names (to be assigned to some measures and/or attributes of the data structure) with some corresponding personalised names. This must be used if transformations within a transformation scheme personalise standard names. All personalisations must be defined in the referenced scheme.",
+							"description":"Deprecated. The name personalisation schemes are deprecated in SDMX 3.2: the names assigned by default by the VTL operators (e.g. bool_var, errorcode) can be changed in the VTL program, for example through the rename clause. References a name personalisation scheme (through a URN), which defines the overriding of some standard VTL names (to be assigned to some measures and/or attributes of the data structure) with some corresponding personalised names. This must be used if transformations within a transformation scheme personalise standard names. All personalisations must be defined in the referenced scheme.",
+							"deprecated":true,
 							"$ref":"#/$defs/NamePersonalisationSchemeReferenceType"
 						},
 						"customTypeScheme":{
-							"description":"References a custom type scheme (through a URN), which defines custom conversions of VTL scalar types to SDMX data types. This must be used if custom type conversions are used in the transformations defined in a transformation scheme. All custom conversions must be defined in the referenced scheme.",
+							"description":"Deprecated. The custom type schemes are deprecated in SDMX 3.2: the default conversions between VTL and SDMX data types apply, unless overridden by the representation defined in the data structure definition of the referenced SDMX artefact; the VTL NULLs become missing values in SDMX, the VTL literals are written in the default format, and explicit type conversions are expressed in the VTL program through the cast operator. References a custom type scheme (through a URN), which defines custom conversions of VTL scalar types to SDMX data types. This must be used if custom type conversions are used in the transformations defined in a transformation scheme. All custom conversions must be defined in the referenced scheme.",
+							"deprecated":true,
 							"$ref":"#/$defs/CustomTypeSchemeReferenceType"
 						},
 						"rulesetSchemes":{
@@ -4410,7 +4439,7 @@
 							"minItems":1,
 							"items":{
 								"$ref":"#/$defs/RulesetSchemeReferenceType",
-								"description":"References a ruleset scheme (through a URN) that defines one or more previously defined rulesets which can be invoked by VTL operators. If a transformation defined in a transformation scheme refers to a ruleset, the scheme in which the ruleset is defined must be referenced here."
+								"description":"References a ruleset scheme that defines rulesets used by the VTL program, i.e. rulesets invoked by VTL operators or, from VTL 2.2, viral propagations. The ruleset schemes referenced by a transformation scheme must contain all the rulesets used by its transformations, also indirectly (e.g. the rulesets invoked by a user defined operator), and all the viral propagations to be applied."
 							}
 						},
 						"userDefinedOperatorSchemes":{
@@ -4419,7 +4448,7 @@
 							"minItems":1,
 							"items":{
 								"$ref":"#/$defs/UserDefinedOperatorSchemeReferenceType",
-								"description":"References a user defined operator scheme (through a URN) that defines one or more user defined operators used by the transformations defined in a transformation scheme. If a transformation in a transformation scheme refers to a user defined operator, the scheme in which the user defined operator is defined must be referenced here."
+								"description":"References a user defined operator scheme that defines one or more user defined operators used by the transformations of the transformation scheme. The user defined operator schemes referenced by a transformation scheme must contain all the user defined operators used by its transformations, also indirectly (e.g. the operators invoked by other user defined operators)."
 							}
 						}
 					}
@@ -4439,11 +4468,11 @@
 					"properties":{
 						"expression":{
 							"type":"string",
-							"description":"The right-hand side of the VTL statement. This is expression that is executed for this transformation. It include references to operands and other artefacts. The expression may contain references to SDMX artefacts using the reduced URN format; see Section 6 SDMX Standards ('SDMX Technical Notes'), 10.2.3 ('Abbreviation of the URN')"
+							"description":"The right-hand side of the VTL statement. This is the expression that is executed for this transformation. It includes references to operands and other artefacts. The SDMX artefacts are referenced through the aliases (vtlAlias) defined in the VTL mapping scheme of the transformation scheme. The references to SDMX artefacts through their URN or the abbreviated URN (see the SDMX Technical Notes, \"References to SDMX artefacts from VTL statements\") are deprecated."
 						},
 						"result":{
 							"type":"string",
-							"description":"The left-hand side of the VTL statement. This identifies the result artefact, which may be used in subsequent transformations. If the result is an SDMX artefact, the is expressed using the alias; see Section 6 SDMX Standards ('SDMX Technical Notes'), 10.2.3 ('Abbreviation of the URN')."
+							"description":"The left-hand side of the VTL statement. This identifies the result artefact, which may be used in subsequent transformations. If the result is an output of the VTL program whose data are converted into SDMX, it is the vtlAlias of a VTL dataset mapping (vtlDatasetMappings) of the VTL mapping scheme whose isInput is false, and the transformation must be persistent. The references through the URN or the abbreviated URN are deprecated."
 						},
 						"isPersistent":{
 							"type":"boolean",
@@ -4475,6 +4504,7 @@
 							"description":"isPartial, if true, indicates that only the relevant portion of the user defined operator scheme is being communicated."
 						},
 						"vtlVersion":{
+							"description":"Identifies the VTL version to which the items in the defined scheme comply (e.g. 2.2), which determines the syntax used in their definitions. It is mandatory, unless the artefact is returned as a stub. Note that definition schemes can only reference definition schemes using the same VTL version.",
 							"type":"string"
 						},
 						"userDefinedOperators":{
@@ -4487,15 +4517,17 @@
 						},
 						"vtlMappingScheme":{
 							"$ref":"#/$defs/VtlMappingSchemeReferenceType",
-							"description":"References a VTL mapping scheme which defines aliases for given SDMX artefacts that are used in the user defined operators. Although the VTL user defined operators are conceived to be defined on generic operands, so that the specific artefacts to be manipulated are passed as parameters at the invocation, it is also possible that they reference specific SDMX artefacts like Dataflows, Codelists and ConceptSchemes. In this case, the mapping schemes referenced here define the mappings to those artefacts."
+							"description":"Deprecated. The mappings used by the user defined operators are provided by the VTL mapping scheme of the transformation scheme. References a VTL mapping scheme which defines aliases for given SDMX artefacts that are used in the user defined operators. Although the VTL user defined operators are conceived to be defined on generic operands, so that the specific artefacts to be manipulated are passed as parameters at the invocation, it is also possible that they reference specific SDMX artefacts like Dataflows, Codelists and ConceptSchemes. In this case, the mapping schemes referenced here define the mappings to those artefacts.",
+							"deprecated":true
 						},
 						"rulesetSchemes":{
 							"type":"array",
 							"uniqueItems":true,
 							"minItems":1,
+							"deprecated":true,
 							"items":{
 								"$ref":"#/$defs/RulesetSchemeReferenceType",
-								"description":"References a ruleset scheme defining rulesets utilized in the user defined operators."
+								"description":"Deprecated. The rulesets used by the user defined operators are provided by the ruleset schemes of the transformation scheme. References a ruleset scheme defining rulesets utilized in the user defined operators."
 							}
 						}
 					}
@@ -6387,12 +6419,14 @@
 			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.transformation\\.RulesetScheme=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
 		},
 		"NamePersonalisationSchemeReferenceType":{
-			"description":"NamePersonalisationSchemeReferenceType is a type for referencing a name personalisation scheme object. It consists of a URN.",
+			"description":"Deprecated. The name personalisation schemes are deprecated in SDMX 3.2. NamePersonalisationSchemeReferenceType is a type for referencing a name personalisation scheme object. It consists of a URN.",
+			"deprecated":true,
 			"type":"string",
 			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.transformation\\.NamePersonalisationScheme=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
 		},
 		"CustomTypeSchemeReferenceType":{
-			"description":"CustomTypeSchemeReferenceType is a type for referencing a custom type scheme object. It consists of a URN.",
+			"description":"Deprecated. The custom type schemes are deprecated in SDMX 3.2. CustomTypeSchemeReferenceType is a type for referencing a custom type scheme object. It consists of a URN.",
+			"deprecated":true,
 			"type":"string",
 			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.transformation\\.CustomTypeScheme=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
 		},
