@@ -1,0 +1,557 @@
+{
+	"$schema": "https://json.sdmx.org/2.1/sdmx-json-structure-schema.json",
+	"meta": {
+		"id": "VTL_SAMPLE1",
+		"test": false,
+		"prepared": "2020-06-05T12:00:00.000Z",
+		"contentLanguages": [
+			"en"
+		],
+		"sender": {
+			"id": "SDMX"
+		},
+		"receivers": [
+			{
+				"id": "SDMX"
+			}
+		]
+	},
+	"data": {
+		"dataflows": [
+			{
+				"id": "DF11",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Dataflow #1.1",
+				"names": {
+					"en": "Dataflow #1.1"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=SDMX:DS11(1.0)"
+			},
+			{
+				"id": "DF1R1",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Dataflow for Result #1.1",
+				"names": {
+					"en": "Dataflow for Result #1.1"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=SDMX:DS1R1(1.0)"
+			}
+		],
+		"codelists": [
+			{
+				"id": "CL_SECTOR",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Sector code list",
+				"names": {
+					"en": "Sector code list"
+				}
+			},
+			{
+				"id": "CL_AREA",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Area codelist",
+				"names": {
+					"en": "Area codelist"
+				},
+				"codes": [
+					{
+						"id": "EU",
+						"name": "European Union",
+						"names": {
+							"en": "European Union"
+						}
+					},
+					{
+						"id": "BENELUX",
+						"name": "The Benelux Union",
+						"names": {
+							"en": "The Benelux Union"
+						}
+					},
+					{
+						"id": "BE",
+						"name": "Belgium",
+						"names": {
+							"en": "Belgium"
+						}
+					},
+					{
+						"id": "LU",
+						"name": "Luxembourg",
+						"names": {
+							"en": "Luxembourg"
+						}
+					},
+					{
+						"id": "NE",
+						"name": "The Netherlands",
+						"names": {
+							"en": "The Netherlands"
+						}
+					},
+					{
+						"id": "AT",
+						"name": "Austria",
+						"names": {
+							"en": "Austria"
+						}
+					},
+					{
+						"id": "BG",
+						"name": "Bulgaria",
+						"names": {
+							"en": "Bulgaria"
+						}
+					},
+					{
+						"id": "SE",
+						"name": "Sweden",
+						"names": {
+							"en": "Sweden"
+						}
+					},
+					{
+						"id": "SI",
+						"name": "Slovenia",
+						"names": {
+							"en": "Slovenia"
+						}
+					},
+					{
+						"id": "SK",
+						"name": "Slovakia",
+						"names": {
+							"en": "Slovakia"
+						}
+					}
+				]
+			}
+		],
+		"conceptSchemes": [
+			{
+				"id": "CS11",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Concepts for Measures #1.1",
+				"names": {
+					"en": "Concepts for Measures #1.1"
+				},
+				"concepts": [
+					{
+						"id": "CREDIT",
+						"name": "Credit",
+						"names": {
+							"en": "Credit"
+						}
+					},
+					{
+						"id": "DEBIT",
+						"name": "Debit",
+						"names": {
+							"en": "Debit"
+						}
+					},
+					{
+						"id": "BALANCE",
+						"name": "Balance",
+						"names": {
+							"en": "Balance"
+						}
+					}
+				]
+			},
+			{
+				"id": "CONCEPTS",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Concepts for DSDs #1.1",
+				"names": {
+					"en": "Concepts for DSDs #1.1"
+				},
+				"concepts": [
+					{
+						"id": "SECTOR",
+						"name": "Sector",
+						"names": {
+							"en": "Sector"
+						}
+					},
+					{
+						"id": "COUNTRY",
+						"name": "Country",
+						"names": {
+							"en": "Country"
+						}
+					},
+					{
+						"id": "TIME_PERIOD",
+						"name": "Time Period",
+						"names": {
+							"en": "Time Period"
+						}
+					},
+					{
+						"id": "MEASURE_DIMENSION",
+						"name": "Measure Dimension",
+						"names": {
+							"en": "Measure Dimension"
+						}
+					},
+					{
+						"id": "OBS_VALUE",
+						"name": "Observation Value",
+						"names": {
+							"en": "Observation Value"
+						}
+					},
+					{
+						"id": "SEVERITY",
+						"name": "Severity",
+						"names": {
+							"en": "Severity"
+						}
+					},
+					{
+						"id": "ERRORCODE",
+						"name": "Error Code",
+						"names": {
+							"en": "Error Code"
+						}
+					},
+					{
+						"id": "RULEID",
+						"name": "Rule Identifier",
+						"names": {
+							"en": "Rule Identifier"
+						}
+					}
+				]
+			}
+		],
+		"dataStructures": [
+			{
+				"id": "DS11",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Data Structure #1.1",
+				"names": {
+					"en": "Data Structure #1.1"
+				},
+				"dataStructureComponents": {
+					"dimensionList": {
+						"id": "DimensionDescriptor",
+						"dimensions": [
+							{
+								"id": "SECTOR",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).SECTOR",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_SECTOR(1.0)"
+								}
+							},
+							{
+								"id": "COUNTRY",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).COUNTRY",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_AREA(1.0)"
+								}
+							}
+						],
+						"timeDimension": {
+							"id": "TIME_PERIOD",
+							"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).TIME_PERIOD",
+							"localRepresentation": {
+								"format": {
+									"dataType": "ObservationalTimePeriod"
+								}
+							}
+						}
+					},
+					"measureList": {
+						"id": "MeasureDescriptor",
+						"measures": [
+							{
+								"id": "OBS_VALUE",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).OBS_VALUE"
+							}
+						]
+					}
+				}
+			},
+			{
+				"id": "DS1R1",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Data Structure for Results #1.1",
+				"names": {
+					"en": "Data Structure for Results #1.1"
+				},
+				"dataStructureComponents": {
+					"dimensionList": {
+						"id": "DimensionDescriptor",
+						"dimensions": [
+							{
+								"id": "SECTOR",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).SECTOR",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_SECTOR(1.0)"
+								}
+							},
+							{
+								"id": "COUNTRY",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).COUNTRY",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_AREA(1.0)"
+								}
+							},
+							{
+								"id": "RULEID",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).RULEID",
+								"localRepresentation": {
+									"format": {
+										"dataType": "String"
+									}
+								}
+							}
+						],
+						"timeDimension": {
+							"id": "TIME_PERIOD",
+							"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).TIME_PERIOD",
+							"localRepresentation": {
+								"format": {
+									"dataType": "ObservationalTimePeriod"
+								}
+							}
+						}
+					},
+					"attributeList": {
+						"id": "AttributeDescriptor",
+						"attributes": [
+							{
+								"id": "ERRORCODE",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).ERRORCODE",
+								"localRepresentation": {
+									"minOccurs": 0,
+									"maxOccurs": 1,
+									"format": {
+										"dataType": "String"
+									}
+								},
+								"attributeRelationship": {
+									"observation": {}
+								}
+							},
+							{
+								"id": "SEVERITY",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).SEVERITY",
+								"localRepresentation": {
+									"minOccurs": 0,
+									"maxOccurs": 1,
+									"format": {
+										"dataType": "Integer",
+										"minValue": 0,
+										"maxValue": 10
+									}
+								},
+								"attributeRelationship": {
+									"observation": {}
+								}
+							}
+						]
+					},
+					"measureList": {
+						"id": "MeasureDescriptor",
+						"measures": [
+							{
+								"id": "OBS_VALUE",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).OBS_VALUE"
+							}
+						]
+					}
+				}
+			}
+		],
+		"vtlMappingSchemes": [
+			{
+				"id": "VTLMS1",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "VTL Mapping Scheme #1",
+				"names": {
+					"en": "VTL Mapping Scheme #1"
+				},
+				"vtlMappings": [
+					{
+						"id": "VTLM1",
+						"name": "VTL Mapping #1",
+						"names": {
+							"en": "VTL Mapping #1"
+						},
+						"alias": "DF1R1",
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=SDMX:DF1R1(1.0)",
+						"fromVtlMapping": {
+							"method": "M2A"
+						}
+					},
+					{
+						"id": "VTLM2",
+						"name": "VTL Mapping #2",
+						"names": {
+							"en": "VTL Mapping #2"
+						},
+						"alias": "DF11",
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=SDMX:DF11(1.0)",
+						"toVtlMapping": {
+							"method": "Basic"
+						}
+					},
+					{
+						"id": "VTLM3",
+						"name": "Variable INDICATOR mapping",
+						"names": {
+							"en": "Variable INDICATOR mapping"
+						},
+						"alias": "INDICATOR",
+						"concept": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).MEASURE_DIMENSION"
+					},
+					{
+						"id": "VTLM4",
+						"name": "Variable VALUE mapping",
+						"names": {
+							"en": "Variable VALUE mapping"
+						},
+						"alias": "VALUE",
+						"concept": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).OBS_VALUE"
+					},
+					{
+						"id": "VTLM5",
+						"name": "Variable TIME mapping",
+						"names": {
+							"en": "Variable TIME mapping"
+						},
+						"alias": "TIME",
+						"concept": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).TIME_PERIOD"
+					},
+					{
+						"id": "VTLM6",
+						"name": "Variable GEO mapping",
+						"names": {
+							"en": "Variable GEO mapping"
+						},
+						"alias": "GEO",
+						"concept": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).COUNTRY"
+					}
+				]
+			}
+		],
+		"namePersonalisationSchemes": [
+			{
+				"id": "NPS1",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Name Peronalisation Scheme #1",
+				"names": {
+					"en": "Name Peronalisation Scheme #1"
+				},
+				"vtlVersion": "2.0",
+				"namePersonalisations": [
+					{
+						"id": "NP1",
+						"name": "Name Personalisation #1",
+						"names": {
+							"en": "Name Personalisation #1"
+						},
+						"vtlArtefact": "variable",
+						"vtlDefaultName": "ERRORLEVEL",
+						"personalisedName": "SEVERITY"
+					}
+				]
+			}
+		],
+		"rulesetSchemes": [
+			{
+				"id": "RS1",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Ruleset Scheme #1",
+				"names": {
+					"en": "Ruleset Scheme #1"
+				},
+				"vtlVersion": "2.0",
+				"rulesets": [
+					{
+						"id": "DPR1",
+						"name": "DataPoint Ruleset #1",
+						"names": {
+							"en": "DataPoint Ruleset #1"
+						},
+						"rulesetType": "datapoint",
+						"rulesetScope": "valuedomain",
+						"rulesetDefinition": "define datapoint ruleset DPR1 ( variable INDICATOR as A, VALUE as B ) is\n  rule1: when A = \"CREDIT\" or A = \"DEBIT\" then B >= 0 errorcode \"Negative value\" errorlevel 10;\n  rule2: when A = \"CREDIT\" or A = \"DEBIT\" then B < 999999999999 errorcode \"Value too large\" errorlevel 8\nend datapoint ruleset"
+					},
+					{
+						"id": "HR1",
+						"name": "Hierarchical Ruleset #1",
+						"names": {
+							"en": "Hierarchical Ruleset #1"
+						},
+						"rulesetType": "hierarchical",
+						"rulesetScope": "valuedomain",
+						"rulesetDefinition": "define hierarchical ruleset HR1 (variable condition TIME as T rule GEO )\n  EU = AT [ T >= 1995-01-01 ]\n    + BE [ T >= 1958-01-01 ]\n    + BG [ T >= 2007-01-01 ]\n    + SE [ T >= 1995-01-01 ]\n    + SI [ T >= 2004-01-01 ]\n    + SK [ T >= 2004-01-01 ]; /* All EU countries would be added under the 'EU' code, but were not for keeping the samples smaller. */\n  BENELUX = BE [ T >= 1948-01-01 ]\n    + NE [ T >= 1948-01-01 ]\n    + LU [ T >= 1948-01-01 ]\nend hierarchical ruleset"
+					}
+				],
+				"vtlMappingScheme": "urn:sdmx:org.sdmx.infomodel.transformation.VtlMappingScheme=SDMX:VTLMS1(1.0)"
+			}
+		],
+		"transformationSchemes": [
+			{
+				"id": "TS1",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Transformation Scheme #1 – SDMX/VTL release sample",
+				"names": {
+					"en": "Transformation Scheme #1 – SDMX/VTL release sample"
+				},
+				"vtlVersion": "2.0",
+				"transformations": [
+					{
+						"id": "TS_A",
+						"name": "Transformation A",
+						"names": {
+							"en": "Transformation A"
+						},
+						"description": "Checks the dataflow DF11 according to the datapoint ruleset DPR1.  DF11 is mapped from SDMX to VTL through the default basic method, therefore its structure remains the same in VTL. All the original input measures are maintained in the output (i.e. OBS_VALUE), moreover the check operation generates the additional identifier RULEID (the id of the applied validation rule of the ruleset) and the additional measures BOOL_VAR (the Boolean outcome of the check, with values TRUE or FALSE), ERRORCODE (text string), ERRORLEVEL (assumed numeric from 0 to 10). Because of the name personalisation from ERRORLEVEL to SEVERITY declared in the associated NamePersonalisationScheme, SEVERITY is assigned instead than the VTL standard nameERRORLEVEL. The resulting VTL dataset TEMP11  is not persistent and it is assumed that it does not need a mapping towards SDMX.",
+						"descriptions": {
+							"en": "Checks the dataflow DF11 according to the datapoint ruleset DPR1.  DF11 is mapped from SDMX to VTL through the default basic method, therefore its structure remains the same in VTL. All the original input measures are maintained in the output (i.e. OBS_VALUE), moreover the check operation generates the additional identifier RULEID (the id of the applied validation rule of the ruleset) and the additional measures BOOL_VAR (the Boolean outcome of the check, with values TRUE or FALSE), ERRORCODE (text string), ERRORLEVEL (assumed numeric from 0 to 10). Because of the name personalisation from ERRORLEVEL to SEVERITY declared in the associated NamePersonalisationScheme, SEVERITY is assigned instead than the VTL standard nameERRORLEVEL. The resulting VTL dataset TEMP11  is not persistent and it is assumed that it does not need a mapping towards SDMX."
+						},
+						"isPersistent": false,
+						"expression": "check_datapoint (DF11, DPR1 all_measures)",
+						"result": "TEMP11"
+					},
+					{
+						"id": "TS_B",
+						"name": "Transformation B",
+						"names": {
+							"en": "Transformation B"
+						},
+						"description": "Filters the TEMP11 observations having SEVERITY >=5, drops the measure BOOL_VAR and calculates creates a the persistent result DF1R1. Due to the mapping method M2A from VTL to SDMX declared for DF1R1 in the associated MappingScheme, the  VTL measure OBS_VALUE is mapped to OBS_VALUE in SDMX while ERRORCODE and SEVERITY become SDMX data attribute.",
+						"descriptions": {
+							"en": "Filters the TEMP11 observations having SEVERITY >=5, drops the measure BOOL_VAR and calculates creates a the persistent result DF1R1. Due to the mapping method M2A from VTL to SDMX declared for DF1R1 in the associated MappingScheme, the  VTL measure OBS_VALUE is mapped to OBS_VALUE in SDMX while ERRORCODE and SEVERITY become SDMX data attribute."
+						},
+						"isPersistent": true,
+						"expression": "TEMP11 [filter SEVERITY >= 5][drop BOOL_VAR]",
+						"result": "DF1R1"
+					}
+				],
+				"vtlMappingScheme": "urn:sdmx:org.sdmx.infomodel.transformation.VtlMappingScheme=SDMX:VTLMS1(1.0)",
+				"namePersonalisationScheme": "urn:sdmx:org.sdmx.infomodel.transformation.NamePersonalisationScheme=SDMX:NPS1(1.0)",
+				"rulesetSchemes": [
+					"urn:sdmx:org.sdmx.infomodel.transformation.RulesetScheme=SDMX:RS1(1.0)"
+				]
+			}
+		]
+	}
+}

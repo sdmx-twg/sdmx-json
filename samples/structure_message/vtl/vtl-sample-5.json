@@ -1,0 +1,521 @@
+{
+	"$schema": "https://json.sdmx.org/2.1/sdmx-json-structure-schema.json",
+	"meta": {
+		"id": "VTL_SAMPLE5",
+		"test": false,
+		"prepared": "2026-10-29T00:00:00Z",
+		"contentLanguages": [
+			"en"
+		],
+		"sender": {
+			"id": "SDMX"
+		},
+		"receivers": [
+			{
+				"id": "SDMX"
+			}
+		]
+	},
+	"data": {
+		"agencySchemes": [
+			{
+				"id": "AGENCIES",
+				"agencyID": "SDMX",
+				"name": "SDMX Agency Scheme",
+				"names": {
+					"en": "SDMX Agency Scheme"
+				},
+				"agencies": [
+					{
+						"id": "SDMX",
+						"name": "SDMX",
+						"names": {
+							"en": "SDMX"
+						},
+						"description": "SDMX is an initiative to foster standards for the exchange of statistical information. It is sponsored by the Bank for International Settlements (BIS), the European Central Bank (ECB), the Statistical Office of the European Union (Eurostat), the International Monetary Fund (IMF), the Organization for Economic Co-Operation and Development (OECD), the United Nations (UN) and the World Bank.",
+						"descriptions": {
+							"en": "SDMX is an initiative to foster standards for the exchange of statistical information. It is sponsored by the Bank for International Settlements (BIS), the European Central Bank (ECB), the Statistical Office of the European Union (Eurostat), the International Monetary Fund (IMF), the Organization for Economic Co-Operation and Development (OECD), the United Nations (UN) and the World Bank."
+						},
+						"contacts": [
+							{
+								"name": "SDMX Secretariat",
+								"names": {
+									"en": "SDMX Secretariat"
+								},
+								"department": "SDMX Secretariat",
+								"departments": {
+									"en": "SDMX Secretariat"
+								},
+								"role": "Single entry point for external inquiries",
+								"roles": {
+									"en": "Single entry point for external inquiries"
+								},
+								"uris": [
+									"http://sdmx.org"
+								],
+								"emails": [
+									"secretariat@sdmx.org"
+								]
+							}
+						]
+					},
+					{
+						"id": "EXAMPLE",
+						"name": "Example Agency",
+						"names": {
+							"en": "Example Agency"
+						}
+					}
+				]
+			}
+		],
+		"codelists": [
+			{
+				"id": "CL_AREA",
+				"version": "1.0.0",
+				"agencyID": "SDMX",
+				"name": "Reference area",
+				"names": {
+					"en": "Reference area"
+				},
+				"codes": [
+					{
+						"id": "USA",
+						"name": "United States",
+						"names": {
+							"en": "United States"
+						}
+					},
+					{
+						"id": "CAN",
+						"name": "Canada",
+						"names": {
+							"en": "Canada"
+						}
+					},
+					{
+						"id": "MEX",
+						"name": "Mexico",
+						"names": {
+							"en": "Mexico"
+						}
+					}
+				]
+			},
+			{
+				"id": "CL_SEX",
+				"version": "1.0.0",
+				"agencyID": "SDMX",
+				"name": "Sex",
+				"names": {
+					"en": "Sex"
+				},
+				"codes": [
+					{
+						"id": "M",
+						"name": "Male",
+						"names": {
+							"en": "Male"
+						}
+					},
+					{
+						"id": "F",
+						"name": "Female",
+						"names": {
+							"en": "Female"
+						}
+					}
+				]
+			},
+			{
+				"id": "CL_AGE",
+				"version": "1.0.0",
+				"agencyID": "SDMX",
+				"name": "Age",
+				"names": {
+					"en": "Age"
+				},
+				"codes": [
+					{
+						"id": "Y_LT15",
+						"name": "Less than 15 years",
+						"names": {
+							"en": "Less than 15 years"
+						}
+					},
+					{
+						"id": "Y15T64",
+						"name": "From 15 to 64 years",
+						"names": {
+							"en": "From 15 to 64 years"
+						}
+					},
+					{
+						"id": "Y_GE65",
+						"name": "65 years or over",
+						"names": {
+							"en": "65 years or over"
+						}
+					}
+				]
+			}
+		],
+		"conceptSchemes": [
+			{
+				"id": "POP_CONCEPTS",
+				"version": "1.0.0",
+				"agencyID": "SDMX",
+				"name": "Population concepts",
+				"names": {
+					"en": "Population concepts"
+				},
+				"concepts": [
+					{
+						"id": "REF_AREA",
+						"name": "Reference area",
+						"names": {
+							"en": "Reference area"
+						}
+					},
+					{
+						"id": "SEX",
+						"name": "Sex",
+						"names": {
+							"en": "Sex"
+						}
+					},
+					{
+						"id": "AGE",
+						"name": "Age",
+						"names": {
+							"en": "Age"
+						}
+					},
+					{
+						"id": "TIME_PERIOD",
+						"name": "Time period",
+						"names": {
+							"en": "Time period"
+						}
+					},
+					{
+						"id": "OBS_VALUE",
+						"name": "Observation value",
+						"names": {
+							"en": "Observation value"
+						}
+					}
+				]
+			}
+		],
+		"dataStructures": [
+			{
+				"id": "POP",
+				"version": "1.0.0",
+				"agencyID": "SDMX",
+				"name": "Population",
+				"names": {
+					"en": "Population"
+				},
+				"dataStructureComponents": {
+					"dimensionList": {
+						"id": "DimensionDescriptor",
+						"dimensions": [
+							{
+								"id": "REF_AREA",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:POP_CONCEPTS(1.0.0).REF_AREA",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_AREA(1.0.0)"
+								}
+							},
+							{
+								"id": "SEX",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:POP_CONCEPTS(1.0.0).SEX",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_SEX(1.0.0)"
+								}
+							},
+							{
+								"id": "AGE",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:POP_CONCEPTS(1.0.0).AGE",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_AGE(1.0.0)"
+								}
+							}
+						],
+						"timeDimension": {
+							"id": "TIME_PERIOD",
+							"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:POP_CONCEPTS(1.0.0).TIME_PERIOD",
+							"localRepresentation": {
+								"format": {
+									"dataType": "GregorianYear",
+									"startTime": "1950"
+								}
+							}
+						}
+					},
+					"measureList": {
+						"id": "MeasureDescriptor",
+						"measures": [
+							{
+								"id": "OBS_VALUE",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:POP_CONCEPTS(1.0.0).OBS_VALUE",
+								"localRepresentation": {
+									"format": {
+										"dataType": "Integer",
+										"minValue": 0
+									}
+								}
+							}
+						]
+					}
+				}
+			},
+			{
+				"id": "DSD_POPRATIO",
+				"version": "1.0.0",
+				"agencyID": "SDMX",
+				"name": "Ratio between the male and the female population",
+				"names": {
+					"en": "Ratio between the male and the female population"
+				},
+				"dataStructureComponents": {
+					"dimensionList": {
+						"id": "DimensionDescriptor",
+						"dimensions": [
+							{
+								"id": "REF_AREA",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:POP_CONCEPTS(1.0.0).REF_AREA",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_AREA(1.0.0)"
+								}
+							},
+							{
+								"id": "AGE",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:POP_CONCEPTS(1.0.0).AGE",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_AGE(1.0.0)"
+								}
+							}
+						],
+						"timeDimension": {
+							"id": "TIME_PERIOD",
+							"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:POP_CONCEPTS(1.0.0).TIME_PERIOD",
+							"localRepresentation": {
+								"format": {
+									"dataType": "GregorianYear",
+									"startTime": "1950"
+								}
+							}
+						}
+					},
+					"measureList": {
+						"id": "MeasureDescriptor",
+						"measures": [
+							{
+								"id": "OBS_VALUE",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:POP_CONCEPTS(1.0.0).OBS_VALUE",
+								"localRepresentation": {
+									"format": {
+										"dataType": "Double",
+										"minValue": 0
+									}
+								}
+							}
+						]
+					}
+				}
+			}
+		],
+		"dataflows": [
+			{
+				"id": "DF_POPRATIO",
+				"version": "1.0.0",
+				"agencyID": "SDMX",
+				"name": "Ratio between the male and the female population",
+				"names": {
+					"en": "Ratio between the male and the female population"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=SDMX:DSD_POPRATIO(1.0.0)"
+			},
+			{
+				"id": "DF_POP",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Population of the Example Agency",
+				"names": {
+					"en": "Population of the Example Agency"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=SDMX:POP(1.0.0)"
+			}
+		],
+		"vtlMappingSchemes": [
+			{
+				"id": "VTL_MAP_POP",
+				"version": "1.0.0",
+				"agencyID": "SDMX",
+				"name": "VTL mappings of TS_POPRATIO",
+				"names": {
+					"en": "VTL mappings of TS_POPRATIO"
+				},
+				"vtlDatasetMappings": [
+					{
+						"id": "POP_M",
+						"name": "Male population",
+						"names": {
+							"en": "Male population"
+						},
+						"vtlAlias": "pop_m",
+						"isInput": true,
+						"dataStructure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=SDMX:POP(1.0.0)"
+					},
+					{
+						"id": "POP_F",
+						"name": "Female population",
+						"names": {
+							"en": "Female population"
+						},
+						"vtlAlias": "pop_f",
+						"isInput": true,
+						"dataStructure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=SDMX:POP(1.0.0)"
+					},
+					{
+						"id": "RATIO",
+						"name": "Ratio between the male and the female population",
+						"names": {
+							"en": "Ratio between the male and the female population"
+						},
+						"vtlAlias": "ratio",
+						"isInput": false,
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=SDMX:DF_POPRATIO(1.0.0)"
+					}
+				]
+			}
+		],
+		"transformationSchemes": [
+			{
+				"id": "TS_POPRATIO",
+				"version": "1.0.0",
+				"agencyID": "SDMX",
+				"name": "Ratio between the male and the female population",
+				"names": {
+					"en": "Ratio between the male and the female population"
+				},
+				"vtlVersion": "2.2",
+				"transformations": [
+					{
+						"id": "RATIO",
+						"name": "Ratio between the male and the female population",
+						"names": {
+							"en": "Ratio between the male and the female population"
+						},
+						"description": "The sub clauses drop the SEX Identifier, whose value is fixed in each input by the key of its data extraction. Without them, the division would not match any data points, because VTL composes the data points having the same values for all the Identifiers. The result has the Identifiers REF_AREA, AGE and TIME_PERIOD and the Measure OBS_VALUE, as the data structure of DF_POPRATIO.",
+						"descriptions": {
+							"en": "The sub clauses drop the SEX Identifier, whose value is fixed in each input by the key of its data extraction. Without them, the division would not match any data points, because VTL composes the data points having the same values for all the Identifiers. The result has the Identifiers REF_AREA, AGE and TIME_PERIOD and the Measure OBS_VALUE, as the data structure of DF_POPRATIO."
+						},
+						"isPersistent": true,
+						"expression": "pop_m [ sub SEX = \"M\" ] / pop_f [ sub SEX = \"F\" ]",
+						"result": "ratio"
+					}
+				],
+				"vtlMappingScheme": "urn:sdmx:org.sdmx.infomodel.transformation.VtlMappingScheme=SDMX:VTL_MAP_POP(1.0.0)"
+			}
+		],
+		"vtlExecutions": [
+			{
+				"id": "EXEC_POPRATIO",
+				"version": "1.0.0",
+				"agencyID": "SDMX",
+				"name": "Execution of TS_POPRATIO by SDMX",
+				"names": {
+					"en": "Execution of TS_POPRATIO by SDMX"
+				},
+				"transformationScheme": "urn:sdmx:org.sdmx.infomodel.transformation.TransformationScheme=SDMX:TS_POPRATIO(1.0.0)",
+				"queryExtractions": [
+					{
+						"datasetMapping": "urn:sdmx:org.sdmx.infomodel.transformation.VtlDatasetMapping=SDMX:VTL_MAP_POP(1.0.0).POP_M",
+						"entryPoint": "https://sdmx.example.org/rest",
+						"sdmxApiVersion": "2.1",
+						"queryParameters": [
+							{
+								"name": "key",
+								"value": "*.M.*",
+								"isFixed": true
+							},
+							{
+								"name": "c[TIME_PERIOD]",
+								"value": "ge:2010",
+								"isFixed": false
+							}
+						]
+					},
+					{
+						"datasetMapping": "urn:sdmx:org.sdmx.infomodel.transformation.VtlDatasetMapping=SDMX:VTL_MAP_POP(1.0.0).POP_F",
+						"entryPoint": "https://sdmx.example.org/rest",
+						"sdmxApiVersion": "2.1",
+						"queryParameters": [
+							{
+								"name": "key",
+								"value": "*.F.*",
+								"isFixed": true
+							},
+							{
+								"name": "c[TIME_PERIOD]",
+								"value": "ge:2010",
+								"isFixed": false
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "EXEC_POPRATIO",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Execution of TS_POPRATIO by EXAMPLE",
+				"names": {
+					"en": "Execution of TS_POPRATIO by EXAMPLE"
+				},
+				"transformationScheme": "urn:sdmx:org.sdmx.infomodel.transformation.TransformationScheme=SDMX:TS_POPRATIO(1.0.0)",
+				"queryExtractions": [
+					{
+						"datasetMapping": "urn:sdmx:org.sdmx.infomodel.transformation.VtlDatasetMapping=SDMX:VTL_MAP_POP(1.0.0).POP_M",
+						"entryPoint": "https://data.example.org/rest",
+						"context": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=EXAMPLE:DF_POP(1.0)",
+						"sdmxApiVersion": "1.5",
+						"queryParameters": [
+							{
+								"name": "key",
+								"value": ".M.",
+								"isFixed": true
+							},
+							{
+								"name": "startPeriod",
+								"value": "2010",
+								"isFixed": false
+							}
+						]
+					},
+					{
+						"datasetMapping": "urn:sdmx:org.sdmx.infomodel.transformation.VtlDatasetMapping=SDMX:VTL_MAP_POP(1.0.0).POP_F",
+						"entryPoint": "https://data.example.org/rest",
+						"context": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=EXAMPLE:DF_POP(1.0)",
+						"sdmxApiVersion": "1.5",
+						"queryParameters": [
+							{
+								"name": "key",
+								"value": ".F.",
+								"isFixed": true
+							},
+							{
+								"name": "startPeriod",
+								"value": "2010",
+								"isFixed": false
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

@@ -1,0 +1,382 @@
+{
+	"$schema": "https://json.sdmx.org/2.1/sdmx-json-structure-schema.json",
+	"meta": {
+		"id": "VTL_SAMPLE3",
+		"test": false,
+		"prepared": "2020-06-05T12:00:00.000Z",
+		"contentLanguages": [
+			"en"
+		],
+		"sender": {
+			"id": "SDMX"
+		},
+		"receivers": [
+			{
+				"id": "SDMX"
+			}
+		]
+	},
+	"data": {
+		"dataflows": [
+			{
+				"id": "DF31",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Dataflow #3.1",
+				"names": {
+					"en": "Dataflow #3.1"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=SDMX:DS31(1.0)"
+			},
+			{
+				"id": "DF3R1",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Dataflow for Result #3.1",
+				"names": {
+					"en": "Dataflow for Result #3.1"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=SDMX:DS3R1(1.0)"
+			}
+		],
+		"codelists": [
+			{
+				"id": "CL_AREA",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Area codelist",
+				"names": {
+					"en": "Area codelist"
+				},
+				"isPartial": true,
+				"codes": [
+					{
+						"id": "NA",
+						"name": "North America",
+						"names": {
+							"en": "North America"
+						}
+					},
+					{
+						"id": "US",
+						"name": "United States of America",
+						"names": {
+							"en": "United States of America"
+						}
+					},
+					{
+						"id": "MX",
+						"name": "Mexico",
+						"names": {
+							"en": "Mexico"
+						}
+					},
+					{
+						"id": "CA",
+						"name": "Canada",
+						"names": {
+							"en": "Canada"
+						}
+					},
+					{
+						"id": "EU",
+						"name": "European Union",
+						"names": {
+							"en": "European Union"
+						}
+					}
+				]
+			},
+			{
+				"id": "CL_INDICATOR",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Indicators Codelist",
+				"names": {
+					"en": "Indicators Codelist"
+				},
+				"codes": [
+					{
+						"id": "GDP",
+						"name": "Gross Domestic Product",
+						"names": {
+							"en": "Gross Domestic Product"
+						}
+					},
+					{
+						"id": "POPULATION",
+						"name": "Population",
+						"names": {
+							"en": "Population"
+						}
+					},
+					{
+						"id": "GDPPERCAPITA",
+						"name": "Gross Domestic Product per Capita",
+						"names": {
+							"en": "Gross Domestic Product per Capita"
+						}
+					}
+				]
+			}
+		],
+		"conceptSchemes": [
+			{
+				"id": "CONCEPTS3",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Concepts for DSDs #2.1",
+				"names": {
+					"en": "Concepts for DSDs #2.1"
+				},
+				"concepts": [
+					{
+						"id": "GEO_AREA",
+						"name": "Geographical Area",
+						"names": {
+							"en": "Geographical Area"
+						}
+					},
+					{
+						"id": "COUNTRY",
+						"name": "Country",
+						"names": {
+							"en": "Country"
+						}
+					},
+					{
+						"id": "TIME_PERIOD",
+						"name": "Time Period",
+						"names": {
+							"en": "Time Period"
+						}
+					},
+					{
+						"id": "INDICATOR",
+						"name": "Measure Dimension",
+						"names": {
+							"en": "Measure Dimension"
+						}
+					},
+					{
+						"id": "OBS_VALUE",
+						"name": "Observation Value",
+						"names": {
+							"en": "Observation Value"
+						}
+					}
+				]
+			}
+		],
+		"dataStructures": [
+			{
+				"id": "DS31",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Data Structure #3.1",
+				"names": {
+					"en": "Data Structure #3.1"
+				},
+				"dataStructureComponents": {
+					"dimensionList": {
+						"id": "DimensionDescriptor",
+						"dimensions": [
+							{
+								"id": "COUNTRY",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS3(1.0).COUNTRY",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_AREA(1.0)"
+								}
+							},
+							{
+								"id": "INDICATOR",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS3(1.0).INDICATOR",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_INDICATOR(1.0)"
+								}
+							}
+						],
+						"timeDimension": {
+							"id": "TIME_PERIOD",
+							"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS3(1.0).TIME_PERIOD",
+							"localRepresentation": {
+								"format": {
+									"dataType": "ObservationalTimePeriod"
+								}
+							}
+						}
+					},
+					"measureList": {
+						"id": "MeasureDescriptor",
+						"measures": [
+							{
+								"id": "OBS_VALUE",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS3(1.0).OBS_VALUE"
+							}
+						]
+					}
+				}
+			},
+			{
+				"id": "DS3R1",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Data Structure for Results #3.1",
+				"names": {
+					"en": "Data Structure for Results #3.1"
+				},
+				"dataStructureComponents": {
+					"dimensionList": {
+						"id": "DimensionDescriptor",
+						"dimensions": [
+							{
+								"id": "GEO_AREA",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS3(1.0).GEO_AREA",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_AREA(1.0)"
+								}
+							},
+							{
+								"id": "INDICATOR",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS3(1.0).INDICATOR",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=SDMX:CL_INDICATOR(1.0)"
+								}
+							}
+						],
+						"timeDimension": {
+							"id": "TIME_PERIOD",
+							"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS3(1.0).TIME_PERIOD",
+							"localRepresentation": {
+								"format": {
+									"dataType": "ObservationalTimePeriod"
+								}
+							}
+						}
+					},
+					"measureList": {
+						"id": "MeasureDescriptor",
+						"measures": [
+							{
+								"id": "OBS_VALUE",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS3(1.0).OBS_VALUE"
+							}
+						]
+					}
+				}
+			}
+		],
+		"vtlMappingSchemes": [
+			{
+				"id": "VTLMS3",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "VTL Mapping Scheme #3",
+				"names": {
+					"en": "VTL Mapping Scheme #3"
+				},
+				"vtlMappings": [
+					{
+						"id": "VTLM1",
+						"name": "VTL Mapping #1",
+						"names": {
+							"en": "VTL Mapping #1"
+						},
+						"alias": "DF3R1",
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=SDMX:DF3R1(1.0)",
+						"fromVtlMapping": {
+							"fromVtlSuperSpace": {
+								"keys": [
+									"INDICATOR",
+									"GEO_AREA"
+								]
+							}
+						}
+					},
+					{
+						"id": "VTLM2",
+						"name": "VTL Mapping #2",
+						"names": {
+							"en": "VTL Mapping #2"
+						},
+						"alias": "DF31",
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=SDMX:DF31(1.0)",
+						"toVtlMapping": {
+							"toVtlSubSpace": {
+								"keys": [
+									"INDICATOR",
+									"COUNTRY"
+								]
+							}
+						}
+					}
+				]
+			}
+		],
+		"transformationSchemes": [
+			{
+				"id": "TS3",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Transformation Scheme #3 – SDMX/VTL release sample",
+				"names": {
+					"en": "Transformation Scheme #3 – SDMX/VTL release sample"
+				},
+				"vtlVersion": "2.0",
+				"transformations": [
+					{
+						"id": "TS_A",
+						"name": "GDP per Capita for USA",
+						"names": {
+							"en": "GDP per Capita for USA"
+						},
+						"isPersistent": true,
+						"expression": "'DF31/GDP.US' / 'DF31/POPULATION.US'",
+						"result": "DF3R1/GDPPERCAPITA.US"
+					},
+					{
+						"id": "TS_B",
+						"name": "GDP per Capita for Canada",
+						"names": {
+							"en": "GDP per Capita for Canada"
+						},
+						"isPersistent": true,
+						"expression": "'DF31/GDP.CA' / 'DF31/POPULATION.CA'",
+						"result": "DF3R1/GDPPERCAPITA.CA"
+					},
+					{
+						"id": "TS_C",
+						"name": "Population for North America",
+						"names": {
+							"en": "Population for North America"
+						},
+						"isPersistent": true,
+						"expression": "'DF31/POPULATION.US' + 'DF31/POPULATION.CA' + 'DF31/POPULATION.MX'",
+						"result": "DF3R1/POPULATION.NA"
+					},
+					{
+						"id": "TS_D",
+						"name": "GDP for North America",
+						"names": {
+							"en": "GDP for North America"
+						},
+						"isPersistent": true,
+						"expression": "'DF31/GDP.US' + 'DF31/GDP.CA' + 'DF31/GDP.MX'",
+						"result": "DF3R1/GDP.NA"
+					},
+					{
+						"id": "TS_E",
+						"name": "GDP per Capita for North America",
+						"names": {
+							"en": "GDP per Capita for North America"
+						},
+						"isPersistent": true,
+						"expression": "'DF31/GDP.NA' / 'DF31/POPULATION.NA'",
+						"result": "DF3R1/GDPPERCAPITA.NA"
+					}
+				],
+				"vtlMappingScheme": "urn:sdmx:org.sdmx.infomodel.transformation.VtlMappingScheme=SDMX:VTLMS3(1.0)"
+			}
+		]
+	}
+}
