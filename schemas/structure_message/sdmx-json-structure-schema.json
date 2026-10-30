@@ -4634,7 +4634,8 @@
 						"entryPoint":{
 							"type":"string",
 							"format":"uri-reference",
-							"description":"The URL of the entry point of the SDMX REST web service (e.g. https://sdmx.example.org/rest)."
+							"minLength":1,
+							"description":"The URL of the entry point of the SDMX REST web service (e.g. https://sdmx.example.org/rest). It cannot be empty."
 						},
 						"context":{
 							"$ref":"#/$defs/DataflowOrProvisionAgreementReferenceType",
@@ -4672,7 +4673,8 @@
 					"properties":{
 						"urlTemplate":{
 							"type":"string",
-							"description":"The complete URL of the query, whose tokens enclosed in curly braces (e.g. {startPeriod}) are replaced by the values of the query parameters having the same names. Each token must have a query parameter with the same name. Any part of the URL, including the entry point, can be a token."
+							"minLength":1,
+							"description":"The complete URL of the query, whose tokens enclosed in curly braces (e.g. {startPeriod}) are replaced by the values of the query parameters having the same names. Each token must have a query parameter with the same name. Any part of the URL, including the entry point, can be a token. It cannot be empty."
 						},
 						"queryParameters":{
 							"type":"array",
