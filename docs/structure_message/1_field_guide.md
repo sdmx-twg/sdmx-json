@@ -3035,41 +3035,21 @@ See the schema file for more information.
 ### vtlMappingScheme
 
 *Object*. VtlMappingScheme provides the details of a VTL mapping scheme, in
-which VTL mappings are described. The mappings define the VTL Data Sets and
-Value Domains used by the transformations, rulesets and user defined operators
-of a transformation scheme.
+which VTL mappings are described. The VTL dataset mappings
+(`vtlDatasetMappings`) map a VTL Data Set to exactly one `dataStructure`,
+`dataflow` or `provisionAgreement`, and have the boolean `isInput`, true for an
+input of the VTL program and false for an output. The VTL codelist mappings
+(`vtlCodelistMappings`) map a VTL Value Domain to a `codelist`.
 
-The VTL dataset mappings (`vtlDatasetMappings`) map a VTL Data Set to an SDMX
-data structure definition, dataflow or provision agreement. A VTL dataset
-mapping has a `vtlAlias`, the alias used in the VTL program to refer to the VTL
-Data Set; the boolean `isInput`, true for an input of the VTL program, whose
-data are obtained from SDMX, and false for an output, whose data are converted
-into SDMX; and exactly one of `dataStructure`, `dataflow` and
-`provisionAgreement`, the reference to the SDMX artefact that defines the VTL
-Data Set.
+Each mapping has a `vtlAlias`, a VTL name without the single quotes that can
+enclose it in the VTL statements, with no whitespace or single quotes and at
+most 128 characters. The `id` and the alias (`alias` in `vtlMappings`) of the
+mappings are unique across the `vtlDatasetMappings`, `vtlCodelistMappings` and
+`vtlMappings` arrays; the schema does not enforce this uniqueness.
 
-The VTL codelist mappings (`vtlCodelistMappings`) map a VTL Value Domain to an
-SDMX codelist, whose codes are the values of the Value Domain. A VTL codelist
-mapping has a `vtlAlias` and a `codelist`, the reference to the codelist; it
-applies only to inputs, as the VTL programs do not produce Value Domains.
-
-The `vtlAlias` is a VTL name given without the single quotes that can enclose
-it in the VTL statements (e.g. `diff`, a VTL keyword, written as 'diff' in the
-statements). It cannot contain whitespace or single quotes and is at most 128
-characters long. Within a VTL mapping scheme, the `id` of the mappings is unique
-across the `vtlDatasetMappings`, `vtlCodelistMappings` and `vtlMappings`
-arrays, and so is the alias (`vtlAlias`, or `alias` in the VTL mappings). The
-schema does not enforce this uniqueness.
-
-The VTL mappings (`vtlMappings`) are the deprecated encoding of the mappings
-used in SDMX 3.0 and 3.1. The `vtlMappings` array and the properties of its
-items are deprecated: `alias`, replaced by `vtlAlias`; `dataflow` and
-`codelist`, replaced by the VTL dataset mappings and the VTL codelist mappings;
-`concept`, as the VTL Variables correspond to the homonymous components of the
-VTL Data Sets and do not need any mapping; and `genericDataflow`,
-`toVtlMapping` (with `toVtlSubSpace` and `method`) and `fromVtlMapping` (with
-`fromVtlSuperSpace` and `method`), as the Basic mapping is the only mapping
-method.
+The `vtlMappings` array is deprecated, together with the `alias`, `dataflow`,
+`genericDataflow`, `codelist`, `concept`, `toVtlMapping`, `fromVtlMapping`,
+`method`, `toVtlSubSpace` and `fromVtlSuperSpace` properties of its items.
 
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
@@ -3128,45 +3108,21 @@ See the schema file for more information.
 
 ### vtlExecution
 
-*Object*. VtlExecution describes the structure of a VTL execution, which
-specifies how the data of the input VTL Data Sets of a transformation scheme
-are retrieved, so that the transformation scheme can be executed on the basis
-of its SDMX definition. A VTL execution is maintained independently of the
-transformation scheme.
+*Object*. VtlExecution specifies how the data of the input VTL Data Sets of a
+transformation scheme are retrieved. The `transformationScheme` reference and at
+least one data extraction are mandatory, also when the execution is returned as
+a stub (`isExternalReference` true). The query extractions (`queryExtractions`)
+query a web service compliant with the SDMX REST API (`entryPoint`, optional
+`context` and `sdmxApiVersion`), and the URL extractions (`urlExtractions`) call
+a URL built from a `urlTemplate`, for web services that are not fully compliant.
+Each extraction references the `datasetMapping` of an input VTL Data Set and can
+have `queryParameters`, the name-value pairs used for building the query
+(`name`, `value`, `isFixed`).
 
-The `transformationScheme` property, which references the transformation scheme
-to be executed, is mandatory, and so is at least one data extraction, in the
-`queryExtractions` or `urlExtractions` arrays. A VTL execution returned as a
-stub (`isExternalReference` true) still contains them.
-
-The query extractions (`queryExtractions`) retrieve the data of an input VTL
-Data Set through a query to a web service compliant with the SDMX REST API. They
-have the `entryPoint`, the URL of the entry point of the web service, and
-optionally the `context`, which references the dataflow or provision agreement
-whose data are queried instead of the SDMX artefact of the VTL dataset mapping,
-and the `sdmxApiVersion`, the version of the SDMX REST API implemented by the
-entry point, written as major.minor (e.g. 2.1).
-
-The URL extractions (`urlExtractions`) retrieve the data through a URL built
-from a template, for web services that are not fully compliant with the SDMX
-REST API. They have the `urlTemplate`, the complete URL of the query, whose
-tokens enclosed in curly braces (e.g. `{startPeriod}`) are replaced by the
-values of the query parameters having the same names.
-
-Every data extraction has a `datasetMapping`, which references the VTL dataset
-mapping of the input VTL Data Set whose data are retrieved (it must belong to
-the VTL mapping scheme of the transformation scheme and have `isInput` true),
-and optionally `queryParameters`, the name-value pairs used for building the
-query. A query parameter has a `name`, which cannot contain whitespace, an
-optional `value` and the boolean `isFixed`. A fixed parameter must have a value,
-which is always used as it is; a non-fixed parameter can have a value, a default
-that can be overridden at run time, and otherwise must be given one at run time.
-
-The VTL executions of a message must have distinct combinations of `agencyID`,
-`id` and `version`; a VTL execution has at most one data extraction for each
-`datasetMapping`, in both extraction arrays together; and the `name` of the
-query parameters is unique within a data extraction. The schema does not
-enforce these uniqueness rules.
+Executions are unique by `agencyID`, `id` and `version` within a message, an
+execution has at most one extraction of either kind per `datasetMapping`, and
+parameter names are unique within an extraction; the schema does not enforce
+these rules.
 
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
