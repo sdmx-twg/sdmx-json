@@ -118,7 +118,6 @@ Deprecated constructs it uses:
 Notes:
 
 - The codelists are smaller than they would be: `SDMX:CL_SECTOR(1.0)` has no codes and `SDMX:CL_AREA(1.0)` has only some countries (all the EU countries would be added to cater for the `EU` code).
-- The references of this sample all resolve within the message.
 
 ### deprecated-vtl-sample-2.json
 
@@ -135,7 +134,6 @@ Deprecated constructs it uses:
 Notes:
 
 - The codelist `SDMX:CL_AREA(1.0)` is partial (`isPartial` true): all the EU countries would be added to cater for the `EU` code, but were removed to keep the sample smaller.
-- The references of this sample all resolve within the message.
 
 ### deprecated-vtl-sample-3.json
 
@@ -152,4 +150,3 @@ Notes:
 
 - The transformation scheme uses an SDMX specific naming convention that requires pre-processing before parsing the VTL expressions. As explained in the SDMX Technical Notes, the dataset identifiers of the sample are a shortcut of the VTL `sub` operator: `'DF31/GDP.US'` is equivalent to `DF31[sub INDICATOR=GDP, COUNTRY=US]`. This convention works combined with the mappings of the sample, which indicate the keys that are used for the dataflows. It is not safe to use outside an SDMX context, as the dataflows may have no meaning there.
 - The codelist `SDMX:CL_AREA(1.0)` is partial (`isPartial` true): all world countries, regions and areas should appear in it, but were removed to keep the sample smaller.
-- The references of this sample all resolve within the message.
