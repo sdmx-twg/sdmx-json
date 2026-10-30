@@ -359,7 +359,7 @@
 					"minItems":1,
 					"items":{
 						"$ref":"#/$defs/VtlExecutionType",
-						"description":"VTL execution (vtlExecutions) provides the details of a VTL execution, which specifies how the data of the input VTL Data Sets of a transformation scheme are retrieved."
+						"description":"vtlExecution provides the details of a VTL execution, which specifies how the data of the input VTL Data Sets of a transformation scheme are retrieved."
 					}
 				}
 			},
@@ -3955,7 +3955,7 @@
 							"minItems":1,
 							"items":{
 								"$ref":"#/$defs/VtlDatasetMappingType",
-								"description":"VTL dataset mapping (vtlDatasetMappings) details a mapping between a VTL Data Set and the SDMX Data Structure Definition, Dataflow or Provision Agreement that defines it."
+								"description":"VtlDatasetMapping details a mapping between a VTL Data Set and the SDMX Data Structure Definition, Dataflow or Provision Agreement that defines it."
 							}
 						},
 						"vtlCodelistMappings":{
@@ -3963,7 +3963,7 @@
 							"minItems":1,
 							"items":{
 								"$ref":"#/$defs/VtlCodelistMappingType",
-								"description":"VTL codelist mapping (vtlCodelistMappings) details a mapping between a VTL Value Domain and the SDMX Codelist whose codes are its values."
+								"description":"VtlCodelistMapping details a mapping between a VTL Value Domain and the SDMX Codelist whose codes are its values."
 							}
 						},
 						"vtlMappings":{
