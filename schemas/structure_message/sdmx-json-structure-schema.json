@@ -6440,11 +6440,6 @@
 			"type":"string",
 			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.transformation\\.VtlMappingScheme=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
 		},
-		"VtlCodelistMappingReferenceType":{
-			"description":"VtlCodelistMappingReferenceType is a type for referencing a VTL codelist mapping object. It consists of a URN.",
-			"type":"string",
-			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.transformation\\.VtlCodelistMapping=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)(\\.[A-Za-z0-9_@$-]+)$"
-		},
 		"TransformationSchemeReferenceType":{
 			"description":"TransformationSchemeReferenceType is a type for referencing a transformation scheme object. It consists of a URN.",
 			"type":"string",
@@ -6454,11 +6449,6 @@
 			"description":"VtlDatasetMappingReferenceType is a type for referencing a VTL dataset mapping object. It consists of a URN.",
 			"type":"string",
 			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.transformation\\.VtlDatasetMapping=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)(\\.[A-Za-z0-9_@$-]+)$"
-		},
-		"VtlExecutionReferenceType":{
-			"description":"VtlExecutionReferenceType is a type for referencing a VTL execution object. It consists of a URN.",
-			"type":"string",
-			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.transformation\\.VtlExecution=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
 		},
 		"duration":{
 			"type":"string",
