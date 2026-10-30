@@ -1,10 +1,9 @@
 # VTL samples
 
-These samples illustrate the VTL (Validation and Transformation Language) artefacts of the SDMX-JSON structure message: the mappings between VTL and SDMX, the rulesets, the user defined operators, the transformation schemes and the VTL executions. They are the JSON counterparts of the SDMX-ML samples `samples/VTL Transformations/` of [sdmx-twg/sdmx-ml#77](https://github.com/sdmx-twg/sdmx-ml/pull/77), and have the same content as their SDMX-ML sources: the same artefacts, identifiers, references and VTL statements. As JSON has no comments, the explanations given by the XML comments of the SDMX-ML files are included below.
+These samples illustrate the VTL (Validation and Transformation Language) artefacts of the SDMX-JSON structure message: the mappings between VTL and SDMX, the rulesets, the user defined operators, the transformation schemes and the VTL executions. They are the JSON counterparts of the SDMX-ML samples `samples/VTL Transformations/` of [sdmx-twg/sdmx-ml#77](https://github.com/sdmx-twg/sdmx-ml/pull/77), and keep the content of their SDMX-ML sources: the same artefacts, identifiers, references and VTL statements. Only whitespace is normalised, for example the indentation of the ruleset and operator definitions and the line breaks of a few descriptions of the deprecated samples. As JSON has no comments, the explanations given by the XML comments of the SDMX-ML files are included below.
 
 - The agencies used by the samples 4 to 9 are `SDMX` and `EXAMPLE`. Both are declared in the agency scheme `SDMX:AGENCIES` that each of these messages includes, and every URN of these messages resolves to an artefact or to an item of the same message.
-- `meta.prepared` is `2026-10-29T00:00:00Z` and the receiver is `SDMX`. The sender is `EXAMPLE`, except in `vtl-sample-5.json`, sent by `SDMX`.
-- The transformation schemes use VTL 2.2 (`vtlVersion` "2.2").
+- In the samples 4 to 9, `meta.prepared` is `2026-10-29T00:00:00Z`, the receiver is `SDMX`, the sender is `EXAMPLE` (`SDMX` in `vtl-sample-5.json`) and the transformation schemes use VTL 2.2 (`vtlVersion` "2.2").
 - The prefix `deprecated-` marks the samples that use constructs deprecated in SDMX 3.2.
 
 ## vtl-sample-4.json
@@ -14,7 +13,7 @@ SDMX-ML source: `VTL_Sample_4.xml`.
 Example 1 of the section "Retrieving the data of the input VTL Data Sets" of the SDMX Technical Notes: the difference between two dataflows, with a VTL execution that retrieves the data of the inputs.
 
 - The transformation scheme `EXAMPLE:TS_DIFF` calculates the difference between the dataflows `EXAMPLE:DF_A` and `EXAMPLE:DF_B` (`ds_diff <- ds_a - ds_b`). Its VTL mapping scheme `EXAMPLE:VTL_MAP` maps the inputs `ds_a` and `ds_b` and the output `ds_diff` to dataflows through VTL dataset mappings (`vtlDatasetMappings`), whose `isInput` property gives the direction of the mapping. Under the Basic mapping, the dimensions and the time dimension of the data structure definition become VTL Identifiers and `OBS_VALUE` a VTL Measure. `ds_a` and `ds_b` are inputs, whose definitions and data are obtained from SDMX; `ds_diff` is an output, whose data are converted into SDMX.
-- The alias of the output is `ds_diff`, not the `diff` of the Technical Notes: `diff` is a VTL keyword, and the Technical Notes were renamed accordingly.
+- The alias of the output is `ds_diff`, not the `diff` of the Technical Notes: `diff` is a VTL keyword, and the example of the Technical Notes was changed accordingly.
 - The VTL execution `EXAMPLE:EXEC_DIFF` (`vtlExecutions`) says how the VTL engine retrieves the data of the inputs, so that `TS_DIFF` can be executed on the basis of its SDMX definition. It is maintained independently of `TS_DIFF`.
     - The query extraction (`queryExtractions`) of `ds_a` is a query to a web service implementing version 1.5 of the SDMX REST API (`sdmxApiVersion` "1.5"): the VTL engine builds the query for `DF_A`, the dataflow referenced by the mapping of `ds_a`. The query parameter `key` is fixed (`A.USA.` selects the annual data of the USA for any `INDICATOR`), `startPeriod` has a default value (2015) that can be overridden at run time, and `endPeriod` has no default value, so it must be provided at run time.
     - The URL extraction (`urlExtractions`) of `ds_b` is the analogous retrieval, written as a URL template (`urlTemplate`): the tokens in curly braces are replaced by the values of the query parameters having the same names. `endPeriod` has no default, so it must be provided at run time.
@@ -102,7 +101,7 @@ VTL Data Sets whose names are written between single quotes in the VTL statement
 
 `deprecated-vtl-sample-1.json` to `deprecated-vtl-sample-3.json` are the JSON counterparts of `deprecated-VTL_Sample_1.xml` to `deprecated-VTL_Sample_3.xml`. They use constructs deprecated in SDMX 3.2, which remain valid: the old VTL mappings (`vtlMappings`), the name personalisation and custom type schemes, and the references from the ruleset schemes to the VTL mapping schemes. Their representation in SDMX 3.2 is described in the section "Conversion of definitions based on deprecated constructs" of the chapter on the Validation and Transformation Language of the SDMX Technical Notes.
 
-Unlike the samples 4 to 9, their content is that of the SDMX-ML files unchanged: the sender and the receiver are `SDMX`, `meta.prepared` is `2020-06-05T12:00:00.000Z`, there is no agency scheme, and the references that the SDMX-ML files leave unresolved stay unresolved (they are listed below).
+Like the samples 4 to 9, they keep the content of their SDMX-ML sources (only whitespace is normalised), which predate SDMX 3.2: the sender and the receiver are `SDMX`, `meta.prepared` is `2020-06-05T12:00:00.000Z`, the schemes use VTL 2.0, there is no agency scheme, and the references that the SDMX-ML files leave unresolved stay unresolved (they are listed below).
 
 ### deprecated-vtl-sample-1.json
 
