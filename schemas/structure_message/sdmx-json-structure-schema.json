@@ -4633,7 +4633,7 @@
 					"properties":{
 						"entryPoint":{
 							"type":"string",
-							"format":"uri",
+							"format":"uri-reference",
 							"description":"The URL of the entry point of the SDMX REST web service (e.g. https://sdmx.example.org/rest)."
 						},
 						"context":{
