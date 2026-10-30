@@ -3041,11 +3041,11 @@ which VTL mappings are described. The VTL dataset mappings
 input of the VTL program and false for an output. The VTL codelist mappings
 (`vtlCodelistMappings`) map a VTL Value Domain to a `codelist`.
 
-Each mapping has a `vtlAlias`, a VTL name without the single quotes that can
-enclose it in the VTL statements, with no whitespace or single quotes and at
-most 128 characters. The `id` and the alias (`alias` in `vtlMappings`) of the
-mappings are unique across the `vtlDatasetMappings`, `vtlCodelistMappings` and
-`vtlMappings` arrays; the schema does not enforce this uniqueness.
+Both kinds of mapping have a `vtlAlias`, a VTL name without the single quotes
+that can enclose it in the VTL statements, with no whitespace or single quotes
+and at most 128 characters. The `id` and the alias (`alias` in `vtlMappings`) of
+the mappings are unique across the `vtlDatasetMappings`, `vtlCodelistMappings`
+and `vtlMappings` arrays; the schema does not enforce this uniqueness.
 
 The `vtlMappings` array is deprecated, together with the `alias`, `dataflow`,
 `genericDataflow`, `codelist`, `concept`, `toVtlMapping`, `fromVtlMapping`,
@@ -3115,9 +3115,9 @@ a stub (`isExternalReference` true). The query extractions (`queryExtractions`)
 query a web service compliant with the SDMX REST API (`entryPoint`, optional
 `context` and `sdmxApiVersion`), and the URL extractions (`urlExtractions`) call
 a URL built from a `urlTemplate`, for web services that are not fully compliant.
-Each extraction references the `datasetMapping` of an input VTL Data Set and can
-have `queryParameters`, the name-value pairs used for building the query
-(`name`, `value`, `isFixed`).
+Each extraction has a `datasetMapping`, the reference to the VTL dataset mapping
+of an input VTL Data Set, and can have `queryParameters`, the name-value pairs
+used for building the query (`name`, `value`, `isFixed`).
 
 Executions are unique by `agencyID`, `id` and `version` within a message, an
 execution has at most one extraction of either kind per `datasetMapping`, and
