@@ -450,6 +450,7 @@
 		"namePersonalisationSchemes": [
 			{
 				"id": "NPS1",
+				"version": "1.0",
 				"agencyID": "SDMX",
 				"name": "Name Peronalisation Scheme #1",
 				"names": {

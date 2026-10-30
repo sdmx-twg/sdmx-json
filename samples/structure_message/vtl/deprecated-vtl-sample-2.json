@@ -36,7 +36,7 @@
 				"names": {
 					"en": "Dataflow for Result #2.1"
 				},
-				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=SDMX:DS21(1.0)"
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=SDMX:DS2R1(1.0)"
 			}
 		],
 		"codelists": [
@@ -118,6 +118,31 @@
 						"name": "Slovakia",
 						"names": {
 							"en": "Slovakia"
+						}
+					}
+				]
+			},
+			{
+				"id": "CS2R1",
+				"version": "1.0",
+				"agencyID": "SDMX",
+				"name": "Concepts for Measures in Results #2.1",
+				"names": {
+					"en": "Concepts for Measures in Results #2.1"
+				},
+				"codes": [
+					{
+						"id": "PERC_EU_IMPORT",
+						"name": "Import for EU in percentage",
+						"names": {
+							"en": "Import for EU in percentage"
+						}
+					},
+					{
+						"id": "PERC_EU_EXPORT",
+						"name": "Export for EU in percentage",
+						"names": {
+							"en": "Export for EU in percentage"
 						}
 					}
 				]
@@ -364,37 +389,13 @@
 				},
 				"vtlMappings": [
 					{
-						"id": "VTLM1",
-						"name": "VTL Mapping #1",
-						"names": {
-							"en": "VTL Mapping #1"
-						},
-						"alias": "DF1R1",
-						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=SDMX:DF1R1(1.0)",
-						"fromVtlMapping": {
-							"method": "M2A"
-						}
-					},
-					{
-						"id": "VTLM2",
-						"name": "VTL Mapping #2",
-						"names": {
-							"en": "VTL Mapping #2"
-						},
-						"alias": "DF11",
-						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=SDMX:D11(1.0)",
-						"toVtlMapping": {
-							"method": "Basic"
-						}
-					},
-					{
 						"id": "VTLM3",
 						"name": "Variable INDICATOR mapping",
 						"names": {
 							"en": "Variable INDICATOR mapping"
 						},
 						"alias": "INDICATOR",
-						"concept": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).MEASURE_DIMENSION"
+						"concept": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS2(1.0).MEASURE_DIMENSION"
 					},
 					{
 						"id": "VTLM4",
@@ -403,7 +404,7 @@
 							"en": "Variable VALUE mapping"
 						},
 						"alias": "VALUE",
-						"concept": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).OBS_VALUE"
+						"concept": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS2(1.0).OBS_VALUE"
 					},
 					{
 						"id": "VTLM5",
@@ -412,7 +413,7 @@
 							"en": "Variable TIME mapping"
 						},
 						"alias": "TIME",
-						"concept": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).TIME_PERIOD"
+						"concept": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS2(1.0).TIME_PERIOD"
 					},
 					{
 						"id": "VTLM6",
@@ -421,7 +422,7 @@
 							"en": "Variable GEO mapping"
 						},
 						"alias": "GEO",
-						"concept": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS(1.0).COUNTRY"
+						"concept": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=SDMX:CONCEPTS2(1.0).GEO_AREA"
 					}
 				]
 			},
@@ -441,7 +442,7 @@
 							"en": "VTL Mapping #1"
 						},
 						"alias": "DF21",
-						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=SDMX:D21(1.0)",
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=SDMX:DF21(1.0)",
 						"toVtlMapping": {
 							"method": "Pivot"
 						}
@@ -453,7 +454,7 @@
 							"en": "VTL Mapping #2"
 						},
 						"alias": "DF2R1",
-						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=SDMX:D2R1(1.0)",
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=SDMX:DF2R1(1.0)",
 						"fromVtlMapping": {
 							"method": "Unpivot"
 						}

@@ -101,7 +101,7 @@ VTL Data Sets whose names are written between single quotes in the VTL statement
 
 `deprecated-vtl-sample-1.json` to `deprecated-vtl-sample-3.json` are the JSON counterparts of `deprecated-VTL_Sample_1.xml` to `deprecated-VTL_Sample_3.xml`. They use constructs deprecated in SDMX 3.2, which remain valid: the old VTL mappings (`vtlMappings`), the name personalisation and custom type schemes, and the references from the ruleset schemes to the VTL mapping schemes. Their representation in SDMX 3.2 is described in the section "Conversion of definitions based on deprecated constructs" of the chapter on the Validation and Transformation Language of the SDMX Technical Notes.
 
-Like the samples 4 to 9, they keep the content of their SDMX-ML sources (only whitespace is normalised), which predate SDMX 3.2: the sender and the receiver are `SDMX`, `meta.prepared` is `2020-06-05T12:00:00.000Z`, the schemes use VTL 2.0, there is no agency scheme, and the references that the SDMX-ML files leave unresolved stay unresolved (they are listed below).
+Like the samples 4 to 9, they keep the content of their SDMX-ML sources (only whitespace is normalised), which predate SDMX 3.2: the sender and the receiver are `SDMX`, `meta.prepared` is `2020-06-05T12:00:00.000Z`, the schemes use VTL 2.0, and there is no agency scheme, so the agency `SDMX` of their artefacts is not declared. Every URN of these messages resolves to an artefact or to an item of the same message.
 
 ### deprecated-vtl-sample-1.json
 
@@ -118,7 +118,7 @@ Deprecated constructs it uses:
 Notes:
 
 - The codelists are smaller than they would be: `SDMX:CL_SECTOR(1.0)` has no codes and `SDMX:CL_AREA(1.0)` has only some countries (all the EU countries would be added to cater for the `EU` code).
-- Unresolved reference: the name personalisation scheme `SDMX:NPS1` has no `version`, while the transformation scheme references it as `SDMX:NPS1(1.0)`.
+- The references of this sample all resolve within the message.
 
 ### deprecated-vtl-sample-2.json
 
@@ -128,14 +128,14 @@ Illustrates aggregation of an SDMX dataflow using VTL hierarchical rulesets, fil
 
 Deprecated constructs it uses:
 
-- The old VTL mappings (`vtlMappings`), with their mapping methods (`Basic`, `M2A`, `Pivot` and `Unpivot`) and their mappings of concepts (`concept`).
+- The old VTL mappings (`vtlMappings`), with their mapping methods (`Pivot` and `Unpivot`) and their mappings of concepts (`concept`).
 - The custom type scheme (`customTypeSchemes`), referenced by the `customTypeScheme` property of the transformation scheme.
 - The reference from the ruleset scheme to the VTL mapping scheme (`vtlMappingScheme` of the ruleset scheme).
 
 Notes:
 
 - The codelist `SDMX:CL_AREA(1.0)` is partial (`isPartial` true): all the EU countries would be added to cater for the `EU` code, but were removed to keep the sample smaller.
-- Unresolved references: the mapping scheme `SDMX:VTLMS1(1.0)` maps dataflows and concepts that the message does not contain (`SDMX:DF1R1(1.0)`, `SDMX:D11(1.0)` and the concepts of `SDMX:CONCEPTS(1.0)`); the mapping scheme `SDMX:VTLMS2(1.0)` maps `SDMX:D21(1.0)` and `SDMX:D2R1(1.0)`, while the dataflows of the message are `SDMX:DF21(1.0)` and `SDMX:DF2R1(1.0)`; and the enumeration of the dimension `MEASURE_DIMENSION` of `SDMX:DS2R1(1.0)` is a codelist URN, `SDMX:CS2R1(1.0)`, that names the concept scheme of the measures of the result.
+- The references of this sample all resolve within the message.
 
 ### deprecated-vtl-sample-3.json
 
