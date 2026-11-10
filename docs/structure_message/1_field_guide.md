@@ -1844,7 +1844,8 @@ object properties:
 
 *Object*. Describes the structure of a geographic codelist. It comprises a set
 of GeoFeatureSetCodes, by adding a value in the Code that follows a pattern to
-represent a geo feature set.
+represent a geo feature set. A geographic codelist can only extend other
+geographic codelists (`codelistExtensions`).
 
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
@@ -1854,7 +1855,7 @@ See the schema file for more information.
 
 *Object*. Describes the structure of a geographic grid code list. These define a
 geographical grid composed of cells representing regular squared portions of the
-Earth.
+Earth. A geo grid codelist cannot extend other codelists.
 
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
