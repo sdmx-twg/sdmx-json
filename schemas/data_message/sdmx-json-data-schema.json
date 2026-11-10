@@ -675,7 +675,7 @@
 								"$ref":"#/$defs/localisedText"
 							},
 							"links":{
-								"description":"Links field is an array of link objects. Also used to specify the Annotation URL which points to an external resource which may contain or supplement the annotation (using 'self' as relationship). If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly. If appropriate, a collection of links to additional external resources.",
+								"description":"Links field is an array of link objects. Also used to specify the Annotation URL which points to an external resource which may contain or supplement the annotation. If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly. If appropriate, a collection of links to additional external resources.",
 								"$ref":"#/$defs/links"
 							}
 						},
