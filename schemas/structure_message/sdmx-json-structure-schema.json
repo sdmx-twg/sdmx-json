@@ -520,13 +520,13 @@
 						"format":"uri-reference"
 					},
 					"rel":{
-						"description":"Relationship of the object to the resource. See semantics below. Use 'self' to indicate the urn to the parent object.",
+						"description":"Relationship of the object to the resource. The value is prefixed with the source of its semantics: sdmx for SDMX artefact types (e.g. sdmx:dataStructure), rfc for the link relation types of RFC 8288 (e.g. rfc:alternate, rfc:help), misc for miscellaneous types (e.g. misc:calendar, misc:source), skos for SKOS relationships (e.g. skos:exactMatch), xkos for XKOS relationships (e.g. xkos:generalizes), and x for custom extensions (e.g. x:catalog). The relationship rfc:self should not be used for SDMX artefacts, as this is already expressed in their urn.",
 						"anyOf":[
 							{
 								"type":"string"
 							},
 							{
-								"description":"structure: provides a reference to the data structure or metadata structure definition depending on the context. Other SDMX artefact types can be specified, e.g. dataflow, provisionagreement, etc. For the others please see: https://tools.ietf.org/rfc/rfc5988.txt",
+								"description":"Deprecated since SDMX 3.2. Unprefixed relationship values, use the corresponding prefixed values instead. structure: provides a reference to the data structure or metadata structure definition depending on the context. Other SDMX artefact types can be specified, e.g. dataflow, provisionagreement, etc. For the others please see: https://tools.ietf.org/rfc/rfc5988.txt",
 								"type":"string",
 								"enum":[
 									"agency",
@@ -647,30 +647,171 @@
 									"working-copy",
 									"working-copy-of"
 								]
+							},
+							{
+								"description":"Predefined prefixed relationship values: SDMX artefact types (sdmx), RFC 8288 link relation types (https://www.rfc-editor.org/rfc/rfc8288) (rfc), misc:calendar (link to a release calendar), misc:source (information about the source of data), misc:request (the SDMX RESTful query that triggered the response), SKOS (skos) and XKOS (xkos) relationships. Custom relationships use the x prefix.",
+								"type":"string",
+								"enum":[
+									"sdmx:agency",
+									"sdmx:agencyScheme",
+									"sdmx:attributeDescriptor",
+									"sdmx:availabilityConstraint",
+									"sdmx:categorisation",
+									"sdmx:category",
+									"sdmx:categoryScheme",
+									"sdmx:categorySchemeMap",
+									"sdmx:code",
+									"sdmx:codelist",
+									"sdmx:componentMap",
+									"sdmx:concept",
+									"sdmx:conceptScheme",
+									"sdmx:conceptSchemeMap",
+									"sdmx:customType",
+									"sdmx:customTypeScheme",
+									"sdmx:dataAttribute",
+									"sdmx:dataConstraint",
+									"sdmx:dataConsumer",
+									"sdmx:dataConsumerScheme",
+									"sdmx:dataflow",
+									"sdmx:dataProvider",
+									"sdmx:dataProviderScheme",
+									"sdmx:dataStructure",
+									"sdmx:datePatternMap",
+									"sdmx:dimension",
+									"sdmx:dimensionDescriptor",
+									"sdmx:epochMap",
+									"sdmx:groupDimensionDescriptor",
+									"sdmx:hierarchicalCode",
+									"sdmx:hierarchy",
+									"sdmx:hierarchyAssociation",
+									"sdmx:itemSchemeMap",
+									"sdmx:level",
+									"sdmx:measure",
+									"sdmx:measureDescriptor",
+									"sdmx:metadataAttribute",
+									"sdmx:metadataAttributeDescriptor",
+									"sdmx:metadataConstraint",
+									"sdmx:metadataflow",
+									"sdmx:metadataProvider",
+									"sdmx:metadataProviderScheme",
+									"sdmx:metadataProvisionAgreement",
+									"sdmx:metadataSet",
+									"sdmx:metadataStructure",
+									"sdmx:namePersonalisation",
+									"sdmx:namePersonalisationScheme",
+									"sdmx:organisationSchemeMap",
+									"sdmx:organisationUnit",
+									"sdmx:organisationUnitScheme",
+									"sdmx:process",
+									"sdmx:processStep",
+									"sdmx:provisionAgreement",
+									"sdmx:reportingCategory",
+									"sdmx:reportingTaxonomy",
+									"sdmx:reportingTaxonomyMap",
+									"sdmx:representationMap",
+									"sdmx:ruleset",
+									"sdmx:rulesetScheme",
+									"sdmx:structureMap",
+									"sdmx:subscription",
+									"sdmx:timeDimension",
+									"sdmx:transformation",
+									"sdmx:transformationScheme",
+									"sdmx:transition",
+									"sdmx:userDefinedOperator",
+									"sdmx:userDefinedOperatorScheme",
+									"sdmx:valueList",
+									"sdmx:vtlCodelistMapping",
+									"sdmx:vtlConceptMapping",
+									"sdmx:vtlDataflowMapping",
+									"sdmx:vtlMappingScheme",
+									"rfc:alternate",
+									"rfc:appendix",
+									"rfc:bookmark",
+									"rfc:chapter",
+									"rfc:contents",
+									"rfc:copyright",
+									"rfc:current",
+									"rfc:describedby",
+									"rfc:edit",
+									"rfc:edit-media",
+									"rfc:enclosure",
+									"rfc:first",
+									"rfc:glossary",
+									"rfc:help",
+									"rfc:hub",
+									"rfc:index",
+									"rfc:last",
+									"rfc:latest-version",
+									"rfc:license",
+									"rfc:next",
+									"rfc:next-archive",
+									"rfc:payment",
+									"rfc:predecessor-version",
+									"rfc:prev",
+									"rfc:prev-archive",
+									"rfc:previous",
+									"rfc:related",
+									"rfc:replies",
+									"rfc:section",
+									"rfc:self",
+									"rfc:service",
+									"rfc:start",
+									"rfc:stylesheet",
+									"rfc:subsection",
+									"rfc:successor-version",
+									"rfc:up",
+									"rfc:version-history",
+									"rfc:via",
+									"rfc:working-copy",
+									"rfc:working-copy-of",
+									"misc:calendar",
+									"misc:source",
+									"misc:request",
+									"skos:definition",
+									"skos:broader",
+									"skos:narrower",
+									"skos:related",
+									"skos:exactMatch",
+									"skos:closeMatch",
+									"skos:broadMatch",
+									"skos:narrowMatch",
+									"skos:relatedMatch",
+									"xkos:generalizes",
+									"xkos:specializes",
+									"xkos:precedes"
+								]
 							}
 						]
 					},
 					"urn":{
-						"description":"The urn holds any valid SDMX Registry URN (see SDMX Registry Specification for details).",
-						"$ref":"#/$defs/urn"
+						"description":"The urn holds any valid SDMX Registry URN (see SDMX Registry Specification for details) or any other URN.",
+						"type":"string",
+						"pattern":"^[uU][rR][nN]:"
 					},
 					"uri":{
-						"description":"The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource.",
+						"description":"Deprecated since SDMX 3.2. The uri attribute holds a URI that contains a link to additional information about the resource, such as a web page. This uri is not an SDMX resource.",
 						"type":"string",
 						"format":"uri"
 					},
 					"title":{
+						"description":"A human-readable (best-language-match) title of the linked resource.",
 						"$ref":"#/$defs/localisedBestMatchText"
 					},
 					"titles":{
+						"description":"Human-readable localised titles of the linked resource. A title must be unique for a given locale.",
 						"$ref":"#/$defs/localisedText"
 					},
 					"type":{
-						"description":"A hint about the type of representation returned by the link.",
+						"description":"A hint about the media type of the representation returned by the link (e.g. application/pdf, text/html). See the list of media types assigned by the IANA.",
 						"type":"string"
 					},
 					"hreflang":{
-						"description":"The natural language of the external link, the same as used in the HTTP Accept-Language request header.",
+						"description":"Deprecated since SDMX 3.2, use locale instead. The natural language of the external link, the same as used in the HTTP Accept-Language request header.",
+						"type":"string",
+						"pattern":"^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$"
+					},
+					"locale":{
+						"description":"The locale of the linked resource, based on the IETF BCP 47 language tag.",
 						"type":"string",
 						"pattern":"^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?((?:-(?:[0-9a-z]{5,8}|[0-9][0-9a-z]{3}))*)?((?:-[0-9a-wy-z](?:-[0-9a-z]{2,8})+)*)?(-x(?:-[0-9a-z]{1,8})+)?$|^(x(?:-[0-9a-z]{1,8})+)$"
 					}
@@ -818,7 +959,7 @@
 					"$ref":"#/$defs/localisedText"
 				},
 				"links":{
-					"description":"Links field is an array of link objects. Also used to specify the Annotation URL which points to an external resource which may contain or supplement the annotation (using 'self' as relationship). If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly. If appropriate, a collection of links to additional external resources.",
+					"description":"Links field is an array of link objects. Also used to specify the Annotation URL which points to an external resource which may contain or supplement the annotation. If a specific behavior is desired, an annotation type should be defined which specifies the use of this field more exactly. If appropriate, a collection of links to additional external resources.",
 					"$ref":"#/$defs/links"
 				}
 			},
@@ -851,9 +992,13 @@
 						"id":{
 							"$ref":"#/$defs/idType"
 						},
+						"urn":{
+							"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details) of the object.",
+							"$ref":"#/$defs/urn"
+						},
 						"links":{
 							"$ref":"#/$defs/links",
-							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
+							"description":"Links field is an array of link objects. If appropriate, a collection of links to additional external resources."
 						}
 					}
 				},
@@ -871,9 +1016,13 @@
 						"id":{
 							"$ref":"#/$defs/NCNameIDType"
 						},
+						"urn":{
+							"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details) of the object.",
+							"$ref":"#/$defs/urn"
+						},
 						"links":{
 							"$ref":"#/$defs/links",
-							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
+							"description":"Links field is an array of link objects. If appropriate, a collection of links to additional external resources."
 						}
 					}
 				},
@@ -958,7 +1107,13 @@
 							"type":"boolean"
 						},
 						"isExternalReference":{
+							"description":"If set to `true` it indicates that the content of the object is held externally. The actual reference is given in the structureURL, which must return a valid SDMX structure message.",
 							"type":"boolean"
+						},
+						"structureURL":{
+							"description":"The full URL at which the externally held object can be retrieved (see isExternalReference).",
+							"type":"string",
+							"format":"uri"
 						},
 						"validFrom":{
 							"type":"string",
@@ -1009,7 +1164,13 @@
 							"type":"boolean"
 						},
 						"isExternalReference":{
+							"description":"If set to `true` it indicates that the content of the object is held externally. The actual reference is given in the structureURL, which must return a valid SDMX structure message.",
 							"type":"boolean"
+						},
+						"structureURL":{
+							"description":"The full URL at which the externally held object can be retrieved (see isExternalReference).",
+							"type":"string",
+							"format":"uri"
 						},
 						"validFrom":{
 							"type":"string",
@@ -1019,9 +1180,13 @@
 							"type":"string",
 							"format":"date-time"
 						},
+						"urn":{
+							"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details) of the object.",
+							"$ref":"#/$defs/urn"
+						},
 						"links":{
 							"$ref":"#/$defs/links",
-							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
+							"description":"Links field is an array of link objects. If appropriate, a collection of links to additional external resources."
 						}
 					}
 				}
@@ -1056,7 +1221,13 @@
 							"type":"boolean"
 						},
 						"isExternalReference":{
+							"description":"If set to `true` it indicates that the content of the object is held externally. The actual reference is given in the structureURL, which must return a valid SDMX structure message.",
 							"type":"boolean"
+						},
+						"structureURL":{
+							"description":"The full URL at which the externally held object can be retrieved (see isExternalReference).",
+							"type":"string",
+							"format":"uri"
 						},
 						"validFrom":{
 							"type":"string",
@@ -2078,9 +2249,13 @@
 							"const":"AttributeDescriptor",
 							"description":"The id attribute is provided in this case for completeness. However, its value is fixed to AttributeDescriptor."
 						},
+						"urn":{
+							"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details) of the object.",
+							"$ref":"#/$defs/urn"
+						},
 						"links":{
 							"$ref":"#/$defs/links",
-							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
+							"description":"Links field is an array of link objects. If appropriate, a collection of links to additional external resources."
 						},
 						"attributes":{
 							"type":"array",
@@ -2128,9 +2303,13 @@
 							"const":"MetadataAttributeDescriptor",
 							"description":"The id attribute is provided in this case for completeness. However, its value is fixed to MetadataAttributeDescriptor."
 						},
+						"urn":{
+							"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details) of the object.",
+							"$ref":"#/$defs/urn"
+						},
 						"links":{
 							"$ref":"#/$defs/links",
-							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
+							"description":"Links field is an array of link objects. If appropriate, a collection of links to additional external resources."
 						},
 						"metadataAttributes":{
 							"type":"array",
@@ -2159,9 +2338,13 @@
 				},
 				{
 					"properties":{
+						"urn":{
+							"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details) of the object.",
+							"$ref":"#/$defs/urn"
+						},
 						"links":{
 							"$ref":"#/$defs/links",
-							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
+							"description":"Links field is an array of link objects. If appropriate, a collection of links to additional external resources."
 						},
 						"metadataAttributeReference":{
 							"$ref":"#/$defs/NestedIDType",
@@ -3644,9 +3827,13 @@
 						"id":{
 							"const":"DimensionDescriptor"
 						},
+						"urn":{
+							"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details) of the object.",
+							"$ref":"#/$defs/urn"
+						},
 						"links":{
 							"$ref":"#/$defs/links",
-							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
+							"description":"Links field is an array of link objects. If appropriate, a collection of links to additional external resources."
 						}
 					}
 				},
@@ -4515,9 +4702,13 @@
 						"id":{
 							"const":"MeasureDescriptor"
 						},
+						"urn":{
+							"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details) of the object.",
+							"$ref":"#/$defs/urn"
+						},
 						"links":{
 							"$ref":"#/$defs/links",
-							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
+							"description":"Links field is an array of link objects. If appropriate, a collection of links to additional external resources."
 						}
 					}
 				},
@@ -5121,9 +5312,13 @@
 								"REPORTING_YEAR_END_DAY"
 							]
 						},
+						"urn":{
+							"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details) of the object.",
+							"$ref":"#/$defs/urn"
+						},
 						"links":{
 							"$ref":"#/$defs/links",
-							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
+							"description":"Links field is an array of link objects. If appropriate, a collection of links to additional external resources."
 						},
 						"usage":{
 							"$ref":"#/$defs/UsageType",
@@ -5737,9 +5932,13 @@
 						"id":{
 							"const":"TIME_PERIOD"
 						},
+						"urn":{
+							"description":"The urn holds a valid SDMX Registry URN (see SDMX Registry Specification for details) of the object.",
+							"$ref":"#/$defs/urn"
+						},
 						"links":{
 							"$ref":"#/$defs/links",
-							"description":"Links field is an array of link objects. Also used to specify the URI or the URN to itself. If appropriate, a collection of links to additional external resources."
+							"description":"Links field is an array of link objects. If appropriate, a collection of links to additional external resources."
 						}
 					}
 				},

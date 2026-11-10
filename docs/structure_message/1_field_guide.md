@@ -313,6 +313,8 @@ on links.
 All SDMX artefact types share the following common object properties:
 
 - id - *String*. Identifier for the resource.
+- urn - *String* *optional*. The URN of the resource, a valid SDMX Registry URN
+  (see SDMX Registry Specification for details).
 - agencyID - *String* *optional*. ID of the agency maintaining this resource.
 - version - *String* *optional*. Version of this resource. Can be a legacy
   version with two version parts (e.g. '1.0') for fully mutable artefacts, or a
@@ -338,12 +340,15 @@ All SDMX artefact types share the following common object properties:
   e.g., when obtained as a response to a GET query that requested specific
   languages through the HTTP header “Accept-Language”.
 - isExternalReference - *Boolean* *optional*. If set to “true” it indicates that
-  the content of the resource is held externally.
+  the content of the resource is held externally. The actual reference is given
+  in the `structureURL`.
+- structureURL - *String* *optional*. The full URL at which the externally held
+  resource can be retrieved. It must return a valid SDMX structure message.
 - annotations - *Array* *optional*. Provides a list of annotation objects.
 - links - *Array* *optional*. A collection of links to additional resources for
-  the resource. See the section *[link](#link)*. **It is recommended to
-  systematically include as the first link a self-referencing hyperlink (link
-  with "rel"="self") to indicate the URL address of the resource, and its URN.**
+  the resource. See the section *[link](#link)*. The URN of the resource is
+  given in its `urn` property (the relationship `rfc:self` should not be used for
+  SDMX artefacts).
 
 See the section on [localised text elements](./4_localised_text_elements.md) on how
 the message deals with languages.
@@ -482,6 +487,8 @@ VtlMappingScheme, NamePersonalisationScheme, RulesetScheme or
 UserDefinedOperatorScheme).
 
 - id - *String*. Identifier for the item.
+- urn - *String* *optional*. The URN of the item, a valid SDMX Registry URN (see
+  SDMX Registry Specification for details).
 - name - *String*. Human-readable (best-language-match) name of the
   item.
 - names - *Object* *optional*. Human-readable localised *[names](#names)* of the
@@ -1927,13 +1934,7 @@ See the schema file for more information.
             "en": "SDMX Agency Scheme",
             "fr": "Schéma des agences SDMX"
         },
-        "links": [
-            {
-                "href": "https://web-service-root/agencyScheme/SDMX/AGENCIES/1.0",
-                "rel": "self",
-                "urn": "urn:sdmx:org.sdmx.infomodel.base.AgencyScheme=SDMX:AGENCIES(1.0)"
-            }
-        ],
+        "urn": "urn:sdmx:org.sdmx.infomodel.base.AgencyScheme=SDMX:AGENCIES(1.0)",
         "isPartial": true,
         "agencies": [
             {
@@ -2053,13 +2054,7 @@ In addition, `dataflow` has the following property:
             "en": "Exchange Rates",
             "fr": "Taux de change"
         },
-        "links": [
-            {
-                "href": "/dataflow/ECB/EXR/1.0",
-                "rel": "self",
-                "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:EXR(1.0)",
-            }
-        ],
+        "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:EXR(1.0)",
         "structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_EXR1(1.0)",
         "dimensionConstraint": ["FREQ", "CUR", "CURR_DEMOM"]
     }
@@ -2202,13 +2197,7 @@ In addition, `categorisation` has the following properties:
             "en": "Categorise: DATAFLOWECB:EXR(1.0)",
             "fr": "Catégoriser: DATAFLOWECB:EXR(1.0)"
         },
-        "links": [
-            {
-                "href": "/categorisation/ECB/53A341E8-D48B-767E-D5FF-E2E3E0E2BB19/1.0",
-                "rel": "self",
-                "urn": "urn:sdmx:org.sdmx.infomodel.categoryscheme.Categorisation=ECB:53A341E8-D48B-767E-D5FF-E2E3E0E2BB19(1.0)"
-            }
-        ],
+        "urn": "urn:sdmx:org.sdmx.infomodel.categoryscheme.Categorisation=ECB:53A341E8-D48B-767E-D5FF-E2E3E0E2BB19(1.0)",
         "source": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:EXR(1.0)",
         "target": "urn:sdmx:org.sdmx.infomodel.categoryscheme.CategoryScheme=ECB:MOBILE_NAVI(1.0).07"
     }
@@ -2251,13 +2240,7 @@ In addition, `dataConstraint` has the following properties:
           "en": "Data constraints for the EXR dataflow",
           "fr": "Constraintes de données pour le dataflow EXR"
         },
-        "links": [
-          {
-            "href": "/constraint/ECB/EXR_CONSTRAINTS/1.0",
-            "rel": "self",
-            "urn": "urn:sdmx:org.sdmx.infomodel.registry.DataConstraint=ECB:EXR_CONSTRAINTS(1.0)"
-          }
-        ],
+        "urn": "urn:sdmx:org.sdmx.infomodel.registry.DataConstraint=ECB:EXR_CONSTRAINTS(1.0)",
         "constraintAttachment": {
             # constraintAttachment object #
         },
@@ -2311,13 +2294,7 @@ In addition, `availabilityConstraint` has the following properties:
       "en": "Availability constraints for the EXR dataflow",
       "fr": "Constraintes de disponibilité pour le dataflow EXR"
      },
-     "links": [
-      {
-       "href": "/constraint/ECB/EXR_CONSTRAINTS/1.0",
-       "rel": "self",
-       "urn": "urn:sdmx:org.sdmx.infomodel.registry.AvailabilityConstraint=ECB:EXR_CONSTRAINTS(1.0)"
-      }
-     ],
+     "urn": "urn:sdmx:org.sdmx.infomodel.registry.AvailabilityConstraint=ECB:EXR_CONSTRAINTS(1.0)",
      "constraintAttachment": {
       # constraintAttachment object #
      },
@@ -2360,13 +2337,7 @@ In addition, `metadataConstraint` has the following properties:
             "en": "Constraints for the EXR dataflow",
             "fr": "Constraintes pour le dataflow EXR"
         },
-        "links": [
-            {
-                "href": "/constraint/ECB/EXR_CONSTRAINTS/1.0",
-                "rel": "self",
-                "urn": "urn:sdmx:org.sdmx.infomodel.registry.ContentConstraint=ECB:EXR_CONSTRAINTS(1.0)"
-            }
-        ],
+        "urn": "urn:sdmx:org.sdmx.infomodel.registry.ContentConstraint=ECB:EXR_CONSTRAINTS(1.0)",
         "constraintAttachment": {
             # constraintAttachment object #
         },
