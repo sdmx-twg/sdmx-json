@@ -561,10 +561,18 @@
 			"type":"string"
 		},
 		"VersionType":{
-			"description":"VersionType is used to communicate version information. The format is restricted to semantic versioning rules (reduced version without 'build metadata'.",
+			"description":"VersionType is used to communicate version information. The format is restricted to allow for simple incrementing and sorting of version number. The version consists of an unlimited set of numeric components, separated by the '.' character. When processing version, each numeric component (the number preceding and following any '.' character) should be parsed as an integer. Thus, a version of 1.3 and 1.03 would be equivalent, as both the '3' component and the '03' component would parse to an integer value of 3.",
 			"type":"string",
-			"pattern":"^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?$",
-			"default":1.0
+			"anyOf":[
+				{
+					"pattern":"^(0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?$",
+					"description":"Legacy version format: describes the version number format previously supported in SDMX. The format is restricted to allow for simple incrementing and sorting of version number. The version consists of an unlimited set of numeric components, separated by the '.' character. When processing version, each numeric component (the number preceding and following any '.' character) should be parsed as an integer. Thus, a version of 1.3 and 1.03 would be equivalent, as both the '3' component and the '03' component would parse to an integer value of 3."
+				},
+				{
+					"pattern":"^(0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?$",
+					"description":"Semantic version format: is a simple type for validating semantic version in the format major.minor.patch[-extension]."
+				}
+			]
 		},
 		"MetadataSetType":{
 			"description":"MetadataSetType describes the structure for a metadata set, which contains a collection of reported metadata against a set of values for a given full or partial target identifier, as described in a metadata structure definition. The metadata set may contain reported metadata for multiple report structures defined in a metadata structure definition.",

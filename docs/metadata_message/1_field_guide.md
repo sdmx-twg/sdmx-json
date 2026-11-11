@@ -282,8 +282,10 @@ structures defined in a metadata structure definition.
   message.
 - id - *String*. Identifier for the metadata set.
 - agencyID - *String*. ID of the agency maintaining this metadata set.
-- version - *String* *optional*. Version of this metadata set according to
-  semantic versioning. If not specified then the metadata set is non-versioned.
+- version - *String* *optional*. Version of this metadata set. Can be a legacy
+  version with two version parts (e.g. '1.0'), or a semantic version according
+  to SDMX versioning rules with 3 parts (e.g. '1.0.0') or with 4 parts (e.g.
+  '1.0.0-draft'). If not specified then the metadata set is non-versioned.
 - isExternalReference - *Boolean* *optional*. If set to “true” it indicates that
   the content of the metadata set is held externally.
 - metadataflow - *String*. URN reference to the metadataflow definition (either
