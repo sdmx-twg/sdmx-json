@@ -504,7 +504,9 @@ Each of the components may contain the following fields:
     limit on its occurrences. For non-enumerated components, if > 1 then the
     component values will use the `values` property of the component value instead
     of `value`. The default is 1. `maxOccurs` must not be smaller than
-    `minOccurs`.
+    `minOccurs`. If `maxOccurs` is greater than 1, the values of the component
+    in the `dataSets` are always presented as an array (of values or of
+    indexes), even if only one value is reported.
 - links - *Array* *optional*. *Links* field is an array of *[component link](#component-link)*
     objects. If appropriate, a collection of links to additional information
     regarding the component.
@@ -524,7 +526,8 @@ If `format` is not used (thus the component values are enumerated) then the
 component values will be flat-listed using their `id` and `name`, independently
 from the value of `maxOccurs`. For attributes and measures, if multiple
 enumerated values are allowed then the indexes of the corresponding component
-values are to listed in arrays in the related `dataSet`.
+values are to listed in arrays in the related `dataSet`, even if only one value
+is reported.
 
 See the section on [localised text elements](./4_localised_text_elements.md) on
 how the message deals with languages.
@@ -1819,6 +1822,8 @@ object within the `structure.measures.observation` array. Indexes for
 `structure.attributes.observation` array. The data type for the array
 `annotation` elements is *integer*. Indexes for `annotation` values correspond
 to the indexes in the array of `annotations` in the `structure` element.
+Values of `measures` and `attributes` whose `maxOccurs` is greater than 1 are
+always presented as arrays, even if only one value is reported.
 
 For information on how to handle the indexes for `dimensions`, `measures`,
 `attributes` and `annotations` see the section dedicated to [handling
