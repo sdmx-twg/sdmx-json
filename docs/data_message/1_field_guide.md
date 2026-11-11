@@ -966,6 +966,10 @@ information:
     the annotation.
 - texts - *Object* *optional*. A list of human-readable localised texts (see
     *[names](#names)*) of the annotation.
+    Note that `value` holds non-localised content (e.g. machine-readable
+    values such as codes, numbers or flags), while `text` and `texts` hold
+    localised, human-readable content; they are alternatives for different
+    kinds of content, not copies of the same content.
 - links - *Array* *optional*. *Links* field is an array of *[annotation link](#annotation-link)*
     objects. If appropriate, a link to an additional external resource which may
     contain or supplement the annotation.
