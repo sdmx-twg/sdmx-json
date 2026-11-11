@@ -1804,6 +1804,16 @@ object properties:
   ability to describe simple hierarchies within a single codelist, by
   referencing the ID value of another code in the same codelist. The start and
   end properties are not used.
+- validFrom - *String* *optional*. Used for business validity: values are only
+  valid for this code if their time periods start at the earliest at the start
+  of the time period defined in this property, which is a standard time period
+  (e.g. `2008` means from 2008-01-01T00:00:00). The validity is checked against
+  the reported time period of the data, not against the time at which the data
+  are processed.
+- validTo - *String* *optional*. Used for business validity: values are only
+  valid for this code if their time periods end at the latest at the end of
+  the time period defined in this property, which is a standard time period
+  (e.g. `2008` means until 2008-12-31T23:59:59).
 
 ??? example
 
@@ -1834,7 +1844,9 @@ object properties:
                     "en": "Code 11",
                     "fr": "Code 11"
                 }
-                "parent": "CODE1"
+                "parent": "CODE1",
+                "validFrom": "2008",
+                "validTo": "2020-Q2"
             }
         ]
     }
