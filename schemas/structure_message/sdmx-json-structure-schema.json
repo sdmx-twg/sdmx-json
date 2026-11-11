@@ -5909,12 +5909,12 @@
 							}
 						},
 						"validFrom":{
-							"type":"string",
-							"format":"date-time"
+							"$ref":"#/$defs/StandardTimePeriodType",
+							"description":"validFrom is optionally used for business validity: the mapping is only applicable to values whose time periods start at the earliest at the start of the time period defined in this property (e.g. 2008 means from 2008-01-01T00:00:00)."
 						},
 						"validTo":{
-							"type":"string",
-							"format":"date-time"
+							"$ref":"#/$defs/StandardTimePeriodType",
+							"description":"validTo is optionally used for business validity: the mapping is only applicable to values whose time periods end at the latest at the end of the time period defined in this property (e.g. 2008 means until 2008-12-31T23:59:59)."
 						}
 					}
 				}
