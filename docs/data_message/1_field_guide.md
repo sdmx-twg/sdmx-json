@@ -1087,7 +1087,8 @@ The `dataSet` properties are:
       non-dimension component values allows restricting the deletion of measure,
       attribute or data-related reference metadata values to the ones being
       present. Instead of real values for non-dimensional components, it is
-      sufficient to use any valid value. With this, whole datasets, any slices
+      sufficient to use any valid or intentionally missing value. With this, whole
+      datasets, any slices
       of observations for dimension groups such as time series, observations or
       individual measure, attribute and data-related reference metadata
       attributes values can be deleted. Dimension values for higher-level
