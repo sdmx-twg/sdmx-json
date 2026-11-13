@@ -1,0 +1,53 @@
+{
+	"$schema":"https://json.sdmx.org/2.2/sdmx-json-registry-schema.json",
+	"meta":{
+		"id":"REG_QUERY_1",
+		"test":true,
+		"prepared":"2026-11-13T10:00:00Z",
+		"contentLanguages":[
+			"en"
+		],
+		"sender":{
+			"id":"ECB",
+			"name":"European Central Bank",
+			"names":{
+				"en":"European Central Bank"
+			}
+		}
+	},
+	"data":{
+		"registrations":[
+			{
+				"id":"REG_EXR_1",
+				"lastUpdated":"2026-11-01T08:30:00Z",
+				"provisionAgreement":"urn:sdmx:org.sdmx.infomodel.registry.ProvisionAgreement=ECB:PA_EXR(1.0.0)",
+				"datasource":{
+					"sdmxApi":{
+						"entryPoint":"https://sdmx.example.org/rest",
+						"sdmxApiVersion":"2.2"
+					}
+				}
+			},
+			{
+				"id":"REG_BSI_1",
+				"lastUpdated":"2026-10-15T12:00:00Z",
+				"provisionAgreement":"urn:sdmx:org.sdmx.infomodel.registry.ProvisionAgreement=ECB:PA_BSI(1.0.0)",
+				"datasource":{
+					"file":"https://sdmx.example.org/files/bsi-2026-09.json"
+				}
+			},
+			{
+				"id":"REG_ICP_1",
+				"lastUpdated":"2026-11-05T07:00:00Z",
+				"provisionAgreement":"urn:sdmx:org.sdmx.infomodel.registry.ProvisionAgreement=ECB:PA_ICP(1.0.0)",
+				"datasource":{
+					"file":"https://sdmx.example.org/files/icp-2026-10.json",
+					"sdmxApi":{
+						"entryPoint":"https://sdmx.example.org/rest/v1",
+						"sdmxApiVersion":"1.5"
+					}
+				}
+			}
+		]
+	}
+}

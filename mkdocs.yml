@@ -32,3 +32,6 @@ nav:
     - Security Considerations: metadata_message/5_security_considerations.md
     - Extending SDMX-JSON: metadata_message/6_extending_sdmx_json.md
     - References: metadata_message/7_references.md
+- Registry Message:
+    - registry_message/index.md
+    - Field Guide: registry_message/1_field_guide.md
