@@ -52,5 +52,17 @@ versions are required or where the information on the language used is required.
 **It is recommended to indicate all languages used anywhere in the message for
 localised elements through http Content-Language response header (languages of
 the intended audience) and/or through a “contentLanguages” property in the meta
-tag.** The main language used can be indicated through the “lang” property in
-the meta tag.
+tag.** The main language used is indicated by the first element of
+“contentLanguages”.
+
+**Conversion to formats that require the language of each text (e.g. the
+`xml:lang` attribute in SDMX-ML):**
+
+- Use the localised text objects (`names`, `descriptions`, etc.), which indicate
+  the language of each text. Messages to be converted should therefore be
+  retrieved with all languages, i.e. with `*` as the value of the
+  Accept-Language header.
+- Otherwise, if “contentLanguages” contains only one language, then all
+  best-language-match texts are in that language.
+- Otherwise, the language of best-language-match texts is unknown and should be
+  indicated as undetermined (e.g. `xml:lang="und"`).
