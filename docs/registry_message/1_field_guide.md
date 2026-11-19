@@ -3,8 +3,9 @@
 ## message
 
 Message is the top level object and it contains the requested information
-(data registrations) as well as the meta-information describing the (technical)
-context of the message and, possibly, status information.
+(data and reference metadata registrations) as well as the meta-information
+describing the (technical) context of the message and, possibly, status
+information.
 
 - $schema - *String* *optional*. Contains the URL to the schema allowing to
   validate the message. This also allows identifying the version of SDMX-JSON
@@ -46,13 +47,19 @@ The properties data and errors CAN coexist in the same message.
 
 *Object* *optional*. Contains the message's “primary data”.
 
-- registrations - *Array* *optional*. A collection of
-  *[registrations](#registration)*.
+- dataRegistrations - *Array* *optional*. A collection of
+  *[data registrations](#dataregistration)*.
+- metadataRegistrations - *Array* *optional*. A collection of
+  *[metadata registrations](#metadataregistration)*.
 
-## registration
+## dataRegistration
 
-*Object*. A data registration provides the information on where the data
-registered against a provision agreement can be retrieved.
+*Object*. A data registration provides the information on where the registered
+data can be retrieved. The registered data must be associated with a provision
+agreement, a dataflow, or a data structure definition: exactly one of the three
+properties below is provided. If possible, the provision agreement should be
+specified. Only in cases where this is not possible should the dataflow or data
+structure definition be used.
 
 - id - *String* *optional*. Registry assigned identification for the
   registration. It must be provided in a response message (unless an error
@@ -61,8 +68,12 @@ registered against a provision agreement can be retrieved.
 - lastUpdated - *String* *optional*. Timestamp for the last time the data
   source was updated. Values must follow the ISO 8601 syntax for combined dates
   and times, including time zone.
-- provisionAgreement - *String*. URN of the provision agreement that the data
-  are registered against.
+- provisionAgreement - *String* *optional*. URN of the provision agreement that
+  the data are registered against.
+- dataflow - *String* *optional*. URN of the dataflow that the data are
+  registered against.
+- dataStructure - *String* *optional*. URN of the data structure definition that
+  the data are registered against.
 - datasource - *Object*. The *[data source](#datasource)* from which the
   registered data can be retrieved.
 
@@ -74,24 +85,61 @@ registered against a provision agreement can be retrieved.
       "lastUpdated": "2026-11-01T08:30:00Z",
       "provisionAgreement": "urn:sdmx:org.sdmx.infomodel.registry.ProvisionAgreement=ECB:PA_EXR(1.0.0)",
       "datasource": {
-        "sdmxApi": {
-          "entryPoint": "https://sdmx.example.org/rest",
-          "sdmxApiVersion": "2.2"
-        }
+        "sdmxApis": [
+          {
+            "entryPoint": "https://sdmx.example.org/rest/v2",
+            "sdmxApiVersion": "2.2"
+          }
+        ]
       }
     }
     ```
 
 ### datasource
 
-*Object*. Specifies the data source. A file, an SDMX REST API, or both must be
-specified.
+*Object*. Specifies where the registered data can be retrieved: either one or
+more files, or one or more SDMX REST APIs, but not both.
 
-- file - *String* *optional*. The URL of an SDMX data message accessible as a
-  file (simple data source).
-- sdmxApi - *Object* *optional*. A web service compliant with the
-  *[SDMX REST API](#sdmxapi)*, from which the registered data can be queried
-  (queryable data source).
+- files - *Array* *optional*. One or more *[files](#file)*. Each file must have a
+  distinct url. When several files are provided, for example the same content
+  as SDMX-CSV and as SDMX-JSON, each must have a format, and the formats must be
+  distinct.
+- sdmxApis - *Array* *optional*. One or more web services compliant with the
+  *[SDMX REST API](#sdmxapi)*. Each must have a distinct combination of entry
+  point and SDMX REST API version, for example the same service for two
+  versions of the API.
+
+??? example
+
+    ```json
+    "datasource": {
+      "files": [
+        {
+          "url": "https://sdmx.example.org/files/icp-2026-10.csv",
+          "format": "application/vnd.sdmx.data+csv;version=2.1.0"
+        },
+        {
+          "url": "https://sdmx.example.org/files/icp-2026-10.json",
+          "format": "application/vnd.sdmx.data+json;version=2.1.0"
+        }
+      ]
+    }
+    ```
+
+### file
+
+*Object*. Describes a static file, in terms of its URL and its format.
+
+- url - *String*. The URL of the file.
+- format - *String* *optional*. The SDMX media type of the file, using the same
+  syntax as the SDMX REST API HTTP Accept header, in the form
+  `application/vnd.sdmx.data+{format};version={major.minor.patch}`, where
+  format is one of `json`, `xml`, `csv` or `parquet` (e.g.
+  `application/vnd.sdmx.data+csv;version=2.1.0`). For reference metadata files,
+  the form is `application/vnd.sdmx.metadata+{format};version={major.minor.patch}`,
+  where format is one of `json`, `xml` or `csv`. The format is optional for
+  compatibility with existing registrations, but required when several files
+  are provided.
 
 ### sdmxApi
 
@@ -99,23 +147,68 @@ specified.
 
 - entryPoint - *String*. The URL of the entry point of the SDMX REST web
   service (e.g. `https://sdmx.example.org/rest`). It cannot be empty.
-- sdmxApiVersion - *String*. The version of the SDMX REST API implemented by
-  the entry point, which determines the syntax of the queries. It is given by
-  the code of a release of the SDMX REST API, written as `major.minor`, without
-  the leading "v" and the patch number (e.g. `1.5`, `2.1` or `2.2`, from the
-  releases v1.5.0, v2.1.0 and v2.2.2).
-
-The same properties describe an SDMX REST web service in the VTL query
-extraction of the structure message.
+- sdmxApiVersion - *String*. The version of the SDMX REST API supported at this
+  entry point, which determines how queries are formulated, expressed as either
+  major or major.minor (e.g. `1`, `2`, `2.1`, `2.3`).
+- specificationURL - *String* *optional*. The URL of a machine-readable
+  description of the service, such as an OpenAPI specification.
 
 ??? example
 
     ```json
-    "datasource": {
-      "file": "https://sdmx.example.org/files/icp-2026-10.json",
-      "sdmxApi": {
+    "sdmxApis": [
+      {
         "entryPoint": "https://sdmx.example.org/rest/v1",
         "sdmxApiVersion": "1.5"
+      },
+      {
+        "entryPoint": "https://sdmx.example.org/rest/v2",
+        "sdmxApiVersion": "2.2",
+        "specificationURL": "https://sdmx.example.org/rest/v2/openapi.json"
+      }
+    ]
+    ```
+
+## metadataRegistration
+
+*Object*. A metadata registration provides the information on where the
+registered reference metadata can be retrieved. The registered metadata must be
+associated with a metadata provision agreement, a metadataflow, or a metadata
+structure definition: exactly one of the three properties below is provided. If
+possible, the metadata provision agreement should be specified. Only in cases
+where this is not possible should the metadataflow or metadata structure
+definition be used.
+
+- id - *String* *optional*. Registry assigned identification for the
+  registration, as for *[data registrations](#dataregistration)*.
+- lastUpdated - *String* *optional*. Timestamp for the last time the metadata
+  source was updated. Values must follow the ISO 8601 syntax for combined dates
+  and times, including time zone.
+- metadataProvisionAgreement - *String* *optional*. URN of the metadata
+  provision agreement that the reference metadata are registered against.
+- metadataflow - *String* *optional*. URN of the metadataflow that the reference
+  metadata are registered against.
+- metadataStructure - *String* *optional*. URN of the metadata structure
+  definition that the reference metadata are registered against.
+- metadataSource - *Object*. Where the registered reference metadata can be
+  retrieved, with the same properties as the *[data source](#datasource)*:
+  either one or more *[files](#file)* (with reference metadata media types), or
+  one or more *[SDMX REST APIs](#sdmxapi)*.
+
+??? example
+
+    ```json
+    {
+      "id": "REG_QUALITY_1",
+      "lastUpdated": "2026-11-10T09:00:00Z",
+      "metadataProvisionAgreement": "urn:sdmx:org.sdmx.infomodel.registry.MetadataProvisionAgreement=ECB:QUALITY_ECB(1.0.0)",
+      "metadataSource": {
+        "files": [
+          {
+            "url": "https://sdmx.example.org/files/quality-2026.json",
+            "format": "application/vnd.sdmx.metadata+json;version=2.1.0"
+          }
+        ]
       }
     }
     ```

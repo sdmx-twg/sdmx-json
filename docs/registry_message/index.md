@@ -1,9 +1,10 @@
 # SDMX-JSON Registry Message
 
 As one of the standard SDMX exchange formats, the SDMX-JSON Registry Message is a
-JSON (JavaScript Object Notation) based message format for exchanging data
-registrations, i.e. the information on where the data registered against a
-provision agreement can be retrieved.
+JSON (JavaScript Object Notation) based message format for exchanging data and
+reference metadata registrations, i.e. the information on where the data or
+reference metadata registered against a provision agreement, a dataflow or a
+data structure definition (or their metadata counterparts) can be retrieved.
 
 The SDMX-JSON Registry Message format 2.2.0 supports the SDMX 3.2 Information
 Model (see the Data Provisioning section) and works together with the SDMX

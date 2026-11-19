@@ -18,10 +18,16 @@
 			"description":"Data contains the message's “primary data”.",
 			"type":"object",
 			"properties":{
-				"registrations":{
+				"dataRegistrations":{
 					"type":"array",
 					"items":{
-						"$ref":"#/$defs/RegistrationType"
+						"$ref":"#/$defs/DataRegistrationType"
+					}
+				},
+				"metadataRegistrations":{
+					"type":"array",
+					"items":{
+						"$ref":"#/$defs/MetadataRegistrationType"
 					}
 				}
 			},
@@ -540,14 +546,24 @@
 			"pattern":"^[A-Za-z0-9_@$-]+$",
 			"type":"string"
 		},
+		"MetadataflowReferenceType":{
+			"description":"MetadataflowReferenceType is a type for referencing a metadata flow object. It consists of a URN.",
+			"type":"string",
+			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.metadatastructure\\.Metadataflow=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
+		},
+		"MetadataProvisionAgreementReferenceType":{
+			"description":"MetadataProvisionAgreementReferenceType is a type for referencing a metadata provision agreement. It consists of a URN.",
+			"type":"string",
+			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.registry\\.MetadataProvisionAgreement=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
+		},
 		"specificationExtensions":{
 			"$comment":"While the SDMX-JSON Specification tries to accommodate most use cases, additional data can be added to extend the specification at certain points. The extensions properties are implemented as patterned fields that are always prefixed by x-. Extensions are one of the best ways to prove the viability of proposed additions to the specification. It is therefore RECOMMENDED that implementations be designed for extensibility to support community experimentation. Support for any one extension is OPTIONAL, and support for one extension does not imply support for others.",
 			"patternProperties":{
 				"^x-":true
 			}
 		},
-		"RegistrationType":{
-			"description":"RegistrationType provides the information needed for a data registration: the provision agreement that the data are registered against and the data source from which the registered data can be retrieved.",
+		"DataRegistrationType":{
+			"description":"DataRegistrationType provides the information needed for a data registration. The registered data must be associated with a provision agreement, a dataflow, or a data structure definition. If possible, the provision agreement should be specified. Only in cases where this is not possible should the dataflow or data structure definition be used.",
 			"type":"object",
 			"properties":{
 				"id":{
@@ -563,50 +579,253 @@
 					"$ref":"#/$defs/ProvisionAgreementReferenceType",
 					"description":"Urn reference to the provision agreement that the data are registered against."
 				},
+				"dataflow":{
+					"$ref":"#/$defs/DataflowReferenceType",
+					"description":"Urn reference to the dataflow that the data are registered against."
+				},
+				"dataStructure":{
+					"$ref":"#/$defs/DataStructureReferenceType",
+					"description":"Urn reference to the data structure definition that the data are registered against."
+				},
 				"datasource":{
 					"$ref":"#/$defs/DataSourceType",
-					"description":"The data source from which the registered data can be retrieved."
+					"description":"Identifies where the registered data can be retrieved, either as one or more files or from one or more SDMX REST APIs."
 				}
 			},
 			"required":[
-				"provisionAgreement",
 				"datasource"
+			],
+			"oneOf":[
+				{
+					"required":[
+						"provisionAgreement"
+					]
+				},
+				{
+					"required":[
+						"dataflow"
+					]
+				},
+				{
+					"required":[
+						"dataStructure"
+					]
+				}
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
+		},
+		"MetadataRegistrationType":{
+			"description":"MetadataRegistrationType provides the information needed for a reference metadata registration. The registered metadata must be associated with a metadata provision agreement, a metadataflow, or a metadata structure definition. If possible, the metadata provision agreement should be specified. Only in cases where this is not possible should the metadataflow or metadata structure definition be used.",
+			"type":"object",
+			"properties":{
+				"id":{
+					"$ref":"#/$defs/idType",
+					"description":"Registry assigned identification for the registration. It must be provided in a response message (unless an error occurred while submitting a new registration), and should be included when updating or deleting a registration."
+				},
+				"lastUpdated":{
+					"type":"string",
+					"format":"date-time",
+					"description":"Timestamp for the last time the metadata source was updated."
+				},
+				"metadataProvisionAgreement":{
+					"$ref":"#/$defs/MetadataProvisionAgreementReferenceType",
+					"description":"Urn reference to the metadata provision agreement that the reference metadata are registered against."
+				},
+				"metadataflow":{
+					"$ref":"#/$defs/MetadataflowReferenceType",
+					"description":"Urn reference to the metadataflow that the reference metadata are registered against."
+				},
+				"metadataStructure":{
+					"$ref":"#/$defs/MetadataStructureReferenceType",
+					"description":"Urn reference to the metadata structure definition that the reference metadata are registered against."
+				},
+				"metadataSource":{
+					"$ref":"#/$defs/MetadataSourceType",
+					"description":"Identifies where the registered reference metadata can be retrieved, either as one or more files or from one or more SDMX REST APIs."
+				}
+			},
+			"required":[
+				"metadataSource"
+			],
+			"oneOf":[
+				{
+					"required":[
+						"metadataProvisionAgreement"
+					]
+				},
+				{
+					"required":[
+						"metadataflow"
+					]
+				},
+				{
+					"required":[
+						"metadataStructure"
+					]
+				}
 			],
 			"$ref":"#/$defs/specificationExtensions",
 			"unevaluatedProperties":false
 		},
 		"DataSourceType":{
-			"description":"DataSourceType specifies a data source. A file, an SDMX REST API, or both must be specified.",
+			"description":"DataSourceType specifies where the registered data can be retrieved: either one or more files, or one or more SDMX REST APIs, but not both.",
 			"type":"object",
 			"properties":{
-				"file":{
+				"files":{
+					"type":"array",
+					"minItems":1,
+					"items":{
+						"$ref":"#/$defs/FileDataSourceType"
+					},
+					"description":"One or more files. Each file must have a distinct url. When several files are provided, each must have a format, and the formats must be distinct (e.g. the same content as SDMX-CSV and as SDMX-JSON)."
+				},
+				"sdmxApis":{
+					"type":"array",
+					"minItems":1,
+					"items":{
+						"$ref":"#/$defs/SdmxApiType"
+					},
+					"description":"One or more web services compliant with the SDMX REST API. Each must have a distinct combination of entry point and SDMX REST API version (e.g. the same service for two versions of the API)."
+				}
+			},
+			"oneOf":[
+				{
+					"required":[
+						"files"
+					]
+				},
+				{
+					"required":[
+						"sdmxApis"
+					]
+				}
+			],
+			"if":{
+				"required":[
+					"files"
+				],
+				"properties":{
+					"files":{
+						"minItems":2
+					}
+				}
+			},
+			"then":{
+				"properties":{
+					"files":{
+						"items":{
+							"required":[
+								"format"
+							]
+						}
+					}
+				}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
+		},
+		"MetadataSourceType":{
+			"description":"MetadataSourceType specifies where the registered reference metadata can be retrieved: either one or more files, or one or more SDMX REST APIs, but not both.",
+			"type":"object",
+			"properties":{
+				"files":{
+					"type":"array",
+					"minItems":1,
+					"items":{
+						"$ref":"#/$defs/FileMetadataSourceType"
+					},
+					"description":"One or more files. Each file must have a distinct url. When several files are provided, each must have a format, and the formats must be distinct (e.g. the same content as SDMX-CSV and as SDMX-JSON)."
+				},
+				"sdmxApis":{
+					"type":"array",
+					"minItems":1,
+					"items":{
+						"$ref":"#/$defs/SdmxApiType"
+					},
+					"description":"One or more web services compliant with the SDMX REST API. Each must have a distinct combination of entry point and SDMX REST API version (e.g. the same service for two versions of the API)."
+				}
+			},
+			"oneOf":[
+				{
+					"required":[
+						"files"
+					]
+				},
+				{
+					"required":[
+						"sdmxApis"
+					]
+				}
+			],
+			"if":{
+				"required":[
+					"files"
+				],
+				"properties":{
+					"files":{
+						"minItems":2
+					}
+				}
+			},
+			"then":{
+				"properties":{
+					"files":{
+						"items":{
+							"required":[
+								"format"
+							]
+						}
+					}
+				}
+			},
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
+		},
+		"FileDataSourceType":{
+			"description":"FileDataSourceType describes a data source that is a static file, in terms of its URL and its format.",
+			"type":"object",
+			"properties":{
+				"url":{
 					"type":"string",
 					"format":"uri",
 					"minLength":1,
-					"description":"The URL of an SDMX data message accessible as a file (simple data source)."
+					"description":"The URL of the file."
 				},
-				"sdmxApi":{
-					"$ref":"#/$defs/SdmxApiType",
-					"description":"A web service compliant with the SDMX REST API, from which the registered data can be queried (queryable data source)."
+				"format":{
+					"$ref":"#/$defs/SdmxDataMediaType",
+					"description":"The SDMX media type of the file, using the same syntax as the SDMX REST API HTTP Accept header (e.g. application/vnd.sdmx.data+csv;version=2.1.0). It is optional for compatibility with existing registrations, but required when several files are provided."
 				}
 			},
-			"anyOf":[
-				{
-					"required":[
-						"file"
-					]
+			"required":[
+				"url"
+			],
+			"$ref":"#/$defs/specificationExtensions",
+			"unevaluatedProperties":false
+		},
+		"FileMetadataSourceType":{
+			"description":"FileMetadataSourceType describes a reference metadata source that is a static file, in terms of its URL and its format.",
+			"type":"object",
+			"properties":{
+				"url":{
+					"type":"string",
+					"format":"uri",
+					"minLength":1,
+					"description":"The URL of the file."
 				},
-				{
-					"required":[
-						"sdmxApi"
-					]
+				"format":{
+					"$ref":"#/$defs/SdmxMetadataMediaType",
+					"description":"The SDMX media type of the file, using the same syntax as the SDMX REST API HTTP Accept header (e.g. application/vnd.sdmx.metadata+json;version=2.1.0). It is optional for compatibility with existing registrations, but required when several files are provided."
 				}
+			},
+			"required":[
+				"url"
 			],
 			"$ref":"#/$defs/specificationExtensions",
 			"unevaluatedProperties":false
 		},
 		"SdmxApiType":{
-			"description":"SdmxApiType describes a web service compliant with the SDMX REST API (queryable data source).",
+			"description":"SdmxApiType describes a web service compliant with the SDMX REST API, in terms of its entry point and the version of the SDMX REST API it complies with.",
 			"type":"object",
 			"properties":{
 				"entryPoint":{
@@ -617,7 +836,13 @@
 				},
 				"sdmxApiVersion":{
 					"$ref":"#/$defs/SdmxApiVersionType",
-					"description":"The version of the SDMX REST API implemented by the entry point, which determines the syntax of the queries."
+					"description":"The version of the SDMX REST API supported at this entry point, which determines how queries are formulated."
+				},
+				"specificationURL":{
+					"type":"string",
+					"format":"uri",
+					"minLength":1,
+					"description":"The URL of a machine-readable description of the service, such as an OpenAPI specification."
 				}
 			},
 			"required":[
@@ -628,9 +853,34 @@
 			"unevaluatedProperties":false
 		},
 		"SdmxApiVersionType":{
-			"description":"A simple type for the version of the SDMX REST API implemented by a web service. It is given by the code of a release of the SDMX REST API, written as major.minor, without the leading \"v\" and the patch number (e.g. 1.5, 2.1 or 2.2, from the releases v1.5.0, v2.1.0 and v2.2.2).",
+			"description":"A simple type for the version of the SDMX REST API, expressed as either major or major.minor (e.g. 1, 2, 2.1, 2.3).",
 			"type":"string",
-			"pattern":"^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+			"pattern":"^[1-9][0-9]*(\\.(0|[1-9][0-9]*))?$"
+		},
+		"SdmxDataMediaType":{
+			"description":"An SDMX data media type, as used in the SDMX REST API HTTP Accept header, in the form application/vnd.sdmx.data+{format};version={major.minor.patch}, where format is one of json, xml, csv, or parquet (e.g. application/vnd.sdmx.data+json;version=2.1.0).",
+			"type":"string",
+			"pattern":"^application/vnd\\.sdmx\\.data\\+(json|xml|csv|parquet);version=(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+		},
+		"SdmxMetadataMediaType":{
+			"description":"An SDMX reference metadata media type, as used in the SDMX REST API HTTP Accept header, in the form application/vnd.sdmx.metadata+{format};version={major.minor.patch}, where format is one of json, xml, or csv (e.g. application/vnd.sdmx.metadata+json;version=2.1.0).",
+			"type":"string",
+			"pattern":"^application/vnd\\.sdmx\\.metadata\\+(json|xml|csv);version=(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+		},
+		"DataStructureReferenceType":{
+			"description":"DataStructureReferenceType is a type for referencing a data structure definition object. It consists of a URN.",
+			"type":"string",
+			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.datastructure\\.DataStructure=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
+		},
+		"DataflowReferenceType":{
+			"description":"DataflowReferenceType is a type for referencing a dataflow object. It consists of a URN.",
+			"type":"string",
+			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.datastructure\\.Dataflow=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
+		},
+		"MetadataStructureReferenceType":{
+			"description":"MetadataStructureReferenceType is a type for referencing a metadata structure definition object. It consists of a URN.",
+			"type":"string",
+			"pattern":"^urn:sdmx:org\\.sdmx\\.infomodel\\.metadatastructure\\.MetadataStructure=([A-Za-z][A-Za-z0-9_-]*(\\.[A-Za-z][A-Za-z0-9_-]*)*):([A-Za-z0-9_@$-]+)\\((((0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?)|((0|[1-9]\\d*)(\\.(0|[1-9]\\d*)){2}(-(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*))(\\.(([A-Za-z-]|([A-Za-z-][A-Za-z0-9-]+)|([A-Za-z0-9-]+[A-Za-z-][A-Za-z0-9-]*))|(0|[1-9][0-9]*)))*)?)|(((0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+\\.(0|[1-9]\\d*))|((0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\+)))\\)$"
 		},
 		"ProvisionAgreementReferenceType":{
 			"description":"ProvisionAgreementReferenceType is a type for referencing a provision agreement. It consists of a URN.",
