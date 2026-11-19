@@ -281,11 +281,16 @@ structures defined in a metadata structure definition.
 - reportingEnd - *String* *optional*. The end of the time period covered by the
   message.
 - id - *String*. Identifier for the metadata set.
+- urn - *String* *optional*. The URN of the metadata set, a valid SDMX Registry
+  URN (see SDMX Registry Specification for details).
 - agencyID - *String*. ID of the agency maintaining this metadata set.
 - version - *String* *optional*. Version of this metadata set according to
   semantic versioning. If not specified then the metadata set is non-versioned.
 - isExternalReference - *Boolean* *optional*. If set to “true” it indicates that
-  the content of the metadata set is held externally.
+  the content of the metadata set is held externally. The actual reference is
+  given in the `structureURL`.
+- structureURL - *String* *optional*. The full URL at which the externally held
+  metadata set can be retrieved.
 - metadataflow - *String*. URN reference to the metadataflow definition (either
   *metadataflow* or *metadataProvisionAgreement* is required).
 - metadataProvisionAgreement - *String*. URN reference to the metadata provision
