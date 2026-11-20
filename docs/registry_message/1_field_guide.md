@@ -148,8 +148,10 @@ more files, or one or more SDMX REST APIs, but not both.
 - entryPoint - *String*. The URL of the entry point of the SDMX REST web
   service (e.g. `https://sdmx.example.org/rest`). It cannot be empty.
 - sdmxApiVersion - *String*. The version of the SDMX REST API supported at this
-  entry point, which determines how queries are formulated, expressed as either
-  major or major.minor (e.g. `1`, `2`, `2.1`, `2.3`).
+  entry point, which determines how queries are formulated, expressed as
+  major.minor, i.e. the code of a release of the SDMX REST API without the
+  leading "v" and the patch number (e.g. `1.5`, `2.1` or `2.2`, from the
+  releases v1.5.0, v2.1.0 and v2.2.2).
 - specificationURL - *String* *optional*. The URL of a machine-readable
   description of the service, such as an OpenAPI specification.
 

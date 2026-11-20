@@ -853,9 +853,9 @@
 			"unevaluatedProperties":false
 		},
 		"SdmxApiVersionType":{
-			"description":"A simple type for the version of the SDMX REST API, expressed as either major or major.minor (e.g. 1, 2, 2.1, 2.3).",
+			"description":"A simple type for the version of the SDMX REST API, expressed as major.minor, i.e. the code of a release of the SDMX REST API without the leading \"v\" and the patch number (e.g. 1.5, 2.1 or 2.2, from the releases v1.5.0, v2.1.0 and v2.2.2).",
 			"type":"string",
-			"pattern":"^[1-9][0-9]*(\\.(0|[1-9][0-9]*))?$"
+			"pattern":"^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
 		},
 		"SdmxDataMediaType":{
 			"description":"An SDMX data media type, as used in the SDMX REST API HTTP Accept header, in the form application/vnd.sdmx.data+{format};version={major.minor.patch}, where format is one of json, xml, csv, or parquet (e.g. application/vnd.sdmx.data+json;version=2.1.0).",
