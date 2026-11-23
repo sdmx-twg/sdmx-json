@@ -152,8 +152,6 @@ more files, or one or more SDMX REST APIs, but not both.
   major.minor, i.e. the code of a release of the SDMX REST API without the
   leading "v" and the patch number (e.g. `1.5`, `2.1` or `2.2`, from the
   releases v1.5.0, v2.1.0 and v2.2.2).
-- specificationURL - *String* *optional*. The URL of a machine-readable
-  description of the service, such as an OpenAPI specification.
 
 ??? example
 
@@ -165,8 +163,7 @@ more files, or one or more SDMX REST APIs, but not both.
       },
       {
         "entryPoint": "https://sdmx.example.org/rest/v2",
-        "sdmxApiVersion": "2.2",
-        "specificationURL": "https://sdmx.example.org/rest/v2/openapi.json"
+        "sdmxApiVersion": "2.2"
       }
     ]
     ```

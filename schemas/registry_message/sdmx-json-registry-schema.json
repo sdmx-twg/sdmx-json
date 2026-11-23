@@ -837,12 +837,6 @@
 				"sdmxApiVersion":{
 					"$ref":"#/$defs/SdmxApiVersionType",
 					"description":"The version of the SDMX REST API supported at this entry point, which determines how queries are formulated."
-				},
-				"specificationURL":{
-					"type":"string",
-					"format":"uri",
-					"minLength":1,
-					"description":"The URL of a machine-readable description of the service, such as an OpenAPI specification."
 				}
 			},
 			"required":[

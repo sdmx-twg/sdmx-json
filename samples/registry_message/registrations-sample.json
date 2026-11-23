@@ -29,8 +29,7 @@
 						},
 						{
 							"entryPoint":"https://sdmx.example.org/rest/v2",
-							"sdmxApiVersion":"2.2",
-							"specificationURL":"https://sdmx.example.org/rest/v2/openapi.json"
+							"sdmxApiVersion":"2.2"
 						}
 					]
 				}
