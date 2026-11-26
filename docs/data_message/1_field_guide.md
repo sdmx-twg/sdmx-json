@@ -457,6 +457,13 @@ Each of the components may contain the following fields:
     dimensions. The information in this field is consistent with the order of
     `dimensions` in the "key" parameter string (i.e. D.USD.EUR.SP00.A) for data
     queries in the SDMX API.
+    Note that the identifiers of `series` and `observations` (e.g. "0:0:4:10:2")
+    concatenate the dimension value indexes in the order of the
+    `structure.dimensions.series` and `structure.dimensions.observation`
+    arrays, not according to the `keyPosition`. Only the identifiers of
+    *[dimensionGroupAttributes](#dimensiongroupattributes)*, which cover all
+    dimensions, follow the order of the dimensions in the Data Structure
+    Definition, i.e. their `keyPosition`.
 - roles - *Array* of *String*s *optional*. Defines the component role(s), if
     any. Roles are represented by the id of a concept defined as [SDMX
     cross-domain
