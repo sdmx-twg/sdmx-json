@@ -573,7 +573,7 @@
 				"lastUpdated":{
 					"type":"string",
 					"format":"date-time",
-					"description":"Timestamp for the last time the data source was updated."
+					"description":"Timestamp for the last time the registered content was updated. For a registration of files, this is the time the content of the files was last updated. For a registration of SDMX REST APIs, where the content may change behind the API, this is the time the registration itself was last changed."
 				},
 				"provisionAgreement":{
 					"$ref":"#/$defs/ProvisionAgreementReferenceType",
@@ -626,7 +626,7 @@
 				"lastUpdated":{
 					"type":"string",
 					"format":"date-time",
-					"description":"Timestamp for the last time the metadata source was updated."
+					"description":"Timestamp for the last time the registered content was updated. For a registration of files, this is the time the content of the files was last updated. For a registration of SDMX REST APIs, where the content may change behind the API, this is the time the registration itself was last changed."
 				},
 				"metadataProvisionAgreement":{
 					"$ref":"#/$defs/MetadataProvisionAgreementReferenceType",

@@ -65,8 +65,11 @@ structure definition be used.
   registration. It must be provided in a response message (unless an error
   occurred while submitting a new registration), and should be included when
   updating or deleting a registration.
-- lastUpdated - *String* *optional*. Timestamp for the last time the data
-  source was updated. Values must follow the ISO 8601 syntax for combined dates
+- lastUpdated - *String* *optional*. Timestamp for the last time the registered
+  content was updated. For a registration of files, this is the time the content
+  of the files was last updated. For a registration of SDMX REST APIs, where the
+  content may change behind the API, this is the time the registration itself
+  was last changed. Values must follow the ISO 8601 syntax for combined dates
   and times, including time zone.
 - provisionAgreement - *String* *optional*. URN of the provision agreement that
   the data are registered against.
@@ -180,8 +183,11 @@ definition be used.
 
 - id - *String* *optional*. Registry assigned identification for the
   registration, as for *[data registrations](#dataregistration)*.
-- lastUpdated - *String* *optional*. Timestamp for the last time the metadata
-  source was updated. Values must follow the ISO 8601 syntax for combined dates
+- lastUpdated - *String* *optional*. Timestamp for the last time the registered
+  content was updated. For a registration of files, this is the time the content
+  of the files was last updated. For a registration of SDMX REST APIs, where the
+  content may change behind the API, this is the time the registration itself
+  was last changed. Values must follow the ISO 8601 syntax for combined dates
   and times, including time zone.
 - metadataProvisionAgreement - *String* *optional*. URN of the metadata
   provision agreement that the reference metadata are registered against.
