@@ -457,6 +457,13 @@ Each of the components may contain the following fields:
     dimensions. The information in this field is consistent with the order of
     `dimensions` in the "key" parameter string (i.e. D.USD.EUR.SP00.A) for data
     queries in the SDMX API.
+    Note that the identifiers of `series` and `observations` (e.g. "0:0:4:10:2")
+    concatenate the dimension value indexes in the order of the
+    `structure.dimensions.series` and `structure.dimensions.observation`
+    arrays, not according to the `keyPosition`. Only the identifiers of
+    *[dimensionGroupAttributes](#dimensiongroupattributes)*, which cover all
+    dimensions, follow the order of the dimensions in the Data Structure
+    Definition, i.e. their `keyPosition`.
 - roles - *Array* of *String*s *optional*. Defines the component role(s), if
     any. Roles are represented by the id of a concept defined as [SDMX
     cross-domain
@@ -504,7 +511,9 @@ Each of the components may contain the following fields:
     limit on its occurrences. For non-enumerated components, if > 1 then the
     component values will use the `values` property of the component value instead
     of `value`. The default is 1. `maxOccurs` must not be smaller than
-    `minOccurs`.
+    `minOccurs`. If `maxOccurs` is greater than 1, the values of the component
+    in the `dataSets` are always presented as an array (of values or of
+    indexes), even if only one value is reported.
 - links - *Array* *optional*. *Links* field is an array of *[component link](#component-link)*
     objects. If appropriate, a collection of links to additional information
     regarding the component.
@@ -524,7 +533,8 @@ If `format` is not used (thus the component values are enumerated) then the
 component values will be flat-listed using their `id` and `name`, independently
 from the value of `maxOccurs`. For attributes and measures, if multiple
 enumerated values are allowed then the indexes of the corresponding component
-values are to listed in arrays in the related `dataSet`.
+values are to listed in arrays in the related `dataSet`, even if only one value
+is reported.
 
 See the section on [localised text elements](./4_localised_text_elements.md) on
 how the message deals with languages.
@@ -966,6 +976,10 @@ information:
     the annotation.
 - texts - *Object* *optional*. A list of human-readable localised texts (see
     *[names](#names)*) of the annotation.
+    Note that `value` holds non-localised content (e.g. machine-readable
+    values such as codes, numbers or flags), while `text` and `texts` hold
+    localised, human-readable content; they are alternatives for different
+    kinds of content, not copies of the same content.
 - links - *Array* *optional*. *Links* field is an array of *[annotation link](#annotation-link)*
     objects. If appropriate, a link to an additional external resource which may
     contain or supplement the annotation.
@@ -1087,7 +1101,8 @@ The `dataSet` properties are:
       non-dimension component values allows restricting the deletion of measure,
       attribute or data-related reference metadata values to the ones being
       present. Instead of real values for non-dimensional components, it is
-      sufficient to use any valid value. With this, whole datasets, any slices
+      sufficient to use any valid or intentionally missing value. With this, whole
+      datasets, any slices
       of observations for dimension groups such as time series, observations or
       individual measure, attribute and data-related reference metadata
       attributes values can be deleted. Dimension values for higher-level
@@ -1819,6 +1834,8 @@ object within the `structure.measures.observation` array. Indexes for
 `structure.attributes.observation` array. The data type for the array
 `annotation` elements is *integer*. Indexes for `annotation` values correspond
 to the indexes in the array of `annotations` in the `structure` element.
+Values of `measures` and `attributes` whose `maxOccurs` is greater than 1 are
+always presented as arrays, even if only one value is reported.
 
 For information on how to handle the indexes for `dimensions`, `measures`,
 `attributes` and `annotations` see the section dedicated to [handling

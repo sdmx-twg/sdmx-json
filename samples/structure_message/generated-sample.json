@@ -4831,12 +4831,6 @@
 					}
 				],
 				"isPartial":false,
-				"codelistExtensions":[
-					{
-						"codelist":"urn:sdmx:org.sdmx.infomodel.codelist.Codelist=DwzKT4eArie.pNBSUjO.BkgmJl.R4.GxBLZ.l.ZzxqH44J:5Sdswfez(26786210760.0.0-d.0.0.PJXjw1cm.F4o7QfMc.31307.U.s.70)",
-						"prefix":"nostrud eu exercitation adipisicing labore"
-					}
-				],
 				"geoGridCodes":[
 					{
 						"id":"$",
@@ -5019,7 +5013,7 @@
 				],
 				"codelistExtensions":[
 					{
-						"codelist":"urn:sdmx:org.sdmx.infomodel.codelist.Codelist=ABC:ABC(1.0)",
+						"codelist":"urn:sdmx:org.sdmx.infomodel.codelist.GeographicCodelist=ABC:ABC(1.0)",
 						"prefix":"consequat non nulla in ea"
 					}
 				],

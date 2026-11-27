@@ -314,6 +314,8 @@ on links.
 All SDMX artefact types share the following common object properties:
 
 - id - *String*. Identifier for the resource.
+- urn - *String* *optional*. The URN of the resource, a valid SDMX Registry URN
+  (see SDMX Registry Specification for details).
 - agencyID - *String* *optional*. ID of the agency maintaining this resource.
 - version - *String* *optional*. Version of this resource. Can be a legacy
   version with two version parts (e.g. '1.0') for fully mutable artefacts, or a
@@ -339,12 +341,15 @@ All SDMX artefact types share the following common object properties:
   e.g., when obtained as a response to a GET query that requested specific
   languages through the HTTP header “Accept-Language”.
 - isExternalReference - *Boolean* *optional*. If set to “true” it indicates that
-  the content of the resource is held externally.
+  the content of the resource is held externally. The actual reference is given
+  in the `structureURL`.
+- structureURL - *String* *optional*. The full URL at which the externally held
+  resource can be retrieved. It must return a valid SDMX structure message.
 - annotations - *Array* *optional*. Provides a list of annotation objects.
 - links - *Array* *optional*. A collection of links to additional resources for
-  the resource. See the section *[link](#link)*. **It is recommended to
-  systematically include as the first link a self-referencing hyperlink (link
-  with "rel"="self") to indicate the URL address of the resource, and its URN.**
+  the resource. See the section *[link](#link)*. The URN of the resource is
+  given in its `urn` property (the relationship `rfc:self` should not be used for
+  SDMX artefacts).
 
 See the section on [localised text elements](./4_localised_text_elements.md) on how
 the message deals with languages.
@@ -408,6 +413,10 @@ cannot be bundled and executed with "transactional ACIDity".
   annotation.
 - texts - *Object* *optional*. A list of human-readable localised texts (see
   *[names](#names)*) of the annotation.
+  Note that `value` holds non-localised content (e.g. machine-readable values
+  such as codes, numbers or flags), while `text` and `texts` hold localised,
+  human-readable content; they are alternatives for different kinds of
+  content, not copies of the same content.
 - links - *Array* *optional*. *Links* field is an array of *[link](#link)*
   objects. If appropriate, a link to an additional external resource which may
   contain or supplement the annotation.
@@ -486,6 +495,8 @@ DataConsumerScheme, OrganisationUnitScheme, ReportingTaxonomy, CustomTypeScheme
 RulesetScheme or UserDefinedOperatorScheme).
 
 - id - *String*. Identifier for the item.
+- urn - *String* *optional*. The URN of the item, a valid SDMX Registry URN (see
+  SDMX Registry Specification for details).
 - name - *String*. Human-readable (best-language-match) name of the
   item.
 - names - *Object* *optional*. Human-readable localised *[names](#names)* of the
@@ -584,14 +595,17 @@ See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
   ordinary dimension (i.e. not the time dimension) takes its concept identity
   from a concept with the identifier TIME_PERIOD, that dimension must provide a
   different explicit identifier.
-- metadata - *String* *optional*. The URN of a a metadata structure definition.
-  A data structure definition may be related to a metadata structure definition
-  in order to use its metadata attributes as part of the data. Note that the
-  referenced metadata set cannot contain nested metadata attributes, as these
-  are not supported in the data. By default all metadata attributes can be
-  associated at any level of the data. However, a metadata attribute usage can
-  be used to provide a specific attribute relationships for a given metadata
-  attribute.
+- metadata - *String* or *Array* *optional*. The URN of a metadata structure
+  definition, or an array of URNs of metadata structure definitions. A data
+  structure definition may be related to one or more metadata structure
+  definitions in order to use their metadata attributes as part of the data. In
+  case of a conflict (duplicated identifier or concept) between the metadata
+  attributes of the referenced metadata structure definitions, only the first
+  occurrence of the metadata attribute is taken into account, following the
+  order of the referenced metadata structure definitions. By default all
+  metadata attributes can be associated at any level of the data. However, a
+  metadata attribute usage can be used to provide a specific attribute
+  relationships for a given metadata attribute.
 - evolvingStructure - *boolean* *optional*. An evolving data structure indicates
   that new Dimensions may be added under a minor version update e.g. 1.0.0 to
   1.1.0. Evolving Data Structures can only be used by Dataflows if they include
@@ -610,6 +624,23 @@ See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
         },
         "evolvingStructure" false,
         "metadata": "urn:sdmx:org.sdmx.infomodel.metadatastructuredefinition.MetadataStructureDefinition=OECD:METADATA(1.0.0)"
+    }
+    ```
+
+??? example "Data structure definition with several metadata structure definitions"
+
+    ```json
+    {
+        "id": "DSD2",
+        "version": "1.0.0",
+        "agencyID": "IMF",
+        "dataStructureComponents": {
+            # dataStructureComponents object #
+        },
+        "metadata": [
+            "urn:sdmx:org.sdmx.infomodel.metadatastructure.MetadataStructure=IMF:DATASET_MSD(1.0.0)",
+            "urn:sdmx:org.sdmx.infomodel.metadatastructure.MetadataStructure=IMF:CENTRAL_MSD(2.1.0)"
+        ]
     }
     ```
 
@@ -681,11 +712,11 @@ structure definition.
   by its identifier "REPORTING_PERIOD_START_DAY" or "REPORTING_PERIOD_END_DAY".
 - metadataAttributeUsages - *Array* *optional*. The
   *[metadataAttributeUsage](#metadataattributeusage)* object refines the details
-  of how a metadata attribute from the metadata structure referenced from the
-  data structure is used. By default, metadata attributes can be expressed at
-  any level of the data. This allows an attribute relationship to be defined in
-  order restrict the reporting of a metadata attribute to a specific part of the
-  data.
+  of how a metadata attribute from one of the metadata structures referenced
+  from the data structure is used. By default, metadata attributes can be
+  expressed at any level of the data. This allows an attribute relationship to
+  be defined in order restrict the reporting of a metadata attribute to a
+  specific part of the data.
 
 ??? example
 
@@ -1144,18 +1175,21 @@ format) along with its meaning.
 ##### metadataAttributeUsage
 
 *Object*. MetadataAttributeUsage defines how a metadata attribute is used in a
-data structure. This is a local reference to a metadata attribute from the
-metadata structure referenced by this data structure. An attribute relationship
-can be defined in order to describe the relationship of the metadata attribute
-to the data structure components.
+data structure. This is a local reference to a metadata attribute from one of
+the metadata structures referenced by this data structure. An attribute
+relationship can be defined in order to describe the relationship of the
+metadata attribute to the data structure components.
 
 - annotations - *Array* *optional*. Provides a list of annotation objects. See
   the section [annotation](#annotation).
 - links - *Array* *optional*. A collection of links to additional resources. See
   the section [link](#link).
 - metadataAttributeReference - *String*. MetadataAttributeReference is a local
-  (nested ID) reference to a metadata attribute defined in the metadata
-  structure referenced by this data structure.
+  (nested ID) reference to a metadata attribute defined in one of the metadata
+  structures referenced by this data structure. If several referenced metadata
+  structures define a metadata attribute with this identifier, the first
+  occurrence is used, following the order of the referenced metadata
+  structures.
 - attributeRelationship - *Object*. The
   *[attributeRelationship](#attributerelationship)* object defines the
   relationship between the referenced metadata attribute and the components of
@@ -1810,6 +1844,16 @@ object properties:
   ability to describe simple hierarchies within a single codelist, by
   referencing the ID value of another code in the same codelist. The start and
   end properties are not used.
+- validFrom - *String* *optional*. Used for business validity: values are only
+  valid for this code if their time periods start at the earliest at the start
+  of the time period defined in this property, which is a standard time period
+  (e.g. `2008` means from 2008-01-01T00:00:00). The validity is checked against
+  the reported time period of the data, not against the time at which the data
+  are processed.
+- validTo - *String* *optional*. Used for business validity: values are only
+  valid for this code if their time periods end at the latest at the end of
+  the time period defined in this property, which is a standard time period
+  (e.g. `2008` means until 2008-12-31T23:59:59).
 
 ??? example
 
@@ -1840,7 +1884,9 @@ object properties:
                     "en": "Code 11",
                     "fr": "Code 11"
                 }
-                "parent": "CODE1"
+                "parent": "CODE1",
+                "validFrom": "2008",
+                "validTo": "2020-Q2"
             }
         ]
     }
@@ -1850,7 +1896,8 @@ object properties:
 
 *Object*. Describes the structure of a geographic codelist. It comprises a set
 of GeoFeatureSetCodes, by adding a value in the Code that follows a pattern to
-represent a geo feature set.
+represent a geo feature set. A geographic codelist can only extend other
+geographic codelists (`codelistExtensions`).
 
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
@@ -1860,7 +1907,7 @@ See the schema file for more information.
 
 *Object*. Describes the structure of a geographic grid code list. These define a
 geographical grid composed of cells representing regular squared portions of the
-Earth.
+Earth. A geo grid codelist cannot extend other codelists.
 
 See *[Common SDMX artefact properties](#common-sdmx-artefact-properties)*.
 
@@ -1933,13 +1980,7 @@ See the schema file for more information.
             "en": "SDMX Agency Scheme",
             "fr": "Schéma des agences SDMX"
         },
-        "links": [
-            {
-                "href": "https://web-service-root/agencyScheme/SDMX/AGENCIES/1.0",
-                "rel": "self",
-                "urn": "urn:sdmx:org.sdmx.infomodel.base.AgencyScheme=SDMX:AGENCIES(1.0)"
-            }
-        ],
+        "urn": "urn:sdmx:org.sdmx.infomodel.base.AgencyScheme=SDMX:AGENCIES(1.0)",
         "isPartial": true,
         "agencies": [
             {
@@ -2059,13 +2100,7 @@ In addition, `dataflow` has the following property:
             "en": "Exchange Rates",
             "fr": "Taux de change"
         },
-        "links": [
-            {
-                "href": "/dataflow/ECB/EXR/1.0",
-                "rel": "self",
-                "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:EXR(1.0)",
-            }
-        ],
+        "urn": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:EXR(1.0)",
         "structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=ECB:ECB_EXR1(1.0)",
         "dimensionConstraint": ["FREQ", "CUR", "CURR_DEMOM"]
     }
@@ -2208,13 +2243,7 @@ In addition, `categorisation` has the following properties:
             "en": "Categorise: DATAFLOWECB:EXR(1.0)",
             "fr": "Catégoriser: DATAFLOWECB:EXR(1.0)"
         },
-        "links": [
-            {
-                "href": "/categorisation/ECB/53A341E8-D48B-767E-D5FF-E2E3E0E2BB19/1.0",
-                "rel": "self",
-                "urn": "urn:sdmx:org.sdmx.infomodel.categoryscheme.Categorisation=ECB:53A341E8-D48B-767E-D5FF-E2E3E0E2BB19(1.0)"
-            }
-        ],
+        "urn": "urn:sdmx:org.sdmx.infomodel.categoryscheme.Categorisation=ECB:53A341E8-D48B-767E-D5FF-E2E3E0E2BB19(1.0)",
         "source": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=ECB:EXR(1.0)",
         "target": "urn:sdmx:org.sdmx.infomodel.categoryscheme.CategoryScheme=ECB:MOBILE_NAVI(1.0).07"
     }
@@ -2257,13 +2286,7 @@ In addition, `dataConstraint` has the following properties:
           "en": "Data constraints for the EXR dataflow",
           "fr": "Constraintes de données pour le dataflow EXR"
         },
-        "links": [
-          {
-            "href": "/constraint/ECB/EXR_CONSTRAINTS/1.0",
-            "rel": "self",
-            "urn": "urn:sdmx:org.sdmx.infomodel.registry.DataConstraint=ECB:EXR_CONSTRAINTS(1.0)"
-          }
-        ],
+        "urn": "urn:sdmx:org.sdmx.infomodel.registry.DataConstraint=ECB:EXR_CONSTRAINTS(1.0)",
         "constraintAttachment": {
             # constraintAttachment object #
         },
@@ -2317,13 +2340,7 @@ In addition, `availabilityConstraint` has the following properties:
       "en": "Availability constraints for the EXR dataflow",
       "fr": "Constraintes de disponibilité pour le dataflow EXR"
      },
-     "links": [
-      {
-       "href": "/constraint/ECB/EXR_CONSTRAINTS/1.0",
-       "rel": "self",
-       "urn": "urn:sdmx:org.sdmx.infomodel.registry.AvailabilityConstraint=ECB:EXR_CONSTRAINTS(1.0)"
-      }
-     ],
+     "urn": "urn:sdmx:org.sdmx.infomodel.registry.AvailabilityConstraint=ECB:EXR_CONSTRAINTS(1.0)",
      "constraintAttachment": {
       # constraintAttachment object #
      },
@@ -2366,13 +2383,7 @@ In addition, `metadataConstraint` has the following properties:
             "en": "Constraints for the EXR dataflow",
             "fr": "Constraintes pour le dataflow EXR"
         },
-        "links": [
-            {
-                "href": "/constraint/ECB/EXR_CONSTRAINTS/1.0",
-                "rel": "self",
-                "urn": "urn:sdmx:org.sdmx.infomodel.registry.ContentConstraint=ECB:EXR_CONSTRAINTS(1.0)"
-            }
-        ],
+        "urn": "urn:sdmx:org.sdmx.infomodel.registry.ContentConstraint=ECB:EXR_CONSTRAINTS(1.0)",
         "constraintAttachment": {
             # constraintAttachment object #
         },

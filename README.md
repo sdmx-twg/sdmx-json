@@ -7,6 +7,7 @@ This includes:
 - Normative documentation and samples for the SDMX-JSON structure message format
 - Normative documentation and samples for the SDMX-JSON data message format
 - Normative documentation and samples for the SDMX-JSON metadata message format
+- Normative documentation and samples for the SDMX-JSON registry message format
 
 The schemas are published to <https://json.sdmx.org>
 

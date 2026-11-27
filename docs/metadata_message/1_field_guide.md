@@ -281,11 +281,18 @@ structures defined in a metadata structure definition.
 - reportingEnd - *String* *optional*. The end of the time period covered by the
   message.
 - id - *String*. Identifier for the metadata set.
+- urn - *String* *optional*. The URN of the metadata set, a valid SDMX Registry
+  URN (see SDMX Registry Specification for details).
 - agencyID - *String*. ID of the agency maintaining this metadata set.
-- version - *String* *optional*. Version of this metadata set according to
-  semantic versioning. If not specified then the metadata set is non-versioned.
+- version - *String* *optional*. Version of this metadata set. Can be a legacy
+  version with two version parts (e.g. '1.0'), or a semantic version according
+  to SDMX versioning rules with 3 parts (e.g. '1.0.0') or with 4 parts (e.g.
+  '1.0.0-draft'). If not specified then the metadata set is non-versioned.
 - isExternalReference - *Boolean* *optional*. If set to “true” it indicates that
-  the content of the metadata set is held externally.
+  the content of the metadata set is held externally. The actual reference is
+  given in the `structureURL`.
+- structureURL - *String* *optional*. The full URL at which the externally held
+  metadata set can be retrieved.
 - metadataflow - *String*. URN reference to the metadataflow definition (either
   *metadataflow* or *metadataProvisionAgreement* is required).
 - metadataProvisionAgreement - *String*. URN reference to the metadata provision
@@ -580,6 +587,10 @@ format) along with its meaning.
   annotation.
 - texts - *Object* *optional*. A list of human-readable localised texts (see
   *[names](#names)*) of the annotation.
+  Note that `value` holds non-localised content (e.g. machine-readable values
+  such as codes, numbers or flags), while `text` and `texts` hold localised,
+  human-readable content; they are alternatives for different kinds of
+  content, not copies of the same content.
 - links - *Array* *optional*. *Links* field is an array of *[link](#meta-link)*
   objects. If appropriate, a link to an additional external resource which may
   contain or supplement the annotation.
