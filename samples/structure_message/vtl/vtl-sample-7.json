@@ -1,0 +1,555 @@
+{
+	"$schema": "https://json.sdmx.org/2.1/sdmx-json-structure-schema.json",
+	"meta": {
+		"id": "VTL_SAMPLE7",
+		"test": false,
+		"prepared": "2026-10-29T00:00:00Z",
+		"contentLanguages": [
+			"en"
+		],
+		"sender": {
+			"id": "EXAMPLE"
+		},
+		"receivers": [
+			{
+				"id": "SDMX"
+			}
+		]
+	},
+	"data": {
+		"agencySchemes": [
+			{
+				"id": "AGENCIES",
+				"agencyID": "SDMX",
+				"name": "SDMX Agency Scheme",
+				"names": {
+					"en": "SDMX Agency Scheme"
+				},
+				"agencies": [
+					{
+						"id": "SDMX",
+						"name": "SDMX",
+						"names": {
+							"en": "SDMX"
+						},
+						"description": "SDMX is an initiative to foster standards for the exchange of statistical information. It is sponsored by the Bank for International Settlements (BIS), the European Central Bank (ECB), the Statistical Office of the European Union (Eurostat), the International Monetary Fund (IMF), the Organization for Economic Co-Operation and Development (OECD), the United Nations (UN) and the World Bank.",
+						"descriptions": {
+							"en": "SDMX is an initiative to foster standards for the exchange of statistical information. It is sponsored by the Bank for International Settlements (BIS), the European Central Bank (ECB), the Statistical Office of the European Union (Eurostat), the International Monetary Fund (IMF), the Organization for Economic Co-Operation and Development (OECD), the United Nations (UN) and the World Bank."
+						},
+						"contacts": [
+							{
+								"name": "SDMX Secretariat",
+								"names": {
+									"en": "SDMX Secretariat"
+								},
+								"department": "SDMX Secretariat",
+								"departments": {
+									"en": "SDMX Secretariat"
+								},
+								"role": "Single entry point for external inquiries",
+								"roles": {
+									"en": "Single entry point for external inquiries"
+								},
+								"uris": [
+									"http://sdmx.org"
+								],
+								"emails": [
+									"secretariat@sdmx.org"
+								]
+							}
+						]
+					},
+					{
+						"id": "EXAMPLE",
+						"name": "Example Agency",
+						"names": {
+							"en": "Example Agency"
+						}
+					}
+				]
+			}
+		],
+		"codelists": [
+			{
+				"id": "CL_AREA",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Reference area",
+				"names": {
+					"en": "Reference area"
+				},
+				"codes": [
+					{
+						"id": "BE",
+						"name": "Belgium",
+						"names": {
+							"en": "Belgium"
+						}
+					},
+					{
+						"id": "LU",
+						"name": "Luxembourg",
+						"names": {
+							"en": "Luxembourg"
+						}
+					},
+					{
+						"id": "NL",
+						"name": "Netherlands",
+						"names": {
+							"en": "Netherlands"
+						}
+					},
+					{
+						"id": "BENELUX",
+						"name": "Benelux",
+						"names": {
+							"en": "Benelux"
+						}
+					}
+				]
+			},
+			{
+				"id": "CL_OBS_STATUS",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Observation status",
+				"names": {
+					"en": "Observation status"
+				},
+				"codes": [
+					{
+						"id": "A",
+						"name": "Normal value",
+						"names": {
+							"en": "Normal value"
+						}
+					},
+					{
+						"id": "E",
+						"name": "Estimated value",
+						"names": {
+							"en": "Estimated value"
+						}
+					},
+					{
+						"id": "M",
+						"name": "Missing value",
+						"names": {
+							"en": "Missing value"
+						}
+					}
+				]
+			}
+		],
+		"conceptSchemes": [
+			{
+				"id": "CONCEPTS",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Concepts",
+				"names": {
+					"en": "Concepts"
+				},
+				"concepts": [
+					{
+						"id": "REF_AREA",
+						"name": "Reference area",
+						"names": {
+							"en": "Reference area"
+						}
+					},
+					{
+						"id": "TIME_PERIOD",
+						"name": "Time period",
+						"names": {
+							"en": "Time period"
+						}
+					},
+					{
+						"id": "OBS_VALUE",
+						"name": "Observation value",
+						"names": {
+							"en": "Observation value"
+						}
+					},
+					{
+						"id": "OBS_STATUS",
+						"name": "Observation status",
+						"names": {
+							"en": "Observation status"
+						}
+					},
+					{
+						"id": "BOOL_VAR",
+						"name": "Validation outcome",
+						"names": {
+							"en": "Validation outcome"
+						}
+					},
+					{
+						"id": "RULEID",
+						"name": "Rule identifier",
+						"names": {
+							"en": "Rule identifier"
+						}
+					},
+					{
+						"id": "ERRORCODE",
+						"name": "Error code",
+						"names": {
+							"en": "Error code"
+						}
+					},
+					{
+						"id": "ERRORLEVEL",
+						"name": "Error level",
+						"names": {
+							"en": "Error level"
+						}
+					}
+				]
+			}
+		],
+		"dataStructures": [
+			{
+				"id": "DSD_POP",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Population",
+				"names": {
+					"en": "Population"
+				},
+				"dataStructureComponents": {
+					"dimensionList": {
+						"id": "DimensionDescriptor",
+						"dimensions": [
+							{
+								"id": "REF_AREA",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).REF_AREA",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=EXAMPLE:CL_AREA(1.0)"
+								}
+							}
+						],
+						"timeDimension": {
+							"id": "TIME_PERIOD",
+							"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).TIME_PERIOD",
+							"localRepresentation": {
+								"format": {
+									"dataType": "ObservationalTimePeriod"
+								}
+							}
+						}
+					},
+					"attributeList": {
+						"id": "AttributeDescriptor",
+						"attributes": [
+							{
+								"id": "OBS_STATUS",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).OBS_STATUS",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=EXAMPLE:CL_OBS_STATUS(1.0)"
+								},
+								"attributeRelationship": {
+									"observation": {}
+								}
+							}
+						]
+					},
+					"measureList": {
+						"id": "MeasureDescriptor",
+						"measures": [
+							{
+								"id": "OBS_VALUE",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).OBS_VALUE",
+								"localRepresentation": {
+									"format": {
+										"dataType": "Integer"
+									}
+								}
+							}
+						]
+					}
+				}
+			},
+			{
+				"id": "DSD_POP_VALIDATION",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Population - validation results",
+				"names": {
+					"en": "Population - validation results"
+				},
+				"dataStructureComponents": {
+					"dimensionList": {
+						"id": "DimensionDescriptor",
+						"dimensions": [
+							{
+								"id": "REF_AREA",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).REF_AREA",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=EXAMPLE:CL_AREA(1.0)"
+								}
+							},
+							{
+								"id": "RULEID",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).RULEID",
+								"localRepresentation": {
+									"format": {
+										"dataType": "String",
+										"maxLength": 30
+									}
+								}
+							}
+						],
+						"timeDimension": {
+							"id": "TIME_PERIOD",
+							"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).TIME_PERIOD",
+							"localRepresentation": {
+								"format": {
+									"dataType": "ObservationalTimePeriod"
+								}
+							}
+						}
+					},
+					"attributeList": {
+						"id": "AttributeDescriptor",
+						"attributes": [
+							{
+								"id": "OBS_STATUS",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).OBS_STATUS",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=EXAMPLE:CL_OBS_STATUS(1.0)"
+								},
+								"attributeRelationship": {
+									"observation": {}
+								}
+							}
+						]
+					},
+					"measureList": {
+						"id": "MeasureDescriptor",
+						"measures": [
+							{
+								"id": "OBS_VALUE",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).OBS_VALUE",
+								"localRepresentation": {
+									"format": {
+										"dataType": "Integer"
+									}
+								}
+							},
+							{
+								"id": "BOOL_VAR",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).BOOL_VAR",
+								"localRepresentation": {
+									"format": {
+										"dataType": "Boolean"
+									}
+								}
+							},
+							{
+								"id": "ERRORCODE",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).ERRORCODE",
+								"localRepresentation": {
+									"format": {
+										"dataType": "String",
+										"maxLength": 50
+									}
+								}
+							},
+							{
+								"id": "ERRORLEVEL",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).ERRORLEVEL",
+								"localRepresentation": {
+									"format": {
+										"dataType": "Integer",
+										"minValue": 1,
+										"maxValue": 9
+									}
+								}
+							}
+						]
+					}
+				}
+			}
+		],
+		"dataflows": [
+			{
+				"id": "DF_POP",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Population",
+				"names": {
+					"en": "Population"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=EXAMPLE:DSD_POP(1.0)"
+			},
+			{
+				"id": "DF_POP_BENELUX",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Population of the Benelux",
+				"names": {
+					"en": "Population of the Benelux"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=EXAMPLE:DSD_POP(1.0)"
+			},
+			{
+				"id": "DF_POP_VALIDATION",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Population - validation results",
+				"names": {
+					"en": "Population - validation results"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=EXAMPLE:DSD_POP_VALIDATION(1.0)"
+			}
+		],
+		"vtlMappingSchemes": [
+			{
+				"id": "VTL_MAP_POP",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "VTL mappings of TS_POP_CHECKS",
+				"names": {
+					"en": "VTL mappings of TS_POP_CHECKS"
+				},
+				"vtlDatasetMappings": [
+					{
+						"id": "DS_POP",
+						"name": "Population",
+						"names": {
+							"en": "Population"
+						},
+						"vtlAlias": "ds_pop",
+						"isInput": true,
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=EXAMPLE:DF_POP(1.0)"
+					},
+					{
+						"id": "DS_BENELUX",
+						"name": "Population of the Benelux",
+						"names": {
+							"en": "Population of the Benelux"
+						},
+						"vtlAlias": "ds_benelux",
+						"isInput": false,
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=EXAMPLE:DF_POP_BENELUX(1.0)"
+					},
+					{
+						"id": "DS_VALIDATION",
+						"name": "Population - validation results",
+						"names": {
+							"en": "Population - validation results"
+						},
+						"vtlAlias": "ds_validation",
+						"isInput": false,
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=EXAMPLE:DF_POP_VALIDATION(1.0)"
+					}
+				],
+				"vtlCodelistMappings": [
+					{
+						"id": "CL_AREA",
+						"name": "Reference areas",
+						"names": {
+							"en": "Reference areas"
+						},
+						"vtlAlias": "cl_area",
+						"codelist": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=EXAMPLE:CL_AREA(1.0)"
+					}
+				]
+			}
+		],
+		"rulesetSchemes": [
+			{
+				"id": "RS_POP",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Rulesets for the population data",
+				"names": {
+					"en": "Rulesets for the population data"
+				},
+				"vtlVersion": "2.2",
+				"rulesets": [
+					{
+						"id": "DPR_VALUE",
+						"name": "Consistency of the observation values",
+						"names": {
+							"en": "Consistency of the observation values"
+						},
+						"rulesetType": "datapoint",
+						"rulesetScope": "variable",
+						"rulesetDefinition": "define datapoint ruleset DPR_VALUE (variable OBS_VALUE as V, OBS_STATUS as S) is\n  VALUE_NOT_NEGATIVE : V >= 0 errorcode \"NEGATIVE_VALUE\" errorlevel 1;\n  MISSING_WITHOUT_VALUE : when S = \"M\" then isnull(V) errorcode \"VALUE_WITH_MISSING_STATUS\" errorlevel 2\nend datapoint ruleset"
+					},
+					{
+						"id": "HR_BENELUX",
+						"name": "Benelux aggregate",
+						"names": {
+							"en": "Benelux aggregate"
+						},
+						"rulesetType": "hierarchical",
+						"rulesetScope": "valuedomain",
+						"rulesetDefinition": "define hierarchical ruleset HR_BENELUX (valuedomain rule cl_area) is\n  BENELUX_TOTAL : BENELUX = BE + LU + NL errorcode \"BENELUX_NOT_SUM\" errorlevel 1\nend hierarchical ruleset"
+					},
+					{
+						"id": "VP_OBS_STATUS",
+						"name": "Viral propagation of OBS_STATUS",
+						"names": {
+							"en": "Viral propagation of OBS_STATUS"
+						},
+						"rulesetType": "viral",
+						"rulesetScope": "variable",
+						"rulesetDefinition": "define viral propagation VP_OBS_STATUS (variable OBS_STATUS) is\n  when \"M\" then \"M\";\n  when \"E\" then \"E\";\n  else \"A\"\nend viral propagation"
+					}
+				]
+			}
+		],
+		"transformationSchemes": [
+			{
+				"id": "TS_POP_CHECKS",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Validation and aggregation of the population data",
+				"names": {
+					"en": "Validation and aggregation of the population data"
+				},
+				"vtlVersion": "2.2",
+				"transformations": [
+					{
+						"id": "VALIDATION",
+						"name": "Validation results",
+						"names": {
+							"en": "Validation results"
+						},
+						"description": "Applies the datapoint ruleset DPR_VALUE to ds_pop and returns, for each data point and rule (ruleid), the original measures, the boolean outcome of the rule (bool_var) and, when the rule is not satisfied, its errorcode and errorlevel. OBS_STATUS is kept, as it is a viral VTL Attribute.",
+						"descriptions": {
+							"en": "Applies the datapoint ruleset DPR_VALUE to ds_pop and returns, for each data point and rule (ruleid), the original measures, the boolean outcome of the rule (bool_var) and, when the rule is not satisfied, its errorcode and errorlevel. OBS_STATUS is kept, as it is a viral VTL Attribute."
+						},
+						"isPersistent": true,
+						"expression": "check_datapoint(ds_pop, DPR_VALUE all_measures)",
+						"result": "ds_validation"
+					},
+					{
+						"id": "BENELUX",
+						"name": "Benelux aggregate",
+						"names": {
+							"en": "Benelux aggregate"
+						},
+						"description": "Calculates BENELUX as BE + LU + NL through the hierarchical ruleset HR_BENELUX, applied to the Identifier REF_AREA. The values of OBS_STATUS of the components are combined through the viral propagation VP_OBS_STATUS.",
+						"descriptions": {
+							"en": "Calculates BENELUX as BE + LU + NL through the hierarchical ruleset HR_BENELUX, applied to the Identifier REF_AREA. The values of OBS_STATUS of the components are combined through the viral propagation VP_OBS_STATUS."
+						},
+						"isPersistent": true,
+						"expression": "hierarchy(ds_pop, HR_BENELUX rule REF_AREA)",
+						"result": "ds_benelux"
+					}
+				],
+				"vtlMappingScheme": "urn:sdmx:org.sdmx.infomodel.transformation.VtlMappingScheme=EXAMPLE:VTL_MAP_POP(1.0)",
+				"rulesetSchemes": [
+					"urn:sdmx:org.sdmx.infomodel.transformation.RulesetScheme=EXAMPLE:RS_POP(1.0)"
+				]
+			}
+		]
+	}
+}

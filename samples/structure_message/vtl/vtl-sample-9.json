@@ -1,0 +1,328 @@
+{
+	"$schema": "https://json.sdmx.org/2.1/sdmx-json-structure-schema.json",
+	"meta": {
+		"id": "VTL_SAMPLE9",
+		"test": false,
+		"prepared": "2026-10-29T00:00:00Z",
+		"contentLanguages": [
+			"en"
+		],
+		"sender": {
+			"id": "EXAMPLE"
+		},
+		"receivers": [
+			{
+				"id": "SDMX"
+			}
+		]
+	},
+	"data": {
+		"agencySchemes": [
+			{
+				"id": "AGENCIES",
+				"agencyID": "SDMX",
+				"name": "SDMX Agency Scheme",
+				"names": {
+					"en": "SDMX Agency Scheme"
+				},
+				"agencies": [
+					{
+						"id": "SDMX",
+						"name": "SDMX",
+						"names": {
+							"en": "SDMX"
+						},
+						"description": "SDMX is an initiative to foster standards for the exchange of statistical information. It is sponsored by the Bank for International Settlements (BIS), the European Central Bank (ECB), the Statistical Office of the European Union (Eurostat), the International Monetary Fund (IMF), the Organization for Economic Co-Operation and Development (OECD), the United Nations (UN) and the World Bank.",
+						"descriptions": {
+							"en": "SDMX is an initiative to foster standards for the exchange of statistical information. It is sponsored by the Bank for International Settlements (BIS), the European Central Bank (ECB), the Statistical Office of the European Union (Eurostat), the International Monetary Fund (IMF), the Organization for Economic Co-Operation and Development (OECD), the United Nations (UN) and the World Bank."
+						},
+						"contacts": [
+							{
+								"name": "SDMX Secretariat",
+								"names": {
+									"en": "SDMX Secretariat"
+								},
+								"department": "SDMX Secretariat",
+								"departments": {
+									"en": "SDMX Secretariat"
+								},
+								"role": "Single entry point for external inquiries",
+								"roles": {
+									"en": "Single entry point for external inquiries"
+								},
+								"uris": [
+									"http://sdmx.org"
+								],
+								"emails": [
+									"secretariat@sdmx.org"
+								]
+							}
+						]
+					},
+					{
+						"id": "EXAMPLE",
+						"name": "Example Agency",
+						"names": {
+							"en": "Example Agency"
+						}
+					}
+				]
+			}
+		],
+		"codelists": [
+			{
+				"id": "CL_AREA",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Reference area",
+				"names": {
+					"en": "Reference area"
+				},
+				"codes": [
+					{
+						"id": "DE",
+						"name": "Germany",
+						"names": {
+							"en": "Germany"
+						}
+					},
+					{
+						"id": "ES",
+						"name": "Spain",
+						"names": {
+							"en": "Spain"
+						}
+					},
+					{
+						"id": "FR",
+						"name": "France",
+						"names": {
+							"en": "France"
+						}
+					}
+				]
+			}
+		],
+		"conceptSchemes": [
+			{
+				"id": "CONCEPTS",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Concepts",
+				"names": {
+					"en": "Concepts"
+				},
+				"concepts": [
+					{
+						"id": "REF_AREA",
+						"name": "Reference area",
+						"names": {
+							"en": "Reference area"
+						}
+					},
+					{
+						"id": "TIME_PERIOD",
+						"name": "Time period",
+						"names": {
+							"en": "Time period"
+						}
+					},
+					{
+						"id": "OBS_VALUE",
+						"name": "Observation value",
+						"names": {
+							"en": "Observation value"
+						}
+					}
+				]
+			}
+		],
+		"dataStructures": [
+			{
+				"id": "DSD_ENERGY",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Electricity",
+				"names": {
+					"en": "Electricity"
+				},
+				"dataStructureComponents": {
+					"dimensionList": {
+						"id": "DimensionDescriptor",
+						"dimensions": [
+							{
+								"id": "REF_AREA",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).REF_AREA",
+								"localRepresentation": {
+									"enumeration": "urn:sdmx:org.sdmx.infomodel.codelist.Codelist=EXAMPLE:CL_AREA(1.0)"
+								}
+							}
+						],
+						"timeDimension": {
+							"id": "TIME_PERIOD",
+							"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).TIME_PERIOD",
+							"localRepresentation": {
+								"format": {
+									"dataType": "GregorianYearMonth"
+								}
+							}
+						}
+					},
+					"measureList": {
+						"id": "MeasureDescriptor",
+						"measures": [
+							{
+								"id": "OBS_VALUE",
+								"conceptIdentity": "urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=EXAMPLE:CONCEPTS(1.0).OBS_VALUE",
+								"localRepresentation": {
+									"format": {
+										"dataType": "Decimal",
+										"decimals": 1
+									}
+								}
+							}
+						]
+					}
+				}
+			}
+		],
+		"dataflows": [
+			{
+				"id": "DF_POWER",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Electricity generation",
+				"names": {
+					"en": "Electricity generation"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=EXAMPLE:DSD_ENERGY(1.0)"
+			},
+			{
+				"id": "DF_CONSUMPTION",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Electricity consumption",
+				"names": {
+					"en": "Electricity consumption"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=EXAMPLE:DSD_ENERGY(1.0)"
+			},
+			{
+				"id": "DF_SURPLUS",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Electricity surplus (generation minus consumption)",
+				"names": {
+					"en": "Electricity surplus (generation minus consumption)"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=EXAMPLE:DSD_ENERGY(1.0)"
+			},
+			{
+				"id": "DF_SELF_SUFFICIENCY",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Electricity self-sufficiency (generation as a percentage of consumption)",
+				"names": {
+					"en": "Electricity self-sufficiency (generation as a percentage of consumption)"
+				},
+				"structure": "urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=EXAMPLE:DSD_ENERGY(1.0)"
+			}
+		],
+		"vtlMappingSchemes": [
+			{
+				"id": "VTL_MAP_ENERGY",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "VTL mappings of TS_ENERGY",
+				"names": {
+					"en": "VTL mappings of TS_ENERGY"
+				},
+				"vtlDatasetMappings": [
+					{
+						"id": "POWER",
+						"name": "Electricity generation",
+						"names": {
+							"en": "Electricity generation"
+						},
+						"vtlAlias": "power",
+						"isInput": true,
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=EXAMPLE:DF_POWER(1.0)"
+					},
+					{
+						"id": "CONSUMPTION",
+						"name": "Electricity consumption",
+						"names": {
+							"en": "Electricity consumption"
+						},
+						"vtlAlias": "consumption",
+						"isInput": true,
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=EXAMPLE:DF_CONSUMPTION(1.0)"
+					},
+					{
+						"id": "DIFF",
+						"name": "Electricity surplus",
+						"names": {
+							"en": "Electricity surplus"
+						},
+						"vtlAlias": "diff",
+						"isInput": false,
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=EXAMPLE:DF_SURPLUS(1.0)"
+					},
+					{
+						"id": "RATIO",
+						"name": "Electricity self-sufficiency",
+						"names": {
+							"en": "Electricity self-sufficiency"
+						},
+						"vtlAlias": "ratio",
+						"isInput": false,
+						"dataflow": "urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=EXAMPLE:DF_SELF_SUFFICIENCY(1.0)"
+					}
+				]
+			}
+		],
+		"transformationSchemes": [
+			{
+				"id": "TS_ENERGY",
+				"version": "1.0",
+				"agencyID": "EXAMPLE",
+				"name": "Electricity surplus and self-sufficiency",
+				"names": {
+					"en": "Electricity surplus and self-sufficiency"
+				},
+				"vtlVersion": "2.2",
+				"transformations": [
+					{
+						"id": "SURPLUS",
+						"name": "Electricity surplus",
+						"names": {
+							"en": "Electricity surplus"
+						},
+						"description": "The input power and the result diff coincide with VTL keywords, so they are written between single quotes; the input consumption is a regular name, written here without quotes. The result 'diff' is the output mapped through the vtlAlias diff.",
+						"descriptions": {
+							"en": "The input power and the result diff coincide with VTL keywords, so they are written between single quotes; the input consumption is a regular name, written here without quotes. The result 'diff' is the output mapped through the vtlAlias diff."
+						},
+						"isPersistent": true,
+						"expression": "'power' - consumption",
+						"result": "'diff'"
+					},
+					{
+						"id": "SELF_SUFFICIENCY",
+						"name": "Electricity self-sufficiency",
+						"names": {
+							"en": "Electricity self-sufficiency"
+						},
+						"description": "The regular name consumption is written here between single quotes: 'consumption' and consumption denote the same VTL Data Set.",
+						"descriptions": {
+							"en": "The regular name consumption is written here between single quotes: 'consumption' and consumption denote the same VTL Data Set."
+						},
+						"isPersistent": true,
+						"expression": "'power' / 'consumption' * 100",
+						"result": "ratio"
+					}
+				],
+				"vtlMappingScheme": "urn:sdmx:org.sdmx.infomodel.transformation.VtlMappingScheme=EXAMPLE:VTL_MAP_ENERGY(1.0)"
+			}
+		]
+	}
+}
